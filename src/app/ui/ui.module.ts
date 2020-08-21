@@ -47,6 +47,12 @@ import { DialogComponent } from './interactions/dialog/dialog.component';
 import { RippleComponent } from './interactions/ripple/ripple.component';
 import { LoadingComponent } from './interactions/loading/loading.component';
 import { AnimationComponent } from './animation/animation.component';
+import { ButtonComponent } from './components/controls/button/button.component';
+import { InputComponent } from './components/controls/input/input.component';
+import { SelectComponent } from './components/controls/select/select.component';
+import { TextareaComponent } from './components/controls/textarea/textarea.component';
+import { SwitchComponent } from './components/controls/switch/switch.component';
+import { CheckComponent } from './components/controls/check/check.component';
 
 @NgModule({
     declarations: [
@@ -77,6 +83,12 @@ import { AnimationComponent } from './animation/animation.component';
         RippleComponent,
         LoadingComponent,
         AnimationComponent,
+        ButtonComponent,
+        InputComponent,
+        SelectComponent,
+        TextareaComponent,
+        SwitchComponent,
+        CheckComponent,
     ],
     imports: [
         CommonModule,
