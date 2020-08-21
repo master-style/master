@@ -681,17 +681,19 @@ document.body.on('tap', '[href]', function () {
 
 // HTMLCollectionPrototype.filter = Array.prototype.filter;
 
-    // const parseStrIntoJSON = (value) => {
-    //     const firstChar = value.trim().slice(0, 1);
-    //     return (firstChar === '{' || firstChar === '[') ? parseJSON(value.replace(/'/g, '"')) : value;
-    // };
+// const parseStrIntoJSON = (value) => {
+//     const firstChar = value.trim().slice(0, 1);
+//     return (firstChar === '{' || firstChar === '[') ? parseJSON(value.replace(/'/g, '"')) : value;
+// };
 
-    // function parseValue(value: any) {
-    //     if (value === 'true' || value === true) {
-    //         return true;
-    //     } else if (value === 'false' || value === false) {
-    //         return false;
-    //     } else {
-    //         return value.match(/^-?\d*(\.\d+)?$/) ? +value : parseStrIntoJSON(value);
-    //     }
-    // }
+// function parseValue(value: any) {
+//     if (value === 'true' || value === true) {
+//         return true;
+//     } else if (value === 'false' || value === false) {
+//         return false;
+//     } else {
+//         return value.match(/^-?\d*(\.\d+)?$/) ? +value : parseStrIntoJSON(value);
+//     }
+// }
+
+import 'dom';
