@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { UiRoutingModule } from './ui-routing.module';
 import { UiComponent } from './ui.component';
 import { IconComponent } from './icon/icon.component';
 import { ColorComponent } from './color/color.component';
@@ -76,7 +77,8 @@ import { LoadingComponent } from './interactions/loading/loading.component';
         LoadingComponent,
     ],
     imports: [
-        CommonModule
+        CommonModule,
+        UiRoutingModule
     ]
 })
 export class UiModule { }
