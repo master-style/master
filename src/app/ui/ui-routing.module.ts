@@ -46,9 +46,23 @@ import { ZIndexComponent } from './modifiers/z-index/z-index.component';
 import { DialogComponent } from './interactions/dialog/dialog.component';
 import { RippleComponent } from './interactions/ripple/ripple.component';
 import { LoadingComponent } from './interactions/loading/loading.component';
+import { AnimationComponent } from './animation/animation.component';
+
+import { RouteResolver } from '../../shared/resolvers/route.resolver';
 
 const routes: Routes = [
-    { path: '', component: UiComponent }
+    { path: '', component: UiComponent },
+    { path: 'animation', component: AnimationComponent },
+    { path: 'breakpoint', component: BreakpointComponent },
+    { path: 'color', component: ColorComponent },
+    {
+        path: 'components', children: [
+            {
+                path: 'badge', component: BadgeComponent, resolve: { route: RouteResolver }
+            }
+        ]
+    },
+    { path: 'icon', component: IconComponent },
 ];
 
 @NgModule({

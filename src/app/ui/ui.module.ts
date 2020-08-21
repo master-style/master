@@ -46,6 +46,7 @@ import { ZIndexComponent } from './modifiers/z-index/z-index.component';
 import { DialogComponent } from './interactions/dialog/dialog.component';
 import { RippleComponent } from './interactions/ripple/ripple.component';
 import { LoadingComponent } from './interactions/loading/loading.component';
+import { AnimationComponent } from './animation/animation.component';
 
 @NgModule({
     declarations: [
@@ -75,6 +76,7 @@ import { LoadingComponent } from './interactions/loading/loading.component';
         DialogComponent,
         RippleComponent,
         LoadingComponent,
+        AnimationComponent,
     ],
     imports: [
         CommonModule,
