@@ -30,8 +30,7 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
 import { InstallationComponent } from './guideline/installation/installation.component';
 import { DisplayComponent } from './modifiers/display/display.component';
 import { VisibilityComponent } from './modifiers/visibility/visibility.component';
-import { ArticleComponent } from './layout/article/article.component';
-import { EmbeddedComponent } from './modifiers/embedded/embedded.component';
+import { ArticleComponent } from './decorators/article/article.component';
 import { GridComponent } from './layout/grid/grid.component';
 import { AlignmentComponent } from './modifiers/alignment/alignment.component';
 import { PositionComponent } from './modifiers/position/position.component';
@@ -53,6 +52,7 @@ import { DialogComponent } from './interactions/dialog/dialog.component';
 import { RippleComponent } from './interactions/ripple/ripple.component';
 import { LoadingComponent } from './interactions/loading/loading.component';
 import { AnimationComponent } from './animation/animation.component';
+import { FigureComponent } from './decorators/figure/figure.component';
 
 import { RouteResolver } from '../../shared/resolvers/route.resolver';
 

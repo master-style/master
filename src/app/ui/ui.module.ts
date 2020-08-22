@@ -24,8 +24,7 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
 import { InstallationComponent } from './guideline/installation/installation.component';
 import { DisplayComponent } from './modifiers/display/display.component';
 import { VisibilityComponent } from './modifiers/visibility/visibility.component';
-import { ArticleComponent } from './layout/article/article.component';
-import { EmbeddedComponent } from './modifiers/embedded/embedded.component';
+import { ArticleComponent } from './decorators/article/article.component';
 import { GridComponent } from './layout/grid/grid.component';
 import { AlignmentComponent } from './modifiers/alignment/alignment.component';
 import { PositionComponent } from './modifiers/position/position.component';
@@ -53,6 +52,7 @@ import { SelectComponent } from './components/controls/select/select.component';
 import { TextareaComponent } from './components/controls/textarea/textarea.component';
 import { SwitchComponent } from './components/controls/switch/switch.component';
 import { CheckComponent } from './components/controls/check/check.component';
+import { FigureComponent } from './decorators/figure/figure.component';
 
 @NgModule({
     declarations: [
@@ -77,7 +77,7 @@ import { CheckComponent } from './components/controls/check/check.component';
         TabsComponent,
         BreadcrumbsComponent,
         InstallationComponent,
-        DisplayComponent, VisibilityComponent, ArticleComponent, EmbeddedComponent, GridComponent, AlignmentComponent, PositionComponent, WrapComponent, AppComponent,
+        DisplayComponent, VisibilityComponent, ArticleComponent, GridComponent, AlignmentComponent, PositionComponent, WrapComponent, AppComponent,
         AreaComponent, BackgroundComponent, BorderComponent, FontComponent, HoverComponent, MarginComponent, PaddingComponent, RadiusComponent, ScaleComponent, ShadowComponent, TextComponent, ZIndexComponent,
         DialogComponent,
         RippleComponent,
@@ -89,6 +89,7 @@ import { CheckComponent } from './components/controls/check/check.component';
         TextareaComponent,
         SwitchComponent,
         CheckComponent,
+        FigureComponent,
     ],
     imports: [
         CommonModule,
