@@ -2,7 +2,7 @@ const
     $doc = document,
     StringPrototype = String.prototype,
     ArrayPrototype = Array.prototype,
-    ElementPrototype = Element.prototype,
+    HTMLElementPrototype = HTMLElement.prototype,
     NodeListPrototype = NodeList.prototype,
     HTMLCollectionPrototype = HTMLCollection.prototype,
     MARGIN_KEY = 'margin',
@@ -240,7 +240,7 @@ function isUnextendable(val) {
 }
 
 // Extend the DOM with these above custom methods
-$window.on = $doc.on = ElementPrototype.on = function (typeSet: string, factor, handle, option?: ListenerOption) {
+$window.on = $doc.on = HTMLElementPrototype.on = function (typeSet: string, factor, handle, option?: ListenerOption) {
     const $target = this;
     if (isFn(factor)) {
         option = handle;
@@ -285,7 +285,7 @@ $window.on = $doc.on = ElementPrototype.on = function (typeSet: string, factor, 
     return $target;
 };
 
-$window.off = $doc.off = ElementPrototype.off = function (typeSet?: any, factor?, handle?, option?: ListenerOption) {
+$window.off = $doc.off = HTMLElementPrototype.off = function (typeSet?: any, factor?, handle?, option?: ListenerOption) {
     const
         $target = this,
         listeners = $target.listeners;
@@ -423,14 +423,14 @@ ArrayPrototype.remove = function (target) {
     return true;
 };
 
-ElementPrototype.append = DocumentFragment.prototype.append = function (...$elements): any {
+HTMLElementPrototype.append = DocumentFragment.prototype.append = function (...$elements): any {
     for (const element of $elements) {
         if (element) this.appendChild(element);
     }
     return this;
 }
 
-Object.assign(ElementPrototype, {
+Object.assign(HTMLElementPrototype, {
     addClass(value?: string): any {
         if (value) {
             this.classList.add(...value.split(' '));
@@ -678,22 +678,3 @@ document.body.on('tap', '[href]', function () {
     if (href)
         target.has('blank') ? window.open(href) : window.location.href = href;
 }, { passive: true });
-
-// HTMLCollectionPrototype.filter = Array.prototype.filter;
-
-// const parseStrIntoJSON = (value) => {
-//     const firstChar = value.trim().slice(0, 1);
-//     return (firstChar === '{' || firstChar === '[') ? parseJSON(value.replace(/'/g, '"')) : value;
-// };
-
-// function parseValue(value: any) {
-//     if (value === 'true' || value === true) {
-//         return true;
-//     } else if (value === 'false' || value === false) {
-//         return false;
-//     } else {
-//         return value.match(/^-?\d*(\.\d+)?$/) ? +value : parseStrIntoJSON(value);
-//     }
-// }
-
-import 'dom';

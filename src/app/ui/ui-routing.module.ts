@@ -7,7 +7,6 @@ import { ButtonComponent } from './components/controls/button/button.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { UiComponent } from './ui.component';
 import { IconComponent } from './icon/icon.component';
 import { ColorComponent } from './color/color.component';
 import { BreakpointComponent } from './breakpoint/breakpoint.component';
@@ -57,7 +56,6 @@ import { FigureComponent } from './decorators/figure/figure.component';
 import { RouteResolver } from '../../shared/resolvers/route.resolver';
 
 const routes: Routes = [
-    { path: '', component: UiComponent },
     { path: 'animation', component: AnimationComponent, resolve: { route: RouteResolver } },
     { path: 'breakpoint', component: BreakpointComponent, resolve: { route: RouteResolver } },
     { path: 'color', component: ColorComponent, resolve: { route: RouteResolver } },

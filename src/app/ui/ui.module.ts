@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UiRoutingModule } from './ui-routing.module';
-import { UiComponent } from './ui.component';
 import { IconComponent } from './icon/icon.component';
 import { ColorComponent } from './color/color.component';
 import { BreakpointComponent } from './breakpoint/breakpoint.component';
@@ -56,7 +55,6 @@ import { FigureComponent } from './decorators/figure/figure.component';
 
 @NgModule({
     declarations: [
-        UiComponent,
         IconComponent,
         ColorComponent,
         BreakpointComponent,
