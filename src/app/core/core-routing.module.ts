@@ -1,14 +1,28 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { TransformComponent } from './utils/transform/transform.component';
+import { StringComponent } from './utils/string/string.component';
+import { ExtendComponent } from './utils/extend/extend.component';
+import { DistinguishComponent } from './utils/distinguish/distinguish.component';
+import { DebounceComponent } from './utils/debounce/debounce.component';
+import { ArrayComponent } from './utils/array/array.component';
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ClassComponent } from './class/class.component';
-import { AttrComponent } from './attr/attr.component';
-import { SelectorComponent } from './selector/selector.component';
-import { CreateComponent } from './create/create.component';
-import { CssComponent } from './css/css.component';
-import { EventListenerComponent } from './event-listener/event-listener.component';
+import { ClassComponent } from './dom/class/class.component';
+import { AttrComponent } from './dom/attr/attr.component';
+import { SelectorComponent } from './dom/selector/selector.component';
+import { CreateComponent } from './dom/create/create.component';
+import { CssComponent } from './dom/css/css.component';
+import { EventListenerComponent } from './dom/event-listener/event-listener.component';
+import { InstallationComponent } from './guideline/installation/installation.component';
+import { CodingStyleComponent } from './guideline/coding-style/coding-style.component';
 
 const routes: Routes = [
+    {
+        path: 'guideline', children: [
+            { path: 'installation', component: InstallationComponent },
+            { path: 'coding-style', component: CodingStyleComponent }
+        ]
+    },
     {
         path: 'dom', children: [
             { path: 'class', component: ClassComponent },
@@ -17,6 +31,16 @@ const routes: Routes = [
             { path: 'create', component: CreateComponent },
             { path: 'css', component: CssComponent },
             { path: 'event-listener', component: EventListenerComponent }
+        ]
+    },
+    {
+        path: 'utils', children: [
+            { path: 'array', component: ArrayComponent },
+            { path: 'debounce', component: DebounceComponent },
+            { path: 'distinguish', component: DistinguishComponent },
+            { path: 'extend', component: ExtendComponent },
+            { path: 'string', component: StringComponent },
+            { path: 'transform', component: TransformComponent }
         ]
     }
 ];

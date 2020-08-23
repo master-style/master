@@ -1,7 +1,6 @@
 {
     "distinguish": "鑒別",
     "transform": "轉換",
-    "debounceAndThrottleFunction": "防抖&節流函式",
     "debounce": "防抖",
     "throttle": "節流",
     "animation": "動畫",
