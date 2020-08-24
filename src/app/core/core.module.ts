@@ -11,7 +11,6 @@ import { CssComponent } from './dom/css/css.component';
 import { EventListenerComponent } from './dom/event-listener/event-listener.component';
 import { ArrayComponent } from './utils/array/array.component';
 import { DebounceComponent } from './utils/debounce/debounce.component';
-import { DistinguishComponent } from './utils/distinguish/distinguish.component';
 import { ExtendComponent } from './utils/extend/extend.component';
 import { StringComponent } from './utils/string/string.component';
 import { TransformComponent } from './utils/transform/transform.component';
@@ -26,7 +25,6 @@ import { TransformComponent } from './utils/transform/transform.component';
         EventListenerComponent,
         ArrayComponent,
         DebounceComponent,
-        DistinguishComponent,
         ExtendComponent,
         StringComponent,
         TransformComponent

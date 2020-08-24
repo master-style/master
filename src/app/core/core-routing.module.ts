@@ -1,7 +1,6 @@
 import { TransformComponent } from './utils/transform/transform.component';
 import { StringComponent } from './utils/string/string.component';
 import { ExtendComponent } from './utils/extend/extend.component';
-import { DistinguishComponent } from './utils/distinguish/distinguish.component';
 import { DebounceComponent } from './utils/debounce/debounce.component';
 import { ArrayComponent } from './utils/array/array.component';
 import { NgModule } from '@angular/core';
@@ -37,7 +36,6 @@ const routes: Routes = [
         path: 'utils', children: [
             { path: 'array', component: ArrayComponent },
             { path: 'debounce', component: DebounceComponent },
-            { path: 'distinguish', component: DistinguishComponent },
             { path: 'extend', component: ExtendComponent },
             { path: 'string', component: StringComponent },
             { path: 'transform', component: TransformComponent }
