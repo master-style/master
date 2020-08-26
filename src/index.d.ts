@@ -1,1 +1,1 @@
-import './app/core';
+import './app/dom';

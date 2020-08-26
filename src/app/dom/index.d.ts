@@ -70,18 +70,6 @@ interface MasterElements extends MasterCommon {
     $filter(selector: string): any[];
 }
 
-interface MasterCommon {
-    on(typeSet: string, factor: string, handle: (event: Event, ...detail: any) => any, option?: ListenerOption): this;
-    on(typeSet: string, handle: (event: Event, ...detail: any) => any, option?: ListenerOption): this;
-    off(typeSet: string, factor: string, handle: Function, option?: ListenerOption): this;
-    off(typeSet: string, handle: Function, option?: ListenerOption): this;
-    off(typeSet: string, factor: string, option?: ListenerOption): this;
-    off(typeSet: string, option?: ListenerOption): this;
-    off(option: ListenerOption): this;
-    off(handle: Function): this;
-    off(): this;
-}
-
 interface Document extends MasterCommon { }
 
 interface Window extends MasterCommon {
