@@ -2,7 +2,7 @@ window.off = document.off = Element.prototype.off = function (
     typeSet?: any,
     factorSelector?,
     handle?,
-    option?: ListenerOption
+    option?: Master.ListenerOption
 ) {
     const
         target = this,
