@@ -30,11 +30,6 @@ const routes: Routes = [
             { path: 'on', component: OnComponent },
             { path: 'off', component: OffComponent }
         ]
-    },
-    {
-        path: 'traversings', children: [
-            { path: '' }
-        ]
     }
 ];
 
