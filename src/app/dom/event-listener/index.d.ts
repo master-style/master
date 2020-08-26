@@ -1,7 +1,4 @@
-import './off';
-import './on';
-
-export interface ListenerOption {
+interface ListenerOption {
     capture?: boolean;
     once?: boolean;
     passive?: boolean;

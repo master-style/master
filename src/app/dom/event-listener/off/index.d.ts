@@ -1,9 +1,11 @@
-import { ListenerOption } from '../index.d';
-
 interface Element {
-    on(typeSet: string, factor: string, handle: (event: Event, ...detail: any) => any, option?: ListenerOption): this;
-    on(typeSet: string, handle: (event: Event, ...detail: any) => any, option?: ListenerOption): this;
+    off(typeSet: string, factor: string, handle: Function, option?: ListenerOption): this;
+    off(typeSet: string, handle: Function, option?: ListenerOption): this;
+    off(typeSet: string, factor: string, option?: ListenerOption): this;
+    off(typeSet: string, option?: ListenerOption): this;
+    off(option: ListenerOption): this;
+    off(handle: Function): this;
+    off(): this;
 }
-
-interface Window extends Pick<Element, 'on'> { }
-interface Document extends Pick<Element, 'on'> { }
+interface Window extends Pick<Element, 'off'> { }
+interface Document extends Pick<Element, 'off'> { }
