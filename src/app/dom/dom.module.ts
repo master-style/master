@@ -9,6 +9,9 @@ import { CreateComponent } from './manipulations/create/create.component';
 import { CssComponent } from './manipulations/css/css.component';
 import { OnComponent } from './event-listener/on/on.component';
 import { OffComponent } from './event-listener/off/off.component';
+import { FilterComponent } from './traversing/filter/filter.component';
+import { ForEachComponent } from './traversing/for-each/for-each.component';
+import { IndexOfComponent } from './traversing/index-of/index-of.component';
 
 @NgModule({
     declarations: [
@@ -17,7 +20,10 @@ import { OffComponent } from './event-listener/off/off.component';
         CreateComponent,
         CssComponent,
         OnComponent,
-        OffComponent
+        OffComponent,
+        FilterComponent,
+        ForEachComponent,
+        IndexOfComponent
     ],
     imports: [
         CommonModule,

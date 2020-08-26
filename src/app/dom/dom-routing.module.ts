@@ -9,12 +9,21 @@ import { InstallationComponent } from './guideline/installation/installation.com
 import { CodingStyleComponent } from './guideline/coding-style/coding-style.component';
 import { OnComponent } from './event-listener/on/on.component';
 import { OffComponent } from './event-listener/off/off.component';
+import { FilterComponent } from './traversing/filter/filter.component';
+import { ForEachComponent } from './traversing/for-each/for-each.component';
+import { IndexOfComponent } from './traversing/index-of/index-of.component';
 
 const routes: Routes = [
     {
         path: 'guideline', children: [
             { path: 'installation', component: InstallationComponent },
             { path: 'coding-style', component: CodingStyleComponent }
+        ]
+    },
+    {
+        path: 'event-listener', children: [
+            { path: 'on', component: OnComponent },
+            { path: 'off', component: OffComponent }
         ]
     },
     {
@@ -26,9 +35,10 @@ const routes: Routes = [
         ]
     },
     {
-        path: 'event-listener', children: [
-            { path: 'on', component: OnComponent },
-            { path: 'off', component: OffComponent }
+        path: 'traversing', children: [
+            { path: 'filter', component: FilterComponent },
+            { path: 'for-each', component: ForEachComponent },
+            { path: 'index-of', component: IndexOfComponent }
         ]
     }
 ];
