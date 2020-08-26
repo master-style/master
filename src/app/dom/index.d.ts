@@ -1,33 +1,13 @@
+import './event-listener';
+import './manipulations';
+import './traversing';
+
 declare const
     anime: any,
     MList,
     MScroll,
     MSelect,
     MInput;
-
-interface String {
-    has(target: any): boolean;
-    has(target: any, matchWord: any): boolean;
-    parse(string: string): any;
-    capitalize(): string;
-}
-
-interface StringConstructor {
-    parse(string: string): any;
-}
-
-interface Array<T> {
-    has(target: any): boolean;
-    remove(array: any): boolean;
-}
-
-interface DOMTokenList {
-    has(target: any): boolean;
-}
-
-interface NodeList extends MasterElements { }
-interface HTMLCollection extends MasterElements { }
-interface HTMLCollectionOf<T> extends MasterElements { }
 
 interface Element extends MasterCommon {
     addClass(value: string): this;
@@ -77,27 +57,8 @@ interface Window extends MasterCommon {
     Master(selector: string, attrs?: any, ...$children: Array<Element | string>): Element;
 }
 
-interface ListenerOption {
-    capture?: boolean;
-    once?: boolean;
-    passive?: boolean;
-    id?: any;
-}
-
 interface Master {
     (selector: string): any;
-    isBool: (value: any) => Boolean;
-    isDefined: (value: any) => Boolean;
-    isFn: (value: any) => Boolean;
-    isNum: (value: any) => Boolean;
-    isObj: (value: any) => Boolean;
-    isStr: (value: any) => Boolean;
-    isUnset: (value: any) => Boolean;
-    toDash: (str: string) => any;
-    toCamel: (str: string) => any;
-    debounce(handle: Function): any;
-    debounce(handle: Function, wait: number): any;
-    debounce(handle: Function, wait: number, immediate: boolean): any;
     extend(...args: any);
     cb: (complete, result?: any) => any;
     // interactive
