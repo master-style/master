@@ -19,8 +19,8 @@ const routes: Routes = [
     },
     {
         path: 'manipulations', children: [
-            { path: 'class', component: ClassComponent },
             { path: 'attr', component: AttrComponent },
+            { path: 'class', component: ClassComponent },
             { path: 'create', component: CreateComponent },
             { path: 'css', component: CssComponent }
         ]
