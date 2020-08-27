@@ -9,9 +9,9 @@ import { InstallationComponent } from './guideline/installation/installation.com
 import { CodingStyleComponent } from './guideline/coding-style/coding-style.component';
 import { OnComponent } from './event-listener/on/on.component';
 import { OffComponent } from './event-listener/off/off.component';
-import { FilterComponent } from './traversing/filter/filter.component';
-import { ForEachComponent } from './traversing/for-each/for-each.component';
-import { IndexOfComponent } from './traversing/index-of/index-of.component';
+import { FilterComponent } from './traversings/filter/filter.component';
+import { ForEachComponent } from './traversings/for-each/for-each.component';
+import { IndexOfComponent } from './traversings/index-of/index-of.component';
 
 const routes: Routes = [
     {

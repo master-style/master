@@ -1,6 +1,6 @@
-const HTMLCollectionProto = HTMLCollection.prototype;
-const NodeListProto = NodeList.prototype;
+const HTMLCollectionPrototype = HTMLCollection.prototype;
+const NodeListPrototype = NodeList.prototype;
 
-HTMLCollectionProto.filter = NodeListProto.filter = Array.prototype.filter;
-HTMLCollectionProto.indexOf = NodeListProto.indexOf = Array.prototype.indexOf;
-HTMLCollectionProto.forEach = Array.prototype.forEach;
+HTMLCollectionPrototype.filter = NodeListPrototype.filter = Array.prototype.filter;
+HTMLCollectionPrototype.indexOf = NodeListPrototype.indexOf = Array.prototype.indexOf;
+HTMLCollectionPrototype.forEach = Array.prototype.forEach;
