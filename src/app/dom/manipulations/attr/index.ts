@@ -11,7 +11,9 @@ ElementPrototype.attr = function (param: any, value?: any, prefix?: string): any
     prefix = arguments.length === 3 ? arguments[2] + '-' : '';
     if (value !== undefined) {
         const kebabCaseKey = camelToKebabCase(prefix + param);
-        value === null ? target.removeAttribute(kebabCaseKey) : target.setAttribute(kebabCaseKey, value);
+        value === null ?
+            target.removeAttribute(kebabCaseKey) :
+            target.setAttribute(kebabCaseKey, value);
         return target;
     } else if (isObjLike(param)) {
         // tslint:disable-next-line: forin
@@ -20,7 +22,9 @@ ElementPrototype.attr = function (param: any, value?: any, prefix?: string): any
         }
         return target;
     } else if (typeof param === 'string') {
-        return parseStr(target.getAttribute(camelToKebabCase(prefix + param)));
+        return parseStr(
+            target.getAttribute(camelToKebabCase(prefix + param))
+        );
     } else {
         const attrs = target.attributes;
         const allAttr = {};
@@ -39,7 +43,11 @@ ElementPrototype.toggleAttr = function (param: any, state?: boolean): Element {
         }
     } else {
         const kebabCaseKey = camelToKebabCase(param);
-        this.toggleAttribute(kebabCaseKey, typeof state === 'boolean' ? state : !(this.getAttribute(kebabCaseKey) === ''));
+        this.toggleAttribute(kebabCaseKey,
+            typeof state === 'boolean' ?
+                state :
+                !(this.getAttribute(kebabCaseKey) === '')
+        );
     }
     return this;
 };
