@@ -14,7 +14,7 @@ import { ForEachComponent } from './traversings/for-each/for-each.component';
 import { IndexOfComponent } from './traversings/index-of/index-of.component';
 
 export const domRoutes: Routes = [
-    { path: '', data: { title: 'DOM' } },
+    { path: 'DOM' },
     {
         path: 'guideline', children: [
             { path: 'installation', component: InstallationComponent },

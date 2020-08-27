@@ -57,21 +57,20 @@ import { RouteResolver } from '../../shared/resolvers/route.resolver';
 import { ItemComponent } from './components/item/item.component';
 
 export const uiRoutes: Routes = [
-    { path: '', data: { title: 'UI' } },
+    { path: 'UI' },
     { path: 'animation', component: AnimationComponent, resolve: { route: RouteResolver } },
     { path: 'breakpoint', component: BreakpointComponent, resolve: { route: RouteResolver } },
     { path: 'color', component: ColorComponent, resolve: { route: RouteResolver } },
     {
         path: 'components', children: [
-            // control
-            { path: '', data: { title: 'control' } },
+            { path: 'control' },
             { path: 'button', component: ButtonComponent, resolve: { route: RouteResolver } },
             { path: 'select', component: SelectComponent, resolve: { route: RouteResolver } },
             { path: 'input', component: InputComponent, resolve: { route: RouteResolver } },
             { path: 'textarea', component: TextareaComponent, resolve: { route: RouteResolver } },
             { path: 'check', component: CheckComponent, resolve: { route: RouteResolver } },
             { path: 'switch', component: SwitchComponent, resolve: { route: RouteResolver } },
-            { path: '', data: { title: 'dataRender' } },
+            { path: 'dataRender' },
             { path: 'badge', component: BadgeComponent, resolve: { route: RouteResolver } },
             { path: 'card', component: CardComponent, resolve: { route: RouteResolver } },
             { path: 'chats', component: ChatsComponent, resolve: { route: RouteResolver } },
@@ -82,15 +81,15 @@ export const uiRoutes: Routes = [
             { path: 'list', component: ListComponent, resolve: { route: RouteResolver } },
             { path: 'ribbon', component: RibbonComponent, resolve: { route: RouteResolver } },
             { path: 'table', component: TableComponent, resolve: { route: RouteResolver } },
-            { path: '', data: { title: 'navigator' } },
+            { path: 'navigator' },
             { path: 'breadcrumbs', component: BreadcrumbsComponent, resolve: { route: RouteResolver } },
             { path: 'tabs', component: TabsComponent, resolve: { route: RouteResolver } },
-            { path: '', data: { title: 'interactive' } },
+            { path: 'interactive' },
             { path: 'collapse', component: CollapseComponent, resolve: { route: RouteResolver } },
             { path: 'modal', component: ModalComponent, resolve: { route: RouteResolver } },
             { path: 'popup', component: PopupComponent, resolve: { route: RouteResolver } },
             { path: 'scroll', component: ScrollComponent, resolve: { route: RouteResolver } },
-            { path: '', data: { title: 'progressIndicator' } },
+            { path: 'progressIndicator' },
             { path: 'progress', component: ProgressComponent, resolve: { route: RouteResolver } },
             { path: 'skeleton', resolve: { route: RouteResolver } },
         ]

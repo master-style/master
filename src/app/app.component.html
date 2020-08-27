@@ -1,7 +1,7 @@
 <m-list>
     <ng-container *ngFor="let eachRoute of routes">
-        <div *ngIf="!eachRoute.path" class="listTitle">{{ eachRoute.data.title }}</div>
-        <m-item *ngIf="eachRoute.path">
+        <div *ngIf="!eachRoute.component" class="listTitle">{{ eachRoute.path | translate }}</div>
+        <m-item *ngIf="eachRoute.component">
             <div class="itemHead"></div>
             <div class="itemBody">{{ eachRoute.path | translate }}</div>
         </m-item>
