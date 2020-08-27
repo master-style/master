@@ -10,8 +10,8 @@ ElementPrototype.attr = function (param: any, value?: any, prefix?: string): any
     const target = this;
     prefix = arguments.length === 3 ? arguments[2] + '-' : '';
     if (value !== undefined) {
-        const key = camelToKebabCase(prefix + param);
-        value === null ? target.removeAttribute(key) : target.setAttribute(key, value);
+        const kebabCaseKey = camelToKebabCase(prefix + param);
+        value === null ? target.removeAttribute(kebabCaseKey) : target.setAttribute(kebabCaseKey, value);
         return target;
     } else if (isObjLike(param)) {
         // tslint:disable-next-line: forin
