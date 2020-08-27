@@ -1,8 +1,8 @@
 
-import camelToKebabCase from '../../../utils/camel-to-kebab-case';
-import kebabToCamelCase from '../../../utils/kebab-to-camel-case';
-import isObjLike from '../../../utils/is-obj-like';
-import parseStr from '../../../utils/parse-str';
+import camelToKebabCase from '@utils/camel-to-kebab-case';
+import kebabToCamelCase from '@utils/kebab-to-camel-case';
+import isObjLike from '@utils/is-obj-like';
+import parseStr from '@utils/parse-str';
 
 const ElementPrototype = Element.prototype;
 
