@@ -1,3 +1,5 @@
-interface window {
-    Master(selector: string, attrs?: any, ...children: Array<Element | string>): Element;
+
+interface Window {
+    Master(selector: string): NodeList;
+    Master(selector: string, attrs: { [key: string]: any }, ...children: (Element | string)[]): Element;
 }
