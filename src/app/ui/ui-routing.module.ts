@@ -54,8 +54,9 @@ import { AnimationComponent } from './animation/animation.component';
 import { FigureComponent } from './decorators/figure/figure.component';
 
 import { RouteResolver } from '../../shared/resolvers/route.resolver';
+import { ItemComponent } from './components/item/item.component';
 
-const routes: Routes = [
+export const routes: Routes = [
     { path: 'animation', component: AnimationComponent, resolve: { route: RouteResolver } },
     { path: 'breakpoint', component: BreakpointComponent, resolve: { route: RouteResolver } },
     { path: 'color', component: ColorComponent, resolve: { route: RouteResolver } },
@@ -71,15 +72,17 @@ const routes: Routes = [
             { path: 'switch', component: SwitchComponent, resolve: { route: RouteResolver } },
             { path: '', data: { title: 'dataRender' } },
             { path: 'badge', component: BadgeComponent, resolve: { route: RouteResolver } },
-            { path: 'breadcrumbs', component: BreadcrumbsComponent, resolve: { route: RouteResolver } },
             { path: 'card', component: CardComponent, resolve: { route: RouteResolver } },
             { path: 'chats', component: ChatsComponent, resolve: { route: RouteResolver } },
             { path: 'chip', component: ChipComponent, resolve: { route: RouteResolver } },
             { path: 'flows', component: FlowsComponent, resolve: { route: RouteResolver } },
             { path: 'info', component: InfoComponent, resolve: { route: RouteResolver } },
+            { path: 'item', component: ItemComponent, resolve: { route: RouteResolver } },
             { path: 'list', component: ListComponent, resolve: { route: RouteResolver } },
             { path: 'ribbon', component: RibbonComponent, resolve: { route: RouteResolver } },
             { path: 'table', component: TableComponent, resolve: { route: RouteResolver } },
+            { path: '', data: { title: 'navigation' } },
+            { path: 'breadcrumbs', component: BreadcrumbsComponent, resolve: { route: RouteResolver } },
             { path: 'tabs', component: TabsComponent, resolve: { route: RouteResolver } },
             { path: '', data: { title: 'interactive' } },
             { path: 'collapse', component: CollapseComponent, resolve: { route: RouteResolver } },

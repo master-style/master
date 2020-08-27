@@ -13,7 +13,7 @@ import { FilterComponent } from './traversings/filter/filter.component';
 import { ForEachComponent } from './traversings/for-each/for-each.component';
 import { IndexOfComponent } from './traversings/index-of/index-of.component';
 
-const routes: Routes = [
+export const routes: Routes = [
     {
         path: 'guideline', children: [
             { path: 'installation', component: InstallationComponent },

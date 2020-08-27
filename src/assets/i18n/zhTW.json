@@ -12,13 +12,13 @@
     "dataRender" : "數據呈現",
     "progressIndicator": "進度預示",
     "badge": "徽章",
-    "breadcrumbs": "麵包屑",
     "card": "卡片",
     "chats": "聊天",
     "chip": "芯片",
     "collapse": "收合",
     "flows": "流程",
     "info": "資訊",
+    "item": "項目",
     "list": "清單",
     "modal": "模態",
     "popup": "彈窗",
@@ -26,6 +26,8 @@
     "ribbon": "緞帶",
     "scroll": "滾動",
     "table": "表單",
+    "navigator": "導覽",
+    "breadcrumbs": "麵包屑",
     "tabs": "標籤",
     "icon": "圖標"
 }

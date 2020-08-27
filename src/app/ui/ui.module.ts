@@ -52,6 +52,7 @@ import { TextareaComponent } from './components/controls/textarea/textarea.compo
 import { SwitchComponent } from './components/controls/switch/switch.component';
 import { CheckComponent } from './components/controls/check/check.component';
 import { FigureComponent } from './decorators/figure/figure.component';
+import { ItemComponent } from './components/item/item.component';
 
 @NgModule({
     declarations: [
@@ -88,6 +89,7 @@ import { FigureComponent } from './decorators/figure/figure.component';
         SwitchComponent,
         CheckComponent,
         FigureComponent,
+        ItemComponent,
     ],
     imports: [
         CommonModule,
