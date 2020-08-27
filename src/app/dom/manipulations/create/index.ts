@@ -7,15 +7,15 @@ window.Master = (selector: string, attr?: { [key: string]: any }, ...children: (
         if (Object.keys(attr).length) element.attr(attr);
         if (childrenLength) {
             if (childrenLength > 1) {
-                const $fragment = document.createDocumentFragment();
-                for (const $child of children) {
-                    $fragment.appendChild(
-                        typeof $child === 'string' ?
-                            document.createTextNode($child as any) :
-                            $child
+                const fragment = document.createDocumentFragment();
+                for (const eachChild of children) {
+                    fragment.appendChild(
+                        typeof eachChild === 'string' ?
+                            document.createTextNode(eachChild as any) :
+                            eachChild
                     );
                 }
-                element.appendChild($fragment);
+                element.appendChild(fragment);
             } else {
                 element.appendChild(
                     typeof children[0] === 'string' ?
