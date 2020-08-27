@@ -1,20 +1,22 @@
 <m-list>
-    <ng-container *ngFor="let eachRoute of routes">
-        <div *ngIf="!eachRoute.component" class="listTitle">{{ eachRoute.path | translate }}</div>
-        <m-item *ngIf="eachRoute.component">
-            <div class="itemHead"></div>
-            <div class="itemBody">{{ eachRoute.path | translate }}</div>
-        </m-item>
-        <m-collapse>
+    <ng-container *ngFor="let eachRoute of routes" [ngTemplateOutlet]="routeGroup"
+        [ngTemplateOutletContext]="{route: eachRoute}">
+        <m-collapse *ngIf="eachRoute.children">
             <m-list class="sm">
-                <m-item>
-                    <div class="itemHead"></div>
-                    <div class="itemBody"></div>
-                    <div class="itemFoot"></div>
-                </m-item>
+                <ng-container *ngFor="let eachChildRoute of eachRoute.children" [ngTemplateOutlet]="routeGroup"
+                    [ngTemplateOutletContext]="{route: eachChildRoute}">
+                </ng-container>
             </m-list>
         </m-collapse>
     </ng-container>
 </m-list>
 {{ appService.translation | json }}
 <router-outlet></router-outlet>
+
+<ng-template #routeGroup let-route="route">
+    <div *ngIf="!route?.component" class="listTitle">{{ route.path | translate }}</div>
+    <m-item *ngIf="route?.component">
+        <div class="itemHead"></div>
+        <div class="itemBody">{{ route.path | translate }}</div>
+    </m-item>
+</ng-template>
