@@ -1,10 +1,10 @@
 
-function Master(selector: string, attrs?: { [key: string]: any }, ...children: (Element | string)[]): any {
-    if (attrs) {
+window.Master = (selector: string, attr?: { [key: string]: any }, ...children: (Element | string)[]): any => {
+    if (attr) {
         const
             childrenLength = children.length,
-            element = document.createElement(selector, attrs && attrs.is ? { is: attrs.is } : undefined);
-        if (Object.keys(attrs).length) element.attr(attrs);
+            element = document.createElement(selector, attr && attr.is ? { is: attr.is } : undefined);
+        if (Object.keys(attr).length) element.attr(attr);
         if (childrenLength) {
             if (childrenLength > 1) {
                 const $fragment = document.createDocumentFragment();
@@ -28,6 +28,4 @@ function Master(selector: string, attrs?: { [key: string]: any }, ...children: (
     } else {
         return document.querySelectorAll(selector);
     }
-}
-
-window.Master = Master;
+};
