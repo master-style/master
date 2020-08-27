@@ -2,13 +2,13 @@
 import camelToKebabCase from '@utils/camel-to-kebab-case';
 import isObjLike from '@utils/is-obj-like';
 import isNum from '@utils/is-num';
-import autoSuffixPx from '@utils/auto-suffix-px';
+import isAutoPx from '@utils/is-auto-px';
 
 Element.prototype.css = function (param?: any, value?: any) {
     const element = this;
     if (value !== undefined) {
         param = camelToKebabCase(param);
-        if (autoSuffixPx(param) && isNum(value)) {
+        if (isAutoPx(param) && isNum(value)) {
             value = value + 'px';
         }
         if (param[0] === '-') {
@@ -25,7 +25,7 @@ Element.prototype.css = function (param?: any, value?: any) {
                 element.style.setProperty(key, param[key]);
             } else {
                 element.style[key] = param[key] +
-                    autoSuffixPx(camelToKebabCase(key)) && isNum(param[key] ?
+                    isAutoPx(camelToKebabCase(key)) && isNum(param[key] ?
                         'px' :
                         ''
                     );
