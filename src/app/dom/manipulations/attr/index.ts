@@ -7,47 +7,48 @@ import parseStr from '../../../utils/parse-str';
 const ElementPrototype = Element.prototype;
 
 ElementPrototype.attr = function (param: any, value?: any, prefix?: string): any {
-    const target = this;
+    const element = this;
     prefix = arguments.length === 3 ? arguments[2] + '-' : '';
     if (value !== undefined) {
         const kebabCaseKey = camelToKebabCase(prefix + param);
         value === null ?
-            target.removeAttribute(kebabCaseKey) :
-            target.setAttribute(kebabCaseKey, value);
-        return target;
+            element.removeAttribute(kebabCaseKey) :
+            element.setAttribute(kebabCaseKey, value);
+        return element;
     } else if (isObjLike(param)) {
         // tslint:disable-next-line: forin
         for (const key in param) {
-            target.setAttribute(camelToKebabCase(prefix + key), param[key]);
+            element.setAttribute(camelToKebabCase(prefix + key), param[key]);
         }
-        return target;
+        return element;
     } else if (typeof param === 'string') {
         return parseStr(
-            target.getAttribute(camelToKebabCase(prefix + param))
+            element.getAttribute(camelToKebabCase(prefix + param))
         );
     } else {
-        const attrs = target.attributes;
-        const allAttr = {};
-        for (const attr of attrs) {
-            allAttr[kebabToCamelCase(prefix + attr.name)] = attr.value;
+        const attrs = element.attributes;
+        const attr = {};
+        for (const eachAttr of attrs) {
+            attr[kebabToCamelCase(prefix + eachAttr.name)] = eachAttr.value;
         }
-        return allAttr;
+        return attr;
     }
 };
 
 ElementPrototype.toggleAttr = function (param: any, state?: boolean): Element {
+    const element = this;
     if (isObjLike(param)) {
         // tslint:disable-next-line: forin
         for (const key in param) {
-            this.toggleAttribute(camelToKebabCase(key), param[key]);
+            element.toggleAttribute(camelToKebabCase(key), param[key]);
         }
     } else {
         const kebabCaseKey = camelToKebabCase(param);
-        this.toggleAttribute(kebabCaseKey,
+        element.toggleAttribute(kebabCaseKey,
             typeof state === 'boolean' ?
                 state :
-                !(this.getAttribute(kebabCaseKey) === '')
+                !(element.getAttribute(kebabCaseKey) === '')
         );
     }
-    return this;
+    return element;
 };
