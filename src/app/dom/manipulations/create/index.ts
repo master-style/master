@@ -1,12 +1,10 @@
 
-window.Master = (selector: string, attr?: { [key: string]: any }, ...children: (Element | string)[]): any => {
+window.Master = function (selector: string, attr?: { [key: string]: any }, ...children: (Element | string)[]) {
     if (attr) {
-        const
-            childrenLength = children.length,
-            element = document.createElement(selector, attr && attr.is ? { is: attr.is } : undefined);
+        const element: Element = document.createElement(selector, attr && attr.is ? { is: attr.is } : undefined);
         if (Object.keys(attr).length) element.attr(attr);
-        if (childrenLength) {
-            if (childrenLength > 1) {
+        if (children.length) {
+            if (children.length > 1) {
                 const fragment = document.createDocumentFragment();
                 for (const eachChild of children) {
                     fragment.appendChild(
@@ -24,7 +22,7 @@ window.Master = (selector: string, attr?: { [key: string]: any }, ...children: (
                 );
             }
         }
-        return element;
+        return (element as any);
     } else {
         return document.querySelectorAll(selector);
     }
