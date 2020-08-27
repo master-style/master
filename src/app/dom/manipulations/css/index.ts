@@ -25,7 +25,10 @@ Element.prototype.css = function (param?: any, value?: any) {
                 element.style.setProperty(key, param[key]);
             } else {
                 element.style[key] = param[key] +
-                    (autoSuffixPx(camelToKebabCase(key)) && isNum(param[key]) ? 'px' : '');
+                    autoSuffixPx(camelToKebabCase(key)) && isNum(param[key] ?
+                        'px' :
+                        ''
+                    );
             }
         }
         return element;
