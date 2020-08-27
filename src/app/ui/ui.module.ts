@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UiRoutingModule } from './ui-routing.module';
 import { IconComponent } from './icon/icon.component';
@@ -92,6 +92,7 @@ import { FigureComponent } from './decorators/figure/figure.component';
     imports: [
         CommonModule,
         UiRoutingModule
-    ]
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class UiModule { }

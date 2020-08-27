@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -27,6 +27,7 @@ import { RouteResolver } from 'src/shared/resolvers/route.resolver';
     providers: [
         RouteResolver
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
