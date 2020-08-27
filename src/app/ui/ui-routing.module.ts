@@ -56,7 +56,8 @@ import { FigureComponent } from './decorators/figure/figure.component';
 import { RouteResolver } from '../../shared/resolvers/route.resolver';
 import { ItemComponent } from './components/item/item.component';
 
-export const routes: Routes = [
+export const uiRoutes: Routes = [
+    { path: '', data: { title: 'UI' } },
     { path: 'animation', component: AnimationComponent, resolve: { route: RouteResolver } },
     { path: 'breakpoint', component: BreakpointComponent, resolve: { route: RouteResolver } },
     { path: 'color', component: ColorComponent, resolve: { route: RouteResolver } },
@@ -81,7 +82,7 @@ export const routes: Routes = [
             { path: 'list', component: ListComponent, resolve: { route: RouteResolver } },
             { path: 'ribbon', component: RibbonComponent, resolve: { route: RouteResolver } },
             { path: 'table', component: TableComponent, resolve: { route: RouteResolver } },
-            { path: '', data: { title: 'navigation' } },
+            { path: '', data: { title: 'navigator' } },
             { path: 'breadcrumbs', component: BreadcrumbsComponent, resolve: { route: RouteResolver } },
             { path: 'tabs', component: TabsComponent, resolve: { route: RouteResolver } },
             { path: '', data: { title: 'interactive' } },
@@ -98,7 +99,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
+    imports: [RouterModule.forChild(uiRoutes)],
     exports: [RouterModule]
 })
 export class UiRoutingModule { }

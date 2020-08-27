@@ -13,7 +13,8 @@ import { FilterComponent } from './traversings/filter/filter.component';
 import { ForEachComponent } from './traversings/for-each/for-each.component';
 import { IndexOfComponent } from './traversings/index-of/index-of.component';
 
-export const routes: Routes = [
+export const domRoutes: Routes = [
+    { path: '', data: { title: 'DOM' } },
     {
         path: 'guideline', children: [
             { path: 'installation', component: InstallationComponent },
@@ -44,7 +45,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
+    imports: [RouterModule.forChild(domRoutes)],
     exports: [RouterModule]
 })
 export class DomRoutingModule { }

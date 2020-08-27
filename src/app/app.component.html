@@ -1,18 +1,20 @@
 <m-list>
-    <div class="listTitle">標題</div>
-    <m-item>
-        <div class="itemHead">頭</div>
-        <div class="itemBody">體</div>
-        <div class="itemFoot">腳</div>
-    </m-item>
-    <m-collapse>
-        <m-list class="sm">
-            <m-item>
-                <div class="itemHead">頭</div>
-                <div class="itemBody">體</div>
-                <div class="itemFoot">腳</div>
-            </m-item>
-        </m-list>
-    </m-collapse>
+    <ng-container *ngFor="let eachRoute of routes">
+        <div *ngIf="!eachRoute.path" class="listTitle">{{ eachRoute.data.title }}</div>
+        <m-item *ngIf="eachRoute.path">
+            <div class="itemHead"></div>
+            <div class="itemBody">{{ eachRoute.path | translate }}</div>
+        </m-item>
+        <m-collapse>
+            <m-list class="sm">
+                <m-item>
+                    <div class="itemHead"></div>
+                    <div class="itemBody"></div>
+                    <div class="itemFoot"></div>
+                </m-item>
+            </m-list>
+        </m-collapse>
+    </ng-container>
 </m-list>
+{{ appService.translation | json }}
 <router-outlet></router-outlet>
