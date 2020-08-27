@@ -33,8 +33,8 @@ Element.prototype.css = function (param?: any, value?: any) {
         }
         return element;
     } else if (typeof param === 'string') {
-        return window.getComputedStyle((element as any)).getPropertyValue(param);
+        return window.getComputedStyle(element).getPropertyValue(param);
     } else {
-        return window.getComputedStyle((element as any));
+        return window.getComputedStyle(element);
     }
 };

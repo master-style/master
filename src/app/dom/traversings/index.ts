@@ -1,3 +1,4 @@
+
 const HTMLCollectionPrototype = HTMLCollection.prototype;
 const NodeListPrototype = NodeList.prototype;
 
