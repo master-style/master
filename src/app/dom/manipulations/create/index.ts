@@ -28,6 +28,6 @@ function Master(selector: string, attrs?: { [key: string]: any }, ...children: (
     } else {
         return document.querySelectorAll(selector);
     }
-};
+}
 
 window.Master = Master;
