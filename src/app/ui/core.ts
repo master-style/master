@@ -356,4 +356,4 @@ export function emit($target, type: string, parameters?) {
         }
         $target.dispatchEvent(event);
     }
-};
+}
