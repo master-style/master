@@ -1,4 +1,7 @@
 {
+    "guideline": "指南",
+    "installation": "安裝",
+    "coding-style": "撰寫風格",
     "distinguish": "鑒別",
     "transform": "轉換",
     "debounce": "防抖",
@@ -6,11 +9,11 @@
     "animation": "動畫",
     "breakpoint": "斷點",
     "color": "顏色",
-    "component": "元件",
+    "components": "元件",
     "control": "控制項",
     "interactive": "互動式",
-    "dataRender" : "數據呈現",
-    "progressIndicator": "進度預示",
+    "data-render" : "數據呈現",
+    "progress-indicator": "進度預示",
     "badge": "徽章",
     "card": "卡片",
     "chats": "聊天",
@@ -29,5 +32,8 @@
     "navigator": "導覽",
     "breadcrumbs": "麵包屑",
     "tabs": "標籤",
-    "icon": "圖標"
+    "icon": "圖標",
+    "event-listener": "事件偵聽器",
+    "manipulations": "操縱",
+    "traversings": "遍歷"
 }

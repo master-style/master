@@ -1,6 +1,6 @@
 <m-list>
-    <ng-container *ngFor="let eachRoute of routes" [ngTemplateOutlet]="routeGroup"
-        [ngTemplateOutletContext]="{route: eachRoute}">
+    <ng-container *ngFor="let eachRoute of routes">
+        <ng-container [ngTemplateOutlet]="routeGroup" [ngTemplateOutletContext]="{route: eachRoute}"></ng-container>
         <m-collapse *ngIf="eachRoute.children">
             <m-list class="sm">
                 <ng-container *ngFor="let eachChildRoute of eachRoute.children" [ngTemplateOutlet]="routeGroup"
@@ -10,7 +10,6 @@
         </m-collapse>
     </ng-container>
 </m-list>
-{{ appService.translation | json }}
 <router-outlet></router-outlet>
 
 <ng-template #routeGroup let-route="route">

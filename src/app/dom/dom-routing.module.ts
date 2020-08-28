@@ -36,7 +36,7 @@ export const domRoutes: Routes = [
         ]
     },
     {
-        path: 'traversing', children: [
+        path: 'traversings', children: [
             { path: 'filter', component: FilterComponent },
             { path: 'for-each', component: ForEachComponent },
             { path: 'index-of', component: IndexOfComponent }

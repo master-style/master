@@ -70,7 +70,7 @@ export const uiRoutes: Routes = [
             { path: 'textarea', component: TextareaComponent, resolve: { route: RouteResolver } },
             { path: 'check', component: CheckComponent, resolve: { route: RouteResolver } },
             { path: 'switch', component: SwitchComponent, resolve: { route: RouteResolver } },
-            { path: 'dataRender' },
+            { path: 'data-render' },
             { path: 'badge', component: BadgeComponent, resolve: { route: RouteResolver } },
             { path: 'card', component: CardComponent, resolve: { route: RouteResolver } },
             { path: 'chats', component: ChatsComponent, resolve: { route: RouteResolver } },
@@ -89,7 +89,7 @@ export const uiRoutes: Routes = [
             { path: 'modal', component: ModalComponent, resolve: { route: RouteResolver } },
             { path: 'popup', component: PopupComponent, resolve: { route: RouteResolver } },
             { path: 'scroll', component: ScrollComponent, resolve: { route: RouteResolver } },
-            { path: 'progressIndicator' },
+            { path: 'progress-indicator' },
             { path: 'progress', component: ProgressComponent, resolve: { route: RouteResolver } },
             { path: 'skeleton', resolve: { route: RouteResolver } },
         ]
