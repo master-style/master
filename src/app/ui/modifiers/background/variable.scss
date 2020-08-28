@@ -1,0 +1,7 @@
+@mixin blurBg($rgb, $opacity) {
+    @supports (backdrop-filter: none) or (-webkit-backdrop-filter: none) {
+        background-color: rgba(#{$rgb}, #{$opacity});
+        backdrop-filter: blur(35px);
+        -webkit-backdrop-filter: blur(35px);
+    }
+}

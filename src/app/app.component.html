@@ -1,19 +1,61 @@
-<m-list>
-    <ng-container *ngFor="let eachRoute of routes">
-        <ng-container [ngTemplateOutlet]="routeGroup" [ngTemplateOutletContext]="{route: eachRoute, class: 'sm lined'}"></ng-container>
-        <m-collapse *ngIf="eachRoute.children">
-            <ng-container *ngFor="let eachChildRoute of eachRoute.children" [ngTemplateOutlet]="routeGroup"
-                [ngTemplateOutletContext]="{route: eachChildRoute, class: 'xs lined'}">
+<div class="appHead sticky bb y:no c-wrap:no" id="appHead">
+    <div class="x">
+        <div class="c:stack">
+            <button is="m-button" id="side-toggle" collapse=".appSide" class="square transparent">
+                <i class="i-maximize-2"></i>
+            </button>
+            <!-- <button is="m-button" toggle="#side .user" class="transparent">
+                    <i class="i-user"></i>
+                </button> -->
+            <button is="m-button" id="themeToggle" class="square transparent">
+                <i class="i-moon f:fade++ hide@active"></i>
+                <i class="i-sun f:yellow show@active"></i>
+            </button>
+        </div>
+    </div>
+    <div class="x f:xs show@md" id="nowTime"></div>
+    <div class="x a:right c:middle">
+        <!-- <label class="ctl demoItem">
+                <select is="m-select">
+                    <option value="Taiwan" head="🇹🇼">Taiwan</option>
+                    <option value="Albania" head="🇦🇱">Albania</option>
+                    <option value="Australia" head="🇦🇺">Australia</option>
+                    <option value="Azerbaijan" head="🇦🇿">Azerbaijan</option>
+                    <option value="Belgium" head="🇧🇪" selected>Belgium</option>
+                    <option value="Bhutan" head="🇧🇹">Bhutan</option>
+                    <option value="Belize" head="🇧🇿">Belize</option>
+                    <option value="Chile" head="🇨🇱">Chile</option>
+                    <option value="Curacao" head="🇨🇼">Curacao</option>
+                </select>
+            </label> -->
+        <button is="m-button" class="square transparent">
+            <i class="i-power"></i>
+        </button>
+    </div>
+</div>
+<div class="appBody">
+</div>
+<div class="appSide br">
+    <div class="appHead s:no c:center">
+        <img src="assets/images/logo.svg" width="70">
+    </div>
+    <m-list>
+        <ng-container *ngFor="let eachRoute of routes">
+            <ng-container [ngTemplateOutlet]="routeGroup" [ngTemplateOutletContext]="{route: eachRoute, class: 'sm'}">
             </ng-container>
-        </m-collapse>
-    </ng-container>
-</m-list>
-<router-outlet></router-outlet>
-
-<ng-template #routeGroup let-route="route" let-class="class">
-    <div *ngIf="!route?.component && !route?.children" class="listLabel">{{ route.path | translate }}</div>
-    <m-item *ngIf="route?.component || route?.children" [class]="class">
-        <div class="itemHead">{{ route?.data?.icon || null }}</div>
-        <div class="itemBody">{{ route.path | translate }}</div>
-    </m-item>
-</ng-template>
+            <m-collapse *ngIf="eachRoute.children">
+                <ng-container *ngFor="let eachChildRoute of eachRoute.children" [ngTemplateOutlet]="routeGroup"
+                    [ngTemplateOutletContext]="{route: eachChildRoute, class: 'xs'}">
+                </ng-container>
+            </m-collapse>
+        </ng-container>
+    </m-list>
+    <router-outlet></router-outlet>
+    <ng-template #routeGroup let-route="route" let-class="class">
+        <div *ngIf="!route?.component && !route?.children" class="listLabel">{{ route.path | translate }}</div>
+        <m-item *ngIf="route?.component || route?.children" [class]="class">
+            <div class="itemHead">{{ route?.data?.icon || null }}</div>
+            <div class="itemBody">{{ route.path | translate }}</div>
+        </m-item>
+    </ng-template>
+</div>

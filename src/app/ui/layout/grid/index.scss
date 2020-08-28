@@ -1,0 +1,1375 @@
+.y,
+[class^=y\:],
+[class*=' y\:'] {
+    --gap: #{$md};
+    contain: style;
+    display: flex;
+    flex-wrap: wrap;
+    margin: calc(var(--gap) * -.5);
+
+    >.x,
+    >[class^=x\:],
+    >[class*=' x\:'] {
+        contain: style;
+        margin: calc(var(--gap) / 2);
+        flex-basis: calc(var(--x) - var(--gap));
+    }
+
+    &:not(.c\:row) {
+
+        >[class^=x\:],
+        >[class*=' x\:'] {
+            max-width: calc(var(--x) - var(--gap));
+        }
+
+        &:not(.y\:fit) {
+            width: calc(100% + var(--gap));
+        }
+    }
+
+    &.c\:row {
+
+        >[class^=x\:],
+        >[class*=' x\:'] {
+            max-height: calc(var(--x) - var(--gap));
+        }
+
+        &:not(.y\:fit) {
+            height: calc(100% + var(--gap));
+        }
+
+        >.x,
+        >[class^=x\:],
+        >[class*=' x\:'] {
+            width: var(--x12);
+            max-width: var(--x12);
+        }
+    }
+
+}
+
+[class^=x\:],
+[class*=' x\:'] {
+    --x: var(--x12);
+    flex-basis: var(--x);
+}
+
+.x\:11 {
+    --x: var(--x11);
+}
+
+.x\:10 {
+    --x: var(--x10);
+}
+
+.x\:9 {
+    --x: var(--x9);
+}
+
+.x\:8 {
+    --x: var(--x8);
+}
+
+.x\:7 {
+    --x: var(--x7);
+}
+
+.x\:6 {
+    --x: var(--x6);
+}
+
+.x\:5 {
+    --x: var(--x5);
+}
+
+.x\:4 {
+    --x: var(--x4);
+}
+
+.x\:3 {
+    --x: var(--x3);
+}
+
+.x\:2 {
+    --x: var(--x2);
+}
+
+.x\:1 {
+    --x: var(--x1);
+}
+
+.x\:0 {
+    flex: 0 0 0 !important;
+}
+
+.x\:fill {
+    flex: 1 1 auto !important;
+}
+
+.x {
+    flex: 0 0 auto !important;
+}
+
+.x\:grow {
+    flex-grow: 1 !important;
+}
+
+.x\:shrink {
+    flex-shrink: 1 !important;
+}
+
+.y\:xxl {
+    --gap: #{$xxl};
+}
+
+.y\:xl {
+    --gap: #{$xl};
+}
+
+.y\:lg {
+    --gap: #{$lg};
+}
+
+.y\:sm {
+    --gap: #{$sm};
+}
+
+.y\:xs {
+    --gap: #{$xs};
+}
+
+.y\:xxs {
+    --gap: #{$xxs};
+}
+
+.y\:no {
+    --gap: 0px;
+
+    &:not(.c\:row) {
+
+        >.x,
+        >[class^=x\:],
+        >[class*=' x\:'] {
+
+            &:not(:last-of-type) {
+                border-top-right-radius: 0 !important;
+                border-bottom-right-radius: 0 !important;
+            }
+
+            &:not(:first-of-type) {
+                border-top-left-radius: 0 !important;
+                border-bottom-left-radius: 0 !important;
+                border-left: 0px !important;
+            }
+        }
+    }
+
+    &.c\:row {
+
+        >.x,
+        >[class^=x\:],
+        >[class*=' x\:'] {
+            &:not(:last-of-type) {
+                border-bottom-left-radius: 0 !important;
+                border-bottom-right-radius: 0 !important;
+            }
+
+            &:not(:first-of-type) {
+                border-top-left-radius: 0 !important;
+                border-top-right-radius: 0 !important;
+                border-top: 0px !important;
+            }
+        }
+    }
+}
+
+[class^='right\:'],
+[class*=' right\:'],
+[class^='right\:'],
+[class*=' right\:'] {
+    position: relative;
+}
+
+.right\:12 {
+    right: var(--x12);
+}
+
+.right\:11 {
+    right: var(--x11);
+}
+
+.right\:10 {
+    right: var(--x10);
+}
+
+.right\:9 {
+    right: var(--x9);
+}
+
+.right\:8 {
+    right: var(--x8);
+}
+
+.right\:7 {
+    right: var(--x7);
+}
+
+.right\:6 {
+    right: var(--x6);
+}
+
+.right\:5 {
+    right: var(--x5);
+}
+
+.right\:4 {
+    right: var(--x4);
+}
+
+.right\:3 {
+    right: var(--x3);
+}
+
+.right\:2 {
+    right: var(--x2);
+}
+
+.right\:1 {
+    right: var(--x1);
+}
+
+.left\:12 {
+    left: var(--x12);
+}
+
+.left\:11 {
+    left: var(--x11);
+}
+
+.left\:1 {
+    left: var(--x10);
+}
+
+.left\:9 {
+    left: var(--x9);
+}
+
+.left\:8 {
+    left: var(--x8);
+}
+
+.left\:7 {
+    left: var(--x7);
+}
+
+.left\:6 {
+    left: var(--x6);
+}
+
+.left\:5 {
+    left: var(--x5);
+}
+
+.left\:4 {
+    left: var(--x4);
+}
+
+.left\:3 {
+    left: var(--x3);
+}
+
+.left\:2 {
+    left: var(--x2);
+}
+
+.left\:1 {
+    left: var(--x1);
+}
+
+.o\:first {
+    order: -1;
+}
+
+.o\:1 {
+    order: 1
+}
+
+.o\:2 {
+    order: 2
+}
+
+.o\:3 {
+    order: 3
+}
+
+.o\:4 {
+    order: 4
+}
+
+.o\:5 {
+    order: 5
+}
+
+.o\:6 {
+    order: 6
+}
+
+.o\:7 {
+    order: 7
+}
+
+.o\:8 {
+    order: 8
+}
+
+.o\:9 {
+    order: 9
+}
+
+.o\:10 {
+    order: 10
+}
+
+.o\:11 {
+    order: 11
+}
+
+.o\:12 {
+    order: 12
+}
+
+.o\:last {
+    order: 13
+}
+
+@include above(sm) {
+
+    .x\:12\@sm {
+        --x: var(--x12);
+    }
+
+    .x\:11\@sm {
+        --x: var(--x11);
+    }
+
+    .x\:10\@sm {
+        --x: var(--x10);
+    }
+
+    .x\:9\@sm {
+        --x: var(--x9);
+    }
+
+    .x\:8\@sm {
+        --x: var(--x8);
+    }
+
+    .x\:7\@sm {
+        --x: var(--x7);
+    }
+
+    .x\:6\@sm {
+        --x: var(--x6);
+    }
+
+    .x\:5\@sm {
+        --x: var(--x5);
+    }
+
+    .x\:4\@sm {
+        --x: var(--x4);
+    }
+
+    .x\:3\@sm {
+        --x: var(--x3);
+    }
+
+    .x\:2\@sm {
+        --x: var(--x2);
+    }
+
+    .x\:1\@sm {
+        --x: var(--x1);
+    }
+
+    .x\:0\@sm {
+        flex: 0 0 0 !important;
+    }
+
+    .x\:fill\@sm {
+        width: auto;
+        flex: 1 1 auto !important;
+    }
+
+    .x\@sm {
+        width: auto;
+        flex: 0 0 auto !important;
+    }
+
+    .x\:grow\@sm {
+        flex-grow: 1 !important;
+    }
+
+    .x\:shrink\@sm {
+        flex-shrink: 1 !important;
+    }
+
+    .y\:xxl\@sm {
+        --gap: #{$xxl};
+    }
+
+    .y\:xl\@sm {
+        --gap: #{$xl};
+    }
+
+    .y\:lg\@sm {
+        --gap: #{$lg};
+    }
+
+    .gap\@sm {
+        --gap: #{$md};
+    }
+
+    .y\:sm\@sm {
+        --gap: #{$sm};
+    }
+
+    .y\:xs\@sm {
+        --gap: #{$xs};
+    }
+
+    .y\:xxs\@sm {
+        --gap: #{$xxs};
+    }
+
+    .y\:no\@sm {
+        --gap: 0px;
+    }
+
+    .right\:12\@sm {
+        right: var(--x12);
+    }
+
+    .right\:11\@sm {
+        right: var(--x11);
+    }
+
+    .right\:10\@sm {
+        right: var(--x10);
+    }
+
+    .right\:9\@sm {
+        right: var(--x9);
+    }
+
+    .right\:8\@sm {
+        right: var(--x8);
+    }
+
+    .right\:7\@sm {
+        right: var(--x7);
+    }
+
+    .right\:6\@sm {
+        right: var(--x6);
+    }
+
+    .right\:5\@sm {
+        right: var(--x5);
+    }
+
+    .right\:4\@sm {
+        right: var(--x4);
+    }
+
+    .right\:3\@sm {
+        right: var(--x3);
+    }
+
+    .right\:2\@sm {
+        right: var(--x2);
+    }
+
+    .right\:1\@sm {
+        right: var(--x1);
+    }
+
+    .left\:12\@sm {
+        left: var(--x12);
+    }
+
+    .left\:11\@sm {
+        left: var(--x11);
+    }
+
+    .left\:10\@sm {
+        left: var(--x10);
+    }
+
+    .left\:9\@sm {
+        left: var(--x9);
+    }
+
+    .left\:8\@sm {
+        left: var(--x8);
+    }
+
+    .left\:7\@sm {
+        left: var(--x7);
+    }
+
+    .left\:6\@sm {
+        left: var(--x6);
+    }
+
+    .left\:5\@sm {
+        left: var(--x5);
+    }
+
+    .left\:4\@sm {
+        left: var(--x4);
+    }
+
+    .left\:3\@sm {
+        left: var(--x3);
+    }
+
+    .left\:2\@sm {
+        left: var(--x2);
+    }
+
+    .left\:1\@sm {
+        left: var(--x1);
+    }
+
+    .o\:first\@sm {
+        order: -1;
+    }
+
+    .o\:1\@sm {
+        order: 1
+    }
+
+    .o\:2\@sm {
+        order: 2
+    }
+
+    .o\:3\@sm {
+        order: 3
+    }
+
+    .o\:4\@sm {
+        order: 4
+    }
+
+    .o\:5\@sm {
+        order: 5
+    }
+
+    .o\:6\@sm {
+        order: 6
+    }
+
+    .o\:7\@sm {
+        order: 7
+    }
+
+    .o\:8\@sm {
+        order: 8
+    }
+
+    .o\:9\@sm {
+        order: 9
+    }
+
+    .o\:10\@sm {
+        order: 10
+    }
+
+    .o\:11\@sm {
+        order: 11
+    }
+
+    .o\:12\@sm {
+        order: 12
+    }
+
+    .o\:last\@sm {
+        order: 13
+    }
+}
+
+@include above(md) {
+
+    .x\:12\@md {
+        --x: var(--x12);
+    }
+
+    .x\:11\@md {
+        --x: var(--x11);
+    }
+
+    .x\:10\@md {
+        --x: var(--x10);
+    }
+
+    .x\:9\@md {
+        --x: var(--x9);
+    }
+
+    .x\:8\@md {
+        --x: var(--x8);
+    }
+
+    .x\:7\@md {
+        --x: var(--x7);
+    }
+
+    .x\:6\@md {
+        --x: var(--x6);
+    }
+
+    .x\:5\@md {
+        --x: var(--x5);
+    }
+
+    .x\:4\@md {
+        --x: var(--x4);
+    }
+
+    .x\:3\@md {
+        --x: var(--x3);
+    }
+
+    .x\:2\@md {
+        --x: var(--x2);
+    }
+
+    .x\:1\@md {
+        --x: var(--x1);
+    }
+
+    .x\:0\@md {
+        flex: 0 0 0 !important;
+    }
+
+    .x\:fill\@md {
+        width: auto;
+        flex: 1 1 auto !important;
+    }
+
+    .x\@md {
+        width: auto;
+        flex: 0 0 auto !important;
+    }
+
+    .x\:grow\@md {
+        flex-grow: 1 !important;
+    }
+
+    .x\:shrink\@md {
+        flex-shrink: 1 !important;
+    }
+
+    .y\:xxl\@md {
+        --gap: #{$xxl};
+    }
+
+    .y\:xl\@md {
+        --gap: #{$xl};
+    }
+
+    .y\:lg\@md {
+        --gap: #{$lg};
+    }
+
+    .gap\@md {
+        --gap: #{$md};
+    }
+
+    .y\:sm\@md {
+        --gap: #{$sm};
+    }
+
+    .y\:xs\@md {
+        --gap: #{$xs};
+    }
+
+    .y\:xxs\@md {
+        --gap: #{$xxs};
+    }
+
+    .y\:no\@md {
+        --gap: 0px;
+    }
+
+    .right\:12\@md {
+        right: var(--x12);
+    }
+
+    .right\:11\@md {
+        right: var(--x11);
+    }
+
+    .right\:10\@md {
+        right: var(--x10);
+    }
+
+    .right\:9\@md {
+        right: var(--x9);
+    }
+
+    .right\:8\@md {
+        right: var(--x8);
+    }
+
+    .right\:7\@md {
+        right: var(--x7);
+    }
+
+    .right\:6\@md {
+        right: var(--x6);
+    }
+
+    .right\:5\@md {
+        right: var(--x5);
+    }
+
+    .right\:4\@md {
+        right: var(--x4);
+    }
+
+    .right\:3\@md {
+        right: var(--x3);
+    }
+
+    .right\:2\@md {
+        right: var(--x2);
+    }
+
+    .right\:1\@md {
+        right: var(--x1);
+    }
+
+    .left\:12\@md {
+        left: var(--x12);
+    }
+
+    .left\:11\@md {
+        left: var(--x11);
+    }
+
+    .left\:10\@md {
+        left: var(--x10);
+    }
+
+    .left\:9\@md {
+        left: var(--x9);
+    }
+
+    .left\:8\@md {
+        left: var(--x8);
+    }
+
+    .left\:7\@md {
+        left: var(--x7);
+    }
+
+    .left\:6\@md {
+        left: var(--x6);
+    }
+
+    .left\:5\@md {
+        left: var(--x5);
+    }
+
+    .left\:4\@md {
+        left: var(--x4);
+    }
+
+    .left\:3\@md {
+        left: var(--x3);
+    }
+
+    .left\:2\@md {
+        left: var(--x2);
+    }
+
+    .left\:1\@md {
+        left: var(--x1);
+    }
+
+    .o\:first\@md {
+        order: -1;
+    }
+
+    .o\:1\@md {
+        order: 1
+    }
+
+    .o\:2\@md {
+        order: 2
+    }
+
+    .o\:3\@md {
+        order: 3
+    }
+
+    .o\:4\@md {
+        order: 4
+    }
+
+    .o\:5\@md {
+        order: 5
+    }
+
+    .o\:6\@md {
+        order: 6
+    }
+
+    .o\:7\@md {
+        order: 7
+    }
+
+    .o\:8\@md {
+        order: 8
+    }
+
+    .o\:9\@md {
+        order: 9
+    }
+
+    .o\:10\@md {
+        order: 10
+    }
+
+    .o\:11\@md {
+        order: 11
+    }
+
+    .o\:12\@md {
+        order: 12
+    }
+
+    .o\:last\@md {
+        order: 13
+    }
+}
+
+@include above(lg) {
+
+    // [class^=x\:lg],
+    // [class*=' x\:lg'] {
+    //     flex: 0 0 auto!important;
+    // }
+    .x\:12\@lg {
+        flex: 0 0 var(--x12);
+    }
+
+    .x\:11\@lg {
+        --x: var(--x11);
+
+
+    }
+
+    .x\:10\@lg {
+        --x: var(--x10);
+
+
+    }
+
+    .x\:9\@lg {
+        --x: var(--x9);
+    }
+
+    .x\:8\@lg {
+        --x: var(--x8);
+    }
+
+    .x\:7\@lg {
+        --x: var(--x7);
+    }
+
+    .x\:6\@lg {
+        --x: var(--x6);
+    }
+
+    .x\:5\@lg {
+        --x: var(--x5);
+    }
+
+    .x\:4\@lg {
+        --x: var(--x4);
+    }
+
+    .x\:3\@lg {
+        --x: var(--x3);
+    }
+
+    .x\:2\@lg {
+        --x: var(--x2);
+    }
+
+    .x\:1\@lg {
+        --x: var(--x1);
+    }
+
+    .x\:0\@lg {
+        flex: 0 0 0 !important;
+    }
+
+    .x\:fill\@lg {
+        width: auto;
+        flex: 1 1 auto !important;
+    }
+
+    .x\@lg {
+        width: auto;
+        flex: 0 0 auto !important;
+    }
+
+    .x\:grow\@lg {
+        flex-grow: 1 !important;
+    }
+
+    .x\:shrink\@lg {
+        flex-shrink: 1 !important;
+    }
+
+    .y\:xxl\@lg {
+        --gap: #{$xxl};
+    }
+
+    .y\:xl\@lg {
+        --gap: #{$xl};
+    }
+
+    .y\:lg\@lg {
+        --gap: #{$lg};
+    }
+
+    .gap\@lg {
+        --gap: #{$md};
+    }
+
+    .y\:sm\@lg {
+        --gap: #{$sm};
+    }
+
+    .y\:xs\@lg {
+        --gap: #{$xs};
+    }
+
+    .y\:xxs\@lg {
+        --gap: #{$xxs};
+    }
+
+    .y\:no\@lg {
+        --gap: 0px;
+    }
+
+    .right\:12\@lg {
+        right: var(--x12);
+    }
+
+    .right\:11\@lg {
+        right: var(--x11);
+    }
+
+    .right\:10\@lg {
+        right: var(--x10);
+    }
+
+    .right\:9\@lg {
+        right: var(--x9);
+    }
+
+    .right\:8\@lg {
+        right: var(--x8);
+    }
+
+    .right\:7\@lg {
+        right: var(--x7);
+    }
+
+    .right\:6\@lg {
+        right: var(--x6);
+    }
+
+    .right\:5\@lg {
+        right: var(--x5);
+    }
+
+    .right\:4\@lg {
+        right: var(--x4);
+    }
+
+    .right\:3\@lg {
+        right: var(--x3);
+    }
+
+    .right\:2\@lg {
+        right: var(--x2);
+    }
+
+    .right\:1\@lg {
+        right: var(--x1);
+    }
+
+    .left\:12\@lg {
+        left: var(--x12);
+    }
+
+    .left\:11\@lg {
+        left: var(--x11);
+    }
+
+    .left\:10\@lg {
+        left: var(--x10);
+    }
+
+    .left\:9\@lg {
+        left: var(--x9);
+    }
+
+    .left\:8\@lg {
+        left: var(--x8);
+    }
+
+    .left\:7\@lg {
+        left: var(--x7);
+    }
+
+    .left\:6\@lg {
+        left: var(--x6);
+    }
+
+    .left\:5\@lg {
+        left: var(--x5);
+    }
+
+    .left\:4\@lg {
+        left: var(--x4);
+    }
+
+    .left\:3\@lg {
+        left: var(--x3);
+    }
+
+    .left\:2\@lg {
+        left: var(--x2);
+    }
+
+    .left\:1\@lg {
+        left: var(--x1);
+    }
+
+    .o\:md-first\@lg {
+        order: -1;
+    }
+
+    .o\:1\@lg {
+        order: 1
+    }
+
+    .o\:2\@lg {
+        order: 2
+    }
+
+    .o\:3\@lg {
+        order: 3
+    }
+
+    .o\:4\@lg {
+        order: 4
+    }
+
+    .o\:5\@lg {
+        order: 5
+    }
+
+    .o\:6\@lg {
+        order: 6
+    }
+
+    .o\:7\@lg {
+        order: 7
+    }
+
+    .o\:8\@lg {
+        order: 8
+    }
+
+    .o\:9\@lg {
+        order: 9
+    }
+
+    .o\:10\@lg {
+        order: 10
+    }
+
+    .o\:11\@lg {
+        order: 11
+    }
+
+    .o\:12\@lg {
+        order: 12
+    }
+
+    .o\:last\@lg {
+        order: 13
+    }
+}
+
+@include above(xl) {
+
+    .x\:12\@xl {
+        flex: 0 0 var(--x12);
+    }
+
+    .x\:11\@xl {
+        --x: var(--x11);
+    }
+
+    .x\:10\@xl {
+        --x: var(--x10);
+    }
+
+    .x\:9\@xl {
+        --x: var(--x9);
+    }
+
+    .x\:8\@xl {
+        --x: var(--x8);
+    }
+
+    .x\:7\@xl {
+        --x: var(--x7);
+    }
+
+    .x\:6\@xl {
+        --x: var(--x6);
+    }
+
+    .x\:5\@xl {
+        --x: var(--x5);
+    }
+
+    .x\:4\@xl {
+        --x: var(--x4);
+    }
+
+    .x\:3\@xl {
+        --x: var(--x3);
+    }
+
+    .x\:2\@xl {
+        --x: var(--x2);
+    }
+
+    .x\:1\@xl {
+        --x: var(--x1);
+    }
+
+    .x\:0\@xl {
+        flex: 0 0 0 !important;
+    }
+
+    .x\:fill\@xl {
+        width: auto;
+        flex: 1 1 auto !important;
+    }
+
+    .x\@xl {
+        width: auto;
+        flex: 0 0 auto !important;
+    }
+
+    .x\:grow\@xl {
+        flex-grow: 1 !important;
+    }
+
+    .x\:shrink\@xl {
+        flex-shrink: 1 !important;
+    }
+
+    .y\:xxl\@xl {
+        --gap: #{$xxl};
+    }
+
+    .y\:xl\@xl {
+        --gap: #{$xl};
+    }
+
+    .y\:lg\@xl {
+        --gap: #{$lg};
+    }
+
+    .gap\@xl {
+        --gap: #{$md};
+    }
+
+    .y\:sm\@xl {
+        --gap: #{$sm};
+    }
+
+    .y\:xs\@xl {
+        --gap: #{$xs};
+    }
+
+    .y\:xxs\@xl {
+        --gap: #{$xxs};
+    }
+
+    .y\:no\@xl {
+        --gap: 0px;
+    }
+
+    .right\:12\@xl {
+        right: var(--x12);
+    }
+
+    .right\:11\@xl {
+        right: var(--x11);
+    }
+
+    .right\:10\@xl {
+        right: var(--x10);
+    }
+
+    .right\:9\@xl {
+        right: var(--x9);
+    }
+
+    .right\:8\@xl {
+        right: var(--x8);
+    }
+
+    .right\:7\@xl {
+        right: var(--x7);
+    }
+
+    .right\:6\@xl {
+        right: var(--x6);
+    }
+
+    .right\:5\@xl {
+        right: var(--x5);
+    }
+
+    .right\:4\@xl {
+        right: var(--x4);
+    }
+
+    .right\:3\@xl {
+        right: var(--x3);
+    }
+
+    .right\:2\@xl {
+        right: var(--x2);
+    }
+
+    .right\:1\@xl {
+        right: var(--x1);
+    }
+
+    .left\:12\@xl {
+        left: var(--x12);
+    }
+
+    .left\:11\@xl {
+        left: var(--x11);
+    }
+
+    .left\:10\@xl {
+        left: var(--x10);
+    }
+
+    .left\:9\@xl {
+        left: var(--x9);
+    }
+
+    .left\:8\@xl {
+        left: var(--x8);
+    }
+
+    .left\:7\@xl {
+        left: var(--x7);
+    }
+
+    .left\:6\@xl {
+        left: var(--x6);
+    }
+
+    .left\:5\@xl {
+        left: var(--x5);
+    }
+
+    .left\:4\@xl {
+        left: var(--x4);
+    }
+
+    .left\:3\@xl {
+        left: var(--x3);
+    }
+
+    .left\:2\@xl {
+        left: var(--x2);
+    }
+
+    .left\:1\@xl {
+        left: var(--x1);
+    }
+
+    .o\:1\@xl {
+        order: 1
+    }
+
+    .o\:2\@xl {
+        order: 2
+    }
+
+    .o\:3\@xl {
+        order: 3
+    }
+
+    .o\:4\@xl {
+        order: 4
+    }
+
+    .o\:5\@xl {
+        order: 5
+    }
+
+    .o\:6\@xl {
+        order: 6
+    }
+
+    .o\:7\@xl {
+        order: 7
+    }
+
+    .o\:8\@xl {
+        order: 8
+    }
+
+    .o\:9\@xl {
+        order: 9
+    }
+
+    .o\:10\@xl {
+        order: 10
+    }
+
+    .o\:11\@xl {
+        order: 11
+    }
+
+    .o\:12\@xl {
+        order: 12
+    }
+
+    .o\:last\@xl {
+        order: 13
+    }
+}

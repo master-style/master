@@ -1,0 +1,317 @@
+.static {
+    position: static !important;
+}
+
+.rel {
+    position: relative !important;
+}
+
+.sticky {
+    @include sticky( !important);
+    top: 0;
+}
+
+.abs {
+    position: absolute !important;
+    z-index: $z-abs;
+}
+
+.fixed {
+    position: fixed !important;
+    z-index: $z-fixed;
+}
+
+.edge {
+    position: absolute !important;
+    z-index: $z-abs;
+
+    &.top {
+        transform: translate(0, -50%);
+    }
+
+    &.bottom {
+        transform: translate(0, 50%);
+    }
+
+    &.left {
+        transform: translate(-50%, 0);
+    }
+
+    &.right {
+        transform: translate(50%, 0);
+    }
+
+    &.top.left {
+        transform: translate(-50%, -50%);
+    }
+
+    &.top.right {
+        transform: translate(50%, -50%);
+    }
+
+    &.bottom.left {
+        transform: translate(-50%, 50%);
+    }
+
+    &.bottom.right {
+        transform: translate(50%, 50%);
+    }
+}
+
+.top {
+    top: 0 !important;
+    bottom: auto !important;
+}
+
+.middle {
+    top: 0 !important;
+    bottom: 0 !important;
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+}
+
+.bottom {
+    top: auto !important;
+    bottom: 0 !important;
+}
+
+.left {
+    left: 0 !important;
+    right: auto !important;
+}
+
+.center {
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.right {
+    left: auto !important;
+    right: 0 !important;
+}
+
+.overlay {
+    position: absolute;
+    border-radius: inherit;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@include above(sm) {
+    .rel\@sm {
+        position: relative !important;
+    }
+
+    .sticky\@sm {
+        @include sticky( !important);
+        top: 0;
+    }
+
+    .abs\@sm {
+        position: absolute !important;
+        z-index: $z-abs;
+    }
+
+    .fixed\@sm {
+        position: fixed !important;
+        z-index: $z-fixed;
+    }
+
+    .top\@sm {
+        top: 0 !important;
+        bottom: auto !important;
+    }
+
+    .middle\@sm {
+        top: 0 !important;
+        bottom: 0 !important;
+        margin-top: auto !important;
+        margin-bottom: auto !important;
+    }
+
+    .bottom\@sm {
+        top: auto !important;
+        bottom: 0 !important;
+    }
+
+    .left\@sm {
+        left: 0 !important;
+        right: auto !important;
+    }
+
+    .center\@sm {
+        left: 50% !important;
+        transform: translateX(-50%);
+    }
+
+    .right\@sm {
+        left: auto !important;
+        right: 0 !important;
+    }
+}
+
+@include above(md) {
+    .rel\@md {
+        position: relative !important;
+    }
+
+    .sticky\@md {
+        @include sticky( !important);
+        top: 0;
+    }
+
+    .abs\@md {
+        position: absolute !important;
+        z-index: $z-abs;
+    }
+
+    .fixed\@md {
+        position: fixed !important;
+        z-index: $z-fixed;
+    }
+
+    .top\@md {
+        top: 0 !important;
+        bottom: auto !important;
+    }
+
+    .middle\@md {
+        top: 0 !important;
+        bottom: 0 !important;
+        margin-top: auto !important;
+        margin-bottom: auto !important;
+    }
+
+    .bottom\@md {
+        top: auto !important;
+        bottom: 0 !important;
+    }
+
+    .left\@md {
+        left: 0 !important;
+        right: auto !important;
+    }
+
+    .center\@md {
+        left: 50% !important;
+        transform: translateX(-50%);
+    }
+
+    .right\@md {
+        left: auto !important;
+        right: 0 !important;
+    }
+}
+
+@include above(lg) {
+    .rel\@lg {
+        position: relative !important;
+    }
+
+    .sticky\@lg {
+        @include sticky( !important);
+        top: 0;
+    }
+
+    .abs\@lg {
+        position: absolute !important;
+        z-index: $z-abs;
+    }
+
+    .fixed\@lg {
+        position: fixed !important;
+        z-index: $z-fixed;
+    }
+
+    .top\@lg {
+        top: 0 !important;
+        bottom: auto !important;
+    }
+
+    .middle\@lg {
+        top: 0 !important;
+        bottom: 0 !important;
+        margin-top: auto !important;
+        margin-bottom: auto !important;
+    }
+
+    .bottom\@lg {
+        top: auto !important;
+        bottom: 0 !important;
+    }
+
+    .left\@lg {
+        left: 0 !important;
+        right: auto !important;
+    }
+
+    .center\@lg {
+        left: 50% !important;
+        transform: translateX(-50%);
+    }
+
+    .right\@lg {
+        left: auto !important;
+        right: 0 !important;
+    }
+}
+
+@include above(xl) {
+    .rel\@xl {
+        position: relative !important;
+    }
+
+    .sticky\@xl {
+        @include sticky( !important);
+        top: 0;
+    }
+
+    .abs\@xl {
+        position: absolute !important;
+        z-index: $z-abs;
+    }
+
+    .fixed\@xl {
+        position: fixed !important;
+        z-index: $z-fixed;
+    }
+
+    .top\@xl {
+        top: 0 !important;
+        bottom: auto !important;
+    }
+
+    .middle\@xl {
+        top: 0 !important;
+        bottom: 0 !important;
+        margin-top: auto !important;
+        margin-bottom: auto !important;
+    }
+
+    .bottom\@xl {
+        top: auto !important;
+        bottom: 0 !important;
+    }
+
+    .left\@xl {
+        left: 0 !important;
+        right: auto !important;
+    }
+
+    .center\@xl {
+        left: 50% !important;
+        transform: translateX(-50%);
+    }
+
+    .right\@xl {
+        left: auto !important;
+        right: 0 !important;
+    }
+}

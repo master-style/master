@@ -1,4 +1,8 @@
+
 @import './breakpoint/variable';
+@import './modifiers/background/variable';
+@import './modifiers/shadow/variable';
+@import './modifiers/z-index/variable';
 
 $blue: #377dff;
 $red: rgb(245, 80, 120);

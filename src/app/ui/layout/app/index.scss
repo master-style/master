@@ -1,0 +1,135 @@
+body {
+    --appHeadH: 3rem;
+    --appFootH: 3.75rem;
+}
+
+.appMaster,
+.appMaster body {
+    position: static;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    contain: style;
+}
+
+.appMaster {
+    height: 100%;
+    overflow-y: overlay;
+    overflow-x: hidden;
+}
+
+.appMaster body {
+    overflow: visible !important;
+}
+
+.appWrap {
+    display: grid;
+    min-height: 100%;
+    min-width: 0;
+    width: 100%;
+    flex: 1 0 auto;
+    contain: style;
+    //
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 200px 1fr 1fr;
+    grid-gap: 0;
+    grid-template-areas:
+        "appSide appHead appHead"
+        "appSide appBreadcrumb appBreadcrumb"
+        "appSide appBody appBody"
+        "appSide appFoot appFoot";
+}
+
+.appLoad {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: var(--theme);
+    z-index: $z-top;
+    contain: strict;
+}
+
+.appHead,
+.appSide {
+    display: flex;
+    flex: 0 0 auto;
+    contain: content;
+}
+
+.appBreadcrumb,
+.appSide,
+.appHead,
+.appFoot {
+    width: 100%;
+    background-color: var(--theme);
+    @include blurBg(var(--themeRgb), .9);
+}
+
+.appHead {
+    grid-area: appHead;
+    top: 0;
+    z-index: $z-fixed !important;
+    min-height: var(--appHeadH);
+    align-items: center;
+
+    &.sticky+.appBody .appSide.sticky {
+        --appSideOffset: var(--appHeadH, 0);
+    }
+}
+
+.appFoot {
+    grid-area: appFoot;
+    bottom: 0;
+    min-height: var(--appFootH);
+    border-top: 1px solid var(--b-fadest);
+    z-index: $z-fixed;
+
+    .tab {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.appFoot,
+.appSide {
+    @supports(padding-bottom: env(safe-area-inset-bottom)) {
+        padding-bottom: unquote('env(safe-area-inset-bottom)!important')
+    }
+}
+
+.appSide {
+    grid-area: appSide;
+    overflow: hidden;
+    max-width: 200px;
+    flex-direction: column;
+    top: 0;
+
+    &.sticky {
+        top: var(--appSideOffset);
+        height: calc(100vh - var(--appSideOffset));
+    }
+}
+
+.appBody {
+    grid-area: appBody;
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    flex-wrap: nowrap;
+    flex: 1 1 auto;
+    contain: style;
+}
+
+.appMain {
+    contain: style;
+    max-width: 100%;
+    // overflow: hidden;
+    width: 100%;
+    min-width: 0; // 不可移除，很重要。flex item 最小寬度預設為內容的最小寬度，故需要設為 0 以防止溢出
+}
