@@ -1,0 +1,47 @@
+@function breakpoint-next($names, $breakpoints: $breakpoints, $breakpoint-names: map-keys($breakpoints)) {
+    $n: index($breakpoint-names, $names);
+    @return if($n !=null and $n < length($breakpoint-names), nth($breakpoint-names, $n + 1), null);
+}
+
+@function breakpoint-min($names, $breakpoints: $breakpoints) {
+    $min: map-get($breakpoints, $names);
+    @return if($min !=0, $min, null);
+}
+
+@function breakpoint-max($names, $breakpoints: $breakpoints) {
+    $next: breakpoint-next($names, $breakpoints);
+    @return if($next, breakpoint-min($next, $breakpoints) - .02, null);
+}
+
+@function breakpoint-suffix($names, $breakpoints: $grid-breakpoints) {
+    @return if(breakpoint-min($names, $breakpoints)==null, '', '\\@#{$names}');
+}
+
+
+@mixin above($names, $breakpoints: $breakpoints) {
+    $min: breakpoint-min($names, $breakpoints);
+
+    @if $min {
+        @media (min-width: $min) {
+            @content;
+        }
+    }
+
+    @else {
+        @content;
+    }
+}
+
+@mixin below($names, $breakpoints: $breakpoints) {
+    $max: breakpoint-max($names, $breakpoints);
+
+    @if $max {
+        @media (max-width: $max) {
+            @content;
+        }
+    }
+
+    @else {
+        @content;
+    }
+}
