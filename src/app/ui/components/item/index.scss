@@ -4,20 +4,14 @@ m-item {
     align-items: flex-start;
     width: 100%;
     contain: style;
-    border-top: 1px solid var(--b-fadest);
     font-size: 1rem;
     min-height: 3rem;
 
-    &:first-child {
-        border-top: 0;
-
-        .itemBody,
-        .itemFoot {
-            border-top: 0;
-        }
+    &.lined:not(:first-child) {
+        border-top: 1px solid var(--b-fadest);
     }
 
-    &.indented {
+    &.indented.lined {
         border-top: 0;
 
         .itemBody,

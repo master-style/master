@@ -3,6 +3,21 @@ m-list {
     display: flex;
     flex-direction: column;
 
+    &.lined {
+        m-item:not(:first-child) {
+            border-top: 1px solid var(--b-fadest);
+        }
+    }
+
+    &.indented.lined m-item {
+        border-top: 0;
+
+        .itemBody,
+        .itemFoot {
+            border-top: 1px solid var(--b-fadest);
+        }
+    }
+
     m-list {
         margin-left: $md;
     }
