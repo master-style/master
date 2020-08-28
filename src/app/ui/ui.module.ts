@@ -53,6 +53,7 @@ import { SwitchComponent } from './components/controls/switch/switch.component';
 import { CheckComponent } from './components/controls/check/check.component';
 import { FigureComponent } from './decorators/figure/figure.component';
 import { ItemComponent } from './components/item/item.component';
+import { SkeletonComponent } from './components/skeleton/skeleton.component';
 
 @NgModule({
     declarations: [
@@ -90,6 +91,7 @@ import { ItemComponent } from './components/item/item.component';
         CheckComponent,
         FigureComponent,
         ItemComponent,
+        SkeletonComponent,
     ],
     imports: [
         CommonModule,

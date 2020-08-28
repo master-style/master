@@ -1,9 +1,9 @@
 <m-list>
     <ng-container *ngFor="let eachRoute of routes">
-        <ng-container [ngTemplateOutlet]="routeGroup" [ngTemplateOutletContext]="{route: eachRoute, class: 'sm'}"></ng-container>
+        <ng-container [ngTemplateOutlet]="routeGroup" [ngTemplateOutletContext]="{route: eachRoute, class: 'sm lined'}"></ng-container>
         <m-collapse *ngIf="eachRoute.children">
             <ng-container *ngFor="let eachChildRoute of eachRoute.children" [ngTemplateOutlet]="routeGroup"
-                [ngTemplateOutletContext]="{route: eachChildRoute, class: 'xs'}">
+                [ngTemplateOutletContext]="{route: eachChildRoute, class: 'xs lined'}">
             </ng-container>
         </m-collapse>
     </ng-container>
@@ -13,7 +13,7 @@
 <ng-template #routeGroup let-route="route" let-class="class">
     <div *ngIf="!route?.component && !route?.children" class="listLabel">{{ route.path | translate }}</div>
     <m-item *ngIf="route?.component || route?.children" [class]="class">
-        <div *ngIf="route?.data?.icon" class="itemHead">{{ route.data.icon }}</div>
+        <div class="itemHead">{{ route?.data?.icon || null }}</div>
         <div class="itemBody">{{ route.path | translate }}</div>
     </m-item>
 </ng-template>

@@ -55,6 +55,7 @@ import { FigureComponent } from './decorators/figure/figure.component';
 
 import { RouteResolver } from '../../shared/resolvers/route.resolver';
 import { ItemComponent } from './components/item/item.component';
+import { SkeletonComponent } from './components/skeleton/skeleton.component';
 
 export const uiRoutes: Routes = [
     { path: 'UI' },
@@ -91,7 +92,7 @@ export const uiRoutes: Routes = [
             { path: 'scroll', component: ScrollComponent, resolve: { route: RouteResolver } },
             { path: 'progress-indicator' },
             { path: 'progress', component: ProgressComponent, resolve: { route: RouteResolver } },
-            { path: 'skeleton', resolve: { route: RouteResolver } },
+            { path: 'skeleton', component: SkeletonComponent, resolve: { route: RouteResolver } },
         ]
     },
     { path: 'icon', component: IconComponent },
