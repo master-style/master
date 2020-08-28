@@ -1,0 +1,139 @@
+m-item {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    contain: style;
+    border-top: 1px solid var(--b-fadest);
+    font-size: 1rem;
+    min-height: 3rem;
+
+    &:first-child {
+        border-top: 0;
+
+        .itemBody,
+        .itemFoot {
+            border-top: 0;
+        }
+    }
+
+    &.indented {
+        border-top: 0;
+
+        .itemBody,
+        .itemFoot {
+            border-top: 1px solid var(--b-fadest);
+        }
+    }
+
+    &.touch {
+
+        @media (any-hover: hover) {
+            &:hover {
+                background-color: var(--hover-theme);
+            }
+        }
+
+    }
+
+    &.sm {
+        font-size: .9125rem;
+        min-height: 2.5rem;
+
+        .itemBody {
+            padding-top: $sm;
+            padding-bottom: $sm;
+        }
+
+        .itemHead,
+        .itemFoot {
+            img {
+                width: 1.625rem;
+                height: 1.625rem;
+                margin: 0 $sm 0 $sm;
+            }
+        }
+    }
+
+    &.xs {
+        font-size: .875rem;
+        min-height: 2rem;
+
+        .itemBody {
+            padding-top: .4375rem;
+            padding-bottom: .4375rem;
+        }
+    }
+
+    &[disabled] {
+        background-color: transparent !important;
+
+        .itemBody {
+            color: var(--f-fadest) !important;
+        }
+
+        i {
+            color: inherit !important;
+        }
+    }
+
+    [is=m-check]~i {
+        --checkedBg: transparent;
+        --checkedBorder: var(--b-fadest);
+        --checked: var(--blue);
+    }
+
+    [is=m-check][type=radio]~i {
+        --checkedBorder: transparent;
+    }
+}
+
+.itemHead,
+.itemBody,
+.itemFoot {
+    contain: style;
+    min-height: inherit;
+}
+
+.itemHead,
+.itemFoot {
+    display: flex;
+    text-align: center;
+    white-space: nowrap;
+    justify-content: center;
+    align-items: center;
+    min-width: 3rem;
+
+    img {
+        width: 2rem;
+        height: 2rem;
+        margin: 0 $sm 0 $sm;
+    }
+
+    i {
+        color: var(--f-fader);
+    }
+}
+
+.itemBody {
+    flex: auto;
+    padding: .825rem 1rem;
+    line-height: 1.3;
+    text-align: left;
+}
+
+.itemFoot {
+    flex: 0 0 auto;
+    padding-right: $sm;
+    color: var(--f-fader);
+
+    i {
+        margin-left: $sm;
+        color: var(--f-fadest);
+    }
+}
+
+.itemHead~.itemBody {
+    text-align: left;
+    padding-left: 0 !important;
+}
