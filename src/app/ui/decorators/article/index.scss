@@ -1,4 +1,4 @@
-article.decorated {
+.decorated {
     display: block;
     width: 100%;
     max-width: $wrap-xs;
@@ -135,11 +135,6 @@ article.decorated {
         text-decoration-skip-ink: none;
     }
 
-    img {
-        border-radius: $xs;
-        margin-bottom: $md;
-    }
-
     ul,
     ol,
     blockquote,
@@ -152,6 +147,7 @@ article.decorated {
         display: inline-block;
         margin: 0 0 $md 0;
 
+        video,
         img {
             margin-bottom: $xs;
         }
