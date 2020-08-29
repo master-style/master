@@ -1,6 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UiRoutingModule } from './ui-routing.module';
+import { SharedModule } from '../shared/shared.module';
 import { IconComponent } from './icon/icon.component';
 import { ColorComponent } from './color/color.component';
 import { BreakpointComponent } from './breakpoint/breakpoint.component';
@@ -95,7 +96,8 @@ import { BreadcrumbComponent } from './decorators/breadcrumb/breadcrumb.componen
     ],
     imports: [
         CommonModule,
-        UiRoutingModule
+        UiRoutingModule,
+        SharedModule
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
