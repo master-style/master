@@ -41,6 +41,7 @@
             <a active aria-current="page">撰寫風格</a>
         </nav>
         <h1 class="mt:no">選單</h1>
+        <router-outlet></router-outlet>
     </article>
 </main>
 <aside class="appSide br">
@@ -51,19 +52,18 @@
         <ng-container *ngFor="let eachRoute of routes">
             <ng-container [ngTemplateOutlet]="routeGroup" [ngTemplateOutletContext]="{route: eachRoute, class: 'sm'}">
             </ng-container>
-            <m-collapse *ngIf="eachRoute.children">
-                <ng-container *ngFor="let eachChildRoute of eachRoute.children" [ngTemplateOutlet]="routeGroup"
-                    [ngTemplateOutletContext]="{route: eachChildRoute, class: 'xs'}">
-                </ng-container>
-            </m-collapse>
         </ng-container>
     </m-list>
-    <router-outlet></router-outlet>
     <ng-template #routeGroup let-route="route" let-class="class">
-        <div *ngIf="!route?.component && !route?.children" class="listLabel">{{ route.path | translate }}</div>
+        <header *ngIf="!route?.component && !route?.children" part="list-header">{{ route.path | translate }}</header>
         <m-item *ngIf="route?.component || route?.children" [class]="class">
             <div class="itemHead">{{ route?.data?.icon || null }}</div>
             <div class="itemBody">{{ route.path | translate }}</div>
         </m-item>
+        <m-collapse *ngIf="route.children">
+            <ng-container *ngFor="let eachRoute of route.children" [ngTemplateOutlet]="routeGroup"
+                [ngTemplateOutletContext]="{route: eachRoute, class: 'xs'}">
+            </ng-container>
+        </m-collapse>
     </ng-template>
 </aside>

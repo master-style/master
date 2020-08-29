@@ -1,15 +1,8 @@
-body {
-    --appHeadH: 3rem;
-    --appFootH: 3.75rem;
-}
-
 .appMaster,
 .appMaster body {
     position: static;
     width: 100%;
-    max-width: 100%;
-    display: flex;
-    flex-direction: column;
+    display: block;
     contain: style;
 }
 
@@ -72,19 +65,15 @@ body {
     grid-row: auto;
     top: 0;
     z-index: $z-fixed !important;
-    min-height: var(--appHeadH);
+    min-height: 3rem;
     align-items: center;
-
-    &.sticky+.appBody .appSide.sticky {
-        --appSideOffset: var(--appHeadH, 0);
-    }
 }
 
 .appFoot {
     grid-area: appFoot;
     grid-row: auto;
     bottom: 0;
-    min-height: var(--appFootH);
+    min-height: 3.75rem;
     border-top: 1px solid var(--b-fadest);
     z-index: $z-fixed;
 
@@ -117,12 +106,5 @@ body {
     grid-area: appBody;
     grid-row: 1fr;
     contain: style;
-}
-
-.appMain {
-    contain: style;
-    max-width: 100%;
-    // overflow: hidden;
-    width: 100%;
-    min-width: 0; // 不可移除，很重要。flex item 最小寬度預設為內容的最小寬度，故需要設為 0 以防止溢出
+    // min-width: 0; // 不可移除，很重要。flex item 最小寬度預設為內容的最小寬度，故需要設為 0 以防止溢出
 }

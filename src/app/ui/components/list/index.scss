@@ -17,7 +17,7 @@ m-list {
     }
 }
 
-.listLabel {
+[part="list-header"] {
     display: block;
     font-size: $f-xxs;
     color: var(--f-fader);
@@ -26,9 +26,4 @@ m-list {
     padding: $md 1rem $sm 1rem;
     text-transform: uppercase;
     font-weight: 500;
-
-    +m-item .itemBody,
-    +m-item .itemFoot {
-        border-top: 0;
-    }
 }
