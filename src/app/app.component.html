@@ -1,4 +1,4 @@
-<nav class="appHead sticky bb y:no c-wrap:no" id="appHead">
+<nav part="app-head" class="sticky bb y:no c-wrap:no" id="appHead">
     <div class="x">
         <div class="c:stack">
             <button is="m-button" id="side-toggle" collapse=".appSide" class="square transparent">
@@ -33,7 +33,7 @@
         </button>
     </div>
 </nav>
-<main class="appBody">
+<main part="app-body">
     <article class="decorated">
         <nav aria-label="breadcrumb" class="decorated">
             <a>UI</a>
@@ -44,7 +44,7 @@
         <router-outlet></router-outlet>
     </article>
 </main>
-<aside class="appSide br">
+<aside part="app-side" class="br">
     <div class="appHead s:no c:center">
         <img src="assets/images/logo.svg" width="70">
     </div>

@@ -1,4 +1,7 @@
 html {
+    height: 100%;
+    overflow-y: overlay;
+    overflow-x: hidden;
     --f-sans-serif: Roboto, PingFang TC, -apple-system, Noto Sans, Helvetica Neue, Microsoft JhengHei, sans-serif;
     /** theme  */
     --blue: #{$blue};
@@ -94,6 +97,45 @@ html {
         --hover-theme: rgba(255, 255, 255, .05);
     }
 }
+
+body,
+html {
+    position: static;
+    width: 100%;
+    display: block;
+    contain: style;
+    width: 100%;
+    will-change: scroll-position;
+    margin: 0;
+    padding: 0;
+    letter-spacing: 0.4px;
+    line-height: 1.15;
+    color: var(--f-themeFader);
+
+    @media (any-pointer: coarse) {
+        letter-spacing: 0px;
+    }
+}
+
+body {
+    overflow: visible;
+    background-color: var(--theme);
+    -webkit-user-drag: none;
+    touch-action: manipulation;
+    -webkit-touch-action: manipulation;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+    -ms-content-zooming: none;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -webkit-overflow-scrolling: touch;
+}
+
 
 // ::-webkit-scrollbar {
 //     background-color: transparent;
@@ -388,39 +430,6 @@ template {
     box-sizing: border-box;
     background-origin: border-box;
     -webkit-tap-highlight-color: transparent;
-}
-
-body,
-html {
-    width: 100%;
-    will-change: scroll-position;
-    margin: 0;
-    padding: 0;
-    letter-spacing: 0.4px;
-    line-height: 1.15;
-    color: var(--f-themeFader);
-
-    @media (any-pointer: coarse) {
-        letter-spacing: 0px;
-    }
-}
-
-body {
-    background-color: var(--theme);
-    -webkit-user-drag: none;
-    touch-action: manipulation;
-    -webkit-touch-action: manipulation;
-    -webkit-touch-callout: none;
-    -webkit-tap-highlight-color: transparent;
-    -ms-content-zooming: none;
-    text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
-    -moz-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -webkit-overflow-scrolling: touch;
 }
 
 body,

@@ -1,22 +1,4 @@
-.appMaster,
-.appMaster body {
-    position: static;
-    width: 100%;
-    display: block;
-    contain: style;
-}
-
-.appMaster {
-    height: 100%;
-    overflow-y: overlay;
-    overflow-x: hidden;
-}
-
-.appMaster body {
-    overflow: visible !important;
-}
-
-.appWrap {
+[part=app-wrap] {
     display: grid;
     min-height: 100%;
     min-width: 0;
@@ -25,14 +7,14 @@
     contain: style;
     grid-gap: 0;
     grid-template-areas:
-        "appSide appHead appHead"
-        "appSide appBody appBody"
-        "appSide appFoot appFoot";
+        "app-side app-head app-head"
+        "app-side app-body app-body"
+        "app-side app-foot app-foot";
     grid-template-rows: auto 1fr auto;
     grid-template-columns: 200px auto auto;
 }
 
-.appLoad {
+[part=app-load] {
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -45,23 +27,23 @@
     contain: strict;
 }
 
-.appHead,
-.appSide {
+[part=app-head],
+[part=app-side] {
     display: flex;
     flex: 0 0 auto;
     contain: content;
 }
 
-.appSide,
-.appHead,
-.appFoot {
+[part=app-side],
+[part=app-head],
+[part=app-foot] {
     width: 100%;
     background-color: var(--theme);
     @include blurBg(var(--themeRgb), .9);
 }
 
-.appHead {
-    grid-area: appHead;
+[part=app-head] {
+    grid-area: app-head;
     grid-row: auto;
     top: 0;
     z-index: $z-fixed !important;
@@ -69,8 +51,8 @@
     align-items: center;
 }
 
-.appFoot {
-    grid-area: appFoot;
+[part=app-foot] {
+    grid-area: app-foot;
     grid-row: auto;
     bottom: 0;
     min-height: 3.75rem;
@@ -83,27 +65,22 @@
     }
 }
 
-.appFoot,
-.appSide {
+[part=app-foot],
+[part=app-side] {
     @supports(padding-bottom: env(safe-area-inset-bottom)) {
         padding-bottom: unquote('env(safe-area-inset-bottom)!important')
     }
 }
 
-.appSide {
-    grid-area: appSide;
+[part=app-side] {
+    grid-area: app-side;
     overflow: hidden;
     flex-direction: column;
     top: 0;
-
-    &.sticky {
-        top: var(--appSideOffset);
-        height: calc(100vh - var(--appSideOffset));
-    }
 }
 
-.appBody {
-    grid-area: appBody;
+[part=app-body] {
+    grid-area: app-body;
     grid-row: 1fr;
     contain: style;
     // min-width: 0; // 不可移除，很重要。flex item 最小寬度預設為內容的最小寬度，故需要設為 0 以防止溢出
