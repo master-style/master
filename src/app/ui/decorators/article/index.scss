@@ -1,7 +1,4 @@
-@import '../../shared/variables';
-@import '../../shared/mixins';
-
-article.formatted {
+article.decorated {
     display: block;
     width: 100%;
     max-width: $wrap-xs;

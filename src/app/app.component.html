@@ -1,4 +1,4 @@
-<div class="appHead sticky bb y:no c-wrap:no" id="appHead">
+<nav class="appHead sticky bb y:no c-wrap:no" id="appHead">
     <div class="x">
         <div class="c:stack">
             <button is="m-button" id="side-toggle" collapse=".appSide" class="square transparent">
@@ -32,10 +32,18 @@
             <i class="i-power"></i>
         </button>
     </div>
-</div>
-<div class="appBody">
-</div>
-<div class="appSide br">
+</nav>
+<main class="appBody">
+    <article class="decorated">
+        <nav aria-label="breadcrumb" class="decorated">
+            <a>UI</a>
+            <a href="guideline">指南</a>
+            <a active aria-current="page">撰寫風格</a>
+        </nav>
+        <h1 class="mt:no">選單</h1>
+    </article>
+</main>
+<aside class="appSide br">
     <div class="appHead s:no c:center">
         <img src="assets/images/logo.svg" width="70">
     </div>
@@ -58,4 +66,4 @@
             <div class="itemBody">{{ route.path | translate }}</div>
         </m-item>
     </ng-template>
-</div>
+</aside>

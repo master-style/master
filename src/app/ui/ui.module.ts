@@ -19,7 +19,6 @@ import { RibbonComponent } from './components/ribbon/ribbon.component';
 import { ScrollComponent } from './components/scroll/scroll.component';
 import { TableComponent } from './components/table/table.component';
 import { TabsComponent } from './components/tabs/tabs.component';
-import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { InstallationComponent } from './guideline/installation/installation.component';
 import { DisplayComponent } from './modifiers/display/display.component';
 import { VisibilityComponent } from './modifiers/visibility/visibility.component';
@@ -54,6 +53,7 @@ import { CheckComponent } from './components/controls/check/check.component';
 import { FigureComponent } from './decorators/figure/figure.component';
 import { ItemComponent } from './components/item/item.component';
 import { SkeletonComponent } from './components/skeleton/skeleton.component';
+import { BreadcrumbComponent } from './decorators/breadcrumb/breadcrumb.component';
 
 @NgModule({
     declarations: [
@@ -75,7 +75,6 @@ import { SkeletonComponent } from './components/skeleton/skeleton.component';
         ScrollComponent,
         TableComponent,
         TabsComponent,
-        BreadcrumbsComponent,
         InstallationComponent,
         DisplayComponent, VisibilityComponent, ArticleComponent, GridComponent, AlignmentComponent, PositionComponent, WrapComponent, AppComponent,
         AreaComponent, BackgroundComponent, BorderComponent, FontComponent, HoverComponent, MarginComponent, PaddingComponent, RadiusComponent, ScaleComponent, ShadowComponent, TextComponent, ZIndexComponent,
@@ -92,6 +91,7 @@ import { SkeletonComponent } from './components/skeleton/skeleton.component';
         FigureComponent,
         ItemComponent,
         SkeletonComponent,
+        BreadcrumbComponent,
     ],
     imports: [
         CommonModule,

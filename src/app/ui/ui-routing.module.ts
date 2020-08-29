@@ -25,7 +25,7 @@ import { RibbonComponent } from './components/ribbon/ribbon.component';
 import { ScrollComponent } from './components/scroll/scroll.component';
 import { TableComponent } from './components/table/table.component';
 import { TabsComponent } from './components/tabs/tabs.component';
-import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
+import { BreadcrumbComponent } from './decorators/breadcrumb/breadcrumb.component';
 import { InstallationComponent } from './guideline/installation/installation.component';
 import { DisplayComponent } from './modifiers/display/display.component';
 import { VisibilityComponent } from './modifiers/visibility/visibility.component';
@@ -83,7 +83,6 @@ export const uiRoutes: Routes = [
             { path: 'ribbon', component: RibbonComponent, resolve: { route: RouteResolver } },
             { path: 'table', component: TableComponent, resolve: { route: RouteResolver } },
             { path: 'navigator' },
-            { path: 'breadcrumbs', component: BreadcrumbsComponent, resolve: { route: RouteResolver } },
             { path: 'tabs', component: TabsComponent, resolve: { route: RouteResolver } },
             { path: 'interactive' },
             { path: 'collapse', component: CollapseComponent, resolve: { route: RouteResolver } },
@@ -93,6 +92,13 @@ export const uiRoutes: Routes = [
             { path: 'progress-indicator' },
             { path: 'progress', component: ProgressComponent, resolve: { route: RouteResolver } },
             { path: 'skeleton', component: SkeletonComponent, resolve: { route: RouteResolver } },
+        ]
+    },
+    {
+        path: 'decorators', children: [
+            { path: 'article', component: ArticleComponent, resolve: { route: RouteResolver } },
+            { path: 'breadcrumb', component: BreadcrumbComponent, resolve: { route: RouteResolver } },
+            { path: 'figure', component: FigureComponent, resolve: { route: RouteResolver } },
         ]
     },
     { path: 'icon', component: IconComponent },

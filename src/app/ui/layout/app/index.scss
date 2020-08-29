@@ -30,15 +30,13 @@ body {
     width: 100%;
     flex: 1 0 auto;
     contain: style;
-    //
-    grid-template-rows: auto 1fr auto;
-    grid-template-columns: 200px 1fr 1fr;
     grid-gap: 0;
     grid-template-areas:
         "appSide appHead appHead"
-        "appSide appBreadcrumb appBreadcrumb"
         "appSide appBody appBody"
         "appSide appFoot appFoot";
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 200px auto auto;
 }
 
 .appLoad {
@@ -61,7 +59,6 @@ body {
     contain: content;
 }
 
-.appBreadcrumb,
 .appSide,
 .appHead,
 .appFoot {
@@ -72,6 +69,7 @@ body {
 
 .appHead {
     grid-area: appHead;
+    grid-row: auto;
     top: 0;
     z-index: $z-fixed !important;
     min-height: var(--appHeadH);
@@ -84,6 +82,7 @@ body {
 
 .appFoot {
     grid-area: appFoot;
+    grid-row: auto;
     bottom: 0;
     min-height: var(--appFootH);
     border-top: 1px solid var(--b-fadest);
@@ -105,7 +104,6 @@ body {
 .appSide {
     grid-area: appSide;
     overflow: hidden;
-    max-width: 200px;
     flex-direction: column;
     top: 0;
 
@@ -117,12 +115,7 @@ body {
 
 .appBody {
     grid-area: appBody;
-    display: flex;
-    width: 100%;
-    min-width: 0;
-    max-width: 100%;
-    flex-wrap: nowrap;
-    flex: 1 1 auto;
+    grid-row: 1fr;
     contain: style;
 }
 
