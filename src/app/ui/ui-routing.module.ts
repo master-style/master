@@ -53,7 +53,7 @@ import { LoadingComponent } from './interactions/loading/loading.component';
 import { AnimationComponent } from './animation/animation.component';
 import { FigureComponent } from './decorators/figure/figure.component';
 
-import { RouteResolver } from '../../shared/resolvers/route.resolver';
+import { RouteResolver } from '../shared/route.resolver';
 import { ItemComponent } from './components/item/item.component';
 import { SkeletonComponent } from './components/skeleton/skeleton.component';
 

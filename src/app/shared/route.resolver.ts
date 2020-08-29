@@ -1,4 +1,4 @@
-import { AppService } from './../../app/app.service';
+import { AppService } from '../app.service';
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 

@@ -1,0 +1,692 @@
+@import './ui/variables';
+@import './ui/mixins';
+@import './shared/highlight';
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap');
+
+@font-face {
+    font-family: 'Fira Code';
+    src: url('../assets/fonts/FiraCode-Medium.eot');
+    src: url('../assets/fonts/FiraCode-Medium.eot') format('embedded-opentype'), url('../assets/fonts/FiraCode-Medium.woff2') format('woff2'), url('../assets/fonts/FiraCode-Medium.woff') format('woff'), url('../assets/fonts/FiraCode-Medium.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+code {
+    font-size: 13px;
+    white-space: pre;
+    font-weight: 600;
+    font-family: 'Fira Code', -apple-system, 'Noto Sans TC', 'Microsoft JhengHei', monospace;
+    letter-spacing: -.1px !important;
+    background-color: var(--themeFade);
+    color: var(--f-theme);
+    padding: 0 .375rem;
+    line-height: 22px;
+    display: inline-flex;
+    border-radius: $xs;
+}
+
+m-table h2,
+m-table h2 code {
+    margin: 0;
+    font-size: 13px !important;
+}
+
+code.default {
+    color: var(--f-fadest);
+    font-size: $f-sm;
+    background-color: transparent;
+}
+
+@include above(sm) {
+    .appNav {
+        padding-right: 200px;
+    }
+}
+
+.bg\:black {
+    background-color: black !important;
+}
+
+.phoneMockup {
+    position: relative;
+    background-size: cover;
+    background-color: var(--theme);
+    background-image: url('../assets/images/iPhoneX.png');
+    background-position: -1px 0;
+    width: 325px;
+    height: 660px;
+    border-radius: 56px;
+    margin: auto;
+    padding: 21px $md 28px $md;
+
+    &:before,
+    &:after {
+        position: absolute;
+        pointer-events: none;
+        left: 0;
+        top: 3.05%;
+        z-index: $z-overlay;
+        content: '';
+        background-size: 100% auto;
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+    }
+
+    &:before {
+        background-image: url('../assets/images/iPhoneX-head.png');
+    }
+
+    &:after {
+        background-image: url('../assets/images/iPhoneX-headbar.png');
+    }
+}
+
+.dark .phoneMockup {
+    &:after {
+        -webkit-filter: invert(100%);
+        /* Safari/Chrome */
+        filter: invert(100%);
+    }
+}
+
+.phoneMockupWrap {
+    position: relative;
+    overflow: hidden;
+    border-radius: 2rem;
+
+    &:before {
+        position: absolute;
+        content: '';
+        pointer-events: none;
+        left: 0;
+        top: 0;
+        z-index: $z-up;
+        display: block;
+        width: 100%;
+        height: 35px;
+        @include blurBg(var(--themeRgb), .9);
+    }
+
+    .scrollWrap {
+        padding-top: $lg;
+    }
+}
+
+.remark code {
+    font-size: inherit;
+}
+
+.mainSide {
+    --appSideOffset: calc(var(--appHeadH) + 2.25rem) !important;
+}
+
+#contents-tabs {
+    .tab {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        color: var(--f-fade);
+    }
+
+    .tabTitle {
+        width: 100%;
+        text-align: left;
+        font-size: $f-xxs;
+        margin-top: .2rem;
+        color: var(--f-fader);
+
+        &:before {
+            content: attr(text);
+        }
+    }
+
+}
+
+m-article {
+
+    h1,
+    h2,
+    h3 {
+
+        &[active] {
+            text-decoration: solid underline #ffd700;
+        }
+
+        code {
+            font-weight: 600;
+            letter-spacing: -.2px !important;
+            font-size: 1.375rem;
+            background-color: transparent;
+            padding: 0;
+            line-height: 1;
+        }
+    }
+
+    h1[title],
+    h2[title],
+    h3[title] {
+        position: relative;
+
+        &:after {
+            position: absolute;
+            top: -$xxs;
+            content: attr(title);
+            font-size: $f-xxs;
+            color: var(--f-fade);
+            font-weight: 400;
+            margin-left: .5rem;
+            letter-spacing: 1.5px;
+            vertical-align: text-top;
+        }
+    }
+
+    hr+h2 {
+        margin-top: 0;
+    }
+}
+
+m-chip.sm {
+    code {
+        font-size: $f-xxs;
+        line-height: normal;
+        background-color: transparent;
+    }
+}
+
+.color {
+    display: inline-flex;
+    margin-right: $sm;
+    vertical-align: middle;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 500;
+    width: 22px;
+    height: 22px;
+    user-select: none;
+    border-radius: $xs;
+    color: white;
+    letter-spacing: -.5px;
+    background-color: var(--theme);
+}
+
+code.colorCode {
+    letter-spacing: .5px;
+
+    .color {
+        border-radius: $xxs;
+        width: 16px;
+        height: 16px;
+        margin-right: $xs;
+    }
+
+    &.colorCode\:row {
+        margin: 0;
+        border: 0;
+        padding: .8rem 1.2rem;
+        justify-content: center;
+    }
+}
+
+.appLogo {
+    img {
+        -webkit-filter: invert(80%);
+        /* Safari/Chrome */
+        filter: invert(80%);
+    }
+}
+
+#appHead {
+    .appLogo {
+        width: 200px;
+    }
+}
+
+@include below(sm) {
+    #appHead {
+        .appLogo {
+            width: auto;
+        }
+    }
+}
+
+#appSide {
+    font-size: $f-xs;
+    border-right: 1px solid var(--b-fadest);
+
+    &:after {
+        contain: strict;
+        position: absolute;
+        pointer-events: none;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        display: block;
+        height: 5rem;
+        content: '';
+    }
+
+    .menu {
+        display: flex;
+        flex-direction: column;
+
+        i:not(.toggle) {
+            color: var(--f-fadest);
+        }
+
+        >li {
+            >a {
+                min-height: 2.5rem;
+                font-size: 15px;
+
+                i:nth-of-type(1) {
+                    padding-right: 0.7rem;
+                    font-size: 90%;
+                }
+            }
+        }
+
+        a:hover {
+            background-color: var(--themeFader);
+            color: var(--f-theme)
+        }
+
+        a,
+        .title {
+            position: relative;
+            display: flex;
+            align-items: center;
+            min-height: 2rem;
+            padding: 0 1.2rem;
+
+            i {
+                line-height: inherit;
+            }
+
+            m-icon {
+                color: var(--f-fadest)
+            }
+
+            &[active] {
+                color: var(--f-blue);
+                background-color: var(--themeFade);
+            }
+        }
+
+        .title {
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: $f-xxs;
+            margin-top: $sm;
+            margin-bottom: -$xxs;
+            color: var(--f-fader) !important;
+            font-weight: 400;
+            border: 0;
+        }
+
+        li {
+            position: relative;
+
+            ul {
+                position: relative;
+                z-index: $z-up;
+                margin-bottom: $sm;
+                margin-top: -$xxs;
+
+                a {
+                    color: var(--f-fade)
+                }
+
+                a,
+                .title {
+                    padding-left: 2.7rem;
+                }
+
+                .title {
+                    color: var(--f-fade);
+                }
+            }
+        }
+    }
+}
+
+
+.phone-demo {
+    padding: 52px 20px 28px 20px;
+    background-image: url('/assets/images/iPhoneX.png');
+    background-size: cover;
+    background-position: center;
+    width: 325px;
+    margin: auto;
+    height: 662px;
+}
+
+.phoneBody {
+    overflow: hidden;
+    height: 100%;
+    border-bottom-right-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+}
+
+.with\:code {
+    .hljs-language {
+        display: none;
+    }
+}
+
+.demo,
+.demoGrid {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    contain: style;
+    margin-bottom: $sm;
+    border-radius: $sm;
+
+    .code {
+        // -webkit-mask-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 1.2rem, rgba(255, 255, 255, 1) 100%);
+
+        margin-bottom: 0;
+    }
+
+}
+
+.dark {
+    .demoGrid .demoItem {
+        border: 1px solid var(--f-fadest);
+        background-color: rgba(255, 255, 255, .05);
+    }
+}
+
+.demoGrid {
+
+    width: calc(100% + 2rem);
+    margin-left: -1rem;
+
+    .demoItem {
+        border: 1px solid #acc9ff;
+        background-color: rgba(234, 241, 255, .6);
+        padding: $sm;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        code {
+            padding: 0;
+            background-color: transparent;
+        }
+
+        p {
+            margin: 0;
+        }
+    }
+
+    .demoBody {
+        background-image: repeating-linear-gradient(90deg, transparent, transparent $md, var(--themeFade) $md, var(--themeFade) calc(100% / 12 - 1.7px))
+    }
+
+    &.guideGap {
+        .demoBody {
+            &:before {
+                z-index: $z-up;
+                background-image: repeating-linear-gradient(90deg, rgba(#00ffff, .3), rgba(#00ffff, .3) $md, rgba(hotpink, .2) $md, rgba(hotpink, .2) calc(100% / 12 - 1.7px))
+            }
+        }
+    }
+
+    &.guide5 {
+        .demoBody {
+            &:before {
+                background-image: repeating-linear-gradient(90deg, transparent, transparent $md, var(--themeFade) $md, var(--themeFade) calc(100% / 10 - 2px))
+            }
+        }
+    }
+}
+
+.demo {
+    position: relative;
+
+    .demoBody {
+        background-origin: border-box;
+        background-color: transparent;
+        background-image: repeating-linear-gradient(45deg, transparent, transparent 1rem, var(--themeFade) 1rem, var(--themeFade) 2rem);
+
+    }
+
+    .copyBtn,
+    .toggleBtn {
+        z-index: $z-up;
+        color: var(--f-fadest);
+    }
+
+    &.collapse {
+        .code {
+            display: none;
+        }
+    }
+}
+
+.demoBody {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: $md;
+    border-radius: $sm;
+
+    +.code {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+}
+
+// .demoItem {
+//     display: flex;
+//     flex-direction: column;
+//     border: 1px solid var(--blueFade);
+//     box-sizing: border-box;
+//     padding: 1rem $xs !important;
+//     background-color: rgba($blueFader, .6);
+//     justify-content: center;
+//     align-items: center;
+
+//     code {
+//         position: relative;
+//         background-color: white;
+//     }
+// }
+
+[measure] {
+    position: relative;
+
+    [class*=measure] {
+        transition: .3s transform ease-out, .3s top ease-out;
+        white-space: nowrap;
+
+        div {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: scale(1) translate(-50%, -100%);
+            transform-origin: left;
+            display: block;
+            text-transform: lowercase;
+
+            &:after {
+                content: 'px';
+                display: inline-flex;
+                vertical-align: text-bottom;
+                transform: scale(.7);
+            }
+        }
+    }
+
+    &.measuring {
+        [class*=measure] {
+            div {
+                transform: scale(1.2) translate(-50%, -100%);
+                transition: .3s ease-out transform;
+            }
+
+            border-style: solid;
+
+            &:before,
+            &:after {
+                height: $md;
+                border-style: solid;
+            }
+        }
+    }
+}
+
+.measureGap,
+.measureWidth {
+    position: absolute;
+    z-index: $z-up;
+    top: - $sm;
+    margin: auto;
+    transform: translate(0, -100%);
+    font-family: 'Fira Code', "PingFang TC", "Noto Sans TC", monospace;
+    font-size: $f-xxs;
+    line-height: 20px;
+    letter-spacing: 0px;
+    color: deeppink;
+    border: 0;
+    border-bottom: 1px dashed deeppink;
+    width: 100%;
+    text-align: center;
+    pointer-events: none;
+    user-select: none;
+    will-change: contents;
+
+    &:before,
+    &:after {
+        position: absolute;
+        z-index: $z-top;
+        bottom: 0px;
+        margin: auto -1px;
+        height: 9px;
+        transform: translate(0, 50%);
+        content: '';
+        transition: .3s ease-out height;
+        border: 0;
+        border-left: 1px dashed deeppink;
+    }
+
+    &:before {
+        left: 0;
+    }
+
+    &:after {
+        right: 0;
+    }
+}
+
+.measureHeight {
+
+    position: absolute;
+    z-index: $z-up;
+    left: - $sm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    transform: translate(-100%, 0%);
+    font-family: 'Fira Code', "PingFang TC", "Noto Sans TC", monospace;
+    font-size: $f-xxs;
+    line-height: 20px;
+    letter-spacing: 0px;
+    color: deeppink;
+    border: 0;
+    border-right: 1px dashed deeppink;
+    height: 100%;
+    text-align: center;
+    pointer-events: none;
+    user-select: none;
+    will-change: contents;
+
+    div {
+        top: auto !important;
+        transform: translate(-150%, 0) !important;
+
+        &:after {
+            position: absolute;
+            top: 0;
+            right: 0;
+            transform: scale(.7) translate(0, 80%) !important;
+        }
+    }
+
+    &:before,
+    &:after {
+        position: absolute;
+        z-index: $z-top;
+        margin: 0 auto;
+        left: -4px;
+        width: 9px;
+        content: '';
+        transition: .3s ease-out width;
+        border: 0;
+        border-bottom: 1px dashed deeppink;
+    }
+
+    &:before {
+        top: 0;
+    }
+
+    &:after {
+        bottom: 0;
+    }
+}
+
+
+.measureGap {
+    transform: translate(50%, -50%);
+    right: 0;
+    top: 50% !important;
+}
+
+.measureYellow {
+    [class^=measure-] {
+        color: var(--f-yellow);
+        border-color: var(--yellow);
+
+        &:before,
+        &:after {
+            border-color: var(--yellow);
+        }
+    }
+}
+
+.demoAction {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: $xxs;
+}
+
+@media(min-width: 1140px) {
+    .demo:not(.action\:bottom) {
+        .demoAction {
+            position: absolute;
+            right: -$xxs;
+            margin-top: 0;
+            top: 0;
+            flex-direction: column;
+            width: auto;
+            transform: translateX(100%);
+        }
+    }
+}
+
+@include below(sm) {
+    #side {
+        position: fixed !important;
+    }
+}

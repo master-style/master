@@ -6,7 +6,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RouteResolver } from 'src/shared/resolvers/route.resolver';
+import { RouteResolver } from './shared/route.resolver';
 
 @NgModule({
     declarations: [

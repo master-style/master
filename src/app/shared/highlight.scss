@@ -1,0 +1,392 @@
+pre {
+    overflow-x: auto;
+    padding: .875rem 1.5rem;
+    background-color: var(--themeFade);
+    border-radius: $sm;
+    font-family: 'Fira Code', "PingFang TC", "Noto Sans TC", monospace;
+    font-size: $f-xs;
+    line-height: 1.7;
+    margin: 0 0 $sm 0;
+
+    code[class*="language-"] {
+        color: var(--f-themeFader);
+        padding: 0;
+        font-size: inherit;
+        display: block;
+        background-color: transparent;
+        text-align: left;
+        white-space: pre;
+        word-spacing: normal;
+        word-break: normal;
+        line-height: inherit;
+        word-wrap: normal;
+        letter-spacing: 0px !important;
+        -webkit-hyphens: none;
+        -moz-hyphens: none;
+        -ms-hyphens: none;
+        hyphens: none;
+    }
+
+    &.language-bash {
+        padding: 1rem 1.5rem;
+        background-color: #020810;
+        --f-red: var(--red);
+
+        ::selection {
+            background-color: rgba(255, 255, 255, .2);
+        }
+
+        code[class*="language"] {
+            color: #c7b5f8
+        }
+
+    }
+}
+
+code[class*="language"] {
+    color: var(--f-themeFade);
+}
+
+pre[class*="language-"].line-numbers {
+    position: relative;
+    padding-left: 3.4em;
+    counter-reset: linenumber;
+}
+
+pre[class*="language-"].line-numbers>code {
+    position: relative;
+    white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+    position: absolute;
+    pointer-events: none;
+    top: 1px;
+    left: -3.5em;
+    width: 2.8em;
+    font-size: $f-xxs;
+    line-height: 23px;
+    /* works for line-numbers below 1000 lines */
+    letter-spacing: -1px;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+
+.line-numbers-rows>span {
+    pointer-events: none;
+    display: block;
+    counter-increment: linenumber;
+}
+
+.line-numbers-rows>span:before {
+    content: counter(linenumber);
+    display: block;
+    color: var(--f-fadest);
+    padding-right: 0.8em;
+    text-align: right;
+}
+
+@media print {
+
+    code[class*="language-"],
+    pre[class*="language-"] {
+        text-shadow: none;
+    }
+}
+
+/* Inline code */
+:not(pre)>code[class*="language-"] {
+    padding: .1em;
+    border-radius: .3em;
+    white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: var(--f-fader);
+}
+
+.token.punctuation {
+    color: #999;
+}
+
+.token.namespace {
+    opacity: .7;
+}
+
+.token.property,
+.token.boolean,
+.token.number,
+.token.symbol,
+.token.deleted {
+    color: var(--f-purple);
+}
+
+.token.selector,
+.token.char,
+.token.inserted {
+    color: var(--f-blue);
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: var(--f-fade);
+}
+
+.token.attr-value,
+.token.atrule,
+.token.keyword {
+    color: var(--f-green);
+}
+
+.token.attr-name {
+    margin-right: $xxs;
+}
+
+.token.tag,
+.token.function {
+    color: var(--f-red);
+}
+
+.token.attr-name,
+.token.builtin,
+.token.constant,
+.token.class-name {
+    font-style: italic;
+    color: var(--f-blue);
+}
+
+.token.string,
+.token.regex,
+.token.important,
+.token.variable {
+    color: var(--f-yellow);
+}
+
+.token.parameter {
+    color: var(--f-yellow);
+    font-style: italic;
+}
+
+.token.important,
+.token.bold {
+    font-weight: bold;
+}
+
+.token.italic {
+    font-style: italic;
+}
+
+.token.entity {
+    cursor: help;
+}
+
+
+
+
+
+
+
+///////
+
+.code {
+    contain: content;
+    position: relative;
+    overflow: hidden;
+    display: block;
+    margin: 0px;
+    width: 100%;
+    margin-bottom: $sm;
+
+    .hljs-language {
+        position: absolute;
+        display: inline;
+        right: .5rem;
+        top: .5rem;
+        font-weight: 500;
+        letter-spacing: 1.5px;
+        font-size: 10px;
+        font-weight: 600;
+        color: var(--f-fadest);
+        text-transform: uppercase;
+    }
+
+    &.single {
+        .hljs-language {
+            display: none;
+        }
+
+        .hljs {
+            line-height: 1.15;
+            padding: .6rem 1rem .45rem 1rem;
+        }
+    }
+
+    &.title\:no {
+        .hljs-language {
+            display: none;
+        }
+    }
+
+    code {
+        // -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 1) 1rem, rgba(0, 0, 0, 1) calc(100% - 1rem), rgba(0, 0, 0, 0) 100%);
+
+        &:not(.hljs) {
+            display: none;
+        }
+    }
+}
+
+.hljs {
+    contain: style;
+    display: block;
+    overflow-x: overlay;
+    -webkit-overflow-scrolling: touch;
+    font-family: 'Fira Code', "PingFang TC", "Noto Sans TC", monospace;
+    font-size: $f-xs;
+    line-height: 1.7;
+    letter-spacing: -.1px !important;
+    padding: .875rem 1.5rem;
+    // border-bottom: solid rgba(255, 255, 255, .1) 1px;
+
+    span {
+        contain: layout size style;
+    }
+}
+
+.hljs,
+.hljs-subst {
+    color: var(--f-fade);
+}
+
+.hljs-line-numbers {
+    overflow-x: hidden;
+    text-align: right;
+    width: 2rem;
+    vertical-align: middle;
+    padding: 1rem 0px 0rem 0px;
+    color: var(--f-fadest);
+    -webkit-touch-callout: none;
+    -webkit-mask-image: none !important;
+
+    +.hljs {
+        padding-left: 1rem;
+    }
+}
+
+.hljs-comment {
+    color: var(--f-fader);
+    font-weight: 500;
+    font-style: italic;
+}
+
+.hljs .bash,
+.hljs-attribute {
+    color: var(--f-blue);
+}
+
+.hljs-type {
+    color: var(--f-purple)
+}
+
+.hljs-string {
+    color: var(--f-blue);
+}
+
+.hljs-literal,
+.hljs-number,
+.hljs-built_in {
+    color: var(--f-purple)
+}
+
+.hljs-params {
+    color: var(--f-yellow);
+    font-style: italic;
+    margin-right: 0.1rem;
+}
+
+.hljs-selector-id,
+.hljs-attr {
+    margin-right: .1rem;
+    color: var(--f-green);
+    font-style: italic;
+}
+
+.hljs-selector-class {
+    font-style: italic;
+    color: var(--f-green)
+}
+
+.hljs-quote {
+    color: var(--f-purple)
+}
+
+.hljs-template-chip {
+    color: var(--f-purple)
+}
+
+.hljs-deletion {
+    color: var(--f-purple)
+}
+
+.hljs-title,
+.hljs-section {
+    color: var(--f-green);
+}
+
+
+.hljs-keyword {
+    color: var(--f-red);
+}
+
+.hljs-regexp,
+.hljs-symbol,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-link,
+.hljs-selector-attr,
+.hljs-selector-pseudo {
+    color: var(--f-blue);
+}
+
+.hljs-selector-tag,
+.hljs-selector-chip,
+.hljs-name,
+.hljs-meta,
+.hljs-meta-string {
+    color: var(--f-red);
+}
+
+.hljs-bullet,
+.hljs-code,
+.hljs-addition {
+    color: code_yellow
+}
+
+.hljs-emphasis {
+    font-style: italic
+}
+
+.hljs-strong {
+    font-weight: bold
+}
+
+@include below(sm) {
+
+    .hljs {
+        font-size: $f-xxs;
+    }
+
+    .hljs-line-numbers {
+        width: 1.5rem;
+    }
+}
