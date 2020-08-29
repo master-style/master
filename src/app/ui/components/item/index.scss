@@ -18,8 +18,8 @@ m-item {
 
     &.indent-lined {
 
-        .itemBody,
-        .itemFoot {
+        [part=item-body],
+        [part=item-foot] {
             border-top: 1px solid var(--b-fadest);
         }
     }
@@ -51,7 +51,7 @@ m-item {
     &[disabled] {
         background-color: transparent !important;
 
-        .itemBody {
+        [part=item-body] {
             color: var(--f-fadest) !important;
         }
 
@@ -71,15 +71,15 @@ m-item {
     }
 }
 
-.itemHead,
-.itemBody,
-.itemFoot {
+[part=item-head],
+[part=item-body],
+[part=item-foot] {
     contain: style;
     min-height: inherit;
 }
 
-.itemHead,
-.itemFoot {
+[part=item-head],
+[part=item-foot] {
     display: flex;
     text-align: center;
     white-space: nowrap;
@@ -98,14 +98,14 @@ m-item {
     }
 }
 
-.itemBody {
+[part=item-body] {
     flex: auto;
     padding: var(--py) var(--px);
     line-height: 1.3;
     text-align: left;
 }
 
-.itemFoot {
+[part=item-foot] {
     flex: 0 0 auto;
     padding-right: $sm;
     color: var(--f-fader);
@@ -116,7 +116,7 @@ m-item {
     }
 }
 
-.itemHead~.itemBody {
+[part=item-head]~[part=item-body] {
     text-align: left;
     padding-left: 0 !important;
 }

@@ -55,10 +55,10 @@
         </ng-container>
     </m-list>
     <ng-template #routeGroup let-route="route" let-class="class">
-        <header *ngIf="!route?.component && !route?.children" part="list-header">{{ route.path | translate }}</header>
+        <header part="list-header" *ngIf="!route?.component && !route?.children">{{ route.path | translate }}</header>
         <m-item *ngIf="route?.component || route?.children" [class]="class">
-            <div class="itemHead">{{ route?.data?.icon || null }}</div>
-            <div class="itemBody">{{ route.path | translate }}</div>
+            <div part="item-head">{{ route?.data?.icon || null }}</div>
+            <div part="item-body">{{ route.path | translate }}</div>
         </m-item>
         <m-collapse *ngIf="route.children">
             <ng-container *ngFor="let eachRoute of route.children" [ngTemplateOutlet]="routeGroup"

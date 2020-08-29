@@ -175,7 +175,6 @@ article.decorated {
         margin-bottom: $sm;
     }
 
-    .articleTitle,
     h1,
     h2 {
         margin-bottom: $sm;
@@ -187,6 +186,7 @@ article.decorated {
     }
 
     h1 {
+        font-size: 3rem;
         margin-top: $xl;
     }
 
@@ -224,10 +224,4 @@ article.decorated {
         }
     }
 
-}
-
-@include above(sm) {
-    article.formatted {
-        padding: $lg;
-    }
 }
