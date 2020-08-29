@@ -11,6 +11,7 @@ export class RouteResolver implements Resolve<any>{
     resolve(route: ActivatedRouteSnapshot) {
         this.appService.currentRoute = route;
         this.appService.updateTitle();
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
         console.log('current', route);
     }
 }

@@ -37,5 +37,6 @@
     "icon": "圖標",
     "event-listener": "事件偵聽器",
     "manipulations": "操縱",
-    "traversings": "遍歷"
+    "traversings": "遍歷",
+    "decorators": "裝飾"
 }
