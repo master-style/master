@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Title } from '@angular/platform-browser';
+import { ActivatedRouteSnapshot } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -9,6 +10,7 @@ export class AppService {
 
     translation: any;
     _currentPath: string;
+    currentRoute: ActivatedRouteSnapshot;
 
     constructor(
         public translateService: TranslateService,
@@ -18,14 +20,14 @@ export class AppService {
         this.translateService.onLangChange
             .subscribe((event: LangChangeEvent) => {
                 this.translation = event.translations;
-                if (this._currentPath)
-                    this.currentPath = this._currentPath;
+                this.updateTitle();
             });
     }
 
-    set currentPath(path: string) {
-        this._currentPath = path;
-        this.title.setTitle((this.translation?.[path] ?? path) + '｜Master');
+    updateTitle() {
+        const title = this.currentRoute?.routeConfig?.path;
+        if (title)
+            this.title.setTitle((this.translation?.[title] ?? title) + '｜Master');
     }
 
 }

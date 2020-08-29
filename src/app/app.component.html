@@ -36,9 +36,9 @@
 <main part="app-body">
     <article class="decorated">
         <nav aria-label="breadcrumb" class="decorated">
-            <a>UI</a>
-            <a href="guideline">指南</a>
-            <a active aria-current="page">撰寫風格</a>
+            <ng-container *ngFor="let eachRoute of appService?.currentRoute?.pathFromRoot">
+                <a [attr.aria-current]="appService?.currentRoute === eachRoute ? 'page': ''">{{ eachRoute?.routeConfig?.path || 'home' | translate }}</a>
+            </ng-container>
         </nav>
         <h1 class="mt:no">選單</h1>
         <router-outlet></router-outlet>

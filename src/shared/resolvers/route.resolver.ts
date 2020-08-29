@@ -9,6 +9,8 @@ export class RouteResolver implements Resolve<any>{
     ) { }
 
     resolve(route: ActivatedRouteSnapshot) {
-        this.appService.currentPath = route.routeConfig.path;
+        this.appService.currentRoute = route;
+        this.appService.updateTitle();
+        console.log('current', route);
     }
 }

@@ -1,5 +1,4 @@
 .decorated[aria-label=breadcrumb] {
-    display: inline-flex;
     font-size: $f-xs;
     color: var(--f-fade);
 
@@ -10,6 +9,11 @@
             font-size: 90%;
             display: inline-block;
             vertical-align: baseline;
+        }
+
+        &:hover {
+            text-decoration: underline;
+            color: var(--f-theme);
         }
 
         &:not(:last-of-type) {
@@ -23,12 +27,7 @@
             }
         }
 
-        &:hover {
-            text-decoration: underline;
-            color: var(--f-theme);
-        }
-
-        &[active] {
+        &[aria-current="page"] {
             cursor: default;
             font-style: italic;
             color: var(--f-theme);

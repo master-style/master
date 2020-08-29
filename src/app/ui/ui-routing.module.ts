@@ -58,7 +58,7 @@ import { ItemComponent } from './components/item/item.component';
 import { SkeletonComponent } from './components/skeleton/skeleton.component';
 
 export const uiRoutes: Routes = [
-    { path: 'UI' },
+    { path: 'ui' },
     { path: 'animation', component: AnimationComponent, resolve: { route: RouteResolver } },
     { path: 'breakpoint', component: BreakpointComponent, resolve: { route: RouteResolver } },
     { path: 'color', component: ColorComponent, resolve: { route: RouteResolver } },
