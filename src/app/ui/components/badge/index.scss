@@ -1,0 +1,35 @@
+m-badge {
+    background-color: var(--bg-theme);
+    color: var(--f-theme);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    text-align: center;
+    font-size: $f-xxs;
+    font-weight: 500;
+    margin: $xxs;
+    padding: 0 .25rem;
+    border-radius: 100rem;
+    letter-spacing: 0;
+    min-height: 1.25rem;
+    min-width: 1.25rem;
+    user-select: none;
+    white-space: nowrap;
+    contain: style;
+    flex: 0 0 auto;
+
+    &.sm {
+        min-height: 1rem;
+        min-width: 1rem;
+    }
+
+    &.lg {
+        min-height: 1.5rem;
+        min-width: 1.5rem;
+    }
+
+    &.outlined {
+        background-color: transparent
+    }
+}
