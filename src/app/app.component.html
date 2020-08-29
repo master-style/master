@@ -36,13 +36,19 @@
 <main part="app-body">
     <article class="decorated">
         <nav aria-label="breadcrumb" class="decorated">
-            <ng-container *ngFor="let eachRoute of appService?.currentRoute?.pathFromRoot">
-                <a [attr.aria-current]="appService?.currentRoute === eachRoute ? 'page': null">{{ eachRoute?.routeConfig?.path || 'home' | translate }}</a>
-            </ng-container>
+            <a *ngFor="let eachRoute of appService?.currentRoute?.pathFromRoot"
+                [attr.aria-current]="appService?.currentRoute === eachRoute ? 'page': null">{{ eachRoute?.routeConfig?.path || 'home' | translate }}</a>
         </nav>
         <h1>{{ appService?.currentRoute?.routeConfig?.path | translate }}</h1>
-        <h6 class="remark t:uppercase">{{ appService?.currentRoute?.routeConfig?.path }}</h6>
-        <br>
+        <div class="y:no my">
+            <m-chip class="x sm red+" [ngClass]="{
+                'red+': eachComposition === 'HTML',
+                'blue+': eachComposition === 'CSS',
+                'yellow+': eachComposition === 'JS'
+            }" *ngFor="let eachComposition of appService?.currentRoute?.data?.compositions">
+                <div part="chip-body">{{ eachComposition }}</div>
+            </m-chip>
+        </div>
         <router-outlet></router-outlet>
     </article>
 </main>

@@ -1,0 +1,107 @@
+m-chip {
+    --size: 2rem;
+    --p: .25rem;
+    --px: .375rem;
+    background-color: var(--bg-theme);
+    color: var(--f-theme);
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.8125rem;
+    border-radius: $xs;
+    vertical-align: middle;
+    height: var(--size);
+    user-select: none;
+    contain: style;
+    padding: var(--p);
+    border: 1px solid var(--b-theme);
+
+    &.rounded {
+
+        [part="chip-head"],
+        [part="chip-foot"] {
+            border-radius: 50%;
+        }
+
+    }
+
+    &.sm {
+        --size: 1.5rem;
+        --px: .3125rem;
+        font-size: $f-xxs;
+
+        [part="chip-head"] {
+            font-size: .625rem;
+        }
+
+        .closeButton {
+            font-size: .625rem;
+            width: .875rem;
+            height: .875rem;
+            margin-right: 0;
+        }
+    }
+
+    &.outlined {
+        background-color: transparent;
+
+        [part="chip-head"] {
+            margin-left: -1px;
+        }
+    }
+
+    .closeButton {
+        font-size: $f-xxs;
+        width: 1.125rem;
+        height: 1.125rem;
+        min-width: auto;
+        min-height: auto;
+        margin-right: .1875rem;
+    }
+}
+
+[part="chip-body"],
+[part="chip-head"],
+[part="chip-foot"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    contain: layout style;
+}
+
+[part="chip-head"],
+[part="chip-foot"] {
+    overflow: hidden;
+    border-radius: $xxs;
+    height: calc(var(--size) - var(--p) * 2);
+}
+
+[part="chip-head"] {
+    line-height: normal;
+    letter-spacing: 0;
+    font-weight: 600;
+    color: var(--f-theme);
+    text-transform: uppercase;
+    background-color: var(--bg-light);
+    padding: 0 $xs;
+    min-width: calc(var(--size) - var(--p) * 2);
+}
+
+[part="chip-foot"],
+img[part="chip-head"],
+i[part="chip-head"] {
+    margin: 0;
+    padding: 0;
+    width: calc(var(--size) - var(--p) * 2);
+}
+
+[part="chip-body"] {
+    padding: 0 var(--px);
+    white-space: nowrap;
+    flex: 1 1 auto;
+    justify-content: flex-start;
+    font-weight: 400;
+
+    i {
+        margin-right: $xs;
+    }
+}
