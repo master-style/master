@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [
+export const routes: Routes = [
     { path: 'dom', loadChildren: () => import('./dom/dom.module').then(m => m.DomModule) },
     { path: 'ui', loadChildren: () => import('./ui/ui.module').then(m => m.UiModule) }
 ];

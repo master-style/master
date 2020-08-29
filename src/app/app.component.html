@@ -64,7 +64,7 @@
     </m-list>
     <ng-template #routeGroup let-route="route" let-class="class">
         <header part="list-header" *ngIf="!route?.component && !route?.children">{{ route.path | translate }}</header>
-        <m-item *ngIf="route?.component || route?.children" [class]="class">
+        <m-item [routerLink]="route?.paths ? route?.paths : ''" *ngIf="route?.component || route?.children" [class]="class">
             <div part="item-head">{{ route?.data?.icon || null }}</div>
             <div part="item-body">{{ route.path | translate }}</div>
         </m-item>

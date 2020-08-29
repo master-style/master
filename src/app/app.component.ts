@@ -14,7 +14,22 @@ export class AppComponent implements OnInit {
     constructor(
         public appService: AppService
     ) {
-        this.routes.push(...uiRoutes, ...domRoutes);
+        this.routes.push(
+            ...this.resolvePaths(['ui'], uiRoutes),
+            ...this.resolvePaths(['dom'], domRoutes)
+        );
+        console.log(this.routes);
     }
     ngOnInit(): void { }
+
+    resolvePaths(parentPaths, routes) {
+        routes.map((eachRoute) => {
+            eachRoute.paths = [...parentPaths];
+            if (eachRoute.path)
+                eachRoute.paths.push(eachRoute.path);
+            if (eachRoute.children)
+                this.resolvePaths(eachRoute.paths, eachRoute.children);
+        });
+        return routes;
+    }
 }
