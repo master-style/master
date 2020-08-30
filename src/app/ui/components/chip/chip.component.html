@@ -65,9 +65,9 @@
 
 <h2 id="appearance">{{ 'appearance' | translate }}</h2>
 <h3 id="appearance-theme-strong">{{ 'color-strong' | translate }}</h3>
-<template [codeLang]="'html'" [codeDemo]=true>
+<template [codeLang]="'html'" [codeDemo]=true *ngFor="let eachStyle of styles">
     <div class="y:sm">
-        <m-chip class="x {{ eachColor }}" *ngFor="let eachColor of colors">
+        <m-chip class="x {{ eachColor }} {{ eachStyle }}" *ngFor="let eachColor of colors">
             <div part="chip-head">
                 <ion-icon name="water"></ion-icon>
             </div>

@@ -7,6 +7,12 @@ pre {
     line-height: 1.7;
     margin: 0 0 $sm 0;
 
+    &[collapsed] {
+        code {
+            display: none!important;
+        }
+    }
+
     code[class*="language-"] {
         color: var(--f-themeFader);
         padding: .875rem 1.5rem;

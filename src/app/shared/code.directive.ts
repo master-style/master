@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input } from '@angular/core';
+import { Directive, ElementRef, Input, Output } from '@angular/core';
 
 import Prism from 'prismjs';
 import 'prismjs/components/prism-scss.min.js';
@@ -27,6 +27,9 @@ export class CodeDirective {
     @Input() codeLang: string;
     @Input() codeDemo: boolean;
     @Input() codeEndLines: number;
+    @Input() codeCollapsed: boolean;
+
+    preElement: Element;
 
     constructor(
         private elementRef: ElementRef
@@ -81,11 +84,15 @@ export class CodeDirective {
         if (isCodeTag) {
             element.innerHTML = code;
         } else {
-            element.before(
+            // for convenient
+            if (this.codeCollapsed === undefined)
+                this.codeCollapsed = this.codeDemo ?? false;
+            this.preElement =
                 $('pre', {},
                     $('code', { class: 'language-' + this.codeLang }).html(code)
                 )
-            );
+                    .toggleAttr('collapsed', this.codeCollapsed);
+            element.before(this.preElement);
         }
     }
 
