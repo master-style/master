@@ -7,6 +7,12 @@
         "paths": {
             "@utils/*": [
                 "src/app/utils/*"
+            ],
+            "@ui/*": [
+                "src/app/ui/*"
+            ],
+            "@shared/*": [
+                "src/app/shared/*"
             ]
         }
     },

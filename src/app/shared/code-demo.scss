@@ -1,14 +1,10 @@
-@import '../../ui/variables';
-@import '../../ui/mixins';
-@import '../highlight';
-
 .with\:code {
     .hljs-language {
         display: none;
     }
 }
 
-.demo,
+div[code],
 .demo-grid {
     display: flex;
     width: 100%;
@@ -57,12 +53,12 @@
         }
     }
 
-    .demo-body {
+    [demo] {
         background-image: repeating-linear-gradient(90deg, transparent, transparent $md, var(--themeFade) $md, var(--themeFade) calc(100% / 12 - 1.7px))
     }
 
     &.guide-gap {
-        .demo-body {
+        [demo] {
             &:before {
                 z-index: $z-up;
                 background-image: repeating-linear-gradient(90deg, rgba(#00ffff, .3), rgba(#00ffff, .3) $md, rgba(hotpink, .2) $md, rgba(hotpink, .2) calc(100% / 12 - 1.7px))
@@ -71,7 +67,7 @@
     }
 
     &.guide5 {
-        .demo-body {
+        [demo] {
             &:before {
                 background-image: repeating-linear-gradient(90deg, transparent, transparent $md, var(--themeFade) $md, var(--themeFade) calc(100% / 10 - 2px))
             }
@@ -79,10 +75,10 @@
     }
 }
 
-.demo {
+div[code] {
     position: relative;
 
-    .demo-body {
+    [demo] {
         background-origin: border-box;
         background-color: transparent;
         background-image: repeating-linear-gradient(45deg, transparent, transparent 1rem, var(--themeFade) 1rem, var(--themeFade) 2rem);
@@ -102,13 +98,13 @@
     }
 }
 
-.demo-body {
+[demo] {
     position: relative;
     display: flex;
     flex-wrap: wrap;
     width: 100%;
     padding: $md;
-    border-radius: $sm;
+    border-radius: $xs;
 
     +.code {
         border-top-left-radius: 0;
@@ -274,7 +270,6 @@
         bottom: 0;
     }
 }
-
 
 .measure-gap {
     transform: translate(50%, -50%);

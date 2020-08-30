@@ -18,7 +18,6 @@ export class AppComponent implements OnInit {
             ...this.resolvePaths(['ui'], uiRoutes),
             ...this.resolvePaths(['dom'], domRoutes)
         );
-        console.log(this.routes);
     }
     ngOnInit(): void { }
 

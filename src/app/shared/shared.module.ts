@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CodeComponent } from './code/code.component';
+import { CodeDirective } from './code.directive';
 
 
 
 @NgModule({
-    declarations: [CodeComponent],
+    declarations: [CodeDirective],
     imports: [
         CommonModule
     ],
     exports: [
         CommonModule,
-        CodeComponent
+        CodeDirective
     ]
 })
 export class SharedModule { }
