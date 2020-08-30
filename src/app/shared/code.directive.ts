@@ -15,7 +15,8 @@ const prettierParser = {
 }
 
 const prettierOpiton = {
-    tabWidth: 4
+    tabWidth: 4,
+    htmlWhitespaceSensitivity: 'ignore'
 };
 
 @Directive({
@@ -49,16 +50,13 @@ export class CodeDirective {
                     );
                 }
 
-                // remove prefix-underscore attribute
-                element.querySelectorAll('*')
-                    .forEach((eachElement: Element) => {
-                        for (const attrName in eachElement.attr()) {
-                            if (attrName.indexOf('_') !== -1)
-                                eachElement.attr(attrName, null);
-                        }
-                    });
-
-                code = $('div', {}, ...element.children).innerHTML;
+                code =
+                    $('div', {}, ...element.children)
+                        .innerHTML
+                        // remove prefix-underscore attribute
+                        .replace(/_[\s\S]*?="[\s\S]*?"/g, '')
+                        .replace(/<!--[\s\S]*?-->/g, '')
+                    ;
                 break;
             case 'typescript':
                 // code = element;

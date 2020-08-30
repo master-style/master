@@ -77,7 +77,8 @@ import { BreadcrumbComponent } from './decorators/breadcrumb/breadcrumb.componen
         TableComponent,
         TabsComponent,
         InstallationComponent,
-        DisplayComponent, VisibilityComponent, ArticleComponent, GridComponent, AlignmentComponent, PositionComponent, WrapComponent, AppComponent,
+        DisplayComponent,
+        VisibilityComponent, ArticleComponent, GridComponent, AlignmentComponent, PositionComponent, WrapComponent, AppComponent,
         AreaComponent, BackgroundComponent, BorderComponent, FontComponent, HoverComponent, MarginComponent, PaddingComponent, RadiusComponent, ScaleComponent, ShadowComponent, TextComponent, ZIndexComponent,
         DialogComponent,
         RippleComponent,
@@ -92,7 +93,7 @@ import { BreadcrumbComponent } from './decorators/breadcrumb/breadcrumb.componen
         FigureComponent,
         ItemComponent,
         SkeletonComponent,
-        BreadcrumbComponent,
+        BreadcrumbComponent
     ],
     imports: [
         CommonModule,

@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouteResolver } from './shared/route.resolver';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 @NgModule({
     declarations: [
@@ -27,7 +27,9 @@ import { RouteResolver } from './shared/route.resolver';
     providers: [
         RouteResolver
     ],
-    bootstrap: [AppComponent],
+    bootstrap: [
+        AppComponent
+    ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
