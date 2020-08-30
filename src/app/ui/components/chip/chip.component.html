@@ -95,28 +95,23 @@
 </div>
 
 <h2 id="color">{{ 'color' | translate }}</h2>
-<h3 id="color-strong">{{ 'strong' | translate }}</h3>
-<template [codeLang]="'html'" [codeDemo]=true *ngFor="let eachStyle of styles">
-    <div class="y:sm">
-        <m-chip class="x {{ eachColor }} {{ eachStyle }}" *ngFor="let eachColor of colors">
-            <div part="chip-head">
-                <ion-icon name="water"></ion-icon>
-            </div>
-            <div part="chip-body">{{ eachColor }}</div>
-        </m-chip>
-    </div>
-</template>
-<h3 id="color-light">{{ 'light' | translate }}</h3>
-<template [codeLang]="'html'" [codeDemo]=true *ngFor="let eachStyle of styles">
-    <div class="y:sm">
-        <m-chip class="x {{ eachColor }}+ {{ eachStyle }}" *ngFor="let eachColor of colors">
-            <div part="chip-head">
-                <ion-icon name="water"></ion-icon>
-            </div>
-            <div part="chip-body">{{ eachColor }}</div>
-        </m-chip>
-    </div>
-</template>
+<div class="y">
+    <ng-container *ngFor="let eachDepth of ['', '+']">
+        <div class="x:fill" *ngFor="let eachStyle of styles">
+            <template [codeLang]="'html'" [codeDemo]=true>
+                <div class="y:sm">
+                    <m-chip class="x {{ eachColor + eachDepth }} {{ eachStyle }}" *ngFor="let eachColor of colors"
+                        (click)="currentColor = eachColor">
+                        <div part="chip-head">
+                            <ion-icon name="water"></ion-icon>
+                        </div>
+                        <div part="chip-body">{{ eachColor }}</div>
+                    </m-chip>
+                </div>
+            </template>
+        </div>
+    </ng-container>
+</div>
 
 <h2 id="size">{{ 'size' | translate }}</h2>
 <template [codeLang]="'html'" [codeDemo]=true>
@@ -197,8 +192,8 @@
                 </td>
                 <td><b>側圓角</b></td>
                 <td class="t:right">
-                    <m-chip class="sm blue+" href="modifiers">
-                        <div part="chip-body">修飾</div>
+                    <m-chip class="sm theme+" href="modifiers">
+                        <div part="chip-body">{{ 'modifiers' | translate }}</div>
                     </m-chip>
                 </td>
             </tr>

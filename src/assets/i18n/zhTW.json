@@ -48,5 +48,7 @@
     "strong": "濃厚",
     "light": "清淡",
     "size": "尺寸",
-    "shape": "形狀"
+    "shape": "形狀",
+    "modifiers": "修飾",
+    "decoractors": "裝飾"
 }

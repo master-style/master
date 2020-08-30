@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, Output } from '@angular/core';
+import { Directive, ElementRef, Input, Output, SimpleChange } from '@angular/core';
 
 import Prism from 'prismjs';
 import 'prismjs/components/prism-scss.min.js';
@@ -28,7 +28,7 @@ export class CodeDirective {
     @Input() codeDemo: boolean;
     @Input() codeCollapsed: boolean;
 
-    preElement: Element;
+    demoElement: Element;
 
     constructor(
         private elementRef: ElementRef
@@ -39,17 +39,17 @@ export class CodeDirective {
         const isTemplateTag = element.tagName === 'TEMPLATE';
         const isCodeTag = element.tagName === 'CODE';
         let code: string;
+
         switch (this.codeLang) {
             case 'html':
                 if (isTemplateTag && this.codeDemo) {
-                    element.before(
-                        $('div', { class: 'demo with:code' },
-                            $('div', { class: 'demo-body' },
-                                ...element.children
-                                    .map((eachChild) => eachChild.cloneNode(true))
-                            )
+                    this.demoElement = $('div', { class: 'demo with:code' },
+                        $('div', { class: 'demo-body' },
+                            ...element.children
+                                .map((eachChild) => eachChild.cloneNode(true))
                         )
                     );
+                    element.before(this.demoElement);
                 }
 
                 code =
@@ -79,16 +79,21 @@ export class CodeDirective {
         if (isCodeTag) {
             element.innerHTML = code;
         } else {
-            // for convenient
-            if (this.codeCollapsed === undefined)
-                this.codeCollapsed = this.codeDemo ?? false;
-            this.preElement =
+            element.before(
                 $('pre', {},
                     $('code', { class: 'language-' + this.codeLang }).html(code)
                 )
-                    .toggleAttr('collapsed', this.codeCollapsed);
-            element.before(this.preElement);
+            );
         }
+
+        this.collapse();
+    }
+
+    collapse() {
+        if (this.codeCollapsed === undefined)
+            this.codeCollapsed = this.codeDemo ?? false;
+        if (this.demoElement)
+            this.demoElement.toggleAttr('collapsed', this.codeCollapsed);
     }
 
 }

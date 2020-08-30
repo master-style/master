@@ -13,12 +13,6 @@
         z-index: $z-up;
         color: var(--f-fadest);
     }
-
-    &.collapse {
-        .code {
-            display: none;
-        }
-    }
 }
 
 .demo,
@@ -51,6 +45,12 @@
     +pre {
         border-top-left-radius: 0;
         border-top-right-radius: 0;
+    }
+
+    &[collapsed] {
+        +pre {
+            display: none;
+        }
     }
 }
 
