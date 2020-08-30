@@ -34,7 +34,7 @@
     </div>
 </nav>
 <main part="app-body">
-    <article class="decorated">
+    <article class="decorated" style="margin-bottom: 3rem">
         <nav aria-label="breadcrumb" class="decorated">
             <a *ngFor="let eachRoute of appService?.currentRoute?.pathFromRoot"
                 [attr.aria-current]="appService?.currentRoute === eachRoute ? 'page': null">{{ eachRoute?.routeConfig?.path || 'home' | translate }}</a>

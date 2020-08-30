@@ -173,12 +173,9 @@ article.decorated {
 
     h1,
     h2,
-    h3 {
-        margin-bottom: $sm;
-    }
-
+    h3,
     h4 {
-        margin-bottom: $xs;
+        margin-bottom: $sm;
     }
 
     h1 {
@@ -192,6 +189,10 @@ article.decorated {
 
     h3 {
         margin-top: $lg;
+    }
+
+    h4 {
+        margin-top: $md;
     }
 
     h1+h2,

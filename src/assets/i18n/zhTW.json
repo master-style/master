@@ -14,7 +14,7 @@
     "components": "元件",
     "control": "控制項",
     "interactive": "互動式",
-    "data-render" : "數據呈現",
+    "data-render": "數據呈現",
     "progress-indicator": "進度預示",
     "badge": "徽章",
     "card": "卡片",
@@ -45,6 +45,8 @@
     "basic": "基本",
     "image": "圖像",
     "appearance": "外觀",
-    "appearance-strong": "濃厚",
-    "appearance-light": "清淡"
+    "strong": "濃厚",
+    "light": "清淡",
+    "size": "尺寸",
+    "shape": "形狀"
 }
