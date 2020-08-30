@@ -4,7 +4,7 @@
     }
 }
 
-div[code],
+.demo,
 .demo-grid {
     display: flex;
     width: 100%;
@@ -75,7 +75,7 @@ div[code],
     }
 }
 
-div[code] {
+.demo {
     position: relative;
 
     .demo-body {

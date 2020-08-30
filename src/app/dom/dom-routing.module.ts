@@ -12,6 +12,7 @@ import { OffComponent } from './event-listener/off/off.component';
 import { FilterComponent } from './traversings/filter/filter.component';
 import { ForEachComponent } from './traversings/for-each/for-each.component';
 import { IndexOfComponent } from './traversings/index-of/index-of.component';
+import { HtmlComponent } from './manipulations/html/html.component';
 
 export const domRoutes: Routes = [
     { path: 'DOM' },
@@ -32,7 +33,8 @@ export const domRoutes: Routes = [
             { path: 'attr', component: AttrComponent },
             { path: 'class', component: ClassComponent },
             { path: 'create', component: CreateComponent },
-            { path: 'css', component: CssComponent }
+            { path: 'css', component: CssComponent },
+            { path: 'html', component: HtmlComponent }
         ]
     },
     {
