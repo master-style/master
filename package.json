@@ -21,6 +21,7 @@
     "@angular/router": "~10.0.11",
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
+    "prettier": "^2.1.1",
     "prismjs": "^1.21.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",

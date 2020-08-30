@@ -1,9 +1,3 @@
-.with\:code {
-    .hljs-language {
-        display: none;
-    }
-}
-
 .demo,
 .demo-grid {
     display: flex;
@@ -20,7 +14,21 @@
 
         margin-bottom: 0;
     }
+}
 
+.demo.with\:code {
+    margin-bottom: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    .hljs-language {
+        display: none;
+    }
+
+    + pre {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
 }
 
 .dark {
@@ -104,7 +112,7 @@
     flex-wrap: wrap;
     width: 100%;
     padding: $md;
-    border-radius: $sm;
+    border-radius: inherit;
 
     +.code {
         border-top-left-radius: 0;
