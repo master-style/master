@@ -114,17 +114,19 @@
 </div>
 
 <h2 id="size">{{ 'size' | translate }}</h2>
-<template [codeLang]="'html'" [codeDemo]=true>
-    <div class="y:sm c:bottom c:center">
-        <m-chip class="x sm theme outlined">
-            <div part="chip-head">S</div>
-            <div part="chip-body">small</div>
-        </m-chip>
-        <m-chip class="x theme outlined">
-            <div part="chip-body">default</div>
-        </m-chip>
+<div class="demo">
+    <div class="demo-body">
+        <div class="y:sm c:bottom c:center">
+            <m-chip class="x sm theme outlined">
+                <div part="chip-head">S</div>
+                <div part="chip-body">small</div>
+            </m-chip>
+            <m-chip class="x theme outlined">
+                <div part="chip-body">default</div>
+            </m-chip>
+        </div>
     </div>
-</template>
+</div>
 <m-table class="sm neat axis:x">
     <table>
         <thead>
@@ -132,7 +134,7 @@
                 <th class="fit t:left bg:theme sticky" style="top: 3rem">class</th>
                 <th class="fit t:left bg:theme sticky t-wrap:no" style="top: 3rem">height</th>
                 <th class="fit t:left bg:theme sticky t-wrap:no" style="top: 3rem">min-width</th>
-                <th class="t:left bg:theme sticky" style="top: 3rem">說明</th>
+                <th class="t:left bg:theme sticky" style="top: 3rem">description</th>
             </tr>
         </thead>
         <tbody>
@@ -157,24 +159,26 @@
 </m-table>
 
 <h2 id="shape">{{ 'shape' | translate }}</h2>
-<template [codeLang]="'html'" [codeDemo]=true>
-    <div class="y:sm c:bottom c:center">
-        <m-chip class="x theme outlined">
-            <div part="chip-head">D</div>
-            <div part="chip-body">default</div>
-        </m-chip>
-        <m-chip class="x theme outlined rounded">
-            <div part="chip-head">R</div>
-            <div part="chip-body">rounded</div>
-        </m-chip>
+<div class="demo">
+    <div class="demo-body">
+        <div class="y:sm c:bottom c:center">
+            <m-chip class="x theme outlined">
+                <div part="chip-head">D</div>
+                <div part="chip-body">default</div>
+            </m-chip>
+            <m-chip class="x theme outlined rounded">
+                <div part="chip-head">R</div>
+                <div part="chip-body">rounded</div>
+            </m-chip>
+        </div>
     </div>
-</template>
+</div>
 <m-table class="sm neat axis:x">
     <table>
         <thead>
             <tr>
                 <th class="fit t:left bg:theme sticky" style="top: 3rem">class</th>
-                <th class="t:left bg:theme sticky" style="top: 3rem">說明</th>
+                <th class="t:left bg:theme sticky" style="top: 3rem">description</th>
                 <th class="fit bg:theme sticky" style="top: 3rem"></th>
             </tr>
         </thead>
