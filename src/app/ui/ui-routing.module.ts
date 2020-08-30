@@ -73,7 +73,7 @@ export const uiRoutes: Routes = [
             { path: 'switch', component: SwitchComponent, resolve: { route: RouteResolver } },
             { path: 'data-render' },
             { path: 'badge', component: BadgeComponent, resolve: { route: RouteResolver } },
-            { path: 'card', component: CardComponent, resolve: { route: RouteResolver } },
+            { path: 'card', component: CardComponent, data: { compositions: ['HTML', 'CSS', 'JS'] }, resolve: { route: RouteResolver } },
             { path: 'chats', component: ChatsComponent, resolve: { route: RouteResolver } },
             { path: 'chip', component: ChipComponent, data: { compositions: ['HTML', 'CSS'] }, resolve: { route: RouteResolver } },
             { path: 'flows', component: FlowsComponent, resolve: { route: RouteResolver } },

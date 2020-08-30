@@ -34,6 +34,56 @@
                     <i class="i-chevron-right buttonFoot abs right"></i>
                 </a>
             </m-card>
+        </div>
+    </div>
+</div>
+
+<h2 id="structure">{{ 'structure' | translate }}</h2>
+<template [codeLang]="'html'">
+    <m-card>
+        <div part="chip-card"></div>
+        <div part="chip-card"></div>
+        <div part="chip-card"></div>
+    </m-card>
+</template>
+
+<h2 id="assembling">{{ 'assembling' | translate }}</h2>
+<div class="demo">
+    <div class="demo-body">
+        <div class="y">
+            <m-card class="raised x:6">
+                <div part="card-head" class="by:3x2"
+                    style="background-image: url(https://images.pexels.com/photos/936611/pexels-photo-936611.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)">
+                </div>
+                <div part="card-body">
+                    <h5>Wed Jan 22 2020</h5>
+                    <h3>Healthy food</h3>
+                    <h4>fruit</h4>
+                    <p>Here's a low-calorie platter for a great afternoon light meal.</p>
+                </div>
+                <div part="card-foot" class="bt:no">
+                    <a is="m-button" class="theme+ xs outlined">
+                        learn more
+                        <i class="i-chevron-right buttonFoot"></i>
+                    </a>
+                </div>
+            </m-card>
+            <m-card class="outlined x:6">
+                <div part="card-head" class="by:3x2"
+                    style="background-image: url(https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)">
+                </div>
+                <div part="card-body">
+                    <h5>Wed Jan 22 2020</h5>
+                    <h3>Healthy food</h3>
+                    <h4>fruit</h4>
+                    <p>Here's a low-calorie platter for a great afternoon light meal. Here's a low-calorie platter for a
+                        great afternoon light meal.</p>
+                </div>
+                <a is="m-button" part="card-foot" class="sm transparent c:left">
+                    learn more
+                    <i class="i-chevron-right buttonFoot abs right"></i>
+                </a>
+            </m-card>
             <m-card class="outlined c:col x:12">
                 <div part="card-head" class="x:4"
                     style="background-image: url(https://images.pexels.com/photos/793765/pexels-photo-793765.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)">
