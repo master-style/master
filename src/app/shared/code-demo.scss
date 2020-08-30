@@ -53,12 +53,12 @@ div[code],
         }
     }
 
-    [demo] {
+    .demo-body {
         background-image: repeating-linear-gradient(90deg, transparent, transparent $md, var(--themeFade) $md, var(--themeFade) calc(100% / 12 - 1.7px))
     }
 
     &.guide-gap {
-        [demo] {
+        .demo-body {
             &:before {
                 z-index: $z-up;
                 background-image: repeating-linear-gradient(90deg, rgba(#00ffff, .3), rgba(#00ffff, .3) $md, rgba(hotpink, .2) $md, rgba(hotpink, .2) calc(100% / 12 - 1.7px))
@@ -67,7 +67,7 @@ div[code],
     }
 
     &.guide5 {
-        [demo] {
+        .demo-body {
             &:before {
                 background-image: repeating-linear-gradient(90deg, transparent, transparent $md, var(--themeFade) $md, var(--themeFade) calc(100% / 10 - 2px))
             }
@@ -78,7 +78,7 @@ div[code],
 div[code] {
     position: relative;
 
-    [demo] {
+    .demo-body {
         background-origin: border-box;
         background-color: transparent;
         background-image: repeating-linear-gradient(45deg, transparent, transparent 1rem, var(--themeFade) 1rem, var(--themeFade) 2rem);
@@ -98,13 +98,13 @@ div[code] {
     }
 }
 
-[demo] {
+.demo-body {
     position: relative;
     display: flex;
     flex-wrap: wrap;
     width: 100%;
     padding: $md;
-    border-radius: $xs;
+    border-radius: $sm;
 
     +.code {
         border-top-left-radius: 0;

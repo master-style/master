@@ -5,8 +5,8 @@
 
 @font-face {
     font-family: 'Fira Code';
-    src: url('../assets/fonts/FiraCode-Medium.eot');
-    src: url('../assets/fonts/FiraCode-Medium.eot') format('embedded-opentype'), url('../assets/fonts/FiraCode-Medium.woff2') format('woff2'), url('../assets/fonts/FiraCode-Medium.woff') format('woff'), url('../assets/fonts/FiraCode-Medium.ttf') format('truetype');
+    src: url('/assets/fonts/FiraCode-Medium.eot');
+    src: url('/assets/fonts/FiraCode-Medium.eot') format('embedded-opentype'), url('/assets/fonts/FiraCode-Medium.woff2') format('woff2'), url('/assets/fonts/FiraCode-Medium.woff') format('woff'), url('/assets/fonts/FiraCode-Medium.ttf') format('truetype');
     font-weight: 600;
     font-style: normal;
     font-display: swap;
@@ -52,7 +52,7 @@ code.default {
     position: relative;
     background-size: cover;
     background-color: var(--theme);
-    background-image: url('../assets/images/iPhoneX.png');
+    background-image: url('/assets/images/iPhoneX.png');
     background-position: -1px 0;
     width: 325px;
     height: 660px;
@@ -76,11 +76,11 @@ code.default {
     }
 
     &:before {
-        background-image: url('../assets/images/iPhoneX-head.png');
+        background-image: url('/assets/images/iPhoneX-head.png');
     }
 
     &:after {
-        background-image: url('../assets/images/iPhoneX-headbar.png');
+        background-image: url('/assets/images/iPhoneX-headbar.png');
     }
 }
 
