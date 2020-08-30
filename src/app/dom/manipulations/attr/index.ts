@@ -6,7 +6,7 @@ import parseStr from '@utils/parse-str';
 
 const ElementPrototype = Element.prototype;
 
-ElementPrototype.attr = function (param: any, value?: any, prefix?: string): any {
+ElementPrototype.attr = function (param?: any, value?: any, prefix?: string): any {
     const element = this;
     prefix = arguments.length === 3 ? arguments[2] + '-' : '';
     if (value !== undefined) {

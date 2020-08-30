@@ -1,23 +1,46 @@
-<template [codeLang]="'html'" demo>
-    <div class="y:sm c:center">
-        <m-chip class="x theme">
-            <div part="chip-head">S</div>
-            <div part="chip-body">Sally</div>
-        </m-chip>
-        <m-chip class="x outlined blue+">
-            <div part="chip-head">♂️</div>
-            <div part="chip-body">Aron</div>
-        </m-chip>
-        <m-chip class="x outlined red+">
-            <div part="chip-head">♀️</div>
-            <div part="chip-body">Joy</div>
-        </m-chip>
-        <m-chip class="x outlined theme rounded">
-            <img part="chip-head" src="assets/images/avatar1.jpg">
-            <div part="chip-body">Joy</div>
-            <button part="chip-close">
-                <m-icon name="close"></m-icon>
-            </button>
-        </m-chip>
+<div class="demo">
+    <div class="demo-body">
+        <div class="y:sm c:center">
+            <m-chip class="x theme">
+                <div part="chip-head">S</div>
+                <div part="chip-body">Sally</div>
+            </m-chip>
+            <m-chip class="x outlined blue+">
+                <div part="chip-head">♂️</div>
+                <div part="chip-body">Aron</div>
+            </m-chip>
+            <m-chip class="x outlined red+">
+                <div part="chip-head">♀️</div>
+                <div part="chip-body">Joy</div>
+            </m-chip>
+            <m-chip class="x outlined theme rounded">
+                <img part="chip-head" src="assets/images/avatar1.jpg">
+                <div part="chip-body">Joy</div>
+                <button part="chip-close">
+                    <m-icon name="close"></m-icon>
+                </button>
+            </m-chip>
+        </div>
     </div>
-</template>
+</div>
+
+<h2 id="usage">使用</h2>
+<h3 id="usage-text">文字</h3>
+<div class="y">
+    <div class="x:6@sm">
+        <template [codeLang]="'html'" [codeDemo]=true [codeEndLines]=1>
+            <m-chip class="theme+ outlined">
+                <div part="chip-body">tag</div>
+            </m-chip>
+        </template>
+    </div>
+    <div class="x:6@sm">
+        <template [codeLang]="'html'" [codeDemo]=true>
+            <m-chip class="theme+ outlined">
+                <div part="chip-head">北</div>
+                <div part="chip-body">50 km</div>
+            </m-chip>
+        </template>
+    </div>
+</div>
+<h3 id="usage-icon-and-img">圖標 / 圖像</h3>

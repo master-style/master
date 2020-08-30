@@ -1,5 +1,6 @@
 interface Element {
-    attr(key: string): string | undefined | null;
+    attr(): { [key: string]: any };
+    attr(key: string): any;
     attr(key: string, value: any): this;
     attr(multi: object): this;
     toggleAttr(key: string, state?: boolean): this;

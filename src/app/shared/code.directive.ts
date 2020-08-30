@@ -10,9 +10,10 @@ import prettier from 'prettier';
 import htmlParser from 'prettier/parser-html.js';
 import typescriptParser from 'prettier/parser-typescript.js';
 
-const prettierPlugins = [htmlParser, typescriptParser];
-
-const isDefined = (value: any): boolean => value !== undefined;
+const prettierOpiton = {
+    plugins: [htmlParser, typescriptParser],
+    tabWidth: 4
+};
 
 @Directive({
     selector: '[codeLang]'
@@ -20,13 +21,12 @@ const isDefined = (value: any): boolean => value !== undefined;
 export class CodeDirective {
 
     @Input() codeLang: string;
-    @Input() demo: string;
+    @Input() codeDemo: boolean;
+    @Input() codeEndLines: number;
 
     constructor(
         private elementRef: ElementRef
-    ) {
-
-    }
+    ) { }
 
     ngOnInit(): void {
         const element = this.elementRef.nativeElement;
@@ -34,7 +34,7 @@ export class CodeDirective {
         let code: string;
         switch (this.codeLang) {
             case 'html':
-                if (isTemplate && isDefined(this.demo)) {
+                if (isTemplate && this.codeDemo) {
                     element.before(
                         $('div', { class: 'demo with:code' },
                             $('div', { class: 'demo-body' },
@@ -44,16 +44,27 @@ export class CodeDirective {
                         )
                     );
                 }
+                console.log(
+                    element.querySelectorAll('*')
+                        .forEach((eachElement: Element) => {
+                            for (const attrName in eachElement.attr()) {
+                                if (attrName.indexOf('_') !== -1)
+                                    eachElement.attr(attrName, null);
+                            }
+                        })
+                );
                 code = $('div', {}, ...element.children).innerHTML;
                 code = prettier.format(code, {
                     parser: 'html',
-                    plugins: prettierPlugins
+                    ...prettierOpiton
                 });
                 break;
             default:
                 break;
         }
 
+        if (this.codeEndLines)
+            code += '\n'.repeat(this.codeEndLines);
         code = Prism.highlight(code, Prism.languages.html, 'html');
 
         if (isTemplate)
