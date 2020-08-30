@@ -4,14 +4,17 @@ import Prism from 'prismjs';
 import 'prismjs/components/prism-scss.min.js';
 import 'prismjs/components/prism-bash.min.js';
 import 'prismjs/components/prism-typescript.min.js';
-import 'prismjs/plugins/line-numbers/prism-line-numbers.min.js';
 
 import prettier from 'prettier';
 import htmlParser from 'prettier/parser-html.js';
 import typescriptParser from 'prettier/parser-typescript.js';
 
+const prettierParser = {
+    'html': htmlParser,
+    'typescript': typescriptParser
+}
+
 const prettierOpiton = {
-    plugins: [htmlParser, typescriptParser],
     tabWidth: 4
 };
 
@@ -28,13 +31,14 @@ export class CodeDirective {
         private elementRef: ElementRef
     ) { }
 
-    ngOnInit(): void {
+    ngAfterContentInit(): void {
         const element = this.elementRef.nativeElement;
-        const isTemplate = element.tagName === 'TEMPLATE';
+        const isTemplateTag = element.tagName === 'TEMPLATE';
+        const isCodeTag = element.tagName === 'CODE';
         let code: string;
         switch (this.codeLang) {
             case 'html':
-                if (isTemplate && this.codeDemo) {
+                if (isTemplateTag && this.codeDemo) {
                     element.before(
                         $('div', { class: 'demo with:code' },
                             $('div', { class: 'demo-body' },
@@ -44,35 +48,47 @@ export class CodeDirective {
                         )
                     );
                 }
-                console.log(
-                    element.querySelectorAll('*')
-                        .forEach((eachElement: Element) => {
-                            for (const attrName in eachElement.attr()) {
-                                if (attrName.indexOf('_') !== -1)
-                                    eachElement.attr(attrName, null);
-                            }
-                        })
-                );
+
+                // remove prefix-underscore attribute
+                element.querySelectorAll('*')
+                    .forEach((eachElement: Element) => {
+                        for (const attrName in eachElement.attr()) {
+                            if (attrName.indexOf('_') !== -1)
+                                eachElement.attr(attrName, null);
+                        }
+                    });
+
                 code = $('div', {}, ...element.children).innerHTML;
-                code = prettier.format(code, {
-                    parser: 'html',
-                    ...prettierOpiton
-                });
+                break;
+            case 'typescript':
+                // code = element;
+                code = element.textContent;
                 break;
             default:
                 break;
         }
 
-        if (this.codeEndLines)
-            code += '\n'.repeat(this.codeEndLines);
-        code = Prism.highlight(code, Prism.languages.html, 'html');
+        code = prettier.format(code, {
+            parser: this.codeLang,
+            plugins: [prettierParser[this.codeLang]],
+            ...prettierOpiton
+        });
 
-        if (isTemplate)
+        if (this.codeEndLines) {
+            code += '\n'.repeat(this.codeEndLines);
+        }
+
+        code = Prism.highlight(code, Prism.languages[this.codeLang], this.codeLang);
+
+        if (isCodeTag) {
+            element.innerHTML = code;
+        } else {
             element.before(
                 $('pre', {},
                     $('code', { class: 'language-' + this.codeLang }).html(code)
                 )
             );
+        }
     }
 
 }

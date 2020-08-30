@@ -44,3 +44,18 @@
     </div>
 </div>
 <h3 id="usage-icon-and-img">圖標 / 圖像</h3>
+
+<template [codeLang]="'typescript'">
+    import Prism from 'prismjs';
+    import 'prismjs/components/prism-scss.min.js';
+    import 'prismjs/components/prism-bash.min.js';
+    import 'prismjs/components/prism-typescript.min.js';
+    import prettier from 'prettier';
+    import htmlParser from 'prettier/parser-html.js';
+    import typescriptParser from 'prettier/parser-typescript.js';
+
+    const prettierOpiton = {{ '{' }}
+    plugins: [htmlParser, typescriptParser],
+    tabWidth: 4
+    {{ '}' }};
+</template>
