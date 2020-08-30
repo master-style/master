@@ -48,15 +48,15 @@ m-chip {
             margin-left: -1px;
         }
     }
+}
 
-    [part="chip-close"] {
-        font-size: $f-xxs;
-        width: 1.125rem;
-        height: 1.125rem;
-        min-width: auto;
-        min-height: auto;
-        margin-right: .1875rem;
-    }
+[part="chip-close"] {
+    font-size: $f-xxs;
+    width: 1.125rem;
+    height: 1.125rem;
+    min-width: auto;
+    min-height: auto;
+    margin-right: .1875rem;
 }
 
 [part="chip-body"],
@@ -86,12 +86,16 @@ m-chip {
     min-width: calc(var(--size) - var(--p) * 2);
 }
 
-[part="chip-foot"],
 img[part="chip-head"],
 i[part="chip-head"] {
     margin: 0;
     padding: 0;
     width: calc(var(--size) - var(--p) * 2);
+}
+
+[part="chip-foot"] {
+    color: var(--f-fade);
+    margin-right: .1875rem;
 }
 
 [part="chip-body"] {

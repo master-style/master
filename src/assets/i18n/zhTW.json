@@ -40,8 +40,11 @@
     "traversings": "遍歷",
     "decorators": "裝飾",
     "usage": "使用",
+    "structure": "構造",
+    "assembling": "組合",
     "basic": "基本",
     "image": "圖像",
     "appearance": "外觀",
-    "color-strong": "濃厚"
+    "appearance-strong": "濃厚",
+    "appearance-light": "清淡"
 }

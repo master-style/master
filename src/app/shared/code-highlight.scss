@@ -6,7 +6,8 @@ pre {
     font-size: $f-xs;
     line-height: 1.7;
     margin: 0 0 $sm 0;
-
+    flex: 1 1 auto;
+    
     &[collapsed] {
         code {
             display: none!important;

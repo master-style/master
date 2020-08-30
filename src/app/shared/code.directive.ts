@@ -26,7 +26,6 @@ export class CodeDirective {
 
     @Input() codeLang: string;
     @Input() codeDemo: boolean;
-    @Input() codeEndLines: number;
     @Input() codeCollapsed: boolean;
 
     preElement: Element;
@@ -74,10 +73,6 @@ export class CodeDirective {
             plugins: [prettierParser[this.codeLang]],
             ...prettierOpiton
         });
-
-        if (this.codeEndLines) {
-            code += '\n'.repeat(this.codeEndLines);
-        }
 
         code = Prism.highlight(code, Prism.languages[this.codeLang], this.codeLang);
 
