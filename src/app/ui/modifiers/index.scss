@@ -1,13 +1,18 @@
-@import './position';
 @import './alignment';
-@import './border';
-@import './wrap';
-@import './radius';
-@import './text';
-@import './font';
-@import './scale';
 @import './area';
 @import './background';
+@import './border';
+@import './display';
+@import './font';
+@import './hover';
+@import './position';
+@import './radius';
+@import './scale';
+@import './shadow';
+@import './text';
+@import './visibility';
+@import './wrap';
+@import './z-index';
 
 $spacings: (xxs: $xxs,
     xs: $xs,
