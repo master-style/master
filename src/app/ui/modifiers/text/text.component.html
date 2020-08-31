@@ -1,1 +1,174 @@
-<p>text works!</p>
+<div class="p">
+    <m-table class="sm t:center mb" axis=y equal-width=true>
+        <table>
+            <thead>
+                <tr>
+                    <th class="t-deleted">line-through</th>
+                    <th class="t-underline">underline</th>
+                    <th class="t-lowercase">is lowercase</th>
+                    <th class="t-uppercase">is uppercase</th>
+                    <th class="t-capitalize">is capitalize</th>
+                    <th class="t-hide">text is hidden.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>.t-deleted</code></td>
+                    <td><code>.t-underline</code></td>
+                    <td><code>.t-lowercase</code></td>
+                    <td><code>.t-uppercase</code></td>
+                    <td><code>.t-capitalize</code></td>
+                    <td><code>.t-hide</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </m-table>
+    <m-table class="sm t:center" axis=xy equal-width=true>
+        <table>
+            <thead>
+                <tr>
+                    <th colspan=4>
+                        ellipsis
+                    </th>
+                    <th colspan=2>
+                        wrap
+                    </th>
+                </tr>
+                <tr class="t-wrap t:left a:top">
+                    <th>
+                        <div class="t-line:1">Taiwan officially the Republic of China (ROC), is a state in East Asia.
+                            Its neighbors include the
+                            People's Republic of China (PRC) to the west, Japan to the northeast, and the Philippines to
+                            the south. It is the most populous state and largest economy that is not a member of the
+                            United
+                            Nations.
+                        </div>
+                    </th>
+                    <th>
+                        <div class="t-line:2">Taiwan officially the Republic of China (ROC), is a state in East Asia.
+                            Its neighbors include the
+                            People's Republic of China (PRC) to the west, Japan to the northeast, and the Philippines to
+                            the south. It is the most populous state and largest economy that is not a member of the
+                            United
+                            Nations.
+                        </div>
+                    </th>
+                    <th>
+                        <div class="t-line:3">Taiwan officially the Republic of China (ROC), is a state in East Asia.
+                            Its neighbors include the
+                            People's Republic of China (PRC) to the west, Japan to the northeast, and the Philippines to
+                            the south. It is the most populous state and largest economy that is not a member of the
+                            United
+                            Nations.
+                        </div>
+                    </th>
+                    <th>
+                        <div class="t-line:4">Taiwan officially the Republic of China (ROC), is a state in East Asia.
+                            Its neighbors include the
+                            People's Republic of China (PRC) to the west, Japan to the northeast, and the Philippines to
+                            the south. It is the most populous state and largest economy that is not a member of the
+                            United
+                            Nations.
+                        </div>
+                    </th>
+                    <th>
+                        <div class="t-wrap">Taiwan officially the Republic of China</div>
+                    </th>
+                    <th>
+                        <div class="t-wrap:no">Taiwan officially the Republic of China</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>.t-line:1</code></td>
+                    <td><code>.t-line:2</code></td>
+                    <td><code>.t-line:3</code></td>
+                    <td><code>.t-line:4</code></td>
+                    <td><code>.t-wrap</code></td>
+                    <td><code>.t-wrap:no</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </m-table>
+</div>
+<div class="demo p">
+    <m-table class="sm scroll:x mb" axis=x>
+        <table class="t:center">
+            <tbody>
+                <tr>
+                    <th>viewport</th>
+                    <th><b>All</b>
+                        <br><code>≥ 0</code>
+                    </th>
+                    <th><b>Small</b>
+                        <br><code>≥ 600 px</code>
+                    </th>
+                    <th><b>Medium</b>
+                        <br><code>≥ 1024 px</code>
+                    </th>
+                    <th><b>Large</b>
+                        <br><code>≥ 1440 px</code>
+                    </th>
+                    <th><b>Extra Large</b>
+                        <br><code>≥ 1920 px</code>
+                    </th>
+                </tr>
+                <tr>
+                    <th><i class="ion-arrow-left-c"></i></th>
+                    <td><code>.t-<b class="f:purple">left</b></code></td>
+                    <td><code>.t-<b class="f:blue">sm</b>-left</code></td>
+                    <td><code>.t-<b class="f:green">md</b>-left</code></td>
+                    <td><code>.t-<b class="f:red">lg</b>-left</code></td>
+                    <td><code>.t-<b class="f:yellow">xl</b>-left</code></td>
+                </tr>
+                <tr>
+                    <th><i class="ion-arrow-right-c"></i></th>
+                    <td><code>.t-<b class="f:purple">right</b></code></td>
+                    <td><code>.t-<b class="f:blue">sm</b>-right</code></td>
+                    <td><code>.t-<b class="f:green">md</b>-right</code></td>
+                    <td><code>.t-<b class="f:red">lg</b>-right</code></td>
+                    <td><code>.t-<b class="f:yellow">xl</b>-right</code></td>
+                </tr>
+                <tr>
+                    <th><i class="ion-arrow-right-c"></i> <i class="ion-arrow-left-c"></i></th>
+                    <td><code>.t-<b class="f:purple">center</b></code></td>
+                    <td><code>.t-<b class="f:blue">sm</b>-center</code></td>
+                    <td><code>.t-<b class="f:green">md</b>-center</code></td>
+                    <td><code>.t-<b class="f:red">lg</b>-center</code></td>
+                    <td><code>.t-<b class="f:yellow">xl</b>-center</code></td>
+                </tr>
+                <tr>
+                    <th><i class="ion-arrow-left-c"></i> <i class="ion-arrow-right-c"></i></th>
+                    <td><code>.t-<b class="f:purple">justify</b></code></td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+            </tbody>
+        </table>
+    </m-table>
+    <div class="y">
+        <m-4 class="t:right@sm">
+            <div class="item px"><code>.t-<b class="f:green">sm</b>-right</code></div>
+        </m-4>
+        <m-4 class="t:left@md">
+            <div class="item px"><code> .t-<b class="f:red">@md</b>-left</code></div>
+        </m-4>
+        <m-4 class="t:center">
+            <div class="item px"><code>.t-<b>center</b></code></div>
+        </m-4>
+        <m-x>
+            <div class="item p t:justify">
+                <p>
+                    <code>.t-<b>justify</b></code> Taiwan officially the Republic of China (ROC), is a state in
+                    East Asia. Its neighbors include the People's Republic of China (PRC) to the west, Japan to the
+                    northeast,
+                    and the Philippines to the south. It is the most populous state and largest economy that is not a
+                    member
+                    of the United Nations.</p>
+            </div>
+        </m-x>
+    </div>
+</div>
