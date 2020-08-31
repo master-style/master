@@ -25,6 +25,8 @@ export function Attr(option?: AttrOption) {
             set(value) {
                 if (this[_propKey] === value) return;
                 this[_propKey] = value;
+                if (this.ready)
+                    this.setAttribute(attrKey, value);
             },
             configurable: true,
             enumerable: true
