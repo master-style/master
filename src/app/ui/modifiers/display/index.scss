@@ -1,0 +1,81 @@
+.block {
+    display: block !important;
+}
+
+.flex {
+    display: flex !important;
+}
+
+.inline-flex {
+    display: inline-flex !important;
+}
+
+.inline-block {
+    display: inline-block !important;
+}
+
+.inline {
+    display: inline !important;
+}
+
+.table {
+    display: table !important;
+}
+
+.cell {
+    display: table-cell !important;
+}
+
+.hide {
+    display: none !important;
+}
+
+// min
+@include above(sm) {
+    .hide\@sm {
+        display: none !important;
+    }
+}
+
+@include above(md) {
+    .hide\@md {
+        display: none !important;
+    }
+}
+
+@include above(lg) {
+    .hide\@lg {
+        display: none !important;
+    }
+}
+
+@include above(xl) {
+    .hide\@xl {
+        display: none !important;
+    }
+}
+
+// max
+@include below(sm) {
+    .show\@sm {
+        display: none !important;
+    }
+}
+
+@include below(md) {
+    .show\@md {
+        display: none !important;
+    }
+}
+
+@include below(lg) {
+    .show\@lg {
+        display: none !important;
+    }
+}
+
+@include below(xl) {
+    .show\@xl {
+        display: none !important;
+    }
+}
