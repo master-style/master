@@ -95,6 +95,12 @@ export const uiRoutes: Routes = [
         ]
     },
     {
+        path: 'modifiers', children: [
+            // { path: '', component: , resolve: { route: RouteResolver }, data: { compositions: ['CSS'] } },
+            { path: 'alignment', component: AlignmentComponent, resolve: { route: RouteResolver }, data: { compositions: ['CSS'] } },
+        ]
+    },
+    {
         path: 'decorators', children: [
             { path: 'article', component: ArticleComponent, resolve: { route: RouteResolver } },
             { path: 'breadcrumb', component: BreadcrumbComponent, resolve: { route: RouteResolver } },

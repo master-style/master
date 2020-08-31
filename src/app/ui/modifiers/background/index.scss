@@ -1,0 +1,181 @@
+.bg\:popup {
+    background-color: var(--theme);
+    @include blurBg(var(--themeRgb), .7);
+}
+
+.dark {
+    .bg\:popup {
+        background-color: var(--themeFader);
+        @include blurBg(var(--themeFaderRgb), .6);
+    }
+}
+
+.bg\:transparent {
+    background: none !important;
+}
+
+.bg\:blue {
+    background-color: var(--blue) !important;
+}
+
+.bg\:blue\+ {
+    background-color: var(--blueFade) !important;
+}
+
+.bg\:blue\+\+ {
+    background-color: var(--blueFader) !important;
+}
+
+.bg\:green {
+    background-color: var(--green) !important;
+}
+
+.bg\:green\+ {
+    background-color: var(--greenFade) !important;
+}
+
+.bg\:green\+\+ {
+    background-color: var(--greenFader) !important;
+}
+
+.bg\:red {
+    background-color: var(--red) !important;
+}
+
+.bg\:red\+ {
+    background-color: var(--redFade) !important;
+}
+
+.bg\:red\+\+ {
+    background-color: var(--redFader) !important;
+}
+
+.bg\:purple {
+    background-color: var(--purple) !important;
+}
+
+.bg\:purple\+ {
+    background-color: var(--purpleFade) !important;
+}
+
+.bg\:purple\+\+ {
+    background-color: var(--purpleFader) !important;
+}
+
+.bg\:yellow {
+    background-color: var(--yellow) !important;
+}
+
+.bg\:yellow\+ {
+    background-color: var(--yellowFade) !important;
+}
+
+.bg\:yellow\+\+ {
+    background-color: var(--yellowFader) !important;
+}
+
+.bg\:theme {
+    background-color: var(--theme) !important;
+    @include blurBg(var(--themeRgb), .9);
+}
+
+.bg\:theme\+ {
+    background-color: var(--themeFade) !important;
+    @include blurBg(var(--themeFadeRgb), .9);
+}
+
+.bg\:theme\+\+ {
+    background-color: var(--themeFader) !important;
+    @include blurBg(var(--themeFaderRgb), .9);
+}
+
+// .gt\:white {
+//     background-image: linear-gradient(to top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+// }
+
+// .gb\:white {
+//     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+// }
+
+// .gt\:dark {
+//     background-image: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .7) 100%);
+// }
+
+// .gb\:dark {
+//     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .7) 100%);
+// }
+
+.bg {
+    max-width: 100%;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+}
+
+.bg\:repeat {
+    background-repeat: repeat !important;
+}
+
+.bg\:repeat-x {
+    background-repeat: repeat-x !important;
+}
+
+.bg\:repeat-y {
+    background-repeat: repeat-y !important;
+}
+
+.bg\:contain {
+    background-size: contain !important
+}
+
+.bg\:fixed {
+    background-attachment: fixed !important;
+}
+
+.bg\:scroll {
+    background-attachment: scroll !important;
+}
+
+.bg\:local {
+    background-attachment: local !important;
+}
+
+.bg\:left {
+    background-position-x: left !important;
+}
+
+.bg\:right {
+    background-position-x: right !important;
+}
+
+.bg\:top {
+    background-position-y: top !important;
+}
+
+.bg\:bottom {
+    background-position-y: bottom !important;
+}
+
+.bg\:center {
+    background-position-x: center !important;
+}
+
+.bg\:middle {
+    background-position-y: center !important;
+}
+
+.bg\:padding {
+    background-origin: padding-box !important;
+}
+
+.bg\:border {
+    background-origin: border-box !important;
+}
+
+.bg\:content {
+    background-origin: content-box !important;
+}
+
+.bg\:no {
+    background: 0 !important
+}
