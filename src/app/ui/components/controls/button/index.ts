@@ -1,22 +1,13 @@
-// import { Element } from '@element';
+import { Element, Attr } from '@element';
 
-// @Element({
-//     tag: 'm-button'
-// })
-// class MasterButtonElement extends HTMLButtonElement {
+@Element({
+    tag: 'm-button'
+})
+export class MasterButtonElement extends HTMLElement {
 
-//     @Attr(false, { reflect: 'toggle' }) loading = loading;
+    @Attr() fuck = false;
 
-//     @Connect()
-//     connectedCallback() {
-//         this.attr('is', 'm-' + NAME);
-//         if (isSafari)
-//             this.on('tap', () => this.focus());
-//     }
+    connectedCallback() {
+    }
 
-//     @ChangeAttr()
-//     attributeChangedCallback() { }
-
-//     @Destroy()
-//     disconnectedCallback() { }
-// }
+}

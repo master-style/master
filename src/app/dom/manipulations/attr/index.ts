@@ -45,7 +45,7 @@ ElementPrototype.toggleAttr = function (param: any, state?: boolean): Element {
     } else {
         const kebabCaseKey = camelToKebabCase(param);
         element.toggleAttribute(kebabCaseKey,
-            typeof state === 'boolean' ?
+            state !== undefined ?
                 state :
                 !(element.getAttribute(kebabCaseKey) === '')
         );

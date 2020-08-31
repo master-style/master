@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ElementRoutingModule } from './element-routing.module';
-import { PropComponent } from './prop/prop.component';
+import { AttrComponent } from './attr/attr.component';
 
 
 @NgModule({
     declarations: [
-        PropComponent
+        AttrComponent
     ],
     imports: [
         CommonModule,

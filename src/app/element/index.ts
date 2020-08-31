@@ -1,10 +1,7 @@
-export * from './prop';
+export * from './attr';
 
 export function Element(option: ElementOption) {
     return function (constructor: any) {
-        customElements.define(
-            option.tag,
-            window[constructor.name] = constructor
-        );
+        window.customElements.define(option.tag, constructor);
     };
 }

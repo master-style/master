@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-prop',
-  templateUrl: './prop.component.html',
-  styleUrls: ['./prop.component.scss']
+  templateUrl: './attr.component.html',
+  styleUrls: ['./attr.component.scss']
 })
-export class PropComponent implements OnInit {
+export class AttrComponent implements OnInit {
 
   constructor() { }
 

@@ -4,6 +4,8 @@
     "compilerOptions": {
         "outDir": "./out-tsc/app",
         "types": [],
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
         "paths": {
             "@utils/*": [
                 "src/app/utils/*"
@@ -14,8 +16,8 @@
             "@shared/*": [
                 "src/app/shared/*"
             ],
-            "@element/*": [
-                "src/app/element/*"
+            "@element": [
+                "src/app/element/index.ts"
             ]
         }
     },

@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RouteResolver } from '../shared/route.resolver';
 
-import { PropComponent } from './prop/prop.component';
+import { AttrComponent } from './attr/attr.component';
 
 export const elementRoutes: Routes = [
-    { path: 'prop', component: PropComponent, resolve: { route: RouteResolver } }
+    { path: 'prop', component: AttrComponent, resolve: { route: RouteResolver } }
 ];
 
 @NgModule({
