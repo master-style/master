@@ -13,6 +13,9 @@
             ],
             "@shared/*": [
                 "src/app/shared/*"
+            ],
+            "@element/*": [
+                "src/app/element/*"
             ]
         }
     },

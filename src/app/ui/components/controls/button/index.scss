@@ -1,0 +1,144 @@
+m-button {
+    --p: #{$md};
+    --size: 3rem;
+    --f-size: #{$f-sm};
+    background-color: var(--bg-theme);
+    color: var(--f-theme);
+    min-width: var(--size);
+    min-height: var(--size);
+    font-size: var(--f-size);
+    position: relative;
+    contain: style;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 var(--p);
+    text-transform: uppercase;
+    white-space: nowrap;
+    -webkit-appearance: none;
+    letter-spacing: 1.25px;
+    line-height: 1.15;
+    border-radius: $xs;
+    border: 0;
+    background-origin: border-box;
+    font-weight: 500;
+    transition: box-shadow ease-out .15s;
+    will-change: box-shadow;
+
+    &.raised:not([loading=true]):not([disabled]) {
+        box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, .12);
+    }
+
+    // css hack to fix some bug
+    // &:after {
+    //     content: '';
+    //     min-height: inherit;
+    //     font-size: 0;
+    // }
+
+    &::-moz-focus-inner {
+        border-style: none;
+        padding: 0;
+    }
+
+    &.xs {
+        --p: .8rem;
+        --size: 2rem;
+        --f-size: .8125rem;
+    }
+
+    &.sm {
+        --p: 1.1rem;
+        --size: 2.5rem;
+        --f-size: .9125rem;
+    }
+
+    &.lg {
+        --p: 1.4rem;
+        --size: 3.5rem;
+        --f-size: 1.125rem;
+    }
+
+    &.round,
+    &.square {
+        padding: 0;
+        width: var(--size);
+        height: var(--size);
+    }
+
+    &.square {
+        border-radius: 0;
+    }
+
+    m-load {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+    }
+
+    @media (any-hover: hover) {
+        &:hover:not([loading=true]):not([disabled]) {
+            background-color: var(--bg-theme-hover, var(--themeFade));
+            box-shadow: inset 0 0 0 1px var(--b-theme-hover);
+
+            &.outlined {
+                border-color: var(--b-theme-hover, var(--b-theme));
+            }
+        }
+    }
+
+    &.outlined {
+        --bg-theme: transparent;
+    }
+
+    &[disabled] {
+        color: var(--f-fadest) !important;
+        background-color: var(--disabled) !important;
+        border-color: transparent !important;
+        box-shadow: none !important;
+    }
+
+    &[loading=true] {
+        cursor: progress !important;
+        color: transparent !important;
+        box-shadow: none !important;
+    }
+}
+
+[part="button-head"] {
+    margin-left: -.25rem;
+    margin-right: .5rem;
+
+    &.abs {
+        left: 0;
+        margin-left: calc(var(--p) - .3rem);
+    }
+}
+
+[part="button-body"] {
+    flex: 1 1 auto;
+}
+
+[part="button-foot"] {
+    margin-right: -.25rem;
+    margin-left: .5rem;
+
+    &.abs {
+        right: 0;
+        margin-right: calc(var(--p) - .3rem);
+    }
+}
+
+.close-button {
+    --bg-theme: var(--b-fade);
+    --bg-theme-hover: var(--f-fadest);
+    --b-theme-hover: transparent;
+    color: var(--theme);
+
+    m-icon {
+        stroke-width: 4px;
+    }
+}

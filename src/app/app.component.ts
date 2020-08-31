@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { uiRoutes } from './ui/ui-routing.module';
 import { domRoutes } from './dom/dom-routing.module';
 import { AppService } from './app.service';
+import { elementRoutes } from './element/element-routing.module';
 
 @Component({
     selector: 'app-root',
@@ -16,7 +17,8 @@ export class AppComponent implements OnInit {
     ) {
         this.routes.push(
             ...this.resolvePaths(['ui'], uiRoutes),
-            ...this.resolvePaths(['dom'], domRoutes)
+            ...this.resolvePaths(['dom'], domRoutes),
+            ...this.resolvePaths(['element'], elementRoutes)
         );
     }
     ngOnInit(): void { }

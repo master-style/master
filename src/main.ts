@@ -5,6 +5,8 @@ import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
 import './app/dom';
+import './app/element';
+import './app/ui';
 
 if (environment.production) {
   enableProdMode();
