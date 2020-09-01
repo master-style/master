@@ -11,8 +11,8 @@ export class MasterButton extends HTMLElement {
     );
 
     // attribute
-    @Attr({ shadow: true }) disabled = true;
-    @Attr() loading = true;
+    @Attr({ toggle: true, shadow: true }) disabled = false;
+    @Attr({ toggle: true }) loading = true;
 
     constructor() {
         super();
@@ -20,9 +20,13 @@ export class MasterButton extends HTMLElement {
             .appendChild(this.shadow);
     }
 
-    // protected static disabled(element, value, oldValue) {
-    //     console.log(value, oldValue);
-    // }
+    protected static disabled(element, value, oldValue) {
+        // console.log(value, oldValue);
+    }
+
+    protected static loading(element, value, oldValue) {
+        // console.log(value, oldValue);
+    }
 
     // attributeChangedCallback(name, oldValue, newValue) {
     //     console.log(name, oldValue, newValue);

@@ -1,6 +1,8 @@
 interface AttrOption {
-    name?: string;
+    key?: string;
     observe?: boolean;
     reflect?: boolean;
     shadow?: boolean;
+    toggle?: boolean;
+    propKey?: string;
 }

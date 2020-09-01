@@ -1,25 +1,37 @@
+import kebabToCamelCase from '@utils/kebab-to-camel-case';
+
 export * from './attr';
 
 export function Element(tag: string) {
     return function (constructor: any) {
         const prototype = constructor.prototype;
+        const attrOptions = constructor.attrOptions;
         prototype.connectedCallback = function () {
-            const propOptions = constructor.propOptions;
-            if (propOptions) {
+            if (attrOptions) {
                 // tslint:disable-next-line: forin
-                for (const eachPropKey in propOptions) {
-                    const eachOption = propOptions[eachPropKey];
-                    const _eachPropKey = '_' + eachPropKey;
+                for (const eachAttrKey in attrOptions) {
+                    const eachAttrOption = attrOptions[eachAttrKey];
+                    const _eachPropKey = '_' + eachAttrOption.propKey;
                     const value = this[_eachPropKey];
-                    if (eachOption.reflect) {
-                        this.attr(eachPropKey, value);
-                        if (eachOption.shadow) this.shadow.attr(eachPropKey, value);
+                    if (eachAttrOption.reflect) {
+                        eachAttrOption.toggle
+                            ? this.toggleAttribute(eachAttrKey, !!value)
+                            : this.setAttribute(eachAttrKey, value);
+                        if (eachAttrOption.shadow) {
+                            eachAttrOption.toggle
+                                ? this.shadow.toggleAttribute(eachAttrKey, !!value)
+                                : this.shadow.setAttribute(eachAttrKey, value);
+                        }
                     }
                 }
             }
             const onConnected = prototype.onConnected;
             if (onConnected) onConnected.call(this);
-        }
+        };
+        prototype.attributeChangedCallback = function (attrKey, oldValue, value) {
+            console.log(attrKey, oldValue, value);
+            console.log(attrOptions[attrKey]);
+        };
         window.customElements.define(tag, constructor);
     };
 }

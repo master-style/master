@@ -3,13 +3,15 @@ import camelToKebabCase from '@utils/camel-to-kebab-case';
 const DEFAULT_ATTR_OPTION = {
     reflect: true,
     observe: true,
-    shadow: false
+    shadow: false,
+    toggle: false
 };
 
 export function Attr(option?: AttrOption) {
-    option = Object.assign(DEFAULT_ATTR_OPTION, option);
+    option = {...DEFAULT_ATTR_OPTION, ...option};
     return (target: any, propKey: string): any => {
-        const attrKey = option.name || camelToKebabCase(propKey);
+        option.propKey = propKey;
+        const attrKey = option.key = camelToKebabCase(propKey);
         const _propKey = '_' + propKey;
         const constructor = target.constructor;
         if (option.observe) {
@@ -18,10 +20,10 @@ export function Attr(option?: AttrOption) {
             }
             constructor.observedAttributes.push(attrKey);
         }
-        if (!constructor.propOptions) {
-            constructor.propOptions = {};
+        if (!constructor.attrOptions) {
+            constructor.attrOptions = {};
         }
-        constructor.propOptions[propKey] = option;
+        constructor.attrOptions[attrKey] = option;
         return {
             get() {
                 return this[_propKey];
@@ -33,8 +35,14 @@ export function Attr(option?: AttrOption) {
                 }
                 this[_propKey] = value;
                 if (option.reflect && this.isConnected) {
-                    this.attr(attrKey, value);
-                    if (option.shadow) this.shadow.attr(attrKey, value);
+                    option.toggle
+                        ? this.toggleAttribute(attrKey, !!value)
+                        : this.setAttribute(attrKey, value);
+                    if (option.shadow) {
+                        option.toggle
+                            ? this.shadow.toggleAttribute(attrKey, !!value)
+                            : this.shadow.setAttribute(attrKey, value);
+                    }
                 }
             },
             configurable: true,

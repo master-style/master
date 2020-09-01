@@ -43,12 +43,6 @@ button {
         border-color: transparent !important;
         box-shadow: none !important;
     }
-
-    &[loading] {
-        cursor: progress !important;
-        color: transparent !important;
-        box-shadow: none !important;
-    }
 }
 
 :host {
@@ -131,6 +125,12 @@ button {
             border-color: var(--b-theme-hover, var(--b-theme));
         }
     }
+}
+
+:host([loading]) button {
+    cursor: progress !important;
+    color: transparent !important;
+    box-shadow: none !important;
 }
 
 ::slotted([part="button-head"]) {
