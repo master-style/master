@@ -7,11 +7,12 @@ button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0 var(--p);
+    padding: 0 var(--px);
     -webkit-appearance: none;
     background-origin: border-box;
     transition: box-shadow ease-out .15s;
     will-change: box-shadow;
+    cursor: pointer;
     // inherit
     font: inherit;
     letter-spacing: inherit;
@@ -27,10 +28,31 @@ button {
     width: 100%;
     height: 100%;
     outline: none;
+
+    @media (any-hover: hover) {
+        &:hover:not([loading]):not([disabled]) {
+            background-color: var(--bg-theme-hover, var(--themeFade));
+            box-shadow: inset 0 0 0 1px var(--b-theme-hover);
+        }
+    }
+
+    &[disabled] {
+        cursor: no-drop;
+        color: var(--f-fadest) !important;
+        background-color: var(--bg-disabled) !important;
+        border-color: transparent !important;
+        box-shadow: none !important;
+    }
+
+    &[loading] {
+        cursor: progress !important;
+        color: transparent !important;
+        box-shadow: none !important;
+    }
 }
 
 :host {
-    --p: #{$md};
+    --px: #{$md};
     --size: 3rem;
     --f-size: #{$f-sm};
     min-width: var(--size);
@@ -61,26 +83,26 @@ button {
     }
 
     &.xs {
-        --p: .8rem;
+        --px: .8rem;
         --size: 2rem;
         --f-size: .8125rem;
     }
 
     &.sm {
-        --p: 1.1rem;
+        --px: 1.1rem;
         --size: 2.5rem;
         --f-size: .9125rem;
     }
 
     &.lg {
-        --p: 1.4rem;
+        --px: 1.4rem;
         --size: 3.5rem;
         --f-size: 1.125rem;
     }
 
     &.round,
     &.square {
-        padding: 0;
+        --px: 0;
         width: var(--size);
         height: var(--size);
     }
@@ -98,32 +120,16 @@ button {
         margin: auto;
     }
 
-    @media (any-hover: hover) {
-        &:hover:not([loading=true]):not([disabled]) {
-            background-color: var(--bg-theme-hover, var(--themeFade));
-            box-shadow: inset 0 0 0 1px var(--b-theme-hover);
-
-            &.outlined {
-                border-color: var(--b-theme-hover, var(--b-theme));
-            }
-        }
-    }
-
     &.outlined {
         --bg-theme: transparent;
     }
+}
 
-    &[disabled] {
-        color: var(--f-fadest) !important;
-        background-color: var(--disabled) !important;
-        border-color: transparent !important;
-        box-shadow: none !important;
-    }
-
-    &[loading=true] {
-        cursor: progress !important;
-        color: transparent !important;
-        box-shadow: none !important;
+:host(.outlined) {
+    @media (any-hover: hover) {
+        button:hover:not([loading]):not([disabled]).outlined {
+            border-color: var(--b-theme-hover, var(--b-theme));
+        }
     }
 }
 
@@ -133,21 +139,21 @@ button {
 
     &.abs {
         left: 0;
-        margin-left: calc(var(--p) - .3rem);
+        margin-left: calc(var(--px) - .3rem);
     }
 }
 
-[part="button-body"] {
+::slotted([part="button-body"]) {
     flex: 1 1 auto;
 }
 
-[part="button-foot"] {
+::slotted([part="button-foot"]) {
     margin-right: -.25rem;
     margin-left: .5rem;
 
     &.abs {
         right: 0;
-        margin-right: calc(var(--p) - .3rem);
+        margin-right: calc(var(--px) - .3rem);
     }
 }
 

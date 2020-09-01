@@ -1,31 +1,39 @@
 export * from './attr';
 
-const isSupportAdoptedStyle = !!document['adoptedStyleSheets'];
+import kebabToCamelCase from '@utils/kebab-to-camel-case';
 
-export function Element(option: ElementOption) {
+export function Element(tag: string) {
     return function (constructor: any) {
-        window.customElements.define(option.tag, constructor);
-    };
-}
-
-export function Render() {
-    return function (target, propertyKey: string, descriptor: PropertyDescriptor) {
-        return {
-            value() {
-                return (this.shadowRoot || this).innerHTML =
-                    (isSupportAdoptedStyle ? '' : `<style>${target.constructor.css}</style>`) +
-                    descriptor.value();
+        const prototype = constructor.prototype;
+        const connectedCallback = prototype.connectedCallback;
+        prototype.connectedCallback = function () {
+            const reflectedAttributes = constructor.reflectedAttributes;
+            if (reflectedAttributes) {
+                reflectedAttributes.forEach((eachAttrKey: string) => {
+                    const _eachPropKey = '_' + kebabToCamelCase(eachAttrKey);
+                    const value = this[_eachPropKey];
+                    console.log(eachAttrKey, value);
+                    typeof value === 'boolean'
+                        ? this.toggleAttribute(eachAttrKey, value)
+                        : this.setAttribute(eachAttrKey, value);
+                });
             }
-        };
+            if (connectedCallback) connectedCallback();
+        }
+        window.customElements.define(tag, constructor);
     };
 }
 
-export function attachShadow() {
-    const shadowRoot = this.attachShadow({ mode: 'open' });
-    const css = this.constructor.css;
-    if (css && isSupportAdoptedStyle) {
+export function attachShadow(element, css) {
+    const shadowRoot = element.attachShadow({ mode: 'open' });
+    if (css && shadowRoot['adoptedStyleSheets']) {
         const styleSheet = new CSSStyleSheet();
         styleSheet['replaceSync'](css);
         shadowRoot.adoptedStyleSheets = [styleSheet];
+    } else if (css) {
+        const styleElement = document.createElement('style');
+        styleElement.innerHTML = css;
+        shadowRoot.appendChild(styleElement);
     }
+    return shadowRoot;
 }

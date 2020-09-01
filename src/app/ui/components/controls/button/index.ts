@@ -1,34 +1,23 @@
-import { Element, Attr, Render, attachShadow } from '@element';
+import { Element, Attr, attachShadow } from '@element';
 
-import buttonCss from './index.scss';
+import css from './index.scss';
 
-@Element({
-    tag: 'm-button'
-})
-export class MasterButtonElement extends HTMLElement {
+@Element('m-button')
+export class MasterButton extends HTMLElement {
 
-    static css = buttonCss;
-
-    @Attr() fuck = false;
-    ready = false;
+    @Attr() disabled = false;
+    @Attr() loading = false;
 
     constructor() {
         super();
-        this.ready = true;
-        attachShadow.call(this);
-        this.render();
+        attachShadow(this, css)
+            .appendChild(
+                $('button', {},
+                    $('slot', {})
+                )
+            );
     }
 
-    @Render()
-    render() {
-        return `
-            <button>
-                <slot></slot>
-            </button>
-        `;
-    }
+    connectedCallback() {}
 
-    connectedCallback() {
-        console.log('connected');
-    }
 }
