@@ -1,31 +1,49 @@
+@import '../../../variables';
 
-
-m-button {
-    --p: #{$md};
-    --size: 3rem;
-    --f-size: #{$f-sm};
+button {
     background-color: var(--bg-theme);
-    color: var(--f-theme);
-    min-width: var(--size);
-    min-height: var(--size);
-    font-size: var(--f-size);
     position: relative;
     contain: style;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 0 var(--p);
-    text-transform: uppercase;
-    white-space: nowrap;
     -webkit-appearance: none;
-    letter-spacing: 1.25px;
-    line-height: 1.15;
-    border-radius: $xs;
-    border: 0;
     background-origin: border-box;
-    font-weight: 500;
     transition: box-shadow ease-out .15s;
     will-change: box-shadow;
+    // inherit
+    font: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+    text-transform: inherit;
+    text-overflow: inherit;
+    text-align: inherit;
+    white-space: inherit;
+    text-decoration: inherit;
+    color: inherit;
+    border-radius: inherit;
+    border: inherit;
+    width: 100%;
+    height: 100%;
+    outline: none;
+}
+
+:host {
+    --p: #{$md};
+    --size: 3rem;
+    --f-size: #{$f-sm};
+    min-width: var(--size);
+    min-height: var(--size);
+    color: var(--f-theme);
+    font-size: var(--f-size);
+    font-weight: 500;
+    letter-spacing: 1.25px;
+    line-height: 1.15;
+    text-transform: uppercase;
+    white-space: nowrap;
+    border-radius: $xs;
+
     &.raised:not([loading=true]):not([disabled]) {
         box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, .12);
     }
@@ -109,7 +127,7 @@ m-button {
     }
 }
 
-[part="button-head"] {
+::slotted([part="button-head"]) {
     margin-left: -.25rem;
     margin-right: .5rem;
 
