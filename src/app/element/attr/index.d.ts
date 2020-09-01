@@ -1,7 +1,7 @@
 interface AttrOption {
     key?: string;
-    observe?: boolean;
-    reflect?: boolean;
+    get?: boolean;
+    set?: boolean;
     shadow?: boolean;
     toggle?: boolean;
     propKey?: string;

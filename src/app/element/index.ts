@@ -13,7 +13,7 @@ export function Element(tag: string) {
                     const eachAttrOption = attrOptions[eachAttrKey];
                     const _eachPropKey = '_' + eachAttrOption.propKey;
                     const value = this[_eachPropKey];
-                    if (eachAttrOption.reflect) {
+                    if (eachAttrOption.set) {
                         eachAttrOption.toggle
                             ? this.toggleAttribute(eachAttrKey, !!value)
                             : this.setAttribute(eachAttrKey, value);
