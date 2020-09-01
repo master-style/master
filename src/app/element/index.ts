@@ -1,20 +1,21 @@
 export * from './attr';
 
-import kebabToCamelCase from '@utils/kebab-to-camel-case';
-
 export function Element(tag: string) {
     return function (constructor: any) {
         const prototype = constructor.prototype;
         prototype.connectedCallback = function () {
-            const reflectedAttributes = constructor.reflectedAttributes;
-            if (reflectedAttributes) {
-                reflectedAttributes.forEach((eachAttrKey: string) => {
-                    const _eachPropKey = '_' + kebabToCamelCase(eachAttrKey);
+            const propOptions = constructor.propOptions;
+            if (propOptions) {
+                // tslint:disable-next-line: forin
+                for (const eachPropKey in propOptions) {
+                    const eachOption = propOptions[eachPropKey];
+                    const _eachPropKey = '_' + eachPropKey;
                     const value = this[_eachPropKey];
-                    typeof value === 'boolean'
-                        ? this.toggleAttribute(eachAttrKey, value)
-                        : this.setAttribute(eachAttrKey, value);
-                });
+                    if (eachOption.reflect) {
+                        this.attr(eachPropKey, value);
+                        if (eachOption.shadow) this.shadow.attr(eachPropKey, value);
+                    }
+                }
             }
             const onConnected = prototype.onConnected;
             if (onConnected) onConnected.call(this);
@@ -36,3 +37,4 @@ export function attachShadow(element, css) {
     }
     return shadowRoot;
 }
+

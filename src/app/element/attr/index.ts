@@ -2,7 +2,8 @@ import camelToKebabCase from '@utils/camel-to-kebab-case';
 
 const DEFAULT_ATTR_OPTION = {
     reflect: true,
-    observe: true
+    observe: true,
+    shadow: false
 };
 
 export function Attr(option?: AttrOption) {
@@ -17,12 +18,10 @@ export function Attr(option?: AttrOption) {
             }
             constructor.observedAttributes.push(attrKey);
         }
-        if (option.reflect) {
-            if (!constructor.reflectedAttributes) {
-                constructor.reflectedAttributes = [];
-            }
-            constructor.reflectedAttributes.push(attrKey);
+        if (!constructor.propOptions) {
+            constructor.propOptions = {};
         }
+        constructor.propOptions[propKey] = option;
         return {
             get() {
                 return this[_propKey];
@@ -33,10 +32,9 @@ export function Attr(option?: AttrOption) {
                     constructor[propKey](this, value, this[_propKey]);
                 }
                 this[_propKey] = value;
-                if (option.reflect && this.connected) {
-                    typeof value === 'boolean'
-                        ? this.toggleAttribute(attrKey, value)
-                        : this.setAttribute(attrKey, value);
+                if (option.reflect && this.isConnected) {
+                    this.attr(attrKey, value);
+                    if (option.shadow) this.shadow.attr(attrKey, value);
                 }
             },
             configurable: true,

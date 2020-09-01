@@ -2,53 +2,60 @@
 import camelToKebabCase from '@utils/camel-to-kebab-case';
 import kebabToCamelCase from '@utils/kebab-to-camel-case';
 import isObjLike from '@utils/is-obj-like';
-import parseStr from '@utils/parse-str';
 
 const ElementPrototype = Element.prototype;
 
-ElementPrototype.attr = function (param?: any, value?: any, prefix?: string): any {
+ElementPrototype.attr = function (param?: any, value?: any): any {
     const element = this;
-    prefix = arguments.length === 3 ? arguments[2] + '-' : '';
     if (value !== undefined) {
-        const kebabCaseKey = camelToKebabCase(prefix + param);
-        value === null ?
-            element.removeAttribute(kebabCaseKey) :
-            element.setAttribute(kebabCaseKey, value);
+        const attrKey = camelToKebabCase(param);
+        if (value === null) {
+            element.removeAttribute(attrKey);
+        }
+        if (typeof value === 'boolean') {
+            element.toggleAttribute(attrKey, value);
+        } else {
+            element.setAttribute(attrKey, value);
+        }
         return element;
     } else if (isObjLike(param)) {
         // tslint:disable-next-line: forin
         for (const key in param) {
-            element.setAttribute(camelToKebabCase(prefix + key), param[key]);
+            const attrKey = camelToKebabCase(key);
+            const attrValue = param[key];
+            if (typeof value === 'boolean') {
+                element.toggleAttribute(attrKey, attrValue);
+            } else {
+                element.setAttribute(attrKey, attrValue);
+            }
         }
         return element;
     } else if (typeof param === 'string') {
-        return parseStr(
-            element.getAttribute(camelToKebabCase(prefix + param))
-        );
+        element.getAttribute(camelToKebabCase(param))
     } else {
         const attrs = element.attributes;
         const attr = {};
         for (const eachAttr of attrs) {
-            attr[kebabToCamelCase(prefix + eachAttr.name)] = eachAttr.value;
+            attr[kebabToCamelCase(eachAttr.name)] = eachAttr.value;
         }
         return attr;
     }
 };
 
-ElementPrototype.toggleAttr = function (param: any, state?: boolean): Element {
-    const element = this;
-    if (isObjLike(param)) {
-        // tslint:disable-next-line: forin
-        for (const key in param) {
-            element.toggleAttribute(camelToKebabCase(key), param[key]);
-        }
-    } else {
-        const kebabCaseKey = camelToKebabCase(param);
-        element.toggleAttribute(kebabCaseKey,
-            state !== undefined ?
-                state :
-                !(element.getAttribute(kebabCaseKey) === '')
-        );
-    }
-    return element;
-};
+// ElementPrototype.toggleAttr = function (param: any, state?: boolean): Element {
+//     const element = this;
+//     if (isObjLike(param)) {
+//         // tslint:disable-next-line: forin
+//         for (const key in param) {
+//             element.toggleAttribute(camelToKebabCase(key), param[key]);
+//         }
+//     } else {
+//         const kebabCaseKey = camelToKebabCase(param);
+//         element.toggleAttribute(kebabCaseKey,
+//             state !== undefined ?
+//                 state :
+//                 !(element.getAttribute(kebabCaseKey) === '')
+//         );
+//     }
+//     return element;
+// };
