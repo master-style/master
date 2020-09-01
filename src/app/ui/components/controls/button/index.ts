@@ -20,4 +20,8 @@ export class MasterButton extends HTMLElement {
 
     connectedCallback() {}
 
+    attributeChangedCallback() {
+        console.log('fuck');
+    }
+
 }
