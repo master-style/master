@@ -8,6 +8,7 @@ export class MasterButton extends HTMLElement {
     @Attr() disabled = false;
     @Attr() loading = false;
 
+
     constructor() {
         super();
         attachShadow(this, css)
@@ -18,10 +19,9 @@ export class MasterButton extends HTMLElement {
             );
     }
 
-    connectedCallback() {}
-
-    attributeChangedCallback() {
-        console.log('fuck');
+    protected static disabled(element, value, oldValue) {
+        console.log(value, oldValue);
+        console.log(element);
     }
 
 }

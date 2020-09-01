@@ -5,20 +5,19 @@ import kebabToCamelCase from '@utils/kebab-to-camel-case';
 export function Element(tag: string) {
     return function (constructor: any) {
         const prototype = constructor.prototype;
-        const connectedCallback = prototype.connectedCallback;
         prototype.connectedCallback = function () {
             const reflectedAttributes = constructor.reflectedAttributes;
             if (reflectedAttributes) {
                 reflectedAttributes.forEach((eachAttrKey: string) => {
                     const _eachPropKey = '_' + kebabToCamelCase(eachAttrKey);
                     const value = this[_eachPropKey];
-                    console.log(eachAttrKey, value);
                     typeof value === 'boolean'
                         ? this.toggleAttribute(eachAttrKey, value)
                         : this.setAttribute(eachAttrKey, value);
                 });
             }
-            if (connectedCallback) connectedCallback();
+            const onConnected = prototype.onConnected;
+            if (onConnected) onConnected.call(this);
         }
         window.customElements.define(tag, constructor);
     };

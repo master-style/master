@@ -2,8 +2,7 @@ import camelToKebabCase from '@utils/camel-to-kebab-case';
 
 const DEFAULT_ATTR_OPTION = {
     reflect: true,
-    observe: true,
-    mutable: true
+    observe: true
 };
 
 export function Attr(option?: AttrOption) {
@@ -30,6 +29,9 @@ export function Attr(option?: AttrOption) {
             },
             set(value) {
                 if (this[_propKey] === value) return;
+                if (propKey in constructor) {
+                    constructor[propKey](this, value, this[_propKey]);
+                }
                 this[_propKey] = value;
                 if (option.reflect && this.connected) {
                     typeof value === 'boolean'
@@ -39,6 +41,6 @@ export function Attr(option?: AttrOption) {
             },
             configurable: true,
             enumerable: true
-        }
+        };
     };
 }
