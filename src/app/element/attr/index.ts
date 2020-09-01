@@ -20,7 +20,7 @@ export function Attr(option?: AttrOption) {
         }
         return {
             get() {
-                return this[_propKey]
+                return this[_propKey];
             },
             set(value) {
                 if (this[_propKey] === value) return;
