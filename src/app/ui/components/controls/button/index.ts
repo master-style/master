@@ -8,9 +8,7 @@ const SLOT = 'slot';
 export class MasterButtonElement extends HTMLElement {
 
     shadow = $(NAME, {},
-        $(SLOT, { name: NAME + '-head' }),
-        $(SLOT, { part: NAME + '-body' }),
-        $(SLOT, { name: NAME + '-foot' })
+        $(SLOT, {}),
     );
 
     @Attr({ toggle: true, shadow: true })
@@ -25,6 +23,6 @@ export class MasterButtonElement extends HTMLElement {
             .appendChild(this.shadow);
     }
 
-    protected static loading = function (value: boolean, oldValue: boolean) {};
+    protected static loading = function (value: boolean, oldValue: boolean) { };
 
 }

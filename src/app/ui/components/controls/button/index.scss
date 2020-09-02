@@ -8,6 +8,8 @@ button {
     align-items: center;
     justify-content: center;
     padding: 0 var(--px);
+    min-width: var(--size);
+    min-height: var(--size);
     -webkit-appearance: none;
     background-origin: border-box;
     transition: box-shadow ease-out .15s;
@@ -49,8 +51,6 @@ button {
     --px: #{$md};
     --size: 3rem;
     --f-size: #{$f-sm};
-    min-width: var(--size);
-    min-height: var(--size);
     font-size: var(--f-size);
     color: var(--f-theme);
     font-weight: 500;
@@ -140,26 +140,26 @@ button {
     }
 }
 
-slot[name="button-head"] {
+::slotted([part=button-head]) {
     display: flex;
     margin-left: -.25rem;
     margin-right: .5rem;
-
-    &.abs {
-        left: 0;
-        margin-left: calc(var(--px) - .3rem);
-    }
 }
 
-slot[name="button-foot"] {
+::slotted([part=button-head].abs) {
+    left: 0;
+    margin-left: calc(var(--px) - .3rem);
+}
+
+::slotted([part=button-foot]) {
     display: flex;
     margin-right: -.25rem;
     margin-left: .5rem;
+}
 
-    &.abs {
-        right: 0;
-        margin-right: calc(var(--px) - .3rem);
-    }
+::slotted([part=button-foot].abs) {
+    right: 0;
+    margin-right: calc(var(--px) - .3rem);
 }
 
 .close-button {

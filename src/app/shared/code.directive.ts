@@ -16,6 +16,7 @@ const prettierParser = {
 
 const prettierOpiton = {
     tabWidth: 4,
+    printWidth: 144,
     htmlWhitespaceSensitivity: 'ignore'
 };
 

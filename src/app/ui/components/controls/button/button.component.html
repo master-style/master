@@ -3,10 +3,10 @@
         <div class="y:sm c:center">
             <m-button class="x blue raised">
                 submit
-                <ion-icon slot="button-foot" name="chevron-forward"></ion-icon>
+                <ion-icon part="button-foot" name="chevron-forward"></ion-icon>
             </m-button>
             <m-button class="x red raised">
-                <ion-icon slot="button-head" name="trash-outline"></ion-icon>
+                <ion-icon part="button-head" name="trash-outline"></ion-icon>
                 delete
             </m-button>
             <m-button class="x">default</m-button>
@@ -23,8 +23,51 @@
 <h2 id="structure">{{ 'structure' | translate }}</h2>
 <template [codeLang]="'html'">
     <m-button>
-        <div slot="button-head"></div>
-        body text
-        <div slot="button-foot"></div>
+        <div part="button-head"></div>
+        text...
+        <div part="button-foot"></div>
     </m-button>
 </template>
+
+<h2 id="assembling">{{ 'assembling' | translate }}</h2>
+<div class="y">
+    <div class="x:6@sm c:row">
+        <template [codeLang]="'html'" [codeDemo]=true [codeCollapsed]=false>
+            <m-button class="outlined">
+                default
+            </m-button>
+        </template>
+    </div>
+    <div class="x:6@sm c:row">
+        <template [codeLang]="'html'" [codeDemo]=true [codeCollapsed]=false>
+            <m-button class="outlined">
+                <ion-icon part="button-head" name="trash-outline"></ion-icon>
+                DELETE
+            </m-button>
+        </template>
+    </div>
+    <div class="x:6@sm c:row">
+        <template [codeLang]="'html'" [codeDemo]=true [codeCollapsed]=false>
+            <m-button class="outlined">
+                MORE
+                <ion-icon part="button-foot" name="chevron-forward"></ion-icon>
+            </m-button>
+        </template>
+    </div>
+    <div class="x:6@sm c:row">
+        <template [codeLang]="'html'" [codeDemo]=true [codeCollapsed]=false>
+            <m-button class="round outlined">
+                <ion-icon name="bookmark-outline"></ion-icon>
+            </m-button>
+        </template>
+    </div>
+    <div class="x:12 c:row">
+        <template [codeLang]="'html'" [codeDemo]=true [codeCollapsed]=false>
+            <m-button class="outlined w:full" style="max-width: 250px">
+                <ion-icon class="abs" part="button-head" name="lock-closed-outline"></ion-icon>
+                PAY
+                <ion-icon class="abs f:fade" part="button-foot" name="chevron-forward"></ion-icon>
+            </m-button>
+        </template>
+    </div>
+</div>
