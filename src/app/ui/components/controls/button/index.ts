@@ -13,8 +13,11 @@ export class MasterButtonElement extends HTMLElement {
         $(SLOT, { name: NAME + '-foot' })
     );
 
-    @Attr({ toggle: true, shadow: true }) disabled: boolean;
-    @Attr({ toggle: true }) loading: boolean;
+    @Attr({ toggle: true, shadow: true })
+    disabled: boolean;
+
+    @Attr({ toggle: true })
+    loading: boolean;
 
     constructor() {
         super();
@@ -22,8 +25,6 @@ export class MasterButtonElement extends HTMLElement {
             .appendChild(this.shadow);
     }
 
-    protected static loading = function (value: boolean, oldValue: boolean) {
-
-    };
+    protected static loading = function (value: boolean, oldValue: boolean) {};
 
 }
