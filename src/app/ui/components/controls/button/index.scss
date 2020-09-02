@@ -51,8 +51,8 @@ button {
     --f-size: #{$f-sm};
     min-width: var(--size);
     min-height: var(--size);
-    color: var(--f-theme);
     font-size: var(--f-size);
+    color: var(--f-theme);
     font-weight: 500;
     letter-spacing: 1.25px;
     line-height: 1.15;
@@ -60,7 +60,7 @@ button {
     white-space: nowrap;
     border-radius: $xs;
 
-    &.raised:not([loading=true]):not([disabled]) {
+    &.raised:not([loading]):not([disabled]) {
         box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, .12);
     }
 
@@ -76,35 +76,6 @@ button {
         padding: 0;
     }
 
-    &.xs {
-        --px: .8rem;
-        --size: 2rem;
-        --f-size: .8125rem;
-    }
-
-    &.sm {
-        --px: 1.1rem;
-        --size: 2.5rem;
-        --f-size: .9125rem;
-    }
-
-    &.lg {
-        --px: 1.4rem;
-        --size: 3.5rem;
-        --f-size: 1.125rem;
-    }
-
-    &.round,
-    &.square {
-        --px: 0;
-        width: var(--size);
-        height: var(--size);
-    }
-
-    &.square {
-        border-radius: 0;
-    }
-
     m-load {
         position: absolute;
         left: 0;
@@ -117,6 +88,37 @@ button {
     &.outlined {
         --bg-theme: transparent;
     }
+
+}
+
+:host(.sm) {
+    --px: 1.1rem;
+    --size: 2.5rem;
+    --f-size: .9125rem;
+}
+
+:host(.xs) {
+    --px: .8rem;
+    --size: 2rem;
+    --f-size: .8125rem;
+}
+
+:host(.lg) {
+    --px: 1.4rem;
+    --size: 3.5rem;
+    --f-size: 1.125rem;
+}
+
+
+:host(.round),
+:host(.square) {
+    --px: 0;
+    width: var(--size);
+    height: var(--size);
+}
+
+:host(.square) {
+    border-radius: 0;
 }
 
 :host(.outlined) {
@@ -127,10 +129,14 @@ button {
     }
 }
 
-:host([loading]) button {
+:host([loading]) {
     cursor: progress !important;
-    color: transparent !important;
-    box-shadow: none !important;
+
+    button {
+        pointer-events: none !important;
+        color: transparent !important;
+        box-shadow: none !important;
+    }
 }
 
 ::slotted([part="button-head"]) {

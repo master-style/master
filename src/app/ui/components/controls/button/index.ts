@@ -20,16 +20,8 @@ export class MasterButtonElement extends HTMLElement {
             .appendChild(this.shadow);
     }
 
-    protected static disabled(element, value, oldValue) {
-        // console.log(value, oldValue);
-    }
+    protected static loading = function (value: boolean, oldValue: boolean) {
 
-    protected static loading(element, value, oldValue) {
-        // console.log(value, oldValue);
-    }
-
-    onAttrChanged() {
-
-    }
+    };
 
 }

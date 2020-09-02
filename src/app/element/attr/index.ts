@@ -39,7 +39,7 @@ export function Attr(option?: AttrOption) {
             set(value, fromAttr?: boolean) {
                 if (option.propValue === value) return;
                 if (propKey in constructor) {
-                    constructor[propKey](this, value, option.propValue);
+                    constructor[propKey].call(this, value, option.propValue);
                 }
                 option.propValue = value;
                 if (option.reflect && !fromAttr && this.isConnected) {
