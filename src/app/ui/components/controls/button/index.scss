@@ -140,7 +140,8 @@ button {
     }
 }
 
-::slotted([part="button-head"]) {
+slot[name="button-head"] {
+    display: flex;
     margin-left: -.25rem;
     margin-right: .5rem;
 
@@ -150,11 +151,8 @@ button {
     }
 }
 
-::slotted([part="button-body"]) {
-    flex: 1 1 auto;
-}
-
-::slotted([part="button-foot"]) {
+slot[name="button-foot"] {
+    display: flex;
     margin-right: -.25rem;
     margin-left: .5rem;
 

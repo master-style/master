@@ -5,7 +5,9 @@ import css from './index.scss';
 export class MasterButtonElement extends HTMLElement {
 
     shadow = $('button', {},
-        $('slot', {})
+        $('slot', { name: 'button-head' }),
+        $('slot', { part: 'button-body' }),
+        $('slot', { name: 'button-foot' })
     );
 
     @Attr({ toggle: true, shadow: true }) disabled: boolean;
