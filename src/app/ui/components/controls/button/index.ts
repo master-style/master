@@ -11,9 +11,8 @@ export class MasterButtonElement extends HTMLElement {
     );
 
     // attribute
-    @Attr({ toggle: true, shadow: true }) disabled = false;
-    @Attr({ toggle: true }) loading = true;
-    @Attr() duration = 50;
+    @Attr({ toggle: true, shadow: true }) disabled = true;
+    @Attr({ toggle: true }) loading = false;
 
     constructor() {
         super();
