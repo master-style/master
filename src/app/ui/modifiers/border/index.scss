@@ -89,3 +89,7 @@
 .b\:fade\+\+ {
     border-color: var(--b-fadest) !important;
 }
+
+.outlined {
+    --b-theme-hover: var(--b-theme, var(--b-fadest));
+}

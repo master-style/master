@@ -125,7 +125,7 @@ button {
 
     @media (any-hover: hover) {
         button:hover:not([loading]):not([disabled]) {
-            border-color: var(--b-theme-hover, var(--b-theme));
+            border-color: var(--b-theme-hover);
         }
     }
 }
