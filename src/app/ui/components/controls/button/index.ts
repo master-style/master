@@ -1,13 +1,16 @@
 import { Element, Attr, attachShadow } from '@element';
 import css from './index.scss';
 
-@Element('m-button')
+const NAME = 'button';
+const SLOT = 'slot';
+
+@Element('m-' + NAME)
 export class MasterButtonElement extends HTMLElement {
 
-    shadow = $('button', {},
-        $('slot', { name: 'button-head' }),
-        $('slot', { part: 'button-body' }),
-        $('slot', { name: 'button-foot' })
+    shadow = $(NAME, {},
+        $(SLOT, { name: NAME + '-head' }),
+        $(SLOT, { part: NAME + '-body' }),
+        $(SLOT, { name: NAME + '-foot' })
     );
 
     @Attr({ toggle: true, shadow: true }) disabled: boolean;
