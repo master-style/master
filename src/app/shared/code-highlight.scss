@@ -1,6 +1,7 @@
 pre {
+    position: relative;
     display: flex;
-    overflow-x: auto;
+    flex-direction: column;
     background-color: var(--themeFade);
     border-radius: $xs;
     font-size: $f-xs;
@@ -16,7 +17,7 @@ pre {
 
     code[class*="language-"] {
         color: var(--f-themeFader);
-        padding: .875rem 1.3rem;
+        padding: .5rem 1.3rem .875rem 1.3rem;
         font-size: inherit;
         display: block;
         background-color: transparent;
@@ -49,6 +50,20 @@ pre {
     }
 }
 
+.code-wrap {
+    overflow-x: auto;
+}
+
+.code-language {
+    padding: .875rem 1.3rem 0 1.3rem;
+    line-height: 1;
+    font-size: 10px;
+    text-transform: uppercase;
+    color: var(--f-fadest);
+    letter-spacing: 1px;
+    font-family: 'Roboto', monospace;
+}
+
 code[class*="language"] {
     color: var(--f-themeFade);
 }
@@ -59,7 +74,7 @@ pre[class*="language-"].line-numbers {
     counter-reset: linenumber;
 }
 
-pre[class*="language-"].line-numbers>code {
+pre[class*="language-"].line-numbers code {
     position: relative;
     white-space: inherit;
 }
@@ -105,11 +120,11 @@ pre[class*="language-"].line-numbers>code {
 }
 
 /* Inline code */
-:not(pre)>code[class*="language-"] {
-    padding: .1em;
-    border-radius: .3em;
-    white-space: normal;
-}
+// :not(pre) code[class*="language-"] {
+//     padding: .1em;
+//     border-radius: .3em;
+//     white-space: normal;
+// }
 
 .token.comment,
 .token.prolog,

@@ -82,7 +82,10 @@ export class CodeDirective {
         } else {
             element.before(
                 $('pre', {},
-                    $('code', { class: 'language-' + this.codeLang }).html(code)
+                    $('div', { class: 'code-language' }, this.codeLang),
+                    $('div', { class: 'code-wrap' },
+                        $('code', { class: 'language-' + this.codeLang }).html(code)
+                    ),
                 )
             );
         }

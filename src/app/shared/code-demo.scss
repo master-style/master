@@ -188,7 +188,7 @@
     top: - $sm;
     margin: auto;
     transform: translate(0, -100%);
-    font-family: 'Fira Code', "PingFang TC", "Noto Sans TC", monospace;
+    font-family: 'Fira Code', -apple-system, 'Noto Sans TC', 'Microsoft JhengHei', monospace;
     font-size: $f-xxs;
     line-height: 20px;
     letter-spacing: 0px;
@@ -234,7 +234,7 @@
     justify-content: center;
     margin: auto;
     transform: translate(-100%, 0%);
-    font-family: 'Fira Code', "PingFang TC", "Noto Sans TC", monospace;
+    font-family: 'Fira Code', -apple-system, 'Noto Sans TC', 'Microsoft JhengHei', monospace;
     font-size: $f-xxs;
     line-height: 20px;
     letter-spacing: 0px;
