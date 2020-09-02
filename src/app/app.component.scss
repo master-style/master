@@ -24,6 +24,9 @@ code {
     line-height: 22px;
     display: inline-flex;
     border-radius: $xs;
+    &[part="chip-body"] {
+        background-color: transparent;
+    }
 }
 
 m-table h2,

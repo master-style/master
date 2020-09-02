@@ -159,13 +159,13 @@
         <thead>
             <tr>
                 <th class="fit t:left bg:theme sticky">class</th>
-                <th class="t:left bg:theme sticky">說明</th>
+                <th class="t:left bg:theme sticky">description</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>
-                    <code class="f:blue">raised</code>
+                    <code class="f:purple">raised</code>
                 </td>
                 <td><b>提高</b>，使其更突兀</td>
             </tr>
@@ -193,7 +193,7 @@
         <thead>
             <tr>
                 <th class="fit t:left bg:theme sticky">class</th>
-                <th class="t:left bg:theme sticky">說明</th>
+                <th class="t:left bg:theme sticky">description</th>
                 <th class="fit bg:theme sticky"></th>
             </tr>
         </thead>
@@ -207,7 +207,7 @@
             </tr>
             <tr>
                 <td>
-                    <code class="f:blue">round</code>
+                    <code class="f:purple">round</code>
                 </td>
                 <td><b>圓形</b>，取消內距</td>
                 <td class="t:right">
@@ -218,14 +218,14 @@
             </tr>
             <tr>
                 <td>
-                    <code class="f:blue">square</code>
+                    <code class="f:purple">square</code>
                 </td>
                 <td><b>方形</b>，取消內距及圓角</td>
                 <td class="t:right"></td>
             </tr>
             <tr>
                 <td>
-                    <code class="f:blue">rounded</code>
+                    <code class="f:purple">rounded</code>
                 </td>
                 <td><b>側圓角</b></td>
                 <td class="t:right">
@@ -237,3 +237,23 @@
         </tbody>
     </table>
 </m-table>
+
+<h2 id="property">{{ 'property' | translate }}</h2>
+<div class="y:sm c:middle">
+    <div class="x:fill">
+        <h3 id="property-disabled" class="my:no">
+            <code style="font-size: inherit; line-height: 1.8">.disabled</code>
+        </h3>
+        <div class="y:xs">
+            <m-chip class="x outlined theme+ sm">
+                <div part="chip-head">attr</div>
+                <code part="chip-body">disabled</code>
+            </m-chip>
+            <m-chip class="x outlined theme+ sm">
+                <i part="chip-head" class="i-check"></i>
+                <code part="chip-body">boolean</code>
+            </m-chip>
+        </div>
+    </div>
+</div>
+<hr class="mt">
