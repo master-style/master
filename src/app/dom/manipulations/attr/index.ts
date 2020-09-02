@@ -42,20 +42,16 @@ ElementPrototype.attr = function (param?: any, value?: any): any {
     }
 };
 
-// ElementPrototype.toggleAttr = function (param: any, state?: boolean): Element {
-//     const element = this;
-//     if (isObjLike(param)) {
-//         // tslint:disable-next-line: forin
-//         for (const key in param) {
-//             element.toggleAttribute(camelToKebabCase(key), param[key]);
-//         }
-//     } else {
-//         const kebabCaseKey = camelToKebabCase(param);
-//         element.toggleAttribute(kebabCaseKey,
-//             state !== undefined ?
-//                 state :
-//                 !(element.getAttribute(kebabCaseKey) === '')
-//         );
-//     }
-//     return element;
-// };
+ElementPrototype.toggleAttr = function (param: any, state?: boolean): Element {
+    const element = this;
+    if (isObjLike(param)) {
+        // tslint:disable-next-line: forin
+        for (const key in param) {
+            element.toggleAttribute(camelToKebabCase(key), param[key]);
+        }
+    } else {
+        const attrKey = camelToKebabCase(param);
+        element.toggleAttribute(attrKey, state);
+    }
+    return element;
+};

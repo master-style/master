@@ -28,8 +28,8 @@ export class MasterButton extends HTMLElement {
         // console.log(value, oldValue);
     }
 
-    // attributeChangedCallback(name, oldValue, newValue) {
-    //     console.log(name, oldValue, newValue);
-    // }
+    attributeChangedCallback(name, oldValue, newValue) {
+        console.log(name, oldValue, newValue);
+    }
 
 }
