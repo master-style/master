@@ -24,7 +24,7 @@ button {
     text-decoration: inherit;
     color: inherit;
     border-radius: inherit;
-    border: inherit;
+    border: 0;
     width: 100%;
     height: 100%;
     outline: none;
@@ -85,10 +85,6 @@ button {
         margin: auto;
     }
 
-    &.outlined {
-        --bg-theme: transparent;
-    }
-
 }
 
 :host(.sm) {
@@ -122,8 +118,13 @@ button {
 }
 
 :host(.outlined) {
+    button {
+        background-color: transparent;
+        border: 1px solid var(--b-theme, var(--b-fadest));
+    }
+
     @media (any-hover: hover) {
-        button:hover:not([loading]):not([disabled]).outlined {
+        button:hover:not([loading]):not([disabled]) {
             border-color: var(--b-theme-hover, var(--b-theme));
         }
     }
