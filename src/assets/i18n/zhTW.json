@@ -72,5 +72,6 @@
     "text": "文本",
     "visibility": "能見",
     "wrap": "包裝",
-    "z-index": "層級"
+    "z-index": "層級",
+    "raised": "提高"
 }

@@ -71,3 +71,169 @@
         </template>
     </div>
 </div>
+
+<h2 id="color">{{ 'color' | translate }}</h2>
+<div class="y:sm">
+    <ng-container *ngFor="let eachDepth of ['', '+']">
+        <div class="x:fill" *ngFor="let eachStyle of styles">
+            <template [codeLang]="'html'" [codeDemo]=true>
+                <div class="y:sm">
+                    <m-button class="x sm {{ eachColor + eachDepth }} {{ eachStyle }}" *ngFor="let eachColor of colors"
+                        (click)="currentColor = eachColor">
+                        <div part="button-body">{{ eachColor }}</div>
+                    </m-button>
+                </div>
+            </template>
+        </div>
+    </ng-container>
+</div>
+
+<h2 id="size">{{ 'size' | translate }}</h2>
+<div class="demo">
+    <div class="demo-body">
+        <div class="y:xl c:bottom c:center">
+            <m-button class="x xs theme raised">extra sm</m-button>
+            <m-button class="x sm theme raised">small</m-button>
+            <m-button class="x theme raised">default</m-button>
+            <m-button class="x lg theme raised">large</m-button>
+        </div>
+    </div>
+</div>
+<m-table class="sm neat axis:x">
+    <table>
+        <thead>
+            <tr slot="table-head">
+                <th class="fit t:left bg:theme sticky">class</th>
+                <th class="fit t:left bg:theme sticky t-wrap:no">height</th>
+                <th class="fit t:left bg:theme sticky t-wrap:no">min-width</th>
+                <th class="t:left bg:theme sticky">description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <code class="f:purple">xs</code>
+                </td>
+                <td><code>2rem</code></td>
+                <td><code>2rem</code></td>
+                <td><b>特小</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <code class="f:purple">sm</code>
+                </td>
+                <td><code>2.5rem</code></td>
+                <td><code>2.5rem</code></td>
+                <td><b>小</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <code class="default">∅</code>
+                </td>
+                <td><code>3rem</code></td>
+                <td><code>3rem</code></td>
+                <td><b>適中</b>，預設</td>
+            </tr>
+            <tr>
+                <td>
+                    <code class="f:purple">lg</code>
+                </td>
+                <td><code>3.5rem</code></td>
+                <td><code>3.5rem</code></td>
+                <td><b>大</b></td>
+            </tr>
+        </tbody>
+    </table>
+</m-table>
+
+<h2 id="raised">{{ 'raised' | translate }}</h2>
+<div class="demo">
+    <div class="demo-body">
+        <div class="y:xl c:bottom c:center">
+            <m-button class="x theme raised">raised</m-button>
+        </div>
+    </div>
+</div>
+<m-table class="sm neat axis:x">
+    <table>
+        <thead>
+            <tr>
+                <th class="fit t:left bg:theme sticky">class</th>
+                <th class="t:left bg:theme sticky">說明</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <code class="f:blue">raised</code>
+                </td>
+                <td><b>提高</b>，使其更突兀</td>
+            </tr>
+        </tbody>
+    </table>
+</m-table>
+
+<h2 id="shape">{{ 'shape' | translate }}</h2>
+<div class="demo">
+    <div class="demo-body">
+        <div class="y c:center">
+            <m-button class="x theme raised">default</m-button>
+            <m-button class="x theme raised round">
+                <ion-icon name="ellipse-outline"></ion-icon>
+            </m-button>
+            <m-button class="x theme raised square">
+                <ion-icon name="square-outline"></ion-icon>
+            </m-button>
+            <m-button class="x theme raised rounded">rounded</m-button>
+        </div>
+    </div>
+</div>
+<m-table class="sm neat axis:x">
+    <table>
+        <thead>
+            <tr>
+                <th class="fit t:left bg:theme sticky">class</th>
+                <th class="t:left bg:theme sticky">說明</th>
+                <th class="fit bg:theme sticky"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <code class="default">∅</code>
+                </td>
+                <td><b>四邊圓角</b>，預設</td>
+                <td class="t:right"></td>
+            </tr>
+            <tr>
+                <td>
+                    <code class="f:blue">round</code>
+                </td>
+                <td><b>圓形</b>，取消內距</td>
+                <td class="t:right">
+                    <m-chip class="sm theme+" href="modifiers">
+                        <div part="chip-body">{{ 'modifiers' | translate }}</div>
+                    </m-chip>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code class="f:blue">square</code>
+                </td>
+                <td><b>方形</b>，取消內距及圓角</td>
+                <td class="t:right"></td>
+            </tr>
+            <tr>
+                <td>
+                    <code class="f:blue">rounded</code>
+                </td>
+                <td><b>側圓角</b></td>
+                <td class="t:right">
+                    <m-chip class="sm theme+" href="modifiers">
+                        <div part="chip-body">{{ 'modifiers' | translate }}</div>
+                    </m-chip>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</m-table>
