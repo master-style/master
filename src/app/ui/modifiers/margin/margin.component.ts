@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-margin',
+  selector: 'doc-margin',
   templateUrl: './margin.component.html',
   styleUrls: ['./margin.component.scss']
 })

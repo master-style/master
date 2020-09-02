@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-wrap',
+  selector: 'doc-wrap',
   templateUrl: './wrap.component.html',
   styleUrls: ['./wrap.component.scss']
 })

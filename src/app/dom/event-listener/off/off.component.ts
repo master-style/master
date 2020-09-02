@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-off',
+  selector: 'doc-off',
   templateUrl: './off.component.html',
   styleUrls: ['./off.component.scss']
 })

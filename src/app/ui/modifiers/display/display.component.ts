@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-display',
+  selector: 'doc-display',
   templateUrl: './display.component.html',
   styleUrls: ['./display.component.scss']
 })

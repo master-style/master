@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-flows',
+  selector: 'doc-flows',
   templateUrl: './flows.component.html',
   styleUrls: ['./flows.component.scss']
 })

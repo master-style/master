@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-for-each',
+  selector: 'doc-for-each',
   templateUrl: './for-each.component.html',
   styleUrls: ['./for-each.component.scss']
 })

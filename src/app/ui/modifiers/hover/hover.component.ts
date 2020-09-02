@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-hover',
+  selector: 'doc-hover',
   templateUrl: './hover.component.html',
   styleUrls: ['./hover.component.scss']
 })

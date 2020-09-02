@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-modal',
+  selector: 'doc-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss']
 })

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-animation',
+  selector: 'doc-animation',
   templateUrl: './animation.component.html',
   styleUrls: ['./animation.component.scss']
 })

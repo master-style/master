@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-collapse',
+  selector: 'doc-collapse',
   templateUrl: './collapse.component.html',
   styleUrls: ['./collapse.component.scss']
 })

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-check',
+  selector: 'doc-check',
   templateUrl: './check.component.html',
   styleUrls: ['./check.component.scss']
 })

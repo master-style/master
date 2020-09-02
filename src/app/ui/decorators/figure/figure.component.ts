@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-figure',
+  selector: 'doc-figure',
   templateUrl: './figure.component.html',
   styleUrls: ['./figure.component.scss']
 })

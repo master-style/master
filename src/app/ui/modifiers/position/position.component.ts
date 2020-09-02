@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-position',
+  selector: 'doc-position',
   templateUrl: './position.component.html',
   styleUrls: ['./position.component.scss']
 })

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-attr',
+  selector: 'doc-attr',
   templateUrl: './attr.component.html',
   styleUrls: ['./attr.component.scss']
 })

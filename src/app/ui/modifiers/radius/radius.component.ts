@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-radius',
+  selector: 'doc-radius',
   templateUrl: './radius.component.html',
   styleUrls: ['./radius.component.scss']
 })

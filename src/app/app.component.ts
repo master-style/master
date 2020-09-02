@@ -5,7 +5,7 @@ import { AppService } from './app.service';
 import { elementRoutes } from './element/element-routing.module';
 
 @Component({
-    selector: 'app-root',
+    selector: 'doc-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
     encapsulation: ViewEncapsulation.None

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-visibility',
+  selector: 'doc-visibility',
   templateUrl: './visibility.component.html',
   styleUrls: ['./visibility.component.scss']
 })

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-breakpoint',
+  selector: 'doc-breakpoint',
   templateUrl: './breakpoint.component.html',
   styleUrls: ['./breakpoint.component.scss']
 })

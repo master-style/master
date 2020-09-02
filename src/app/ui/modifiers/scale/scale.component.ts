@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-scale',
+  selector: 'doc-scale',
   templateUrl: './scale.component.html',
   styleUrls: ['./scale.component.scss']
 })

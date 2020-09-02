@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-loading',
+  selector: 'doc-loading',
   templateUrl: './loading.component.html',
   styleUrls: ['./loading.component.scss']
 })

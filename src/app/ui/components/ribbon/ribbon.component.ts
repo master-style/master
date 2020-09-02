@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-ribbon',
+  selector: 'doc-ribbon',
   templateUrl: './ribbon.component.html',
   styleUrls: ['./ribbon.component.scss']
 })

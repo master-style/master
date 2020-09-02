@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-popup',
+  selector: 'doc-popup',
   templateUrl: './popup.component.html',
   styleUrls: ['./popup.component.scss']
 })

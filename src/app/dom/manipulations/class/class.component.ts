@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-class',
+  selector: 'doc-class',
   templateUrl: './class.component.html',
   styleUrls: ['./class.component.scss']
 })

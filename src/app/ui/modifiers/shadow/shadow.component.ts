@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-shadow',
+  selector: 'doc-shadow',
   templateUrl: './shadow.component.html',
   styleUrls: ['./shadow.component.scss']
 })

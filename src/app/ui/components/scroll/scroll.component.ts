@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-scroll',
+  selector: 'doc-scroll',
   templateUrl: './scroll.component.html',
   styleUrls: ['./scroll.component.scss']
 })

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-alignment',
+  selector: 'doc-alignment',
   templateUrl: './alignment.component.html',
   styleUrls: ['./alignment.component.scss']
 })
