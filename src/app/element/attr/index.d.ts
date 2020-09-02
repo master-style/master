@@ -1,9 +1,11 @@
 interface AttrOption {
     key?: string;
-    get?: boolean;
-    set?: boolean;
+    observe?: boolean;
+    reflect?: boolean;
     shadow?: boolean;
     toggle?: boolean;
     propKey?: string;
-    setProp?: Function
+    propValue?: any;
+    setProp?: Function;
+    set?: Function;
 }

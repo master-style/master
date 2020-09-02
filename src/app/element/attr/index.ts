@@ -1,8 +1,8 @@
 import camelToKebabCase from '@utils/camel-to-kebab-case';
 
 const DEFAULT_ATTR_OPTION = {
-    set: true,
-    get: true,
+    reflect: true,
+    observe: true,
     shadow: false,
     toggle: false
 };
@@ -12,9 +12,8 @@ export function Attr(option?: AttrOption) {
     return (target: any, propKey: string): any => {
         option.propKey = propKey;
         const attrKey = option.key = camelToKebabCase(propKey);
-        const _propKey = '_' + propKey;
         const constructor = target.constructor;
-        if (option.get) {
+        if (option.observe) {
             if (!constructor.observedAttributes) {
                 constructor.observedAttributes = [];
             }
@@ -23,26 +22,28 @@ export function Attr(option?: AttrOption) {
         if (!constructor.attrOptions) {
             constructor.attrOptions = {};
         }
+        option.set = function (value) {
+            option.toggle
+                ? this.toggleAttribute(attrKey, !!value)
+                : this.setAttribute(attrKey, value);
+            if (option.shadow) {
+                option.toggle
+                    ? this.shadow.toggleAttribute(attrKey, !!value)
+                    : this.shadow.setAttribute(attrKey, value);
+            }
+        }
         const propDescriptor = {
             get() {
-                return this[_propKey];
+                return option.propValue;
             },
             set(value, fromAttr?: boolean) {
-                if (this[_propKey] === value) return;
+                if (option.propValue === value) return;
                 if (propKey in constructor) {
-                    constructor[propKey](this, value, this[_propKey]);
+                    constructor[propKey](this, value, option.propValue);
                 }
-                this[_propKey] = value;
-                if (option.set && !fromAttr && this.isConnected) {
-                    console.log('set attribute', propKey);
-                    option.toggle
-                        ? this.toggleAttribute(attrKey, !!value)
-                        : this.setAttribute(attrKey, value);
-                    if (option.shadow) {
-                        option.toggle
-                            ? this.shadow.toggleAttribute(attrKey, !!value)
-                            : this.shadow.setAttribute(attrKey, value);
-                    }
+                option.propValue = value;
+                if (option.reflect && !fromAttr && this.isConnected) {
+                    option.set.call(this, value);
                 }
             },
             configurable: true,

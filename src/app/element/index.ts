@@ -11,18 +11,9 @@ export function Element(tag: string) {
             if (attrOptions) {
                 // tslint:disable-next-line: forin
                 for (const eachAttrKey in attrOptions) {
-                    const eachAttrOption = attrOptions[eachAttrKey];
-                    const _eachPropKey = '_' + eachAttrOption.propKey;
-                    const value = this[_eachPropKey];
-                    if (eachAttrOption.set) {
-                        eachAttrOption.toggle
-                            ? this.toggleAttribute(eachAttrKey, !!value)
-                            : this.setAttribute(eachAttrKey, value);
-                        if (eachAttrOption.shadow) {
-                            eachAttrOption.toggle
-                                ? this.shadow.toggleAttribute(eachAttrKey, !!value)
-                                : this.shadow.setAttribute(eachAttrKey, value);
-                        }
+                    const eachAttrOption: AttrOption = attrOptions[eachAttrKey];
+                    if (eachAttrOption.reflect) {
+                        eachAttrOption.set.call(this, eachAttrOption.propValue);
                     }
                 }
             }
@@ -38,8 +29,7 @@ export function Element(tag: string) {
                 oldValue = parseStr(oldValue);
                 value = parseStr(value);
             }
-            console.log(attrKey, oldValue, 'to', value);
-            attrOption.setProp(value, true);
+            attrOption.setProp.call(this, value, true);
             if (onAttrChanged) onAttrChanged.call(this);
         };
         window.customElements.define(tag, constructor);
