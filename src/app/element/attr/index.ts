@@ -8,7 +8,7 @@ const DEFAULT_ATTR_OPTION = {
 };
 
 export function Attr(option?: AttrOption) {
-    option = {...DEFAULT_ATTR_OPTION, ...option};
+    option = { ...DEFAULT_ATTR_OPTION, ...option };
     return (target: any, propKey: string): any => {
         option.propKey = propKey;
         const attrKey = option.key = camelToKebabCase(propKey);
@@ -23,18 +23,18 @@ export function Attr(option?: AttrOption) {
         if (!constructor.attrOptions) {
             constructor.attrOptions = {};
         }
-        constructor.attrOptions[attrKey] = option;
-        return {
+        const propDescriptor = {
             get() {
                 return this[_propKey];
             },
-            set(value) {
+            set(value, fromAttr?: boolean) {
                 if (this[_propKey] === value) return;
                 if (propKey in constructor) {
                     constructor[propKey](this, value, this[_propKey]);
                 }
                 this[_propKey] = value;
-                if (option.set && this.isConnected) {
+                if (option.set && !fromAttr && this.isConnected) {
+                    console.log('set attribute', propKey);
                     option.toggle
                         ? this.toggleAttribute(attrKey, !!value)
                         : this.setAttribute(attrKey, value);
@@ -48,5 +48,8 @@ export function Attr(option?: AttrOption) {
             configurable: true,
             enumerable: true
         };
+        option.setProp = propDescriptor.set;
+        constructor.attrOptions[attrKey] = option;
+        return propDescriptor;
     };
 }

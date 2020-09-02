@@ -1,11 +1,12 @@
-import kebabToCamelCase from '@utils/kebab-to-camel-case';
-
 export * from './attr';
+
+import parseStr from '@utils/parse-str';
 
 export function Element(tag: string) {
     return function (constructor: any) {
         const prototype = constructor.prototype;
         const attrOptions = constructor.attrOptions;
+        const onConnected = prototype.onConnected;
         prototype.connectedCallback = function () {
             if (attrOptions) {
                 // tslint:disable-next-line: forin
@@ -25,12 +26,21 @@ export function Element(tag: string) {
                     }
                 }
             }
-            const onConnected = prototype.onConnected;
             if (onConnected) onConnected.call(this);
         };
+        const onAttrChanged = prototype.onAttrChanged;
         prototype.attributeChangedCallback = function (attrKey, oldValue, value) {
-            console.log(attrKey, oldValue, value);
-            console.log(attrOptions[attrKey]);
+            const attrOption = attrOptions[attrKey];
+            if (attrOption.toggle) {
+                oldValue = oldValue === null ? false : true;
+                value = value === null ? false : true;
+            } else {
+                oldValue = parseStr(oldValue);
+                value = parseStr(value);
+            }
+            console.log(attrKey, oldValue, 'to', value);
+            attrOption.setProp(value, true);
+            if (onAttrChanged) onAttrChanged.call(this);
         };
         window.customElements.define(tag, constructor);
     };

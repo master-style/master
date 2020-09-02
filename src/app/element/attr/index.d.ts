@@ -5,4 +5,5 @@ interface AttrOption {
     shadow?: boolean;
     toggle?: boolean;
     propKey?: string;
+    setProp?: Function
 }

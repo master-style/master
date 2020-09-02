@@ -12,22 +12,14 @@ ElementPrototype.attr = function (param?: any, value?: any): any {
         if (value === null) {
             element.removeAttribute(attrKey);
         }
-        if (typeof value === 'boolean') {
-            element.toggleAttribute(attrKey, value);
-        } else {
-            element.setAttribute(attrKey, value);
-        }
+        element.setAttribute(attrKey, value);
         return element;
     } else if (isObjLike(param)) {
         // tslint:disable-next-line: forin
         for (const key in param) {
             const attrKey = camelToKebabCase(key);
             const attrValue = param[key];
-            if (typeof value === 'boolean') {
-                element.toggleAttribute(attrKey, attrValue);
-            } else {
-                element.setAttribute(attrKey, attrValue);
-            }
+            element.setAttribute(attrKey, attrValue);
         }
         return element;
     } else if (typeof param === 'string') {

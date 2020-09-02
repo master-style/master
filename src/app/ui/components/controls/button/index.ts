@@ -3,7 +3,7 @@ import { Element, Attr, attachShadow } from '@element';
 import css from './index.scss';
 
 @Element('m-button')
-export class MasterButton extends HTMLElement {
+export class MasterButtonElement extends HTMLElement {
 
     // element
     shadow = $('button', {},
@@ -13,6 +13,7 @@ export class MasterButton extends HTMLElement {
     // attribute
     @Attr({ toggle: true, shadow: true }) disabled = false;
     @Attr({ toggle: true }) loading = true;
+    @Attr() duration = 50;
 
     constructor() {
         super();
@@ -28,8 +29,8 @@ export class MasterButton extends HTMLElement {
         // console.log(value, oldValue);
     }
 
-    attributeChangedCallback(name, oldValue, newValue) {
-        console.log(name, oldValue, newValue);
+    onAttrChanged() {
+
     }
 
 }
