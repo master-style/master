@@ -56,5 +56,21 @@
     "size": "尺寸",
     "shape": "形狀",
     "modifiers": "修飾",
-    "decoractors": "裝飾"
+    "alignment": "對齊",
+    "area": "面積",
+    "background": "背景",
+    "border": "邊框",
+    "display": "陳列",
+    "font": "字型",
+    "hover": "懸停",
+    "margin": "邊距",
+    "padding": "內距",
+    "position": "定位",
+    "radius": "圓角",
+    "scale": "比例",
+    "shadow": "陰影",
+    "text": "文本",
+    "visibility": "能見",
+    "wrap": "包裝",
+    "z-index": "層級"
 }

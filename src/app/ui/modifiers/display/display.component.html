@@ -1,1 +1,79 @@
-<p>display works!</p>
+<div class="demo p">
+    <m-table class="sm scroll:x" axis=y>
+        <table class="t:center">
+            <tbody>
+                <tr>
+                    <th>block</th>
+                    <th>inline-block</th>
+                    <th>inline</th>
+                    <th>table</th>
+                    <th>table-cell</th>
+                </tr>
+                <tr>
+                    <td><code>.block</code></td>
+                    <td><code>.inline-block</code></td>
+                    <td><code>.inline</code></td>
+                    <td><code>.table</code></td>
+                    <td><code>.cell</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </m-table>
+    <m-table class="sm scroll:x my" axis=x>
+        <table class="t:center">
+            <tbody>
+                <tr>
+                    <th colspan=6>none</th>
+                </tr>
+                <tr>
+                    <th>viewport</th>
+                    <th><b>All</b>
+                        <br><code>≥ 0</code>
+                    </th>
+                    <th><b>Small</b>
+                        <br><code>≥ 600 px</code>
+                    </th>
+                    <th><b>Medium</b>
+                        <br><code>≥ 1024 px</code>
+                    </th>
+                    <th><b>Large</b>
+                        <br><code>≥ 1440 px</code>
+                    </th>
+                    <th><b>Extra Large</b>
+                        <br><code>≥ 1920 px</code>
+                    </th>
+                </tr>
+                <tr>
+                    <th>show</th>
+                    <td>-</td>
+                    <td><code>.<b class="f:blue">sm</b>-show</code></td>
+                    <td><code>.<b class="f:green">md</b>-show</code></td>
+                    <td><code>.<b class="f:red">lg</b>-show</code></td>
+                    <td><code>.<b class="f:yellow">xl</b>-show</code></td>
+                </tr>
+                <tr>
+                    <th>hide</th>
+                    <td><code>.<b class="f:purple">hide</b></code></td>
+                    <td><code>.<b class="f:blue">sm</b>-hide</code></td>
+                    <td><code>.<b class="f:green">md</b>-hide</code></td>
+                    <td><code>.<b class="f:red">lg</b>-hide</code></td>
+                    <td><code>.<b class="f:yellow">xl</b>-hide</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </m-table>
+    <div class="y">
+        <m-x class="show@md">
+            <div class="item"><code>.<b class="f:green">md</b>-show</code></div>
+        </m-x>
+        <m-x class="hide@md">
+            <div class="item"><code>.<b class="f:green">md</b>-hide</code></div>
+        </m-x>
+    </div>
+</div>
+<div class="code"><code class="html">
+        <div class="y">
+            <m-x class="show@md"></m-x>
+            <m-x class="hide@md"></m-x>
+        </div>
+    </code></div>

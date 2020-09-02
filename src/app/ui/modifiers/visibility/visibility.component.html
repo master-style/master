@@ -1,1 +1,34 @@
-<p>visibility works!</p>
+<div class="demo p">
+    <p>Set the <b>visibility</b> of elements with our visibility utilities.</p>
+    <p>These do not modify the <b>display</b> value at all and are helpful for hiding content from most users, but still
+        keeping them
+        for screen readers.</p>
+    <m-table class="sm scroll:x my" axis=y>
+        <table class="t:center">
+            <tbody>
+                <tr>
+                    <th>visible</th>
+                    <th>invisible</th>
+                </tr>
+                <tr>
+                    <td><code>.visible</code></td>
+                    <td><code>.invisible</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </m-table>
+    <div class="y">
+        <m-6 class="invisible">
+            <div class="item"><code>.invisible</code></div>
+        </m-6>
+        <m-6 class="visible">
+            <div class="item"><code>.visible</code></div>
+        </m-6>
+    </div>
+</div>
+<div class="code"><code class="html">
+        <div class="y">
+            <m-6 class="invisible">.invisible</m-6>
+            <m-6 class="visible">.visible</m-6>
+        </div>
+    </code></div>

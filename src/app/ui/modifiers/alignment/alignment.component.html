@@ -1,1 +1,128 @@
-<p>alignment works!</p>
+<div class="demo p">
+    <m-table class="sm scroll:x mb" axis=x>
+        <table class="t:center">
+            <tbody>
+                <tr>
+                    <th colspan=6>horzontial</th>
+                </tr>
+                <tr>
+                    <th>viewport</th>
+                    <th><b>All</b>
+                        <br><code>≥ 0</code>
+                    </th>
+                    <th><b>Small</b>
+                        <br><code>≥ 600 px</code>
+                    </th>
+                    <th><b>Medium</b>
+                        <br><code>≥ 1024 px</code>
+                    </th>
+                    <th><b>Large</b>
+                        <br><code>≥ 1440 px</code>
+                    </th>
+                    <th><b>Extra Large</b>
+                        <br><code>≥ 1920 px</code>
+                    </th>
+                </tr>
+                <tr>
+                    <th><i class="ion-arrow-left-c"></i></th>
+                    <td><code>.a-<b class="f:purple">left</b></code></td>
+                    <td><code>.a-<b class="f:blue">sm</b>-left</code></td>
+                    <td><code>.a-<b class="f:green">md</b>-left</code></td>
+                    <td><code>.a-<b class="f:red">lg</b>-left</code></td>
+                    <td><code>.a-<b class="f:yellow">xl</b>-left</code></td>
+                </tr>
+                <tr>
+                    <th><i class="ion-arrow-right-c"></i></th>
+                    <td><code>.a-<b class="f:purple">right</b></code></td>
+                    <td><code>.a-<b class="f:blue">sm</b>-right</code></td>
+                    <td><code>.a-<b class="f:green">md</b>-right</code></td>
+                    <td><code>.a-<b class="f:red">lg</b>-right</code></td>
+                    <td><code>.a-<b class="f:yellow">xl</b>-right</code></td>
+                </tr>
+                <tr>
+                    <th><i class="ion-arrow-right-c"></i> <i class="ion-arrow-left-c"></i></th>
+                    <td><code>.a-<b class="f:purple">center</b></code></td>
+                    <td><code>.a-<b class="f:blue">sm</b>-center</code></td>
+                    <td><code>.a-<b class="f:green">md</b>-center</code></td>
+                    <td><code>.a-<b class="f:red">lg</b>-center</code></td>
+                    <td><code>.a-<b class="f:yellow">xl</b>-center</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </m-table>
+    <div class="y">
+        <m-4 class="a:right@sm">
+            <div class="item"><code>.a-<b class="f:blue">sm</b>-right</code></div>
+        </m-4>
+        <m-4 sm=3 class="a:left@md">
+            <div class="item"><code> .a-<b class="f:green">md</b>-left</code></div>
+        </m-4>
+        <m-4 sm=3 class="a:center">
+            <div class="item"><code>.a-<b>center</b></code></div>
+        </m-4>
+    </div>
+</div>
+<div class="code"><code class="html">
+        <div class="y">
+            <m-4 class="a:right@sm"></m-4>
+            <m-4 class="a:left@md" sm=3></m-4>
+            <m-4 class="a:center" sm=3></m-4>
+        </div>
+    </code></div>
+<div class="p">
+    <m-table class="sm scroll:x" axis="xy">
+        <table class="t:center">
+            <tbody>
+                <tr>
+                    <th colspan=7>vertical</th>
+                </tr>
+                <tr style="height: 100px;">
+                    <th>table cell</th>
+                    <td class="a:baseline"><code>.a:baseline</code></td>
+                    <td class="a:top"><code>.a:top</code></td>
+                    <td class="a:middle"><code>.a:middle</code></td>
+                    <td class="a:bottom"><code>.a:bottom</code></td>
+                    <td class="a:text-top"><code>.a:text-top</code></td>
+                    <td class="a:text-bottom"><code>.a:text-bottom</code></td>
+                </tr>
+                <tr>
+                    <th>inline</th>
+                    <td colspan=7>
+                        <code class="a:baseline">.a:baseline</code>
+                        <code class="a:top">.a:top</code>
+                        <code class="a:middle">.a:middle</code>
+                        <code class="a:bottom">.a:bottom</code>
+                        <code class="a:text-top">.a:text-top</code>
+                        <code class="a:text-bottom">.a:text-bottom</code>
+                        <i class="ion-heart f:purple"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </m-table>
+</div>
+<div class="y:no">
+    <m-x sm=6>
+        <div class="code"><code class="html" title="table cell ( virtual table )">
+                <div class="y" style="height: 100px;">
+                    <m-x class="a:baseline">baseline</m-x>
+                    <m-x class="a:top">top</m-x>
+                    <m-x class="a:middle">middle</m-x>
+                    <m-x class="a:bottom">bottom</m-x>
+                    <m-x class="a:text-top">text-top</m-x>
+                    <m-x class="a:text-bottom">text-bottom</m-x>
+                </div>
+            </code></div>
+    </m-x>
+    <m-x sm=6>
+        <div class="code"><code class="html" title="inline elements"><span class="a:baseline">.a:baseline</span>
+                <span class="a:top">.a:top</span>
+                <span class="a:middle">.a:middle</span>
+                <span class="a:bottom">.a:bottom</span>
+                <span class="a:text-top">.a:text-top</span>
+                <span class="a:text-bottom">.a:text-bottom</span>
+                <i class="ion-heart"></i>
+
+            </code></div>
+    </m-x>
+</div>

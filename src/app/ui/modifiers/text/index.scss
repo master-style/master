@@ -32,7 +32,7 @@
 }
 
 // text line
-[class*=t-line\:] {
+[class*="t-line\:"] {
     overflow: hidden;
     display: -webkit-box;
     max-width: 100%;

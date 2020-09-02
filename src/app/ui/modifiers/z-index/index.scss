@@ -1,0 +1,35 @@
+.z\:down {
+    z-index: $z-down;
+}
+
+.z\:up {
+    z-index: $z-up;
+}
+
+.z {
+    z-index: $z;
+}
+
+.z\:sticky {
+    z-index: $z-sticky;
+}
+
+.z\:abs {
+    z-index: $z-abs;
+}
+
+.z\:fixed {
+    z-index: $z-fixed;
+}
+
+.z\:overlap {
+    z-index: $z-overlap;
+}
+
+.z\:overlay {
+    z-index: $z-overlay;
+}
+
+.z\:top {
+    z-index: $z-top;
+}

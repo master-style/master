@@ -98,6 +98,22 @@ export const uiRoutes: Routes = [
         path: 'modifiers', children: [
             // { path: '', component: , resolve: { route: RouteResolver }, data: { compositions: ['CSS'] } },
             { path: 'alignment', component: AlignmentComponent, resolve: { route: RouteResolver }, data: { compositions: ['CSS'] } },
+            { path: 'area', component: AreaComponent, resolve: { route: RouteResolver }, data: { compositions: ['CSS'] } },
+            { path: 'background', component: BackgroundComponent, resolve: { route: RouteResolver }, data: { compositions: ['CSS'] } },
+            { path: 'border', component: BorderComponent, resolve: { route: RouteResolver }, data: { compositions: ['CSS'] } },
+            { path: 'display', component: DisplayComponent, resolve: { route: RouteResolver }, data: { compositions: ['CSS'] } },
+            { path: 'font', component: FontComponent, resolve: { route: RouteResolver }, data: { compositions: ['CSS'] } },
+            { path: 'hover', component: HoverComponent, resolve: { route: RouteResolver }, data: { compositions: ['CSS'] } },
+            { path: 'margin', component: MarginComponent, resolve: { route: RouteResolver }, data: { compositions: ['CSS'] } },
+            { path: 'padding', component: PaddingComponent, resolve: { route: RouteResolver }, data: { compositions: ['CSS'] } },
+            { path: 'position', component: PositionComponent, resolve: { route: RouteResolver }, data: { compositions: ['CSS'] } },
+            { path: 'radius', component: RadiusComponent, resolve: { route: RouteResolver }, data: { compositions: ['CSS'] } },
+            { path: 'scale', component: ScaleComponent, resolve: { route: RouteResolver }, data: { compositions: ['CSS'] } },
+            { path: 'shadow', component: ShadowComponent, resolve: { route: RouteResolver }, data: { compositions: ['CSS'] } },
+            { path: 'text', component: TextComponent, resolve: { route: RouteResolver }, data: { compositions: ['CSS'] } },
+            { path: 'visibility', component: VisibilityComponent, resolve: { route: RouteResolver }, data: { compositions: ['CSS'] } },
+            { path: 'wrap', component: WrapComponent, resolve: { route: RouteResolver }, data: { compositions: ['CSS'] } },
+            { path: 'z-index', component: ZIndexComponent, resolve: { route: RouteResolver }, data: { compositions: ['CSS'] } }
         ]
     },
     {

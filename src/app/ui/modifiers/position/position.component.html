@@ -1,1 +1,138 @@
-<p>position works!</p>
+<div class="p">
+    <m-table class="sm scroll:x" axis=y>
+        <table class="t:center">
+            <tbody>
+                <tr>
+                    <th>relative</th>
+                    <th>absolute</th>
+                    <th>fixed</th>
+                    <th>sticky</th>
+                </tr>
+                <tr>
+                    <td><code>.rel</code></td>
+                    <td><code>.abs</code></td>
+                    <td><code>.fixed</code></td>
+                    <td><code>.sticky</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </m-table>
+    <m-table class="sm scroll:x mt" axis=xy>
+        <table class="t:center">
+            <tbody>
+                <tr>
+                    <th colspan=3>vertical</th>
+                    <th colspan=3>horizontal</th>
+                </tr>
+                <tr>
+                    <th>top</th>
+                    <th>middle</th>
+                    <th>bottom</th>
+                    <th>left</th>
+                    <th>center</th>
+                    <th>right</th>
+                </tr>
+                <tr>
+                    <td><code>.top</code></td>
+                    <td><code>.middle</code></td>
+                    <td><code>.bottom</code></td>
+                    <td><code>.left</code></td>
+                    <td><code>.center</code></td>
+                    <td><code>.right</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </m-table>
+    <div class="y mt:sm">
+        <m-6 md=3>
+            <div class="bg:theme- by:1x1 a:middle t:center r:xs rel">
+                <code class="bg:theme-">.rel</code>
+                <code class="abs top left t:left m-sm">.abs<br>.top.left</code>
+            </div>
+        </m-6>
+        <m-6 md=3>
+            <div class="bg:theme- by:1x1 a:middle t:center r:xs rel">
+                <code class="bg:theme-">.rel</code>
+                <code class="abs bottom right t:right m-sm">.abs<br>.bottom.right</code>
+            </div>
+        </m-6>
+        <m-x sm=6 md=3>
+            <div class="bg:theme- by:1x1 a:middle r:xs rel p-sm">
+                <code class="bg:theme- a:bottom">.rel</code>
+                <code class="table abs middle right mr:sm">.table<br>.abs<br>.middle.right</code>
+            </div>
+        </m-x>
+        <m-x sm=6 md=3>
+            <div class="bg:theme- by:1x1 a:middle r:xs rel p-sm">
+                <code class="bg:theme- a:bottom">.rel</code>
+                <code class="table abs middle center">.table<br>.abs<br>.middle.center</code>
+            </div>
+        </m-x>
+        <m-6>
+            <div class="bg:theme- r:xs t:center by:2x1 rel overflow:no">
+                <div class="scroll abs top h:full w:full">
+                    <p>scroll me</p>
+                    <p>scroll me</p>
+                    <code class="sticky block mt:xs r:no">.sticky</code>
+                    <p>scroll me</p>
+                    <p>scroll me</p>
+                    <p>scroll me</p>
+                    <p>scroll me</p>
+                    <p>scroll me</p>
+                    <p>scroll me</p>
+                    <p>scroll me</p>
+                    <p>scroll me</p>
+                    <p>scroll me</p>
+                    <p>scroll me</p>
+                    <p>scroll me</p>
+                    <p>scroll me</p>
+                    <p>scroll me</p>
+                    <p>scroll me</p>
+                </div>
+            </div>
+        </m-6>
+        <m-6>
+            <div class="bg:theme- r:xs t:center by:2x1 rel overflow:no">
+                <div class="scroll abs top h:full w:full">
+                    <p>scroll me</p>
+                    <p>scroll me</p>
+                    <p>scroll me</p>
+                    <p>scroll me</p>
+                    <p>scroll me</p>
+                    <p>scroll me</p>
+                    <p>scroll me</p>
+                    <p>scroll me</p>
+                    <p>scroll me</p>
+                    <p>scroll me</p>
+                    <p>scroll me</p>
+                    <p>scroll me</p>
+                    <p>scroll me</p>
+                    <p>scroll me</p>
+                    <code class="sticky bottom block mt:xs r:no">.sticky.bottom</code>
+                    <p>scroll me</p>
+                    <p>scroll me</p>
+                </div>
+            </div>
+        </m-6>
+    </div>
+</div>
+<div class="y:no">
+    <m-x sm=6>
+        <div class="code"><code class="html" title="hacking position with table">
+                <div class="rel">
+                    <div class="table abs middle center">
+                        <!-- content here ... -->
+                    </div>
+                </div>
+            </code></div>
+    </m-x>
+    <m-x sm=6>
+        <div class="code"><code class="html" title="inline elements">
+                <div class="scroll" style="height: 100px">
+                    <!-- content here ... -->
+                    <div class="sticky">.sticky</div>
+                    <!-- content here ... -->
+                </div>
+            </code></div>
+    </m-x>
+</div>
