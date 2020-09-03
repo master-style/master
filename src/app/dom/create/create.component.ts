@@ -11,10 +11,11 @@ export class CreateComponent implements OnInit {
 
     times = 0;
     performanceTime = 0;
+    firstPerformanceTime = 0;
 
     ngOnInit(): void {
         const template = () => [
-            'div', { class: 'shine' },
+            'div', { class: 'shine', $text: '1' },
             'div', { class: 'shine', $text: this.times, name: this.times },
             'div', { class: 'shine', $text: '1' }, [
                 'div', {
@@ -49,6 +50,9 @@ export class CreateComponent implements OnInit {
             const t1 = performance.now();
             render1.run(template, container);
             this.performanceTime = performance.now() - t1;
+            if (this.times === 1) {
+                this.firstPerformanceTime = this.performanceTime;
+            }
         }, 1000);
 
     }

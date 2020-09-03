@@ -1,3 +1,6 @@
-<h4>
-    {{ performanceTime }}
-</h4>
+<p>
+    首次執行<b style="margin-left: 2rem">{{ firstPerformanceTime | number:'0.5' }} ms</b>
+</p>
+<p>
+    每次執行<b style="margin-left: 2rem">{{ performanceTime  | number:'0.5' }} ms</b>
+</p>
