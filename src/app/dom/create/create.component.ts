@@ -50,15 +50,14 @@ export class CreateComponent implements OnInit {
         const container = document.querySelector('doc-create');
 
         setInterval(() => {
-            this.times++;
             const t1 = performance.now();
             render1.run(template, container);
             this.performanceTime = performance.now() - t1;
-            if (this.times === 1) {
+            if (this.times === 0) {
                 this.firstPerformanceTime = this.performanceTime;
             }
+            this.times++;
             if (this.times % 4 === 0) {
-                this.times = 0;
                 this.items = [];
             } else {
                 this.items.push(this.times);

@@ -4,14 +4,22 @@
 // 測試
 .shine {
     animation: shine .5s linear;
-    display: block;
-    padding: .8rem;
+    display: flex;
+    flex: 1 1 auto;
+    padding: 1rem;
     border: 1px solid rgba(255,255,255,.1);
     background-color: rgba(255, 255, 255, .1);
-    margin-top: .4rem;
+    margin-top: .5rem;
     .shine {
-        margin-top: .4rem;
+        &:first-child {
+            margin-left: 1rem
+        }
     }
+    > .shine {
+
+        margin-top: 0;
+    }
+
 }
 
 @keyframes shine {
