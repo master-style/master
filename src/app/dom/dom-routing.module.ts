@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { CreateComponent } from './create/create.component';
 import { ClassComponent } from './manipulations/class/class.component';
 import { AttrComponent } from './manipulations/attr/attr.component';
-import { CreateComponent } from './manipulations/create/create.component';
 import { CssComponent } from './manipulations/css/css.component';
 import { InstallationComponent } from './guideline/installation/installation.component';
 import { CodingStyleComponent } from './guideline/coding-style/coding-style.component';
@@ -22,6 +22,7 @@ export const domRoutes: Routes = [
             { path: 'coding-style', component: CodingStyleComponent }
         ]
     },
+    { path: 'create', component: CreateComponent },
     {
         path: 'event-listener', children: [
             { path: 'on', component: OnComponent },
@@ -32,7 +33,6 @@ export const domRoutes: Routes = [
         path: 'manipulations', children: [
             { path: 'attr', component: AttrComponent },
             { path: 'class', component: ClassComponent },
-            { path: 'create', component: CreateComponent },
             { path: 'css', component: CssComponent },
             { path: 'html', component: HtmlComponent }
         ]
