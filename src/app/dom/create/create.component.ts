@@ -20,10 +20,7 @@ export class CreateComponent implements OnInit {
             'div', { class: 'shine', $text: '1' },
             'div', { class: 'shine', $text: this.times, name: this.times },
             'div', { class: 'shine', $text: '1' }, [
-                'div', {
-                    class: 'shine'
-                },
-                'div', { class: 'shine' }, () => this.items.map((item) => [
+                'div', { class: 'shine', $text: '2' }, () => this.items.map((item) => [
                     'div', { class: 'shine', $text: item }
                 ]),
                 'div', { class: 'shine', $text: '2' },
