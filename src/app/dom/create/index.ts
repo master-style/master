@@ -42,60 +42,110 @@ interface cache {
     tag: string,
     attr?: { [key: string]: any },
     children?: cache[],
-    element?: Element
+    element?: Element,
+    $html?: string,
+    $text?: string
+};
+
+const fragment = document.createDocumentFragment();
+
+const create = function(eachNodes, container) {
+    const eachFragment = fragment.cloneNode();
+    eachNodes.forEach((node) => {
+        const element = document.createElement(node.tag);
+        node.element = element;
+        const attr = node.attr;
+        let skipChildren = false;
+        if (node.$text !== undefined) {
+            element.textContent = node.$text;
+        }
+        if (
+            attr.$html !== undefined
+        ) {
+            element.innerHTML = node.$html;
+            skipChildren = true;
+        }
+        if (attr) {
+            Object.keys(attr).forEach((eachAttrKey) => {
+                element.setAttribute(eachAttrKey, attr[eachAttrKey]);
+            });
+        }
+        if (!skipChildren && node.children) {
+            create(node.children, element);
+        }
+        eachFragment.appendChild(element);
+    });
+    container.appendChild(eachFragment);
 };
 
 Master.Render = class MasterRender {
-    run(createTemplate) {
+
+    root;
+
+    run(createTemplate, root) {
         // tslint:disable-next-line: prefer-for-of
         const nodes: cache[] = [];
+
         (function generate(layer: any[], trees: cache[]) {
-            let element: cache;
+            let node: cache;
             // tslint:disable-next-line: prefer-for-of
             for (let i = 0; i < layer.length; i++) {
                 const current = layer[i];
                 if (typeof current === 'string') {
-                    element = {
+                    node = {
                         tag: current
                     };
-                    trees.push(element);
+                    trees.push(node);
                 } else if (Array.isArray(current)) {
-                    element.children = [];
-                    generate(current, element.children);
+                    node.children = [];
+                    generate(current, node.children);
                 } else if (typeof current === 'object') {
-                    element.attr = current;
+                    const attr = current;
+                    if (attr.$text !== undefined) {
+                        node.$text = attr.$text;
+                        delete attr.$text;
+                    }
+                    if (
+                        attr.$html !== undefined
+                    ) {
+                        node.$html = attr.$html;
+                        delete attr.$html;
+                    }
+                    node.attr = attr;
                 }
             }
         })(createTemplate(), nodes);
 
-        const fragment = document.createDocumentFragment();
-        (function render(eachNodes, container) {
-            const eachFragment = fragment.cloneNode();
-            eachNodes.forEach((eachNode) => {
-                const element = document.createElement(eachNode.tag);
-                eachNode.element = element;
-                const attr = eachNode.attr;
-                let skipChildren = false;
-                if (attr) {
-                    if (attr.$text) {
-                        element.textContent = attr['$text'];
-                        delete eachNode.attr.$text;
+        if (this.nodes && this.root === root) {
+            (function render(newNodes, oldNodes) {
+                // tslint:disable-next-line: prefer-for-of
+                for (let i = 0; i < newNodes.length; i++) {
+                    const newNode = newNodes[i];
+                    const oldNode = oldNodes[i];
+                    newNode.element = oldNode.element;
+                    if (newNode.attr) {
+                        Object.keys(newNode.attr).forEach((eachAttrKey) => {
+                            const newAttrValue = newNode.attr[eachAttrKey];
+                            const oldAttrValue = oldNode.attr[eachAttrKey];
+                            if (newAttrValue !== oldAttrValue)
+                                newNode.element.setAttribute(eachAttrKey, newAttrValue);
+                        });
                     }
-                    if (
-                        attr.$html
-                    ) {
-                        element.innerHTML = attr.$html;
-                        delete eachNode.attr.$html;
-                        skipChildren = true;
+                    if (newNode.$text && newNode.$text !== oldNode.$text) {
+                        newNode.element.textContent = newNode.$text;
                     }
-                    element.attr(attr);
+                    if (newNode.children) {
+                        render(newNode.children, oldNode.children);
+                    }
                 }
-                if (!skipChildren && eachNode.children) {
-                    render(eachNode.children, element);
-                }
-                eachFragment.appendChild(element);
-            });
-            container.appendChild(eachFragment);
-        })(nodes, document.querySelector('doc-create'));
+            })(nodes, this.nodes);
+        } else {
+            this.root = root;
+            create(nodes, root);
+        }
+
+        this.nodes = nodes;
     }
+
+    nodes = [];
 };

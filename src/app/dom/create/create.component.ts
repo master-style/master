@@ -9,41 +9,48 @@ export class CreateComponent implements OnInit {
 
     constructor() { }
 
+    times = 0;
+    performanceTime = 0;
+
     ngOnInit(): void {
+        const template = () => [
+            'div', { class: 'shine' },
+            'div', { class: 'shine', $text: this.times, name: this.times },
+            'div', { class: 'shine', $text: '1' }, [
+                'div', {
+                    class: 'shine'
+                },
+                'div', { class: 'shine', $text: '2' },
+                'div', { class: 'shine', $text: '2' },
+                'div', { class: 'shine', $text: '2' }, [
+                    'div', { class: 'shine', $text: '3' },
+                    'div', { class: 'shine', $text: '3' }, [
+                        'div', { class: 'shine', $text: '4' }, [
+                            'div', { class: 'shine', $text: '5' }
+                        ]
+                    ]
+                ],
+                'div', { class: 'shine', $text: '2', $html: '<article>love</article>' }
+            ],
+            'div', { class: 'shine', $text: '1' },
+            'div', { class: 'shine', $text: '1' },
+            'div', { class: 'shine', $text: '1' }, [
+                'div', { class: 'shine', $text: '2' },
+            ],
+            'div', { class: 'shine', $text: '1' }
+        ];
+
+        const render1 = new Master.Render();
+
+        const container = document.querySelector('doc-create');
+
+        setInterval(() => {
+            this.times++;
+            const t1 = performance.now();
+            render1.run(template, container);
+            this.performanceTime = performance.now() - t1;
+        }, 1000);
+
     }
 
 }
-
-const template = () => [
-    'div', { class: 'shine', $text: '1' }, [
-        'div', {
-            class: 'shine',
-            $text: '2'
-        },
-        'div', { class: 'shine', $text: '2' },
-        'div', { class: 'shine', $text: '2' },
-        'div', { class: 'shine', $text: '2' }, [
-            'div', { class: 'shine', $text: '3' },
-            'div', { class: 'shine', $text: '3' }, [
-                'div', { class: 'shine', $text: '4' }, [
-                    'div', { class: 'shine', $text: '5' }
-                ]
-            ]
-        ],
-        'div', { class: 'shine', $text: '2', $html: '<article>love</article>' }
-    ],
-    'div', { class: 'shine', $text: '1' },
-    'div', { class: 'shine', $text: '1' },
-    'div', { class: 'shine', $text: '1' }, [
-        'div', { class: 'shine', $text: '2' },
-    ],
-    'div', { class: 'shine', $text: '1' }
-];
-
-const render1 = new Master.Render();
-
-setTimeout(() => {
-    console.time('t1');
-    render1.run(template);
-    console.timeEnd('t1');
-}, 1000);
