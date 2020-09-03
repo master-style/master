@@ -36,31 +36,7 @@ window.Master = function (selector: string, attr?: { [key: string]: any }, ...ch
 // - 局部更新 text 異動
 // - 局部更新 node 異動 ( tagName /  )
 
-const template = () => [
-    'div', { class: 'shine', $text: '1' }, [
-        'div', {
-            class: 'shine',
-            $text: '2'
-        },
-        'div', { class: 'shine', $text: '2' },
-        'div', { class: 'shine', $text: '2' },
-        'div', { class: 'shine', $text: '2' }, [
-            'div', { class: 'shine', $text: '3' },
-            'div', { class: 'shine', $text: '3' }, [
-                'div', { class: 'shine', $text: '4' }, [
-                    'div', { class: 'shine', $text: '5' }
-                ]
-            ]
-        ],
-        'div', { class: 'shine', $text: '2', $html: '<article>love</article>' }
-    ],
-    'div', { class: 'shine', $text: '1' },
-    'div', { class: 'shine', $text: '1' },
-    'div', { class: 'shine', $text: '1' }, [
-        'div', { class: 'shine', $text: '2' },
-    ],
-    'div', { class: 'shine', $text: '1' }
-];
+
 
 interface cache {
     tag: string,
@@ -123,11 +99,3 @@ Master.Render = class MasterRender {
         })(nodes, document.querySelector('doc-create'));
     }
 };
-
-const render1 = new Master.Render();
-
-setTimeout(() => {
-    console.time('t1');
-    render1.run(template);
-    console.timeEnd('t1');
-}, 1000);

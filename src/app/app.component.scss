@@ -5,12 +5,12 @@
 .shine {
     animation: shine .5s linear;
     display: block;
-    height: 50px;
+    padding: .8rem;
+    border: 1px solid rgba(255,255,255,.1);
     background-color: rgba(255, 255, 255, .1);
-    margin-bottom: 50px;
-
+    margin-top: .4rem;
     .shine {
-        margin-left: 1rem;
+        margin-top: .4rem;
     }
 }
 
