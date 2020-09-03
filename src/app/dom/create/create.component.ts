@@ -13,7 +13,7 @@ export class CreateComponent implements OnInit {
     performanceTime = 0;
     firstPerformanceTime = 0;
 
-    items: any = ['A', 'B', 'C'];
+    items: any = [];
 
     ngOnInit(): void {
         const template = () => [
@@ -57,7 +57,12 @@ export class CreateComponent implements OnInit {
             if (this.times === 1) {
                 this.firstPerformanceTime = this.performanceTime;
             }
-            this.items.push(this.times);
+            if (this.times % 4 === 0) {
+                this.times = 0;
+                this.items = [];
+            } else {
+                this.items.push(this.times);
+            }
         }, 1000);
 
     }

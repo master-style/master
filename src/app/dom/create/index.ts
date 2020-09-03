@@ -102,7 +102,6 @@ Master.Render = class MasterRender {
                     const children = current().reduce((acc, currentValue) => {
                         return acc.concat(currentValue);
                     }, []);
-                    console.log(children);
                     generate(children, node.children = []);
                 } else if (currentType === 'object') {
                     const attr = current;
@@ -120,7 +119,7 @@ Master.Render = class MasterRender {
         })(createTemplate(), nodes);
 
         if (this.nodes && this.root === root) {
-            (function render(newNodes, oldNodes) {
+            (function render(newNodes, oldNodes, parent) {
                 // tslint:disable-next-line: prefer-for-of
                 for (let i = 0; i < newNodes.length; i++) {
                     const newNode = newNodes[i];
@@ -143,7 +142,7 @@ Master.Render = class MasterRender {
                                 .forEach((deletedOldNode) => deletedOldNode.element.remove());
                         }
                         if (newNode.children) {
-                            render(newNode.children, oldNode.children);
+                            render(newNode.children, oldNode.children, newNode.element);
                         }
                     } else {
                         newNode.element = document.createElement(newNode.tag);
@@ -158,12 +157,20 @@ Master.Render = class MasterRender {
                             newNode.element.textContent = newNode.$text;
                         }
                         if (newNode.children) {
-                            render(newNode.children, oldNode.children);
+                            render(newNode.children, oldNode.children, newNode.element);
                         }
-                        newNodes[i - 1].element.after(newNode.element);
+                        if (newNodes[i - 1]) {
+                            newNodes[i - 1].element.after(newNode.element);
+                        } else {
+                            parent.append(newNode.element);
+                        }
                     }
                 }
-            })(nodes, this.nodes);
+                if (!newNodes.length && oldNodes.length) {
+                    oldNodes
+                        .forEach((deletedOldNode) => deletedOldNode.element.remove());
+                }
+            })(nodes, this.nodes, root);
         } else {
             this.root = root;
             create(nodes, root);
