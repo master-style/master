@@ -239,7 +239,9 @@
 </m-table>
 
 <h2 id="property">{{ 'property' | translate }}</h2>
-<doc-prop></doc-prop>
+<doc-prop [types]="['boolean']" [attr]="'disabled'" [description]="description">
+    <ng-template #description>The user cannot interact with the button.</ng-template>
+</doc-prop>
 <div class="demo">
     <div class="demo-body">
         <div class="y:sm c:center">

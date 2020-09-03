@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <td colspan="2">
-                    <h3 id="property-disabled">
+                    <h3 id="property-disabled" style="margin-bottom: 0">
                         <code class="bg:transparent"
                             style="font-size: inherit; padding: 0">.disabled</code>
                     </h3>
@@ -14,12 +14,14 @@
             <tr>
                 <th class="fit t:left">type</th>
                 <td>
-                    <m-chip class="theme+ sm">
-                        <div part="chip-head">
-                            <ion-icon name="text-outline"></ion-icon>
-                        </div>
-                        <code part="chip-body">boolean</code>
-                    </m-chip>
+                    <div class="y:xs">
+                        <m-chip class="x theme+ sm" *ngFor="let type of types">
+                            <div part="chip-head">
+                                <ion-icon [attr.name]="getTypeIcon(type)"></ion-icon>
+                            </div>
+                            <code part="chip-body">{{ getTypeString(type) }}</code>
+                        </m-chip>
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -33,7 +35,9 @@
             <tr>
                 <th class="fit t:left">description</th>
                 <td>
-                    <p class="remark f:xs" style="margin-bottom: 0">The user cannot interact with the button.</p>
+                    <p class="remark f:xs" style="margin-bottom: 0">
+                        <ng-container [ngTemplateOutlet]="description"></ng-container>
+                    </p>
                 </td>
             </tr>
         </tbody>
