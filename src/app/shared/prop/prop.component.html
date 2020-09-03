@@ -5,7 +5,7 @@
                 <td colspan="2">
                     <h3 id="property-disabled" style="margin-bottom: 0">
                         <code class="bg:transparent"
-                            style="font-size: inherit; padding: 0">.disabled</code>
+                            style="font-size: inherit; padding: 0">.{{ name }}</code>
                     </h3>
                 </td>
             </tr>
@@ -16,7 +16,7 @@
                 <td>
                     <div class="y:xs">
                         <m-chip class="x theme+ sm" *ngFor="let type of types">
-                            <div part="chip-head">
+                            <div part="chip-head" *ngIf="type !== undefined">
                                 <ion-icon [attr.name]="getTypeIcon(type)"></ion-icon>
                             </div>
                             <code part="chip-body">{{ getTypeString(type) }}</code>
@@ -28,16 +28,14 @@
                 <th class="fit t:left">attribute</th>
                 <td>
                     <m-chip class="theme+ sm">
-                        <code part="chip-body">disabled</code>
+                        <code part="chip-body">{{ camelToKebabCase(name) }}</code>
                     </m-chip>
                 </td>
             </tr>
-            <tr>
+            <tr *ngIf="description">
                 <th class="fit t:left">description</th>
                 <td>
-                    <p class="remark f:xs" style="margin-bottom: 0">
-                        <ng-container [ngTemplateOutlet]="description"></ng-container>
-                    </p>
+                    <p class="remark f:xs" style="margin-bottom: 0" [innerHTML]="description"></p>
                 </td>
             </tr>
         </tbody>

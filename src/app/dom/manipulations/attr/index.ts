@@ -19,7 +19,8 @@ ElementPrototype.attr = function (param?: any, value?: any): any {
         for (const key in param) {
             const attrKey = camelToKebabCase(key);
             const attrValue = param[key];
-            element.setAttribute(attrKey, attrValue);
+            if (attrValue !== undefined)
+                element.setAttribute(attrKey, attrValue);
         }
         return element;
     } else if (typeof param === 'string') {

@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
+import camelToKebabCase from '@utils/camel-to-kebab-case';
+
 @Component({
     selector: 'doc-prop',
     templateUrl: './prop.component.html',
@@ -7,15 +9,15 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 })
 export class PropComponent implements OnInit {
 
+    @Input() name: string;
     @Input() types: [];
-    @Input() attr: string;
     @Input() description: string;
+
+    camelToKebabCase = camelToKebabCase;
 
     constructor() { }
 
-    ngOnInit(): void {
-        console.log(this.description);
-    }
+    ngOnInit(): void {}
 
     getTypeIcon(value) {
         switch (value) {
@@ -45,6 +47,8 @@ export class PropComponent implements OnInit {
             case 'array':
             case 'number':
                 return value;
+            case undefined:
+                return 'undefined';
             default:
                 return "'" + value + "'";
         }

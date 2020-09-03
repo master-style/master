@@ -1,7 +1,7 @@
 <div class="demo">
     <div class="demo-body">
         <div class="y:sm c:center">
-            <m-button class="x blue raised">
+            <m-button class="x blue raised" href="google.com" disabled>
                 submit
                 <ion-icon part="button-foot" name="chevron-forward"></ion-icon>
             </m-button>
@@ -239,16 +239,35 @@
 </m-table>
 
 <h2 id="property">{{ 'property' | translate }}</h2>
-<doc-prop [types]="['boolean']" [attr]="'disabled'" [description]="description">
-    <ng-template #description>The user cannot interact with the button.</ng-template>
+
+<doc-prop [name]="'disabled'" [types]="['boolean']"
+    [description]="'The user cannot interact with the button.'">
 </doc-prop>
 <div class="demo">
     <div class="demo-body">
         <div class="y:sm c:center">
-            <m-button class="x" disabled>
-                submit
+            <m-button class="x" disabled>submit</m-button>
+        </div>
+    </div>
+</div>
+
+<doc-prop [name]="'loading'" [types]="['boolean']"></doc-prop>
+<div class="demo">
+    <div class="demo-body">
+        <div class="y:sm c:center">
+            <m-button class="x theme+" loading>submit</m-button>
+        </div>
+    </div>
+</div>
+
+<doc-prop [name]="'download'" [types]="['string', undefined]" [description]="'This attribute instructs browsers to download a URL instead of navigating to it, so the user will be prompted to save it as a local file. If the attribute has a value, it is used as the pre-filled file name in the Save prompt (the user can still change the file name if they want).'"></doc-prop>
+<div class="demo">
+    <div class="demo-body">
+        <div class="y:sm c:center">
+            <m-button id="button" class="x theme+" download="雞掰">
+                <ion-icon name="cloud-download-outline" part="button-head"></ion-icon>
+                download
             </m-button>
         </div>
     </div>
 </div>
-<doc-prop></doc-prop>

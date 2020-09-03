@@ -7,4 +7,5 @@ interface AttrOption {
     propKey?: string;
     setProp?: Function;
     set?: Function;
+    default?: any;
 }

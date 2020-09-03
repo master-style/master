@@ -9,7 +9,7 @@ const DEFAULT_ATTR_OPTION = {
 
 export function Attr(option?: AttrOption) {
     option = { ...DEFAULT_ATTR_OPTION, ...option };
-    return (target: any, propKey: string): any => {
+    return function (target: any, propKey: string): any {
         option.propKey = propKey;
         const _propKey = '_' + propKey;
         const attrKey = option.key = camelToKebabCase(propKey);
@@ -23,16 +23,23 @@ export function Attr(option?: AttrOption) {
         if (!constructor.attrOptions) {
             constructor.attrOptions = {};
         }
-        option.set = function (value) {
-            option.toggle
-                ? this.toggleAttribute(attrKey, !!value)
-                : this.setAttribute(attrKey, value);
-            if (option.shadow) {
-                option.toggle
-                    ? this.shadow.toggleAttribute(attrKey, !!value)
-                    : this.shadow.setAttribute(attrKey, value);
+        option.set = function (value: any, fromAttr?) {
+            if (option.toggle) {
+                if (!fromAttr) {
+                    this.toggleAttribute(attrKey, !!value);
+                }
+                if (option.shadow) {
+                    this.shadow.toggleAttribute(attrKey, !!value);
+                }
+            } else if (value !== undefined) {
+                if (!fromAttr) {
+                    this.setAttribute(attrKey, value);
+                }
+                if (option.shadow) {
+                    this.shadow.setAttribute(attrKey, value);
+                }
             }
-        }
+        };
         const propDescriptor = {
             get() {
                 return _propKey[this];
@@ -43,12 +50,10 @@ export function Attr(option?: AttrOption) {
                     constructor[propKey].call(this, value, this[_propKey]);
                 }
                 this[_propKey] = value;
-                if (option.reflect && !fromAttr && this.isConnected) {
-                    option.set.call(this, value);
+                if (option.reflect && this.isConnected) {
+                    option.set.call(this, value, fromAttr);
                 }
-            },
-            configurable: true,
-            enumerable: true
+            }
         };
         option.setProp = propDescriptor.set;
         constructor.attrOptions[attrKey] = option;

@@ -1,6 +1,6 @@
 @import '../../../variables';
 
-button {
+[part=shadow] {
     background-color: var(--bg-theme);
     position: relative;
     contain: style;
@@ -41,7 +41,7 @@ button {
     }
 
     &[disabled] {
-        cursor: no-drop;
+        pointer-events: none !important;
         color: var(--f-fadest) !important;
         background-color: var(--bg-disabled) !important;
         border-color: transparent !important;
@@ -121,13 +121,13 @@ button {
 }
 
 :host(.outlined) {
-    button {
+    [part=shadow] {
         background-color: transparent;
         border: 1px solid var(--b-theme, var(--b-fadest));
     }
 
     @media (any-hover: hover) {
-        button:hover:not([loading]):not([disabled]) {
+        [part=shadow]:hover:not([loading]):not([disabled]) {
             border-color: var(--b-theme-hover);
         }
     }
@@ -136,11 +136,15 @@ button {
 :host([loading]) {
     cursor: progress !important;
 
-    button {
+    [part=shadow] {
         pointer-events: none !important;
         color: transparent !important;
         box-shadow: none !important;
     }
+}
+
+:host([disabled]) {
+    cursor: no-drop !important;
 }
 
 ::slotted([part=button-head]) {
