@@ -36,31 +36,30 @@ window.Master = function (selector: string, attr?: { [key: string]: any }, ...ch
 // - 局部更新 text 異動
 // - 局部更新 node 異動 ( tagName /  )
 
-
 const template = () => [
-    'div', { class: 'test', $text: '1' }, [
+    'div', { class: 'shine', $text: '1' }, [
         'div', {
-            class: 'blue',
+            class: 'shine',
             $text: '2'
         },
-        'div', { $text: '2' },
-        'div', { $text: '2' },
-        'div', { $text: '2' }, [
-            'div', { $text: '3' },
-            'div', { $text: '3' }, [
-                'div', { $text: '4' }, [
-                    'div', { $text: '5' }
+        'div', { class: 'shine', $text: '2' },
+        'div', { class: 'shine', $text: '2' },
+        'div', { class: 'shine', $text: '2' }, [
+            'div', { class: 'shine', $text: '3' },
+            'div', { class: 'shine', $text: '3' }, [
+                'div', { class: 'shine', $text: '4' }, [
+                    'div', { class: 'shine', $text: '5' }
                 ]
             ]
         ],
-        'div', { $text: '2', $html: '<div style="width: 100px; height: 50px; background-color: red"></div>' }
+        'div', { class: 'shine', $text: '2', $html: '<article>love</article>' }
     ],
-    'div', { $text: '1' },
-    'div', { $text: '1' },
-    'div', { $text: '1' }, [
-        'div', { $text: '2' },
+    'div', { class: 'shine', $text: '1' },
+    'div', { class: 'shine', $text: '1' },
+    'div', { class: 'shine', $text: '1' }, [
+        'div', { class: 'shine', $text: '2' },
     ],
-    'div', { $text: '1' }
+    'div', { class: 'shine', $text: '1' }
 ];
 
 interface cache {
@@ -121,30 +120,14 @@ Master.Render = class MasterRender {
                 eachFragment.appendChild(element);
             });
             container.appendChild(eachFragment);
-        })(nodes, document.documentElement);
+        })(nodes, document.querySelector('doc-create'));
     }
 };
 
-setTimeout(() => {
-
-    document.documentElement.innerHTML = '';
-}, 1000);
 const render1 = new Master.Render();
 
 setTimeout(() => {
     console.time('t1');
     render1.run(template);
     console.timeEnd('t1');
-}, 3000);
-
-// import { html, render } from 'lit-html';
-
-
-// setTimeout(() => {
-//     console.time('t1');
-//     const result = myTemplate();
-//     render(result, document.documentElement);
-//     console.timeEnd('t1');
-// }, 3000);
-
-// let myTemplate = () => html`<div class="test">1<div name="fuck" class="blue">2</div><div>2</div><div>2</div><div>2<div>3</div><div>3<div>4<div>5</div></div></div></div><div>2</div></div><div>1</div><div>1</div><div>1<div>2</div></div><div>1</div>`;
+}, 1000);
