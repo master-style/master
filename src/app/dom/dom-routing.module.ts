@@ -13,35 +13,36 @@ import { FilterComponent } from './traversings/filter/filter.component';
 import { ForEachComponent } from './traversings/for-each/for-each.component';
 import { IndexOfComponent } from './traversings/index-of/index-of.component';
 import { HtmlComponent } from './manipulations/html/html.component';
+import { RouteResolver } from '@shared/route.resolver';
 
 export const domRoutes: Routes = [
     { path: 'DOM' },
     {
         path: 'guideline', children: [
-            { path: 'installation', component: InstallationComponent },
-            { path: 'coding-style', component: CodingStyleComponent }
+            { path: 'installation', component: InstallationComponent, resolve: { route: RouteResolver } },
+            { path: 'coding-style', component: CodingStyleComponent, resolve: { route: RouteResolver } }
         ]
     },
-    { path: 'create', component: CreateComponent },
+    { path: 'create', component: CreateComponent, resolve: { route: RouteResolver } },
     {
         path: 'event-listener', children: [
-            { path: 'on', component: OnComponent },
-            { path: 'off', component: OffComponent }
+            { path: 'on', component: OnComponent, resolve: { route: RouteResolver } },
+            { path: 'off', component: OffComponent, resolve: { route: RouteResolver } }
         ]
     },
     {
         path: 'manipulations', children: [
-            { path: 'attr', component: AttrComponent },
-            { path: 'class', component: ClassComponent },
-            { path: 'css', component: CssComponent },
-            { path: 'html', component: HtmlComponent }
+            { path: 'attr', component: AttrComponent, resolve: { route: RouteResolver } },
+            { path: 'class', component: ClassComponent, resolve: { route: RouteResolver } },
+            { path: 'css', component: CssComponent, resolve: { route: RouteResolver } },
+            { path: 'html', component: HtmlComponent, resolve: { route: RouteResolver } }
         ]
     },
     {
         path: 'traversings', children: [
-            { path: 'filter', component: FilterComponent },
-            { path: 'for-each', component: ForEachComponent },
-            { path: 'index-of', component: IndexOfComponent }
+            { path: 'filter', component: FilterComponent, resolve: { route: RouteResolver } },
+            { path: 'for-each', component: ForEachComponent, resolve: { route: RouteResolver } },
+            { path: 'index-of', component: IndexOfComponent, resolve: { route: RouteResolver } }
         ]
     }
 ];
