@@ -49,7 +49,7 @@ interface cache {
 
 const fragment = document.createDocumentFragment();
 
-const create = function(eachNodes, container) {
+const create = function (eachNodes, container) {
     const eachFragment = fragment.cloneNode();
     eachNodes.forEach((node) => {
         const element = document.createElement(node.tag);
@@ -59,9 +59,7 @@ const create = function(eachNodes, container) {
         if (node.$text !== undefined) {
             element.textContent = node.$text;
         }
-        if (
-            attr.$html !== undefined
-        ) {
+        if (attr.$html !== undefined) {
             element.innerHTML = node.$html;
             skipChildren = true;
         }
@@ -91,23 +89,28 @@ Master.Render = class MasterRender {
             // tslint:disable-next-line: prefer-for-of
             for (let i = 0; i < layer.length; i++) {
                 const current = layer[i];
-                if (typeof current === 'string') {
+                const currentType = typeof current;
+                if (currentType === 'string') {
                     node = {
                         tag: current
                     };
                     trees.push(node);
                 } else if (Array.isArray(current)) {
+                    generate(current, node.children = []);
+                } else if (currentType === 'function') {
                     node.children = [];
-                    generate(current, node.children);
-                } else if (typeof current === 'object') {
+                    const children = current().reduce((acc, currentValue) => {
+                        return acc.concat(currentValue);
+                    }, []);
+                    console.log(children);
+                    generate(children, node.children = []);
+                } else if (currentType === 'object') {
                     const attr = current;
                     if (attr.$text !== undefined) {
                         node.$text = attr.$text;
                         delete attr.$text;
                     }
-                    if (
-                        attr.$html !== undefined
-                    ) {
+                    if (attr.$html !== undefined) {
                         node.$html = attr.$html;
                         delete attr.$html;
                     }
@@ -122,20 +125,42 @@ Master.Render = class MasterRender {
                 for (let i = 0; i < newNodes.length; i++) {
                     const newNode = newNodes[i];
                     const oldNode = oldNodes[i];
-                    newNode.element = oldNode.element;
-                    if (newNode.attr) {
-                        Object.keys(newNode.attr).forEach((eachAttrKey) => {
-                            const newAttrValue = newNode.attr[eachAttrKey];
-                            const oldAttrValue = oldNode.attr[eachAttrKey];
-                            if (newAttrValue !== oldAttrValue)
-                                newNode.element.setAttribute(eachAttrKey, newAttrValue);
-                        });
-                    }
-                    if (newNode.$text && newNode.$text !== oldNode.$text) {
-                        newNode.element.textContent = newNode.$text;
-                    }
-                    if (newNode.children) {
-                        render(newNode.children, oldNode.children);
+                    if (oldNode) {
+                        newNode.element = oldNode.element;
+                        if (newNode.attr) {
+                            Object.keys(newNode.attr).forEach((eachAttrKey) => {
+                                const newAttrValue = newNode.attr[eachAttrKey];
+                                const oldAttrValue = oldNode?.attr[eachAttrKey];
+                                if (newAttrValue !== oldAttrValue)
+                                    newNode.element.setAttribute(eachAttrKey, newAttrValue);
+                            });
+                        }
+                        if (newNode.$text && newNode.$text !== oldNode.$text) {
+                            newNode.element.textContent = newNode.$text;
+                        }
+                        if (!newNodes[i + 1]) {
+                            oldNodes.splice(i + 1)
+                                .forEach((deletedOldNode) => deletedOldNode.element.remove());
+                        }
+                        if (newNode.children) {
+                            render(newNode.children, oldNode.children);
+                        }
+                    } else {
+                        newNode.element = document.createElement(newNode.tag);
+                        if (newNode.attr) {
+                            Object.keys(newNode.attr).forEach((eachAttrKey) => {
+                                const newAttrValue = newNode.attr[eachAttrKey];
+                                if (newAttrValue)
+                                    newNode.element.setAttribute(eachAttrKey, newAttrValue);
+                            });
+                        }
+                        if (newNode.$text) {
+                            newNode.element.textContent = newNode.$text;
+                        }
+                        if (newNode.children) {
+                            render(newNode.children, oldNode.children);
+                        }
+                        newNodes[i - 1].element.after(newNode.element);
                     }
                 }
             })(nodes, this.nodes);

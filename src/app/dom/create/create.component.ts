@@ -13,6 +13,8 @@ export class CreateComponent implements OnInit {
     performanceTime = 0;
     firstPerformanceTime = 0;
 
+    items: any = ['A', 'B', 'C'];
+
     ngOnInit(): void {
         const template = () => [
             'div', { class: 'shine', $text: '1' },
@@ -21,7 +23,9 @@ export class CreateComponent implements OnInit {
                 'div', {
                     class: 'shine'
                 },
-                'div', { class: 'shine', $text: '2' },
+                'div', { class: 'shine' }, () => this.items.map((item) => [
+                    'div', { class: 'shine', $text: item }
+                ]),
                 'div', { class: 'shine', $text: '2' },
                 'div', { class: 'shine', $text: '2' }, [
                     'div', { class: 'shine', $text: '3' },
@@ -53,6 +57,7 @@ export class CreateComponent implements OnInit {
             if (this.times === 1) {
                 this.firstPerformanceTime = this.performanceTime;
             }
+            this.items.push(this.times);
         }, 1000);
 
     }
