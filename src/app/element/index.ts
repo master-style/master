@@ -12,8 +12,9 @@ export function Element(tag: string) {
                 // tslint:disable-next-line: forin
                 for (const eachAttrKey in attrOptions) {
                     const eachAttrOption: AttrOption = attrOptions[eachAttrKey];
+                    const eachPropValue = this['_' + eachAttrOption.propKey];
                     if (eachAttrOption.reflect) {
-                        eachAttrOption.set.call(this, eachAttrOption.propValue);
+                        eachAttrOption.set.call(this, eachPropValue);
                     }
                 }
             }

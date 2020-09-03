@@ -11,6 +11,7 @@ export function Attr(option?: AttrOption) {
     option = { ...DEFAULT_ATTR_OPTION, ...option };
     return (target: any, propKey: string): any => {
         option.propKey = propKey;
+        const _propKey = '_' + propKey;
         const attrKey = option.key = camelToKebabCase(propKey);
         const constructor = target.constructor;
         if (option.observe) {
@@ -34,14 +35,14 @@ export function Attr(option?: AttrOption) {
         }
         const propDescriptor = {
             get() {
-                return option.propValue;
+                return _propKey[this];
             },
             set(value, fromAttr?: boolean) {
-                if (option.propValue === value) return;
+                if (this[_propKey] === value) return;
                 if (propKey in constructor) {
-                    constructor[propKey].call(this, value, option.propValue);
+                    constructor[propKey].call(this, value, this[_propKey]);
                 }
-                option.propValue = value;
+                this[_propKey] = value;
                 if (option.reflect && !fromAttr && this.isConnected) {
                     option.set.call(this, value);
                 }
