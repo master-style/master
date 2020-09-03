@@ -10,6 +10,7 @@ m-table {
 
     thead th {
         vertical-align: middle;
+        border-width: 2px !important;
     }
 
     table {
@@ -43,7 +44,6 @@ m-table {
         padding: $sm;
         font-weight: normal;
         font-size: $f-xs;
-        border-width: 2px !important;
     }
 
     &.sm {
@@ -86,13 +86,19 @@ m-table {
             &:not(:last-child) {
                 border-right: 1px solid var(--b-fadest);
             }
+        }
 
-            &:first-child {
-                padding-left: 0;
-            }
+        &.neat {
+            th,
+            td {
 
-            &:last-child {
-                padding-right: 0;
+                &:first-child {
+                    padding-left: 0;
+                }
+
+                &:last-child {
+                    padding-right: 0;
+                }
             }
         }
     }

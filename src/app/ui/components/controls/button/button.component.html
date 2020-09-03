@@ -239,21 +239,14 @@
 </m-table>
 
 <h2 id="property">{{ 'property' | translate }}</h2>
-<div class="y:sm c:middle">
-    <div class="x:fill">
-        <h3 id="property-disabled" class="my:no">
-            <code style="font-size: inherit; line-height: 1.8">.disabled</code>
-        </h3>
-        <div class="y:xs">
-            <m-chip class="x outlined theme+ sm">
-                <div part="chip-head">attr</div>
-                <code part="chip-body">disabled</code>
-            </m-chip>
-            <m-chip class="x outlined theme+ sm">
-                <i part="chip-head" class="i-check"></i>
-                <code part="chip-body">boolean</code>
-            </m-chip>
+<doc-prop></doc-prop>
+<div class="demo">
+    <div class="demo-body">
+        <div class="y:sm c:center">
+            <m-button class="x" disabled>
+                submit
+            </m-button>
         </div>
     </div>
 </div>
-<hr class="mt">
+<doc-prop></doc-prop>
