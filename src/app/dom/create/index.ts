@@ -36,12 +36,10 @@ window.Master = function (selector: string, attr?: { [key: string]: any }, ...ch
 // - 局部更新 text 異動
 // - 局部更新 node 異動 ( tagName /  )
 
-this.color = 'fuck';
 
 const template = () => [
     'div', { class: 'test', $text: '1' }, [
         'div', {
-            name: this.color,
             class: 'blue',
             $text: '2'
         },
@@ -55,7 +53,7 @@ const template = () => [
                 ]
             ]
         ],
-        'div', { $text: '2' }
+        'div', { $text: '2', $html: '<div style="width: 100px; height: 50px; background-color: red"></div>' }
     ],
     'div', { $text: '1' },
     'div', { $text: '1' },
@@ -75,7 +73,6 @@ interface cache {
 Master.Render = class MasterRender {
     run(createTemplate) {
         // tslint:disable-next-line: prefer-for-of
-        console.time('t1');
         const nodes: cache[] = [];
         (function generate(layer: any[], trees: cache[]) {
             let element: cache;
@@ -102,30 +99,52 @@ Master.Render = class MasterRender {
             eachNodes.forEach((eachNode) => {
                 const element = document.createElement(eachNode.tag);
                 eachNode.element = element;
-                if (eachNode.attr) {
-                    if (eachNode.attr.$text) {
-                        element.textContent = eachNode.attr['$text'];
+                const attr = eachNode.attr;
+                let skipChildren = false;
+                if (attr) {
+                    if (attr.$text) {
+                        element.textContent = attr['$text'];
                         delete eachNode.attr.$text;
                     }
-                    element.attr(eachNode.attr);
+                    if (
+                        attr.$html
+                    ) {
+                        element.innerHTML = attr.$html;
+                        delete eachNode.attr.$html;
+                        skipChildren = true;
+                    }
+                    element.attr(attr);
                 }
-                if (eachNode.children) {
+                if (!skipChildren && eachNode.children) {
                     render(eachNode.children, element);
                 }
                 eachFragment.appendChild(element);
             });
             container.appendChild(eachFragment);
-        })(nodes, target);
-
-        console.timeEnd('t1');
-        console.log(caches);
+        })(nodes, document.documentElement);
     }
 };
 
-const render = new Master.Render();
-let target;
-setTimeout(()=> {
+setTimeout(() => {
 
-    target = document.querySelector('doc-create');
-    render.run(template);
+    document.documentElement.innerHTML = '';
 }, 1000);
+const render1 = new Master.Render();
+
+setTimeout(() => {
+    console.time('t1');
+    render1.run(template);
+    console.timeEnd('t1');
+}, 3000);
+
+// import { html, render } from 'lit-html';
+
+
+// setTimeout(() => {
+//     console.time('t1');
+//     const result = myTemplate();
+//     render(result, document.documentElement);
+//     console.timeEnd('t1');
+// }, 3000);
+
+// let myTemplate = () => html`<div class="test">1<div name="fuck" class="blue">2</div><div>2</div><div>2</div><div>2<div>3</div><div>3<div>4<div>5</div></div></div></div><div>2</div></div><div>1</div><div>1</div><div>1<div>2</div></div><div>1</div>`;
