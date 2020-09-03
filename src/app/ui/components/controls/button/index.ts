@@ -7,9 +7,7 @@ const SLOT = 'slot';
 @Element('m-' + NAME)
 export class MasterButtonElement extends HTMLElement {
 
-    shadow = $(NAME, { part: 'shadow' },
-        $(SLOT, {}),
-    );
+    shadow: Element;
 
     // href first
     @Attr({ shadow: true })
@@ -22,21 +20,25 @@ export class MasterButtonElement extends HTMLElement {
     loading: boolean;
 
     @Attr({ shadow: true })
-    download: string = 'fuck';
+    download: string;
 
     constructor() {
         super();
-        attachShadow(this, css)
-            .appendChild(this.shadow);
+        attachShadow(this, css);
     }
 
-    onConnected() { }
+    onConnected() {
+        // console.log(this);
+        if (!this.shadow) MasterButtonElement.href.call(this, this.href);
+    }
 
-    attributeChangedCallback(attrKey, value, oldValue) {
-        if (attrKey === 'href' && value && this.shadow.tagName !== 'A') {
+    attributeChangedCallback(attrKey, value, oldValue) { }
+
+    protected static href = function (value: boolean) {
+        const renewShadow = (tag) => {
             const attrOptions = MasterButtonElement['attrOptions'];
-            this.shadow.remove();
-            this.shadow = $('A', {
+            if (this.shadow) this.shadow.remove();
+            this.shadow = $(tag, {
                 part: 'shadow',
                 ...Object.keys(attrOptions)
                     .reduce((attrs, eachAttrKey) => {
@@ -49,9 +51,13 @@ export class MasterButtonElement extends HTMLElement {
                 $(SLOT, {})
             );
             this.shadowRoot.appendChild(this.shadow);
-        }
-    }
+        };
 
-    // protected static loading = function (value: boolean, oldValue: boolean) { };
+        if (typeof value === 'string' && this.shadow?.tagName !== 'A') {
+            renewShadow('A');
+        } else if (!this.shadow || this.shadow?.tagName === 'A') {
+            renewShadow('BUTTON');
+        }
+    };
 
 }

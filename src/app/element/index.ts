@@ -1,6 +1,18 @@
 export * from './attr';
 
-import parseStr from '@utils/parse-str';
+const parseAttrValue = (value, toggle) => {
+    if (value === undefined) {
+        return value;
+    } else if (toggle) {
+        return value === null ? false : true;
+    } else {
+        if (value === '' || value === null) {
+            return value;
+        } else {
+            return isNaN(+value) ? value : +value;
+        }
+    }
+};
 
 export function Element(tag: string) {
     return function (constructor: any) {
@@ -14,16 +26,11 @@ export function Element(tag: string) {
         const attributeChangedCallback = prototype.attributeChangedCallback;
         prototype.attributeChangedCallback = function (attrKey, oldValue, value) {
             if (value === oldValue) return;
-            console.log('changed:', attrKey, value, oldValue);
+            // console.log('changed:', attrKey, value, oldValue);
             const attrOption = attrOptions[attrKey];
-            if (attrOption.toggle) {
-                oldValue = oldValue === null ? false : true;
-                value = value === null ? false : true;
-            } else {
-                oldValue = parseStr(oldValue);
-                value = parseStr(value);
-            }
-            console.log('changed:', attrKey, value, oldValue);
+            value = parseAttrValue(value, attrOption.toggle);
+            oldValue = parseAttrValue(oldValue, attrOption.toggle);
+            // console.log('changed:', attrKey, value, oldValue);
             attrOption.setProp.call(this, value, true);
             if (attributeChangedCallback) attributeChangedCallback.call(this, attrKey, value, oldValue);
             if (onAttrChanged) onAttrChanged.call(this, attrKey, value, oldValue);
@@ -31,12 +38,14 @@ export function Element(tag: string) {
 
         prototype.connectedCallback = function () {
             if (attrOptions) {
+                const attributes = this.attributes;
                 // tslint:disable-next-line: forin
                 for (const eachAttrKey in attrOptions) {
                     const eachAttrOption: AttrOption = attrOptions[eachAttrKey];
                     const eachPropValue = this['_' + eachAttrOption.propKey];
-                    console.log('connected:', eachAttrKey, eachPropValue);
-                    if (eachAttrOption.reflect && eachPropValue) {
+                    const eachAttrValue = parseAttrValue(attributes[eachAttrKey]?.value, eachAttrOption.toggle);
+                    // console.log('connected:', eachAttrKey, eachPropValue);
+                    if (eachAttrOption.reflect && eachPropValue !== eachAttrValue) {
                         eachAttrOption.set.call(this, eachPropValue);
                     }
                 }
