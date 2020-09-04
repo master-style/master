@@ -125,7 +125,7 @@ class MasterTemplate {
         })(this.template(), nodes);
 
         if (this.nodes && this.container === container) {
-            (function render(newNodes, oldNodes, parent) {
+            (function renderNode(newNodes, oldNodes, parent) {
                 if (!newNodes.length && oldNodes.length) {
                     oldNodes
                         .forEach((deletedOldNode) => deletedOldNode.element.remove());
@@ -153,7 +153,7 @@ class MasterTemplate {
                                     .forEach((deletedOldNode) => deletedOldNode.element.remove());
                             }
                             if (newNode.children) {
-                                render(newNode.children, oldNode.children, newNode.element);
+                                renderNode(newNode.children, oldNode.children, newNode.element);
                             }
                         } else {
                             newNode.element = document.createElement(newNode.tag);
@@ -172,7 +172,7 @@ class MasterTemplate {
                                 newNode.element.textContent = newNode.$text;
                             }
                             if (newNode.children) {
-                                render(newNode.children, oldNode?.children, newNode.element);
+                                renderNode(newNode.children, oldNode?.children, newNode.element);
                             }
                             if (newNodes[i - 1]) {
                                 newNodes[i - 1].element.after(newNode.element);

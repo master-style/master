@@ -25,7 +25,7 @@ export function Attr(option?: AttrOption) {
         }
         const propDescriptor = {
             get() {
-                return _propKey[this];
+                return this[_propKey];
             },
             set(value, fromAttr?: boolean) {
                 if (this[_propKey] === value) return;
@@ -35,10 +35,12 @@ export function Attr(option?: AttrOption) {
                 this[_propKey] = value;
                 if (this.isConnected) {
                     if (option.reflect) {
-                        if (!fromAttr) this.attr(value);
+                        if (!fromAttr) {
+                            this.attr(attrKey, value);
+                        };
                     }
                     if (option.render && this.render) {
-                        this.render.call(this);
+                        this.render();
                     }
                 }
             }
