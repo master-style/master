@@ -39,15 +39,13 @@ window.Master = function (selector: any, attr?: { [key: string]: any }, ...child
 // - 局部更新 text 異動
 // - 局部更新 node 異動 ( tagName /  )
 
-
-
-interface cache {
-    tag: string,
-    attr?: { [key: string]: any },
-    children?: cache[],
-    element?: Element,
-    $html?: string,
-    $text?: string
+interface TemplateNode {
+    tag: string;
+    attr?: { [key: string]: any };
+    children?: TemplateNode[];
+    element?: Element;
+    $html?: string;
+    $text?: string;
 };
 
 const create = function (eachNodes, parent) {
@@ -79,19 +77,20 @@ const create = function (eachNodes, parent) {
 
 class MasterTemplate {
 
-    constructor(private template) { }
+    constructor(
+        private template
+    ) { }
 
-    container;
-
-    nodes = [];
+    container: HTMLElement;
+    nodes: TemplateNode[] = [];
 
     render(container) {
 
         // tslint:disable-next-line: prefer-for-of
-        const nodes: cache[] = [];
+        const nodes: TemplateNode[] = [];
 
-        (function generate(layer: any[], trees: cache[]) {
-            let node: cache;
+        (function generate(layer: any[], trees: TemplateNode[]) {
+            let node: TemplateNode;
             // tslint:disable-next-line: prefer-for-of
             for (let i = 0; i < layer.length; i++) {
                 const current = layer[i];
@@ -132,52 +131,52 @@ class MasterTemplate {
                 } else {
                     // tslint:disable-next-line: prefer-for-of
                     for (let i = 0; i < newNodes.length; i++) {
-                        const newNode = newNodes[i];
+                        const node = newNodes[i];
                         let oldNode = oldNodes ? oldNodes[i] : null;
-                        if (oldNode && newNode.tag === oldNode.tag) {
-                            newNode.element = oldNode.element;
-                            if (newNode.attr) {
-                                Object.keys(newNode.attr).forEach((eachAttrKey) => {
-                                    const newAttrValue = newNode.attr[eachAttrKey];
+                        if (oldNode && node.tag === oldNode.tag) {
+                            node.element = oldNode.element;
+                            if (node.attr) {
+                                Object.keys(node.attr).forEach((eachAttrKey) => {
+                                    const newAttrValue = node.attr[eachAttrKey];
                                     const oldAttrValue = oldNode?.attr[eachAttrKey];
                                     if (newAttrValue !== oldAttrValue) {
-                                        newNode.element.attr(eachAttrKey, newAttrValue);
+                                        node.element.attr(eachAttrKey, newAttrValue);
                                     }
                                 });
                             }
-                            if (newNode.$text && newNode.$text !== oldNode.$text) {
-                                newNode.element.textContent = newNode.$text;
+                            if (node.$text && node.$text !== oldNode.$text) {
+                                node.element.textContent = node.$text;
                             }
                             if (!newNodes[i + 1]) {
                                 oldNodes.splice(i + 1)
                                     .forEach((deletedOldNode) => deletedOldNode.element.remove());
                             }
-                            if (newNode.children) {
-                                renderNode(newNode.children, oldNode.children, newNode.element);
+                            if (node.children) {
+                                renderNode(node.children, oldNode.children, node.element);
                             }
                         } else {
-                            newNode.element = document.createElement(newNode.tag);
-                            if (oldNode && newNode.tag !== oldNode.tag) {
-                                oldNode.element.before(newNode.element);
+                            node.element = document.createElement(node.tag);
+                            if (oldNode && node.tag !== oldNode.tag) {
+                                oldNode.element.before(node.element);
                                 oldNode.element.remove();
                                 oldNode = null;
                             }
-                            if (newNode.attr) {
-                                Object.keys(newNode.attr).forEach((eachAttrKey) => {
-                                    const newAttrValue = newNode.attr[eachAttrKey];
-                                    newNode.element.attr(eachAttrKey, newAttrValue);
+                            if (node.attr) {
+                                Object.keys(node.attr).forEach((eachAttrKey) => {
+                                    const newAttrValue = node.attr[eachAttrKey];
+                                    node.element.attr(eachAttrKey, newAttrValue);
                                 });
                             }
-                            if (newNode.$text) {
-                                newNode.element.textContent = newNode.$text;
+                            if (node.$text) {
+                                node.element.textContent = node.$text;
                             }
-                            if (newNode.children) {
-                                renderNode(newNode.children, oldNode?.children, newNode.element);
+                            if (node.children) {
+                                renderNode(node.children, oldNode?.children, node.element);
                             }
                             if (newNodes[i - 1]) {
-                                newNodes[i - 1].element.after(newNode.element);
+                                newNodes[i - 1].element.after(node.element);
                             } else {
-                                parent.append(newNode.element);
+                                parent.append(node.element);
                             }
                         }
                     }
