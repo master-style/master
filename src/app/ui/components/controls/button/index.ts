@@ -18,7 +18,7 @@ export class MasterButtonElement extends HTMLElement {
     loading: boolean;
 
     @Attr({ render: true })
-    download: string = 'fuck';
+    download = 'fuck';
 
     @Attr({ render: true })
     target: string;
@@ -37,10 +37,6 @@ export class MasterButtonElement extends HTMLElement {
     constructor() {
         super();
         attachShadow(this, css);
-    }
-
-    onConnected() {
-        this.render();
     }
 
     render() {

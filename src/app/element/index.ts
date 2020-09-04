@@ -34,10 +34,11 @@ export function Element(tag: string) {
                     const eachAttrValue = parseAttrValue(attributes[eachAttrKey]?.value);
                     // console.log('connected:', eachAttrKey, eachPropValue);
                     if (eachAttrOption.reflect && eachPropValue !== eachAttrValue) {
-                        this.attr(eachPropValue);
+                        this.attr(eachAttrKey, eachPropValue);
                     }
                 }
             }
+            if (this.render) this.render();
             if (connectedCallback) connectedCallback.call(this);
             if (onConnected) onConnected.call(this);
         };
