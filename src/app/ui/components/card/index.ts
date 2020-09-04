@@ -18,7 +18,9 @@ export class MasterCard extends HTMLElement {
             download: this.download,
             type: this.type
         }, [
-            'slot'
+            'slot', { name: 'head' },
+            'slot', { name: 'body' },
+            'slot', { name: 'foot' }
         ]
     ]);
 

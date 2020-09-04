@@ -53,7 +53,7 @@ a[part=shadow] {
     border: 1px solid var(--b-fadest);
 }
 
-::slotted([part="card-head"]) {
+::slotted([slot=head]) {
     position: relative;
     border: 0;
     background-size: cover;
@@ -63,57 +63,20 @@ a[part=shadow] {
     margin: 0 !important; // !important: conflict article.decorated
 }
 
-::slotted([part="card-body"]) {
+::slotted([slot=body]) {
     padding: 1rem;
     width: 100%;
     flex: 1 1 auto;
-
-    h3 {
-        font-size: $f-md;
-        line-height: 1.2;
-    }
-
-    h4 {
-        font-size: $f-sm;
-    }
-
-    h3,
-    h4 {
-        margin: 0 0 $xs 0 !important; // !important: conflict article.decorated
-    }
-
-    h5 {
-        font-size: $f-xxs;
-        margin-bottom: $xxs;
-    }
-
-    h4,
-    h5 {
-        font-weight: 400;
-        color: var(--f-themeFader);
-    }
-
-    p {
-        font-size: $f-xs;
-        line-height: 1.4 !important;
-        text-align: inherit;
-        margin: 0 0 $xs 0 !important; // !important: conflict article.decorated
-        color: var(--f-fade);
-
-        &:last-child {
-            margin: 0 !important; // !important: conflict article.decorated
-        }
-    }
 }
 
-::slotted([part="card-body"] [part="card-foot"]) {
+::slotted([slot=body] [slot=foot]) {
     margin-top: 1rem;
     margin-bottom: -1rem;
     margin-left: -1rem;
     width: calc(100% + 2rem);
 }
 
-::slotted([part="card-foot"]) {
+::slotted([slot=foot]) {
     position: relative;
     padding: .8rem 1rem;
     width: 100%;

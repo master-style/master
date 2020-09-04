@@ -1,5 +1,7 @@
 @import '../../../variables';
 
+@import '../../../shadow';
+
 [part=shadow] {
     background-color: var(--bg-theme);
     display: inline-flex;
@@ -10,28 +12,9 @@
     min-height: var(--size);
     transition: box-shadow ease-out .15s;
     will-change: box-shadow;
-    cursor: pointer;
-    // reset
-    background-origin: border-box;
-    position: relative;
-    contain: style;
-    font: inherit;
-    letter-spacing: inherit;
-    line-height: inherit;
-    text-transform: inherit;
-    text-overflow: inherit;
-    text-align: inherit;
-    white-space: inherit;
-    text-decoration: inherit;
-    color: inherit;
-    border-radius: inherit;
-    border: 0;
-    width: 100%;
-    height: 100%;
-    outline: none;
-    -webkit-appearance: none;
     -webkit-user-select: none;
     user-select: none;
+    cursor: pointer;
 
     @media (any-hover: hover) {
         &:hover:not([loading]):not([disabled]) {
