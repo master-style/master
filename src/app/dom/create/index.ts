@@ -165,9 +165,7 @@ class MasterTemplate {
                             if (newNode.attr) {
                                 Object.keys(newNode.attr).forEach((eachAttrKey) => {
                                     const newAttrValue = newNode.attr[eachAttrKey];
-                                    if (newAttrValue) {
-                                        newNode.element.attr(eachAttrKey, newAttrValue);
-                                    }
+                                    newNode.element.attr(eachAttrKey, newAttrValue);
                                 });
                             }
                             if (newNode.$text) {

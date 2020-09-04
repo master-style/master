@@ -39,7 +39,7 @@ export function Attr(option?: AttrOption) {
                         if (!fromAttr) this.attr(value);
                     }
                     if (option.render && this.template) {
-                        this.template.render();
+                        this.template.render(this.shadowRoot || this);
                     }
                 }
             }

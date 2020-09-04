@@ -17,38 +17,39 @@ export class CreateComponent implements OnInit {
 
     tagName = 'div';
 
-    ngOnInit(): void {
-        const template = $(() => [
-            'div', { class: 'shine', $text: '1' },
-            'div', { class: 'shine', $text: this.times, name: this.times, disabled: true },
-            'div', { class: 'shine', $text: '1' }, [
-                'div', { class: 'shine', $text: '2' }, () => this.items.map((item) => [
-                    'div', { class: 'shine', $text: item }
-                ]),
-                'div', { class: 'shine', $text: '2' },
-                'div', { class: 'shine', $text: '2' }, [
-                    'div', { class: 'shine', $text: '3' },
-                    'div', { class: 'shine', $text: '3' }, [
-                        'div', { class: 'shine', $text: '4' }, [
-                            'div', { class: 'shine', $text: '5' }
-                        ]
+    template = $(() => [
+        'div', { class: 'shine', $text: '1' },
+        'div', { class: 'shine', $text: this.times, name: this.times, disabled: true },
+        'div', { class: 'shine', $text: '1' }, [
+            'div', { class: 'shine', $text: '2' }, () => this.items.map((item) => [
+                'div', { class: 'shine', $text: item }
+            ]),
+            'div', { class: 'shine', $text: '2' },
+            'div', { class: 'shine', $text: '2' }, [
+                'div', { class: 'shine', $text: '3' },
+                'div', { class: 'shine', $text: '3' }, [
+                    'div', { class: 'shine', $text: '4' }, [
+                        'div', { class: 'shine', $text: '5' }
                     ]
-                ],
-                'div', { class: 'shine', $html: '<article>love</article>' }
+                ]
             ],
-            this.tagName, { class: 'shine', $text: '1' }, [
-                'div', { class: 'shine', $text: '2' },
-            ],
-            'div', { class: 'shine', $text: '1' },
-            'div', { class: 'shine', $text: '1' },
-            'div', { class: 'shine', $text: '1' }
-        ]);
+            'div', { class: 'shine', $html: '<article>love</article>' }
+        ],
+        this.tagName, { class: 'shine', $text: '1' }, [
+            'div', { class: 'shine', $text: '2' },
+        ],
+        'div', { class: 'shine', $text: '1' },
+        'div', { class: 'shine', $text: '1' },
+        'div', { class: 'shine', $text: '1' }
+    ]);
+
+    ngOnInit(): void {
 
         const container = document.querySelector('doc-create');
 
         setInterval(() => {
             const t1 = performance.now();
-            template.render(container);
+            this.template.render(container);
             this.performanceTime = performance.now() - t1;
             if (this.times === 0) {
                 this.firstPerformanceTime = this.performanceTime;
@@ -64,8 +65,8 @@ export class CreateComponent implements OnInit {
             } else {
                 this.tagName = 'div';
             }
-            if(this.times === 2) {
-                template.remove();
+            if (this.times === 2) {
+                this.template.remove();
             }
         }, 1000);
 

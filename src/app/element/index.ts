@@ -1,18 +1,6 @@
 export * from './attr';
 
-const parseAttrValue = (value) => {
-    if (value === undefined) {
-        return value;
-    } else if (typeof value === 'boolean') {
-        return value === true ? true : false;
-    } else {
-        if (value === '' || value === null) {
-            return value;
-        } else {
-            return isNaN(+value) ? value : +value;
-        }
-    }
-};
+import parseAttrValue from '@utils/parse-attr-value';
 
 export function Element(tag: string) {
     return function (constructor: any) {
@@ -26,7 +14,7 @@ export function Element(tag: string) {
         const attributeChangedCallback = prototype.attributeChangedCallback;
         prototype.attributeChangedCallback = function (attrKey, oldValue, value) {
             if (value === oldValue) return;
-            // console.log('changed:', attrKey, value, oldValue);
+            console.log('changed:', attrKey, value, oldValue);
             const attrOption = attrOptions[attrKey];
             value = parseAttrValue(value);
             oldValue = parseAttrValue(oldValue);

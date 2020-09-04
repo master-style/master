@@ -1,4 +1,5 @@
 import isObjLike from '@utils/is-obj-like';
+import parseAttrValue from '@utils/parse-attr-value';
 
 const ElementPrototype = Element.prototype;
 
@@ -26,12 +27,11 @@ ElementPrototype.attr = function (param?: any, value?: any): any {
         }
         return element;
     } else if (typeof param === 'string') {
-        element.getAttribute((param));
+        element.getAttribute(parseAttrValue(param));
     } else {
-        const attrs = element.attributes;
         const attr = {};
-        for (const eachAttr of attrs) {
-            attr[eachAttr.name] = eachAttr.value;
+        for (const eachAttr of element.attributes) {
+            attr[eachAttr.name] = parseAttrValue(eachAttr.value);
         }
         return attr;
     }
