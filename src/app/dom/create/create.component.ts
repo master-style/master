@@ -20,7 +20,7 @@ export class CreateComponent implements OnInit {
     ngOnInit(): void {
         const template = $(() => [
             'div', { class: 'shine', $text: '1' },
-            'div', { class: 'shine', $text: this.times, name: this.times },
+            'div', { class: 'shine', $text: this.times, name: this.times, disabled: true },
             'div', { class: 'shine', $text: '1' }, [
                 'div', { class: 'shine', $text: '2' }, () => this.items.map((item) => [
                     'div', { class: 'shine', $text: item }
