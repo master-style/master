@@ -8,4 +8,5 @@ interface AttrOption {
     setProp?: Function;
     set?: Function;
     default?: any;
+    render?: boolean;
 }

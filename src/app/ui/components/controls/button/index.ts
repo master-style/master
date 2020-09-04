@@ -7,23 +7,32 @@ const SLOT = 'slot';
 @Element('m-' + NAME)
 export class MasterButtonElement extends HTMLElement {
 
-    shadow: Element;
-    template = $(() => [
-        this.href ? 'a' : 'button', { class: 'shine', $text: '1' }
+    protected template = $(() => [
+        this.href ? 'a' : 'button', {
+            part: 'shadow',
+            href: this.href,
+            target: this.target,
+            disabled: this.disabled,
+            download: this.download,
+            $html: '<slot>'
+        }
     ]);
 
     // href first
-    @Attr({ shadow: true })
-    href: string;
-
-    @Attr({ toggle: true, shadow: true })
+    @Attr({ toggle: true, render: true })
     disabled: boolean;
 
     @Attr({ toggle: true })
     loading: boolean;
 
-    @Attr({ shadow: true })
+    @Attr({ render: true })
+    href: string;
+
+    @Attr({ render: true })
     download: string;
+
+    @Attr({ render: true })
+    target: string;
 
     constructor() {
         super();
@@ -31,36 +40,7 @@ export class MasterButtonElement extends HTMLElement {
     }
 
     onConnected() {
-        // console.log(this);
-        if (!this.shadow) MasterButtonElement.href.call(this, this.href);
+        this.template.render(this.shadowRoot);
     }
-
-    attributeChangedCallback(attrKey, value, oldValue) { }
-
-    protected static href = function (value: boolean) {
-        const renewShadow = (tag) => {
-            const attrOptions = MasterButtonElement['attrOptions'];
-            if (this.shadow) this.shadow.remove();
-            this.shadow = $(tag, {
-                part: 'shadow',
-                ...Object.keys(attrOptions)
-                    .reduce((attrs, eachAttrKey) => {
-                        const eachAttrOption = attrOptions[eachAttrKey];
-                        if (eachAttrOption.shadow)
-                            attrs[eachAttrKey] = this[eachAttrOption.propKey];
-                        return attrs;
-                    }, {})
-            },
-                $(SLOT, {})
-            );
-            this.shadowRoot.appendChild(this.shadow);
-        };
-
-        if (typeof value === 'string' && this.shadow?.tagName !== 'A') {
-            renewShadow('A');
-        } else if (!this.shadow || this.shadow?.tagName === 'A') {
-            renewShadow('BUTTON');
-        }
-    };
 
 }

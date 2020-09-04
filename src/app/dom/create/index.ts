@@ -66,7 +66,10 @@ const create = function (eachNodes, parent) {
         }
         if (attr) {
             Object.keys(attr).forEach((eachAttrKey) => {
-                element.setAttribute(eachAttrKey, attr[eachAttrKey]);
+                const eachAttrValue = attr[eachAttrKey];
+                typeof eachAttrValue === 'boolean'
+                    ? element.toggleAttribute(eachAttrKey, eachAttrValue)
+                    : element.setAttribute(eachAttrKey, eachAttrValue);
             });
         }
         if (!skipChildren && node.children) {
@@ -79,15 +82,14 @@ const create = function (eachNodes, parent) {
 
 class MasterTemplate {
 
-    constructor(private template) {
-        console.log(template);
-    }
+    constructor(private template) { }
 
     container;
 
     nodes = [];
 
     render(container) {
+
         // tslint:disable-next-line: prefer-for-of
         const nodes: cache[] = [];
 
@@ -141,8 +143,11 @@ class MasterTemplate {
                                 Object.keys(newNode.attr).forEach((eachAttrKey) => {
                                     const newAttrValue = newNode.attr[eachAttrKey];
                                     const oldAttrValue = oldNode?.attr[eachAttrKey];
-                                    if (newAttrValue !== oldAttrValue)
-                                        newNode.element.setAttribute(eachAttrKey, newAttrValue);
+                                    if (newAttrValue !== oldAttrValue) {
+                                        typeof newAttrValue === 'boolean'
+                                            ? newNode.element.toggleAttribute(eachAttrKey, newAttrValue)
+                                            : newNode.element.setAttribute(eachAttrKey, newAttrValue);
+                                    }
                                 });
                             }
                             if (newNode.$text && newNode.$text !== oldNode.$text) {
@@ -165,8 +170,11 @@ class MasterTemplate {
                             if (newNode.attr) {
                                 Object.keys(newNode.attr).forEach((eachAttrKey) => {
                                     const newAttrValue = newNode.attr[eachAttrKey];
-                                    if (newAttrValue)
-                                        newNode.element.setAttribute(eachAttrKey, newAttrValue);
+                                    if (newAttrValue) {
+                                        typeof newAttrValue === 'boolean'
+                                            ? newNode.element.toggleAttribute(eachAttrKey, newAttrValue)
+                                            : newNode.element.setAttribute(eachAttrKey, newAttrValue);
+                                    }
                                 });
                             }
                             if (newNode.$text) {

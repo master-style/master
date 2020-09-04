@@ -4,7 +4,8 @@ const DEFAULT_ATTR_OPTION = {
     reflect: true,
     observe: true,
     shadow: false,
-    toggle: false
+    toggle: false,
+    render: false
 };
 
 export function Attr(option?: AttrOption) {
@@ -24,20 +25,11 @@ export function Attr(option?: AttrOption) {
             constructor.attrOptions = {};
         }
         option.set = function (value: any, fromAttr?) {
+            if (fromAttr) return;
             if (option.toggle) {
-                if (!fromAttr) {
-                    this.toggleAttribute(attrKey, !!value);
-                }
-                if (option.shadow) {
-                    this.shadow.toggleAttribute(attrKey, !!value);
-                }
+                this.toggleAttribute(attrKey, !!value);
             } else if (value !== undefined) {
-                if (!fromAttr) {
-                    this.setAttribute(attrKey, value);
-                }
-                if (option.shadow) {
-                    this.shadow.setAttribute(attrKey, value);
-                }
+                this.setAttribute(attrKey, value);
             }
         };
         const propDescriptor = {
@@ -50,8 +42,13 @@ export function Attr(option?: AttrOption) {
                     constructor[propKey].call(this, value, this[_propKey]);
                 }
                 this[_propKey] = value;
-                if (option.reflect && this.isConnected) {
-                    option.set.call(this, value, fromAttr);
+                if (this.isConnected) {
+                    if (option.reflect) {
+                        option.set.call(this, value, fromAttr);
+                    }
+                    if (option.render && this.template) {
+                        this.template.render();
+                    }
                 }
             }
         };
