@@ -17,7 +17,7 @@ export class MasterButtonElement extends HTMLElement {
     loading: boolean;
 
     @Attr({ render: true })
-    download = 'fuck';
+    download: string;
 
     @Attr({ render: true })
     target: string;
