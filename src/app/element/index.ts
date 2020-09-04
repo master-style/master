@@ -12,6 +12,7 @@ export function Element(tag: string) {
 
         const onAttrChanged = prototype.onAttrChanged;
         const attributeChangedCallback = prototype.attributeChangedCallback;
+
         prototype.attributeChangedCallback = function (attrKey, oldValue, value) {
             if (value === oldValue) return;
             const attrOption = attrOptions[attrKey];
