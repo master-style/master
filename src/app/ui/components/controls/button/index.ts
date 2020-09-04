@@ -40,7 +40,6 @@ export class MasterButtonElement extends HTMLElement {
     }
 
     render() {
-        console.log('render');
         this.template.render(this.shadowRoot);
     }
 
