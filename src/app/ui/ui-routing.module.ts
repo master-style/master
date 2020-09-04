@@ -65,7 +65,7 @@ export const uiRoutes: Routes = [
     {
         path: 'components', children: [
             { path: 'control' },
-            { path: 'button', component: ButtonComponent, resolve: { route: RouteResolver } },
+            { path: 'button', component: ButtonComponent, data: { compositions: ['HTML', 'CSS', 'JS'] }, resolve: { route: RouteResolver } },
             { path: 'select', component: SelectComponent, resolve: { route: RouteResolver } },
             { path: 'input', component: InputComponent, resolve: { route: RouteResolver } },
             { path: 'textarea', component: TextareaComponent, resolve: { route: RouteResolver } },

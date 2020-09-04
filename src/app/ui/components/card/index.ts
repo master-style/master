@@ -1,16 +1,16 @@
 import { Element, Attr } from '@element';
 import css from './index.scss';
 
-const NAME = 'button';
+const NAME = 'card';
 
 @Element({
     tag: 'm-' + NAME,
     css
 })
-export class MasterButton extends HTMLElement {
+export class MasterCard extends HTMLElement {
 
     template = $(() => [
-        (this.href && !this.disabled) ? 'a' : NAME, {
+        (this.href && !this.disabled) ? 'a' : 'button', {
             part: 'shadow',
             href: this.href,
             target: this.target,

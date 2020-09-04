@@ -1,37 +1,69 @@
-m-card {
+@import '../../variables';
+
+[part=shadow] {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    background-color: var(--bg-object);
+    background-origin: border-box;
+    position: relative;
+    contain: style;
+    font: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+    text-transform: inherit;
+    text-overflow: inherit;
+    text-align: inherit;
+    white-space: inherit;
+    text-decoration: inherit;
+    color: inherit;
+    border-radius: inherit;
+    border: 0;
+    width: 100%;
+    height: 100%;
+    outline: none;
+}
+
+button[part=shadow],
+a[part=shadow] {
+    -webkit-appearance: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+:host {
     position: relative;
     display: flex;
-    background-color: var(--bg-object);
     border-radius: $xs;
     overflow: hidden;
     flex-wrap: wrap;
     flex-direction: column;
-
-    &.raised {
-        border: 0;
-        box-shadow:
-            0 0.4px 0.8px rgba(0, 0, 0, 0.021),
-            0 1px 2.3px rgba(0, 0, 0, 0.03),
-            0 2.4px 5.4px rgba(0, 0, 0, 0.039),
-            0 8px 18px rgba(0, 0, 0, 0.06);
-    }
-
-    &.outlined {
-        border: 1px solid var(--b-fadest);
-    }
 }
 
-[part="card-head"] {
+:host(.raised) {
+    border: 0;
+    box-shadow:
+        0 0.4px 0.8px rgba(0, 0, 0, 0.021),
+        0 1px 2.3px rgba(0, 0, 0, 0.03),
+        0 2.4px 5.4px rgba(0, 0, 0, 0.039),
+        0 8px 18px rgba(0, 0, 0, 0.06);
+}
+
+:host(.outlined) {
+    border: 1px solid var(--b-fadest);
+}
+
+::slotted([part="card-head"]) {
     position: relative;
     border: 0;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
     width: 100%;
-    margin: 0!important; // !important: conflict article.decorated
+    margin: 0 !important; // !important: conflict article.decorated
 }
 
-[part="card-body"] {
+::slotted([part="card-body"]) {
     padding: 1rem;
     width: 100%;
     flex: 1 1 auto;
@@ -63,7 +95,7 @@ m-card {
 
     p {
         font-size: $f-xs;
-        line-height: 1.4!important;
+        line-height: 1.4 !important;
         text-align: inherit;
         margin: 0 0 $xs 0 !important; // !important: conflict article.decorated
         color: var(--f-fade);
@@ -72,16 +104,16 @@ m-card {
             margin: 0 !important; // !important: conflict article.decorated
         }
     }
-
-    [part="card-foot"] {
-        margin-top: 1rem;
-        margin-bottom: -1rem;
-        margin-left: -1rem;
-        width: calc(100% + 2rem);
-    }
 }
 
-[part="card-foot"] {
+::slotted([part="card-body"] [part="card-foot"]) {
+    margin-top: 1rem;
+    margin-bottom: -1rem;
+    margin-left: -1rem;
+    width: calc(100% + 2rem);
+}
+
+::slotted([part="card-foot"]) {
     position: relative;
     padding: .8rem 1rem;
     width: 100%;

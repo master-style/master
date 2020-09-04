@@ -42,7 +42,7 @@ export class CreateComponent implements OnInit {
             'div', { class: 'shine', $text: '1' },
             'div', { class: 'shine', $text: '1' },
             'div', { class: 'shine', $text: '1' }
-        ]
+        ];
     });
 
     timer;

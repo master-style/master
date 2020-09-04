@@ -2,20 +2,19 @@
 
 [part=shadow] {
     background-color: var(--bg-theme);
-    position: relative;
-    contain: style;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 0 var(--px);
     min-width: var(--size);
     min-height: var(--size);
-    -webkit-appearance: none;
-    background-origin: border-box;
     transition: box-shadow ease-out .15s;
     will-change: box-shadow;
     cursor: pointer;
-    // inherit
+    // reset
+    background-origin: border-box;
+    position: relative;
+    contain: style;
     font: inherit;
     letter-spacing: inherit;
     line-height: inherit;
@@ -30,6 +29,7 @@
     width: 100%;
     height: 100%;
     outline: none;
+    -webkit-appearance: none;
     -webkit-user-select: none;
     user-select: none;
 
