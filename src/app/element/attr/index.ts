@@ -1,4 +1,5 @@
 import camelToKebabCase from '@utils/camel-to-kebab-case';
+import 'reflect-metadata';
 
 const DEFAULT_ATTR_OPTION = {
     reflect: true,
@@ -9,7 +10,8 @@ const DEFAULT_ATTR_OPTION = {
 
 export function Attr(options?: AttrOptions) {
     options = { ...DEFAULT_ATTR_OPTION, ...options };
-    return function (target: any, propKey: string): any {
+    return (target, propKey: string): any => {
+        options.type = Reflect.getMetadata('design:type', target, propKey).name;
         options.propKey = propKey;
         const _propKey = '_' + propKey;
         const attrKey = options.key = camelToKebabCase(propKey);
@@ -23,11 +25,11 @@ export function Attr(options?: AttrOptions) {
         if (!constructor.attrOptions) {
             constructor.attrOptions = {};
         }
-        const propDescriptor = {
+        const descriptor = {
             get() {
                 return this[_propKey];
             },
-            set(value, fromAttr?: boolean) {
+            set(value: any, fromAttr?: boolean) {
                 if (this[_propKey] === value) return;
                 if (propKey in constructor) {
                     constructor[propKey].call(this, value, this[_propKey]);
@@ -35,7 +37,11 @@ export function Attr(options?: AttrOptions) {
                 this[_propKey] = value;
                 if (this.isConnected) {
                     if (options.reflect && !fromAttr) {
-                        this.attr(attrKey, value);
+                        if (options.type === 'Boolean') {
+                            this.toggleAttribute(attrKey, !!value);
+                        } else {
+                            this.setAttribute(attrKey, value);
+                        }
                     }
                     if (options.render && this.render && this.ready) {
                         this.render();
@@ -43,8 +49,8 @@ export function Attr(options?: AttrOptions) {
                 }
             }
         };
-        options.setProp = propDescriptor.set;
+        options.setProp = descriptor.set;
         constructor.attrOptions[attrKey] = options;
-        return propDescriptor;
+        return descriptor;
     };
 }

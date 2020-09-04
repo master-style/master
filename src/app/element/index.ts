@@ -1,9 +1,18 @@
 export * from './attr';
 
-import parseAttrValue from '@utils/parse-attr-value';
-
 const DEFAULT_ELEMENT_OPTION = {
     shadow: true
+};
+
+const parseAttrValue = (value, type) => {
+    switch (type) {
+        case 'Number':
+            return value = isNaN(+value) ? value : +value;
+        case 'Boolean':
+            return value = (value === '' || value) ? true : false;
+        default:
+            return value;
+    }
 };
 
 export function Element(options: ElementOptions) {
@@ -20,26 +29,34 @@ export function Element(options: ElementOptions) {
 
         prototype.attributeChangedCallback = function (attrKey, oldValue, value) {
             if (value === oldValue) return;
-            const attrOption = attrOptions[attrKey];
-            value = parseAttrValue(value);
-            oldValue = parseAttrValue(oldValue);
+            const eachAttrOptions = attrOptions[attrKey];
+            const type = attrOptions.type;
+            value = parseAttrValue(value, type);
+            oldValue = parseAttrValue(oldValue, type);
             // console.log('changed:', attrKey, value, oldValue);
-            attrOption.setProp.call(this, value, true);
+            eachAttrOptions.setProp.call(this, value, true);
             if (attributeChangedCallback) attributeChangedCallback.call(this, attrKey, value, oldValue);
             if (onAttrChanged) onAttrChanged.call(this, attrKey, value, oldValue);
         };
-
         prototype.connectedCallback = function () {
             this.ready = false; // prevent rendering many times
             if (attrOptions) {
                 const attributes = this.attributes;
                 // tslint:disable-next-line: forin
                 for (const eachAttrKey in attrOptions) {
-                    const eachAttrOption: AttrOptions = attrOptions[eachAttrKey];
-                    const eachPropValue = this['_' + eachAttrOption.propKey];
-                    const eachAttrValue = parseAttrValue(attributes[eachAttrKey]?.value);
-                    if (eachAttrOption.reflect && eachPropValue !== eachAttrValue) {
-                        this.attr(eachAttrKey, eachPropValue);
+                    const eachAttrOptions: AttrOptions = attrOptions[eachAttrKey];
+                    const eachPropValue = this['_' + eachAttrOptions.propKey];
+                    const eachAttr = attributes[eachAttrKey];
+                    if (eachAttr) {
+                        const eachAttrValue = parseAttrValue(eachAttr.value, eachAttrOptions.type);
+                        if (eachAttrOptions.reflect && eachPropValue !== eachAttrValue) {
+                            if (eachAttrOptions.type === 'Boolean') {
+                                this.toggleAttribute(eachAttrKey, eachAttrValue);
+                            } else {
+                                this.setAttribute(eachAttrKey, eachAttrValue);
+                            }
+                            count++;
+                        }
                     }
                 }
             }

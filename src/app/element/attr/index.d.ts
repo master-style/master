@@ -7,4 +7,5 @@ interface AttrOptions {
     set?: Function;
     default?: any;
     render?: boolean;
+    type?: string;
 }
