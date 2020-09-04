@@ -24,7 +24,7 @@ export function Element(tag: string) {
         };
 
         prototype.connectedCallback = function () {
-            this.ready = false;
+            this.ready = false; // prevent rendering many times
             if (attrOptions) {
                 const attributes = this.attributes;
                 // tslint:disable-next-line: forin
