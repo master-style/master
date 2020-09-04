@@ -66,8 +66,7 @@ const create = function (eachNodes, parent) {
         if (attr) {
             Object.keys(attr).forEach((eachAttrKey) => {
                 const eachAttrValue = attr[eachAttrKey];
-                console.log(eachAttrKey, eachAttrValue);
-                element.attr(eachAttrKey, eachAttrKey);
+                element.attr(eachAttrKey, eachAttrValue);
             });
         }
         if (!skipChildren && node.children) {
@@ -142,7 +141,7 @@ class MasterTemplate {
                                     const newAttrValue = newNode.attr[eachAttrKey];
                                     const oldAttrValue = oldNode?.attr[eachAttrKey];
                                     if (newAttrValue !== oldAttrValue) {
-                                        newNode.element.attr(eachAttrKey, newAttrValue)
+                                        newNode.element.attr(eachAttrKey, newAttrValue);
                                     }
                                 });
                             }
@@ -167,7 +166,7 @@ class MasterTemplate {
                                 Object.keys(newNode.attr).forEach((eachAttrKey) => {
                                     const newAttrValue = newNode.attr[eachAttrKey];
                                     if (newAttrValue) {
-                                        newNode.element.attr(eachAttrKey, newAttrValue)
+                                        newNode.element.attr(eachAttrKey, newAttrValue);
                                     }
                                 });
                             }

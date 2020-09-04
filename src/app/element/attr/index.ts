@@ -24,14 +24,6 @@ export function Attr(option?: AttrOption) {
         if (!constructor.attrOptions) {
             constructor.attrOptions = {};
         }
-        option.set = function (value: any, fromAttr?) {
-            if (fromAttr) return;
-            if (option.toggle) {
-                this.toggleAttribute(attrKey, !!value);
-            } else if (value !== undefined) {
-                this.setAttribute(attrKey, value);
-            }
-        };
         const propDescriptor = {
             get() {
                 return _propKey[this];
@@ -44,7 +36,7 @@ export function Attr(option?: AttrOption) {
                 this[_propKey] = value;
                 if (this.isConnected) {
                     if (option.reflect) {
-                        option.set.call(this, value, fromAttr);
+                        if (!fromAttr) this.attr(value);
                     }
                     if (option.render && this.template) {
                         this.template.render();

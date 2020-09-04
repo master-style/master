@@ -46,7 +46,7 @@ export function Element(tag: string) {
                     const eachAttrValue = parseAttrValue(attributes[eachAttrKey]?.value);
                     // console.log('connected:', eachAttrKey, eachPropValue);
                     if (eachAttrOption.reflect && eachPropValue !== eachAttrValue) {
-                        eachAttrOption.set.call(this, eachPropValue);
+                        this.attr(eachPropValue);
                     }
                 }
             }

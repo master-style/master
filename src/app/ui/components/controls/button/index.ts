@@ -7,16 +7,19 @@ const SLOT = 'slot';
 @Element('m-' + NAME)
 export class MasterButtonElement extends HTMLElement {
 
-    protected template = $(() => [
-        this.href ? 'a' : 'button', {
-            part: 'shadow',
-            href: this.href,
-            target: this.target,
-            disabled: this.disabled,
-            download: this.download,
-            $html: '<slot>'
-        }
-    ]);
+    protected template = $(() => {
+        console.log(this);
+        return [
+            this.href ? 'a' : 'button', {
+                part: 'shadow',
+                href: this.href,
+                target: this.target,
+                disabled: this.disabled,
+                download: this.download,
+                $html: '<slot>'
+            }
+        ]
+    });
 
     // href first
     @Attr({ render: true })
