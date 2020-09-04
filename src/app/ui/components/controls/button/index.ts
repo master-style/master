@@ -1,9 +1,12 @@
-import { Element, Attr, attachShadow } from '@element';
+import { Element, Attr } from '@element';
 import css from './index.scss';
 
 const NAME = 'button';
 
-@Element('m-' + NAME)
+@Element({
+    tag: 'm-' + NAME,
+    css
+})
 export class MasterButton extends HTMLElement {
 
     @Attr({ render: true })
@@ -36,13 +39,7 @@ export class MasterButton extends HTMLElement {
         }
     ]);
 
-    constructor() {
-        super();
-        attachShadow(this, css);
-    }
-
     render() {
         this.template.render(this.shadowRoot);
     }
-
 }

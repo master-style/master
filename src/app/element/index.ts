@@ -2,7 +2,12 @@ export * from './attr';
 
 import parseAttrValue from '@utils/parse-attr-value';
 
-export function Element(tag: string) {
+const DEFAULT_ELEMENT_OPTION = {
+    shadow: true
+};
+
+export function Element(options: ElementOptions) {
+    options = { ...DEFAULT_ELEMENT_OPTION, ...options };
     return function (constructor: any) {
         const prototype = constructor.prototype;
         const attrOptions = constructor.attrOptions;
@@ -30,7 +35,7 @@ export function Element(tag: string) {
                 const attributes = this.attributes;
                 // tslint:disable-next-line: forin
                 for (const eachAttrKey in attrOptions) {
-                    const eachAttrOption: AttrOption = attrOptions[eachAttrKey];
+                    const eachAttrOption: AttrOptions = attrOptions[eachAttrKey];
                     const eachPropValue = this['_' + eachAttrOption.propKey];
                     const eachAttrValue = parseAttrValue(attributes[eachAttrKey]?.value);
                     if (eachAttrOption.reflect && eachPropValue !== eachAttrValue) {
@@ -39,25 +44,23 @@ export function Element(tag: string) {
                 }
             }
             this.ready = true;
+            if (options.shadow) {
+                const shadowRoot = this.attachShadow({ mode: 'open' });
+                if (options.css && shadowRoot['adoptedStyleSheets']) {
+                    const styleSheet = new CSSStyleSheet();
+                    styleSheet['replaceSync'](options.css);
+                    shadowRoot.adoptedStyleSheets = [styleSheet];
+                } else if (options.css) {
+                    const styleElement = document.createElement('style');
+                    styleElement.innerHTML = options.css;
+                    shadowRoot.appendChild(styleElement);
+                }
+            }
             if (this.render) this.render();
             if (connectedCallback) connectedCallback.call(this);
             if (onConnected) onConnected.call(this);
         };
 
-        window.customElements.define(tag, constructor);
+        window.customElements.define(options.tag, constructor);
     };
-}
-
-export function attachShadow(element, css) {
-    const shadowRoot = element.attachShadow({ mode: 'open' });
-    if (css && shadowRoot['adoptedStyleSheets']) {
-        const styleSheet = new CSSStyleSheet();
-        styleSheet['replaceSync'](css);
-        shadowRoot.adoptedStyleSheets = [styleSheet];
-    } else if (css) {
-        const styleElement = document.createElement('style');
-        styleElement.innerHTML = css;
-        shadowRoot.appendChild(styleElement);
-    }
-    return shadowRoot;
 }

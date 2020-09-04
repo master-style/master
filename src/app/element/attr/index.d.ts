@@ -1,4 +1,4 @@
-interface AttrOption {
+interface AttrOptions {
     key?: string;
     observe?: boolean;
     reflect?: boolean;

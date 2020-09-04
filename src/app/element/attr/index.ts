@@ -7,14 +7,14 @@ const DEFAULT_ATTR_OPTION = {
     render: false
 };
 
-export function Attr(option?: AttrOption) {
-    option = { ...DEFAULT_ATTR_OPTION, ...option };
+export function Attr(options?: AttrOptions) {
+    options = { ...DEFAULT_ATTR_OPTION, ...options };
     return function (target: any, propKey: string): any {
-        option.propKey = propKey;
+        options.propKey = propKey;
         const _propKey = '_' + propKey;
-        const attrKey = option.key = camelToKebabCase(propKey);
+        const attrKey = options.key = camelToKebabCase(propKey);
         const constructor = target.constructor;
-        if (option.observe) {
+        if (options.observe) {
             if (!constructor.observedAttributes) {
                 constructor.observedAttributes = [];
             }
@@ -34,17 +34,17 @@ export function Attr(option?: AttrOption) {
                 }
                 this[_propKey] = value;
                 if (this.isConnected) {
-                    if (option.reflect && !fromAttr) {
+                    if (options.reflect && !fromAttr) {
                         this.attr(attrKey, value);
                     }
-                    if (option.render && this.render && this.ready) {
+                    if (options.render && this.render && this.ready) {
                         this.render();
                     }
                 }
             }
         };
-        option.setProp = propDescriptor.set;
-        constructor.attrOptions[attrKey] = option;
+        options.setProp = propDescriptor.set;
+        constructor.attrOptions[attrKey] = options;
         return propDescriptor;
     };
 }

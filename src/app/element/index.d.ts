@@ -1,4 +1,5 @@
-interface ElementOption {
+interface ElementOptions {
     tag: string;
-    style?: string;
+    css?: string;
+    shadow?: boolean;
 }
