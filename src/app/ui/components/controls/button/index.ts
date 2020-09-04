@@ -7,19 +7,16 @@ const SLOT = 'slot';
 @Element('m-' + NAME)
 export class MasterButtonElement extends HTMLElement {
 
-    template = $(() => {
-        console.log(this, this['_href'], this.target, this.disabled, this.download);
-        return [
-            this.href ? 'a' : 'button', {
-                part: 'shadow',
-                href: this.href,
-                target: this.target,
-                disabled: this.disabled,
-                download: this.download,
-                $html: '<slot>'
-            }
-        ];
-    });
+    template = $(() => [
+        this.href ? 'a' : 'button', {
+            part: 'shadow',
+            href: this.href,
+            target: this.target,
+            disabled: this.disabled,
+            download: this.download,
+            $html: '<slot>'
+        }
+    ]);
 
     @Attr({ render: true })
     href: string;
@@ -43,6 +40,10 @@ export class MasterButtonElement extends HTMLElement {
     }
 
     onConnected() {
+        this.render();
+    }
+
+    render() {
         this.template.render(this.shadowRoot);
     }
 

@@ -65,9 +65,6 @@ export class CreateComponent implements OnInit {
             } else {
                 this.tagName = 'div';
             }
-            if (this.times === 2) {
-                this.template.remove();
-            }
         }, 1000);
 
     }

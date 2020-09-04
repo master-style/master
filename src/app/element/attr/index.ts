@@ -3,7 +3,6 @@ import camelToKebabCase from '@utils/camel-to-kebab-case';
 const DEFAULT_ATTR_OPTION = {
     reflect: true,
     observe: true,
-    shadow: false,
     toggle: false,
     render: false
 };
@@ -38,8 +37,8 @@ export function Attr(option?: AttrOption) {
                     if (option.reflect) {
                         if (!fromAttr) this.attr(value);
                     }
-                    if (option.render && this.template) {
-                        this.template.render(this.shadowRoot || this);
+                    if (option.render && this.render) {
+                        this.render.call(this);
                     }
                 }
             }
