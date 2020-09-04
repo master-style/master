@@ -83,6 +83,8 @@ Master.Template = class MasterTemplate {
 
     container;
 
+    nodes = [];
+
     render(container) {
         // tslint:disable-next-line: prefer-for-of
         const nodes: cache[] = [];
@@ -188,5 +190,12 @@ Master.Template = class MasterTemplate {
         this.nodes = nodes;
     }
 
-    nodes = [];
+    remove() {
+        if (this.nodes) {
+            this.nodes
+                .forEach((deletedNode) => deletedNode.element.remove());
+            this.nodes = [];
+        }
+        return this;
+    }
 };
