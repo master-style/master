@@ -9,7 +9,6 @@ export class MasterButtonElement extends HTMLElement {
     @Attr({ render: true })
     href: string;
 
-    // href first
     @Attr({ render: true })
     disabled: boolean;
 

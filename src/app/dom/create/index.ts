@@ -78,38 +78,39 @@ const create = function (eachNodes, parent) {
 class MasterTemplate {
 
     constructor(
-        private template
+        private template: () => any[]
     ) { }
 
-    container: HTMLElement;
+    container;
     nodes: TemplateNode[] = [];
 
     render(container) {
 
         // tslint:disable-next-line: prefer-for-of
-        const nodes: TemplateNode[] = [];
+        const oldNodes: TemplateNode[] = this.nodes;
 
-        (function generate(layer: any[], trees: TemplateNode[]) {
+        this.nodes = [];
+
+        (function generate(tokens: any[], eachNodes: TemplateNode[]) {
             let node: TemplateNode;
             // tslint:disable-next-line: prefer-for-of
-            for (let i = 0; i < layer.length; i++) {
-                const current = layer[i];
-                const currentType = typeof current;
-                if (currentType === 'string') {
+            for (let i = 0; i < tokens.length; i++) {
+                const token = tokens[i];
+                const tokenType = typeof token;
+                if (tokenType === 'string') {
                     node = {
-                        tag: current
+                        tag: token
                     };
-                    trees.push(node);
-                } else if (Array.isArray(current)) {
-                    generate(current, node.children = []);
-                } else if (currentType === 'function') {
-                    node.children = [];
-                    const children = current().reduce((acc, currentValue) => {
-                        return acc.concat(currentValue);
+                    eachNodes.push(node);
+                } else if (Array.isArray(token)) {
+                    generate(token, node.children = []);
+                } else if (tokenType === 'function') {
+                    const children = token().reduce((acc, eachToken) => {
+                        return acc.concat(eachToken);
                     }, []);
                     generate(children, node.children = []);
-                } else if (currentType === 'object') {
-                    const attr = current;
+                } else if (tokenType === 'object') {
+                    const attr = token;
                     if (attr.$text !== undefined) {
                         node.$text = attr.$text;
                         delete attr.$text;
@@ -121,79 +122,77 @@ class MasterTemplate {
                     node.attr = attr;
                 }
             }
-        })(this.template(), nodes);
+        })(this.template(), this.nodes);
 
         if (this.nodes && this.container === container) {
-            (function renderNode(newNodes, oldNodes, parent) {
-                if (!newNodes.length && oldNodes.length) {
-                    oldNodes
-                        .forEach((deletedOldNode) => deletedOldNode.element.remove());
+            (function renderNode(eachNodes, eachOldNodes, parent) {
+                if (!eachNodes.length && eachOldNodes.length) {
+                    eachOldNodes
+                        .forEach((eachNode) => eachNode.element.remove());
                 } else {
                     // tslint:disable-next-line: prefer-for-of
-                    for (let i = 0; i < newNodes.length; i++) {
-                        const node = newNodes[i];
-                        let oldNode = oldNodes ? oldNodes[i] : null;
-                        if (oldNode && node.tag === oldNode.tag) {
-                            node.element = oldNode.element;
-                            if (node.attr) {
-                                Object.keys(node.attr).forEach((eachAttrKey) => {
-                                    const newAttrValue = node.attr[eachAttrKey];
-                                    const oldAttrValue = oldNode?.attr[eachAttrKey];
+                    for (let i = 0; i < eachNodes.length; i++) {
+                        const eachNode = eachNodes[i];
+                        let eachOldNode = eachOldNodes ? eachOldNodes[i] : null;
+                        if (eachOldNode && eachNode.tag === eachOldNode.tag) {
+                            eachNode.element = eachOldNode.element;
+                            if (eachNode.attr) {
+                                Object.keys(eachNode.attr).forEach((eachAttrKey) => {
+                                    const newAttrValue = eachNode.attr[eachAttrKey];
+                                    const oldAttrValue = eachOldNode?.attr[eachAttrKey];
                                     if (newAttrValue !== oldAttrValue) {
-                                        node.element.attr(eachAttrKey, newAttrValue);
+                                        eachNode.element.attr(eachAttrKey, newAttrValue);
                                     }
                                 });
                             }
-                            if (node.$text && node.$text !== oldNode.$text) {
-                                node.element.textContent = node.$text;
+                            if (eachNode.$text && eachNode.$text !== eachOldNode.$text) {
+                                eachNode.element.textContent = eachNode.$text;
                             }
-                            if (!newNodes[i + 1]) {
-                                oldNodes.splice(i + 1)
+                            if (!eachNodes[i + 1]) {
+                                eachOldNodes.splice(i + 1)
                                     .forEach((deletedOldNode) => deletedOldNode.element.remove());
                             }
-                            if (node.children) {
-                                renderNode(node.children, oldNode.children, node.element);
+                            if (eachNode.children) {
+                                renderNode(eachNode.children, eachOldNode.children, eachNode.element);
                             }
                         } else {
-                            node.element = document.createElement(node.tag);
-                            if (oldNode && node.tag !== oldNode.tag) {
-                                oldNode.element.before(node.element);
-                                oldNode.element.remove();
-                                oldNode = null;
+                            eachNode.element = document.createElement(eachNode.tag);
+                            if (eachOldNode && eachNode.tag !== eachOldNode.tag) {
+                                eachOldNode.element.before(eachNode.element);
+                                eachOldNode.element.remove();
+                                eachOldNode = null;
                             }
-                            if (node.attr) {
-                                Object.keys(node.attr).forEach((eachAttrKey) => {
-                                    const newAttrValue = node.attr[eachAttrKey];
-                                    node.element.attr(eachAttrKey, newAttrValue);
+                            if (eachNode.attr) {
+                                Object.keys(eachNode.attr).forEach((eachAttrKey) => {
+                                    const newAttrValue = eachNode.attr[eachAttrKey];
+                                    eachNode.element.attr(eachAttrKey, newAttrValue);
                                 });
                             }
-                            if (node.$text) {
-                                node.element.textContent = node.$text;
+                            if (eachNode.$text) {
+                                eachNode.element.textContent = eachNode.$text;
                             }
-                            if (node.children) {
-                                renderNode(node.children, oldNode?.children, node.element);
+                            if (eachNode.children) {
+                                renderNode(eachNode.children, eachOldNode?.children, eachNode.element);
                             }
-                            if (newNodes[i - 1]) {
-                                newNodes[i - 1].element.after(node.element);
+                            if (eachNodes[i - 1]) {
+                                eachNodes[i - 1].element.after(eachNode.element);
                             } else {
-                                parent.append(node.element);
+                                parent.append(eachNode.element);
                             }
                         }
                     }
                 }
-            })(nodes, this.nodes, container);
+            })(this.nodes, oldNodes, container);
         } else {
             this.container = container;
-            create(nodes, container);
+            create(this.nodes, container);
         }
-
-        this.nodes = nodes;
     }
 
     remove() {
         if (this.nodes) {
             this.nodes
-                .forEach((deletedNode) => deletedNode.element.remove());
+                .forEach((eachNode) => eachNode.element.remove());
             this.nodes = [];
         }
         return this;
