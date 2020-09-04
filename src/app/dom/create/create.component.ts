@@ -15,6 +15,8 @@ export class CreateComponent implements OnInit {
 
     items: any = [];
 
+    tagName = 'div';
+
     ngOnInit(): void {
         const template = () => [
             'div', { class: 'shine', $text: '1' },
@@ -34,11 +36,11 @@ export class CreateComponent implements OnInit {
                 ],
                 'div', { class: 'shine', $text: '2', $html: '<article>love</article>' }
             ],
-            'div', { class: 'shine', $text: '1' },
-            'div', { class: 'shine', $text: '1' },
-            'div', { class: 'shine', $text: '1' }, [
+            this.tagName, { class: 'shine', $text: '1' }, [
                 'div', { class: 'shine', $text: '2' },
             ],
+            'div', { class: 'shine', $text: '1' },
+            'div', { class: 'shine', $text: '1' },
             'div', { class: 'shine', $text: '1' }
         ];
 
@@ -58,6 +60,11 @@ export class CreateComponent implements OnInit {
                 this.items = [];
             } else {
                 this.items.push(this.times);
+            }
+            if(this.tagName === 'div') {
+                this.tagName = 'a';
+            } else {
+                this.tagName = 'div';
             }
         }, 1000);
 

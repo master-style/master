@@ -120,55 +120,61 @@ Master.Render = class MasterRender {
 
         if (this.nodes && this.root === root) {
             (function render(newNodes, oldNodes, parent) {
-                // tslint:disable-next-line: prefer-for-of
-                for (let i = 0; i < newNodes.length; i++) {
-                    const newNode = newNodes[i];
-                    const oldNode = oldNodes[i];
-                    if (oldNode) {
-                        newNode.element = oldNode.element;
-                        if (newNode.attr) {
-                            Object.keys(newNode.attr).forEach((eachAttrKey) => {
-                                const newAttrValue = newNode.attr[eachAttrKey];
-                                const oldAttrValue = oldNode?.attr[eachAttrKey];
-                                if (newAttrValue !== oldAttrValue)
-                                    newNode.element.setAttribute(eachAttrKey, newAttrValue);
-                            });
-                        }
-                        if (newNode.$text && newNode.$text !== oldNode.$text) {
-                            newNode.element.textContent = newNode.$text;
-                        }
-                        if (!newNodes[i + 1]) {
-                            oldNodes.splice(i + 1)
-                                .forEach((deletedOldNode) => deletedOldNode.element.remove());
-                        }
-                        if (newNode.children) {
-                            render(newNode.children, oldNode.children, newNode.element);
-                        }
-                    } else {
-                        newNode.element = document.createElement(newNode.tag);
-                        if (newNode.attr) {
-                            Object.keys(newNode.attr).forEach((eachAttrKey) => {
-                                const newAttrValue = newNode.attr[eachAttrKey];
-                                if (newAttrValue)
-                                    newNode.element.setAttribute(eachAttrKey, newAttrValue);
-                            });
-                        }
-                        if (newNode.$text) {
-                            newNode.element.textContent = newNode.$text;
-                        }
-                        if (newNode.children) {
-                            render(newNode.children, oldNode.children, newNode.element);
-                        }
-                        if (newNodes[i - 1]) {
-                            newNodes[i - 1].element.after(newNode.element);
-                        } else {
-                            parent.append(newNode.element);
-                        }
-                    }
-                }
                 if (!newNodes.length && oldNodes.length) {
                     oldNodes
                         .forEach((deletedOldNode) => deletedOldNode.element.remove());
+                } else {
+                    // tslint:disable-next-line: prefer-for-of
+                    for (let i = 0; i < newNodes.length; i++) {
+                        const newNode = newNodes[i];
+                        let oldNode = oldNodes ? oldNodes[i] : null;
+                        if (oldNode && newNode.tag === oldNode.tag) {
+                            newNode.element = oldNode.element;
+                            if (newNode.attr) {
+                                Object.keys(newNode.attr).forEach((eachAttrKey) => {
+                                    const newAttrValue = newNode.attr[eachAttrKey];
+                                    const oldAttrValue = oldNode?.attr[eachAttrKey];
+                                    if (newAttrValue !== oldAttrValue)
+                                        newNode.element.setAttribute(eachAttrKey, newAttrValue);
+                                });
+                            }
+                            if (newNode.$text && newNode.$text !== oldNode.$text) {
+                                newNode.element.textContent = newNode.$text;
+                            }
+                            if (!newNodes[i + 1]) {
+                                oldNodes.splice(i + 1)
+                                    .forEach((deletedOldNode) => deletedOldNode.element.remove());
+                            }
+                            if (newNode.children) {
+                                render(newNode.children, oldNode.children, newNode.element);
+                            }
+                        } else {
+                            newNode.element = document.createElement(newNode.tag);
+                            if (oldNode && newNode.tag !== oldNode.tag) {
+                                oldNode.element.before(newNode.element);
+                                oldNode.element.remove();
+                                oldNode = null;
+                            }
+                            if (newNode.attr) {
+                                Object.keys(newNode.attr).forEach((eachAttrKey) => {
+                                    const newAttrValue = newNode.attr[eachAttrKey];
+                                    if (newAttrValue)
+                                        newNode.element.setAttribute(eachAttrKey, newAttrValue);
+                                });
+                            }
+                            if (newNode.$text) {
+                                newNode.element.textContent = newNode.$text;
+                            }
+                            if (newNode.children) {
+                                render(newNode.children, oldNode?.children, newNode.element);
+                            }
+                            if (newNodes[i - 1]) {
+                                newNodes[i - 1].element.after(newNode.element);
+                            } else {
+                                parent.append(newNode.element);
+                            }
+                        }
+                    }
                 }
             })(nodes, this.nodes, root);
         } else {
