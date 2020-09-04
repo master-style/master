@@ -66,9 +66,8 @@ const create = function (eachNodes, parent) {
         if (attr) {
             Object.keys(attr).forEach((eachAttrKey) => {
                 const eachAttrValue = attr[eachAttrKey];
-                typeof eachAttrValue === 'boolean'
-                    ? element.toggleAttribute(eachAttrKey, eachAttrValue)
-                    : element.setAttribute(eachAttrKey, eachAttrValue);
+                console.log(eachAttrKey, eachAttrValue);
+                element.attr(eachAttrKey, eachAttrKey);
             });
         }
         if (!skipChildren && node.children) {
@@ -143,9 +142,7 @@ class MasterTemplate {
                                     const newAttrValue = newNode.attr[eachAttrKey];
                                     const oldAttrValue = oldNode?.attr[eachAttrKey];
                                     if (newAttrValue !== oldAttrValue) {
-                                        typeof newAttrValue === 'boolean'
-                                            ? newNode.element.toggleAttribute(eachAttrKey, newAttrValue)
-                                            : newNode.element.setAttribute(eachAttrKey, newAttrValue);
+                                        newNode.element.attr(eachAttrKey, newAttrValue)
                                     }
                                 });
                             }
@@ -170,9 +167,7 @@ class MasterTemplate {
                                 Object.keys(newNode.attr).forEach((eachAttrKey) => {
                                     const newAttrValue = newNode.attr[eachAttrKey];
                                     if (newAttrValue) {
-                                        typeof newAttrValue === 'boolean'
-                                            ? newNode.element.toggleAttribute(eachAttrKey, newAttrValue)
-                                            : newNode.element.setAttribute(eachAttrKey, newAttrValue);
+                                        newNode.element.attr(eachAttrKey, newAttrValue)
                                     }
                                 });
                             }

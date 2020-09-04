@@ -19,10 +19,10 @@ export class MasterButtonElement extends HTMLElement {
     ]);
 
     // href first
-    @Attr({ toggle: true, render: true })
+    @Attr({ render: true })
     disabled: boolean;
 
-    @Attr({ toggle: true })
+    @Attr()
     loading: boolean;
 
     @Attr({ render: true })

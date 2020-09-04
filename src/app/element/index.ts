@@ -1,10 +1,10 @@
 export * from './attr';
 
-const parseAttrValue = (value, toggle) => {
+const parseAttrValue = (value) => {
     if (value === undefined) {
         return value;
-    } else if (toggle) {
-        return value === null ? false : true;
+    } else if (typeof value === 'boolean') {
+        return value === true ? true : false;
     } else {
         if (value === '' || value === null) {
             return value;
@@ -28,8 +28,8 @@ export function Element(tag: string) {
             if (value === oldValue) return;
             // console.log('changed:', attrKey, value, oldValue);
             const attrOption = attrOptions[attrKey];
-            value = parseAttrValue(value, attrOption.toggle);
-            oldValue = parseAttrValue(oldValue, attrOption.toggle);
+            value = parseAttrValue(value);
+            oldValue = parseAttrValue(oldValue);
             // console.log('changed:', attrKey, value, oldValue);
             attrOption.setProp.call(this, value, true);
             if (attributeChangedCallback) attributeChangedCallback.call(this, attrKey, value, oldValue);
@@ -43,7 +43,7 @@ export function Element(tag: string) {
                 for (const eachAttrKey in attrOptions) {
                     const eachAttrOption: AttrOption = attrOptions[eachAttrKey];
                     const eachPropValue = this['_' + eachAttrOption.propKey];
-                    const eachAttrValue = parseAttrValue(attributes[eachAttrKey]?.value, eachAttrOption.toggle);
+                    const eachAttrValue = parseAttrValue(attributes[eachAttrKey]?.value);
                     // console.log('connected:', eachAttrKey, eachPropValue);
                     if (eachAttrOption.reflect && eachPropValue !== eachAttrValue) {
                         eachAttrOption.set.call(this, eachPropValue);

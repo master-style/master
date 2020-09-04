@@ -10,7 +10,7 @@ ElementPrototype.attr = function (param?: any, value?: any): any {
             element.removeAttribute(attrKey);
         } else {
             typeof value === 'boolean'
-                ? element.toggleAttribute(attrKey, value)
+                ? element.toggleAttribute(attrKey, !!value)
                 : element.setAttribute(attrKey, value);
         }
         return element;
@@ -20,7 +20,7 @@ ElementPrototype.attr = function (param?: any, value?: any): any {
             const attrValue = param[attrKey];
             if (attrValue !== undefined) {
                 typeof attrValue === 'boolean'
-                    ? element.toggleAttribute(attrKey, attrValue)
+                    ? element.toggleAttribute(attrKey, !!attrValue)
                     : element.setAttribute(attrKey, attrValue);
             }
         }
