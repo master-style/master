@@ -10,6 +10,12 @@ const NAME = 'button';
 export class MasterButton extends HTMLElement {
 
     @Attr({ render: true })
+    type: string;
+
+    @Attr({ render: true })
+    rel: string;
+
+    @Attr({ render: true })
     href: string;
 
     @Attr({ render: true })
@@ -23,9 +29,6 @@ export class MasterButton extends HTMLElement {
 
     @Attr({ render: true })
     target: string;
-
-    @Attr({ render: true })
-    type: string;
 
     template = $(() => [
         this.href ? 'a' : 'button', {

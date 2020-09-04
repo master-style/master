@@ -11,6 +11,7 @@ export class PropComponent implements OnInit {
 
     @Input() name: string;
     @Input() types: [];
+    @Input() default: any;
     @Input() description: string;
 
     camelToKebabCase = camelToKebabCase;
@@ -38,7 +39,7 @@ export class PropComponent implements OnInit {
         }
     }
 
-    getTypeString(value) {
+    parsedStr(value) {
         switch (value) {
             case 'boolean':
             case 'string':

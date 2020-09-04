@@ -4,8 +4,7 @@
             <tr>
                 <td colspan="2">
                     <h3 id="property-disabled" style="margin-bottom: 0">
-                        <code class="bg:transparent"
-                            style="font-size: inherit; padding: 0">.{{ name }}</code>
+                        <code class="bg:transparent" style="font-size: inherit; padding: 0">.{{ name }}</code>
                     </h3>
                 </td>
             </tr>
@@ -16,10 +15,11 @@
                 <td>
                     <div class="y:xs">
                         <m-chip class="x theme+ sm" *ngFor="let type of types">
-                            <div part="chip-head" *ngIf="type !== undefined">
-                                <ion-icon [attr.name]="getTypeIcon(type)"></ion-icon>
+                            <div part="chip-head">
+                                <ion-icon *ngIf="type !== undefined" [attr.name]="getTypeIcon(type)"></ion-icon>
+                                {{ type === undefined ? '∅' : '' }}
                             </div>
-                            <code part="chip-body">{{ getTypeString(type) }}</code>
+                            <code part="chip-body">{{ parsedStr(type) }}</code>
                         </m-chip>
                     </div>
                 </td>
@@ -30,6 +30,20 @@
                     <m-chip class="theme+ sm">
                         <code part="chip-body">{{ camelToKebabCase(name) }}</code>
                     </m-chip>
+                </td>
+            </tr>
+            <tr>
+                <th class="fit t:left">default</th>
+                <td>
+                    <div class="y:xs">
+                        <m-chip class="x outlined blue+ sm">
+                            <div part="chip-head">
+                                <ion-icon *ngIf="default !== undefined" [attr.name]="getTypeIcon(default)"></ion-icon>
+                                {{ default === undefined ? '∅' : '' }}
+                            </div>
+                            <code part="chip-body">{{ parsedStr(default) }}</code>
+                        </m-chip>
+                    </div>
                 </td>
             </tr>
             <tr *ngIf="description">
