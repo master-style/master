@@ -20,6 +20,9 @@ export function Element(tag: string) {
             oldValue = parseAttrValue(oldValue);
             // console.log('changed:', attrKey, value, oldValue);
             attrOption.setProp.call(this, value, true);
+            if (attrOption.render && this.render) {
+                this.render();
+            }
             if (attributeChangedCallback) attributeChangedCallback.call(this, attrKey, value, oldValue);
             if (onAttrChanged) onAttrChanged.call(this, attrKey, value, oldValue);
         };
