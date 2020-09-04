@@ -111,15 +111,15 @@ class MasterTemplate {
                     generate(children, node.children = []);
                 } else if (tokenType === 'object') {
                     const attr = token;
-                    if (attr.$text !== undefined) {
-                        node.$text = attr.$text;
-                        delete attr.$text;
+                    node.attr = {};
+                    for (const attrKey in attr) {
+                        const eachAttrValue = attr[attrKey];
+                        if (attrKey[0] !== '$') {
+                            node.attr[attrKey] = eachAttrValue;
+                        } else {
+                            node[attrKey] = eachAttrValue;
+                        }
                     }
-                    if (attr.$html !== undefined) {
-                        node.$html = attr.$html;
-                        delete attr.$html;
-                    }
-                    node.attr = attr;
                 }
             }
         })(this.template(), this.nodes);
