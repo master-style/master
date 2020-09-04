@@ -134,6 +134,7 @@ class MasterTemplate {
                                 renderNodes(eachNode.children, eachOldNode.children, eachNode.element);
                             }
                         } else {
+                            let skipChildren = false;
                             eachNode.element = document.createElement(eachNode.tag);
                             if (eachOldNode) {
                                 eachOldNode.element.before(eachNode.element);
@@ -144,10 +145,13 @@ class MasterTemplate {
                                     eachNode.element.attr(eachAttrKey, eachNode.attr[eachAttrKey]);
                                 }
                             }
-                            if (eachNode.$text) {
+                            if (eachNode.$html !== undefined) {
+                                eachNode.element.innerHTML = eachNode.$html;
+                                skipChildren = true;
+                            } else if (eachNode.$text !== undefined) {
                                 eachNode.element.textContent = eachNode.$text;
                             }
-                            if (eachNode.children) {
+                            if (!skipChildren && eachNode.children) {
                                 renderNodes(eachNode.children, [], eachNode.element);
                             }
                             if (i !== 0) {
