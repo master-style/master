@@ -1,3 +1,4 @@
+const fragment = document.createDocumentFragment();
 
 window.Master = function (selector: any, attr?: { [key: string]: any }, ...children: (Element | string)[]) {
     if (typeof selector === 'function') {
@@ -7,15 +8,15 @@ window.Master = function (selector: any, attr?: { [key: string]: any }, ...child
         if (Object.keys(attr).length) element.attr(attr);
         if (children.length) {
             if (children.length > 1) {
-                const fragment = document.createDocumentFragment();
+                const eachFragment = fragment.cloneNode();
                 for (const eachChild of children) {
-                    fragment.appendChild(
+                    eachFragment.appendChild(
                         typeof eachChild === 'string' ?
                             document.createTextNode(eachChild as any) :
                             eachChild
                     );
                 }
-                element.appendChild(fragment);
+                element.appendChild(eachFragment);
             } else {
                 element.appendChild(
                     typeof children[0] === 'string' ?
@@ -48,8 +49,6 @@ interface cache {
     $html?: string,
     $text?: string
 };
-
-const fragment = document.createDocumentFragment();
 
 const create = function (eachNodes, parent) {
     const eachFragment = fragment.cloneNode();
