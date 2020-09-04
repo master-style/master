@@ -93,14 +93,10 @@ class MasterTemplate {
 
         (function generate(tokens: any[], eachNodes: TemplateNode[]) {
             let node: TemplateNode;
-            // tslint:disable-next-line: prefer-for-of
-            for (let i = 0; i < tokens.length; i++) {
-                const token = tokens[i];
+            for (const token of tokens) {
                 const tokenType = typeof token;
                 if (tokenType === 'string') {
-                    node = {
-                        tag: token
-                    };
+                    node = { tag: token };
                     eachNodes.push(node);
                 } else if (Array.isArray(token)) {
                     generate(token, node.children = []);
