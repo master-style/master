@@ -1,6 +1,8 @@
 
-window.Master = function (selector: string, attr?: { [key: string]: any }, ...children: (Element | string)[]) {
-    if (attr) {
+window.Master = function (selector: any, attr?: { [key: string]: any }, ...children: (Element | string)[]) {
+    if (typeof selector === 'function') {
+        return new MasterTemplate(selector);
+    } else if (attr) {
         const element: Element = document.createElement(selector, attr && attr.is ? { is: attr.is } : undefined);
         if (Object.keys(attr).length) element.attr(attr);
         if (children.length) {
@@ -75,7 +77,7 @@ const create = function (eachNodes, parent) {
     parent.appendChild(eachFragment);
 };
 
-Master.Template = class MasterTemplate {
+class MasterTemplate {
 
     constructor(private template) {
         console.log(template);
@@ -198,4 +200,4 @@ Master.Template = class MasterTemplate {
         }
         return this;
     }
-};
+}

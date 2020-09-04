@@ -18,7 +18,7 @@ export class CreateComponent implements OnInit {
     tagName = 'div';
 
     ngOnInit(): void {
-        const template = new Master.Template(() => [
+        const template = $(() => [
             'div', { class: 'shine', $text: '1' },
             'div', { class: 'shine', $text: this.times, name: this.times },
             'div', { class: 'shine', $text: '1' }, [

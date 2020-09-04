@@ -8,6 +8,9 @@ const SLOT = 'slot';
 export class MasterButtonElement extends HTMLElement {
 
     shadow: Element;
+    template = $(() => [
+        this.href ? 'a' : 'button', { class: 'shine', $text: '1' }
+    ]);
 
     // href first
     @Attr({ shadow: true })
