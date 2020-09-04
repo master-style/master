@@ -18,7 +18,7 @@ export class CreateComponent implements OnInit {
     tagName = 'div';
 
     ngOnInit(): void {
-        const template = () => [
+        const template = new Master.Template(() => [
             'div', { class: 'shine', $text: '1' },
             'div', { class: 'shine', $text: this.times, name: this.times },
             'div', { class: 'shine', $text: '1' }, [
@@ -34,7 +34,7 @@ export class CreateComponent implements OnInit {
                         ]
                     ]
                 ],
-                'div', { class: 'shine', $text: '2', $html: '<article>love</article>' }
+                'div', { class: 'shine', $html: '<article>love</article>' }
             ],
             this.tagName, { class: 'shine', $text: '1' }, [
                 'div', { class: 'shine', $text: '2' },
@@ -42,15 +42,13 @@ export class CreateComponent implements OnInit {
             'div', { class: 'shine', $text: '1' },
             'div', { class: 'shine', $text: '1' },
             'div', { class: 'shine', $text: '1' }
-        ];
-
-        const render1 = new Master.Render();
+        ]);
 
         const container = document.querySelector('doc-create');
 
         setInterval(() => {
             const t1 = performance.now();
-            render1.run(template, container);
+            template.render(container);
             this.performanceTime = performance.now() - t1;
             if (this.times === 0) {
                 this.firstPerformanceTime = this.performanceTime;
@@ -61,7 +59,7 @@ export class CreateComponent implements OnInit {
             } else {
                 this.items.push(this.times);
             }
-            if(this.tagName === 'div') {
+            if (this.tagName === 'div') {
                 this.tagName = 'a';
             } else {
                 this.tagName = 'div';

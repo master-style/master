@@ -49,19 +49,18 @@ interface cache {
 
 const fragment = document.createDocumentFragment();
 
-const create = function (eachNodes, container) {
+const create = function (eachNodes, parent) {
     const eachFragment = fragment.cloneNode();
     eachNodes.forEach((node) => {
         const element = document.createElement(node.tag);
         node.element = element;
         const attr = node.attr;
         let skipChildren = false;
-        if (node.$text !== undefined) {
-            element.textContent = node.$text;
-        }
-        if (attr.$html !== undefined) {
+        if (node.$html !== undefined) {
             element.innerHTML = node.$html;
             skipChildren = true;
+        } else if (node.$text !== undefined) {
+            element.textContent = node.$text;
         }
         if (attr) {
             Object.keys(attr).forEach((eachAttrKey) => {
@@ -73,14 +72,18 @@ const create = function (eachNodes, container) {
         }
         eachFragment.appendChild(element);
     });
-    container.appendChild(eachFragment);
+    parent.appendChild(eachFragment);
 };
 
-Master.Render = class MasterRender {
+Master.Template = class MasterTemplate {
 
-    root;
+    constructor(private template) {
+        console.log(template);
+    }
 
-    run(createTemplate, root) {
+    container;
+
+    render(container) {
         // tslint:disable-next-line: prefer-for-of
         const nodes: cache[] = [];
 
@@ -116,9 +119,9 @@ Master.Render = class MasterRender {
                     node.attr = attr;
                 }
             }
-        })(createTemplate(), nodes);
+        })(this.template(), nodes);
 
-        if (this.nodes && this.root === root) {
+        if (this.nodes && this.container === container) {
             (function render(newNodes, oldNodes, parent) {
                 if (!newNodes.length && oldNodes.length) {
                     oldNodes
@@ -176,10 +179,10 @@ Master.Render = class MasterRender {
                         }
                     }
                 }
-            })(nodes, this.nodes, root);
+            })(nodes, this.nodes, container);
         } else {
-            this.root = root;
-            create(nodes, root);
+            this.container = container;
+            create(nodes, container);
         }
 
         this.nodes = nodes;
