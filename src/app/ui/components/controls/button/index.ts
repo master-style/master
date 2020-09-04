@@ -4,7 +4,7 @@ import css from './index.scss';
 const NAME = 'button';
 
 @Element('m-' + NAME)
-export class MasterButtonElement extends HTMLElement {
+export class MasterButton extends HTMLElement {
 
     @Attr({ render: true })
     href: string;
@@ -21,6 +21,9 @@ export class MasterButtonElement extends HTMLElement {
     @Attr({ render: true })
     target: string;
 
+    @Attr({ render: true })
+    type: string;
+
     template = $(() => [
         this.href ? 'a' : 'button', {
             part: 'shadow',
@@ -28,6 +31,7 @@ export class MasterButtonElement extends HTMLElement {
             target: this.target,
             disabled: this.disabled,
             download: this.download,
+            type: this.type,
             $html: '<slot>'
         }
     ]);

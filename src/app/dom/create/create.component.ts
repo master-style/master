@@ -49,7 +49,7 @@ export class CreateComponent implements OnInit {
 
     ngOnInit(): void {
 
-        const container = document.querySelector('doc-create');
+        const container = document.querySelector('#create');
 
         this.timer = setInterval(() => {
             const t1 = performance.now();

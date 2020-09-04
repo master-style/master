@@ -3,3 +3,12 @@ interface Master {
     (selector: string): NodeList;
     (template: () => Array<any>): MasterTemplate;
 }
+
+interface TemplateNode {
+    tag: string;
+    attr?: { [key: string]: any };
+    children?: TemplateNode[];
+    element?: Element;
+    $html?: string;
+    $text?: string;
+}

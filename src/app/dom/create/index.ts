@@ -31,23 +31,6 @@ window.Master = function (selector: any, attr?: { [key: string]: any }, ...child
     }
 };
 
-// const template = Master.template('div', { class: 'blue', name: 'aron' }, [])
-// const render = Master.render(template);
-// 第一次 render 後，將 template 存在 render 本身
-// 第Ｎ次 render，都將與前一次 render 之 template 比對，一有異動便局部更新：
-// - 局部更新 attr 異動
-// - 局部更新 text 異動
-// - 局部更新 node 異動 ( tagName /  )
-
-interface TemplateNode {
-    tag: string;
-    attr?: { [key: string]: any };
-    children?: TemplateNode[];
-    element?: Element;
-    $html?: string;
-    $text?: string;
-};
-
 const create = function (eachNodes, parent) {
     const eachFragment = fragment.cloneNode();
     eachNodes.forEach((node) => {
@@ -88,7 +71,6 @@ class MasterTemplate {
 
         // tslint:disable-next-line: prefer-for-of
         const oldNodes: TemplateNode[] = this.nodes;
-
         this.nodes = [];
 
         (function generate(tokens: any[], eachNodes: TemplateNode[]) {
@@ -171,7 +153,7 @@ class MasterTemplate {
                             if (i !== 0) {
                                 eachNodes[i - 1].element.after(eachNode.element);
                             } else {
-                                parent.append(eachNode.element);
+                                parent.appendChild(eachNode.element);
                             }
                         }
                     }
