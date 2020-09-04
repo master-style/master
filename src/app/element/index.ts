@@ -19,7 +19,7 @@ export function Element(options: ElementOptions) {
     options = { ...DEFAULT_ELEMENT_OPTION, ...options };
     return function (constructor: any) {
         const prototype = constructor.prototype;
-        const attrOptions = constructor.attrOptions;
+        const attrOptionsMap = constructor.attrOptionsMap;
 
         const onConnected = prototype.onConnected;
         const connectedCallback = prototype.connectedCallback;
@@ -29,8 +29,8 @@ export function Element(options: ElementOptions) {
 
         prototype.attributeChangedCallback = function (attrKey, oldValue, value) {
             if (value === oldValue) return;
-            const eachAttrOptions = attrOptions[attrKey];
-            const type = attrOptions.type;
+            const eachAttrOptions = attrOptionsMap[attrKey];
+            const type = eachAttrOptions.type;
             value = parseAttrValue(value, type);
             oldValue = parseAttrValue(oldValue, type);
             // console.log('changed:', attrKey, value, oldValue);
@@ -40,11 +40,11 @@ export function Element(options: ElementOptions) {
         };
         prototype.connectedCallback = function () {
             this.ready = false; // prevent rendering many times
-            if (attrOptions) {
+            if (attrOptionsMap) {
                 const attributes = this.attributes;
                 // tslint:disable-next-line: forin
-                for (const eachAttrKey in attrOptions) {
-                    const eachAttrOptions: AttrOptions = attrOptions[eachAttrKey];
+                for (const eachAttrKey in attrOptionsMap) {
+                    const eachAttrOptions: AttrOptions = attrOptionsMap[eachAttrKey];
                     const eachPropValue = this['_' + eachAttrOptions.propKey];
                     const eachAttr = attributes[eachAttrKey];
                     if (eachAttr) {
@@ -55,7 +55,6 @@ export function Element(options: ElementOptions) {
                             } else {
                                 this.setAttribute(eachAttrKey, eachAttrValue);
                             }
-                            count++;
                         }
                     }
                 }
