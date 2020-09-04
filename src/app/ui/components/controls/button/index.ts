@@ -2,7 +2,6 @@ import { Element, Attr, attachShadow } from '@element';
 import css from './index.scss';
 
 const NAME = 'button';
-const SLOT = 'slot';
 
 @Element('m-' + NAME)
 export class MasterButtonElement extends HTMLElement {
