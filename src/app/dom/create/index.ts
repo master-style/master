@@ -125,7 +125,7 @@ class MasterTemplate {
         })(this.template(), this.nodes);
 
         if (this.nodes && this.container === container) {
-            (function renderNode(eachNodes, eachOldNodes, parent) {
+            (function renderNodes(eachNodes, eachOldNodes, parent) {
                 if (!eachNodes.length && eachOldNodes.length) {
                     eachOldNodes
                         .forEach((eachNode) => eachNode.element.remove());
@@ -133,7 +133,7 @@ class MasterTemplate {
                     // tslint:disable-next-line: prefer-for-of
                     for (let i = 0; i < eachNodes.length; i++) {
                         const eachNode = eachNodes[i];
-                        let eachOldNode = eachOldNodes ? eachOldNodes[i] : null;
+                        let eachOldNode = eachOldNodes[i];
                         if (eachOldNode && eachNode.tag === eachOldNode.tag) {
                             eachNode.element = eachOldNode.element;
                             if (eachNode.attr) {
@@ -145,7 +145,7 @@ class MasterTemplate {
                                     }
                                 });
                             }
-                            if (eachNode.$text && eachNode.$text !== eachOldNode.$text) {
+                            if (eachNode.$text !== eachOldNode.$text) {
                                 eachNode.element.textContent = eachNode.$text;
                             }
                             if (!eachNodes[i + 1]) {
@@ -153,28 +153,26 @@ class MasterTemplate {
                                     .forEach((deletedOldNode) => deletedOldNode.element.remove());
                             }
                             if (eachNode.children) {
-                                renderNode(eachNode.children, eachOldNode.children, eachNode.element);
+                                renderNodes(eachNode.children, eachOldNode.children, eachNode.element);
                             }
                         } else {
                             eachNode.element = document.createElement(eachNode.tag);
-                            if (eachOldNode && eachNode.tag !== eachOldNode.tag) {
+                            if (eachOldNode) {
                                 eachOldNode.element.before(eachNode.element);
-                                eachOldNode.element.remove();
-                                eachOldNode = null;
+                                eachOldNode = (eachOldNode.element.remove() as undefined);
                             }
                             if (eachNode.attr) {
-                                Object.keys(eachNode.attr).forEach((eachAttrKey) => {
-                                    const newAttrValue = eachNode.attr[eachAttrKey];
-                                    eachNode.element.attr(eachAttrKey, newAttrValue);
-                                });
+                                for (const eachAttrKey in eachNode.attr) {
+                                    eachNode.element.attr(eachAttrKey, eachNode.attr[eachAttrKey]);
+                                }
                             }
                             if (eachNode.$text) {
                                 eachNode.element.textContent = eachNode.$text;
                             }
                             if (eachNode.children) {
-                                renderNode(eachNode.children, eachOldNode?.children, eachNode.element);
+                                renderNodes(eachNode.children, [], eachNode.element);
                             }
-                            if (eachNodes[i - 1]) {
+                            if (i !== 0) {
                                 eachNodes[i - 1].element.after(eachNode.element);
                             } else {
                                 parent.append(eachNode.element);
