@@ -9,6 +9,21 @@ const NAME = 'button';
 })
 export class MasterButton extends HTMLElement {
 
+    template = $(() => {
+        console.log(this, this.href, this.disabled)
+        return [
+            (this.href && !this.disabled) ? 'a' : 'button', {
+                part: 'shadow',
+                href: this.href,
+                target: this.target,
+                disabled: this.disabled,
+                download: this.download,
+                type: this.type,
+                $html: '<slot>'
+            }
+        ]
+    });
+
     @Attr({ render: true })
     type: string;
 
@@ -29,18 +44,6 @@ export class MasterButton extends HTMLElement {
 
     @Attr({ render: true })
     target: string;
-
-    template = $(() => [
-        this.href ? 'a' : 'button', {
-            part: 'shadow',
-            href: this.href,
-            target: this.target,
-            disabled: this.disabled,
-            download: this.download,
-            type: this.type,
-            $html: '<slot>'
-        }
-    ]);
 
     render() {
         this.template.render(this.shadowRoot);

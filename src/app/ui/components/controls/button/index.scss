@@ -41,7 +41,7 @@
     }
 
     &[disabled] {
-        pointer-events: none !important;
+        cursor: no-drop !important;
         color: var(--f-fadest) !important;
         background-color: var(--bg-disabled) !important;
         border-color: transparent !important;
@@ -141,10 +141,6 @@
         color: transparent !important;
         box-shadow: none !important;
     }
-}
-
-:host([disabled]) {
-    cursor: no-drop !important;
 }
 
 ::slotted([part=button-head]) {

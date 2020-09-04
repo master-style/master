@@ -180,16 +180,12 @@ article.decorated {
         margin-top: 2.5rem;
     }
 
-    h3 {
-        margin-top: $lg;
-    }
-
+    h3,
     h4 {
         margin-top: $md;
     }
 
-    h1+h2,
-    h2+h3 {
+    h1+h2 {
         margin-top: $md;
     }
 
