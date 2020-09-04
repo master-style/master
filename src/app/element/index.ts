@@ -14,20 +14,17 @@ export function Element(tag: string) {
         const attributeChangedCallback = prototype.attributeChangedCallback;
         prototype.attributeChangedCallback = function (attrKey, oldValue, value) {
             if (value === oldValue) return;
-            console.log('changed:', attrKey, value, oldValue);
             const attrOption = attrOptions[attrKey];
             value = parseAttrValue(value);
             oldValue = parseAttrValue(oldValue);
             // console.log('changed:', attrKey, value, oldValue);
             attrOption.setProp.call(this, value, true);
-            if (attrOption.render && this.render) {
-                this.render();
-            }
             if (attributeChangedCallback) attributeChangedCallback.call(this, attrKey, value, oldValue);
             if (onAttrChanged) onAttrChanged.call(this, attrKey, value, oldValue);
         };
 
         prototype.connectedCallback = function () {
+            this.ready = false;
             if (attrOptions) {
                 const attributes = this.attributes;
                 // tslint:disable-next-line: forin
@@ -35,12 +32,12 @@ export function Element(tag: string) {
                     const eachAttrOption: AttrOption = attrOptions[eachAttrKey];
                     const eachPropValue = this['_' + eachAttrOption.propKey];
                     const eachAttrValue = parseAttrValue(attributes[eachAttrKey]?.value);
-                    // console.log('connected:', eachAttrKey, eachPropValue);
                     if (eachAttrOption.reflect && eachPropValue !== eachAttrValue) {
                         this.attr(eachAttrKey, eachPropValue);
                     }
                 }
             }
+            this.ready = true;
             if (this.render) this.render();
             if (connectedCallback) connectedCallback.call(this);
             if (onConnected) onConnected.call(this);

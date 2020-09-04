@@ -33,11 +33,11 @@ export function Attr(option?: AttrOption) {
                     constructor[propKey].call(this, value, this[_propKey]);
                 }
                 this[_propKey] = value;
-                if (this.isConnected && !fromAttr) {
-                    if (option.reflect) {
+                if (this.isConnected) {
+                    if (option.reflect && !fromAttr) {
                         this.attr(attrKey, value);
                     }
-                    if (option.render && this.render) {
+                    if (option.render && this.render && this.ready) {
                         this.render();
                     }
                 }
