@@ -1,3 +1,21 @@
+.body\/foot\+head {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr auto;
+    grid-template-areas:
+        "body head"
+        "foot head"
+}
+
+.head\+body\/foot {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr auto;
+    grid-template-areas:
+        "head body"
+        "head foot"
+}
+
 .y,
 [class^=y\:],
 [class*=' y\:'] {
@@ -108,11 +126,11 @@
     flex: 0 0 auto !important;
 }
 
-.x\:grow {
+.grow {
     flex-grow: 1 !important;
 }
 
-.x\:shrink {
+.shrink {
     flex-shrink: 1 !important;
 }
 
@@ -404,11 +422,11 @@
         flex: 0 0 auto !important;
     }
 
-    .x\:grow\@sm {
+    .grow\@sm {
         flex-grow: 1 !important;
     }
 
-    .x\:shrink\@sm {
+    .shrink\@sm {
         flex-shrink: 1 !important;
     }
 
@@ -661,11 +679,11 @@
         flex: 0 0 auto !important;
     }
 
-    .x\:grow\@md {
+    .grow\@md {
         flex-grow: 1 !important;
     }
 
-    .x\:shrink\@md {
+    .shrink\@md {
         flex-shrink: 1 !important;
     }
 
@@ -926,11 +944,11 @@
         flex: 0 0 auto !important;
     }
 
-    .x\:grow\@lg {
+    .grow\@lg {
         flex-grow: 1 !important;
     }
 
-    .x\:shrink\@lg {
+    .shrink\@lg {
         flex-shrink: 1 !important;
     }
 
@@ -1183,11 +1201,11 @@
         flex: 0 0 auto !important;
     }
 
-    .x\:grow\@xl {
+    .grow\@xl {
         flex-grow: 1 !important;
     }
 
-    .x\:shrink\@xl {
+    .shrink\@xl {
         flex-shrink: 1 !important;
     }
 

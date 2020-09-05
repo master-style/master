@@ -1,5 +1,4 @@
 [class*="\@hover"] {
-    contain: style;
     transform: translateZ(0);
     transition-delay: 50ms; // improve interactions performance and experience
     transition-duration: 0.5s;

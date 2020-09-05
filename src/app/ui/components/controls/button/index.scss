@@ -5,9 +5,9 @@
 [part=shadow] {
     background-color: var(--bg-theme);
     display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 var(--px);
+    align-items: inherit;
+    justify-content: inherit;
+    padding: var(--py) var(--px);
     min-width: var(--size);
     min-height: var(--size);
     transition: box-shadow ease-out .15s;
@@ -17,7 +17,7 @@
     cursor: pointer;
 
     @media (any-hover: hover) {
-        &:hover:not([loading]):not([disabled]) {
+        &:hover:not([disabled]) {
             background-color: var(--bg-theme-hover, var(--themeFade));
             box-shadow: inset 0 0 0 1px var(--b-theme-hover);
         }
@@ -29,13 +29,18 @@
         background-color: var(--bg-disabled) !important;
         border-color: transparent !important;
         box-shadow: none !important;
+        ::slotted([part=foot]) {
+            color: inherit;
+        }
     }
 }
 
 :host {
     --px: #{$md};
+    --py: 0;
     --size: 3rem;
     --f-size: #{$f-sm};
+    --b-theme-hover: transparent;
     display: inline-flex;
     font-size: var(--f-size);
     color: var(--f-theme);
@@ -45,6 +50,8 @@
     text-transform: uppercase;
     white-space: nowrap;
     border-radius: $xs;
+    align-items: center;
+    justify-content: center;
 
     // css hack to fix some bug
     // &:after {
@@ -69,7 +76,7 @@
 
 }
 
-:host(.raised:not([loading]):not([disabled])) {
+:host(.raised:not([disabled])) {
     box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, .12);
 }
 
@@ -91,7 +98,6 @@
     --f-size: 1.125rem;
 }
 
-
 :host(.round),
 :host(.square) {
     --px: 0;
@@ -109,7 +115,7 @@
         border: 1px solid var(--b-theme, var(--b-fadest));
 
         @media (any-hover: hover) {
-            &:hover:not([loading]):not([disabled]) {
+            &:hover:not([disabled]) {
                 border-color: var(--b-theme-hover);
             }
         }
@@ -118,6 +124,7 @@
 
 :host([loading]) {
     cursor: progress !important;
+
     [part=shadow] {
         pointer-events: none !important;
         color: transparent !important;
@@ -140,6 +147,7 @@
     display: flex;
     margin-right: -.25rem;
     margin-left: .5rem;
+    color: var(--f-fader);
 }
 
 ::slotted([part=foot].abs) {

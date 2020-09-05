@@ -24,6 +24,12 @@ m-card {
         color: var(--f-themeFader);
     }
 
+    h3:last-child,
+    h4:last-child,
+    h5:last-child {
+        margin-bottom: 0!important;
+    }
+
     p {
         font-size: $f-xs;
         line-height: 1.4 !important;

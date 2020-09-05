@@ -55,7 +55,6 @@ import { FigureComponent } from './decorators/figure/figure.component';
 import { ItemComponent } from './components/item/item.component';
 import { SkeletonComponent } from './components/skeleton/skeleton.component';
 import { BreadcrumbComponent } from './decorators/breadcrumb/breadcrumb.component';
-import { AssemblyComponent } from './layout/assembly/assembly.component';
 
 @NgModule({
     declarations: [
@@ -94,8 +93,7 @@ import { AssemblyComponent } from './layout/assembly/assembly.component';
         FigureComponent,
         ItemComponent,
         SkeletonComponent,
-        BreadcrumbComponent,
-        AssemblyComponent
+        BreadcrumbComponent
     ],
     imports: [
         CommonModule,
