@@ -126,24 +126,24 @@
     }
 }
 
-::slotted([part=button-head]) {
+::slotted([part=head]) {
     display: flex;
     margin-left: -.25rem;
     margin-right: .5rem;
 }
 
-::slotted([part=button-head].abs) {
+::slotted([part=head].abs) {
     left: 0;
     margin-left: calc(var(--px) - .3rem);
 }
 
-::slotted([part=button-foot]) {
+::slotted([part=foot]) {
     display: flex;
     margin-right: -.25rem;
     margin-left: .5rem;
 }
 
-::slotted([part=button-foot].abs) {
+::slotted([part=foot].abs) {
     right: 0;
     margin-right: calc(var(--px) - .3rem);
 }
