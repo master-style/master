@@ -10,7 +10,9 @@ const NAME = 'card';
 export class MasterCard extends HTMLElement {
 
     template = $(() => [
-        (this.href && !this.disabled) ? 'a' : 'button', {
+        (this.href && !this.disabled)
+            ? 'a'
+            : (this.type || this.disabled) ? 'button' : 'div', {
             part: 'shadow',
             href: this.href,
             target: this.target,
