@@ -107,18 +107,17 @@
     [part=shadow] {
         background-color: transparent;
         border: 1px solid var(--b-theme, var(--b-fadest));
-    }
 
-    @media (any-hover: hover) {
-        [part=shadow]:hover:not([loading]):not([disabled]) {
-            border-color: var(--b-theme-hover);
+        @media (any-hover: hover) {
+            &:hover:not([loading]):not([disabled]) {
+                border-color: var(--b-theme-hover);
+            }
         }
     }
 }
 
 :host([loading]) {
     cursor: progress !important;
-
     [part=shadow] {
         pointer-events: none !important;
         color: transparent !important;
