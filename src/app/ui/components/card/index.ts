@@ -9,22 +9,27 @@ const NAME = 'card';
 })
 export class MasterCard extends HTMLElement {
 
-    template = $(() => [
-        (this.href && !this.disabled)
+    template = $(() => {
+        const tag = (this.href && !this.disabled)
             ? 'a'
-            : (this.type || this.disabled) ? 'button' : 'div', {
-            part: 'shadow',
-            href: this.href,
-            target: this.target,
-            disabled: this.disabled,
-            download: this.download,
-            type: this.type
-        }, [
-            'slot', { name: 'head' },
-            'slot', { name: 'body' },
-            'slot', { name: 'foot' }
-        ]
-    ]);
+            : (this.type || this.disabled) ? 'button' : null;
+        if (tag) {
+            return [
+                tag, {
+                    part: 'shadow',
+                    href: this.href,
+                    target: this.target,
+                    disabled: this.disabled,
+                    download: this.download,
+                    type: this.type
+                }, [
+                    'slot'
+                ]
+            ];
+        } else {
+            return ['slot', { part: 'shadow' }];
+        }
+    });
 
     @Attr({ render: true })
     type: string;

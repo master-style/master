@@ -6,20 +6,13 @@
     background-color: var(--bg-object);
 }
 
-button[part=shadow],
-a[part=shadow] {
-    -webkit-appearance: none;
-    -webkit-user-select: none;
-    user-select: none;
-}
-
 :host {
     position: relative;
-    display: flex;
+    display: grid;
     border-radius: $xs;
     overflow: hidden;
-    flex-wrap: wrap;
-    flex-direction: column;
+    // flex-wrap: wrap;
+    // flex-direction: column;
 }
 
 :host(.raised) {
@@ -35,8 +28,9 @@ a[part=shadow] {
     border: 1px solid var(--b-fadest);
 }
 
-::slotted([slot=head]) {
+::slotted([part="head"]) {
     position: relative;
+    grid-area: head;
     border: 0;
     background-size: cover;
     background-repeat: no-repeat;
@@ -45,24 +39,27 @@ a[part=shadow] {
     margin: 0 !important; // !important: conflict article.decorated
 }
 
-::slotted([slot=body]) {
+::slotted([part="body"]) {
+    position: relative;
+    grid-area: body;
     padding: 1rem;
     width: 100%;
-    flex: 1 1 auto;
+    // flex: 1 1 auto;
 }
 
-::slotted([slot=body] [slot=foot]) {
-    margin-top: 1rem;
-    margin-bottom: -1rem;
-    margin-left: -1rem;
-    width: calc(100% + 2rem);
-}
+// ::slotted([slot=body] [slot=foot]) {
+//     margin-top: 1rem;
+//     margin-bottom: -1rem;
+//     margin-left: -1rem;
+//     width: calc(100% + 2rem);
+// }
 
-::slotted([slot=foot]) {
+::slotted([part="foot"]) {
     position: relative;
+    grid-area: foot;
     padding: .8rem 1rem;
     width: 100%;
     border-radius: 0;
     border-top: var(--b-fader) 1px dashed !important;
-    align-self: flex-end;
+    // align-self: flex-end;
 }
