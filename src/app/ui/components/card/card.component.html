@@ -35,6 +35,58 @@
                     <ion-icon name="chevron-forward" part="foot"></ion-icon>
                 </m-button>
             </m-card>
+        </div>
+    </div>
+</div>
+
+<h2 id="structure">{{ 'structure' | translate }}</h2>
+<template [codeLang]="'html'">
+    <m-card>
+        <div part="head"></div>
+        <div part="body"></div>
+        <div part="foot"></div>
+        <m-button part="foot"></m-button>
+    </m-card>
+</template>
+
+<h2 id="assembling">{{ 'assembling' | translate }}</h2>
+<div class="demo">
+    <div class="demo-body">
+        <div class="y">
+            <m-card class="raised x:6">
+                <div part="head" class="by:3x2"
+                    style="background-image: url(https://images.pexels.com/photos/936611/pexels-photo-936611.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)">
+                </div>
+                <div part="body">
+                    <h5>Wed Jan 22 2020</h5>
+                    <h3>Healthy food</h3>
+                    <h4>fruit</h4>
+                    <p>Here's a low-calorie platter for a great afternoon light meal.Here's a low-calorie platter for a
+                        great afternoon light meal.</p>
+                </div>
+                <div part="foot">
+                    <m-button class="theme+ xs outlined">
+                        learn more
+                        <ion-icon name="chevron-forward" part="foot"></ion-icon>
+                    </m-button>
+                </div>
+            </m-card>
+            <m-card class="raised x:6">
+                <div part="head" class="by:3x2"
+                    style="background-image: url(https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)">
+                </div>
+                <div part="body">
+                    <h5>Wed Jan 22 2020</h5>
+                    <h3>Healthy food</h3>
+                    <h4>fruit</h4>
+                    <p>Here's a low-calorie platter for a great afternoon light meal.Here's a low-calorie platter for a
+                        great afternoon light meal.</p>
+                </div>
+                <m-button part="foot" class="bt b:dashed">
+                    learn more
+                    <ion-icon name="chevron-forward" part="foot"></ion-icon>
+                </m-button>
+            </m-card>
             <m-card class="raised x:12 head+body/foot">
                 <div part="head"
                     style="background-image: url(https://images.pexels.com/photos/793765/pexels-photo-793765.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)">
@@ -109,14 +161,3 @@
         </div>
     </div>
 </div>
-
-<h2 id="structure">{{ 'structure' | translate }}</h2>
-<template [codeLang]="'html'">
-    <m-card>
-        <div part="chip-card"></div>
-        <div part="chip-card"></div>
-        <div part="chip-card"></div>
-    </m-card>
-</template>
-
-<h2 id="assembling">{{ 'assembling' | translate }}</h2>
