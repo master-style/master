@@ -5,7 +5,7 @@
     display: grid;
 }
 
-.g\:body\/foot\+head {
+.body\/foot\+head {
     grid-template-columns: 2fr 1fr;
     grid-template-rows: 1fr auto;
     grid-template-areas:
