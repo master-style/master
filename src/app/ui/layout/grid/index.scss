@@ -1,23 +1,7 @@
-.g,
-[class^=g\:],
-[class*=' g\:'] {
-    contain: style;
-    display: grid;
-}
-
-.body\/foot\+head {
-    grid-template-columns: 2fr 1fr;
-    grid-template-rows: 1fr auto;
-    grid-template-areas:
-        "body head"
-        "foot head"
-}
-
 .y,
 [class^=y\:],
 [class*=' y\:'] {
     --gap: #{$md};
-    contain: style;
     display: flex;
     flex-wrap: wrap;
     margin: calc(var(--gap) * -.5);
@@ -25,7 +9,6 @@
     >.x,
     >[class^=x\:],
     >[class*=' x\:'] {
-        contain: style;
         margin: calc(var(--gap) / 2);
         flex-basis: calc(var(--x) - var(--gap));
     }

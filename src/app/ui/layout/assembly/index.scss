@@ -1,0 +1,12 @@
+.body\/foot\+head {
+    // grid-template-columns: 2fr 1fr;
+    // grid-template-rows: 1fr auto;
+    display: grid;
+    grid-template-areas:
+        "body head"
+        "foot head"
+}
+
+.cols\:2-1 {
+    grid-template-columns: 2fr 1fr;
+}
