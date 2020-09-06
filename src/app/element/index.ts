@@ -5,7 +5,7 @@ const DEFAULT_ELEMENT_OPTION = {
     shadow: true
 };
 
-const parseAttrValue = (value, type) => {
+const parseAttrValue = (value: any, type: string) => {
     if (value === 'undefined')
         return undefined;
     switch (type) {
