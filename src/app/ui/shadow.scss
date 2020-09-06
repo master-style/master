@@ -6,7 +6,6 @@
 [part=shadow] {
     position: relative;
     display: contents;
-    background-color: var(--bg-object);
     -webkit-appearance: none;
     font: inherit;
     // flex-wrap: inherit;
@@ -26,9 +25,11 @@
     height: 100%;
     outline: none;
     overflow: hidden;
+    background-color: transparent;
 
     &:before {
         position: absolute;
+        contain: strict;
         z-index: -1;
         left: 0;
         top: 0;
@@ -36,7 +37,36 @@
         height: 100%;
         content: '';
         background-origin: border-box;
-        background-color: inherit;
+        background-color: var(--bg-theme, var(--bg-object));
+        border-radius: inherit;
+        border: inherit;
+        box-sizing: border-box;
+        transition: box-shadow ease-out .15s;
+        will-change: box-shadow;
+    }
+
+    @media (any-hover: hover) {
+        &:hover:not([disabled]) {
+            &:before {
+                --bg-theme: var(--bg-theme-hover, var(--themeFade));
+                box-shadow: inset 0 0 0 1px var(--b-theme-hover);
+            }
+        }
+    }
+
+    &[disabled] {
+        --bg-theme: var(--bg-disabled) !important;
+        --b-theme: transparent !important;
+        cursor: no-drop !important;
+        color: var(--f-fadest) !important;
+
+        &:before {
+            box-shadow: none !important;
+        }
+
+        ::slotted([part=foot]) {
+            color: inherit;
+        }
     }
 }
 
@@ -45,4 +75,23 @@ a[part=shadow] {
     -webkit-appearance: none;
     -webkit-user-select: none;
     user-select: none;
+    cursor: pointer;
+}
+
+:host(.outlined) {
+    [part=shadow] {
+        &:before {
+            --bg-theme: transparent;
+            border: 1px solid var(--b-theme, var(--b-fadest));
+        }
+
+        @media (any-hover: hover) {
+            &:hover:not([disabled]) {
+                &:before {
+                    --bg-theme: var(--bg-theme-hover, var(--themeFade));
+                    border-color: var(--b-theme-hover);
+                }
+            }
+        }
+    }
 }

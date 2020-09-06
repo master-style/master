@@ -78,5 +78,6 @@
     "create": "創建",
     "state": "狀態",
     "hyperlink": "超連結",
-    "type": "類型"
+    "type": "類型",
+    "outlined": "外框"
 }

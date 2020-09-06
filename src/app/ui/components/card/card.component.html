@@ -177,3 +177,199 @@
         </template>
     </div>
 </div>
+
+<h2 id="raised">{{ 'raised' | translate }}</h2>
+<div class="demo">
+    <div class="demo-body">
+        <div class="y">
+            <m-card class="x:6">
+                <div part="body">
+                    <h5>Wed Jan 22 2020</h5>
+                    <h3>Default</h3>
+                    <p>Here's a low-calorie platter for a great afternoon light meal.</p>
+                </div>
+                <div part="foot">
+                    <m-button class="theme+ xs outlined">
+                        learn more
+                        <ion-icon name="chevron-forward" part="foot"></ion-icon>
+                    </m-button>
+                </div>
+            </m-card>
+            <m-card class="raised x:6">
+                <div part="body">
+                    <h5>Wed Jan 22 2020</h5>
+                    <h3>Raised</h3>
+                    <p>Here's a low-calorie platter for a great afternoon light meal.</p>
+                </div>
+                <div part="foot">
+                    <m-button class="theme+ xs outlined">
+                        learn more
+                        <ion-icon name="chevron-forward" part="foot"></ion-icon>
+                    </m-button>
+                </div>
+            </m-card>
+        </div>
+    </div>
+</div>
+<m-table class="sm neat axis:x">
+    <table>
+        <thead>
+            <tr>
+                <th class="fit t:left bg:theme sticky">class</th>
+                <th class="t:left bg:theme sticky">description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <code class="f:blue">raised</code>
+                </td>
+                <td><b>提高</b>，使其更突兀</td>
+            </tr>
+        </tbody>
+    </table>
+</m-table>
+
+<h2 id="outlined">{{ 'outlined' | translate }}</h2>
+<div class="demo">
+    <div class="demo-body">
+        <div class="y">
+            <m-card class="x:6">
+                <div part="body">
+                    <h5>Wed Jan 22 2020</h5>
+                    <h3>Default</h3>
+                    <p>Here's a low-calorie platter for a great afternoon light meal.</p>
+                </div>
+                <div part="foot">
+                    <m-button class="theme+ xs outlined">
+                        learn more
+                        <ion-icon name="chevron-forward" part="foot"></ion-icon>
+                    </m-button>
+                </div>
+            </m-card>
+            <m-card class="outlined x:6">
+                <div part="body">
+                    <h5>Wed Jan 22 2020</h5>
+                    <h3>Outlined</h3>
+                    <p>Here's a low-calorie platter for a great afternoon light meal.</p>
+                </div>
+                <div part="foot">
+                    <m-button class="theme+ xs outlined">
+                        learn more
+                        <ion-icon name="chevron-forward" part="foot"></ion-icon>
+                    </m-button>
+                </div>
+            </m-card>
+        </div>
+    </div>
+</div>
+<m-table class="sm neat axis:x">
+    <table>
+        <thead>
+            <tr>
+                <th class="fit t:left bg:theme sticky">class</th>
+                <th class="t:left bg:theme sticky">description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <code class="f:blue">raised</code>
+                </td>
+                <td><b>提高</b>，使其更突兀</td>
+            </tr>
+        </tbody>
+    </table>
+</m-table>
+
+<h2 id="shape">{{ 'shape' | translate }}</h2>
+<div class="demo">
+    <div class="demo-body">
+        <div class="y c:center">
+            <m-button class="x theme raised">default</m-button>
+            <m-button class="x theme raised round">
+                <ion-icon name="ellipse-outline"></ion-icon>
+            </m-button>
+            <m-button class="x theme raised square">
+                <ion-icon name="square-outline"></ion-icon>
+            </m-button>
+            <m-button class="x theme raised rounded">rounded</m-button>
+        </div>
+    </div>
+</div>
+<m-table class="sm neat axis:x">
+    <table>
+        <thead>
+            <tr>
+                <th class="fit t:left bg:theme sticky">class</th>
+                <th class="t:left bg:theme sticky">description</th>
+                <th class="fit bg:theme sticky"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <code class="default">∅</code>
+                </td>
+                <td><b>四邊圓角</b>，預設</td>
+                <td class="t:right"></td>
+            </tr>
+            <tr>
+                <td>
+                    <code class="f:blue">round</code>
+                </td>
+                <td><b>圓形</b>，取消內距</td>
+                <td class="t:right">
+                    <m-chip class="sm theme+" href="modifiers">
+                        <div part="chip-body">{{ 'modifiers' | translate }}</div>
+                    </m-chip>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code class="f:blue">square</code>
+                </td>
+                <td><b>方形</b>，取消內距及圓角</td>
+                <td class="t:right"></td>
+            </tr>
+            <tr>
+                <td>
+                    <code class="f:blue">rounded</code>
+                </td>
+                <td><b>側圓角</b></td>
+                <td class="t:right">
+                    <m-chip class="sm theme+" href="modifiers">
+                        <div part="chip-body">{{ 'modifiers' | translate }}</div>
+                    </m-chip>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</m-table>
+
+<h2 id="state">{{ 'state' | translate }}</h2>
+<doc-prop [name]="'disabled'" [types]="['boolean']" [description]="'The user cannot interact with the button.'">
+</doc-prop>
+<div class="demo">
+    <div class="demo-body">
+        <div class="y:sm c:center">
+            <m-button class="x" disabled>submit</m-button>
+        </div>
+    </div>
+</div>
+
+<doc-prop [name]="'loading'" [types]="['boolean']"></doc-prop>
+<div class="demo">
+    <div class="demo-body">
+        <div class="y:sm c:center">
+            <m-button class="x theme+" loading>submit</m-button>
+        </div>
+    </div>
+</div>
+
+<h2 id="type">{{ 'type' | translate }}</h2>
+<doc-prop [name]="'type'" [types]="['button', 'reset', 'submit']" [default]="'button'"
+    [description]="'The type of the button.'">
+</doc-prop>
+
+<doc-prop-hyperlink></doc-prop-hyperlink>

@@ -3,36 +3,12 @@
 @import '../../../shadow';
 
 [part=shadow] {
-    background-color: var(--bg-theme);
     display: inline-flex;
     align-items: inherit;
     justify-content: inherit;
     padding: var(--py) var(--px);
     min-width: var(--size);
     min-height: var(--size);
-    transition: box-shadow ease-out .15s;
-    will-change: box-shadow;
-    -webkit-user-select: none;
-    user-select: none;
-    cursor: pointer;
-
-    @media (any-hover: hover) {
-        &:hover:not([disabled]) {
-            background-color: var(--bg-theme-hover, var(--themeFade));
-            box-shadow: inset 0 0 0 1px var(--b-theme-hover);
-        }
-    }
-
-    &[disabled] {
-        cursor: no-drop !important;
-        color: var(--f-fadest) !important;
-        background-color: var(--bg-disabled) !important;
-        border-color: transparent !important;
-        box-shadow: none !important;
-        ::slotted([part=foot]) {
-            color: inherit;
-        }
-    }
 }
 
 :host {
@@ -107,19 +83,6 @@
 
 :host(.square) {
     border-radius: 0;
-}
-
-:host(.outlined) {
-    [part=shadow] {
-        background-color: transparent;
-        border: 1px solid var(--b-theme, var(--b-fadest));
-
-        @media (any-hover: hover) {
-            &:hover:not([disabled]) {
-                border-color: var(--b-theme-hover);
-            }
-        }
-    }
 }
 
 :host([loading]) {
