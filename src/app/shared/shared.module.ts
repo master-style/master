@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { CodeDirective } from './code.directive';
 import { TranslateModule } from '@ngx-translate/core';
 import { PropComponent } from './prop/prop.component';
+import { HyperlinkComponent } from './hyperlink/hyperlink.component';
 
 @NgModule({
-    declarations: [CodeDirective, PropComponent],
+    declarations: [CodeDirective, PropComponent, HyperlinkComponent],
     imports: [
         CommonModule,
         TranslateModule
@@ -14,7 +15,8 @@ import { PropComponent } from './prop/prop.component';
         CommonModule,
         CodeDirective,
         TranslateModule,
-        PropComponent
+        PropComponent,
+        HyperlinkComponent
     ],
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA

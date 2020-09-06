@@ -75,5 +75,8 @@
     "z-index": "層級",
     "raised": "提高",
     "property": "屬性",
-    "create": "創建"
+    "create": "創建",
+    "state": "狀態",
+    "hyperlink": "超連結",
+    "type": "類型"
 }

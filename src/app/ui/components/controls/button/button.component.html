@@ -238,12 +238,7 @@
     </table>
 </m-table>
 
-<h2 id="property">{{ 'property' | translate }}</h2>
-
-<doc-prop [name]="'type'" [types]="['button', 'reset', 'submit']"
-    [description]="'The type of the button.'">
-</doc-prop>
-
+<h2 id="state">{{ 'state' | translate }}</h2>
 <doc-prop [name]="'disabled'" [types]="['boolean']" [description]="'The user cannot interact with the button.'">
 </doc-prop>
 <div class="demo">
@@ -263,38 +258,9 @@
     </div>
 </div>
 
-<doc-prop [name]="'href'" [types]="['string', undefined]"
-    [description]="'Contains a URL or a URL fragment that the hyperlink points to. If this property is set, an anchor tag will be rendered.'">
-</doc-prop>
-<div class="demo">
-    <div class="demo-body">
-        <div class="y:sm c:center">
-            <m-button id="button" class="x theme+" href="https://google.com" target="blank">
-                <ion-icon name="link-outline" part="head"></ion-icon>
-                LINK
-            </m-button>
-        </div>
-    </div>
-</div>
-
-<doc-prop [name]="'download'" [types]="['string', undefined]"
-    [description]="'This attribute instructs browsers to download a URL instead of navigating to it, so the user will be prompted to save it as a local file. If the attribute has a value, it is used as the pre-filled file name in the Save prompt (the user can still change the file name if they want).'">
-</doc-prop>
-<div class="demo">
-    <div class="demo-body">
-        <div class="y:sm c:center">
-            <m-button id="button" class="x theme+" href="#" download="custom download filename">
-                <ion-icon name="cloud-download-outline" part="head"></ion-icon>
-                download
-            </m-button>
-        </div>
-    </div>
-</div>
-
-<doc-prop [name]="'rel'" [types]="['string', undefined]"
-    [description]="'Specifies the relationship of the target object to the link object. The value is a space-separated list of link types.'">
+<h2 id="type">{{ 'type' | translate }}</h2>
+<doc-prop [name]="'type'" [types]="['button', 'reset', 'submit']"
+    [description]="'The type of the button.'">
 </doc-prop>
 
-<doc-prop [name]="'target'" [types]="['_blank', '_self', '_parent', '_top']"
-    [description]="'Specifies where to display the linked URL. Only applies when an href is provided.'">
-</doc-prop>
+<doc-prop-hyperlink></doc-prop-hyperlink>
