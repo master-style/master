@@ -6,6 +6,8 @@ const DEFAULT_ELEMENT_OPTION = {
 };
 
 const parseAttrValue = (value, type) => {
+    if (value === 'undefined')
+        return undefined;
     switch (type) {
         case 'Number':
             return value = isNaN(+value) ? value : +value;
@@ -42,20 +44,32 @@ export function Element(options: ElementOptions) {
         prototype.connectedCallback = function () {
             this.ready = false; // prevent rendering many times
             if (attrOptionsMap) {
+                // 取得當前 attr 與 prop 比對，避免重複設置相同 attr
                 const attributes = this.attributes;
-                // tslint:disable-next-line: forin
                 for (const eachAttrKey in attrOptionsMap) {
                     const eachAttrOptions: AttrOptions = attrOptionsMap[eachAttrKey];
                     const eachPropValue = this['_' + eachAttrOptions.propKey];
                     const eachAttr = attributes[eachAttrKey];
+                    if (!eachAttr && eachPropValue === undefined) continue;
+                    let value: any;
+                    let eachAttrValue: any;
                     if (eachAttr) {
-                        const eachAttrValue = parseAttrValue(eachAttr.value, eachAttrOptions.type);
-                        if (eachAttrOptions.reflect && eachPropValue !== eachAttrValue) {
-                            if (eachAttrOptions.type === 'Boolean') {
-                                this.toggleAttribute(eachAttrKey, eachAttrValue);
-                            } else {
-                                this.setAttribute(eachAttrKey, eachAttrValue);
-                            }
+                        eachAttrValue = parseAttrValue(eachAttr.value, eachAttrOptions.type);
+                    }
+                    if (eachAttrValue === eachPropValue) {
+                        continue;
+                    } else if (eachAttrValue !== undefined) {
+                        value = eachAttrValue;
+                    } else if (eachPropValue !== undefined) {
+                        value = eachPropValue;
+                    } else {
+                        continue;
+                    }
+                    if (eachAttrOptions.reflect) {
+                        if (eachAttrOptions.type === 'Boolean') {
+                            this.toggleAttribute(eachAttrKey, value);
+                        } else {
+                            this.setAttribute(eachAttrKey, value);
                         }
                     }
                 }
