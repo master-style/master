@@ -15,9 +15,23 @@ const prettierParser = {
 }
 
 const prettierOpiton = {
-    tabWidth: 4,
-    printWidth: 144,
-    htmlWhitespaceSensitivity: 'ignore'
+    "arrowParens": "always",
+    "bracketSpacing": true,
+    "embeddedLanguageFormatting": "auto",
+    "htmlWhitespaceSensitivity": "css",
+    "insertPragma": false,
+    "jsxBracketSameLine": false,
+    "jsxSingleQuote": false,
+    "printWidth": 144,
+    "proseWrap": "preserve",
+    "quoteProps": "consistent",
+    "requirePragma": false,
+    "semi": false,
+    "singleQuote": true,
+    "tabWidth": 4,
+    "trailingComma": "es5",
+    "useTabs": false,
+    "vueIndentScriptAndStyle": false
 };
 
 @Directive({
@@ -57,8 +71,7 @@ export class CodeDirective {
                     $('div', {}, ...element.children)
                         .innerHTML
                         // remove prefix-underscore attribute
-                        .replace(/_[\s\S]*?="[\s\S]*?"/g, '')
-                        .replace(/<!--[\s\S]*?-->/g, '')
+                        .replace(/_[\S]*?="[\s\S]*?"/g, '')
                     ;
                 break;
             case 'typescript':
@@ -78,7 +91,8 @@ export class CodeDirective {
         code = Prism.highlight(code, Prism.languages[this.codeLang], this.codeLang);
 
         if (isCodeTag) {
-            element.innerHTML = code;
+            element.innerHTML = code
+                .replace('=""', '');
         } else {
             element.before(
                 $('pre', {},

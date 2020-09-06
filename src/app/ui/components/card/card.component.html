@@ -9,8 +9,7 @@
                     <h5>Wed Jan 22 2020</h5>
                     <h3>Healthy food</h3>
                     <h4>fruit</h4>
-                    <p>Here's a low-calorie platter for a great afternoon light meal.Here's a low-calorie platter for a
-                        great afternoon light meal.</p>
+                    <p>Here's a low-calorie platter for a great afternoon light meal.</p>
                 </div>
                 <div part="foot">
                     <m-button class="theme+ xs outlined">
@@ -27,8 +26,7 @@
                     <h5>Wed Jan 22 2020</h5>
                     <h3>Healthy food</h3>
                     <h4>fruit</h4>
-                    <p>Here's a low-calorie platter for a great afternoon light meal.Here's a low-calorie platter for a
-                        great afternoon light meal.</p>
+                    <p>Here's a low-calorie platter for a great afternoon light meal.</p>
                 </div>
                 <m-button part="foot" class="bt b:dashed">
                     learn more
@@ -50,10 +48,10 @@
 </template>
 
 <h2 id="assembling">{{ 'assembling' | translate }}</h2>
-<div class="demo">
-    <div class="demo-body">
-        <div class="y">
-            <m-card class="raised x:6">
+<div class="y">
+    <div class="x:6@sm c:row">
+        <template [codeLang]="'html'" [codeDemo]=true [codeCollapsed]=false>
+            <m-card class="raised">
                 <div part="head" class="by:3x2"
                     style="background-image: url(https://images.pexels.com/photos/936611/pexels-photo-936611.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)">
                 </div>
@@ -61,8 +59,7 @@
                     <h5>Wed Jan 22 2020</h5>
                     <h3>Healthy food</h3>
                     <h4>fruit</h4>
-                    <p>Here's a low-calorie platter for a great afternoon light meal.Here's a low-calorie platter for a
-                        great afternoon light meal.</p>
+                    <p>Here's a low-calorie platter for a great afternoon light meal.</p>
                 </div>
                 <div part="foot">
                     <m-button class="theme+ xs outlined">
@@ -71,23 +68,30 @@
                     </m-button>
                 </div>
             </m-card>
-            <m-card class="raised x:6">
+        </template>
+    </div>
+    <div class="x:6@sm c:row">
+        <template [codeLang]="'html'" [codeDemo]=true [codeCollapsed]=false>
+            <m-card class="raised">
                 <div part="head" class="by:3x2"
                     style="background-image: url(https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)">
                 </div>
-                <div part="body">
+                <div part="body" style="padding-bottom: 1.95rem">
                     <h5>Wed Jan 22 2020</h5>
                     <h3>Healthy food</h3>
                     <h4>fruit</h4>
-                    <p>Here's a low-calorie platter for a great afternoon light meal.Here's a low-calorie platter for a
-                        great afternoon light meal.</p>
+                    <p>Here's a low-calorie platter for a great afternoon light meal.</p>
                 </div>
                 <m-button part="foot" class="bt b:dashed">
                     learn more
                     <ion-icon name="chevron-forward" part="foot"></ion-icon>
                 </m-button>
             </m-card>
-            <m-card class="raised x:12 head+body/foot">
+        </template>
+    </div>
+    <div class="x:12@sm c:row">
+        <template [codeLang]="'html'" [codeDemo]=true [codeCollapsed]=false>
+            <m-card class="raised head+body/foot">
                 <div part="head"
                     style="background-image: url(https://images.pexels.com/photos/793765/pexels-photo-793765.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)">
                 </div>
@@ -102,7 +106,11 @@
                     <ion-icon name="chevron-forward" part="foot" class="abs"></ion-icon>
                 </m-button>
             </m-card>
-            <m-card class="raised x:12 body/foot+head">
+        </template>
+    </div>
+    <div class="x:12@sm c:row">
+        <template [codeLang]="'html'" [codeDemo]=true [codeCollapsed]=false>
+            <m-card class="raised body/foot+head">
                 <div part="head"
                     style="background-image: url(https://images.pexels.com/photos/416471/pexels-photo-416471.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500)">
                 </div>
@@ -117,7 +125,11 @@
                     <ion-icon name="chevron-forward" part="foot" class="abs"></ion-icon>
                 </m-button>
             </m-card>
-            <m-card class="outlined x:6 raised @hover float@hover">
+        </template>
+    </div>
+    <div class="x:12 c:row">
+        <template [codeLang]="'html'" [codeDemo]=true [codeCollapsed]=false>
+            <m-card class="outlined raised @hover float@hover x:6">
                 <figure part="head" class="decorated" style="background-color: #000">
                     <video playsinline muted autoplay loop
                         src="https://player.vimeo.com/external/327849339.sd.mp4?s=d43df12c6b19a289137b374ad9ddad0c05abfdd2&profile_id=164&oauth2_token_id=57447761">
@@ -136,7 +148,11 @@
                     <ion-icon name="chevron-forward" part="foot" class="abs"></ion-icon>
                 </m-button>
             </m-card>
-            <m-card class="outlined x:6 raised">
+        </template>
+    </div>
+    <div class="x:12 c:row">
+        <template [codeLang]="'html'" [codeDemo]=true [codeCollapsed]=false>
+            <m-card class="outlined raised">
                 <div part="body" class="x">
                     <h5>Wed Jan 22 2020</h5>
                     <h3>Apple iPhone 11 Pro</h3>
@@ -158,6 +174,6 @@
                     <ion-icon name="chevron-forward" part="foot" class="abs"></ion-icon>
                 </m-button>
             </m-card>
-        </div>
+        </template>
     </div>
 </div>
