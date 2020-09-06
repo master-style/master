@@ -1,6 +1,6 @@
 import { Element, Attr } from '@element';
-import css from './index.scss';
 import { MasterClickable } from '@ui/components/clickable';
+import css from './index.scss';
 
 const NAME = 'button';
 
