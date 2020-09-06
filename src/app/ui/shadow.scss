@@ -37,13 +37,16 @@
 
     &[disabled] {
         background-color: var(--bg-disabled) !important;
-        border-color: transparent !important;
         cursor: no-drop !important;
         color: var(--f-fadest) !important;
         box-shadow: none !important;
 
         ::slotted([part=foot]) {
             color: inherit;
+        }
+
+        ::slotted(*) {
+            pointer-events: none;
         }
     }
 }
@@ -80,8 +83,14 @@ a[part=shadow] {
 
     [part="shadow"] {
         background-color: transparent;
+
+        &[disabled] {
+            background-color: transparent !important;
+            border-color: var(--b-fadest) !important;
+        }
     }
 }
+
 
 :host([part=foot]) {
     [part=shadow] {
