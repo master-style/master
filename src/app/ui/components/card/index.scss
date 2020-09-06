@@ -23,7 +23,7 @@
 :host(.outlined) {
     ::slotted(m-button[part=foot]) {
         --bg-theme: transparent;
-        --b-theme: transparent;
+        --b-size: 0;
     }
 }
 
