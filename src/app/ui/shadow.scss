@@ -38,20 +38,13 @@
         content: '';
         background-origin: border-box;
         background-color: var(--bg-theme, var(--bg-object));
+        border-style: solid;
+        border-width: var(--b-size, 0px);
+        border-color: var(--b-theme);
         border-radius: inherit;
-        border: inherit;
         box-sizing: border-box;
         transition: box-shadow ease-out .15s;
-        will-change: box-shadow;
-    }
-
-    @media (any-hover: hover) {
-        &:hover:not([disabled]) {
-            &:before {
-                --bg-theme: var(--bg-theme-hover, var(--themeFade));
-                box-shadow: inset 0 0 0 1px var(--b-theme-hover);
-            }
-        }
+        will-change: transform;
     }
 
     &[disabled] {
@@ -70,6 +63,27 @@
     }
 }
 
+@media (any-hover: hover) {
+    .touch {
+        &:hover:not([disabled]) {
+            --bg-theme: var(--bg-theme-hover, var(--themeFade));
+
+            &:before {
+                box-shadow: inset 0 0 0 1px var(--b-theme-hover);
+            }
+        }
+    }
+
+    :host(.outlined) {
+        .touch {
+            &:hover:not([disabled]) {
+                --bg-theme: var(--bg-theme-hover, var(--themeFade));
+                --b-theme: var(--b-theme-hover);
+            }
+        }
+    }
+}
+
 button[part=shadow],
 a[part=shadow] {
     -webkit-appearance: none;
@@ -80,18 +94,7 @@ a[part=shadow] {
 
 :host(.outlined) {
     [part=shadow] {
-        &:before {
-            --bg-theme: transparent;
-            border: 1px solid var(--b-theme, var(--b-fadest));
-        }
-
-        @media (any-hover: hover) {
-            &:hover:not([disabled]) {
-                &:before {
-                    --bg-theme: var(--bg-theme-hover, var(--themeFade));
-                    border-color: var(--b-theme-hover);
-                }
-            }
-        }
+        --bg-theme: transparent;
+        --b-size: 1px;
     }
 }

@@ -91,6 +91,6 @@
 }
 
 .outlined {
-    --b-theme-hover: var(--b-theme, var(--b-fadest));
-    background-color: transparent;
+    --b-theme: var(--b-fadest);
+    --b-theme-hover: var(--b-fadest);
 }

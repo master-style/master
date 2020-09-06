@@ -9,6 +9,7 @@ export class MasterClickable extends HTMLElement {
         if (tag === 'button') {
             return [
                 tag, {
+                    class: 'touch',
                     part: 'shadow',
                     disabled: this.disabled,
                     type: this.type
@@ -19,6 +20,7 @@ export class MasterClickable extends HTMLElement {
         } else if (tag === 'a') {
             return [
                 tag, {
+                    class: 'touch',
                     part: 'shadow',
                     href: this.href,
                     download: this.download,

@@ -20,6 +20,13 @@
         0 15px 25px rgba(0, 0, 0, 0.08);
 }
 
+:host(.outlined) {
+    ::slotted(m-button[part=foot]) {
+        --bg-theme: transparent;
+        --b-theme: transparent;
+    }
+}
+
 ::slotted([part=head]) {
     position: relative;
     grid-area: head;
