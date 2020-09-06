@@ -3,9 +3,6 @@
 @import '../../../shadow';
 
 [part=shadow] {
-    display: inline-flex;
-    align-items: inherit;
-    justify-content: inherit;
     padding: var(--py) var(--px);
     min-width: var(--size);
     min-height: var(--size);

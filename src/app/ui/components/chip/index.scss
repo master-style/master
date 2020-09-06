@@ -1,4 +1,11 @@
-m-chip {
+@import '../../variables';
+@import '../../shadow';
+
+[part=shadow] {
+    padding: var(--p);
+}
+
+:host {
     --size: 2rem;
     --p: .25rem;
     --px: .375rem;
@@ -12,45 +19,45 @@ m-chip {
     height: var(--size);
     user-select: none;
     contain: style;
-    padding: var(--p);
     border: 1px solid var(--b-theme);
 
-    &.rounded {
+}
 
-        [part="head"],
-        [part="foot"] {
-            border-radius: 50%;
-        }
+:host(.rounded) {
 
+    ::slotted([part="head"]),
+    ::slotted([part="foot"]) {
+        border-radius: 50%;
     }
 
-    &.sm {
-        --size: 1.5rem;
-        --px: .3125rem;
-        font-size: $f-xxs;
+}
 
-        [part="head"] {
-            font-size: .625rem;
-        }
+:host(.sm) {
+    --size: 1.5rem;
+    --px: .3125rem;
+    font-size: $f-xxs;
 
-        [part="close"] {
-            font-size: .625rem;
-            width: .875rem;
-            height: .875rem;
-            margin-right: 0;
-        }
+    ::slotted([part="head"]) {
+        font-size: .625rem;
     }
 
-    &.outlined {
-        background-color: transparent;
-
-        [part="head"] {
-            margin-left: -1px;
-        }
+    ::slotted([part="close"]) {
+        font-size: .625rem;
+        width: .875rem;
+        height: .875rem;
+        margin-right: 0;
     }
 }
 
-[part="close"] {
+:host(.outlined) {
+    background-color: transparent;
+
+    ::slotted([part="head"]) {
+        margin-left: -1px;
+    }
+}
+
+::slotted([part="close"]) {
     font-size: $f-xxs;
     width: 1.125rem;
     height: 1.125rem;
@@ -59,23 +66,23 @@ m-chip {
     margin-right: .1875rem;
 }
 
-[part="body"],
-[part="head"],
-[part="foot"] {
+::slotted([part="body"]),
+::slotted([part="head"]),
+::slotted([part="foot"]) {
     display: flex;
     align-items: center;
     justify-content: center;
     contain: layout style;
 }
 
-[part="head"],
-[part="foot"] {
+::slotted([part="head"]),
+::slotted([part="foot"]) {
     overflow: hidden;
     border-radius: $xxs;
     height: calc(var(--size) - var(--p) * 2);
 }
 
-[part="head"] {
+::slotted([part="head"]) {
     line-height: normal;
     letter-spacing: 0;
     font-weight: 600;
@@ -86,19 +93,19 @@ m-chip {
     min-width: calc(var(--size) - var(--p) * 2);
 }
 
-img[part="head"],
-i[part="head"] {
+::slotted(img[part="head"]),
+::slotted(i[part="head"]) {
     margin: 0;
     padding: 0;
-    width: calc(var(--size) - var(--p) * 2);
+    width: calc(var(--size) - var(--p) * 2)!important;
 }
 
-[part="foot"] {
+::slotted([part="foot"]) {
     color: var(--f-fade);
     margin-right: .1875rem;
 }
 
-[part="body"] {
+::slotted([part="body"]) {
     padding: 0 var(--px);
     white-space: nowrap;
     flex: 1 1 auto;
