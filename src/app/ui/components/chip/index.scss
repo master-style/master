@@ -17,8 +17,8 @@ m-chip {
 
     &.rounded {
 
-        [part="chip-head"],
-        [part="chip-foot"] {
+        [part="head"],
+        [part="foot"] {
             border-radius: 50%;
         }
 
@@ -29,11 +29,11 @@ m-chip {
         --px: .3125rem;
         font-size: $f-xxs;
 
-        [part="chip-head"] {
+        [part="head"] {
             font-size: .625rem;
         }
 
-        [part="chip-close"] {
+        [part="close"] {
             font-size: .625rem;
             width: .875rem;
             height: .875rem;
@@ -44,13 +44,13 @@ m-chip {
     &.outlined {
         background-color: transparent;
 
-        [part="chip-head"] {
+        [part="head"] {
             margin-left: -1px;
         }
     }
 }
 
-[part="chip-close"] {
+[part="close"] {
     font-size: $f-xxs;
     width: 1.125rem;
     height: 1.125rem;
@@ -59,23 +59,23 @@ m-chip {
     margin-right: .1875rem;
 }
 
-[part="chip-body"],
-[part="chip-head"],
-[part="chip-foot"] {
+[part="body"],
+[part="head"],
+[part="foot"] {
     display: flex;
     align-items: center;
     justify-content: center;
     contain: layout style;
 }
 
-[part="chip-head"],
-[part="chip-foot"] {
+[part="head"],
+[part="foot"] {
     overflow: hidden;
     border-radius: $xxs;
     height: calc(var(--size) - var(--p) * 2);
 }
 
-[part="chip-head"] {
+[part="head"] {
     line-height: normal;
     letter-spacing: 0;
     font-weight: 600;
@@ -86,19 +86,19 @@ m-chip {
     min-width: calc(var(--size) - var(--p) * 2);
 }
 
-img[part="chip-head"],
-i[part="chip-head"] {
+img[part="head"],
+i[part="head"] {
     margin: 0;
     padding: 0;
     width: calc(var(--size) - var(--p) * 2);
 }
 
-[part="chip-foot"] {
+[part="foot"] {
     color: var(--f-fade);
     margin-right: .1875rem;
 }
 
-[part="chip-body"] {
+[part="body"] {
     padding: 0 var(--px);
     white-space: nowrap;
     flex: 1 1 auto;
