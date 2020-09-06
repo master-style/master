@@ -16,7 +16,6 @@
     --py: 0;
     --size: 3rem;
     --f-size: #{$f-sm};
-    --b-theme-hover: transparent;
     display: inline-flex;
     font-size: var(--f-size);
     color: var(--f-theme);
@@ -28,13 +27,6 @@
     border-radius: $xs;
     align-items: center;
     justify-content: center;
-
-    // css hack to fix some bug
-    // &:after {
-    //     content: '';
-    //     min-height: inherit;
-    //     font-size: 0;
-    // }
 
     &::-moz-focus-inner {
         border-style: none;

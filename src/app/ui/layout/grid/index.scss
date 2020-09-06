@@ -1,21 +1,3 @@
-.body\/foot\+head {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-template-rows: 1fr auto;
-    grid-template-areas:
-        "body head"
-        "foot head"
-}
-
-.head\+body\/foot {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-template-rows: 1fr auto;
-    grid-template-areas:
-        "head body"
-        "head foot"
-}
-
 .y,
 [class^=y\:],
 [class*=' y\:'] {

@@ -1,15 +1,17 @@
 :host {
+    --bg-theme: transparent;
     position: relative;
     z-index: 0;
 }
 
 [part=shadow] {
     position: relative;
-    display: contents;
+    display: inherit;
     -webkit-appearance: none;
+    contain: layout style;
     font: inherit;
-    // flex-wrap: inherit;
-    // flex-direction: inherit;
+    flex-wrap: inherit;
+    flex-direction: inherit;
     letter-spacing: inherit;
     line-height: inherit;
     text-transform: inherit;
@@ -20,42 +22,25 @@
     color: inherit;
     border-radius: inherit;
     padding: 0;
-    border: 0;
     width: 100%;
     height: 100%;
     outline: none;
     overflow: hidden;
-    background-color: transparent;
-
-    &:before {
-        position: absolute;
-        contain: strict;
-        z-index: -1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        content: '';
-        background-origin: border-box;
-        background-color: var(--bg-theme, var(--bg-object));
-        border-style: solid;
-        border-width: var(--b-size, 0px);
-        border-color: var(--b-theme);
-        border-radius: inherit;
-        box-sizing: border-box;
-        transition: box-shadow ease-out .15s;
-        will-change: transform;
-    }
+    background-origin: border-box;
+    background-color: var(--bg-theme, var(--bg-object));
+    border-style: var(--b-style, solid);
+    border-width: var(--b-size, 0px);
+    border-color: var(--b-theme);
+    box-sizing: border-box;
+    transition: box-shadow ease-out .15s;
+    will-change: transform;
 
     &[disabled] {
-        --bg-theme: var(--bg-disabled) !important;
-        --b-theme: transparent !important;
+        background-color: var(--bg-disabled) !important;
+        border-color: transparent !important;
         cursor: no-drop !important;
         color: var(--f-fadest) !important;
-
-        &:before {
-            box-shadow: none !important;
-        }
+        box-shadow: none !important;
 
         ::slotted([part=foot]) {
             color: inherit;
@@ -66,19 +51,17 @@
 @media (any-hover: hover) {
     .touch {
         &:hover:not([disabled]) {
-            --bg-theme: var(--bg-theme-hover, var(--themeFade));
-
-            &:before {
-                box-shadow: inset 0 0 0 1px var(--b-theme-hover);
-            }
+            background-color: var(--bg-theme-hover, var(--themeFade));
+            box-shadow: inset 0 0 0 1px var(--b-theme-hover);
+            border-style: solid;
         }
     }
 
     :host(.outlined) {
         .touch {
             &:hover:not([disabled]) {
-                --bg-theme: var(--bg-theme-hover, var(--themeFade));
-                --b-theme: var(--b-theme-hover);
+                background-color: var(--bg-theme-hover, var(--themeFade));
+                border-color: var(--b-theme-hover);
             }
         }
     }
@@ -93,8 +76,16 @@ a[part=shadow] {
 }
 
 :host(.outlined) {
+    --b-size: 1px;
+
+    [part="shadow"] {
+        background-color: transparent;
+    }
+}
+
+:host([part=foot]) {
     [part=shadow] {
-        --bg-theme: transparent;
-        --b-size: 1px;
+        border: 0;
+        box-shadow: none;
     }
 }

@@ -20,14 +20,6 @@
         0 15px 25px rgba(0, 0, 0, 0.08);
 }
 
-:host(.outlined) {
-    ::slotted(m-button[part=foot] [part=shadow]:before) {
-        --bg-theme: transparent;
-        --b-size: 0;
-        z-index: 0;
-    }
-}
-
 ::slotted([part=head]) {
     position: relative;
     grid-area: head;
@@ -62,4 +54,26 @@
     --size: 2.5rem;
     --f-size: .9125rem;
     padding: 0;
+}
+
+:host(.body\/foot\+head) {
+    [part=shadow] {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: 1fr auto;
+        grid-template-areas:
+            "body head"
+            "foot head"
+    }
+}
+
+:host(.head\+body\/foot) {
+    [part=shadow] {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-template-rows: 1fr auto;
+        grid-template-areas:
+            "head body"
+            "head foot"
+    }
 }
