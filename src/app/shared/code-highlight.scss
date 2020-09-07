@@ -8,12 +8,6 @@ pre {
     line-height: 1.6;
     margin: 0;
     flex: 1 1 auto;
-    
-    &[collapsed] {
-        code {
-            display: none!important;
-        }
-    }
 
     code[class*="language-"] {
         color: var(--f-themeFader);

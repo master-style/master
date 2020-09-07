@@ -35,8 +35,6 @@
 
 .demo.with\:code {
     margin-bottom: 0;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
 
     .hljs-language {
         display: none;
@@ -51,6 +49,11 @@
         +pre {
             display: none;
         }
+    }
+
+    &:not([collapsed]) {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
     }
 }
 

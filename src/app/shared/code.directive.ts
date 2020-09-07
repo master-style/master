@@ -18,7 +18,7 @@ const prettierOpiton = {
     "arrowParens": "always",
     "bracketSpacing": true,
     "embeddedLanguageFormatting": "auto",
-    "htmlWhitespaceSensitivity": "css",
+    "htmlWhitespaceSensitivity": "ignore",
     "insertPragma": false,
     "jsxBracketSameLine": false,
     "jsxSingleQuote": false,
@@ -44,6 +44,9 @@ export class CodeDirective {
     @Input() codeCollapsed: boolean;
 
     demoElement: Element;
+    preElement: Element;
+    collapseButton: Element;
+    copyButton: Element;
 
     constructor(
         private elementRef: ElementRef
@@ -71,6 +74,7 @@ export class CodeDirective {
                     $('div', {}, ...element.children)
                         .innerHTML
                         // remove prefix-underscore attribute
+                        .replace(/<!--bindings[^>]*-->/g, '')
                         .replace(/_[\S]*?="[\s\S]*?"/g, '')
                     ;
                 break;
@@ -91,25 +95,36 @@ export class CodeDirective {
         code = Prism.highlight(code, Prism.languages[this.codeLang], this.codeLang);
 
         if (isCodeTag) {
-            element.innerHTML = code
-                .replace('=""', '');
+            element.innerHTML = code;
         } else {
-            element.before(
-                $('pre', {},
-                    $('div', { class: 'code-language' }, this.codeLang),
-                    $('div', { class: 'code-wrap' },
-                        $('code', { class: 'language-' + this.codeLang }).html(code)
-                    ),
-                )
+            this.preElement = $('pre', {},
+                $('div', { class: 'code-language' }, this.codeLang),
+                $('div', { class: 'code-wrap' },
+                    $('code', { class: 'language-' + this.codeLang }).html(code)
+                ),
             );
+            element.before(this.preElement);
+            const functionElement =
+                $('div', { class: 'code-function c:right', style: 'margin-top: .25rem' });
+            if (this.codeDemo) {
+                this.collapseButton =
+                    $('m-button', { class: 'round xs f:fade++' })
+                        .html('<i class="i-code">')
+                        .on('click', () => {
+                            this.demoElement.toggleAttr('collapsed');
+                        });
+                functionElement.append(this.collapseButton);
+            }
+            this.copyButton =
+                $('m-button', { class: 'round xs f:fade++' })
+                    .html('<i class="i-copy">');
+            functionElement.append(this.copyButton);
+            element.before(functionElement);
         }
 
-        this.collapse();
-    }
-
-    collapse() {
         if (this.codeCollapsed === undefined)
             this.codeCollapsed = this.codeDemo ?? false;
+        console.log(this.codeCollapsed);
         if (this.demoElement)
             this.demoElement.toggleAttr('collapsed', this.codeCollapsed);
     }
