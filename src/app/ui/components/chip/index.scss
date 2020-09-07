@@ -10,6 +10,7 @@
     --p: .25rem;
     --px: .375rem;
     background-color: var(--bg-theme);
+    line-height: normal;
     color: var(--f-theme);
     display: inline-flex;
     align-items: center;
@@ -83,7 +84,6 @@
 }
 
 ::slotted([part="head"]) {
-    line-height: normal;
     letter-spacing: 0;
     font-weight: 600;
     color: var(--f-theme);
