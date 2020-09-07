@@ -15,11 +15,11 @@
                 <td>
                     <div class="y:xs">
                         <m-chip class="x theme+ sm" *ngFor="let type of types">
-                            <div part="chip-head">
+                            <div part="head">
                                 <ion-icon *ngIf="type !== undefined" [attr.name]="getTypeIcon(type)"></ion-icon>
                                 {{ type === undefined ? '∅' : '' }}
                             </div>
-                            <code part="chip-body">{{ parsedStr(type) }}</code>
+                            <code part="body">{{ parsedStr(type) }}</code>
                         </m-chip>
                     </div>
                 </td>
@@ -28,7 +28,7 @@
                 <th class="fit t:left">attribute</th>
                 <td>
                     <m-chip class="theme+ sm">
-                        <code part="chip-body">{{ camelToKebabCase(name) }}</code>
+                        <code part="body">{{ camelToKebabCase(name) }}</code>
                     </m-chip>
                 </td>
             </tr>
@@ -37,11 +37,11 @@
                 <td>
                     <div class="y:xs">
                         <m-chip class="x outlined blue+ sm">
-                            <div part="chip-head">
+                            <div part="head">
                                 <ion-icon *ngIf="default !== undefined" [attr.name]="getTypeIcon(default)"></ion-icon>
                                 {{ default === undefined ? '∅' : '' }}
                             </div>
-                            <code part="chip-body">{{ parsedStr(default) }}</code>
+                            <code part="body">{{ parsedStr(default) }}</code>
                         </m-chip>
                     </div>
                 </td>

@@ -47,7 +47,6 @@
 }
 
 ::slotted([part=body]) {
-    position: relative;
     grid-area: body;
     padding: 1rem;
     width: 100%;
@@ -57,11 +56,13 @@
 ::slotted([part=foot]) {
     --px: 1rem;
     --py: .8rem;
-    position: relative;
+    display: flex;
+    flex-wrap: wrap;
     padding: var(--py) var(--px);
     grid-area: foot;
     width: 100%;
     border-radius: 0;
+    clear: both;
 }
 
 ::slotted(m-button[part=foot]) {

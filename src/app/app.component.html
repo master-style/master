@@ -46,7 +46,7 @@
                 'blue+': eachComposition === 'CSS',
                 'yellow+': eachComposition === 'JS'
             }" *ngFor="let eachComposition of appService?.currentRoute?.data?.compositions">
-                <div part="chip-body">{{ eachComposition }}</div>
+                <div part="body">{{ eachComposition }}</div>
             </m-chip>
         </div>
         <router-outlet></router-outlet>

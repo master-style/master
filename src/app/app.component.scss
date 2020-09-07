@@ -67,7 +67,7 @@ code {
     display: inline-flex;
     border-radius: $xs;
 
-    &[part="chip-body"] {
+    &[part="body"] {
         background-color: transparent;
     }
 }
