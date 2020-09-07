@@ -1,0 +1,53 @@
+@import '../../variables';
+
+:host {
+    contain: style paint;
+    display: inline-block;
+    border-radius: $xxs;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+
+    &:before {
+        content: '\00a0 '
+    }
+}
+
+[part=bg] {
+    contain: strict;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    border-radius: inherit;
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(var(--bg-skeletonRgb), .5);
+}
+
+:host(.animated) {
+    position: relative;
+
+    [part=bg] {
+        background-image: linear-gradient(to right, rgba(var(--bg-skeletonRgb), .5) 2%, rgba(var(--bg-skeletonRgb), 1) 18%, rgba(var(--bg-skeletonRgb), .5) 33%);
+        background-size: 800px 104px;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        animation-name: animate;
+    }
+}
+
+@keyframes animate {
+    0% {
+        background-position: -468px 0;
+    }
+
+    100% {
+        background-position: 468px 0;
+    }
+}

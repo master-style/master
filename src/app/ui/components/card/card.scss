@@ -27,7 +27,7 @@ m-card {
     h3:last-child,
     h4:last-child,
     h5:last-child {
-        margin-bottom: 0!important;
+        margin-bottom: 0 !important;
     }
 
     p {
@@ -40,5 +40,11 @@ m-card {
         &:last-child {
             margin: 0 !important; // !important: conflict article.decorated
         }
+    }
+
+    >[part=head] m-skeleton {
+        position: absolute;
+        top: 0;
+        left: 0;
     }
 }

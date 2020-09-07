@@ -8,23 +8,25 @@
     flex: 1 1 auto;
     align-items: center;
     padding: 1rem;
-    border: 1px solid rgba(255,255,255,.1);
+    border: 1px solid rgba(255, 255, 255, .1);
     background-color: rgba(255, 255, 255, .1);
     margin-top: .5rem;
+
     .shine {
         &:first-child {
             margin-left: 1rem
         }
     }
-    > .shine {
+
+    >.shine {
 
         margin-top: 0;
     }
 }
 
-h2 + doc-prop {
+h2+doc-prop {
     h3 {
-        margin-top: 0!important;
+        margin-top: 0 !important;
     }
 }
 
@@ -267,6 +269,10 @@ code.colorCode {
         padding: .8rem 1.2rem;
         justify-content: center;
     }
+}
+
+code[part="body"] {
+    padding: 0 .375rem;
 }
 
 .appLogo {
