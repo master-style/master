@@ -89,16 +89,6 @@
 </div>
 
 <h2 id="size">{{ 'size' | translate }}</h2>
-<div class="demo">
-    <div class="demo-body">
-        <div class="y:xl c:bottom c:center">
-            <m-button class="x xs theme raised">extra sm</m-button>
-            <m-button class="x sm theme raised">small</m-button>
-            <m-button class="x theme raised">default</m-button>
-            <m-button class="x lg theme raised">large</m-button>
-        </div>
-    </div>
-</div>
 <m-table class="sm neat axis:x">
     <table>
         <thead>
@@ -145,15 +135,16 @@
         </tbody>
     </table>
 </m-table>
+<template [codeLang]="'html'" [codeDemo]=true>
+    <div class="y:xl c:bottom c:center">
+        <m-button class="x xs theme raised">extra sm</m-button>
+        <m-button class="x sm theme raised">small</m-button>
+        <m-button class="x theme raised">default</m-button>
+        <m-button class="x lg theme raised">large</m-button>
+    </div>
+</template>
 
 <h2 id="raised">{{ 'raised' | translate }}</h2>
-<div class="demo">
-    <div class="demo-body">
-        <div class="y:xl c:bottom c:center">
-            <m-button class="x theme raised">raised</m-button>
-        </div>
-    </div>
-</div>
 <m-table class="sm neat axis:x">
     <table>
         <thead>
@@ -172,22 +163,11 @@
         </tbody>
     </table>
 </m-table>
+<template [codeLang]="'html'" [codeDemo]=true>
+    <m-button class="theme raised">raised</m-button>
+</template>
 
 <h2 id="shape">{{ 'shape' | translate }}</h2>
-<div class="demo">
-    <div class="demo-body">
-        <div class="y c:center">
-            <m-button class="x theme raised">default</m-button>
-            <m-button class="x theme raised round">
-                <ion-icon name="ellipse-outline"></ion-icon>
-            </m-button>
-            <m-button class="x theme raised square">
-                <ion-icon name="square-outline"></ion-icon>
-            </m-button>
-            <m-button class="x theme raised rounded">rounded</m-button>
-        </div>
-    </div>
-</div>
 <m-table class="sm neat axis:x">
     <table>
         <thead>
@@ -237,6 +217,18 @@
         </tbody>
     </table>
 </m-table>
+<template [codeLang]="'html'" [codeDemo]=true>
+    <div class="y c:center">
+        <m-button class="x theme raised">default</m-button>
+        <m-button class="x theme raised round">
+            <ion-icon name="ellipse-outline"></ion-icon>
+        </m-button>
+        <m-button class="x theme raised square">
+            <ion-icon name="square-outline"></ion-icon>
+        </m-button>
+        <m-button class="x theme raised rounded">rounded</m-button>
+    </div>
+</template>
 
 <h2 id="outlined">{{ 'outlined' | translate }}</h2>
 <m-table class="sm neat axis:x">

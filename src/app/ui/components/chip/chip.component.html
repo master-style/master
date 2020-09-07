@@ -115,19 +115,6 @@
 </div>
 
 <h2 id="size">{{ 'size' | translate }}</h2>
-<div class="demo">
-    <div class="demo-body">
-        <div class="y:sm c:bottom c:center">
-            <m-chip class="x sm theme outlined">
-                <div part="head">S</div>
-                <div part="body">small</div>
-            </m-chip>
-            <m-chip class="x theme outlined">
-                <div part="body">default</div>
-            </m-chip>
-        </div>
-    </div>
-</div>
 <m-table class="sm neat axis:x">
     <table>
         <thead>
@@ -158,22 +145,19 @@
         </tbody>
     </table>
 </m-table>
+<template [codeLang]="'html'" [codeDemo]=true>
+    <div class="y:sm c:bottom c:center">
+        <m-chip class="x sm theme outlined">
+            <div part="head">S</div>
+            <div part="body">small</div>
+        </m-chip>
+        <m-chip class="x theme outlined">
+            <div part="body">default</div>
+        </m-chip>
+    </div>
+</template>
 
 <h2 id="shape">{{ 'shape' | translate }}</h2>
-<div class="demo">
-    <div class="demo-body">
-        <div class="y:sm c:bottom c:center">
-            <m-chip class="x theme outlined">
-                <div part="head">D</div>
-                <div part="body">default</div>
-            </m-chip>
-            <m-chip class="x theme outlined rounded">
-                <div part="head">R</div>
-                <div part="body">rounded</div>
-            </m-chip>
-        </div>
-    </div>
-</div>
 <m-table class="sm neat axis:x">
     <table>
         <thead>
@@ -205,3 +189,15 @@
         </tbody>
     </table>
 </m-table>
+<template [codeLang]="'html'" [codeDemo]=true>
+    <div class="y:sm c:bottom c:center">
+        <m-chip class="x theme outlined">
+            <div part="head">D</div>
+            <div part="body">default</div>
+        </m-chip>
+        <m-chip class="x theme outlined rounded">
+            <div part="head">R</div>
+            <div part="body">rounded</div>
+        </m-chip>
+    </div>
+</template>
