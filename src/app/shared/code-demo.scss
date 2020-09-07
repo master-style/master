@@ -1,18 +1,6 @@
 .demo {
     position: relative;
-
-    .demo-body {
-        background-origin: border-box;
-        background-color: transparent;
-        background-image: repeating-linear-gradient(45deg, transparent, transparent 1rem, var(--themeFade) 1rem, var(--themeFade) 2rem);
-
-    }
-
-    .copy-button,
-    .toggle-button {
-        z-index: $z-up;
-        color: var(--f-fadest);
-    }
+    flex: 1 1 auto;
 }
 
 .demo,
@@ -20,11 +8,10 @@
     display: flex;
     width: 100%;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     contain: style;
     margin-bottom: $sm;
     border-radius: $sm;
+    justify-content: center;
 
     .code {
         // -webkit-mask-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 1.2rem, rgba(255, 255, 255, 1) 100%);
@@ -69,24 +56,6 @@
     width: calc(100% + 2rem);
     margin-left: -1rem;
 
-    .demo-item {
-        border: 1px solid #acc9ff;
-        background-color: rgba(234, 241, 255, .6);
-        padding: $sm;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        code {
-            padding: 0;
-            background-color: transparent;
-        }
-
-        p {
-            margin: 0;
-        }
-    }
-
     .demo-body {
         background-image: repeating-linear-gradient(90deg, transparent, transparent $md, var(--themeFade) $md, var(--themeFade) calc(100% / 12 - 1.7px))
     }
@@ -114,10 +83,14 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     width: 100%;
     padding: $md;
     border-radius: inherit;
+    flex: 1 1 auto;
+    background-origin: border-box;
+    background-color: transparent;
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 1rem, var(--themeFade) 1rem, var(--themeFade) 2rem);
 
     +.code {
         border-top-left-radius: 0;

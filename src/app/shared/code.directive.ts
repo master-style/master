@@ -12,26 +12,26 @@ import typescriptParser from 'prettier/parser-typescript.js';
 const prettierParser = {
     'html': htmlParser,
     'typescript': typescriptParser
-}
+};
 
 const prettierOpiton = {
-    "arrowParens": "always",
-    "bracketSpacing": true,
-    "embeddedLanguageFormatting": "auto",
-    "htmlWhitespaceSensitivity": "ignore",
-    "insertPragma": false,
-    "jsxBracketSameLine": false,
-    "jsxSingleQuote": false,
-    "printWidth": 144,
-    "proseWrap": "preserve",
-    "quoteProps": "consistent",
-    "requirePragma": false,
-    "semi": false,
-    "singleQuote": true,
-    "tabWidth": 4,
-    "trailingComma": "es5",
-    "useTabs": false,
-    "vueIndentScriptAndStyle": false
+    'arrowParens': 'always',
+    'bracketSpacing': true,
+    'embeddedLanguageFormatting': 'auto',
+    'htmlWhitespaceSensitivity': 'ignore',
+    'insertPragma': false,
+    'jsxBracketSameLine': false,
+    'jsxSingleQuote': false,
+    'printWidth': 144,
+    'proseWrap': 'preserve',
+    'quoteProps': 'consistent',
+    'requirePragma': false,
+    'semi': false,
+    'singleQuote': true,
+    'tabWidth': 4,
+    'trailingComma': 'es5',
+    'useTabs': false,
+    'vueIndentScriptAndStyle': false
 };
 
 @Directive({
@@ -90,7 +90,8 @@ export class CodeDirective {
             parser: this.codeLang,
             plugins: [prettierParser[this.codeLang]],
             ...prettierOpiton
-        });
+        })
+            .replace('=""', '');
 
         code = Prism.highlight(code, Prism.languages[this.codeLang], this.codeLang);
 
