@@ -47,9 +47,6 @@ export class MasterClickable extends HTMLElement {
     @Attr({ render: true })
     disabled: boolean;
 
-    @Attr()
-    loading: boolean;
-
     @Attr({ render: true })
     download: number;
 

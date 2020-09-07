@@ -89,7 +89,7 @@ export const uiRoutes: Routes = [
             { path: 'modal', component: ModalComponent, resolve: { route: RouteResolver } },
             { path: 'popup', component: PopupComponent, resolve: { route: RouteResolver } },
             { path: 'scroll', component: ScrollComponent, resolve: { route: RouteResolver } },
-            { path: 'progress-indicator' },
+            { path: 'loading-indicator' },
             { path: 'progress', component: ProgressComponent, resolve: { route: RouteResolver } },
             { path: 'skeleton', component: SkeletonComponent, resolve: { route: RouteResolver } },
         ]
