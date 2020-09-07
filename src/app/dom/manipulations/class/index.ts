@@ -16,6 +16,6 @@ ElementPrototype.rmClass = function (value: string) {
 };
 
 ElementPrototype.toggleClass = function (value: string, state?: boolean) {
-    state = typeof state === 'boolean' ? state : !this.hasClass(value);
+    state = typeof state === 'boolean' ? state : !this.classList.contains(value);
     return state ? this.addClass(value) : this.rmClass(value);
 };
