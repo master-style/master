@@ -98,11 +98,13 @@ export class CodeDirective {
         if (isCodeTag) {
             element.innerHTML = code;
         } else {
-            this.preElement = $('pre', {},
-                $('div', { class: 'code-language' }, this.codeLang),
+            const codeWrapElement =
                 $('div', { class: 'code-wrap' },
                     $('code', { class: 'language-' + this.codeLang }).html(code)
-                ),
+                );
+            this.preElement = $('pre', {},
+                $('div', { class: 'code-language' }, this.codeLang),
+                codeWrapElement
             );
             element.before(this.preElement);
             const functionElement =
@@ -118,7 +120,22 @@ export class CodeDirective {
             }
             this.copyButton =
                 $('m-button', { class: 'round xs f:fade++' })
-                    .html('<i class="i-copy">');
+                    .html('<i class="i-copy">')
+                    .on('click', (e) => {
+                        // Select some text (you could also create a range)
+                        this.preElement.css('display', 'block');
+                        const range = document.createRange();
+                        range.selectNode(codeWrapElement);
+                        const selection = window.getSelection();
+                        selection.removeAllRanges();
+                        selection.addRange(range);
+
+                        if (document.execCommand('copy')) {
+                            console.log('copied');
+                        }
+                        this.preElement.css('display', null);
+                    });
+
             functionElement.append(this.copyButton);
             element.before(functionElement);
         }
