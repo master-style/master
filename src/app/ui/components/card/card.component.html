@@ -295,24 +295,7 @@
 <h2 id="skeleton">{{ 'loading-indicator' | translate }}</h2>
 <div class="demo">
     <div class="demo-body">
-        <div class="y:sm c:center">
-            <m-card class="raised x:6">
-                <div part="head" class="by:3x2"
-                    style="background-image: url(https://images.pexels.com/photos/936611/pexels-photo-936611.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)">
-                </div>
-                <div part="body">
-                    <h5>Wed Jan 22 2020</h5>
-                    <h3>Healthy food</h3>
-                    <h4>fruit</h4>
-                    <p>Here's a low-calorie platter for a great afternoon light meal.</p>
-                </div>
-                <div part="foot">
-                    <m-button class="theme+ xs outlined">
-                        learn more
-                        <ion-icon name="chevron-forward" part="foot"></ion-icon>
-                    </m-button>
-                </div>
-            </m-card>
+        <div class="y c:center">
             <m-card class="raised x:6">
                 <div part="head" class="by:3x2">
                     <m-skeleton></m-skeleton>
@@ -334,6 +317,23 @@
                     </p>
                 </div>
             </m-card>
+            <m-card class="raised x:6">
+                <div part="head" class="by:3x2"
+                    style="background-image: url(https://images.pexels.com/photos/936611/pexels-photo-936611.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)">
+                </div>
+                <div part="body">
+                    <h5>Wed Jan 22 2020</h5>
+                    <h3>Healthy food</h3>
+                    <h4>fruit</h4>
+                    <p>Here's a low-calorie platter for a great afternoon light meal.</p>
+                </div>
+                <div part="foot">
+                    <m-button class="theme+ xs outlined">
+                        learn more
+                        <ion-icon name="chevron-forward" part="foot"></ion-icon>
+                    </m-button>
+                </div>
+            </m-card>
         </div>
     </div>
 </div>
@@ -351,7 +351,7 @@
                 <td>
                     <code class="f:blue">&lt;m-skeleton&gt;</code>
                 </td>
-                <td><b>內容骨幹</b>，提升用戶加載體驗</td>
+                <td><b>內容骨架</b>，提升用戶加載體驗</td>
                 <td class="t:right">
                     <m-chip class="sm theme+" href="ui/components/skeleton">
                         <div part="body">{{ 'skeleton' | translate }}</div>
