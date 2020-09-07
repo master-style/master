@@ -238,6 +238,36 @@
     </table>
 </m-table>
 
+<h2 id="outlined">{{ 'outlined' | translate }}</h2>
+<m-table class="sm neat axis:x">
+    <table>
+        <thead>
+            <tr>
+                <th class="fit t:left bg:theme sticky">class</th>
+                <th class="t:left bg:theme sticky">description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <code class="f:blue">outlined</code>
+                </td>
+                <td><b>外框</b></td>
+            </tr>
+        </tbody>
+    </table>
+</m-table>
+<template [codeLang]="'html'" [codeDemo]=true>
+    <div class="y c:center">
+        <m-button class="x theme">
+            default
+        </m-button>
+        <m-button class="x theme outlined">
+            outlined
+        </m-button>
+    </div>
+</template>
+
 <h2 id="state">{{ 'state' | translate }}</h2>
 <doc-prop [name]="'disabled'" [types]="['boolean']" [description]="'The user cannot interact with the component.'">
 </doc-prop>
