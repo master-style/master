@@ -25,7 +25,7 @@
     box-shadow: none;
 
     ::slotted(*) {
-        pointer-events: none;
+        pointer-events: none!important;
     }
 
     ::slotted([part=head]),
@@ -67,6 +67,7 @@
 
 ::slotted(m-button[part=foot]) {
     --px: 1.1rem;
+    --py: 0;
     --size: 2.5rem;
     --f-size: .9125rem;
     padding: 0;
