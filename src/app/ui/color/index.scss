@@ -1,3 +1,89 @@
+html {
+    /** theme  */
+    --blue: #{$blue};
+    --blueFade: #{lighten($blue, 33%)};
+    --blueFader: #{lighten($blue, 36.5%)};
+    --red: #{$red};
+    --redFade: #{lighten($red, 30%)};
+    --redFader: #{lighten($red, 33.5%)};
+    --green: #{$green};
+    --greenFade: #{lighten($green, 41%)};
+    --greenFader: #{lighten($green, 48.5%)};
+    --yellow: #{$yellow};
+    --yellowFade: #{lighten($yellow, 31%)};
+    --yellowFader: #{lighten($yellow, 36.5%)};
+    --purple: #{$purple};
+    --purpleFade: #{lighten($purple, 17%)};
+    --purpleFader: #{lighten($purple, 21.5%)};
+    --f-blue: #{darken($blue, 8%)};
+    --f-red: #{darken($red, 8%)};
+    --f-green: #{darken($green, 6%)};
+    --f-purple: #{darken($purple, 8%)};
+    --f-yellow: #{darken($yellow, 8%)};
+    --b-fadeRgb: 40, 67, 110;
+    --b-fade: rgba(var(--b-fadeRgb), .16);
+    --b-fader: rgba(var(--b-fadeRgb), .12);
+    --b-fadest: rgba(var(--b-fadeRgb), .08);
+    // theme
+    --themeRgb: 255, 255, 255;
+    --themeFadeRgb: 246, 248, 250;
+    --themeFaderRgb: 242, 244, 247;
+    --bg-skeletonRgb: 15, 30, 55;
+    --theme: rgb(var(--themeRgb));
+    --themeFade: rgb(var(--themeFadeRgb));
+    --themeFader: rgb(var(--themeFaderRgb));
+    --bg-objectRgb: var(--themeRgb);
+    --bg-object: var(--theme);
+    --f-theme: #1e1e23;
+    --f-themeFade: #3a3a44;
+    --f-themeFader: #565665;
+    --f-fade: #68738c;
+    --f-fader: #a1a8b9;
+    --f-fadest: #bec3cf;
+    --gap-theme: var(--themeFader);
+    --hover-theme: rgba(0, 27, 83, .05);
+
+    &.dark {
+        --blueFade: #{rgba($blue, .2)};
+        --blueFader: #{rgba($blue, .1)};
+        --redFade: #{rgba($red, .2)};
+        --redFader: #{rgba($red, .1)};
+        --greenFade: #{rgba($green, .2)};
+        --greenFader: #{rgba($green, .1)};
+        --yellowFade: #{rgba($yellow, .2)};
+        --yellowFader: #{rgba($yellow, .1)};
+        --purpleFade: #{rgba($purple, .2)};
+        --purpleFader: #{rgba($purple, .1)};
+        /* theme */
+        --themeRgb: 29, 29, 30;
+        --themeFadeRgb: 36, 36, 36;
+        --themeFaderRgb: 49, 49, 50;
+        --bg-skeletonRgb: 255, 255, 255;
+        --theme: rgb(var(--themeRgb));
+        --themeFade: rgb(var(--themeFadeRgb));
+        --themeFader: rgb(var(--themeFaderRgb));
+        --bg-objectRgb: var(--themeFaderRgb);
+        --bg-object: var(--themeFader);
+        --f-blue: var(--blue);
+        --f-red: var(--red);
+        --f-green: var(--green);
+        --f-purple: var(--purple);
+        --f-yellow: var(--yellow);
+        --f-theme: #fff;
+        --f-themeFade: #d7d7da;
+        --f-themeFader: #b7b7ba;
+        --f-fade: #97979a;
+        --f-fader: #77777a;
+        --f-fadest: #57575a;
+        --b-fadeRgb: 255, 255, 255;
+        --b-fade: rgba(var(--b-fadeRgb), .16);
+        --b-fader: rgba(var(--b-fadeRgb), .12);
+        --b-fadest: rgba(var(--b-fadeRgb), .08);
+        --gap-theme: rgba(0, 0, 0, .2);
+        --hover-theme: rgba(255, 255, 255, .05);
+    }
+}
+
 .blue {
     --bg-theme: var(--blue);
     --bg-theme-hover: var(--f-blue);
