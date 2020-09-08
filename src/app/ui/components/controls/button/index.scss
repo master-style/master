@@ -90,8 +90,13 @@
     }
 }
 
+slot[name=head],
+slot[name=foot] {
+    align-items: center;
+    justify-content: center;
+}
+
 slot[name=head] {
-    display: flex;
     margin-left: -.25rem;
     margin-right: .5rem;
 }
@@ -102,7 +107,6 @@ slot[name=head].abs {
 }
 
 slot[name=foot] {
-    display: flex;
     margin-right: -.25rem;
     margin-left: .5rem;
 }

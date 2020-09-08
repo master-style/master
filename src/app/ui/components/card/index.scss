@@ -30,8 +30,8 @@
         pointer-events: none !important;
     }
 
-    slot[name=head],
     .body,
+    slot[name=head],
     slot[name=foot] {
         opacity: .5;
     }
@@ -39,7 +39,6 @@
 
 slot[name=head] {
     position: relative;
-    display: block;
     grid-area: head;
     border: 0;
     background-size: cover;
@@ -58,15 +57,14 @@ slot[name=head] {
     grid-area: body;
     padding: 1rem;
     width: 100%;
-    flex: 1 1 auto;
 }
 
 slot[name=foot] {
-    display: flex;
     flex-wrap: wrap;
     padding: var(--foot-py) var(--foot-px);
     grid-area: foot;
     clear: both;
+    line-height: 0;
 }
 
 slot[name=foot]::slotted(m-button) {
@@ -102,12 +100,12 @@ slot[name=foot]::slotted(m-button) {
 }
 
 .body::slotted(h3) {
-    font-size: var(--f-md);
-    line-height: 1.2;
+    font-size: var(--f-md) !important;
+    line-height: 1.2 !important;
 }
 
 .body::slotted(h4) {
-    font-size: var(--f-sm);
+    font-size: var(--f-sm) !important;
 }
 
 .body::slotted(h3),
@@ -116,14 +114,14 @@ slot[name=foot]::slotted(m-button) {
 }
 
 .body::slotted(h5) {
-    font-size: var(--f-xxs);
-    margin-bottom: $xxs;
+    font-size: var(--f-xxs) !important;
+    margin-bottom: $xxs !important;
 }
 
 .body::slotted(h4),
 .body::slotted(h5) {
-    font-weight: 400;
-    color: var(--f-themeFader);
+    font-weight: 400 !important;
+    color: var(--f-themeFader) !important;
 }
 
 .body::slotted(h3):last-child,
@@ -133,11 +131,11 @@ slot[name=foot]::slotted(m-button) {
 }
 
 .body::slotted(p) {
-    font-size: var(--f-xs);
+    font-size: var(--f-xs) !important;
     line-height: 1.4 !important;
-    text-align: inherit;
+    text-align: inherit !important;
     margin: 0 0 $xs 0 !important; // !important: conflict article.decorated
-    color: var(--f-fade);
+    color: var(--f-fade) !important;
 
     &:last-child {
         margin: 0 !important; // !important: conflict article.decorated
