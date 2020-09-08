@@ -90,6 +90,11 @@
     }
 }
 
+.body {
+    align-items: center;
+    justify-content: center;
+}
+
 slot[name=head],
 slot[name=foot] {
     align-items: center;
