@@ -236,10 +236,6 @@ audio:not([controls]) {
 img {
     border-style: none;
     -webkit-user-drag: none;
-
-    &:not([width]) {
-        width: 100%;
-    }
 }
 
 /**

@@ -53,6 +53,14 @@
     }
 }
 
+.body {
+    display: flex;
+}
+
+slot {
+    box-sizing: border-box;
+}
+
 @media (any-hover: hover) {
     .touch {
         &:hover:not([disabled]) {

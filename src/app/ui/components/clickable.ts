@@ -14,7 +14,9 @@ export class MasterClickable extends HTMLElement {
                     disabled: this.disabled,
                     type: this.type
                 }, [
-                    'slot'
+                    'slot', { name: 'head' },
+                    'slot', { class: 'body' },
+                    'slot', { name: 'foot' }
                 ]
             ];
         } else if (tag === 'a') {
@@ -27,11 +29,13 @@ export class MasterClickable extends HTMLElement {
                     rel: this.rel,
                     target: this.target
                 }, [
-                    'slot'
+                    'slot', { name: 'head' },
+                    'slot', { class: 'body' },
+                    'slot', { name: 'foot' }
                 ]
             ];
         } else {
-            return ['slot', { part: 'shadow' }];
+            return ['slot', { part: 'shadow', class: 'body' }];
         }
     });
 
