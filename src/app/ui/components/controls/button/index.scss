@@ -74,6 +74,12 @@
     border-radius: 0;
 }
 
+:host(.outlined) {
+    ::slotted([part=foot]) {
+        color: var(--f-fader);
+    }
+}
+
 :host([loading]) {
     cursor: progress !important;
 
@@ -99,7 +105,6 @@
     display: flex;
     margin-right: -.25rem;
     margin-left: .5rem;
-    color: var(--f-fader);
 }
 
 ::slotted([part=foot].abs) {
