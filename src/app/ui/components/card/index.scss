@@ -100,3 +100,46 @@ slot[name=foot]::slotted(m-button) {
             "head foot"
     }
 }
+
+.body::slotted(h3) {
+    font-size: $f-md;
+    line-height: 1.2;
+}
+
+.body::slotted(h4) {
+    font-size: $f-sm;
+}
+
+.body::slotted(h3),
+.body::slotted(h4) {
+    margin: 0 0 $xs 0 !important; // !important: conflict article.decorated
+}
+
+.body::slotted(h5) {
+    font-size: $f-xxs;
+    margin-bottom: $xxs;
+}
+
+.body::slotted(h4),
+.body::slotted(h5) {
+    font-weight: 400;
+    color: var(--f-themeFader);
+}
+
+.body::slotted(h3):last-child,
+.body::slotted(h4):last-child,
+.body::slotted(h5):last-child {
+    margin-bottom: 0 !important;
+}
+
+.body::slotted(p) {
+    font-size: $f-xs;
+    line-height: 1.4 !important;
+    text-align: inherit;
+    margin: 0 0 $xs 0 !important; // !important: conflict article.decorated
+    color: var(--f-fade);
+
+    &:last-child {
+        margin: 0 !important; // !important: conflict article.decorated
+    }
+}
