@@ -3,10 +3,10 @@
         <div class="y:sm c:center">
             <m-button class="x blue raised" href="google.com" disabled>
                 submit
-                <ion-icon part="foot" name="chevron-forward"></ion-icon>
+                <ion-icon slot="foot" name="chevron-forward"></ion-icon>
             </m-button>
             <m-button class="x red raised">
-                <ion-icon part="head" name="trash-outline"></ion-icon>
+                <ion-icon slot="head" name="trash-outline"></ion-icon>
                 delete
             </m-button>
             <m-button class="x">default</m-button>
@@ -23,9 +23,9 @@
 <h2 id="structure">{{ 'structure' | translate }}</h2>
 <template [codeLang]="'html'">
     <m-button>
-        <div part="head"></div>
+        <div slot="head"></div>
         text...
-        <div part="foot"></div>
+        <div slot="foot"></div>
     </m-button>
 </template>
 
@@ -41,7 +41,7 @@
     <div class="x:6@sm c:row">
         <template [codeLang]="'html'" [codeDemo]=true>
             <m-button class="red+">
-                <ion-icon part="head" name="trash-outline"></ion-icon>
+                <ion-icon slot="head" name="trash-outline"></ion-icon>
                 DELETE
             </m-button>
         </template>
@@ -50,7 +50,7 @@
         <template [codeLang]="'html'" [codeDemo]=true>
             <m-button class="blue">
                 MORE
-                <ion-icon part="foot" name="chevron-forward"></ion-icon>
+                <ion-icon slot="foot" name="chevron-forward"></ion-icon>
             </m-button>
         </template>
     </div>
@@ -64,9 +64,9 @@
     <div class="x:12 c:row">
         <template [codeLang]="'html'" [codeDemo]=true>
             <m-button class="green+ outlined w:full" style="max-width: 250px">
-                <ion-icon class="abs" part="head" name="lock-closed-outline"></ion-icon>
+                <ion-icon class="abs" slot="head" name="lock-closed-outline"></ion-icon>
                 PAY
-                <ion-icon class="abs" part="foot" name="chevron-forward"></ion-icon>
+                <ion-icon class="abs" slot="foot" name="chevron-forward"></ion-icon>
             </m-button>
         </template>
     </div>
@@ -80,7 +80,7 @@
                 <div class="y:sm">
                     <m-button class="x sm {{ eachColor + eachDepth }} {{ eachStyle }}" *ngFor="let eachColor of colors"
                         (click)="currentColor = eachColor">
-                        <div part="body">{{ eachColor }}</div>
+                        {{ eachColor }}
                     </m-button>
                 </div>
             </template>
@@ -192,7 +192,7 @@
                 <td><b>圓形</b>，取消內距</td>
                 <td class="t:right">
                     <m-chip class="sm theme+" href="modifiers">
-                        <div part="body">{{ 'modifiers' | translate }}</div>
+                        {{ 'modifiers' | translate }}
                     </m-chip>
                 </td>
             </tr>
@@ -210,7 +210,7 @@
                 <td><b>側圓角</b></td>
                 <td class="t:right">
                     <m-chip class="sm theme+" href="modifiers">
-                        <div part="body">{{ 'modifiers' | translate }}</div>
+                        {{ 'modifiers' | translate }}
                     </m-chip>
                 </td>
             </tr>

@@ -46,7 +46,7 @@
 }
 
 :host(.sm) {
-    --px: 1.1rem;
+    --px: 1rem;
     --size: 2.5rem;
     --f-size: .9125rem;
 }
@@ -75,7 +75,7 @@
 }
 
 :host(.outlined) {
-    ::slotted([part=foot]) {
+    slot[name=foot] {
         color: var(--f-fader);
     }
 }
@@ -90,24 +90,24 @@
     }
 }
 
-::slotted([part=head]) {
+slot[name=head] {
     display: flex;
     margin-left: -.25rem;
     margin-right: .5rem;
 }
 
-::slotted([part=head].abs) {
+slot[name=head].abs {
     left: 0;
     margin-left: calc(var(--px) - .3rem);
 }
 
-::slotted([part=foot]) {
+slot[name=foot] {
     display: flex;
     margin-right: -.25rem;
     margin-left: .5rem;
 }
 
-::slotted([part=foot].abs) {
+slot[name=foot].abs {
     right: 0;
     margin-right: calc(var(--px) - .3rem);
 }
