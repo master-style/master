@@ -19,7 +19,7 @@
                                 <ion-icon *ngIf="type !== undefined" [attr.name]="getTypeIcon(type)"></ion-icon>
                                 {{ type === undefined ? '∅' : '' }}
                             </div>
-                            <code part="body">{{ parsedStr(type) }}</code>
+                            <code>{{ parsedStr(type) }}</code>
                         </m-chip>
                     </div>
                 </td>
@@ -28,7 +28,7 @@
                 <th class="fit t:left">attribute</th>
                 <td>
                     <m-chip class="theme+ sm">
-                        <code part="body">{{ camelToKebabCase(name) }}</code>
+                        <code>{{ camelToKebabCase(name) }}</code>
                     </m-chip>
                 </td>
             </tr>
@@ -41,7 +41,7 @@
                                 <ion-icon *ngIf="default !== undefined" [attr.name]="getTypeIcon(default)"></ion-icon>
                                 {{ default === undefined ? '∅' : '' }}
                             </div>
-                            <code part="body">{{ parsedStr(default) }}</code>
+                            <code>{{ parsedStr(default) }}</code>
                         </m-chip>
                     </div>
                 </td>

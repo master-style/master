@@ -69,9 +69,12 @@ code {
     line-height: 24px;
     display: inline-flex;
     border-radius: $xs;
+}
 
-    &[part="body"] {
+m-chip {
+    code {
         background-color: transparent;
+        padding: 0 .375rem;
     }
 }
 
@@ -270,10 +273,6 @@ code.colorCode {
         padding: .8rem 1.2rem;
         justify-content: center;
     }
-}
-
-code[part="body"] {
-    padding: 0 .375rem;
 }
 
 .appLogo {

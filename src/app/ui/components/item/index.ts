@@ -8,7 +8,4 @@ const NAME = 'item';
     tag: 'm-' + NAME,
     css
 })
-export class MasterItem extends MasterClickable {
-    @Attr({ render: true })
-    type: string = 'button';
-}
+export class MasterItem extends MasterClickable {}

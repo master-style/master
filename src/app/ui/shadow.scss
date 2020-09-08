@@ -1,11 +1,12 @@
 :host {
     --bg-theme: transparent;
-    position: relative;
     z-index: 0;
+    pointer-events: none;
 }
 
 [part=shadow] {
     position: relative;
+    pointer-events: auto;
     display: inherit;
     -webkit-appearance: none;
     contain: layout style;
