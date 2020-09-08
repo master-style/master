@@ -1,12 +1,10 @@
 :host {
     --bg-theme: transparent;
     z-index: 0;
-    pointer-events: none;
 }
 
 [part=root] {
     position: relative;
-    pointer-events: auto;
     display: inherit;
     -webkit-appearance: none;
     contain: layout style;
@@ -40,16 +38,12 @@
 
     &[disabled] {
         background-color: var(--bg-disabled) !important;
-        cursor: no-drop !important;
+        // cursor: no-drop !important;
         color: var(--f-fadest) !important;
         box-shadow: none !important;
 
-        ::slotted([part=foot]) {
+        slot[name=foot] {
             color: inherit;
-        }
-
-        ::slotted(*) {
-            pointer-events: none;
         }
     }
 }
@@ -99,7 +93,7 @@ a[part=root] {
 :host(.outlined) {
     --b-size: 1px;
 
-    [part="shadow"] {
+    [part=root] {
         background-color: transparent;
 
         &[disabled] {
@@ -107,6 +101,10 @@ a[part=root] {
             border-color: var(--b-fadest) !important;
         }
     }
+}
+
+:host([disabled]) {
+    pointer-events: none!important;
 }
 
 

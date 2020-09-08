@@ -11,8 +11,8 @@ const NAME = 'item';
 export class MasterItem extends MasterClickable {
     slotTemplate = [
         'slot', { name: 'head' },
-        'div', { class: 'inner' }, [
-            'slot', { class: 'body' },
+        'div', { part: 'lower' }, [
+            'slot', { part: 'body' },
             'slot', { name: 'foot' }
         ]
     ];
