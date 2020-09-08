@@ -3,6 +3,11 @@ import { Attr } from '@element';
 export class MasterClickable extends HTMLElement {
 
     template = $(() => {
+        const slot = [
+            'slot', { name: 'head' },
+            'slot', { class: 'body' },
+            'slot', { name: 'foot' }
+        ]
         const tag = (this.href && !this.disabled)
             ? 'a'
             : (this.type || this.disabled) ? 'button' : null;
@@ -13,11 +18,7 @@ export class MasterClickable extends HTMLElement {
                     part: 'shadow',
                     disabled: this.disabled,
                     type: this.type
-                }, [
-                    'slot', { name: 'head' },
-                    'slot', { class: 'body' },
-                    'slot', { name: 'foot' }
-                ]
+                }, slot
             ];
         } else if (tag === 'a') {
             return [
@@ -28,14 +29,12 @@ export class MasterClickable extends HTMLElement {
                     download: this.download,
                     rel: this.rel,
                     target: this.target
-                }, [
-                    'slot', { name: 'head' },
-                    'slot', { class: 'body' },
-                    'slot', { name: 'foot' }
-                ]
+                }, slot
             ];
         } else {
-            return ['slot', { part: 'shadow', class: 'body' }];
+            return [
+                'div', { part: 'shadow' }, slot
+            ];
         }
     });
 

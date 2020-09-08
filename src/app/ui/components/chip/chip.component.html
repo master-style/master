@@ -2,21 +2,21 @@
     <div class="demo-body">
         <div class="y:sm c:center">
             <m-chip class="x theme">
-                <div part="head">S</div>
-                <div part="body">Sally</div>
+                <div slot="head">S</div>
+                Sally
             </m-chip>
             <m-chip class="x outlined blue+">
-                <div part="head">♂️</div>
-                <div part="body">Aron</div>
+                <div slot="head">♂️</div>
+                Aron
             </m-chip>
             <m-chip class="x outlined red+">
-                <div part="head">♀️</div>
-                <div part="body">Joy</div>
+                <div slot="head">♀️</div>
+                Joy
             </m-chip>
             <m-chip class="x outlined theme rounded">
-                <img part="head" src="assets/images/avatar1.jpg">
-                <div part="body">Joy</div>
-                <button part="close">
+                <img slot="head" src="assets/images/avatar1.jpg">
+                Joy
+                <button slot="close">
                     <m-icon name="close"></m-icon>
                 </button>
             </m-chip>
@@ -27,10 +27,10 @@
 <h2 id="structure">{{ 'structure' | translate }}</h2>
 <template [codeLang]="'html'">
     <m-chip>
-        <div part="head"></div>
-        <div part="body"></div>
-        <div part="foot"></div>
-        <m-button part="close">
+        <div slot="head"></div>
+        text...
+        <div slot="foot"></div>
+        <m-button slot="close">
             <m-icon name="close"></m-icon>
         </m-button>
     </m-chip>
@@ -41,53 +41,53 @@
     <div class="x:6@sm c:row">
         <template [codeLang]="'html'" [codeDemo]=true>
             <m-chip class="theme+ outlined">
-                <div part="body">tag</div>
+                tag
             </m-chip>
         </template>
     </div>
     <div class="x:6@sm c:row">
         <template [codeLang]="'html'" [codeDemo]=true>
             <m-chip class="theme+ outlined">
-                <div part="head">🙍🏼‍♂️</div>
-                <div part="body">Tom</div>
+                <div slot="head">🙍🏼‍♂️</div>
+                Tom
             </m-chip>
         </template>
     </div>
     <div class="x:6@sm c:row">
         <template [codeLang]="'html'" [codeDemo]=true>
             <m-chip class="theme+ outlined">
-                <div part="body">3</div>
-                <div part="foot">days</div>
+                3
+                <div slot="foot">days</div>
             </m-chip>
         </template>
     </div>
     <div class="x:6@sm c:row">
         <template [codeLang]="'html'" [codeDemo]=true>
             <m-chip class="theme+ outlined">
-                <img part="head" src="assets/images/avatar.jpg">
-                <div part="body">Aron</div>
+                <img slot="head" src="assets/images/avatar.jpg">
+                Aron
             </m-chip>
         </template>
     </div>
     <div class="x:6@sm c:row">
         <template [codeLang]="'html'" [codeDemo]=true>
             <m-chip class="theme+ outlined">
-                <div part="head">
+                <div slot="head">
                     <ion-icon name="bicycle"></ion-icon>
                 </div>
-                <div part="body">50</div>
-                <div part="foot">km</div>
+                50
+                <div slot="foot">km</div>
             </m-chip>
         </template>
     </div>
     <div class="x:6@sm c:row">
         <template [codeLang]="'html'" [codeDemo]=true>
             <m-chip class="theme+ outlined">
-                <div part="head">
+                <div slot="head">
                     <ion-icon name="pricetag"></ion-icon>
                 </div>
-                <div part="body">Tie</div>
-                <m-button part="close">
+                Tie
+                <m-button slot="close">
                     <m-icon name="close"></m-icon>
                 </m-button>
             </m-chip>
@@ -103,10 +103,10 @@
                 <div class="y:sm">
                     <m-chip class="x {{ eachColor + eachDepth }} {{ eachStyle }}" *ngFor="let eachColor of colors"
                         (click)="currentColor = eachColor">
-                        <div part="head">
+                        <div slot="head">
                             <ion-icon name="water"></ion-icon>
                         </div>
-                        <div part="body">{{ eachColor }}</div>
+                        {{ eachColor }}
                     </m-chip>
                 </div>
             </template>
@@ -148,11 +148,11 @@
 <template [codeLang]="'html'" [codeDemo]=true>
     <div class="y:sm c:bottom c:center">
         <m-chip class="x sm theme outlined">
-            <div part="head">S</div>
-            <div part="body">small</div>
+            <div slot="head">S</div>
+            small
         </m-chip>
         <m-chip class="x theme outlined">
-            <div part="body">default</div>
+            default
         </m-chip>
     </div>
 </template>
@@ -182,7 +182,7 @@
                 <td><b>側圓角</b></td>
                 <td class="t:right">
                     <m-chip class="sm theme+" href="modifiers">
-                        <div part="body">{{ 'modifiers' | translate }}</div>
+                        {{ 'modifiers' | translate }}
                     </m-chip>
                 </td>
             </tr>
@@ -192,12 +192,12 @@
 <template [codeLang]="'html'" [codeDemo]=true>
     <div class="y:sm c:bottom c:center">
         <m-chip class="x theme outlined">
-            <div part="head">D</div>
-            <div part="body">default</div>
+            <div slot="head">D</div>
+            default
         </m-chip>
         <m-chip class="x theme outlined rounded">
-            <div part="head">R</div>
-            <div part="body">rounded</div>
+            <div slot="head">R</div>
+            rounded
         </m-chip>
     </div>
 </template>
