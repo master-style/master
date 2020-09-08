@@ -17,15 +17,14 @@
 
 :host(.lined) {
     [part=shadow] {
-        border-top: 1px solid var(--b-fadest);
+        border-bottom: 1px solid var(--b-fadest);
     }
 }
 
 :host(.indent-lined) {
-
-    .body,
-    slot[name=foot] {
-        border-top: 1px solid var(--b-fadest);
+    position: relative;
+    .body {
+        border-bottom: 1px solid var(--b-fadest);
     }
 
 }

@@ -1,4 +1,4 @@
-import { Element, Attr } from '@element';
+import { Element } from '@element';
 import { MasterClickable } from '@ui/components/clickable';
 import css from './index.scss';
 
@@ -8,4 +8,12 @@ const NAME = 'item';
     tag: 'm-' + NAME,
     css
 })
-export class MasterItem extends MasterClickable {}
+export class MasterItem extends MasterClickable {
+    slotTemplate = [
+        'slot', { name: 'head' },
+        'div', { class: 'inner' }, [
+            'slot', { class: 'body' },
+            'slot', { name: 'foot' }
+        ]
+    ];
+}

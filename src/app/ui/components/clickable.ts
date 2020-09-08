@@ -1,13 +1,16 @@
 import { Attr } from '@element';
 
+type elementToken = string | { [key: string]: any };
+
 export class MasterClickable extends HTMLElement {
 
+    slotTemplate: (elementToken | (() => elementToken[]))[] = [
+        'slot', { name: 'head' },
+        'slot', { class: 'body' },
+        'slot', { name: 'foot' }
+    ];
+
     template = $(() => {
-        const slot = [
-            'slot', { name: 'head' },
-            'slot', { class: 'body' },
-            'slot', { name: 'foot' }
-        ]
         const tag = (this.href && !this.disabled)
             ? 'a'
             : (this.type || this.disabled) ? 'button' : null;
@@ -18,7 +21,7 @@ export class MasterClickable extends HTMLElement {
                     part: 'shadow',
                     disabled: this.disabled,
                     type: this.type
-                }, slot
+                }, this.slotTemplate
             ];
         } else if (tag === 'a') {
             return [
@@ -29,11 +32,11 @@ export class MasterClickable extends HTMLElement {
                     download: this.download,
                     rel: this.rel,
                     target: this.target
-                }, slot
+                }, this.slotTemplate
             ];
         } else {
             return [
-                'div', { part: 'shadow' }, slot
+                'div', { part: 'shadow' }, this.slotTemplate
             ];
         }
     });
