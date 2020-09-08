@@ -3,9 +3,11 @@
         <div class="y c:center">
             <div class="x:6@sm">
                 <m-list>
-                    <m-item class="lined" *ngFor="let item of ','.repeat(5).split(',')">
+                    <m-item class="indent-lined" *ngFor="let item of ','.repeat(5).split(',')">
                         <ion-icon slot="head" name="airplane"></ion-icon>
-                        飛航模式
+                        A branded indicator is displayed until 
+                        <span slot="foot">TW Mobile</span>
+                        <ion-icon slot="foot" name="chevron-forward"></ion-icon>
                     </m-item>
                 </m-list>
             </div>

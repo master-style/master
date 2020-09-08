@@ -73,15 +73,12 @@
 // }
 
 slot[name=head],
-.body,
-slot[name=foot] {
+.body {
     contain: style;
     min-height: var(--size);
 }
 
-slot[name=head],
-slot[name=foot] {
-    display: flex;
+slot[name=head] {
     text-align: center;
     white-space: nowrap;
     justify-content: center;
@@ -100,21 +97,21 @@ slot[name=foot] {
 // }
 
 .body {
-    flex: auto;
     padding: var(--py) var(--px);
     line-height: 1.3;
     text-align: left;
 }
 
 slot[name=foot] {
-    flex: 0 0 auto;
-    padding-right: $sm;
-    color: var(--f-fader);
+    padding-right: var(--px);
+    color: var(--f-fade);
+    height: var(--size);
+    align-items: center;
+}
 
-    i {
-        margin-left: $sm;
-        color: var(--f-fadest);
-    }
+slot[name=foot]::slotted([role=img]) {
+    margin-right: -.5rem;
+    margin-left: .5rem;
 }
 
 slot[name=head] {
