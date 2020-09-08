@@ -1,5 +1,5 @@
 [aria-label=breadcrumb].decorated {
-    font-size: $f-xs;
+    font-size: var(--f-xs);
     color: var(--f-fade);
 
     a {

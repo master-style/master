@@ -36,14 +36,14 @@ m-table {
     }
 
     td {
-        font-size: $f-sm;
+        font-size: var(--f-sm);
         padding: .8125rem $sm;
     }
 
     th {
         padding: $sm;
         font-weight: normal;
-        font-size: $f-xs;
+        font-size: var(--f-xs);
     }
 
     &.sm {

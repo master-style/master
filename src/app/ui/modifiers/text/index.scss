@@ -90,37 +90,37 @@
 
 // size
 .t\:xxs {
-    font-size: $f-xxs !important;
+    font-size: var(--f-xxs) !important;
     line-height: 1.4;
 }
 
 .t\:xs {
-    font-size: $f-xs !important;
+    font-size: var(--f-xs) !important;
     line-height: 1.45;
 }
 
 .t\:sm {
-    font-size: $f-sm !important;
+    font-size: var(--f-sm) !important;
     line-height: 1.4;
 }
 
 .t\:md {
-    font-size: $f-md !important;
+    font-size: var(--f-md) !important;
     line-height: 1.3;
 }
 
 .t\:lg {
-    font-size: $f-lg !important;
+    font-size: var(--f-lg) !important;
     line-height: 1.25;
 }
 
 .t\:xl {
-    font-size: $f-xl !important;
+    font-size: var(--f-xl) !important;
     line-height: 1.2;
 }
 
 .t\:xxl {
-    font-size: $f-xxl !important;
+    font-size: var(--f-xxl) !important;
     line-height: 1.15;
 }
 

@@ -83,7 +83,7 @@ m-table h2 code {
 
 code.default {
     color: var(--f-fadest);
-    font-size: $f-sm;
+    font-size: var(--f-sm);
     background-color: transparent;
 }
 
@@ -183,7 +183,7 @@ code.default {
     .tabTitle {
         width: 100%;
         text-align: left;
-        font-size: $f-xxs;
+        font-size: var(--f-xxs);
         margin-top: .2rem;
         color: var(--f-fader);
 
@@ -223,7 +223,7 @@ m-article {
             position: absolute;
             top: -$xxs;
             content: attr(title);
-            font-size: $f-xxs;
+            font-size: var(--f-xxs);
             color: var(--f-fade);
             font-weight: 400;
             margin-left: .5rem;
@@ -299,7 +299,7 @@ code[part="body"] {
 }
 
 #appSide {
-    font-size: $f-xs;
+    font-size: var(--f-xs);
     border-right: 1px solid var(--b-fadest);
 
     &:after {
@@ -364,7 +364,7 @@ code[part="body"] {
         .title {
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            font-size: $f-xxs;
+            font-size: var(--f-xxs);
             margin-top: $sm;
             margin-bottom: -$xxs;
             color: var(--f-fader) !important;

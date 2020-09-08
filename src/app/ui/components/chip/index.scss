@@ -36,7 +36,7 @@
 :host(.sm) {
     --size: 1.5rem;
     --px: .3125rem;
-    font-size: $f-xxs;
+    font-size: var(--f-xxs);
 
     slot[name=head] {
         font-size: .625rem;
@@ -59,7 +59,7 @@
 }
 
 slot[name=close] {
-    font-size: $f-xxs;
+    font-size: var(--f-xxs);
     width: 1.125rem;
     height: 1.125rem;
     min-width: auto;

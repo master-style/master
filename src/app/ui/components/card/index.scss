@@ -102,12 +102,12 @@ slot[name=foot]::slotted(m-button) {
 }
 
 .body::slotted(h3) {
-    font-size: $f-md;
+    font-size: var(--f-md);
     line-height: 1.2;
 }
 
 .body::slotted(h4) {
-    font-size: $f-sm;
+    font-size: var(--f-sm);
 }
 
 .body::slotted(h3),
@@ -116,7 +116,7 @@ slot[name=foot]::slotted(m-button) {
 }
 
 .body::slotted(h5) {
-    font-size: $f-xxs;
+    font-size: var(--f-xxs);
     margin-bottom: $xxs;
 }
 
@@ -133,7 +133,7 @@ slot[name=foot]::slotted(m-button) {
 }
 
 .body::slotted(p) {
-    font-size: $f-xs;
+    font-size: var(--f-xs);
     line-height: 1.4 !important;
     text-align: inherit;
     margin: 0 0 $xs 0 !important; // !important: conflict article.decorated

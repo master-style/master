@@ -12,7 +12,7 @@
     --px: #{$md};
     --py: 0;
     --size: 3rem;
-    --f-size: #{$f-sm};
+    --f-size: #{var(--f-sm)};
     display: inline-flex;
     font-size: var(--f-size);
     color: var(--f-theme);

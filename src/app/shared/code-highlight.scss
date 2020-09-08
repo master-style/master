@@ -4,7 +4,7 @@ pre {
     flex-direction: column;
     background-color: var(--themeFade);
     border-radius: $xs;
-    font-size: $f-xs;
+    font-size: var(--f-xs);
     line-height: 1.6;
     margin: 0;
     flex: 1 1 auto;
@@ -79,7 +79,7 @@ pre[class*="language-"].line-numbers code {
     top: 1px;
     left: -3.5em;
     width: 2.8em;
-    font-size: $f-xxs;
+    font-size: var(--f-xxs);
     line-height: 23px;
     /* works for line-numbers below 1000 lines */
     letter-spacing: -1px;

@@ -6,7 +6,7 @@ m-badge {
     justify-content: center;
     vertical-align: middle;
     text-align: center;
-    font-size: $f-xxs;
+    font-size: var(--f-xxs);
     font-weight: 500;
     margin: $xxs;
     padding: 0 .25rem;

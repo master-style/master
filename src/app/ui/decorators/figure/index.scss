@@ -22,7 +22,7 @@ figure.decorated {
     }
 
     figcaption {
-        font-size: $f-xs;
+        font-size: var(--f-xs);
         color: var(--f-theme);
         text-align: center;
         font-style: italic;

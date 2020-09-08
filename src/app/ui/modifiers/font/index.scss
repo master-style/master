@@ -58,31 +58,31 @@
 
 // size
 .f\:xxs {
-    font-size: $f-xxs !important;
+    font-size: var(--f-xxs) !important;
 }
 
 .f\:xs {
-    font-size: $f-xs !important;
+    font-size: var(--f-xs) !important;
 }
 
 .f\:sm {
-    font-size: $f-sm !important;
+    font-size: var(--f-sm) !important;
 }
 
 .f\:md {
-    font-size: $f-md !important;
+    font-size: var(--f-md) !important;
 }
 
 .f\:lg {
-    font-size: $f-lg !important;
+    font-size: var(--f-lg) !important;
 }
 
 .f\:xl {
-    font-size: $f-xl !important;
+    font-size: var(--f-xl) !important;
 }
 
 .f\:xxl {
-    font-size: $f-xxl !important;
+    font-size: var(--f-xxl) !important;
 }
 
 .f\:extra {

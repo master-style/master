@@ -19,7 +19,7 @@ m-list {
 
 [part="list-header"] {
     display: block;
-    font-size: $f-xxs;
+    font-size: var(--f-xxs);
     color: var(--f-fader);
     line-height: 100%;
     letter-spacing: 1px;

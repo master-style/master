@@ -15,6 +15,13 @@ html {
     --x3: 25%;
     --x2: 16.666666%;
     --x1: 8.3333333%;
+    --f-xxs: 0.75rem; // 12px
+    --f-xs: 0.875rem; // 14px
+    --f-sm: 1rem; // 16px
+    --f-md: 1.250rem; // 20px
+    --f-lg: 1.563rem; // 25px
+    --f-xl: 2rem; // 32px
+    --f-xxl: 2.5rem; // 40px
 }
 
 body,
@@ -466,17 +473,17 @@ h6 {
 }
 
 .remark {
-    font-size: $f-xxs;
+    font-size: var(--f-xxs);
     color: var(--f-fade);
     line-height: 1.4;
 }
 
 h1 {
-    font-size: $f-xxl;
+    font-size: var(--f-xxl);
 }
 
 h2 {
-    font-size: $f-xl;
+    font-size: var(--f-xl);
 }
 
 h1,
@@ -485,11 +492,11 @@ h2 {
 }
 
 h3 {
-    font-size: $f-lg;
+    font-size: var(--f-lg);
 }
 
 h4 {
-    font-size: $f-md;
+    font-size: var(--f-md);
 }
 
 h3,
@@ -498,11 +505,11 @@ h4 {
 }
 
 h5 {
-    font-size: $f-sm;
+    font-size: var(--f-sm);
 }
 
 h6 {
-    font-size: $f-xs;
+    font-size: var(--f-xs);
 }
 
 h5,
@@ -527,22 +534,22 @@ hr {
 
 @include below(sm) {
     h1 {
-        font-size: $f-xl;
+        font-size: var(--f-xl);
     }
 
     h2 {
-        font-size: $f-lg;
+        font-size: var(--f-lg);
     }
 
     h3 {
-        font-size: $f-md;
+        font-size: var(--f-md);
     }
 
     h4 {
-        font-size: $f-sm;
+        font-size: var(--f-sm);
     }
 
     h5 {
-        font-size: $f-xxs;
+        font-size: var(--f-xxs);
     }
 }
