@@ -15,19 +15,16 @@
     font-size: var(--f-size);
 }
 
-:host(.lined) {
-    [part=lower] {
+:host(.lined:not(.indent)) {
+    [part=root] {
         border-bottom: 1px solid var(--b-fadest);
     }
 }
 
-:host(.indent-lined) {
-    position: relative;
-
+:host(.indent.lined) {
     [part=lower] {
         border-bottom: 1px solid var(--b-fadest);
     }
-
 }
 
 @media (any-hover: hover) {
@@ -67,6 +64,13 @@
 [part=lower] {
     display: flex;
     flex-wrap: nowrap;
+    flex: 1 1 auto;
+}
+
+::slotted([role=img]) {
+    width: var(--img-size);
+    height: var(--img-size);
+    margin-right: .625rem;
 }
 
 slot[name=head],
@@ -80,36 +84,29 @@ slot[name=head] {
     white-space: nowrap;
     justify-content: center;
     align-items: center;
-    min-width: 3rem;
 }
 
-// ::slotted(img[part=head]) {
-//     width: var(--img-size);
-//     height: var(--img-size);
-//     margin: 0 $sm 0 $sm;
-// }
-
 [part=body] {
-    padding: var(--py) var(--px);
-    line-height: 1.3;
+    padding: var(--py) 0;
+    line-height: 1.4;
     text-align: left;
+    align-items: center;
 }
 
 slot[name=foot] {
-    padding-right: var(--px);
+    // padding-right: var(--px);
     color: var(--f-fade);
     height: var(--size);
     align-items: center;
 }
 
 slot[name=foot]::slotted([role=img]) {
-    margin-right: -.5rem;
+    margin-right: 0;
     margin-left: .5rem;
 }
 
 slot[name=head] {
     ~[part=lower] [part=body] {
-        text-align: left;
         padding-left: 0 !important;
     }
 }

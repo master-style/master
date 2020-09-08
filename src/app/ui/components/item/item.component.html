@@ -3,151 +3,61 @@
         <div class="y c:center">
             <div class="x:6@sm">
                 <m-list>
-                    <m-item class="indent-lined" *ngFor="let item of ','.repeat(5).split(',')">
-                        <ion-icon slot="head" name="airplane"></ion-icon>
-                        A branded indicator is displayed until 
-                        <span slot="foot">TW Mobile</span>
-                        <ion-icon slot="foot" name="chevron-forward"></ion-icon>
+                    <m-item class="indent lined" *ngFor="let item of ','.repeat(5).split(',')">
+                        <!-- <img slot="head" role="img" src="assets/images/ios-icons/airplane.svg"> -->
+                        <ion-icon slot="head" name="square-outline"></ion-icon>
+                        飛航模式
+                        <span slot="foot">+ $5.00</span>
+                        <!-- <ion-icon slot="foot" name="chevron-forward"></ion-icon> -->
+                    </m-item>
+                    <m-item class="indent lined">
+                        <ion-icon slot="head" name="checkbox"></ion-icon>
+                        <!-- <ion-icon slot="head" name="checkbox"></ion-icon> -->
+                        飛航模式
+                        <span slot="foot">+ $5.00</span>
+                        <!-- <ion-icon slot="foot" name="chevron-forward"></ion-icon> -->
+                        <img slot="foot" role="img" src="assets/images/ios-icons/airplane.svg">
+                    </m-item>
+                    <m-item class="indent lined" *ngFor="let item of ','.repeat(5).split(',')">
+                        <!-- <img slot="head" role="img" src="assets/images/ios-icons/airplane.svg"> -->
+                        <ion-icon slot="head" name="checkbox"></ion-icon>
+                        飛航模式
+                        <span slot="foot">+ $5.00</span>
+                        <!-- <ion-icon slot="foot" name="chevron-forward"></ion-icon> -->
+                    </m-item>
+                </m-list>
+            </div>
+            <div class="x:6@sm">
+                <m-list>
+                    <m-item class="indent lined" *ngFor="let item of ','.repeat(5).split(',')">
+                        <!-- <img slot="head" role="img" src="assets/images/ios-icons/airplane.svg"> -->
+                        <ion-icon slot="head" name="square-outline"></ion-icon>
+                        飛航模式
+                        <span slot="foot">+ $5.00</span>
+                        <!-- <ion-icon slot="foot" name="chevron-forward"></ion-icon> -->
+                    </m-item>
+                    <m-item class="indent lined">
+                        <ion-icon slot="head" name="checkbox"></ion-icon>
+                        <!-- <ion-icon slot="head" name="checkbox"></ion-icon> -->
+                        <div>
+                            其實如果有專心跟著老王講的技術分析，可以事前跑，高檔爆大量，則大量的低點要守住，如果大量的低點灌破就會出現一個大回檔，任何均線的支撐都沒用
+                            <div class="f:fade" style="margin-top: .25rem;">+ $5.00</div>
+                        </div>
+                        <img slot="foot" role="img" style="width: 48px; height: 48px" src="assets/images/ios-icons/airplane.svg">
+                        <!-- <ion-icon slot="foot" name="chevron-forward"></ion-icon> -->
+                    </m-item>
+                    <m-item class="indent lined" *ngFor="let item of ','.repeat(5).split(',')">
+                        <!-- <img slot="head" role="img" src="assets/images/ios-icons/airplane.svg"> -->
+                        <ion-icon slot="head" name="checkbox"></ion-icon>
+                        飛航模式
+                        <span slot="foot">+ $5.00</span>
+                        <!-- <ion-icon slot="foot" name="chevron-forward"></ion-icon> -->
                     </m-item>
                 </m-list>
             </div>
         </div>
     </div>
 </div>
-
-<h2 id="structure">{{ 'structure' | translate }}</h2>
-<template [codeLang]="'html'">
-    <m-card>
-        <div part="head"></div>
-        <div part="body"></div>
-        <div part="foot"></div>
-        <m-button part="foot"></m-button>
-    </m-card>
-</template>
-
-<h2 id="assembling">{{ 'assembling' | translate }}</h2>
-<div class="y">
-    <div class="x:6@sm c:row">
-        <template [codeLang]="'html'" [codeDemo]=true>
-            <m-card class="raised">
-                <div part="head" class="by:3x2"
-                    style="background-image: url(https://images.pexels.com/photos/936611/pexels-photo-936611.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)">
-                </div>
-                <div part="body">
-                    <h5>Wed Jan 22 2020</h5>
-                    <h3>Healthy food</h3>
-                    <h4>fruit</h4>
-                    <p>Here's a low-calorie platter for a great afternoon light meal.</p>
-                </div>
-                <div part="foot">
-                    <m-button class="theme+ xs outlined">
-                        learn more
-                        <ion-icon name="chevron-forward" part="foot"></ion-icon>
-                    </m-button>
-                </div>
-            </m-card>
-        </template>
-    </div>
-</div>
-
-<h2 id="skeleton">{{ 'loading-indicator' | translate }}</h2>
-<m-table class="sm neat axis:x">
-    <table>
-        <thead>
-            <tr>
-                <th class="fit t:left bg:theme sticky">element</th>
-                <th class="t:left bg:theme sticky">description</th>
-                <th class="bg:theme sticky"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <code class="f:blue">&lt;m-skeleton&gt;</code>
-                </td>
-                <td><b>內容骨架</b>，提升用戶加載體驗</td>
-                <td class="t:right">
-                    <m-chip class="sm theme+" href="ui/components/skeleton">
-                        <div part="body">{{ 'skeleton' | translate }}</div>
-                    </m-chip>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</m-table>
-<template [codeLang]="'html'" [codeDemo]=true>
-    <div class="y">
-        <m-card class="raised x:6">
-            <div part="head" class="by:3x2">
-                <m-skeleton></m-skeleton>
-            </div>
-            <div part="body">
-                <h5>
-                    <m-skeleton class="animated" height="60%" width="30%"></m-skeleton>
-                </h5>
-                <h3>
-                    <m-skeleton class="animated" height="60%" width="60%"></m-skeleton>
-                </h3>
-                <h4>
-                    <m-skeleton class="animated" height="60%" width="20%"></m-skeleton>
-                </h4>
-                <p>
-                    <m-skeleton class="animated" height="60%"></m-skeleton>
-                    <m-skeleton class="animated" height="60%"></m-skeleton>
-                    <m-skeleton class="animated" height="60%" width="70%"></m-skeleton>
-                </p>
-            </div>
-        </m-card>
-        <m-card class="raised x:6">
-            <div part="head" class="by:3x2"
-                style="background-image: url(https://images.pexels.com/photos/936611/pexels-photo-936611.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)">
-            </div>
-            <div part="body">
-                <h5>Wed Jan 22 2020</h5>
-                <h3>Healthy food</h3>
-                <h4>fruit</h4>
-                <p>Here's a low-calorie platter for a great afternoon light meal.</p>
-            </div>
-            <div part="foot">
-                <m-button class="theme+ xs outlined">
-                    learn more
-                    <ion-icon name="chevron-forward" part="foot"></ion-icon>
-                </m-button>
-            </div>
-        </m-card>
-    </div>
-</template>
-
-<h2 id="state">{{ 'state' | translate }}</h2>
-<doc-prop [name]="'disabled'" [types]="['boolean']" [description]="'The user cannot interact with the component.'">
-</doc-prop>
-<template [codeLang]="'html'" [codeDemo]=true>
-    <div class="y c:center">
-        <m-card class="raised x:6" disabled>
-            <div part="head" class="by:3x2"
-                style="background-image: url(https://images.pexels.com/photos/936611/pexels-photo-936611.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)">
-            </div>
-            <div part="body">
-                <h5>Wed Jan 22 2020</h5>
-                <h3>Healthy food</h3>
-                <h4>fruit</h4>
-                <p>Here's a low-calorie platter for a great afternoon light meal.</p>
-            </div>
-            <div part="foot">
-                <m-button class="theme+ xs outlined">
-                    learn more
-                    <ion-icon name="chevron-forward" part="foot"></ion-icon>
-                </m-button>
-            </div>
-            <div class="abs" style="margin: .5rem">
-                <m-chip class="bg:popup">
-                    <div part="head">🔥</div>
-                    <div part="body">SOLD OUT</div>
-                </m-chip>
-            </div>
-        </m-card>
-    </div>
-</template>
 
 <h2 id="type">{{ 'type' | translate }}</h2>
 <doc-prop [name]="'type'" [types]="['button', 'reset', 'submit']" [default]="'button'"
