@@ -4,6 +4,8 @@
 :host {
     --bg-theme: var(--bg-object);
     --bg-disabled: var(--bg-theme);
+    --foot-px: 1rem;
+    --foot-py: .8rem;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -25,18 +27,19 @@
     box-shadow: none;
 
     ::slotted(*) {
-        pointer-events: none!important;
+        pointer-events: none !important;
     }
 
-    ::slotted([part=head]),
-    ::slotted([part=body]),
-    ::slotted([part=foot]) {
+    slot[name=head],
+    .body,
+    slot[name=foot] {
         opacity: .5;
     }
 }
 
-::slotted([part=head]) {
+slot[name=head] {
     position: relative;
+    display: block;
     grid-area: head;
     border: 0;
     background-size: cover;
@@ -44,33 +47,36 @@
     background-position: center center;
     width: 100%;
     margin: 0 !important; // !important: conflict article.decorated
+
+    ::slotted(m-skeleton) {
+        height: 100%
+    }
 }
 
-::slotted([part=body]) {
+.body {
+    display: block;
     grid-area: body;
     padding: 1rem;
     width: 100%;
     flex: 1 1 auto;
 }
 
-::slotted([part=foot]) {
-    --px: 1rem;
-    --py: .8rem;
+slot[name=foot] {
     display: flex;
     flex-wrap: wrap;
-    padding: var(--py) var(--px);
+    padding: var(--foot-py) var(--foot-px);
     grid-area: foot;
-    width: 100%;
-    border-radius: 0;
     clear: both;
 }
 
-::slotted(m-button[part=foot]) {
+slot[name=foot]::slotted(m-button) {
+    margin: calc(-1 * var(--foot-py)) calc(-1 * var(--foot-px));
+    border-radius: 0;
+    flex: 1 1 auto;
     --px: 1.1rem;
     --py: 0;
     --size: 2.5rem;
     --f-size: .9125rem;
-    padding: 0;
 }
 
 :host(.body\/foot\+head) {
