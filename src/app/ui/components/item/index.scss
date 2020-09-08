@@ -16,14 +16,14 @@
 }
 
 :host(.lined) {
-    [part=shadow] {
+    [part=root] {
         border-bottom: 1px solid var(--b-fadest);
     }
 }
 
 :host(.indent-lined) {
     position: relative;
-    .body {
+    [part=body] {
         border-bottom: 1px solid var(--b-fadest);
     }
 
@@ -52,7 +52,7 @@
 :host([disabled]) {
     background-color: transparent !important;
 
-    .body {
+    [part=body] {
         color: var(--f-fadest) !important;
     }
 
@@ -72,7 +72,7 @@
 // }
 
 slot[name=head],
-.body {
+[part=body] {
     contain: style;
     min-height: var(--size);
 }
@@ -95,7 +95,7 @@ slot[name=head] {
 //     margin: 0 $sm 0 $sm;
 // }
 
-.body {
+[part=body] {
     padding: var(--py) var(--px);
     line-height: 1.3;
     text-align: left;
@@ -114,7 +114,7 @@ slot[name=foot]::slotted([role=img]) {
 }
 
 slot[name=head] {
-    ~.body {
+    ~[part=body] {
         text-align: left;
         padding-left: 0 !important;
     }

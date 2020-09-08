@@ -1,7 +1,7 @@
 @import '../../variables';
 @import '../../shadow';
 
-[part=shadow] {
+[part=root] {
     padding: var(--p);
 }
 
@@ -67,7 +67,7 @@ slot[name=close] {
     margin-right: .1875rem;
 }
 
-.body,
+[part=body],
 slot[name=head],
 slot[name=foot] {
     display: flex;
@@ -106,7 +106,7 @@ slot[name=foot] {
     margin-right: .1875rem;
 }
 
-.body {
+[part=body] {
     padding: 0 var(--px);
     white-space: nowrap;
     justify-content: flex-start;

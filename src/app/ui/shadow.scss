@@ -4,7 +4,7 @@
     pointer-events: none;
 }
 
-[part=shadow] {
+[part=root] {
     position: relative;
     pointer-events: auto;
     display: inherit;
@@ -54,7 +54,7 @@
     }
 }
 
-.body {
+[part=body] {
     display: flex;
     flex: auto;
 }
@@ -88,8 +88,8 @@ slot {
     }
 }
 
-button[part=shadow],
-a[part=shadow] {
+button[part=root],
+a[part=root] {
     -webkit-appearance: none;
     -webkit-user-select: none;
     user-select: none;
@@ -111,7 +111,7 @@ a[part=shadow] {
 
 
 :host([part=foot]) {
-    [part=shadow] {
+    [part=root] {
         border: 0;
         box-shadow: none;
     }

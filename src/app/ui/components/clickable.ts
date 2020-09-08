@@ -6,7 +6,7 @@ export class MasterClickable extends HTMLElement {
 
     slotTemplate: (elementToken | (() => elementToken[]))[] = [
         'slot', { name: 'head' },
-        'slot', { class: 'body' },
+        'slot', { part: 'body' },
         'slot', { name: 'foot' }
     ];
 
@@ -18,7 +18,7 @@ export class MasterClickable extends HTMLElement {
             return [
                 tag, {
                     class: 'touch',
-                    part: 'shadow',
+                    part: 'root',
                     disabled: this.disabled,
                     type: this.type
                 }, this.slotTemplate
@@ -27,7 +27,7 @@ export class MasterClickable extends HTMLElement {
             return [
                 tag, {
                     class: 'touch',
-                    part: 'shadow',
+                    part: 'root',
                     href: this.href,
                     download: this.download,
                     rel: this.rel,
@@ -36,7 +36,7 @@ export class MasterClickable extends HTMLElement {
             ];
         } else {
             return [
-                'div', { part: 'shadow' }, this.slotTemplate
+                'div', { part: 'root' }, this.slotTemplate
             ];
         }
     });

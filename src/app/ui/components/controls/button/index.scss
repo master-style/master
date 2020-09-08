@@ -2,7 +2,7 @@
 
 @import '../../../shadow';
 
-[part=shadow] {
+[part=root] {
     padding: var(--py) var(--px);
     min-width: var(--size);
     min-height: var(--size);
@@ -83,14 +83,14 @@
 :host([loading]) {
     cursor: progress !important;
 
-    [part=shadow] {
+    [part=root] {
         pointer-events: none !important;
         color: transparent !important;
         box-shadow: none !important;
     }
 }
 
-.body {
+[part=body] {
     align-items: center;
     justify-content: center;
 }

@@ -30,7 +30,7 @@
         pointer-events: none !important;
     }
 
-    .body,
+    [part=body],
     slot[name=head],
     slot[name=foot] {
         opacity: .5;
@@ -52,7 +52,7 @@ slot[name=head] {
     }
 }
 
-.body {
+[part=body] {
     display: block;
     grid-area: body;
     padding: 1rem;
@@ -78,7 +78,7 @@ slot[name=foot]::slotted(m-button) {
 }
 
 :host(.body\/foot\+head) {
-    [part=shadow] {
+    [part=root] {
         display: grid;
         grid-template-columns: 2fr 1fr;
         grid-template-rows: 1fr auto;
@@ -89,7 +89,7 @@ slot[name=foot]::slotted(m-button) {
 }
 
 :host(.head\+body\/foot) {
-    [part=shadow] {
+    [part=root] {
         display: grid;
         grid-template-columns: 1fr 2fr;
         grid-template-rows: 1fr auto;
@@ -99,38 +99,38 @@ slot[name=foot]::slotted(m-button) {
     }
 }
 
-.body::slotted(h3) {
+[part=body]::slotted(h3) {
     font-size: var(--f-md) !important;
     line-height: 1.2 !important;
 }
 
-.body::slotted(h4) {
+[part=body]::slotted(h4) {
     font-size: var(--f-sm) !important;
 }
 
-.body::slotted(h3),
-.body::slotted(h4) {
+[part=body]::slotted(h3),
+[part=body]::slotted(h4) {
     margin: 0 0 $xs 0 !important; // !important: conflict article.decorated
 }
 
-.body::slotted(h5) {
+[part=body]::slotted(h5) {
     font-size: var(--f-xxs) !important;
     margin-bottom: $xxs !important;
 }
 
-.body::slotted(h4),
-.body::slotted(h5) {
+[part=body]::slotted(h4),
+[part=body]::slotted(h5) {
     font-weight: 400 !important;
     color: var(--f-themeFader) !important;
 }
 
-.body::slotted(h3):last-child,
-.body::slotted(h4):last-child,
-.body::slotted(h5):last-child {
+[part=body]::slotted(h3):last-child,
+[part=body]::slotted(h4):last-child,
+[part=body]::slotted(h5):last-child {
     margin-bottom: 0 !important;
 }
 
-.body::slotted(p) {
+[part=body]::slotted(p) {
     font-size: var(--f-xs) !important;
     line-height: 1.4 !important;
     text-align: inherit !important;
