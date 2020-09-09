@@ -92,6 +92,9 @@ slot[name=head] {
     background-color: var(--bg-light);
     padding: 0 $xs;
     min-width: calc(var(--size) - var(--p) * 2);
+    &:blank {
+        display: none;
+    }
 }
 
 // ::slotted(img[part="head"]),

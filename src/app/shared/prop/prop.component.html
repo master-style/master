@@ -15,10 +15,8 @@
                 <td>
                     <div class="y:xs">
                         <m-chip class="x theme+ sm" *ngFor="let type of types">
-                            <div part="head">
-                                <ion-icon *ngIf="type !== undefined" [attr.name]="getTypeIcon(type)"></ion-icon>
-                                {{ type === undefined ? '∅' : '' }}
-                            </div>
+                            <ion-icon *ngIf="type !== undefined" slot="head" [attr.name]="getTypeIcon(type)"></ion-icon>
+                            <span *ngIf="type === undefined" slot="head">'∅'</span>
                             <code>{{ parsedStr(type) }}</code>
                         </m-chip>
                     </div>
@@ -37,10 +35,9 @@
                 <td>
                     <div class="y:xs">
                         <m-chip class="x outlined blue+ sm">
-                            <div part="head">
-                                <ion-icon *ngIf="default !== undefined" [attr.name]="getTypeIcon(default)"></ion-icon>
-                                {{ default === undefined ? '∅' : '' }}
-                            </div>
+                            <ion-icon slot="head" *ngIf="default !== undefined" [attr.name]="getTypeIcon(default)">
+                            </ion-icon>
+                            {{ default === undefined ? '∅' : '' }}
                             <code>{{ parsedStr(default) }}</code>
                         </m-chip>
                     </div>

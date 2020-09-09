@@ -45,16 +45,16 @@
     box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, .12);
 }
 
-:host(.sm) {
-    --px: 1rem;
-    --size: 2.5rem;
-    --f-size: .9125rem;
-}
-
 :host(.xs) {
     --px: .8rem;
     --size: 2rem;
     --f-size: .8125rem;
+}
+
+:host(.sm) {
+    --px: 1.1rem;
+    --size: 2.5rem;
+    --f-size: .9125rem;
 }
 
 :host(.lg) {
