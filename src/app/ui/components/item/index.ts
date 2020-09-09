@@ -10,12 +10,10 @@ const NAME = 'item';
 })
 export class MasterItem extends MasterClickable {
     slotTemplate = [
-        'div', { part: 'root' }, [
-            'slot', { name: 'head' },
-            'div', { part: 'lower' }, [
-                'slot', { part: 'body' },
-                'slot', { name: 'foot' }
-            ]
+        'slot', { name: 'head' },
+        'div', { part: 'lower' }, [
+            'slot', { part: 'body' },
+            'slot', { name: 'foot' }
         ]
     ];
 }
