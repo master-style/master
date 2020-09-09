@@ -80,5 +80,8 @@
     "state": "狀態",
     "hyperlink": "超連結",
     "type": "類型",
-    "outlined": "外框"
+    "outlined": "外框",
+    "underlined": "底線",
+    "lined": "橫隔線",
+    "indent-lined": "縮進線"
 }

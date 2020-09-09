@@ -28,13 +28,13 @@
     font-size: var(--f-size);
 }
 
-:host(.lined:not(.indent)) {
+:host(.lined) {
     [part=root] {
         border-bottom: 1px solid var(--b-fadest);
     }
 }
 
-:host(.indent.lined) {
+:host(.indent-lined) {
     [part=lower] {
         border-bottom: 1px solid var(--b-fadest);
     }

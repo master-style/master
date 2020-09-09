@@ -2,34 +2,34 @@
     <div class="demo-body">
         <div class="y:lg p:sm">
             <div class="x:6@sm">
-                <m-item class="indent lined">
+                <m-item class="indent-lined">
                     <img slot="head" role="img" src="assets/images/ios-icons/airplane.svg">
                     Airplane Mode
                 </m-item>
-                <m-item class="indent lined">
+                <m-item class="indent-lined">
                     <img slot="head" role="img" src="assets/images/ios-icons/wifi.svg">
                     Wi-Fi
                     <span slot="foot">Aoyue Design</span>
                     <ion-icon slot="foot" name="chevron-forward"></ion-icon>
                 </m-item>
-                <m-item class="indent lined">
+                <m-item class="indent-lined">
                     <img slot="head" role="img" src="assets/images/ios-icons/bluetooth.svg">
                     Bluetooth
                     <span slot="foot">On</span>
                     <ion-icon slot="foot" name="chevron-forward"></ion-icon>
                 </m-item>
-                <m-item class="indent lined">
+                <m-item class="indent-lined">
                     <img slot="head" role="img" src="assets/images/ios-icons/cellular.svg">
                     Cellular
                     <ion-icon slot="foot" name="chevron-forward"></ion-icon>
                 </m-item>
-                <m-item class="indent lined">
+                <m-item class="indent-lined">
                     <img slot="head" role="img" src="assets/images/ios-icons/hotspot.svg">
                     Personal Hotspot
                     <span slot="foot">Off</span>
                     <ion-icon slot="foot" name="chevron-forward"></ion-icon>
                 </m-item>
-                <m-item class="indent lined">
+                <m-item class="indent-lined">
                     <img slot="head" role="img" src="assets/images/ios-icons/vpn.svg">
                     VPN
                 </m-item>
@@ -63,6 +63,71 @@
         </div>
     </div>
 </div>
+
+<h2 id="structure">{{ 'structure' | translate }}</h2>
+<template [codeLang]="'html'">
+    <m-item>
+        <div slot="head"></div>
+        text...
+        <div slot="foot"></div>
+    </m-item>
+</template>
+
+<h2 id="lined">{{ 'lined' | translate }}</h2>
+<m-table class="sm neat axis:x">
+    <table>
+        <thead>
+            <tr>
+                <th class="fit t:left bg:theme sticky">class</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <code class="f:blue">lined</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</m-table>
+<template [codeLang]="'html'" [codeDemo]=true>
+    <div class="y c:center">
+        <div class="x:6@sm">
+            <m-item class="lined" *ngFor="let item of '.'.repeat(1).split('.')">
+                <ion-icon name="cut" slot="head"></ion-icon>
+                Lined
+            </m-item>
+        </div>
+    </div>
+</template>
+
+<h2 id="indent">{{ 'indent-lined' | translate }}</h2>
+<m-table class="sm neat axis:x">
+    <table>
+        <thead>
+            <tr>
+                <th class="fit t:left bg:theme sticky">class</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <code class="f:blue">indent-lined</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</m-table>
+<template [codeLang]="'html'" [codeDemo]=true>
+    <div class="y c:center">
+        <div class="x:6@sm">
+            <m-item class="indent-lined" *ngFor="let item of '.'.repeat(1).split('.')">
+                <ion-icon name="cut" slot="head"></ion-icon>
+                Lined
+            </m-item>
+        </div>
+    </div>
+</template>
 
 <h2 id="type">{{ 'type' | translate }}</h2>
 <doc-prop [name]="'type'" [types]="['button']" [description]="'The type of the button.'"></doc-prop>
