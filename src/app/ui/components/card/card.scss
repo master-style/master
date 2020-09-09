@@ -1,0 +1,44 @@
+m-card {
+    h3 {
+        font-size: var(--f-md) !important;
+        line-height: 1.2 !important;
+    }
+
+    h4 {
+        font-size: var(--f-sm) !important;
+    }
+
+    h3,
+    h4 {
+        margin: 0 0 $xs 0 !important; // !important: conflict article.decorated
+    }
+
+    h5 {
+        font-size: var(--f-xxs) !important;
+        margin-bottom: $xxs !important;
+    }
+
+    h4,
+    h5 {
+        font-weight: 400 !important;
+        color: var(--f-themeFader) !important;
+    }
+
+    h3:last-child,
+    h4:last-child,
+    h5:last-child {
+        margin-bottom: 0 !important;
+    }
+
+    p {
+        font-size: var(--f-xs) !important;
+        line-height: 1.4 !important;
+        text-align: inherit !important;
+        margin: 0 0 $xs 0 !important; // !important: conflict article.decorated
+        color: var(--f-fade) !important;
+
+        &:last-child {
+            margin: 0 !important; // !important: conflict article.decorated
+        }
+    }
+}

@@ -50,7 +50,7 @@
 
 [part=body] {
     display: flex;
-    flex: auto;
+    flex: 1 1 auto;
 }
 
 ::slotted([part=foot]),

@@ -30,14 +30,14 @@
         pointer-events: none !important;
     }
 
-    [part=body],
-    slot[name=head],
-    slot[name=foot] {
+    ::slotted([part=body]),
+    ::slotted([part=head]),
+    ::slotted([part=foot]) {
         opacity: .5;
     }
 }
 
-slot[name=head] {
+::slotted([part=head]) {
     position: relative;
     grid-area: head;
     border: 0;
@@ -52,14 +52,14 @@ slot[name=head] {
     }
 }
 
-[part=body] {
-    display: block;
+::slotted([part=body]) {
     grid-area: body;
     padding: 1rem;
     width: 100%;
+    flex-direction: column;
 }
 
-slot[name=foot] {
+::slotted([part=foot]) {
     flex-wrap: wrap;
     padding: var(--foot-py) var(--foot-px);
     grid-area: foot;
@@ -67,8 +67,8 @@ slot[name=foot] {
     line-height: 0;
 }
 
-slot[name=foot]::slotted(m-button) {
-    margin: calc(-1 * var(--foot-py)) calc(-1 * var(--foot-px));
+::slotted(m-button[part=foot]) {
+    padding: 0;
     border-radius: 0;
     flex: 1 1 auto;
     --px: 1.1rem;
@@ -96,48 +96,5 @@ slot[name=foot]::slotted(m-button) {
         grid-template-areas:
             "head body"
             "head foot"
-    }
-}
-
-[part=body]::slotted(h3) {
-    font-size: var(--f-md) !important;
-    line-height: 1.2 !important;
-}
-
-[part=body]::slotted(h4) {
-    font-size: var(--f-sm) !important;
-}
-
-[part=body]::slotted(h3),
-[part=body]::slotted(h4) {
-    margin: 0 0 $xs 0 !important; // !important: conflict article.decorated
-}
-
-[part=body]::slotted(h5) {
-    font-size: var(--f-xxs) !important;
-    margin-bottom: $xxs !important;
-}
-
-[part=body]::slotted(h4),
-[part=body]::slotted(h5) {
-    font-weight: 400 !important;
-    color: var(--f-themeFader) !important;
-}
-
-[part=body]::slotted(h3):last-child,
-[part=body]::slotted(h4):last-child,
-[part=body]::slotted(h5):last-child {
-    margin-bottom: 0 !important;
-}
-
-[part=body]::slotted(p) {
-    font-size: var(--f-xs) !important;
-    line-height: 1.4 !important;
-    text-align: inherit !important;
-    margin: 0 0 $xs 0 !important; // !important: conflict article.decorated
-    color: var(--f-fade) !important;
-
-    &:last-child {
-        margin: 0 !important; // !important: conflict article.decorated
     }
 }
