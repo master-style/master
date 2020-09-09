@@ -75,7 +75,7 @@
 }
 
 :host(.outlined) {
-    slot[name=foot] {
+    ::slotted([part=foot]) {
         color: var(--f-fader);
     }
 }
@@ -90,33 +90,28 @@
     }
 }
 
-[part=body] {
+::slotted([part=head]),
+::slotted([part=foot]) {
     align-items: center;
     justify-content: center;
 }
 
-slot[name=head],
-slot[name=foot] {
-    align-items: center;
-    justify-content: center;
-}
-
-slot[name=head] {
+::slotted([part=head]) {
     margin-left: -.25rem;
     margin-right: .5rem;
 }
 
-slot[name=head].abs {
+::slotted([part=head].abs) {
     left: 0;
     margin-left: calc(var(--px) - .3rem);
 }
 
-slot[name=foot] {
+::slotted([part=foot]) {
     margin-right: -.25rem;
     margin-left: .5rem;
 }
 
-slot[name=foot].abs {
+::slotted([part=foot].abs) {
     right: 0;
     margin-right: calc(var(--px) - .3rem);
 }
