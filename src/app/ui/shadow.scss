@@ -42,7 +42,7 @@
         color: var(--f-fadest) !important;
         box-shadow: none !important;
 
-        slot[name=foot] {
+        ::slotted([part=foot]) {
             color: inherit;
         }
     }
@@ -53,14 +53,10 @@
     flex: auto;
 }
 
-slot[name=foot],
-slot[name=head] {
+::slotted([part=foot]),
+::slotted([part=head]) {
     display: flex;
     flex: 0 0 auto;
-}
-
-slot {
-    box-sizing: border-box;
 }
 
 @media (any-hover: hover) {

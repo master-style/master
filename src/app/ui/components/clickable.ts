@@ -4,12 +4,6 @@ type elementToken = string | { [key: string]: any };
 
 export class MasterClickable extends HTMLElement {
 
-    slotTemplate: (elementToken | (() => elementToken[]))[] = [
-        'slot', { name: 'head' },
-        'slot', { part: 'body' },
-        'slot', { name: 'foot' }
-    ];
-
     template = $(() => {
         const tag = (this.href && !this.disabled)
             ? 'a'
@@ -21,7 +15,9 @@ export class MasterClickable extends HTMLElement {
                     part: 'root',
                     disabled: this.disabled,
                     type: this.type
-                }, this.slotTemplate
+                }, [
+                    'slot'
+                ]
             ];
         } else if (tag === 'a') {
             return [
@@ -32,11 +28,13 @@ export class MasterClickable extends HTMLElement {
                     download: this.download,
                     rel: this.rel,
                     target: this.target
-                }, this.slotTemplate
+                }, [
+                    'slot'
+                ]
             ];
         } else {
             return [
-                'div', { part: 'root' }, this.slotTemplate
+                'slot', { part: 'root' }
             ];
         }
     });

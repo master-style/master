@@ -2,21 +2,21 @@
     <div class="demo-body">
         <div class="y:sm c:center">
             <m-chip class="x theme">
-                <div slot="head">S</div>
+                <div part="head">S</div>
                 Sally
             </m-chip>
             <m-chip class="x outlined blue+">
-                <div slot="head">♂️</div>
+                <div part="head">♂️</div>
                 Aron
             </m-chip>
             <m-chip class="x outlined red+">
-                <div slot="head">♀️</div>
+                <div part="head">♀️</div>
                 Joy
             </m-chip>
             <m-chip class="x outlined theme rounded">
-                <img slot="head" src="assets/images/avatar1.jpg">
+                <img part="head" src="assets/images/avatar1.jpg">
                 Joy
-                <button slot="close">
+                <button part="close">
                     <m-icon name="close"></m-icon>
                 </button>
             </m-chip>
@@ -27,10 +27,10 @@
 <h2 id="structure">{{ 'structure' | translate }}</h2>
 <template [codeLang]="'html'">
     <m-chip>
-        <div slot="head"></div>
+        <div part="head"></div>
         text...
-        <div slot="foot"></div>
-        <m-button slot="close">
+        <div part="foot"></div>
+        <m-button part="close">
             <m-icon name="close"></m-icon>
         </m-button>
     </m-chip>
@@ -48,7 +48,7 @@
     <div class="x:6@sm c:row">
         <template [codeLang]="'html'" [codeDemo]=true>
             <m-chip class="theme+ outlined">
-                <div slot="head">🙍🏼‍♂️</div>
+                <div part="head">🙍🏼‍♂️</div>
                 Tom
             </m-chip>
         </template>
@@ -57,14 +57,14 @@
         <template [codeLang]="'html'" [codeDemo]=true>
             <m-chip class="theme+ outlined">
                 3
-                <div slot="foot">days</div>
+                <div part="foot">days</div>
             </m-chip>
         </template>
     </div>
     <div class="x:6@sm c:row">
         <template [codeLang]="'html'" [codeDemo]=true>
             <m-chip class="theme+ outlined">
-                <img slot="head" src="assets/images/avatar.jpg">
+                <img part="head" src="assets/images/avatar.jpg">
                 Aron
             </m-chip>
         </template>
@@ -72,22 +72,22 @@
     <div class="x:6@sm c:row">
         <template [codeLang]="'html'" [codeDemo]=true>
             <m-chip class="theme+ outlined">
-                <div slot="head">
+                <div part="head">
                     <ion-icon name="bicycle"></ion-icon>
                 </div>
                 50
-                <div slot="foot">km</div>
+                <div part="foot">km</div>
             </m-chip>
         </template>
     </div>
     <div class="x:6@sm c:row">
         <template [codeLang]="'html'" [codeDemo]=true>
             <m-chip class="theme+ outlined">
-                <div slot="head">
+                <div part="head">
                     <ion-icon name="pricetag"></ion-icon>
                 </div>
                 Tie
-                <m-button slot="close">
+                <m-button part="close">
                     <m-icon name="close"></m-icon>
                 </m-button>
             </m-chip>
@@ -103,7 +103,7 @@
                 <div class="y:sm">
                     <m-chip class="x {{ eachColor + eachDepth }} {{ eachStyle }}" *ngFor="let eachColor of colors"
                         (click)="currentColor = eachColor">
-                        <div slot="head">
+                        <div part="head">
                             <ion-icon name="water"></ion-icon>
                         </div>
                         {{ eachColor }}
@@ -148,7 +148,7 @@
 <template [codeLang]="'html'" [codeDemo]=true>
     <div class="y:sm c:bottom c:center">
         <m-chip class="x sm theme outlined">
-            <div slot="head">S</div>
+            <div part="head">S</div>
             small
         </m-chip>
         <m-chip class="x theme outlined">
@@ -192,11 +192,11 @@
 <template [codeLang]="'html'" [codeDemo]=true>
     <div class="y:sm c:bottom c:center">
         <m-chip class="x theme outlined">
-            <div slot="head">D</div>
+            <div part="head">D</div>
             default
         </m-chip>
         <m-chip class="x theme outlined rounded">
-            <div slot="head">R</div>
+            <div part="head">R</div>
             rounded
         </m-chip>
     </div>
