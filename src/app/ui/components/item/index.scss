@@ -6,10 +6,12 @@
 }
 
 [part=body] {
+    display: block;
     padding: var(--py) 0;
     line-height: 1.4;
     text-align: left;
     align-items: center;
+    flex: 1 1 auto;
 }
 
 :host {
@@ -77,14 +79,15 @@
 // }
 
 [part=lower] {
-    display: flex;
     flex-wrap: nowrap;
     flex: 1 1 auto;
     padding-right: var(--px);
 }
 
+slot[name=foot],
 slot[name=head],
-[part=body] {
+[part=lower] {
+    display: flex;
     contain: style;
     min-height: var(--size);
 }
