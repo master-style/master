@@ -107,3 +107,10 @@
     color: var(--f-fade);
     margin-left: .375rem;
 }
+
+:host([disabled]) {
+    ::slotted([part=head]) {
+        color: inherit !important;
+        background-color: var(--b-fadest) !important;
+    }
+}
