@@ -1,6 +1,17 @@
 @import '../../variables';
 @import '../../shadow';
 
+[part=root] {
+    padding-left: var(--px);
+}
+
+[part=body] {
+    padding: var(--py) 0;
+    line-height: 1.4;
+    text-align: left;
+    align-items: center;
+}
+
 :host {
     --f-size: 1rem;
     --size: 3rem;
@@ -13,10 +24,6 @@
     width: 100%;
     contain: style;
     font-size: var(--f-size);
-}
-
-[part=root] {
-    padding-left: var(--px);
 }
 
 :host(.lined:not(.indent)) {
@@ -86,13 +93,6 @@ slot[name=head] {
     text-align: center;
     white-space: nowrap;
     justify-content: center;
-    align-items: center;
-}
-
-[part=body] {
-    padding: var(--py) 0;
-    line-height: 1.4;
-    text-align: left;
     align-items: center;
 }
 
