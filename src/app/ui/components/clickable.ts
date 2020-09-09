@@ -31,10 +31,10 @@ export class MasterClickable extends HTMLElement {
                 }, this.slotTemplate || ['slot']
             ];
         } else {
-            return [
+            return this.slotTemplate ? [
                 'div', { part: 'root' },
                 this.slotTemplate
-            ] || ['slot', { part: 'root' }];
+            ] : ['slot', { part: 'root' }];
         }
     });
 
