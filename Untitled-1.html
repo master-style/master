@@ -1,25 +1,26 @@
-<m-list>
-    <header part="header">標題</header>
-    <m-item>
-        <div part="head">頭</div>
-        <div part="body">體</div>
-        <div part="foot">腳</div>
-    </m-item>
-    <m-collapse>
-        <m-item>
-            <div part="head">頭</div>
-            <div part="body">體</div>
-            <div part="foot">腳</div>
-        </m-item>
-    </m-collapse>
-</m-list>
 
-<m-select>
+<m-select label="<b>選擇</b>">
     <m-label>標題</m-label>
     <m-option value=""></m-option>
     <m-option value=""></m-option>
     <m-option value=""></m-option>
 </m-select>
+
+<m-list>
+    <m-label>標題</m-label>
+    <m-item>
+        <div slot="head">頭</div>
+        <div slot="body">體</div>
+        <div slot="foot">腳</div>
+    </m-item>
+    <m-collapse>
+        <m-item>
+            <div slot="head">頭</div>
+            <div slot="body">體</div>
+            <div slot="foot">腳</div>
+        </m-item>
+    </m-collapse>
+</m-list>
 
 <!-- 組件 -->
 <m-slides>

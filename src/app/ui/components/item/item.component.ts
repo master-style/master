@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'doc-item',
-  templateUrl: './item.component.html',
-  styleUrls: ['./item.component.scss']
+    selector: 'doc-item',
+    templateUrl: './item.component.html',
+    styleUrls: ['./item.component.scss']
 })
 export class ItemComponent implements OnInit {
 
-  constructor() { }
+    constructor() { }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {}
 
 }
