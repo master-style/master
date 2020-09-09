@@ -53,6 +53,7 @@
 }
 
 ::slotted([part=body]) {
+    display: block;
     grid-area: body;
     padding: 1rem;
     width: 100%;
