@@ -1,4 +1,4 @@
-import { Element } from '@element';
+import { Element, Attr } from '@element';
 import { MasterClickable } from '@ui/components/clickable';
 import css from './index.scss';
 

@@ -1,4 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UiRoutingModule } from './ui-routing.module';
 import { SharedModule } from '../shared/shared.module';
@@ -24,11 +25,9 @@ import { InstallationComponent } from './guideline/installation/installation.com
 import { DisplayComponent } from './modifiers/display/display.component';
 import { VisibilityComponent } from './modifiers/visibility/visibility.component';
 import { ArticleComponent } from './decorators/article/article.component';
-import { GridComponent } from './layout/grid/grid.component';
 import { AlignmentComponent } from './modifiers/alignment/alignment.component';
 import { PositionComponent } from './modifiers/position/position.component';
 import { WrapComponent } from './modifiers/wrap/wrap.component';
-import { AppComponent } from './layout/app/app.component';
 import { AreaComponent } from './modifiers/area/area.component';
 import { BackgroundComponent } from './modifiers/background/background.component';
 import { BorderComponent } from './modifiers/border/border.component';
@@ -78,7 +77,7 @@ import { BreadcrumbComponent } from './decorators/breadcrumb/breadcrumb.componen
         TabsComponent,
         InstallationComponent,
         DisplayComponent,
-        VisibilityComponent, ArticleComponent, GridComponent, AlignmentComponent, PositionComponent, WrapComponent, AppComponent,
+        VisibilityComponent, ArticleComponent, AlignmentComponent, PositionComponent, WrapComponent,
         AreaComponent, BackgroundComponent, BorderComponent, FontComponent, HoverComponent, MarginComponent, PaddingComponent, RadiusComponent, ScaleComponent, ShadowComponent, TextComponent, ZIndexComponent,
         DialogComponent,
         RippleComponent,
@@ -98,7 +97,8 @@ import { BreadcrumbComponent } from './decorators/breadcrumb/breadcrumb.componen
     imports: [
         CommonModule,
         UiRoutingModule,
-        SharedModule
+        SharedModule,
+        FormsModule
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
