@@ -1,4 +1,3 @@
-
 export default function kebabToCamelCase(str: string) {
     return str
         .split('-')

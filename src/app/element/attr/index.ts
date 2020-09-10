@@ -1,6 +1,5 @@
 import camelToKebabCase from '@utils/camel-to-kebab-case';
 import 'reflect-metadata';
-
 const DEFAULT_ATTR_OPTION = {
     reflect: true,
     observe: true,
