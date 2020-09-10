@@ -30,11 +30,9 @@ import { InstallationComponent } from './guideline/installation/installation.com
 import { DisplayComponent } from './modifiers/display/display.component';
 import { VisibilityComponent } from './modifiers/visibility/visibility.component';
 import { ArticleComponent } from './decorators/article/article.component';
-import { GridComponent } from './layout/grid/grid.component';
 import { AlignmentComponent } from './modifiers/alignment/alignment.component';
 import { PositionComponent } from './modifiers/position/position.component';
 import { WrapComponent } from './modifiers/wrap/wrap.component';
-import { AppComponent } from './layout/app/app.component';
 import { AreaComponent } from './modifiers/area/area.component';
 import { BackgroundComponent } from './modifiers/background/background.component';
 import { BorderComponent } from './modifiers/border/border.component';
