@@ -1,4 +1,4 @@
-import './clickable';
+import '../clickable';
 import './skeleton';
 import './controls';
 import './chip';
