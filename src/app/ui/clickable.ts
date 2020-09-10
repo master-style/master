@@ -1,8 +1,8 @@
-import { Attr } from '@element';
+import { Attr } from '../element';
 
 type elementToken = string | { [key: string]: any };
 
-export class MasterClickable extends HTMLElement {
+export default class MasterClickable extends HTMLElement {
 
     slotTemplate: (elementToken | (() => elementToken[]))[];
 

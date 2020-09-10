@@ -1,34 +1,34 @@
-// import { Attr } from '@element';
+import { Attr } from '../../../element';
 
-// type elementToken = string | { [key: string]: any };
+type elementToken = string | { [key: string]: any };
 
-// export class MasterClickable extends HTMLElement {
+export default class MasterControl extends HTMLElement {
 
-//     slotTemplate: (elementToken | (() => elementToken[]))[];
+    slotTemplate: (elementToken | (() => elementToken[]))[];
 
-    // template = $(() => [
-        
-    // ]);
+    template = $(() => [
+        ''
+    ]);
 
-//     @Attr({ render: true })
-//     type: string;
+    @Attr({ render: true })
+    type: string;
 
-//     @Attr({ render: true })
-//     rel: string;
+    @Attr({ render: true })
+    rel: string;
 
-//     @Attr({ render: true })
-//     href: string;
+    @Attr({ render: true })
+    href: string;
 
-//     @Attr({ render: true })
-//     disabled: boolean;
+    @Attr({ render: true })
+    disabled: boolean;
 
-//     @Attr({ render: true })
-//     download: number;
+    @Attr({ render: true })
+    download: number;
 
-//     @Attr({ render: true })
-//     target: string;
+    @Attr({ render: true })
+    target: string;
 
-//     render() {
-//         this.template.render(this.shadowRoot);
-//     }
-// }
+    render() {
+        this.template.render(this.shadowRoot);
+    }
+}

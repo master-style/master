@@ -142,7 +142,6 @@ export class CodeDirective {
 
         if (this.codeCollapsed === undefined)
             this.codeCollapsed = this.codeDemo ?? false;
-        console.log(this.codeCollapsed);
         if (this.demoElement)
             this.demoElement.toggleAttr('collapsed', this.codeCollapsed);
     }

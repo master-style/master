@@ -1,0 +1,1 @@
+import MasterControl from '../control';
