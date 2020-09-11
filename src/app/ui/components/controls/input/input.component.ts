@@ -10,7 +10,7 @@ export class InputComponent implements OnInit {
 
     constructor() { }
 
-    value=  1;
+    value = 1;
 
     ngOnInit(): void {
     }
@@ -19,7 +19,7 @@ export class InputComponent implements OnInit {
         console.log(form.value);
     }
 
-    onInput(){
+    onInput() {
         console.log('input');
     }
 

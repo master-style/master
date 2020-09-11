@@ -1,4 +1,4 @@
-import MasterControl from '../control';
+import MasterControl from '../core';
 
 import { Element, Attr } from '@element';
 import css from './index.scss';
@@ -33,6 +33,10 @@ export class MasterInput extends MasterControl {
             'legend'
         ]
     ]);
+
+    protected valueChanged(value, oldValue) {
+        console.log(value, oldValue);
+    }
 
     render() {
         this.template.render(this.shadowRoot);
