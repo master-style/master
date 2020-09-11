@@ -56,6 +56,16 @@ export default class MasterClickable extends HTMLElement {
     @Attr({ render: true })
     target: string;
 
+    static type = function (value, oldValue) {
+        if (value === 'submit') {
+            this.on('click', () => {
+                this.closest('FORM').dispatchEvent(new Event('submit'));
+            }, { id: this });
+        } else if (oldValue === 'submit') {
+            this.off({ id: this });
+        }
+    };
+
     render() {
         this.template.render(this.shadowRoot);
     }

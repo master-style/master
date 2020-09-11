@@ -38,7 +38,6 @@ export function Element(options: ElementOptions) {
             oldValue = parseAttrValue(oldValue, type);
             // console.log('changed:', attrKey, value, oldValue);
             eachAttrOptions.setProp.call(this, value, true);
-            if (attributeChangedCallback) attributeChangedCallback.call(this, attrKey, value, oldValue);
             if (onAttrChanged) onAttrChanged.call(this, attrKey, value, oldValue);
         };
         prototype.connectedCallback = function () {
@@ -88,7 +87,6 @@ export function Element(options: ElementOptions) {
                 }
             }
             if (this.render) this.render();
-            if (connectedCallback) connectedCallback.call(this);
             if (onConnected) onConnected.call(this);
         };
 

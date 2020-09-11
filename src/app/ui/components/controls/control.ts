@@ -7,26 +7,41 @@ export default class MasterControl extends HTMLElement {
     slotTemplate: (elementToken | (() => elementToken[]))[];
 
     template = $(() => [
-        ''
+        'slot'
     ]);
 
     @Attr({ render: true })
     type: string;
 
     @Attr({ render: true })
-    rel: string;
+    name: string;
 
     @Attr({ render: true })
-    href: string;
+    label: string;
+
+    @Attr({ render: true })
+    placeholder: string;
 
     @Attr({ render: true })
     disabled: boolean;
 
     @Attr({ render: true })
-    download: number;
+    required: boolean;
+
+    @Attr({ render: true, key: 'readonly' })
+    readOnly: boolean;
 
     @Attr({ render: true })
-    target: string;
+    validate: string;
+
+    @Attr({ render: true })
+    invalidate: string;
+
+    @Attr({ render: true })
+    warning: string;
+
+    @Attr({ render: true })
+    value: any;
 
     render() {
         this.template.render(this.shadowRoot);
