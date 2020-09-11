@@ -2,11 +2,11 @@
     <div class="demo-body">
         <div class="y">
             <form #form="ngForm" (ngSubmit)="onSubmit(form)">
-                <m-input type="text"></m-input>
-                <m-input>
-
+                <m-input name="test2" type="text" value="omg">
+                    <span slot="head">NT$</span>
+                    <span slot="foot">/個</span>
                 </m-input>
-                <input name="test" type="text" value="123">
+                <input name="test" type="text" value="123" ngModel>
                 <m-button type="submit">送出</m-button>
             </form>
         </div>

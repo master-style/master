@@ -4,8 +4,6 @@ type elementToken = string | { [key: string]: any };
 
 export default class MasterControl extends HTMLElement {
 
-    slotTemplate: (elementToken | (() => elementToken[]))[];
-
     template = $(() => [
         'slot'
     ]);
@@ -43,7 +41,4 @@ export default class MasterControl extends HTMLElement {
     @Attr({ render: true })
     value: any;
 
-    render() {
-        this.template.render(this.shadowRoot);
-    }
 }

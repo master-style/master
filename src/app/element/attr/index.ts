@@ -30,8 +30,8 @@ export function Attr(options?: AttrOptions) {
             },
             set(value: any, fromAttr?: boolean) {
                 if (this[_propKey] === value) return;
-                if (propKey in constructor) {
-                    constructor[propKey].call(this, value, this[_propKey]);
+                if ((propKey + 'Changed') in this) {
+                    this[propKey + 'Changed'](value, this[_propKey]);
                 }
                 this[_propKey] = value;
                 if (this.isConnected) {

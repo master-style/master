@@ -17,4 +17,8 @@ export class InputComponent implements OnInit {
         console.log(form.value);
     }
 
+    onInput(){
+        console.log('input');
+    }
+
 }
