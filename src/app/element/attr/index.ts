@@ -10,7 +10,8 @@ const DEFAULT_ATTR_OPTION = {
 export function Attr(options?: AttrOptions) {
     options = { ...DEFAULT_ATTR_OPTION, ...options };
     return (target, propKey: string): any => {
-        options.type = Reflect.getMetadata('design:type', target, propKey).name;
+        options.type = Reflect.getMetadata('design:type', target, propKey);
+        console.log(propKey, options.type);
         options.propKey = propKey;
         const _propKey = '_' + propKey;
         const attrKey = options.key = camelToKebabCase(propKey);

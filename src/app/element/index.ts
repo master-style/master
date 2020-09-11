@@ -13,6 +13,9 @@ const parseAttrValue = (value: any, type: string) => {
             return value = isNaN(+value) ? value : +value;
         case 'Boolean':
             return value = (value === '' || value) ? true : false;
+        case 'Object':
+            // string | number
+            
         default:
             return value;
     }

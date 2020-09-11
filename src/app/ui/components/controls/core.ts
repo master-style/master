@@ -39,9 +39,6 @@ export default class MasterControl extends HTMLElement {
     warning: string;
 
     @Attr({ render: true })
-    value: any;
-
-    @Attr({ render: true })
     autocomplete: string;
 
     @Attr({ render: true })
@@ -65,4 +62,9 @@ export default class MasterControl extends HTMLElement {
     @Attr({ render: true })
     step: number;
 
+    @Attr({ render: true })
+    value: any;
+
+    @Attr({ render: true })
+    test: [];
 }
