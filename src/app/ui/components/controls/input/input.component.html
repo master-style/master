@@ -2,12 +2,13 @@
     <div class="demo-body">
         <div class="y">
             <form #form="ngForm" (ngSubmit)="onSubmit(form)">
-                <m-input class="outlined" name="test2" type="number" [(ngModel)]="value" required ngDefaultControl>
+                <m-input class="outlined" name="test2" type="number" (ngModelChange)="numberChanged(+$event)"
+                    [(ngModel)]="value" required ngDefaultControl>
                     <div part="head">NT$</div>
                     <div part="foot">/個</div>
                 </m-input>
-                <input name="num" type="month" (ngModelChange)="numberChanged($event)" [(ngModel)]="number">
                 <m-button type="submit">送出</m-button>
+                <option value=""></option>
             </form>
         </div>
     </div>

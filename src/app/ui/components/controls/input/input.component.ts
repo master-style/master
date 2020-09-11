@@ -14,8 +14,7 @@ export class InputComponent implements OnInit {
 
     number = 1200;
 
-    ngOnInit(): void {
-    }
+    ngOnInit(): void { }
 
     onSubmit(form: NgForm) {
         console.log(form.value);
@@ -26,7 +25,7 @@ export class InputComponent implements OnInit {
     }
 
     numberChanged(event) {
-        console.log(event);
+        // console.log(event);
     }
 
 }

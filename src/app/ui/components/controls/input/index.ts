@@ -1,6 +1,6 @@
 import MasterControl from '../core';
 
-import { Element, Attr } from '@element';
+import { Element } from '@element';
 import css from './index.scss';
 
 const NAME = 'input';
@@ -43,6 +43,17 @@ export class MasterInput extends MasterControl {
             }
             return { value, oldValue };
         }
+    }
+
+    onConnected() {
+        this.on('input', (event: any) => {
+            this.value = event.target.value;
+            console.log(event.target.value);
+        }, { id: this });
+    }
+
+    onDisconnected() {
+        this.off('input', { id: this })
     }
 
     render() {

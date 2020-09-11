@@ -25,6 +25,7 @@ export function Element(options: ElementOptions) {
         const attrOptionsMap = constructor.attrOptionsMap;
         const onConnected = prototype.onConnected;
         const onAttrChanged = prototype.onAttrChanged;
+        prototype.disconnectedCallback = prototype.onDisconnected;
         prototype.attributeChangedCallback = function (attrKey, oldValue, value) {
             if (value === oldValue) return;
             const eachAttrOptions = attrOptionsMap[attrKey];
@@ -68,7 +69,7 @@ export function Element(options: ElementOptions) {
                 }
             }
             this.ready = true;
-            if (options.shadow) {
+            if (options.shadow && !this.shadowRoot) {
                 const shadowRoot = this.attachShadow({ mode: 'open' });
                 if (options.css && shadowRoot['adoptedStyleSheets']) {
                     const styleSheet = new CSSStyleSheet();
