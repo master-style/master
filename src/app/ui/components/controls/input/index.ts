@@ -43,3 +43,5 @@ export class MasterInput extends MasterControl {
         this.controlTemplate.render(this);
     }
 }
+
+console.log(HTMLInputElement.prototype);

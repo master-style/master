@@ -41,4 +41,28 @@ export default class MasterControl extends HTMLElement {
     @Attr({ render: true })
     value: any;
 
+    @Attr({ render: true })
+    autocomplete: string;
+
+    @Attr({ render: true })
+    max: number;
+
+    @Attr({ render: true })
+    min: number;
+
+    @Attr({ render: true })
+    maxLength: number;
+
+    @Attr({ render: true })
+    minLength: number;
+
+    @Attr({ render: true })
+    pattern: string;
+
+    @Attr({ render: true })
+    size: number;
+
+    @Attr({ render: true })
+    step: number;
+
 }
