@@ -13,7 +13,7 @@ export class MasterInput extends MasterControl {
 
     controlTemplate = $(() => [
         'input', {
-            slot: 'body',
+            part: 'body',
             type: this.type,
             name: this.name,
             label: this.label,
@@ -28,11 +28,7 @@ export class MasterInput extends MasterControl {
     ]);
 
     template = $(() => [
-        'div', { part: 'root' }, [
-            'slot', { name: 'head' },
-            'slot', { name: 'body' },
-            'slot', { name: 'foot' },
-        ],
+        'slot',
         'fieldset', [
             'legend'
         ]

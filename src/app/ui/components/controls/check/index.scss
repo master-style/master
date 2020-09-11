@@ -1,0 +1,62 @@
+::-ms-check {
+    display: none;
+}
+
+[is=m-switch],
+[is=m-check] {
+    width: 0;
+    height: 0;
+    visibility: hidden;
+
+    &[hidden] {
+        ~i {
+            display: none;
+        }
+    }
+
+    ~span {
+        cursor: pointer;
+        white-space: nowrap;
+        padding-left: .375rem;
+    }
+
+    &:checked~span {
+        font-weight: 500;
+        color: var(--f-theme);
+    }
+
+    ~i {
+        position: relative;
+        flex: 0 0 auto;
+        display: inline-flex;
+        box-sizing: border-box;
+        cursor: pointer;
+    }
+
+    &[type=radio]:checked {
+
+        ~i,
+        ~span {
+            pointer-events: none;
+        }
+    }
+
+    ~m-badge {
+        left: 0;
+        right: auto;
+        max-width: none;
+        white-space: nowrap;
+    }
+
+    &[disabled] {
+
+        ~i {
+            --theme-checked: var(--b-fadest);
+        }
+
+        ~span {
+            color: var(--f-fadest);
+            font-weight: inherit;
+        }
+    }
+}

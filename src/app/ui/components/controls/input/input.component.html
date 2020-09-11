@@ -2,9 +2,9 @@
     <div class="demo-body">
         <div class="y">
             <form #form="ngForm" (ngSubmit)="onSubmit(form)">
-                <m-input name="test2" type="text" value="omg" [(ngModel)]="value" required ngDefaultControl>
-                    <span slot="head">NT$</span>
-                    <span slot="foot">/個</span>
+                <m-input class="outlined" name="test2" type="text" value="omg" [(ngModel)]="value" required ngDefaultControl>
+                    <div part="head">NT$</div>
+                    <div part="foot">/個</div>
                 </m-input>
                 <input name="test" type="text" value="123" ngModel>
                 <m-button type="submit">送出</m-button>
