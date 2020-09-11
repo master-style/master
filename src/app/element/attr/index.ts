@@ -1,5 +1,6 @@
 import camelToKebabCase from '@utils/camel-to-kebab-case';
 import 'reflect-metadata';
+
 const DEFAULT_ATTR_OPTION = {
     reflect: true,
     observe: true,
@@ -10,10 +11,9 @@ const DEFAULT_ATTR_OPTION = {
 export function Attr(options?: AttrOptions) {
     options = { ...DEFAULT_ATTR_OPTION, ...options };
     return (target, propKey: string): any => {
-        options.type = Reflect.getMetadata('design:type', target, propKey);
-        console.log(propKey, options.type);
+        options.type = Reflect.getMetadata('design:type', target, propKey).name;
         options.propKey = propKey;
-        const _propKey = '_' + propKey;
+        const _propKey = '#' + propKey;
         const attrKey = options.key = camelToKebabCase(propKey);
         const constructor = target.constructor;
         if (options.observe) {
@@ -30,10 +30,16 @@ export function Attr(options?: AttrOptions) {
                 return this[_propKey];
             },
             set(value: any, fromAttr?: boolean) {
-                if (this[_propKey] === value) return;
-                if ((propKey + 'Changed') in this) {
-                    this[propKey + 'Changed'](value, this[_propKey]);
+                let oldValue = this[_propKey];
+                const propHandler = this[propKey + 'Handler'];
+                if (propHandler) {
+                    const prop = propHandler.call(this, value, oldValue);
+                    if (prop) {
+                        oldValue = prop.oldValue;
+                        value = prop.value;
+                    }
                 }
+                if (value === oldValue) return;
                 this[_propKey] = value;
                 if (this.isConnected) {
                     if (options.reflect && !fromAttr) {

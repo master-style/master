@@ -10,7 +10,6 @@ const parseAttrValue = (value: any, type: string) => {
         return undefined;
     switch (type) {
         case 'Number':
-        case 'Object': // string | number
             return isNaN(+value) ? value : +value;
         case 'Boolean':
             return (value === '' || value) ? true : false;
@@ -24,20 +23,14 @@ export function Element(options: ElementOptions) {
     return function (constructor: any) {
         const prototype = constructor.prototype;
         const attrOptionsMap = constructor.attrOptionsMap;
-
         const onConnected = prototype.onConnected;
-        const connectedCallback = prototype.connectedCallback;
-
         const onAttrChanged = prototype.onAttrChanged;
-        const attributeChangedCallback = prototype.attributeChangedCallback;
-
         prototype.attributeChangedCallback = function (attrKey, oldValue, value) {
             if (value === oldValue) return;
             const eachAttrOptions = attrOptionsMap[attrKey];
             const type = eachAttrOptions.type;
             value = parseAttrValue(value, type);
             oldValue = parseAttrValue(oldValue, type);
-            // console.log('changed:', attrKey, value, oldValue);
             eachAttrOptions.setProp.call(this, value, true);
             if (onAttrChanged) onAttrChanged.call(this, attrKey, value, oldValue);
         };

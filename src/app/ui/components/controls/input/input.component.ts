@@ -10,7 +10,9 @@ export class InputComponent implements OnInit {
 
     constructor() { }
 
-    value = 1;
+    value = 123;
+
+    number = 1200;
 
     ngOnInit(): void {
     }
@@ -21,6 +23,10 @@ export class InputComponent implements OnInit {
 
     onInput() {
         console.log('input');
+    }
+
+    numberChanged(event) {
+        console.log(event);
     }
 
 }

@@ -34,8 +34,15 @@ export class MasterInput extends MasterControl {
         ]
     ]);
 
-    protected valueChanged(value, oldValue) {
-        console.log(value, oldValue);
+    protected valueHandler(value: any, oldValue: any) {
+        if (this.type === 'number') {
+            if (value === '') {
+                value = oldValue;
+            } else {
+                value = isNaN(+value) ? value : +value;
+            }
+            return { value, oldValue };
+        }
     }
 
     render() {
