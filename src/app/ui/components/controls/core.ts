@@ -8,63 +8,61 @@ export default class MasterControl extends HTMLElement {
         'slot'
     ]);
 
-    @Attr({ render: true })
+    @Attr()
     type: string;
 
-    @Attr({ render: true })
+    @Attr()
     name: string;
 
-    @Attr({ render: true })
+    @Attr()
     label: string;
 
-    @Attr({ render: true })
+    @Attr()
     placeholder: string;
 
-    @Attr({ render: true })
+    @Attr()
     disabled: boolean;
 
-    @Attr({ render: true })
+    @Attr()
     required: boolean;
 
-    @Attr({ render: true, key: 'readonly' })
+    @Attr({ key: 'readonly' })
     readOnly: boolean;
 
-    @Attr({ render: true })
+    @Attr()
     validate: string;
 
-    @Attr({ render: true })
+    @Attr()
     invalidate: string;
 
-    @Attr({ render: true })
+    @Attr()
     warning: string;
 
-    @Attr({ render: true })
+    @Attr()
     autocomplete: string;
 
-    @Attr({ render: true })
+    @Attr()
     max: number;
 
-    @Attr({ render: true })
+    @Attr()
     min: number;
 
-    @Attr({ render: true })
+    @Attr()
     maxLength: number;
 
-    @Attr({ render: true })
+    @Attr()
     minLength: number;
 
-    @Attr({ render: true })
+    @Attr()
     pattern: string;
 
-    @Attr({ render: true })
+    @Attr()
     size: number;
 
-    @Attr({ render: true })
+    @Attr()
     step: number;
 
-    @Attr({ render: true })
+    @Attr({ reflect: false, render: false })
     value: any;
 
-    @Attr({ render: true })
-    test: [];
 }

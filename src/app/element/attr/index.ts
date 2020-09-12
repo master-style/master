@@ -4,7 +4,7 @@ import 'reflect-metadata';
 const DEFAULT_ATTR_OPTION = {
     reflect: true,
     observe: true,
-    render: false
+    render: true
 };
 
 export function Attr(options?: AttrOptions) {

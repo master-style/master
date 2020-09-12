@@ -38,22 +38,22 @@ export default class MasterClickable extends HTMLElement {
         }
     });
 
-    @Attr({ render: true })
+    @Attr()
     type: string;
 
-    @Attr({ render: true })
+    @Attr()
     rel: string;
 
-    @Attr({ render: true })
+    @Attr()
     href: string;
 
-    @Attr({ render: true })
+    @Attr()
     disabled: boolean;
 
-    @Attr({ render: true })
+    @Attr()
     download: number;
 
-    @Attr({ render: true })
+    @Attr()
     target: string;
 
     protected typeChanged(value, oldValue) {

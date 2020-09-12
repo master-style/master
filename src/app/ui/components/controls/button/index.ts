@@ -9,9 +9,9 @@ const NAME = 'button';
     css
 })
 export class MasterButton extends MasterClickable {
-    @Attr({ render: true })
+    @Attr()
     type: string = 'button';
 
-    @Attr()
+    @Attr({ render: false })
     loading: boolean;
 }

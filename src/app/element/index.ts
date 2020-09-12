@@ -10,6 +10,7 @@ const parseAttrValue = (value: any, type: string) => {
         return undefined;
     switch (type) {
         case 'Number':
+            if (value === '') return null;
             return isNaN(+value) ? value : +value;
         case 'Boolean':
             return (value === '' || value) ? true : false;

@@ -18,10 +18,10 @@ export class MasterSkeleton extends HTMLElement {
         ];
     });
 
-    @Attr({ render: true })
+    @Attr()
     width: number;
 
-    @Attr({ render: true })
+    @Attr()
     height: number;
 
     render() {
