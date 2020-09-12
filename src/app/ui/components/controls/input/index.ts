@@ -1,4 +1,4 @@
-import MasterControl from '../core';
+import MasterControl from '../control';
 
 import { Element, Attr } from '@element';
 import css from './index.scss';
@@ -31,8 +31,9 @@ export class MasterInput extends MasterControl {
     template = $(() => [
         'slot',
         'fieldset', [
-            'legend'
-        ]
+            'legend', { $html: '<span>' + this.label + '</span>' }
+        ],
+        'm-label', { $html: this.label }
     ]);
 
     @Attr({ observe: false, render: false })
