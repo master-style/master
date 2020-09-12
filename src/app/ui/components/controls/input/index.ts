@@ -16,25 +16,24 @@ export class MasterInput extends MasterControl {
             part: 'body',
             type: this.type,
             name: this.name,
-            label: this.label,
             placeholder: this.placeholder,
             disabled: this.disabled,
             required: this.required,
             readOnly: this.readOnly,
             pattern: this.pattern,
-            validate: this.validate,
-            invalidate: this.invalidate,
-            warning: this.warning
         }
     ]);
 
-    template = $(() => [
-        'slot',
-        'fieldset', [
-            'legend', { $html: '<span>' + this.label + '</span>' }
-        ],
-        'm-label', { $html: this.label }
-    ]);
+    template = $(() => {
+        console.log(this.label);
+        return [
+            'slot',
+            'fieldset', [
+                'legend', { $html: '<span>' + this.label + '</span>' }
+            ],
+            'm-label', { $html: this.label }
+        ];
+    });
 
     @Attr({ observe: false, render: false })
     empty: boolean;
@@ -71,9 +70,8 @@ export class MasterInput extends MasterControl {
     }
 
     render() {
+        console.log('render');
         this.template.render(this.shadowRoot);
         this.controlTemplate.render(this);
     }
 }
-
-console.log(HTMLInputElement.prototype);

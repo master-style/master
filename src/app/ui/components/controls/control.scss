@@ -196,9 +196,8 @@
     legend {
         transition:
             max-width .2s cubic-bezier(0.33, 1, 0.68, 1) .1s,
-            padding-right .1s cubic-bezier(0.33, 1, 0.68, 1) .3s,
-            margin-left .1s cubic-bezier(0.33, 1, 0.68, 1) .3s;
-        margin-left: 0px;
+            padding-right .1s cubic-bezier(0.33, 1, 0.68, 1) .3s;
+        margin-left: -1px;
         padding-right: 0px;
     }
 }
@@ -207,7 +206,6 @@
 :host(.outlined[label]:not([empty]):not(:focus-within)) {
     legend {
         transition: none;
-        margin-left: -1px;
         padding-right: 6px;
     }
 }

@@ -112,7 +112,9 @@ class MasterTemplate {
                     for (let i = 0; i < eachNodes.length; i++) {
                         const eachNode = eachNodes[i];
                         let eachOldNode = eachOldNodes[i];
-                        if (eachOldNode && eachNode.tag === eachOldNode.tag) {
+                        let skipChildren = false;
+                        const cached = eachOldNode && eachNode.tag === eachOldNode.tag;
+                        if (cached) {
                             eachNode.element = eachOldNode.element;
                             if (eachNode.attr) {
                                 Object.keys(eachNode.attr).forEach((eachAttrKey) => {
@@ -123,18 +125,11 @@ class MasterTemplate {
                                     }
                                 });
                             }
-                            if (eachNode.$text !== eachOldNode.$text) {
-                                eachNode.element.textContent = eachNode.$text;
-                            }
                             if (!eachNodes[i + 1]) {
                                 eachOldNodes.splice(i + 1)
                                     .forEach((deletedOldNode) => deletedOldNode.element.remove());
                             }
-                            if (eachNode.children) {
-                                renderNodes(eachNode.children, eachOldNode.children, eachNode.element);
-                            }
                         } else {
-                            let skipChildren = false;
                             eachNode.element = document.createElement(eachNode.tag);
                             if (eachOldNode) {
                                 eachOldNode.element.before(eachNode.element);
@@ -145,15 +140,17 @@ class MasterTemplate {
                                     eachNode.element.attr(eachAttrKey, eachNode.attr[eachAttrKey]);
                                 }
                             }
-                            if (eachNode.$html !== undefined) {
-                                eachNode.element.innerHTML = eachNode.$html;
-                                skipChildren = true;
-                            } else if (eachNode.$text !== undefined) {
-                                eachNode.element.textContent = eachNode.$text;
-                            }
-                            if (!skipChildren && eachNode.children) {
-                                renderNodes(eachNode.children, [], eachNode.element);
-                            }
+                        }
+                        if (eachNode.$html !== undefined) {
+                            eachNode.element.innerHTML = eachNode.$html;
+                            skipChildren = true;
+                        } else if (eachNode.$text !== undefined) {
+                            eachNode.element.textContent = eachNode.$text;
+                        }
+                        if (!skipChildren && eachNode.children) {
+                            renderNodes(eachNode.children, eachOldNode.children, eachNode.element);
+                        }
+                        if (!cached) {
                             if (i !== 0) {
                                 eachNodes[i - 1].element.after(eachNode.element);
                             } else {
