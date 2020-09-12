@@ -21,6 +21,7 @@ export class MasterInput extends MasterControl {
             disabled: this.disabled,
             required: this.required,
             readOnly: this.readOnly,
+            pattern: this.pattern,
             validate: this.validate,
             invalidate: this.invalidate,
             warning: this.warning
