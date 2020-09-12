@@ -62,7 +62,7 @@ export default class MasterControl extends HTMLElement {
     @Attr({ render: true })
     step: number;
 
-    @Attr({ observe: false, reflect: false })
+    @Attr({ render: true })
     value: any;
 
     @Attr({ render: true })

@@ -2,7 +2,7 @@
     <div class="demo-body">
         <div class="y">
             <form #form="ngForm" (ngSubmit)="onSubmit(form)">
-                <m-input class="outlined" name="test2" type="number" (ngModelChange)="numberChanged(+$event)"
+                <m-input class="outlined" name="test2" type="password" (ngModelChange)="numberChanged(+$event)"
                     [(ngModel)]="value" required ngDefaultControl>
                     <div part="head">NT$</div>
                     <div part="foot">/個</div>

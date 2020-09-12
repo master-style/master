@@ -24,7 +24,8 @@ export class MasterInput extends MasterControl {
             pattern: this.pattern,
             validate: this.validate,
             invalidate: this.invalidate,
-            warning: this.warning
+            warning: this.warning,
+            value: this.value
         }
     ]);
 
@@ -35,12 +36,6 @@ export class MasterInput extends MasterControl {
         ]
     ]);
 
-    @Attr({ observe: false })
-    focused: boolean;
-
-    @Attr({ observe: false })
-    empty: boolean;
-
     protected valueHandler(value: any, oldValue: any) {
         if (this.type === 'number') {
             if (value === '') {
@@ -48,9 +43,6 @@ export class MasterInput extends MasterControl {
             } else {
                 value = isNaN(+value) ? value : +value;
             }
-        }
-        if (oldValue !== value) {
-            this.empty = !value;
         }
         return { value, oldValue };
     }
@@ -60,7 +52,7 @@ export class MasterInput extends MasterControl {
             .on('input', (event: any) => {
                 this.value = event.target.value;
                 console.log(event.target.value);
-            }, { id: this })
+            }, { id: this });
     }
 
     onDisconnected() {
