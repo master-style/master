@@ -4,7 +4,6 @@ import 'reflect-metadata';
 const DEFAULT_ATTR_OPTION = {
     reflect: true,
     observe: true,
-    toggle: false,
     render: false
 };
 

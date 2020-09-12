@@ -1,6 +1,6 @@
 import MasterControl from '../core';
 
-import { Element } from '@element';
+import { Element, Attr } from '@element';
 import css from './index.scss';
 
 const NAME = 'input';
@@ -35,22 +35,32 @@ export class MasterInput extends MasterControl {
         ]
     ]);
 
+    @Attr({ observe: false })
+    focused: boolean;
+
+    @Attr({ observe: false })
+    empty: boolean;
+
     protected valueHandler(value: any, oldValue: any) {
         if (this.type === 'number') {
             if (value === '') {
-                value = oldValue;
+                value = 0;
             } else {
                 value = isNaN(+value) ? value : +value;
             }
-            return { value, oldValue };
         }
+        if (oldValue !== value) {
+            this.empty = !value;
+        }
+        return { value, oldValue };
     }
 
     onConnected() {
-        this.on('input', (event: any) => {
-            this.value = event.target.value;
-            console.log(event.target.value);
-        }, { id: this });
+        this
+            .on('input', (event: any) => {
+                this.value = event.target.value;
+                console.log(event.target.value);
+            }, { id: this })
     }
 
     onDisconnected() {
