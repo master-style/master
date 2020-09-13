@@ -29,14 +29,18 @@ export class MasterInput extends MasterControl {
         return [
             'slot',
             'fieldset', [
-                'legend', { $html: '<span>' + this.label + '</span>' }
+                'legend', [
+                    'span', { $text: this.label }
+                ]
             ],
-            'm-label', { $html: this.label }
+            'm-label', { $text: this.label }
         ];
     });
 
     @Attr({ observe: false, render: false })
     empty: boolean;
+
+    focused = false;
 
     protected valueHandler(value: any, oldValue: any) {
         if (this.type === 'number') {
@@ -59,9 +63,14 @@ export class MasterInput extends MasterControl {
 
     onConnected() {
         this
-            .on('input', (event: any) => {
+            .on('click', (event: any) => {
+                if (event.target.tagName === 'INPUT') return;
+                this.controlTemplate.nodes[0].element.focus();
+            }, { id: this, passive: true })
+            .on('input', '[part=body]', (event: any) => {
+                console.log('fuck');
                 this.value = event.target.value;
-            }, { id: this });
+            }, { id: this, passive: true });
         this.updateValue(this.value);
     }
 

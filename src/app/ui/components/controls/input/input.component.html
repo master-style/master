@@ -1,4 +1,4 @@
-<div class="demo">
+<!-- <div class="demo">
     <div class="demo-body">
         <div class="y">
             <form #form="ngForm" (ngSubmit)="onSubmit(form)">
@@ -10,6 +10,20 @@
                 <m-button type="submit">送出</m-button>
                 <option value=""></option>
             </form>
+        </div>
+    </div>
+</div> -->
+
+<div class="demo">
+    <div class="demo-body">
+        <div class="y">
+            <m-input class="x:4@sm outlined"
+                     label="price *"
+                     placeholder="0"
+                     type="number">
+                <label part="head">NT$</label>
+                <label part="foot">/ piece</label>
+            </m-input>
         </div>
     </div>
 </div>

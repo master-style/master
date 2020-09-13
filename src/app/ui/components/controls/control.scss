@@ -49,8 +49,8 @@
     font-size: var(--f-sm);
     --b-width: 1px;
     --b-color: var(--b-fade);
-    --label-y: calc(var(--py, .875rem));
-
+    --py: .875rem;
+    --px: 1rem;
     // ~m-icon {
     //     margin: 0 .5rem 0 .2rem;
     //     color: var(--f-fadest);
@@ -157,17 +157,16 @@
     -webkit-text-fill-color: var(--f-blue);
 }
 
+:host(:active:not([readonly]):not([disabled])),
 :host(:focus-within:not([readonly]):not([disabled])) {
+    --b-width: 2px;
+
     ::slotted([part=body]) {
         color: var(--f-fade);
     }
 }
 
-:host(:focus-within:not([readonly]):not([disabled])) {
-    --b-width: 2px;
-}
-
-:host([label][empty]:not(:focus-within):not([readonly])) {
+:host([label][empty]:not(:focus-within):not(:active):not([readonly])) {
 
     ::slotted([part=head]),
     ::slotted([part=foot]),
@@ -182,7 +181,7 @@
 
     m-label {
         transition-delay: .1s;
-        transform: translate(0, var(--label-y));
+        transform: translate(0, var(--py));
     }
 }
 
@@ -196,9 +195,9 @@
     legend {
         transition:
             max-width .2s cubic-bezier(0.33, 1, 0.68, 1) .1s,
-            padding-right .1s cubic-bezier(0.33, 1, 0.68, 1) .3s;
-        margin-left: -1px;
-        padding-right: 0px;
+            padding-right .2s cubic-bezier(0.33, 1, 0.68, 1) .1s;
+        margin-left: -2px;
+        will-change: max-width, padding-right;
     }
 }
 
@@ -206,22 +205,26 @@
 :host(.outlined[label]:not([empty]):not(:focus-within)) {
     legend {
         transition: none;
-        padding-right: 6px;
+        padding-right: 7px;
     }
 }
 
 // outlined
+
+:host(.outlined[label]:active:not([readonly]):not([disabled])),
 :host(.outlined[label]:focus-within:not([readonly]):not([disabled])) {
     legend {
-        transition: max-width .2s cubic-bezier(0.64, 0, 0.78, 0);
-        margin-left: -2px;
-        padding-right: 6px;
+        transition:
+            max-width .2s cubic-bezier(0.64, 0, 0.78, 0),
+            padding-right .2s cubic-bezier(0.64, 0, 0.78, 0);
+        margin-left: -3px;
+        padding-right: 7px;
         height: 2px;
     }
 }
 
 :host(.underlined) {
-    padding: calc(var(--py, .875rem) - 0.25rem) 0;
+    padding: calc(var(--py) - 0.25rem) 0;
 
     fieldset {
         border-bottom-width: var(--b-width);
@@ -235,7 +238,7 @@
     ::slotted([part=head]),
     ::slotted([part=foot]) {
         --px: 0;
-        padding: calc(var(--py, .875rem) - .25px) 0;
+        padding: calc(var(--py) - .25rem) 0;
     }
 }
 
@@ -246,7 +249,7 @@ m-ripples {
 m-label {
     position: absolute;
     top: 0;
-    left: var(--px, 1rem);
+    left: var(--px);
     display: block;
     user-select: none;
     pointer-events: none;
@@ -277,7 +280,7 @@ fieldset {
     display: flex;
     color: var(--theme, var(--f-themeFader));
     border: 0px solid var(--b-color);
-    padding: 0 calc(var(--px, 1rem) - 5px);
+    padding: 0 calc(var(--px) - 5px);
     border-radius: inherit;
     pointer-events: none;
 }
@@ -285,12 +288,13 @@ fieldset {
 legend {
     max-width: 100%;
     height: 1px;
-    will-change: max-width;
     color: transparent;
     font-size: var(--f-xxs);
     line-height: 0;
     padding: 0;
     margin: 0;
+    contain: layout;
+    user-select: none;
 }
 
 m-badge {
@@ -326,30 +330,20 @@ m-badge {
     font-weight: 500;
     color: var(--f-theme);
     -webkit-text-fill-color: unset; // fix safari opacity problem
-    opacity: 1;
-    transition: color .2s ease;
-    will-change: color;
+    // transition: color .2s ease;
+    // will-change: color;
     user-select: text;
     -webkit-user-select: text;
-    padding-left: var(--px, 1rem);
-    padding-right: var(--px, 1rem);
-    cursor: text;
-}
-
-::slotted([part=body]:-moz-read-only) {
-    cursor: default;
-    caret-color: transparent;
-}
-
-::slotted([part=body]::selection) {
-    color: #000;
+    padding-left: var(--px);
+    padding-right: var(--px);
+    cursor: text !important;
 }
 
 ::slotted([part=head]),
 ::slotted([part=foot]),
 ::slotted([part=body]) {
-    padding-top: var(--py, .875rem);
-    padding-bottom: var(--py, .875rem);
+    padding-top: var(--py);
+    padding-bottom: var(--py);
 }
 
 ::slotted([part=body]),
@@ -363,20 +357,19 @@ m-badge {
 ::slotted([part=foot]) {
     user-select: none;
     white-space: nowrap;
-    pointer-events: none;
 }
 
 ::slotted([part=head]) {
     margin-right: -.6875rem;
-    padding-left: var(--px, 1rem);
+    padding-left: var(--px);
     order: -1;
 }
 
 ::slotted([part=foot]) {
     order: 1;
     margin-left: .3125rem;
-    padding-right: var(--px, 1rem);
-    font-size: var(--f-xs);
+    padding-right: var(--px);
+    font-size: var(--f-xxs);
 }
 
 // [validate] {

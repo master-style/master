@@ -151,6 +151,7 @@ class MasterTemplate {
                             renderNodes(eachNode.children, eachOldNode.children, eachNode.element);
                         }
                         if (!cached) {
+                            // 逐一插入首次創建新元素
                             if (i !== 0) {
                                 eachNodes[i - 1].element.after(eachNode.element);
                             } else {

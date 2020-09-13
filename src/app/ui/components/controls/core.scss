@@ -27,3 +27,13 @@
     color: var(--f-fader);
     -webkit-text-fill-color: var(--f-fader); // fix safari opacity problem
 }
+
+
+:-moz-read-only {
+    cursor: default;
+    caret-color: transparent;
+}
+
+::selection {
+    color: #000;
+}
