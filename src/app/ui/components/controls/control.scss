@@ -129,8 +129,8 @@
         border-style: dashed;
     }
 
-    slot[name=head],
-    slot[name=foot],
+    ::slotted([part=head]),
+    ::slotted([part=foot]),
     m-label {
         cursor: no-drop !important;
         color: var(--f-fadest) !important;
@@ -168,8 +168,8 @@
 
 :host([label][empty]:not(:focus-within):not(:active):not([readonly])) {
 
-    slot[name=head],
-    slot[name=foot],
+    ::slotted([part=head]),
+    ::slotted([part=foot]),
     ::slotted([part=body]) {
         opacity: 0;
         transition-delay: 0s;
@@ -235,8 +235,8 @@
         --px: 0;
     }
 
-    slot[name=head],
-    slot[name=foot] {
+    ::slotted([part=head]),
+    ::slotted([part=foot]) {
         --px: 0;
         padding: calc(var(--py) - .25rem) 0;
     }
@@ -339,34 +339,33 @@ m-badge {
     cursor: text !important;
 }
 
-slot[name=head],
-slot[name=foot],
+::slotted([part=head]),
+::slotted([part=foot]),
 ::slotted([part=body]) {
     padding-top: var(--py);
     padding-bottom: var(--py);
 }
 
 ::slotted([part=body]),
-slot[name=head],
-slot[name=foot] {
+::slotted([part=head]),
+::slotted([part=foot]) {
     transition: opacity .2s .1s cubic-bezier(0, 0, .2, 1);
     will-change: opacity;
 }
 
-slot[name=head],
-slot[name=foot] {
-    display: flex;
+::slotted([part=head]),
+::slotted([part=foot]) {
     user-select: none;
     white-space: nowrap;
 }
 
-slot[name=head] {
+::slotted([part=head]) {
     margin-right: -.6875rem;
     padding-left: var(--px);
     order: -1;
 }
 
-slot[name=foot] {
+::slotted([part=foot]) {
     order: 1;
     margin-left: .3125rem;
     padding-right: var(--px);
