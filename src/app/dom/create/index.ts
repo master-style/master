@@ -85,10 +85,7 @@ class MasterTemplate {
                     for (let i = 0; i < eachNodes.length; i++) {
                         const eachNode = eachNodes[i];
                         let eachOldNode = eachOldNodes[i];
-                        let skipChildren = false;
-                        console.log(eachOldNode);
-                        const cached = eachOldNode && eachNode.tag === eachOldNode.tag;
-                        if (cached) {
+                        if (eachOldNode && eachNode.tag === eachOldNode.tag) {
                             eachNode.element = eachOldNode.element;
                             if (eachNode.attr) {
                                 for (const eachAttrKey in eachNode.attr) {
@@ -99,31 +96,37 @@ class MasterTemplate {
                                     }
                                 }
                             }
+                            if (eachNode.$text !== eachOldNode.$text) {
+                                eachNode.element.textContent = eachNode.$text;
+                            }
                             if (!eachNodes[i + 1]) {
                                 eachOldNodes.splice(i + 1)
                                     .forEach((deletedOldNode) => deletedOldNode.element.remove());
                             }
+                            if (eachNode.children) {
+                                renderNodes(eachNode.children, eachOldNode.children, eachNode.element);
+                            }
                         } else {
+                            let skipChildren = false;
                             eachNode.element = document.createElement(eachNode.tag);
                             if (eachOldNode) {
                                 eachOldNode.element.before(eachNode.element);
                                 eachOldNode = (eachOldNode.element.remove() as undefined);
                             }
                             if (eachNode.attr) {
-                                eachNode.element.attr(eachNode.attr);
+                                for (const eachAttrKey in eachNode.attr) {
+                                    eachNode.element.attr(eachAttrKey, eachNode.attr[eachAttrKey]);
+                                }
                             }
-                        }
-                        if (eachNode.$html !== undefined) {
-                            eachNode.element.innerHTML = eachNode.$html;
-                            skipChildren = true;
-                        } else if (eachNode.$text !== undefined) {
-                            eachNode.element.textContent = eachNode.$text;
-                        }
-                        if (!skipChildren && eachNode.children) {
-                            renderNodes(eachNode.children, eachOldNode?.children, eachNode.element);
-                        }
-                        if (!cached) {
-                            // 逐一插入首次創建新元素
+                            if (eachNode.$html !== undefined) {
+                                eachNode.element.innerHTML = eachNode.$html;
+                                skipChildren = true;
+                            } else if (eachNode.$text !== undefined) {
+                                eachNode.element.textContent = eachNode.$text;
+                            }
+                            if (!skipChildren && eachNode.children) {
+                                renderNodes(eachNode.children, [], eachNode.element);
+                            }
                             if (i !== 0) {
                                 eachNodes[i - 1].element.after(eachNode.element);
                             } else {
