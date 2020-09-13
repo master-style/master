@@ -73,11 +73,10 @@ export class CodeDirective {
                 code =
                     $('div', {}, ...element.children)
                         .innerHTML
-                        // remove prefix-underscore attribute
+                        .replace(/<?_[\S]*?="[\s\S]*?"/g, '')
                         .replace(/<!--bindings[^>]*-->/g, '')
                         .replace(/<\s*input[^>]*>(.*?)/g, '')
                         .replace(/<?(empty)="[^"]*"/g, '')
-                        .replace(/_[\S]*?="[\s\S]*?"/g, '')
                     ;
                 break;
             case 'typescript':
