@@ -31,30 +31,6 @@ window.Master = function (selector: any, attr?: { [key: string]: any }, ...child
     }
 };
 
-const create = function (eachNodes, parent) {
-    const eachFragment = fragment.cloneNode();
-    eachNodes.forEach((node) => {
-        const element = document.createElement(node.tag);
-        node.element = element;
-        const attr = node.attr;
-        let skipChildren = false;
-        if (node.$html !== undefined) {
-            element.innerHTML = node.$html;
-            skipChildren = true;
-        } else if (node.$text !== undefined) {
-            element.textContent = node.$text;
-        }
-        if (attr) {
-            element.attr(attr);
-        }
-        if (!skipChildren && node.children) {
-            create(node.children, element);
-        }
-        eachFragment.appendChild(element);
-    });
-    parent.appendChild(eachFragment);
-};
-
 class MasterTemplate {
 
     constructor(
@@ -110,17 +86,18 @@ class MasterTemplate {
                         const eachNode = eachNodes[i];
                         let eachOldNode = eachOldNodes[i];
                         let skipChildren = false;
+                        console.log(eachOldNode);
                         const cached = eachOldNode && eachNode.tag === eachOldNode.tag;
                         if (cached) {
                             eachNode.element = eachOldNode.element;
                             if (eachNode.attr) {
-                                Object.keys(eachNode.attr).forEach((eachAttrKey) => {
+                                for (const eachAttrKey in eachNode.attr) {
                                     const newAttrValue = eachNode.attr[eachAttrKey];
                                     const oldAttrValue = eachOldNode?.attr[eachAttrKey];
                                     if (newAttrValue !== oldAttrValue) {
                                         eachNode.element.attr(eachAttrKey, newAttrValue);
                                     }
-                                });
+                                }
                             }
                             if (!eachNodes[i + 1]) {
                                 eachOldNodes.splice(i + 1)
@@ -143,7 +120,7 @@ class MasterTemplate {
                             eachNode.element.textContent = eachNode.$text;
                         }
                         if (!skipChildren && eachNode.children) {
-                            renderNodes(eachNode.children, eachOldNode.children, eachNode.element);
+                            renderNodes(eachNode.children, eachOldNode?.children, eachNode.element);
                         }
                         if (!cached) {
                             // 逐一插入首次創建新元素
@@ -158,7 +135,29 @@ class MasterTemplate {
             })(this.nodes, oldNodes, container);
         } else {
             this.container = container;
-            create(this.nodes, container);
+            (function create(eachNodes, parent) {
+                const eachFragment = fragment.cloneNode();
+                eachNodes.forEach((node) => {
+                    const element = document.createElement(node.tag);
+                    node.element = element;
+                    const attr = node.attr;
+                    let skipChildren = false;
+                    if (node.$html !== undefined) {
+                        element.innerHTML = node.$html;
+                        skipChildren = true;
+                    } else if (node.$text !== undefined) {
+                        element.textContent = node.$text;
+                    }
+                    if (attr) {
+                        element.attr(attr);
+                    }
+                    if (!skipChildren && node.children) {
+                        create(node.children, element);
+                    }
+                    eachFragment.appendChild(element);
+                });
+                parent.appendChild(eachFragment);
+            })(this.nodes, container);
         }
     }
 
