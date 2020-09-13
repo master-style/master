@@ -60,6 +60,15 @@ export class CodeDirective {
 
         switch (this.codeLang) {
             case 'html':
+                code =
+                    $('div', {}, ...element.children.map((eachNode)=> eachNode.cloneNode(true)))
+                        .innerHTML
+                        .replace(/<?_[\S]*?="[\s\S]*?"/g, '')
+                        .replace(/<!--bindings[^>]*-->/g, '')
+                        .replace(/<\s*input[^>]*>(.*?)/g, '')
+                        .replace(/<?(empty)="[^"]*"/g, '')
+                    ;
+
                 if (isTemplateTag && this.codeDemo) {
                     this.demoElement = $('div', { class: 'demo with:code' },
                         $('div', { class: 'demo-body' },
@@ -68,15 +77,6 @@ export class CodeDirective {
                     );
                     element.before(this.demoElement);
                 }
-
-                code =
-                    $('div', {}, ...element.children)
-                        .innerHTML
-                        .replace(/<?_[\S]*?="[\s\S]*?"/g, '')
-                        .replace(/<!--bindings[^>]*-->/g, '')
-                        .replace(/<\s*input[^>]*>(.*?)/g, '')
-                        .replace(/<?(empty)="[^"]*"/g, '')
-                    ;
                 break;
             case 'typescript':
                 // code = element;
