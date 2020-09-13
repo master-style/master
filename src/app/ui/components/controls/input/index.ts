@@ -27,7 +27,9 @@ export class MasterInput extends MasterControl {
     template = $(() => {
         console.log(this.label);
         return [
+            'slot', { name: 'head' },
             'slot',
+            'slot', { name: 'foot' },
             'fieldset', [
                 'legend', [
                     'span', { $text: this.label }
