@@ -25,7 +25,6 @@ export class MasterInput extends MasterControl {
     ]);
 
     template = $(() => {
-        console.log(this.label);
         return [
             'slot',
             'fieldset', [
@@ -56,8 +55,8 @@ export class MasterInput extends MasterControl {
         return { value, oldValue };
     }
 
-    protected updateValue(value: number) {
-        this.empty = value === null || value === undefined;
+    protected updateValue(value: any) {
+        this.empty = value === null || value === undefined || value === '';
         this.controlTemplate.nodes[0].element.value = value ?? null;
     }
 

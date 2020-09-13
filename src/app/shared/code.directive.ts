@@ -75,6 +75,8 @@ export class CodeDirective {
                         .innerHTML
                         // remove prefix-underscore attribute
                         .replace(/<!--bindings[^>]*-->/g, '')
+                        .replace(/<\s*input[^>]*>(.*?)/g, '')
+                        .replace(/<?(empty)="[^"]*"/g, '')
                         .replace(/_[\S]*?="[\s\S]*?"/g, '')
                     ;
                 break;
