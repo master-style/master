@@ -215,8 +215,8 @@
 :host(.outlined[label]:focus-within:not([readonly]):not([disabled])) {
     legend {
         transition:
-            max-width .2s cubic-bezier(0.64, 0, 0.78, 0),
-            padding-right .2s cubic-bezier(0.64, 0, 0.78, 0);
+            max-width .2s ease-in,
+            padding-right .2s ease-in;
         margin-left: -3px;
         padding-right: 7px;
         height: 2px;

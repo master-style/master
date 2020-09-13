@@ -60,7 +60,7 @@ export default class MasterClickable extends HTMLElement {
         if (value === 'submit') {
             this.on('click', () => {
                 this.closest('FORM').dispatchEvent(new Event('submit'));
-            }, { id: this });
+            }, { id: this, passive: true });
         } else if (oldValue === 'submit') {
             this.off({ id: this });
         }
