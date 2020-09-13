@@ -58,7 +58,7 @@ export class MasterInput extends MasterControl {
 
     protected updateValue(value: number) {
         this.empty = value === null || value === undefined;
-        this.controlTemplate.nodes[0].element.value = value;
+        this.controlTemplate.nodes[0].element.value = value ?? null;
     }
 
     onConnected() {
