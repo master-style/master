@@ -166,7 +166,7 @@
     }
 }
 
-:host([label][empty]:not(:focus-within):not(:active):not([readonly])) {
+:host([label][empty]:not([expanded]):not(:focus-within):not(:active):not([readonly])) {
 
     ::slotted([part=head]),
     ::slotted([part=foot]),
@@ -202,6 +202,7 @@
 }
 
 // outlined
+:host(.outlined[expanded]),
 :host(.outlined[label]:not([empty]):not(:focus-within)) {
     legend {
         transition: none;
@@ -210,7 +211,6 @@
 }
 
 // outlined
-
 :host(.outlined[label]:active:not([readonly]):not([disabled])),
 :host(.outlined[label]:focus-within:not([readonly]):not([disabled])) {
     legend {
@@ -317,6 +317,15 @@ m-badge {
     box-shadow: none;
 }
 
+::slotted([part=head]),
+::slotted([part=foot]),
+::slotted([part=body]) {
+    padding-top: var(--py);
+    padding-bottom: var(--py);
+    transition: opacity .2s .1s cubic-bezier(0, 0, .2, 1);
+    will-change: opacity;
+}
+
 ::slotted([part=body]) {
     -webkit-appearance: none !important;
     text-overflow: ellipsis;
@@ -340,20 +349,6 @@ m-badge {
 }
 
 ::slotted([part=head]),
-::slotted([part=foot]),
-::slotted([part=body]) {
-    padding-top: var(--py);
-    padding-bottom: var(--py);
-}
-
-::slotted([part=body]),
-::slotted([part=head]),
-::slotted([part=foot]) {
-    transition: opacity .2s .1s cubic-bezier(0, 0, .2, 1);
-    will-change: opacity;
-}
-
-::slotted([part=head]),
 ::slotted([part=foot]) {
     user-select: none;
     white-space: nowrap;
@@ -370,6 +365,7 @@ m-badge {
     margin-left: .3125rem;
     padding-right: var(--px);
     font-size: var(--f-xxs);
+    color: var(--f-fade);
 }
 
 // [validate] {

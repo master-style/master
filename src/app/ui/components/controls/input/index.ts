@@ -19,7 +19,7 @@ export class MasterInput extends MasterControl {
             placeholder: this.placeholder,
             disabled: this.disabled,
             required: this.required,
-            readOnly: this.readOnly,
+            readonly: this.readOnly,
             pattern: this.pattern,
         }
     ]);
