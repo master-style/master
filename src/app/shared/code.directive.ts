@@ -64,7 +64,6 @@ export class CodeDirective {
                     this.demoElement = $('div', { class: 'demo with:code' },
                         $('div', { class: 'demo-body' },
                             ...element.children
-                                .map((eachChild) => eachChild.cloneNode(true))
                         )
                     );
                     element.before(this.demoElement);

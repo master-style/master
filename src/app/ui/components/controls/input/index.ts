@@ -24,17 +24,15 @@ export class MasterInput extends MasterControl {
         }
     ]);
 
-    template = $(() => {
-        return [
-            'slot',
-            'fieldset', [
-                'legend', [
-                    'span', { $text: this.label }
-                ]
-            ],
-            'm-label', { $text: this.label }
-        ];
-    });
+    template = $(() => [
+        'slot',
+        'fieldset', [
+            'legend', [
+                'span', { $text: this.label }
+            ]
+        ],
+        'm-label', { $text: this.label }
+    ]);
 
     @Attr({ observe: false, render: false })
     empty: boolean;
@@ -74,12 +72,11 @@ export class MasterInput extends MasterControl {
     }
 
     onDisconnected() {
-        this.off('input', { id: this })
+        this.off('input', { id: this });
     }
 
     render() {
-        console.log('render');
-        this.template.render(this.shadowRoot);
         this.controlTemplate.render(this);
+        this.template.render(this.shadowRoot);
     }
 }

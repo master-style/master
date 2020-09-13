@@ -45,10 +45,7 @@ const create = function (eachNodes, parent) {
             element.textContent = node.$text;
         }
         if (attr) {
-            Object.keys(attr).forEach((eachAttrKey) => {
-                const eachAttrValue = attr[eachAttrKey];
-                element.attr(eachAttrKey, eachAttrValue);
-            });
+            element.attr(attr);
         }
         if (!skipChildren && node.children) {
             create(node.children, element);
@@ -136,9 +133,7 @@ class MasterTemplate {
                                 eachOldNode = (eachOldNode.element.remove() as undefined);
                             }
                             if (eachNode.attr) {
-                                for (const eachAttrKey in eachNode.attr) {
-                                    eachNode.element.attr(eachAttrKey, eachNode.attr[eachAttrKey]);
-                                }
+                                eachNode.element.attr(eachNode.attr);
                             }
                         }
                         if (eachNode.$html !== undefined) {
@@ -169,6 +164,7 @@ class MasterTemplate {
 
     remove() {
         if (this.nodes) {
+            this.container = null;
             this.nodes
                 .forEach((eachNode) => eachNode.element.remove());
             this.nodes = [];

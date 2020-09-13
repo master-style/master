@@ -25,6 +25,13 @@
                 <m-label part="foot">/ piece</m-label>
             </m-input>
             <m-input class="x:4@sm outlined"
+                     label="price"
+                     placeholder="0"
+                     type="number">
+                <label part="head">NT$</label>
+                <label part="foot">/ piece</label>
+            </m-input>
+            <m-input class="x:4@sm outlined"
                      label="company"
                      value="Aoyue Design"
                      type="text"
@@ -43,7 +50,93 @@
 <h2 id="structure">{{ 'structure' | translate }}</h2>
 <template [codeLang]="'html'">
     <m-input label="" type="text" value="" placeholder="">
-        <m-label part="head"></m-label>
-        <m-label part="foot"></m-label>
+        <label part="head"></label>
+        <label part="foot"></label>
     </m-input>
+</template>
+
+<h2 id="size">{{ 'size' | translate }}</h2>
+<m-table class="sm neat axis:x">
+    <table>
+        <thead>
+            <tr part="table-head">
+                <th class="fit t:left bg:theme sticky">class</th>
+                <th class="fit t:left bg:theme sticky t-wrap:no">height</th>
+                <th class="fit t:left bg:theme sticky t-wrap:no">min-width</th>
+                <th class="t:left bg:theme sticky">description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <code class="f:blue">xs</code>
+                </td>
+                <td><code>2rem</code></td>
+                <td><code>2rem</code></td>
+                <td><b>特小</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <code class="f:blue">sm</code>
+                </td>
+                <td><code>2.5rem</code></td>
+                <td><code>2.5rem</code></td>
+                <td><b>小</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <code class="default">∅</code>
+                </td>
+                <td><code>3rem</code></td>
+                <td><code>3rem</code></td>
+                <td><b>適中</b>，預設</td>
+            </tr>
+            <tr>
+                <td>
+                    <code class="f:blue">lg</code>
+                </td>
+                <td><code>3.5rem</code></td>
+                <td><code>3.5rem</code></td>
+                <td><b>大</b></td>
+            </tr>
+        </tbody>
+    </table>
+</m-table>
+<template [codeLang]="'html'" [codeDemo]=true>
+    <div class="y:xl c:bottom c:center">
+        <m-input class="x:3@sm xs outlined" placeholder="xs"></m-input>
+        <m-input class="x:3@sm sm outlined" placeholder="sm"></m-input>
+        <m-input class="x:3@sm outlined" placeholder="default"></m-input>
+        <m-input class="x:3@sm lg outlined" placeholder="lg"></m-input>
+    </div>
+</template>
+
+<h2 id="outlined">{{ 'outlined' | translate }}</h2>
+<m-table class="sm neat axis:x">
+    <table>
+        <thead>
+            <tr>
+                <th class="fit t:left bg:theme sticky">class</th>
+                <th class="t:left bg:theme sticky">description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <code class="f:blue">outlined</code>
+                </td>
+                <td><b>外框</b></td>
+            </tr>
+        </tbody>
+    </table>
+</m-table>
+<template [codeLang]="'html'" [codeDemo]=true>
+    <div class="y c:center">
+        <!-- <m-input class="x theme">
+            default
+        </m-input>
+        <m-input class="x theme outlined">
+            outlined
+        </m-input> -->
+    </div>
 </template>
