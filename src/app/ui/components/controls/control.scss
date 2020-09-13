@@ -55,65 +55,22 @@
     //     margin: 0 .5rem 0 .2rem;
     //     color: var(--f-fadest);
     // }
+}
 
-    // ~m-ripples {
-    //     border-radius: $xs;
-    // }
+:host(.xs) {
+    font-size: var(--f-xs);
+    --py: .5rem;
+    --px: .8rem;
+}
 
-    // &.xs {
-    //     font-size: var(--f-xs);
-    //     --py: .375rem;
-    //     --px: .8rem;
+:host(.sm) {
+    --py: .6875rem;
+}
 
-    //     &.underlined {
-    //         padding-bottom: .25rem;
-    //     }
-
-    //     ~m-label {
-    //         --py: .375rem;
-    //     }
-
-    //     ~.ctlHead,
-    //     ~.ctlFoot,
-    //     ~m-label,
-    //     ~fieldset {
-    //         font-size: var(--f-xs);
-    //         --py: .375rem;
-    //         --px: .8rem;
-    //     }
-    // }
-
-    // &.sm {
-    //     --py: 0.625rem;
-
-    //     ~.ctlHead,
-    //     ~.ctlFoot,
-    //     ~m-label,
-    //     ~fieldset {
-    //         --py: 0.625rem;
-    //         --py: 0.625rem;
-    //     }
-    // }
-
-    // &.lg {
-    //     font-size: 1.125rem;
-    //     --px: 1.2rem;
-    //     --py: 1.0315rem;
-
-    //     ~m-label {
-    //         --px: 1.2rem;
-    //         --py: 1.0315rem;
-    //     }
-
-    //     ~.ctlHead,
-    //     ~.ctlFoot,
-    //     ~m-label,
-    //     ~fieldset {
-    //         font-size: 1.125rem;
-    //         --py: 1.0315rem;
-    //         --px: 1.2rem;
-    //     }
-    // }
+:host(.lg) {
+    font-size: 1.125rem;
+    --py: 1.1875rem;
+    --px: 1.2rem;
 }
 
 :host([disabled]) {
@@ -225,6 +182,7 @@
 
 :host(.underlined) {
     --px: 0;
+
     fieldset {
         border-bottom-width: var(--b-width);
     }
@@ -247,7 +205,6 @@ m-label {
     transition-duration: .2s;
     transform-origin: left;
     line-height: inherit;
-    font-size: var(--f-sm);
     color: var(--f-themeFader);
     transform: scale(.75) translate(0, -65%);
     white-space: nowrap;
@@ -320,7 +277,6 @@ m-badge {
     -ms-text-overflow: ellipsis;
     white-space: nowrap;
     font-family: inherit;
-    font-size: var(--f-sm);
     z-index: $z-up;
     contain: style;
     width: 100%;
