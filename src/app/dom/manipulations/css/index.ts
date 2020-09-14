@@ -21,11 +21,12 @@ Element.prototype.css = function (param?: any, value?: any) {
     } else if (isObjLike(param)) {
         // tslint:disable-next-line: forin
         for (const key in param) {
+            const propValue = param[key];
             if (key[0] === '-') {
-                element.style.setProperty(key, param[key]);
+                element.style.setProperty(key, propValue);
             } else {
-                element.style[key] = param[key] +
-                    isAutoPx(camelToKebabCase(key)) && isNum(param[key] ?
+                element.style[key] = propValue +
+                    (isAutoPx(camelToKebabCase(key)) && isNum(propValue) ?
                         'px' :
                         ''
                     );

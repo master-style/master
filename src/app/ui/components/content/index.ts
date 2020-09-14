@@ -53,6 +53,7 @@ export class MasterList extends HTMLElement {
             'm-bar', {
                 part: 'x',
                 $if: this.scrollX,
+                $css: { padding: this.barPadding },
                 $created: (element) => this.barX = element
             }, [
                 'm-thumb', {
@@ -62,6 +63,7 @@ export class MasterList extends HTMLElement {
             'm-bar', {
                 part: 'y',
                 $if: this.scrollY,
+                $css: { padding: this.barPadding },
                 $created: (element) => this.barY = element
             }, [
                 'm-thumb', {
@@ -73,16 +75,6 @@ export class MasterList extends HTMLElement {
 
     render() {
         this.template.render(this.shadowRoot);
-        const nodes = this.template.nodes;
-        this.wrap = nodes[0].element;
-        // if (this.scrollX) {
-        //     this.barX = nodes[1].element;
-        //     this.thumbX = nodes[1].children[0].element;
-        // }
-        // if (this.scrollY) {
-        //     this.barY = nodes[2].element;
-        //     this.thumbY = nodes[2].children[0].element;
-        // }
     }
 
     wrap: any;
