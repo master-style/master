@@ -122,19 +122,27 @@ class MasterTemplate {
                                 }
                             } else if (eachOldNode.element) {
                                 eachOldNode.element.remove();
+                                const removed = eachNode.$removed;
+                                if (removed) removed(eachOldNode.element);
                             }
                         } else {
                             if (eachOldNode?.element && eachNode.$if === false) {
                                 eachOldNode.element.remove();
+                                const removed = eachNode.$removed;
+                                if (removed) removed(eachOldNode.element);
                                 continue;
                             } else if (eachNode.$if === false) {
                                 continue;
                             }
                             let skipChildren = false;
                             eachNode.element = document.createElement(eachNode.tag);
+                            const created = eachNode.$created;
+                            if (created) created(eachNode.element);
                             if (eachOldNode?.element) {
                                 eachOldNode.element.before(eachNode.element);
                                 eachOldNode = (eachOldNode.element.remove() as undefined);
+                                const removed = eachNode.$removed;
+                                if (removed) removed(eachOldNode.element);
                             }
                             const attr = eachNode.attr;
                             if (attr) {
@@ -180,6 +188,8 @@ class MasterTemplate {
                 eachNodes.forEach((eachNode) => {
                     if (eachNode.$if === false) return;
                     const element = document.createElement(eachNode.tag);
+                    const created = eachNode.$created;
+                    if (created) created(element);
                     eachNode.element = element;
                     let skipChildren = false;
                     if (eachNode.$html !== undefined) {

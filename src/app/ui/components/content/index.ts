@@ -24,20 +24,49 @@ const
     css
 })
 export class MasterList extends HTMLElement {
+    // scrollbar(whether: boolean) {
+    //     const toggleBar = (dir) => {
+    //         const $bar = this['$' + dir + 'Bar'];
+    //         if (whether && !$bar && this.hasDir(dir)) {
+    //             const that = this;
+    //             this.append(
+    //                 this['$' + dir + 'Bar'] = $(DIV, { class: 'scrollBar scrollBar:' + dir })
+    //                     .on('animationend', function () {
+    //                         if (!that.scrolling) this.rmClass('show fadeOut');
+    //                     }, { passive: true })
+    //                     .css('padding', this.barPadding)
+    //                     .append(this['$' + dir + 'Cue'] = $(DIV, { class: 'scrollCue' }))
+    //             );
+    //         } else if (!whether) {
+    //             if ($bar) this['$' + dir + 'Bar'] = $bar.remove();
+    //         }
+    //     }
+    //     toggleBar('x');
+    //     toggleBar('y');
+    // }
+
     template = $(() => {
         return [
-            'slot',
+            'slot', {
+                $created: (element) => this.wrap = element
+            },
             'm-bar', {
+                part: 'x',
                 $if: this.scrollX,
-                part: 'x'
+                $created: (element) => this.barX = element
             }, [
-                'm-thumb'
+                'm-thumb', {
+                    $created: (element) => this.thumbX = element
+                }
             ],
             'm-bar', {
+                part: 'y',
                 $if: this.scrollY,
-                part: 'y'
+                $created: (element) => this.barY = element
             }, [
-                'm-thumb'
+                'm-thumb', {
+                    $created: (element) => this.thumbY = element
+                }
             ]
         ]
     });
@@ -46,24 +75,24 @@ export class MasterList extends HTMLElement {
         this.template.render(this.shadowRoot);
         const nodes = this.template.nodes;
         this.wrap = nodes[0].element;
-        if (this.scrollX) {
-            this.barX = nodes[1].element;
-            this.cueX = nodes[1].children[0].element;
-        }
-        if (this.scrollY) {
-            this.barY = nodes[2].element;
-            this.cueY = nodes[2].children[0].element;
-        }
+        // if (this.scrollX) {
+        //     this.barX = nodes[1].element;
+        //     this.thumbX = nodes[1].children[0].element;
+        // }
+        // if (this.scrollY) {
+        //     this.barY = nodes[2].element;
+        //     this.thumbY = nodes[2].children[0].element;
+        // }
     }
 
     wrap: any;
     barX: any;
     barY: any;
-    cueY: any;
-    cueX: any;
+    thumbY: any;
+    thumbX: any;
 
     private accTime = { x: null, y: null };
-    #cueSize = { x: null, y: null };
+    #thumbSize = { x: null, y: null };
     private size = { x: null, y: null };
     private wrapSize = { x: null, y: null };
     private scrollSize = { x: null, y: null };
@@ -102,27 +131,6 @@ export class MasterList extends HTMLElement {
 
     @Attr({ observe: false, render: false })
     reachY: number;
-
-    // scrollbar(whether: boolean) {
-    //     const toggleBar = (dir) => {
-    //         const $bar = this['$' + dir + 'Bar'];
-    //         if (whether && !$bar && this.hasDir(dir)) {
-    //             const that = this;
-    //             this.append(
-    //                 this['$' + dir + 'Bar'] = $(DIV, { class: 'scrollBar scrollBar:' + dir })
-    //                     .on('animationend', function () {
-    //                         if (!that.scrolling) this.rmClass('show fadeOut');
-    //                     }, { passive: true })
-    //                     .css('padding', this.barPadding)
-    //                     .append(this['$' + dir + 'Cue'] = $(DIV, { class: 'scrollCue' }))
-    //             );
-    //         } else if (!whether) {
-    //             if ($bar) this['$' + dir + 'Bar'] = $bar.remove();
-    //         }
-    //     }
-    //     toggleBar('x');
-    //     toggleBar('y');
-    // }
 
     @Attr({ reflect: false })
     barPadding = 4;
@@ -267,19 +275,19 @@ export class MasterList extends HTMLElement {
             if (isX && this.reachX !== reach) this.reachX = reach;
             if (isY && this.reachY !== reach) this.reachY = reach;
 
-            const cue = isX ? this.cueX : this.cueY;
+            const thumb = isX ? this.thumbX : this.thumbY;
 
             const
                 barPosition = scrollPosition < 0 ? 0 : (scrollPosition > maxPosition ? maxPosition : scrollPosition);
             const
-                cueSize = size * size / (scrollSize + padding) - this.barPadding * 2,
+                thumbSize = size * size / (scrollSize + padding) - this.barPadding * 2,
                 Dir = isX ? 'X' : 'Y',
                 TRANSLATE = 'translate' + Dir;
-            cue.style.transform =
+            thumb.style.transform =
                 TRANSLATE + '(' + barPosition / (maxPosition + size) * size + 'px)';
-            if (this.#cueSize[dir] !== cueSize) {
-                this.#cueSize[dir] = cueSize;
-                cue.style[isX ? 'width' : 'height'] = cueSize + 'px';
+            if (this.#thumbSize[dir] !== thumbSize) {
+                this.#thumbSize[dir] = thumbSize;
+                thumb.style[isX ? 'width' : 'height'] = thumbSize + 'px';
             }
             return scrollPosition !== maxPosition;
         } else {
