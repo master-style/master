@@ -79,7 +79,14 @@ class MasterTemplate {
             (function renderNodes(eachNodes, eachOldNodes, parent) {
                 if (!eachNodes.length && eachOldNodes.length) {
                     eachOldNodes
-                        .forEach((eachNode) => eachNode.element.remove());
+                        .forEach((eachNode) => {
+                            const element = eachNode.element;
+                            if (element) {
+                                element.remove();
+                                const removed = eachNode.$removed;
+                                if (removed) removed(element);
+                            }
+                        });
                 } else {
                     // tslint:disable-next-line: prefer-for-of
                     for (let i = 0; i < eachNodes.length; i++) {
@@ -135,35 +142,35 @@ class MasterTemplate {
                                 continue;
                             }
                             let skipChildren = false;
-                            eachNode.element = document.createElement(eachNode.tag);
+                            const element = eachNode.element = document.createElement(eachNode.tag);
                             const created = eachNode.$created;
-                            if (created) created(eachNode.element);
+                            if (created) created(element);
                             if (eachOldNode?.element) {
-                                eachOldNode.element.before(eachNode.element);
+                                eachOldNode.element.before(element);
                                 eachOldNode = (eachOldNode.element.remove() as undefined);
                                 const removed = eachNode.$removed;
                                 if (removed) removed(eachOldNode.element);
                             }
                             const attr = eachNode.attr;
                             if (attr) {
-                                eachNode.element.attr(attr);
+                                element.attr(attr);
                             }
                             const css = eachNode.$css;
                             if (css) {
-                                eachNode.element.css(css);
+                                element.css(css);
                             }
                             if (eachNode.$html !== undefined) {
-                                eachNode.element.innerHTML = eachNode.$html;
+                                element.innerHTML = eachNode.$html;
                                 skipChildren = true;
                             } else if (eachNode.$text !== undefined) {
-                                eachNode.element.textContent = eachNode.$text;
+                                element.textContent = eachNode.$text;
                             }
                             if (!skipChildren && eachNode.children) {
-                                renderNodes(eachNode.children, [], eachNode.element);
+                                renderNodes(eachNode.children, [], element);
                             }
 
                             if (i === 0) {
-                                parent.prepend(eachNode.element);
+                                parent.prepend(element);
                             } else {
                                 const existedNode =
                                     eachNodes
@@ -172,9 +179,9 @@ class MasterTemplate {
                                         .find((nearNode) => nearNode.$if !== false && nearNode.element);
 
                                 if (existedNode) {
-                                    existedNode.element.after(eachNode.element);
+                                    existedNode.element.after(element);
                                 } else {
-                                    parent.appendChild(eachNode.element);
+                                    parent.appendChild(element);
                                 }
                             }
                         }
@@ -187,10 +194,9 @@ class MasterTemplate {
                 const eachFragment = fragment.cloneNode();
                 eachNodes.forEach((eachNode) => {
                     if (eachNode.$if === false) return;
-                    const element = document.createElement(eachNode.tag);
+                    const element = eachNode.element = document.createElement(eachNode.tag);
                     const created = eachNode.$created;
                     if (created) created(element);
-                    eachNode.element = element;
                     let skipChildren = false;
                     if (eachNode.$html !== undefined) {
                         element.innerHTML = eachNode.$html;
@@ -220,7 +226,14 @@ class MasterTemplate {
         if (this.nodes) {
             this.container = null;
             this.nodes
-                .forEach((eachNode) => eachNode.element.remove());
+                .forEach((eachNode) => {
+                    const element = eachNode.element;
+                    if (element) {
+                        element.remove();
+                        const removed = eachNode.$removed;
+                        if (removed) removed(element);
+                    }
+                });
             this.nodes = [];
         }
         return this;
