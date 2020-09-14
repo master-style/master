@@ -82,6 +82,7 @@
     "type": "類型",
     "outlined": "外框",
     "underlined": "底線",
+    "borderline": "邊線",
     "lined": "橫隔線",
     "indent-lined": "縮進線"
 }

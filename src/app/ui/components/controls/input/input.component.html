@@ -111,7 +111,7 @@
 <m-input class="x:3@sm" label="default"></m-input>
 <m-input class="x:3@sm lg" label="large"></m-input> -->
 
-<h2 id="outlined">{{ 'outlined' | translate }}</h2>
+<h2 id="borderline">{{ 'borderline' | translate }}</h2>
 <m-table class="sm neat axis:x">
     <table>
         <thead>
@@ -127,16 +127,25 @@
                 </td>
                 <td><b>外框</b></td>
             </tr>
+            <tr>
+                <td>
+                    <code class="f:blue">underlined</code>
+                </td>
+                <td><b>底線</b></td>
+            </tr>
         </tbody>
     </table>
 </m-table>
 <template [codeLang]="'html'" [codeDemo]=true>
     <div class="y c:center">
-        <!-- <m-input class="x theme">
-            default
-        </m-input>
-        <m-input class="x theme outlined">
-            outlined
-        </m-input> -->
+        <div class="x">
+            <m-input label="default"></m-input>
+        </div>
+        <div class="x">
+            <m-input class="underlined" label="underlined"></m-input>
+        </div>
+        <div class="x">
+            <m-input class="outlined" label="outlined"></m-input>
+        </div>
     </div>
 </template>
