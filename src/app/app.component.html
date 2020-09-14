@@ -1,7 +1,10 @@
 <nav part="app-head" class="sticky bb y:no c-wrap:no" id="appHead">
     <div class="x">
         <div class="c:stack">
-            <button is="m-button" id="side-toggle" collapse=".appSide" class="square transparent">
+            <button is="m-button"
+                    id="side-toggle"
+                    collapse=".appSide"
+                    class="square transparent">
                 <i class="i-maximize-2"></i>
             </button>
             <!-- <button is="m-button" toggle="#side .user" class="transparent">
@@ -37,15 +40,17 @@
     <article class="decorated" style="margin-bottom: 3rem">
         <nav aria-label="breadcrumb" class="decorated">
             <a *ngFor="let eachRoute of appService?.currentRoute?.pathFromRoot"
-                [attr.aria-current]="appService?.currentRoute === eachRoute ? 'page': null">{{ eachRoute?.routeConfig?.path || 'home' | translate }}</a>
+               [attr.aria-current]="appService?.currentRoute === eachRoute ? 'page': null">{{ eachRoute?.routeConfig?.path || 'home' | translate }}</a>
         </nav>
         <h1>{{ appService?.currentRoute?.routeConfig?.path | translate }}</h1>
         <div class="y:no my">
-            <m-chip class="x sm red+" [ngClass]="{
-                'red+': eachComposition === 'HTML',
-                'blue+': eachComposition === 'CSS',
-                'yellow+': eachComposition === 'JS'
-            }" *ngFor="let eachComposition of appService?.currentRoute?.data?.compositions">
+            <m-chip class="x sm red+"
+                    [ngClass]="{
+                        'red+': eachComposition === 'HTML',
+                        'blue+': eachComposition === 'CSS',
+                        'yellow+': eachComposition === 'JS'
+                    }"
+                    *ngFor="let eachComposition of appService?.currentRoute?.data?.compositions">
                 {{ eachComposition }}
             </m-chip>
         </div>
@@ -58,20 +63,32 @@
     </div>
     <m-list>
         <ng-container *ngFor="let eachRoute of routes">
-            <ng-container [ngTemplateOutlet]="routeGroup" [ngTemplateOutletContext]="{route: eachRoute, class: 'sm'}">
+            <ng-container [ngTemplateOutlet]="routeGroup"
+                          [ngTemplateOutletContext]="{route: eachRoute, size: 'sm'}">
             </ng-container>
         </ng-container>
     </m-list>
-    <ng-template #routeGroup let-route="route" let-class="class">
-        <header part="list-header" *ngIf="!route?.component && !route?.children">{{ route.path | translate }}</header>
-        <m-item [routerLink]="route?.paths ? route?.paths : ''" *ngIf="route?.component || route?.children" [class]="class" type="button">
-            <div slot="head">{{ route?.data?.icon || null }}</div>
+    <ng-template #routeGroup let-route="route" let-size="size">
+        <label *ngIf="!route?.component && !route?.children"
+               [ngStyle]="{'padding-left': size !== 'sm' ? '2.75rem' : '1.25rem'}"
+               style="padding-right: 1.25rem">
             {{ route.path | translate }}
+        </label>
+        <m-item [routerLink]="route?.paths ? route?.paths : ''"
+                *ngIf="route?.component || route?.children"
+                style="--px: 1.25rem"
+                [class]="size"
+                type="button">
+            <i class="i-{{route?.data?.icon}} f:fade++" style="margin-right: .625rem" *ngIf="route?.data?.icon"></i>
+            <span [ngStyle]="{'padding-left': size !== 'sm' ? '1.5rem' : null}">{{ route.path | translate }}</span>
         </m-item>
         <m-collapse *ngIf="route.children">
-            <ng-container *ngFor="let eachRoute of route.children" [ngTemplateOutlet]="routeGroup"
-                [ngTemplateOutletContext]="{route: eachRoute, class: 'xs'}">
-            </ng-container>
+            <m-list>
+                <ng-container *ngFor="let eachRoute of route.children"
+                              [ngTemplateOutlet]="routeGroup"
+                              [ngTemplateOutletContext]="{route: eachRoute, size: 'xs'}">
+                </ng-container>
+            </m-list>
         </m-collapse>
     </ng-template>
 </aside>

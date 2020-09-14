@@ -49,14 +49,14 @@
 :host(.sm) {
     --f-size: .9125rem;
     --size: 2.5rem;
-    --py: .6875rem;
+    --py: .625rem;
     --img-size: 1.625rem;
 }
 
 :host(.xs) {
     --f-size: .875rem;
     --size: 2rem;
-    --py: .4375rem;
+    --py: .375rem;
     --img-size: 1.25rem;
 }
 
@@ -82,6 +82,7 @@
     flex-wrap: nowrap;
     flex: 1 1 auto;
     padding-right: var(--px);
+    box-sizing: border-box;
 }
 
 slot[name=foot],

@@ -57,11 +57,11 @@ import { SkeletonComponent } from './components/skeleton/skeleton.component';
 
 export const uiRoutes: Routes = [
     { path: 'ui' },
-    { path: 'animation', component: AnimationComponent, resolve: { route: RouteResolver } },
-    { path: 'breakpoint', component: BreakpointComponent, resolve: { route: RouteResolver } },
-    { path: 'color', component: ColorComponent, resolve: { route: RouteResolver } },
+    { path: 'animation', data: { icon: 'activity' }, component: AnimationComponent, resolve: { route: RouteResolver } },
+    { path: 'breakpoint', data: { icon: 'git-commit' }, component: BreakpointComponent, resolve: { route: RouteResolver } },
+    { path: 'color', data: { icon: 'droplet' }, component: ColorComponent, resolve: { route: RouteResolver } },
     {
-        path: 'components', children: [
+        path: 'components', data: { icon: 'box' }, children: [
             { path: 'control' },
             { path: 'button', component: ButtonComponent, data: { compositions: ['HTML', 'CSS', 'JS'] }, resolve: { route: RouteResolver } },
             { path: 'select', component: SelectComponent, resolve: { route: RouteResolver } },
@@ -93,7 +93,7 @@ export const uiRoutes: Routes = [
         ]
     },
     {
-        path: 'modifiers', children: [
+        path: 'modifiers', data: { icon: 'scissors' }, children: [
             // { path: '', component: , resolve: { route: RouteResolver }, data: { compositions: ['CSS'] } },
             { path: 'alignment', component: AlignmentComponent, resolve: { route: RouteResolver }, data: { compositions: ['CSS'] } },
             { path: 'area', component: AreaComponent, resolve: { route: RouteResolver }, data: { compositions: ['CSS'] } },
@@ -115,13 +115,13 @@ export const uiRoutes: Routes = [
         ]
     },
     {
-        path: 'decorators', children: [
+        path: 'decorators', data: {}, children: [
             { path: 'article', component: ArticleComponent, resolve: { route: RouteResolver } },
             { path: 'breadcrumb', component: BreadcrumbComponent, resolve: { route: RouteResolver } },
             { path: 'figure', component: FigureComponent, resolve: { route: RouteResolver } },
         ]
     },
-    { path: 'icon', component: IconComponent },
+    { path: 'icon', data: {}, component: IconComponent },
 ];
 
 @NgModule({
