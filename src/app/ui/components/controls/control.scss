@@ -93,6 +93,7 @@
 
     ::slotted([part=head]),
     ::slotted([part=foot]),
+    ::slotted([part=body]),
     m-label {
         cursor: no-drop !important;
         color: var(--f-fadest) !important;
