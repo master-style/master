@@ -61,7 +61,7 @@ export class CodeDirective {
         switch (this.codeLang) {
             case 'html':
                 code =
-                    $('div', {}, ...element.children.map((eachNode)=> eachNode.cloneNode(true)))
+                    $('div', {}, ...element.children)
                         .innerHTML
                         .replace(/<?_[\S]*?="[\s\S]*?"/g, '')
                         .replace(/<!--bindings[^>]*-->/g, '')

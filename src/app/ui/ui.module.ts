@@ -1,6 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import { UiRoutingModule } from './ui-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { IconComponent } from './icon/icon.component';
@@ -95,9 +94,8 @@ import { BreadcrumbComponent } from './decorators/breadcrumb/breadcrumb.componen
         BreadcrumbComponent
     ],
     imports: [
-        CommonModule,
-        UiRoutingModule,
         SharedModule,
+        UiRoutingModule,
         FormsModule
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
