@@ -58,18 +58,20 @@
     </article>
 </main>
 <aside part="app-side" class="sticky br">
-    <div class="c:center" style="height: 3rem">
-        <img src="assets/images/logo.svg" width="70">
-    </div>
-    <m-content scroll-y>
-        <m-list>
-            <ng-container *ngFor="let eachRoute of routes">
-                <ng-container [ngTemplateOutlet]="routeGroup"
-                              [ngTemplateOutletContext]="{route: eachRoute, size: 'sm'}">
+    <div class="y:no c:row c-wrap:no">
+        <div class="x c:center" style="height: 3rem">
+            <img src="assets/images/logo.svg" width="70">
+        </div>
+        <m-content class="x:fill" scroll-y>
+            <m-list>
+                <ng-container *ngFor="let eachRoute of routes">
+                    <ng-container [ngTemplateOutlet]="routeGroup"
+                                  [ngTemplateOutletContext]="{route: eachRoute, size: 'sm'}">
+                    </ng-container>
                 </ng-container>
-            </ng-container>
-        </m-list>
-    </m-content>
+            </m-list>
+        </m-content>
+    </div>
 </aside>
 
 <ng-template #routeGroup let-route="route" let-size="size">

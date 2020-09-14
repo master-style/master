@@ -54,6 +54,7 @@ import { FigureComponent } from './decorators/figure/figure.component';
 import { RouteResolver } from '../shared/route.resolver';
 import { ItemComponent } from './components/item/item.component';
 import { SkeletonComponent } from './components/skeleton/skeleton.component';
+import { ContentComponent } from './components/content/content.component';
 
 export const uiRoutes: Routes = [
     { path: 'ui' },
@@ -62,6 +63,7 @@ export const uiRoutes: Routes = [
     { path: 'color', data: { icon: 'droplet' }, component: ColorComponent, resolve: { route: RouteResolver } },
     {
         path: 'components', data: { icon: 'box' }, children: [
+            { path: 'content', component: ContentComponent, resolve: { route: RouteResolver } },
             { path: 'control' },
             { path: 'button', component: ButtonComponent, data: { compositions: ['HTML', 'CSS', 'JS'] }, resolve: { route: RouteResolver } },
             { path: 'select', component: SelectComponent, resolve: { route: RouteResolver } },
@@ -83,10 +85,10 @@ export const uiRoutes: Routes = [
             { path: 'navigator' },
             { path: 'tabs', component: TabsComponent, resolve: { route: RouteResolver } },
             { path: 'interactive' },
-            { path: 'collapse', component: CollapseComponent, resolve: { route: RouteResolver } },
+            { path: 'collapse', component: ContentComponent, resolve: { route: RouteResolver } },
             { path: 'modal', component: ModalComponent, resolve: { route: RouteResolver } },
             { path: 'popup', component: PopupComponent, resolve: { route: RouteResolver } },
-            { path: 'scroll', component: ScrollComponent, resolve: { route: RouteResolver } },
+            { path: 'scroll', component: ContentComponent, resolve: { route: RouteResolver } },
             { path: 'loading-indicator' },
             { path: 'progress', component: ProgressComponent, resolve: { route: RouteResolver } },
             { path: 'skeleton', component: SkeletonComponent, resolve: { route: RouteResolver } },

@@ -1,0 +1,170 @@
+@import '../../variables';
+
+:host {
+    position: relative;
+    contain: size style;
+
+    &[over=x] {
+        overscroll-behavior-x: auto;
+    }
+
+    &[over=y] {
+        overscroll-behavior-y: auto;
+    }
+
+    &[over=both] {
+        overscroll-behavior: auto auto;
+    }
+
+    &[guide] {
+        .scrollWrap {
+            will-change: scroll-position, -webkit-mask-image;
+        }
+    }
+}
+
+:host([scroll-y]),
+:host([scroll-x]) {
+    slot {
+        will-change: scroll-position;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+}
+
+:host([scroll-x]) {
+    slot {
+        overflow-y: hidden;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        touch-action: pan-x;
+    }
+
+    // .scrollItems {
+    //     flex-wrap: nowrap;
+    //     padding-right: inherit;
+    // }
+
+    // .scroll-item {
+    //     &:last-child {
+    //         padding-right: 0;
+    //     }
+    // }
+
+    // &[snap=true] {
+    //     scroll-snap-type: mandatory;
+
+    //     .scroll-item {
+    //         scroll-snap-align: center;
+    //     }
+    // }
+}
+
+:host([scroll-y]) {
+
+    slot {
+        overflow-y: auto;
+        overflow-x: hidden;
+        overscroll-behavior-y: contain;
+        touch-action: pan-y;
+    }
+
+    // .scrollItems {
+    //     flex-direction: column;
+    // }
+
+    // &[snap=true] {
+    //     scroll-snap-type: mandatory;
+
+    //     .scroll-item {
+    //         scroll-snap-align: center;
+    //     }
+    // }
+}
+
+:host([scroll-x][scroll-y]) {
+    slot {
+        overflow: auto;
+        touch-action: manipulation;
+    }
+}
+
+slot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow-wrap: break-word;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+    -ms-overflow-style: none;
+}
+
+.scrollItems {
+    display: flex;
+}
+
+.scrollBar {
+    position: absolute;
+    z-index: $z-overlay;
+    pointer-events: none;
+    contain: content;
+    animation-delay: .5s;
+    animation-duration: .2s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+
+    &:not(.show) {
+        display: none;
+    }
+
+    &.show {
+        will-change: opacity;
+
+        .scrollCue {
+            will-change: transform;
+        }
+    }
+}
+
+.scrollCue {
+    position: relative;
+    display: block;
+    border-radius: 2px;
+    background-color: var(--b-fade);
+    pointer-events: auto;
+    contain: strict;
+
+    // &:hover {
+    //     width: 6px;
+    //     border-radius: 3px;
+    //     background-color: rgba(0, 0, 0, .2);
+    // }
+}
+
+.scrollBar\:x {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    .scrollCue {
+        height: 4px;
+    }
+}
+
+.scrollBar\:y {
+    top: 0;
+    right: 0;
+    height: 100%;
+
+    .scrollCue {
+        width: 4px;
+    }
+}

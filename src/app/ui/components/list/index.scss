@@ -33,6 +33,6 @@
     text-transform: uppercase;
 }
 
-::slotted(label:first-of-type) {
+::slotted(label:first-child) {
     padding-top: $sm;
 }
