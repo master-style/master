@@ -21,7 +21,7 @@ export class CreateComponent implements OnInit {
 
     template = $(() => {
         return [
-            'div', { class: 'shine', $text: '1' },
+            'div', { class: 'shine', $text: '1', $if: this.if },
             'div', { class: 'shine', $text: this.times, name: this.times, disabled: true },
             'div', { class: 'shine', $text: '2', $if: this.if }, [
                 'div', { class: 'shine', $text: '3' }, () => this.items.map((item) => [
@@ -42,7 +42,7 @@ export class CreateComponent implements OnInit {
                 'div', { class: 'shine', $text: '11' },
             ],
             'div', { class: 'shine', $text: '12' },
-            'div', { class: 'shine', $text: '13' },
+            'div', { class: 'shine', $text: '13', $if: this.if },
             'div', { class: 'shine', $text: '14' }
         ];
     });
