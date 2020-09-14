@@ -42,6 +42,7 @@ export class CodeDirective {
     @Input() codeLang: string;
     @Input() codeDemo: boolean;
     @Input() codeCollapsed: boolean;
+    @Input() selector: string;
 
     demoElement: Element;
     preElement: Element;
@@ -56,12 +57,14 @@ export class CodeDirective {
         const element = this.elementRef.nativeElement;
         const isTemplateTag = element.tagName === 'TEMPLATE';
         const isCodeTag = element.tagName === 'CODE';
+        const targetElements = this.selector ?
+            element.querySelectorAll(this.selector) : element.children;
         let code: string;
 
         switch (this.codeLang) {
             case 'html':
                 code =
-                    $('div', {}, ...element.children
+                    $('div', {}, ...targetElements
                         .map((eachNode) => eachNode.cloneNode(true)))
                         .innerHTML
                         .replace(/<?_[\S]*?="[\s\S]*?"/g, '')

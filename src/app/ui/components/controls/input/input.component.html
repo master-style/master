@@ -82,12 +82,15 @@
     </table>
 </m-table>
 
-<template [codeLang]="'html'" [codeDemo]=true>
+<template [codeLang]="'html'" [codeDemo]=true [selector]="'m-input'">
     <div class="y:xl c:bottom c:center">
-        <m-input class="outlined {{eachSize}} x:3@sm" label="{{eachSize||'default'}}" *ngFor="let eachSize of sizes"></m-input>
+        <div class="x:3@sm" *ngFor="let eachSize of sizes">
+            <m-input class="outlined {{eachSize}}" label="{{eachSize||'default'}}">
+            </m-input>
+        </div>
     </div>
 </template>
-        
+
 <!-- <m-input class="x:3@sm sm outlined" label="small"></m-input>
 <m-input class="x:3@sm outlined" label="default"></m-input>
 <m-input class="x:3@sm lg outlined" label="large"></m-input>
