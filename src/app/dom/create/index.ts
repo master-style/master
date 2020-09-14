@@ -92,13 +92,14 @@ class MasterTemplate {
                     for (let i = 0; i < eachNodes.length; i++) {
                         const eachNode = eachNodes[i];
                         let eachOldNode = eachOldNodes[i];
-                        if (eachOldNode?.element && eachNode.tag === eachOldNode.tag) {
+                        const eachOldElement = eachOldNode?.element;
+                        if (eachOldElement && eachNode.tag === eachOldNode.tag) {
                             if (!eachNodes[i + 1]) {
                                 eachOldNodes.splice(i + 1)
                                     .forEach((deletedOldNode) => deletedOldNode.element.remove());
                             }
                             if (eachNode.$if !== false) {
-                                eachNode.element = eachOldNode.element;
+                                const element = eachNode.element = eachOldElement;
                                 const attr = eachNode.attr;
                                 const oldAttr = eachOldNode?.attr;
                                 if (attr) {
@@ -106,7 +107,7 @@ class MasterTemplate {
                                         const value = attr[eachAttrKey];
                                         const oldValue = oldAttr[eachAttrKey];
                                         if (value !== oldValue) {
-                                            eachNode.element.attr(eachAttrKey, value);
+                                            element.attr(eachAttrKey, value);
                                         }
                                     }
                                 }
@@ -117,26 +118,26 @@ class MasterTemplate {
                                         const value = css[eachPropKey];
                                         const oldValue = oldCss[eachPropKey];
                                         if (value !== oldValue) {
-                                            eachNode.element.css(eachPropKey, value);
+                                            element.css(eachPropKey, value);
                                         }
                                     }
                                 }
                                 if (eachNode.$text !== eachOldNode.$text) {
-                                    eachNode.element.textContent = eachNode.$text;
+                                    element.textContent = eachNode.$text;
                                 }
                                 if (eachNode.children) {
-                                    renderNodes(eachNode.children, eachOldNode.children, eachNode.element);
+                                    renderNodes(eachNode.children, eachOldNode.children, element);
                                 }
-                            } else if (eachOldNode.element) {
-                                eachOldNode.element.remove();
+                            } else if (eachOldElement) {
+                                eachOldElement.remove();
                                 const removed = eachNode.$removed;
-                                if (removed) removed(eachOldNode.element);
+                                if (removed) removed(eachOldElement);
                             }
                         } else {
-                            if (eachOldNode?.element && eachNode.$if === false) {
-                                eachOldNode.element.remove();
+                            if (eachOldElement && eachNode.$if === false) {
+                                eachOldElement.remove();
                                 const removed = eachNode.$removed;
-                                if (removed) removed(eachOldNode.element);
+                                if (removed) removed(eachOldElement);
                                 continue;
                             } else if (eachNode.$if === false) {
                                 continue;
@@ -145,9 +146,9 @@ class MasterTemplate {
                             const element = eachNode.element = document.createElement(eachNode.tag);
                             const created = eachNode.$created;
                             if (created) created(element);
-                            if (eachOldNode?.element) {
-                                eachOldNode.element.before(element);
-                                eachOldNode = (eachOldNode.element.remove() as undefined);
+                            if (eachOldElement) {
+                                eachOldElement.before(element);
+                                eachOldNode = (eachOldElement.remove() as undefined);
                                 const removed = eachNode.$removed;
                                 if (removed) removed(eachOldNode.element);
                             }
