@@ -85,31 +85,41 @@ class MasterTemplate {
                     for (let i = 0; i < eachNodes.length; i++) {
                         const eachNode = eachNodes[i];
                         let eachOldNode = eachOldNodes[i];
-                        if (eachOldNode && eachNode.tag === eachOldNode.tag) {
-                            eachNode.element = eachOldNode.element;
-                            if (eachNode.attr) {
-                                for (const eachAttrKey in eachNode.attr) {
-                                    const newAttrValue = eachNode.attr[eachAttrKey];
-                                    const oldAttrValue = eachOldNode?.attr[eachAttrKey];
-                                    if (newAttrValue !== oldAttrValue) {
-                                        eachNode.element.attr(eachAttrKey, newAttrValue);
-                                    }
-                                }
-                            }
-                            if (eachNode.$text !== eachOldNode.$text) {
-                                eachNode.element.textContent = eachNode.$text;
-                            }
+                        if (eachOldNode?.element && eachNode.tag === eachOldNode.tag) {
                             if (!eachNodes[i + 1]) {
                                 eachOldNodes.splice(i + 1)
                                     .forEach((deletedOldNode) => deletedOldNode.element.remove());
                             }
-                            if (eachNode.children) {
-                                renderNodes(eachNode.children, eachOldNode.children, eachNode.element);
+                            if (eachNode.$if !== false) {
+                                eachNode.element = eachOldNode.element;
+                                if (eachNode.attr) {
+                                    for (const eachAttrKey in eachNode.attr) {
+                                        const newAttrValue = eachNode.attr[eachAttrKey];
+                                        const oldAttrValue = eachOldNode?.attr[eachAttrKey];
+                                        if (newAttrValue !== oldAttrValue) {
+                                            eachNode.element.attr(eachAttrKey, newAttrValue);
+                                        }
+                                    }
+                                }
+                                if (eachNode.$text !== eachOldNode.$text) {
+                                    eachNode.element.textContent = eachNode.$text;
+                                }
+                                if (eachNode.children) {
+                                    renderNodes(eachNode.children, eachOldNode.children, eachNode.element);
+                                }
+                            } else if (eachOldNode.element) {
+                                eachOldNode.element.remove();
                             }
                         } else {
+                            if (eachOldNode?.element && eachNode.$if === false) {
+                                eachOldNode.element.remove();
+                                continue;
+                            } else if (eachNode.$if === false) {
+                                continue;
+                            }
                             let skipChildren = false;
                             eachNode.element = document.createElement(eachNode.tag);
-                            if (eachOldNode) {
+                            if (eachOldNode?.element) {
                                 eachOldNode.element.before(eachNode.element);
                                 eachOldNode = (eachOldNode.element.remove() as undefined);
                             }
@@ -127,10 +137,21 @@ class MasterTemplate {
                             if (!skipChildren && eachNode.children) {
                                 renderNodes(eachNode.children, [], eachNode.element);
                             }
-                            if (i !== 0) {
-                                eachNodes[i - 1].element.after(eachNode.element);
-                            } else {
+
+                            if (i === 0) {
                                 parent.appendChild(eachNode.element);
+                            } else {
+                                const existedNode =
+                                    eachNodes
+                                        .slice(0, i)
+                                        .reverse()
+                                        .find((nearNode) => nearNode.$if !== false && nearNode.element);
+
+                                if (existedNode) {
+                                    existedNode.element.after(eachNode.element);
+                                } else {
+                                    parent.appendChild(eachNode.element);
+                                }
                             }
                         }
                     }
@@ -141,6 +162,7 @@ class MasterTemplate {
             (function create(eachNodes, parent) {
                 const eachFragment = fragment.cloneNode();
                 eachNodes.forEach((node) => {
+                    if (node.$if === false) return;
                     const element = document.createElement(node.tag);
                     node.element = element;
                     const attr = node.attr;

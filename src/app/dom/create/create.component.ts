@@ -17,31 +17,33 @@ export class CreateComponent implements OnInit {
 
     tagName = 'div';
 
+    if = false;
+
     template = $(() => {
         return [
             'div', { class: 'shine', $text: '1' },
             'div', { class: 'shine', $text: this.times, name: this.times, disabled: true },
-            'div', { class: 'shine', $text: '1' }, [
-                'div', { class: 'shine', $text: '2' }, () => this.items.map((item) => [
+            'div', { class: 'shine', $text: '2', $if: this.if }, [
+                'div', { class: 'shine', $text: '3' }, () => this.items.map((item) => [
                     'div', { class: 'shine', $text: item }
                 ]),
-                'div', { class: 'shine', $text: '2' },
-                'div', { class: 'shine', $text: '2' }, [
-                    'div', { class: 'shine', $text: '3' },
-                    'div', { class: 'shine', $text: '3' }, [
-                        'div', { class: 'shine', $text: '4' }, [
-                            'div', { class: 'shine', $text: '5' }
+                'div', { class: 'shine', $text: '4' },
+                'div', { class: 'shine', $text: '5' }, [
+                    'div', { class: 'shine', $text: '6' },
+                    'div', { class: 'shine', $text: '7' }, [
+                        'div', { class: 'shine', $text: '8' }, [
+                            'div', { class: 'shine', $text: '9' }
                         ]
                     ]
                 ],
                 'div', { class: 'shine', $html: '<article>love</article>' }
             ],
-            this.tagName, { class: 'shine', $text: '1' }, [
-                'div', { class: 'shine', $text: '2' },
+            this.tagName, { class: 'shine', $text: '10' }, [
+                'div', { class: 'shine', $text: '11' },
             ],
-            'div', { class: 'shine', $text: '1' },
-            'div', { class: 'shine', $text: '1' },
-            'div', { class: 'shine', $text: '1' }
+            'div', { class: 'shine', $text: '12' },
+            'div', { class: 'shine', $text: '13' },
+            'div', { class: 'shine', $text: '14' }
         ];
     });
 
@@ -70,6 +72,10 @@ export class CreateComponent implements OnInit {
                 this.tagName = 'div';
             }
         }, 1000);
+
+        setTimeout(() => {
+            this.if = true;
+        }, 3000);
 
     }
 
