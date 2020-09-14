@@ -23,6 +23,9 @@ export default class MasterControl extends HTMLElement {
     @Attr()
     disabled: boolean;
 
+    @Attr({ render: false })
+    expanded: boolean;
+
     @Attr()
     required: boolean;
 
@@ -64,5 +67,8 @@ export default class MasterControl extends HTMLElement {
 
     @Attr({ reflect: false, render: false })
     value: any;
+
+    @Attr({ observe: false, render: false })
+    empty: boolean;
 
 }

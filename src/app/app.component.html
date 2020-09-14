@@ -65,8 +65,8 @@
     <ng-template #routeGroup let-route="route" let-class="class">
         <header part="list-header" *ngIf="!route?.component && !route?.children">{{ route.path | translate }}</header>
         <m-item [routerLink]="route?.paths ? route?.paths : ''" *ngIf="route?.component || route?.children" [class]="class" type="button">
-            <div part="item-head">{{ route?.data?.icon || null }}</div>
-            <div part="item-body">{{ route.path | translate }}</div>
+            <div slot="head">{{ route?.data?.icon || null }}</div>
+            {{ route.path | translate }}
         </m-item>
         <m-collapse *ngIf="route.children">
             <ng-container *ngFor="let eachRoute of route.children" [ngTemplateOutlet]="routeGroup"

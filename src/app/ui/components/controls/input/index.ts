@@ -34,9 +34,6 @@ export class MasterInput extends MasterControl {
         'm-label', { $text: this.label }
     ]);
 
-    @Attr({ observe: false, render: false })
-    empty: boolean;
-
     focused = false;
 
     protected valueHandler(value: any, oldValue: any) {

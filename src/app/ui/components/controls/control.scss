@@ -160,7 +160,14 @@
         margin-left: 0;
         will-change: max-width;
     }
+}
 
+:host(.outlined[label]) {
+    span {
+        padding: 0 var(--label-px);
+        letter-spacing: normal;
+        contain: strict;
+    }
 }
 
 // outlined
@@ -171,11 +178,6 @@
         margin-left: 0;
     }
 
-    span {
-        padding: 0 var(--label-px);
-        letter-spacing: normal;
-        contain: strict;
-    }
 }
 
 // outlined
