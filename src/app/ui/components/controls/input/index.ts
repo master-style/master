@@ -34,8 +34,6 @@ export class MasterInput extends MasterControl {
         'm-label', { $text: this.label }
     ]);
 
-    focused = false;
-
     protected valueHandler(value: any, oldValue: any) {
         if (this.type === 'number') {
             if (value === '') {
@@ -62,7 +60,6 @@ export class MasterInput extends MasterControl {
                 this.controlTemplate.nodes[0].element.focus();
             }, { id: this, passive: true })
             .on('input', '[part=body]', (event: any) => {
-                console.log('fuck');
                 this.value = event.target.value;
             }, { id: this, passive: true });
         this.updateValue(this.value);
