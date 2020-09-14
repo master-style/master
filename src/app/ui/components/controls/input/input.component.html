@@ -81,23 +81,24 @@
         </tbody>
     </table>
 </m-table>
+
 <template [codeLang]="'html'" [codeDemo]=true>
     <div class="y:xl c:bottom c:center">
-        <m-input class="x:3@sm outlined" label="extra small" *ngFor="let eachSize of sizes">
-        </m-input>
-        <!-- <m-input class="x:3@sm sm outlined" label="small"></m-input>
-        <m-input class="x:3@sm outlined" label="default"></m-input>
-        <m-input class="x:3@sm lg outlined" label="large"></m-input>
-        <m-input class="x:3@sm xs underlined" label="extra small"></m-input>
-        <m-input class="x:3@sm sm underlined" label="small"></m-input>
-        <m-input class="x:3@sm underlined" label="default"></m-input>
-        <m-input class="x:3@sm lg underlined" label="large"></m-input>
-        <m-input class="x:3@sm xs" label="extra small"></m-input>
-        <m-input class="x:3@sm sm" label="small"></m-input>
-        <m-input class="x:3@sm" label="default"></m-input>
-        <m-input class="x:3@sm lg" label="large"></m-input> -->
+        <m-input class="outlined {{eachSize}} x:3@sm" label="{{eachSize||'default'}}" *ngFor="let eachSize of sizes"></m-input>
     </div>
 </template>
+        
+<!-- <m-input class="x:3@sm sm outlined" label="small"></m-input>
+<m-input class="x:3@sm outlined" label="default"></m-input>
+<m-input class="x:3@sm lg outlined" label="large"></m-input>
+<m-input class="x:3@sm xs underlined" label="extra small"></m-input>
+<m-input class="x:3@sm sm underlined" label="small"></m-input>
+<m-input class="x:3@sm underlined" label="default"></m-input>
+<m-input class="x:3@sm lg underlined" label="large"></m-input>
+<m-input class="x:3@sm xs" label="extra small"></m-input>
+<m-input class="x:3@sm sm" label="small"></m-input>
+<m-input class="x:3@sm" label="default"></m-input>
+<m-input class="x:3@sm lg" label="large"></m-input> -->
 
 <h2 id="outlined">{{ 'outlined' | translate }}</h2>
 <m-table class="sm neat axis:x">

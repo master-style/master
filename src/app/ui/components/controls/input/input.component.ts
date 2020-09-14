@@ -7,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InputComponent implements OnInit {
 
-    sizes: ['xs', 'sm', '', 'lg'];
-
     constructor() { }
+
+    sizes = ['xs', 'sm', '', 'lg'];
 
     ngOnInit(): void { }
 
