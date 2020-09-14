@@ -51,6 +51,7 @@
     --b-color: var(--b-fade);
     --py: .875rem;
     --px: 1rem;
+    --label-pr: .4375rem;
     // ~m-icon {
     //     margin: 0 .5rem 0 .2rem;
     //     color: var(--f-fadest);
@@ -61,16 +62,19 @@
     font-size: var(--f-xs);
     --py: .5rem;
     --px: .8rem;
+    --label-pr: .2rem;
 }
 
 :host(.sm) {
     --py: .6875rem;
+    --label-pr: .5rem;
 }
 
 :host(.lg) {
     font-size: 1.125rem;
     --py: 1.1875rem;
     --px: 1.2rem;
+    --label-pr: .75rem;
 }
 
 :host([disabled]) {
@@ -150,11 +154,9 @@
     }
 
     legend {
-        transition:
-            max-width .2s cubic-bezier(0.33, 1, 0.68, 1) .1s,
-            padding-right .2s cubic-bezier(0.33, 1, 0.68, 1) .1s;
-        margin-left: -2px;
-        will-change: max-width, padding-right;
+        transition: max-width .2s cubic-bezier(0.33, 1, 0.68, 1) .1s;
+        margin-left: 0;
+        will-change: max-width;
     }
 }
 
@@ -163,7 +165,11 @@
 :host(.outlined[label]:not([empty]):not(:focus-within)) {
     legend {
         transition: none;
-        padding-right: 7px;
+        margin-left: 0;
+    }
+
+    span {
+        padding-right: var(--label-pr);
     }
 }
 
@@ -172,11 +178,13 @@
 :host(.outlined[label]:focus-within:not([readonly]):not([disabled])) {
     legend {
         transition:
-            max-width .2s ease-in,
-            padding-right .2s ease-in;
-        margin-left: -3px;
-        padding-right: 7px;
+            max-width .2s ease-in;
+        margin-left: -1px;
         height: 2px;
+    }
+
+    span {
+        padding-right: var(--label-pr);
     }
 }
 
@@ -220,8 +228,10 @@ fieldset {
     position: absolute;
     box-sizing: border-box;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
+    margin: 0;
     display: flex;
     color: var(--theme, var(--f-themeFader));
     border: 0px solid var(--b-color);
