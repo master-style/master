@@ -2,8 +2,6 @@ import { Element, Attr } from '@element';
 import debounce from 'lodash/debounce';
 import css from './index.scss';
 
-console.log(debounce);
-
 const NAME = 'content';
 
 const
@@ -25,37 +23,33 @@ const
 })
 export class MasterList extends HTMLElement {
 
-    template = $(() => {
-        const temp = [
-            'slot', {
-                $created: (element: HTMLElement) => this.wrap = element
-            },
-            'm-bar', {
-                part: 'x',
-                hidden: !this.scrolling,
-                $if: this.scrollX,
-                $css: { padding: this.barPadding },
-                $created: (element: HTMLElement) => this.barX = element
-            }, [
-                'm-thumb', {
-                    $created: (element: HTMLElement) => this.thumbX = element
-                }
-            ],
-            'm-bar', {
-                part: 'y',
-                hidden: !this.scrolling,
-                $if: this.scrollY,
-                $css: { padding: this.barPadding },
-                $created: (element: HTMLElement) => this.barY = element
-            }, [
-                'm-thumb', {
-                    $created: (element: HTMLElement) => this.thumbY = element
-                }
-            ]
-        ];
-        console.log(temp);
-        return temp;
-    });
+    template = $(() => [
+        'slot', {
+            $created: (element: HTMLElement) => this.wrap = element
+        },
+        'm-bar', {
+            part: 'x',
+            hidden: !this.scrolling,
+            $if: this.scrollX,
+            $css: { padding: this.barPadding },
+            $created: (element: HTMLElement) => this.barX = element
+        }, [
+            'm-thumb', {
+                $created: (element: HTMLElement) => this.thumbX = element
+            }
+        ],
+        'm-bar', {
+            part: 'y',
+            hidden: !this.scrolling,
+            $if: this.scrollY,
+            $css: { padding: this.barPadding },
+            $created: (element: HTMLElement) => this.barY = element
+        }, [
+            'm-thumb', {
+                $created: (element: HTMLElement) => this.thumbY = element
+            }
+        ]
+    ]);
 
     render() {
         this.template.render(this.shadowRoot);
@@ -119,12 +113,7 @@ export class MasterList extends HTMLElement {
             if (!this.renderBy('x') && !this.renderBy('y')) return;
             if (!this.scrolling) {
                 this.scrolling = true;
-                if (this.scrollX) {
-                    this.barX.hidden = false;
-                }
-                if (this.scrollY) {
-                    this.barY.hidden = false;
-                }
+                this.render();
             }
             if (this.#scrollEndTimeout) this.#scrollEndTimeout = clearTimeout(this.#scrollEndTimeout);
             this.#scrollEndTimeout = setTimeout(() => {
@@ -277,14 +266,7 @@ export class MasterList extends HTMLElement {
         if (this.#animationFrame) this.#animationFrame = cancelAnimationFrame(this.#animationFrame);
         this.scrolling = false;
         this.#accTime = { x: 0, y: 0 };
-        if (!this.disableScrollbar) {
-            if (this.scrollX) {
-                this.barX.hidden = true;
-            };
-            if (this.scrollY) {
-                this.barY.hidden = true;
-            }
-        }
+        this.render();
     }
 
     onDisconnected() {
