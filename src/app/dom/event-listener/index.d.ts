@@ -6,6 +6,3 @@ declare namespace Master {
         id?: any;
     }
 }
-
-import './on';
-import './off';
