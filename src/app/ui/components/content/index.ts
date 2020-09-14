@@ -69,16 +69,17 @@ export class MasterList extends HTMLElement {
     thumbY: any;
     thumbX: any;
 
-    private accTime = { x: null, y: null };
+    #accTime = { x: null, y: null };
     #thumbSize = { x: null, y: null };
-    private size = { x: null, y: null };
-    private wrapSize = { x: null, y: null };
-    private scrollSize = { x: null, y: null };
+    #size = { x: null, y: null };
+    #wrapSize = { x: null, y: null };
+    #scrollSize = { x: null, y: null };
+    #scrollEndTimeout: any;
+
     scrolling = false;
-    private scrollEndTimeout: any;
     max = { x: null, y: null };
 
-    private animationFrame;
+    #animationFrame: any;
 
     @Attr({ reflect: false, render: false })
     duration: number = 300;
@@ -125,8 +126,8 @@ export class MasterList extends HTMLElement {
                     this.barY.hidden = false;
                 }
             }
-            if (this.scrollEndTimeout) this.scrollEndTimeout = clearTimeout(this.scrollEndTimeout);
-            this.scrollEndTimeout = setTimeout(() => {
+            if (this.#scrollEndTimeout) this.#scrollEndTimeout = clearTimeout(this.#scrollEndTimeout);
+            this.#scrollEndTimeout = setTimeout(() => {
                 this.stopScrolling();
             }, 100);
         }, {
@@ -196,8 +197,8 @@ export class MasterList extends HTMLElement {
         }
 
         if (this.scrolling) {
-            if (this.animationFrame) this.animationFrame = cancelAnimationFrame(this.animationFrame);
-            this.accTime = { x: 0, y: 0 };
+            if (this.#animationFrame) this.#animationFrame = cancelAnimationFrame(this.#animationFrame);
+            this.#accTime = { x: 0, y: 0 };
         }
 
         if (duration === 0) {
@@ -207,11 +208,11 @@ export class MasterList extends HTMLElement {
             duration = duration || this.duration;
             this.scrolling = true;
             const scroll = (dir: string, currentValue: number, toValue: number) => {
-                this.accTime[dir] += 20;
-                const newValue = linear(this.accTime[dir], currentValue, toValue - currentValue, duration);
+                this.#accTime[dir] += 20;
+                const newValue = linear(this.#accTime[dir], currentValue, toValue - currentValue, duration);
                 if (currentValue !== Math.round(toValue)) {
                     this.wrap[SCROLL_POSITION_KEY[dir]] = newValue;
-                    this.animationFrame = requestAnimationFrame(() => scroll(dir, newValue, toValue));
+                    this.#animationFrame = requestAnimationFrame(() => scroll(dir, newValue, toValue));
                 } else {
                     this.scrolling = false;
                     if (complete) complete();
@@ -227,9 +228,9 @@ export class MasterList extends HTMLElement {
         const isY = dir === 'y';
         if (isX && this.scrollX || isY && this.scrollY) {
             const
-                scrollSize = this.scrollSize[dir] = this.wrap[SCROLL_SIZE_KEY[dir]],
-                size = this.size[dir] = this[CLIENT_SIZE_KEY[dir]],
-                wrapSize = this.wrapSize[dir] = this.wrap[CLIENT_SIZE_KEY[dir]],
+                scrollSize = this.#scrollSize[dir] = this.wrap[SCROLL_SIZE_KEY[dir]],
+                size = this.#size[dir] = this[CLIENT_SIZE_KEY[dir]],
+                wrapSize = this.#wrapSize[dir] = this.wrap[CLIENT_SIZE_KEY[dir]],
                 padding = size - wrapSize,
                 scrollPosition = this.wrap[SCROLL_POSITION_KEY[dir]],
                 maxPosition = this.max[dir] = scrollSize - wrapSize < 0 ? 0 : (scrollSize - wrapSize),
@@ -273,9 +274,9 @@ export class MasterList extends HTMLElement {
 
     // stop current animation
     stopScrolling() {
-        if (this.animationFrame) this.animationFrame = cancelAnimationFrame(this.animationFrame);
+        if (this.#animationFrame) this.#animationFrame = cancelAnimationFrame(this.#animationFrame);
         this.scrolling = false;
-        this.accTime = { x: 0, y: 0 };
+        this.#accTime = { x: 0, y: 0 };
         if (!this.disableScrollbar) {
             if (this.scrollX) {
                 this.barX.hidden = true;
