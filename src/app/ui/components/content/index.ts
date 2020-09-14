@@ -5,17 +5,18 @@ import css from './index.scss';
 const NAME = 'content';
 
 const
+    SCROLL_KEY = 'scroll',
+    OFFSET_KEY = 'scroll',
     WIDTH_KEY = 'Width',
     HEIGHT_KEY = 'Height',
-    SCROLL_SIZE_KEY = { X: 'scrollWidth', Y: 'scrollHeight' },
-    SCROLL_POSITION_KEY = { X: 'scrollLeft', Y: 'scrollTop' },
-    OFFSET_POSITION_KEY = { X: 'offsetLeft', Y: 'offsetTop' },
-    OFFSET_SIZE_KEY = { X: 'offset' + WIDTH_KEY, Yy: 'offset' + HEIGHT_KEY },
-    CLIENT_SIZE_KEY = { X: 'client' + WIDTH_KEY, Y: 'client' + HEIGHT_KEY },
-    linear = (t, b, c, d): any => {
-        t = (t /= d) * .5;
-        return Math.round(b + c * t);
-    };
+    LEFT_KEY = 'Left',
+    TOP_KEY = 'Top',
+    SIZE_KEY = { X: 'width', Y: 'height' },
+    SCROLL_SIZE_KEY = { X: SCROLL_KEY + WIDTH_KEY, Y: SCROLL_KEY + HEIGHT_KEY },
+    SCROLL_POSITION_KEY = { X: SCROLL_KEY + LEFT_KEY, Y: SCROLL_KEY + TOP_KEY },
+    OFFSET_POSITION_KEY = { X: OFFSET_KEY + LEFT_KEY, Y: OFFSET_KEY + TOP_KEY },
+    OFFSET_SIZE_KEY = { X: OFFSET_KEY + WIDTH_KEY, Y: OFFSET_KEY + HEIGHT_KEY },
+    CLIENT_SIZE_KEY = { X: 'client' + WIDTH_KEY, Y: 'client' + HEIGHT_KEY };
 
 @Element({
     tag: 'm-' + NAME,
@@ -26,7 +27,7 @@ export class MasterList extends HTMLElement {
     template = $(() => [
         'slot', {
             $created: (element: HTMLElement) => {
-                this.wrap = element;
+                this.scrollWrap = element;
                 console.log('wrap');
             }
         },
@@ -59,7 +60,7 @@ export class MasterList extends HTMLElement {
         this.renderPartly();
     }
 
-    wrap: any;
+    scrollWrap: HTMLElement;
     barX: any;
     barY: any;
     thumbY: any;
@@ -81,7 +82,6 @@ export class MasterList extends HTMLElement {
     maxX: number;
     maxY: number;
 
-    max = { x: null, y: null };
     scrolling = false;
 
     #animationFrame: any;
@@ -117,7 +117,7 @@ export class MasterList extends HTMLElement {
     barPadding = 4;
 
     onConnected() {
-        this.wrap.on('scroll', (event: any) => {
+        this.scrollWrap.on('scroll', (event: any) => {
             console.log('scroll')
             if (!this.renderPartly()) return;
             if (!this.scrolling) {
@@ -158,7 +158,7 @@ export class MasterList extends HTMLElement {
                     if (this.center) {
                         const
                             elementSize = element[CLIENT_SIZE_KEY[dir]],
-                            offsetSize = this.wrap[OFFSET_SIZE_KEY[dir]],
+                            offsetSize = this.scrollWrap[OFFSET_SIZE_KEY[dir]],
                             centerOffset = (offsetSize - elementSize) / 2;
                         if (to[dir] < centerOffset) {
                             to[dir] = 0;
@@ -181,7 +181,7 @@ export class MasterList extends HTMLElement {
                     } else if (to[dir] < 0) {
                         to[dir] = 0;
                     }
-                    const current = this.wrap[SCROLL_POSITION_KEY[dir]];
+                    const current = this.scrollWrap[SCROLL_POSITION_KEY[dir]];
                     if (to[dir] === current) return to[dir] = null;
                 };
             if (this.scrollX) calc('X');
@@ -199,24 +199,28 @@ export class MasterList extends HTMLElement {
         }
 
         if (duration === 0) {
-            if (to.x) this.wrap.scrollLeft = to.x;
-            if (to.y) this.wrap.scrollTop = to.y;
+            if (this.scrollX && to.X) this.scrollWrap.scrollLeft = to.X;
+            if (this.scrollY && to.Y) this.scrollWrap.scrollTop = to.Y;
         } else {
             duration = duration || this.duration;
             this.scrolling = true;
             const scroll = (dir: string, currentValue: number, toValue: number) => {
                 this['#time' + dir] += 20;
-                const newValue = linear(this['#time' + dir], currentValue, toValue - currentValue, duration);
+                const newValue =
+                    (function (t, b, c, d) {
+                        t = (t /= d) * .5;
+                        return Math.round(b + c * t);
+                    })(this['#time' + dir], currentValue, toValue - currentValue, duration);
                 if (currentValue !== Math.round(toValue)) {
-                    this.wrap[SCROLL_POSITION_KEY[dir]] = newValue;
+                    this.scrollWrap[SCROLL_POSITION_KEY[dir]] = newValue;
                     this.#animationFrame = requestAnimationFrame(() => scroll(dir, newValue, toValue));
                 } else {
                     this.scrolling = false;
                     if (complete) complete();
                 }
-            }
-            if (to.X) scroll('X', this.wrap[SCROLL_POSITION_KEY.X], to.X);
-            if (to.Y) scroll('Y', this.wrap[SCROLL_POSITION_KEY.Y], to.Y);
+            };
+            if (this.scrollX && to.X) scroll('X', this.scrollWrap[SCROLL_POSITION_KEY.X], to.X);
+            if (this.scrollY && to.Y) scroll('Y', this.scrollWrap[SCROLL_POSITION_KEY.Y], to.Y);
         }
     }
 
@@ -224,12 +228,12 @@ export class MasterList extends HTMLElement {
         const render = (dir: string) => {
             if (this['scroll' + dir]) {
                 const
-                    scrollSize = this['#scrollSize' + dir] = this.wrap[SCROLL_SIZE_KEY[dir]],
+                    scrollSize = this['#scrollSize' + dir] = this.scrollWrap[SCROLL_SIZE_KEY[dir]],
                     size = this['#size' + dir] = this[CLIENT_SIZE_KEY[dir]],
-                    wrapSize = this['#wrapSize' + dir] = this.wrap[CLIENT_SIZE_KEY[dir]],
+                    wrapSize = this['#wrapSize' + dir] = this.scrollWrap[CLIENT_SIZE_KEY[dir]],
                     padding = size - wrapSize,
-                    scrollPosition = this.wrap[SCROLL_POSITION_KEY[dir]],
-                    maxPosition = this.max[dir] = scrollSize - wrapSize < 0 ? 0 : (scrollSize - wrapSize),
+                    scrollPosition = this.scrollWrap[SCROLL_POSITION_KEY[dir]],
+                    maxPosition = this['max' + dir] = scrollSize - wrapSize < 0 ? 0 : (scrollSize - wrapSize),
                     reach = scrollPosition <= 0 ? -1 : scrollPosition >= maxPosition ? 1 : 0;
                 if (this.guide) {
                     const
@@ -242,7 +246,8 @@ export class MasterList extends HTMLElement {
                             this.scrollable ?
                                 `linear-gradient(to ${dir === 'X' ? 'right' : 'bottom'},rgba(0,0,0,0) 0px,rgba(0,0,0,1) ${startGuide}px,rgba(0,0,0,1) ${endGuide}px,rgba(0,0,0,0) ${size}px)` :
                                 '';
-                    this.wrap.style.webkitMaskImage = this.wrap.style.maskImage = maskImage;
+                    // tslint:disable-next-line: deprecation
+                    this.scrollWrap.style.webkitMaskImage = this.scrollWrap.style.maskImage = maskImage;
                 }
 
                 if (this['reach' + dir] !== reach) this['reach' + dir] = reach;
@@ -258,7 +263,7 @@ export class MasterList extends HTMLElement {
                     TRANSLATE + '(' + barPosition / (maxPosition + size) * size + 'px)';
                 if (this['#thumbSize' + dir] !== thumbSize) {
                     this['#thumbSize' + dir] = thumbSize;
-                    thumb.style[this.scrollX && 'width' || this.scrollY && 'height'] = thumbSize + 'px';
+                    thumb.style[SIZE_KEY[dir]] = thumbSize + 'px';
                 }
                 return scrollPosition !== maxPosition;
             } else {
@@ -277,7 +282,7 @@ export class MasterList extends HTMLElement {
     }
 
     onDisconnected() {
-        this.wrap.off({ id: 'scroll' });
+        this.scrollWrap.off({ id: 'scroll' });
         window.off({ id: this });
     }
 
