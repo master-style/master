@@ -3,30 +3,12 @@
 :host {
     position: relative;
     contain: size style;
-
-    &[over=x] {
-        overscroll-behavior-x: auto;
-    }
-
-    &[over=y] {
-        overscroll-behavior-y: auto;
-    }
-
-    &[over=both] {
-        overscroll-behavior: auto auto;
-    }
-
-    &[guide] {
-        .scrollWrap {
-            will-change: scroll-position, -webkit-mask-image;
-        }
-    }
 }
 
 :host([scroll-y]),
 :host([scroll-x]) {
     slot {
-        will-change: scroll-position;
+        will-change: scroll-position, -webkit-mask-image;
         -webkit-overflow-scrolling: touch;
         -ms-overflow-style: none;
         scrollbar-width: none;
@@ -94,6 +76,12 @@
     }
 }
 
+
+:host([overscroll]) {
+    overscroll-behavior: auto auto;
+}
+
+
 slot {
     position: absolute;
     top: 0;
@@ -111,7 +99,8 @@ slot {
     display: flex;
 }
 
-.scrollBar {
+m-bar,
+m-bar {
     position: absolute;
     z-index: $z-overlay;
     pointer-events: none;
@@ -128,13 +117,13 @@ slot {
     &.show {
         will-change: opacity;
 
-        .scrollCue {
+        m-thumb {
             will-change: transform;
         }
     }
 }
 
-.scrollCue {
+m-thumb {
     position: relative;
     display: block;
     border-radius: 2px;
@@ -149,22 +138,22 @@ slot {
     // }
 }
 
-.scrollBar\:x {
+m-bar[part=x] {
     bottom: 0;
     left: 0;
     width: 100%;
 
-    .scrollCue {
+    m-thumb {
         height: 4px;
     }
 }
 
-.scrollBar\:y {
+m-bar[part=y] {
     top: 0;
     right: 0;
     height: 100%;
 
-    .scrollCue {
+    m-thumb {
         width: 4px;
     }
 }
