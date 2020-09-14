@@ -74,9 +74,9 @@
 
 [part=app-side] {
     grid-area: app-side;
-    overflow: hidden;
     flex-direction: column;
     top: 0;
+    height: 100vh;
 }
 
 [part=app-body] {
