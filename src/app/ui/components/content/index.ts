@@ -131,7 +131,7 @@ export class MasterList extends HTMLElement {
             }
             if (this.scrollEndTimeout) this.scrollEndTimeout = clearTimeout(this.scrollEndTimeout);
             this.scrollEndTimeout = setTimeout(() => {
-                this.stop();
+                this.stopScrolling();
             }, 100);
         }, {
             id: 'scroll',
@@ -255,10 +255,7 @@ export class MasterList extends HTMLElement {
                         this.scrollable ?
                             `linear-gradient(to ${isX ? 'right' : 'bottom'},rgba(0,0,0,0) 0px,rgba(0,0,0,1) ${startGuide}px,rgba(0,0,0,1) ${endGuide}px,rgba(0,0,0,0) ${size}px)` :
                             '';
-                this.wrap.css({
-                    maskImage,
-                    webkitMaskImage: maskImage
-                });
+                this.wrap.style.webkitMaskImage = this.wrap.style.maskImage = maskImage;
             }
 
             if (isX && this.reachX !== reach) this.reachX = reach;
@@ -285,8 +282,7 @@ export class MasterList extends HTMLElement {
     }
 
     // stop current animation
-    stop() {
-        console.log('stop');
+    stopScrolling() {
         if (this.animationFrame) this.animationFrame = cancelAnimationFrame(this.animationFrame);
         this.scrolling = false;
         this.accTime = { x: 0, y: 0 };

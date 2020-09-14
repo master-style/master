@@ -3,6 +3,10 @@
 :host {
     position: relative;
     contain: size style;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+    -ms-overflow-style: none;
+    user-select: none;
 }
 
 :host([scroll-y]),
@@ -89,19 +93,15 @@ slot {
     display: block;
     width: 100%;
     height: 100%;
-    overflow-wrap: break-word;
-    -webkit-user-drag: none;
-    -webkit-touch-callout: none;
-    -ms-overflow-style: none;
 }
 
 .scrollItems {
     display: flex;
 }
 
-m-bar,
 m-bar {
     position: absolute;
+    display: block;
     z-index: $z-overlay;
     pointer-events: none;
     contain: content;
