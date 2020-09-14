@@ -32,6 +32,7 @@ export class MasterList extends HTMLElement {
             },
             'm-bar', {
                 part: 'x',
+                hidden: !this.scrolling,
                 $if: this.scrollX,
                 $css: { padding: this.barPadding },
                 $created: (element: HTMLElement) => this.barX = element
@@ -42,6 +43,7 @@ export class MasterList extends HTMLElement {
             ],
             'm-bar', {
                 part: 'y',
+                hidden: !this.scrolling,
                 $if: this.scrollY,
                 $css: { padding: this.barPadding },
                 $created: (element: HTMLElement) => this.barY = element
@@ -57,6 +59,8 @@ export class MasterList extends HTMLElement {
 
     render() {
         this.template.render(this.shadowRoot);
+        if (this.scrollX) this.renderBy('x');
+        if (this.scrollY) this.renderBy('y');
     }
 
     wrap: any;
@@ -114,8 +118,12 @@ export class MasterList extends HTMLElement {
             if (!this.renderBy('x') && !this.renderBy('y')) return;
             if (!this.scrolling) {
                 this.scrolling = true;
-                if (this.barX) this.barX.addClass('show').rmClass('fadeOut');
-                if (this.barY) this.barY.addClass('show').rmClass('fadeOut');
+                if (this.scrollX) {
+                    this.barX.hidden = false;
+                }
+                if (this.scrollY) {
+                    this.barY.hidden = false;
+                }
             }
             if (this.scrollEndTimeout) this.scrollEndTimeout = clearTimeout(this.scrollEndTimeout);
             this.scrollEndTimeout = setTimeout(() => {
@@ -127,12 +135,11 @@ export class MasterList extends HTMLElement {
         });
 
         window.on('resize', debounce(() => {
-            this.renderPart();
+            if (this.scrollX) this.renderBy('x');
+            if (this.scrollY) this.renderBy('y');
         }, 70), {
             id: this
         });
-
-        this.renderPart();
     }
 
     get scrollable(): boolean {
@@ -215,11 +222,6 @@ export class MasterList extends HTMLElement {
         }
     }
 
-    renderPart() {
-        if (this.scrollX) this.renderBy('x');
-        if (this.scrollY) this.renderBy('y');
-    }
-
     private renderBy(dir: string) {
         const isX = dir === 'x';
         const isY = dir === 'y';
@@ -275,8 +277,12 @@ export class MasterList extends HTMLElement {
         this.scrolling = false;
         this.accTime = { x: 0, y: 0 };
         if (!this.disableScrollbar) {
-            if (this.barX) this.barX.addClass('fadeOut');
-            if (this.barY) this.barY.addClass('fadeOut');
+            if (this.scrollX) {
+                this.barX.hidden = true;
+            };
+            if (this.scrollY) {
+                this.barY.hidden = true;
+            }
         }
     }
 

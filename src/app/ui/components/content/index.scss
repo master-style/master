@@ -105,21 +105,12 @@ m-bar {
     z-index: $z-overlay;
     pointer-events: none;
     contain: content;
-    animation-delay: .5s;
-    animation-duration: .2s;
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-out;
+    opacity: 1;
 
-    &:not(.show) {
-        display: none;
-    }
-
-    &.show {
+    &[hidden] {
+        opacity: 0;
+        transition: opacity .2s ease-out .5s;
         will-change: opacity;
-
-        m-thumb {
-            will-change: transform;
-        }
     }
 }
 
@@ -130,6 +121,7 @@ m-thumb {
     background-color: var(--b-fade);
     pointer-events: auto;
     contain: strict;
+    will-change: transform;
 
     // &:hover {
     //     width: 6px;
