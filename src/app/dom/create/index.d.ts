@@ -12,4 +12,5 @@ interface TemplateNode {
     $html?: string;
     $text?: string;
     $if?: boolean;
+    $css?: { [key: string]: any };
 }

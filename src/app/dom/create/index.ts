@@ -47,28 +47,28 @@ class MasterTemplate {
         this.nodes = [];
 
         (function generate(tokens: any[], eachNodes: TemplateNode[]) {
-            let node: TemplateNode;
+            let eachNode: TemplateNode;
             for (const token of tokens) {
                 const tokenType = typeof token;
                 if (tokenType === 'string') {
-                    node = { tag: token };
-                    eachNodes.push(node);
+                    eachNode = { tag: token };
+                    eachNodes.push(eachNode);
                 } else if (Array.isArray(token)) {
-                    generate(token, node.children = []);
+                    generate(token, eachNode.children = []);
                 } else if (tokenType === 'function') {
                     const children = token().reduce((acc, eachToken) => {
                         return acc.concat(eachToken);
                     }, []);
-                    generate(children, node.children = []);
+                    generate(children, eachNode.children = []);
                 } else if (tokenType === 'object') {
                     const attr = token;
-                    node.attr = {};
+                    eachNode.attr = {};
                     for (const attrKey in attr) {
                         const eachAttrValue = attr[attrKey];
                         if (attrKey[0] !== '$') {
-                            node.attr[attrKey] = eachAttrValue;
+                            eachNode.attr[attrKey] = eachAttrValue;
                         } else {
-                            node[attrKey] = eachAttrValue;
+                            eachNode[attrKey] = eachAttrValue;
                         }
                     }
                 }
@@ -92,12 +92,25 @@ class MasterTemplate {
                             }
                             if (eachNode.$if !== false) {
                                 eachNode.element = eachOldNode.element;
-                                if (eachNode.attr) {
-                                    for (const eachAttrKey in eachNode.attr) {
-                                        const newAttrValue = eachNode.attr[eachAttrKey];
-                                        const oldAttrValue = eachOldNode?.attr[eachAttrKey];
-                                        if (newAttrValue !== oldAttrValue) {
-                                            eachNode.element.attr(eachAttrKey, newAttrValue);
+                                const attr = eachNode.attr;
+                                const oldAttr = eachOldNode?.attr;
+                                if (attr) {
+                                    for (const eachAttrKey in attr) {
+                                        const value = attr[eachAttrKey];
+                                        const oldValue = oldAttr[eachAttrKey];
+                                        if (value !== oldValue) {
+                                            eachNode.element.attr(eachAttrKey, value);
+                                        }
+                                    }
+                                }
+                                const css = eachNode.$css;
+                                const oldCss = eachOldNode?.$css;
+                                if (css) {
+                                    for (const eachPropKey in css) {
+                                        const value = css[eachPropKey];
+                                        const oldValue = oldCss[eachPropKey];
+                                        if (value !== oldValue) {
+                                            eachNode.element.css(eachPropKey, value);
                                         }
                                     }
                                 }
@@ -123,10 +136,13 @@ class MasterTemplate {
                                 eachOldNode.element.before(eachNode.element);
                                 eachOldNode = (eachOldNode.element.remove() as undefined);
                             }
-                            if (eachNode.attr) {
-                                for (const eachAttrKey in eachNode.attr) {
-                                    eachNode.element.attr(eachAttrKey, eachNode.attr[eachAttrKey]);
-                                }
+                            const attr = eachNode.attr;
+                            if (attr) {
+                                eachNode.element.attr(attr);
+                            }
+                            const css = eachNode.$css;
+                            if (css) {
+                                eachNode.element.css(css);
                             }
                             if (eachNode.$html !== undefined) {
                                 eachNode.element.innerHTML = eachNode.$html;
@@ -161,23 +177,27 @@ class MasterTemplate {
             this.container = container;
             (function create(eachNodes, parent) {
                 const eachFragment = fragment.cloneNode();
-                eachNodes.forEach((node) => {
-                    if (node.$if === false) return;
-                    const element = document.createElement(node.tag);
-                    node.element = element;
-                    const attr = node.attr;
+                eachNodes.forEach((eachNode) => {
+                    if (eachNode.$if === false) return;
+                    const element = document.createElement(eachNode.tag);
+                    eachNode.element = element;
                     let skipChildren = false;
-                    if (node.$html !== undefined) {
-                        element.innerHTML = node.$html;
+                    if (eachNode.$html !== undefined) {
+                        element.innerHTML = eachNode.$html;
                         skipChildren = true;
-                    } else if (node.$text !== undefined) {
-                        element.textContent = node.$text;
+                    } else if (eachNode.$text !== undefined) {
+                        element.textContent = eachNode.$text;
                     }
+                    const attr = eachNode.attr;
                     if (attr) {
                         element.attr(attr);
                     }
-                    if (!skipChildren && node.children) {
-                        create(node.children, element);
+                    const css = eachNode.$css;
+                    if (css) {
+                        element.css(css);
+                    }
+                    if (!skipChildren && eachNode.children) {
+                        create(eachNode.children, element);
                     }
                     eachFragment.appendChild(element);
                 });

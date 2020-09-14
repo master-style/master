@@ -27,10 +27,16 @@ export class MasterList extends HTMLElement {
     template = $(() => {
         return [
             'slot',
-            'm-bar', { part: 'x', $if: this.scrollX }, [
+            'm-bar', {
+                $if: this.scrollX,
+                part: 'x'
+            }, [
                 'm-thumb'
             ],
-            'm-bar', { part: 'y', $if: this.scrollY }, [
+            'm-bar', {
+                $if: this.scrollY,
+                part: 'y'
+            }, [
                 'm-thumb'
             ]
         ]
