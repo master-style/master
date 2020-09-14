@@ -122,7 +122,7 @@ export class MasterList extends HTMLElement {
     barPadding = 4;
 
     onConnected() {
-        this.wrap.on('scroll', (event: any) => requestAnimationFrame(() => {
+        this.wrap.on('scroll', (event: any) => {
             if (!this.renderBy('x') && !this.renderBy('y')) return;
             if (!this.scrolling) {
                 this.scrolling = true;
@@ -133,7 +133,7 @@ export class MasterList extends HTMLElement {
             this.scrollEndTimeout = setTimeout(() => {
                 this.stop();
             }, 100);
-        }), {
+        }, {
             id: 'scroll',
             passive: true
         });
@@ -272,9 +272,8 @@ export class MasterList extends HTMLElement {
                 cueSize = size * size / (scrollSize + padding) - this.barPadding * 2,
                 Dir = isX ? 'X' : 'Y',
                 TRANSLATE = 'translate' + Dir;
-            cue.css(
-                'transform', TRANSLATE + '(' + barPosition / (maxPosition + size) * size + 'px)'
-            );
+            cue.style.transform =
+                TRANSLATE + '(' + barPosition / (maxPosition + size) * size + 'px)';
             if (this.#cueSize[dir] !== cueSize) {
                 this.#cueSize[dir] = cueSize;
                 cue.style[isX ? 'width' : 'height'] = cueSize + 'px';
