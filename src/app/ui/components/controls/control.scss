@@ -82,13 +82,10 @@
 }
 
 :host([disabled]) {
+    --disabled-f-color: var(--f-fadest);
     cursor: no-drop !important;
     color: var(--f-fadest) !important;
     -webkit-text-fill-color: var(--f-fadest); // fix safari opacity problem
-
-    &::placeholder {
-        -webkit-text-fill-color: var(--f-fadest); // fix safari opacity problem
-    }
 
     fieldset {
         border-style: dashed;
@@ -131,7 +128,7 @@
     }
 }
 
-:host([label][empty]:not([expanded]):not(:focus-within):not(:active):not([readonly])) {
+:host([label][empty]:not([expanded]):not(:focus-within):not(:active):not([readonly]):not([disabled])) {
 
     ::slotted([part=head]),
     ::slotted([part=foot]),
@@ -163,11 +160,6 @@
         will-change: max-width;
     }
 
-    span {
-        padding: 0 var(--label-px);
-        letter-spacing: normal;
-        contain: strict;
-    }
 }
 
 // outlined
@@ -176,6 +168,12 @@
     legend {
         transition: none;
         margin-left: 0;
+    }
+
+    span {
+        padding: 0 var(--label-px);
+        letter-spacing: normal;
+        contain: strict;
     }
 }
 

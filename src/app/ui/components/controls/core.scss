@@ -24,10 +24,9 @@
 
 ::placeholder {
     opacity: 1; // fixed safari default opacity
-    color: var(--f-fader);
-    -webkit-text-fill-color: var(--f-fader); // fix safari opacity problem
+    color: var(--disabled-f-color, var(--f-fader));
+    -webkit-text-fill-color: var(--disabled-f-color, var(--f-fader)); // fix safari opacity problem
 }
-
 
 :-moz-read-only {
     cursor: default;

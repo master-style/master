@@ -81,7 +81,6 @@
         </tbody>
     </table>
 </m-table>
-
 <template [codeLang]="'html'" [codeDemo]=true [selector]="'m-input'">
     <div class="y:xl c:bottom c:center">
         <div class="x:3@sm">
@@ -98,18 +97,6 @@
         </div>
     </div>
 </template>
-
-<!-- <m-input class="x:3@sm sm outlined" label="small"></m-input>
-<m-input class="x:3@sm outlined" label="default"></m-input>
-<m-input class="x:3@sm lg outlined" label="large"></m-input>
-<m-input class="x:3@sm xs underlined" label="extra small"></m-input>
-<m-input class="x:3@sm sm underlined" label="small"></m-input>
-<m-input class="x:3@sm underlined" label="default"></m-input>
-<m-input class="x:3@sm lg underlined" label="large"></m-input>
-<m-input class="x:3@sm xs" label="extra small"></m-input>
-<m-input class="x:3@sm sm" label="small"></m-input>
-<m-input class="x:3@sm" label="default"></m-input>
-<m-input class="x:3@sm lg" label="large"></m-input> -->
 
 <h2 id="borderline">{{ 'borderline' | translate }}</h2>
 <m-table class="sm neat axis:x">
@@ -149,3 +136,15 @@
         </div>
     </div>
 </template>
+
+<h2 id="state">{{ 'state' | translate }}</h2>
+<doc-prop [name]="'disabled'" [types]="['boolean']" [description]="'The user cannot interact with the component.'">
+</doc-prop>
+<div class="demo">
+    <div class="demo-body">
+        <div class="y c:center">
+            <m-input class="x outlined" label="disabled" value="disabled" disabled></m-input>
+            <m-input class="x underlined" label="disabled" placeholder="disabled" disabled></m-input>
+        </div>
+    </div>
+</div>
