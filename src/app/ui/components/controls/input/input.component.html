@@ -84,9 +84,17 @@
 
 <template [codeLang]="'html'" [codeDemo]=true [selector]="'m-input'">
     <div class="y:xl c:bottom c:center">
-        <div class="x:3@sm" *ngFor="let eachSize of sizes">
-            <m-input class="outlined {{eachSize}}" label="{{eachSize||'default'}}">
-            </m-input>
+        <div class="x:3@sm">
+            <m-input class="outlined xs" label="extra small"></m-input>
+        </div>
+        <div class="x:3@sm">
+            <m-input class="outlined sm" label="small"></m-input>
+        </div>
+        <div class="x:3@sm">
+            <m-input class="outlined" label="default"></m-input>
+        </div>
+        <div class="x:3@sm">
+            <m-input class="outlined lg" label="large"></m-input>
         </div>
     </div>
 </template>

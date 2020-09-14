@@ -76,12 +76,14 @@
 <div class="y:sm">
     <ng-container *ngFor="let eachDepth of ['', '+']">
         <div class="x:fill" *ngFor="let eachStyle of styles">
-            <template [codeLang]="'html'" [codeDemo]=true>
+            <template [codeLang]="'html'" [codeDemo]=true [selector]="'m-button'">
                 <div class="y:sm">
-                    <m-button class="x sm {{ eachColor + eachDepth }} {{ eachStyle }}" *ngFor="let eachColor of colors"
-                        (click)="currentColor = eachColor">
-                        {{ eachColor }}
-                    </m-button>
+                    <div class="x" *ngFor="let eachColor of colors">
+                        <m-button class="sm {{ eachColor + eachDepth }} {{ eachStyle }}"
+                                  (click)="currentColor = eachColor">
+                            {{ eachColor }}
+                        </m-button>
+                    </div>
                 </div>
             </template>
         </div>
@@ -135,12 +137,20 @@
         </tbody>
     </table>
 </m-table>
-<template [codeLang]="'html'" [codeDemo]=true>
+<template [codeLang]="'html'" [codeDemo]=true [selector]="'m-button'">
     <div class="y:xl c:bottom c:center">
-        <m-button class="x xs theme raised">extra sm</m-button>
-        <m-button class="x sm theme raised">small</m-button>
-        <m-button class="x theme raised">default</m-button>
-        <m-button class="x lg theme raised">large</m-button>
+        <div class="x">
+            <m-button class="xs theme raised">extra sm</m-button>
+        </div>
+        <div class="x">
+            <m-button class="sm theme raised">small</m-button>
+        </div>
+        <div class="x">
+            <m-button class="theme raised">default</m-button>
+        </div>
+        <div class="x">
+            <m-button class="lg theme raised">large</m-button>
+        </div>
     </div>
 </template>
 
@@ -217,16 +227,24 @@
         </tbody>
     </table>
 </m-table>
-<template [codeLang]="'html'" [codeDemo]=true>
+<template [codeLang]="'html'" [codeDemo]=true [selector]="'m-button'">
     <div class="y c:center">
-        <m-button class="x theme raised">default</m-button>
-        <m-button class="x theme raised round">
-            <ion-icon name="ellipse-outline"></ion-icon>
-        </m-button>
-        <m-button class="x theme raised square">
-            <ion-icon name="square-outline"></ion-icon>
-        </m-button>
-        <m-button class="x theme raised rounded">rounded</m-button>
+        <div class="x">
+            <m-button class="theme raised">default</m-button>
+        </div>
+        <div class="x">
+            <m-button class="theme raised round">
+                <ion-icon name="ellipse-outline"></ion-icon>
+            </m-button>
+        </div>
+        <div class="x">
+            <m-button class="theme raised square">
+                <ion-icon name="square-outline"></ion-icon>
+            </m-button>
+        </div>
+        <div class="x">
+            <m-button class="theme raised rounded">rounded</m-button>
+        </div>
     </div>
 </template>
 
@@ -249,14 +267,18 @@
         </tbody>
     </table>
 </m-table>
-<template [codeLang]="'html'" [codeDemo]=true>
+<template [codeLang]="'html'" [codeDemo]=true [selector]="'m-button'">
     <div class="y c:center">
-        <m-button class="x theme">
-            default
-        </m-button>
-        <m-button class="x theme outlined">
-            outlined
-        </m-button>
+        <div class="x">
+            <m-button class="theme">
+                default
+            </m-button>
+        </div>
+        <div class="x">
+            <m-button class="theme outlined">
+                outlined
+            </m-button>
+        </div>
     </div>
 </template>
 
@@ -282,7 +304,7 @@
 
 <h2 id="type">{{ 'type' | translate }}</h2>
 <doc-prop [name]="'type'" [types]="['button', 'reset', 'submit']" [default]="'button'"
-    [description]="'The type of the button.'">
+          [description]="'The type of the button.'">
 </doc-prop>
 
 <doc-prop-hyperlink></doc-prop-hyperlink>

@@ -9,8 +9,6 @@ export class InputComponent implements OnInit {
 
     constructor() { }
 
-    sizes = ['xs', 'sm', '', 'lg'];
-
     ngOnInit(): void { }
 
 }
