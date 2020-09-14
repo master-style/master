@@ -5,27 +5,10 @@
         "outDir": "./out-tsc/app",
         "types": [],
         "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "paths": {
-            "@utils/*": [
-                "src/app/utils/*"
-            ],
-            "@ui/*": [
-                "src/app/ui/*"
-            ],
-            "@shared/*": [
-                "src/app/shared/*"
-            ],
-            "@element": [
-                "src/app/element/index.ts"
-            ]
-        }
+        "experimentalDecorators": true
     },
     "files": [
         "src/main.ts",
         "src/polyfills.ts"
-    ],
-    "include": [
-        "src/**/*.d.ts"
     ]
 }
