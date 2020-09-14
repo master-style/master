@@ -159,3 +159,17 @@
         </div>
     </div>
 </div>
+
+<doc-prop [name]="'expanded'" [types]="['boolean']" [description]="'When the input has no value, keep expanding. When the field is required, it is recommended to keep it expanded; otherwise, when the field is optional, keep the default state.'">
+</doc-prop>
+<div class="demo">
+    <div class="demo-body">
+        <div class="y c:center">
+            <m-input class="x outlined" label="default"></m-input>
+            <m-input class="x outlined" label="expanded *" expanded></m-input>
+        </div>
+    </div>
+</div>
+
+<doc-prop [name]="'empty'" [readonly]="true" [types]="['boolean']" [description]="'The input has no value.'">
+</doc-prop>

@@ -14,12 +14,13 @@ export class PropComponent implements OnInit {
     @Input() types: [];
     @Input() default: any;
     @Input() description: string;
+    @Input() readonly: boolean;
 
     camelToKebabCase = camelToKebabCase;
 
     constructor() { }
 
-    ngOnInit(): void {}
+    ngOnInit(): void { }
 
     getTypeIcon(value) {
         switch (value) {
