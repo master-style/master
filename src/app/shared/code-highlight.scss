@@ -44,6 +44,12 @@ pre {
     }
 }
 
+.code-function {
+    +template+h2 {
+        margin-top: .25rem;
+    }
+}
+
 .code-wrap {
     overflow-x: auto;
 }
