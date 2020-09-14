@@ -173,3 +173,8 @@
 
 <doc-prop [name]="'empty'" [readonly]="true" [types]="['boolean']" [description]="'The input has no value.'">
 </doc-prop>
+
+<h2 id="property">{{ 'property' | translate }}</h2>
+<doc-prop [name]="'type'" [types]="['date', 'email', 'number', 'password', 'search', 'tel', 'text', 'time', 'url']"
+    [description]="'The type of control to display. The default type is text.'" [default]="'text'">
+</doc-prop>
