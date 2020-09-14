@@ -43,15 +43,17 @@
 // }
 
 :host {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    font-size: var(--f-sm);
+    --f-size: var(--f-sm);
     --b-width: 1px;
     --b-color: var(--b-fade);
     --py: .875rem;
     --px: 1rem;
-    --label-pr: .4375rem;
+    --label-px: .25rem;
+    --label-f-size: var(--f-xxs);
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    font-size: var(--f-size);
     // ~m-icon {
     //     margin: 0 .5rem 0 .2rem;
     //     color: var(--f-fadest);
@@ -59,22 +61,24 @@
 }
 
 :host(.xs) {
-    font-size: var(--f-xs);
+    --f-size: var(--f-xs);
     --py: .5rem;
     --px: .8rem;
-    --label-pr: .2rem;
+    --label-px: .25rem;
+    --label-f-size: .65625rem;
 }
 
 :host(.sm) {
     --py: .6875rem;
-    --label-pr: .5rem;
+    --label-px: .25rem;
 }
 
 :host(.lg) {
-    font-size: 1.125rem;
+    --f-size: var(--f-md);
     --py: 1.1875rem;
     --px: 1.2rem;
-    --label-pr: .75rem;
+    --label-px: .3125rem;
+    --label-f-size: .9375rem;
 }
 
 :host([disabled]) {
@@ -158,6 +162,12 @@
         margin-left: 0;
         will-change: max-width;
     }
+
+    span {
+        padding: 0 var(--label-px);
+        letter-spacing: normal;
+        contain: strict;
+    }
 }
 
 // outlined
@@ -166,10 +176,6 @@
     legend {
         transition: none;
         margin-left: 0;
-    }
-
-    span {
-        padding-right: var(--label-pr);
     }
 }
 
@@ -182,10 +188,6 @@
         margin-left: -1px;
         height: 2px;
     }
-
-    span {
-        padding-right: var(--label-pr);
-    }
 }
 
 :host(.underlined) {
@@ -193,6 +195,13 @@
 
     fieldset {
         border-bottom-width: var(--b-width);
+    }
+
+    ::slotted([part=head]),
+    ::slotted([part=foot]),
+    ::slotted([part=body]) {
+        padding-top: calc(var(--py) + .125rem);
+        padding-bottom: calc(var(--py) - .125rem);
     }
 }
 
@@ -216,6 +225,7 @@ m-label {
     color: var(--f-themeFader);
     transform: scale(.75) translate(0, -65%);
     white-space: nowrap;
+    letter-spacing: normal;
     // i {
     //     display: inline-flex;
     //     color: inherit;
@@ -235,7 +245,7 @@ fieldset {
     display: flex;
     color: var(--theme, var(--f-themeFader));
     border: 0px solid var(--b-color);
-    padding: 0 calc(var(--px) - 5px);
+    padding: 0 calc(var(--px) - .3125rem);
     border-radius: inherit;
     pointer-events: none;
 }
@@ -243,13 +253,13 @@ fieldset {
 legend {
     max-width: 100%;
     height: 1px;
-    color: transparent;
-    font-size: var(--f-xxs);
+    font-size: var(--label-f-size);
     line-height: 0;
     padding: 0;
     margin: 0;
-    contain: layout;
+    contain: layout paint style;
     user-select: none;
+    visibility: hidden;
 }
 
 m-badge {
