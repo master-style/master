@@ -10,6 +10,7 @@ import camelToKebabCase from '@utils/camel-to-kebab-case';
 export class PropComponent implements OnInit {
 
     @Input() name: string;
+    @Input() attr: string;
     @Input() types: [];
     @Input() default: any;
     @Input() description: string;

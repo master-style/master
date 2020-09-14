@@ -143,8 +143,19 @@
 <div class="demo">
     <div class="demo-body">
         <div class="y c:center">
-            <m-input class="x outlined" label="disabled" value="disabled" disabled></m-input>
-            <m-input class="x underlined" label="disabled" placeholder="disabled" disabled></m-input>
+            <m-input class="x outlined" label="disabled" value="value" disabled></m-input>
+            <m-input class="x underlined" label="disabled" value="value" disabled></m-input>
+        </div>
+    </div>
+</div>
+
+<doc-prop [name]="'readOnly'" [attr]="'readonly'" [types]="['boolean']" [description]="'The user cannot modify the value.'">
+</doc-prop>
+<div class="demo">
+    <div class="demo-body">
+        <div class="y c:center">
+            <m-input class="x outlined" label="readonly" value="value" readonly></m-input>
+            <m-input class="x underlined" label="readonly" value="value" readonly></m-input>
         </div>
     </div>
 </div>
