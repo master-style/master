@@ -37,7 +37,7 @@ class MasterTemplate {
         private template: () => any[]
     ) { }
 
-    container;
+    container: any;
     nodes: TemplateNode[] = [];
 
     render(container) {
