@@ -93,12 +93,14 @@ class MasterTemplate {
                         const eachNode = eachNodes[i];
                         let eachOldNode = eachOldNodes[i];
                         const eachOldElement = eachOldNode?.element;
+                        const hasIf = eachNode.hasOwnProperty('$if');
+                        const whether = hasIf && !!eachNode.$if || !hasIf;
                         if (eachOldElement && eachNode.tag === eachOldNode.tag) {
                             if (!eachNodes[i + 1]) {
                                 eachOldNodes.splice(i + 1)
                                     .forEach((deletedOldNode) => deletedOldNode.element.remove());
                             }
-                            if (eachNode.$if !== false) {
+                            if (whether) {
                                 const element = eachNode.element = eachOldElement;
                                 const attr = eachNode.attr;
                                 const oldAttr = eachOldNode?.attr;
@@ -134,12 +136,12 @@ class MasterTemplate {
                                 if (removed) removed(eachOldElement);
                             }
                         } else {
-                            if (eachOldElement && eachNode.$if === false) {
+                            if (eachOldElement && whether) {
                                 eachOldElement.remove();
                                 const removed = eachNode.$removed;
                                 if (removed) removed(eachOldElement);
                                 continue;
-                            } else if (eachNode.$if === false) {
+                            } else if (whether) {
                                 continue;
                             }
                             let skipChildren = false;
@@ -177,7 +179,11 @@ class MasterTemplate {
                                     eachNodes
                                         .slice(0, i)
                                         .reverse()
-                                        .find((nearNode) => nearNode.$if !== false && nearNode.element);
+                                        .find((nearNode) => {
+                                            const eachHasIf = nearNode.hasOwnProperty('$if');
+                                            return (eachHasIf && nearNode.$if || !eachHasIf)
+                                                && nearNode.element;
+                                        });
 
                                 if (existedNode) {
                                     existedNode.element.after(element);
@@ -194,7 +200,8 @@ class MasterTemplate {
             (function create(eachNodes, parent) {
                 const eachFragment = fragment.cloneNode();
                 eachNodes.forEach((eachNode) => {
-                    if (eachNode.$if === false) return;
+                    const hasIf = eachNode.hasOwnProperty('$if');
+                    if (hasIf && !eachNode.$if) return;
                     const element = eachNode.element = document.createElement(eachNode.tag);
                     const created = eachNode.$created;
                     if (created) created(element);

@@ -24,53 +24,35 @@ const
     css
 })
 export class MasterList extends HTMLElement {
-    // scrollbar(whether: boolean) {
-    //     const toggleBar = (dir) => {
-    //         const $bar = this['$' + dir + 'Bar'];
-    //         if (whether && !$bar && this.hasDir(dir)) {
-    //             const that = this;
-    //             this.append(
-    //                 this['$' + dir + 'Bar'] = $(DIV, { class: 'scrollBar scrollBar:' + dir })
-    //                     .on('animationend', function () {
-    //                         if (!that.scrolling) this.rmClass('show fadeOut');
-    //                     }, { passive: true })
-    //                     .css('padding', this.barPadding)
-    //                     .append(this['$' + dir + 'Cue'] = $(DIV, { class: 'scrollCue' }))
-    //             );
-    //         } else if (!whether) {
-    //             if ($bar) this['$' + dir + 'Bar'] = $bar.remove();
-    //         }
-    //     }
-    //     toggleBar('x');
-    //     toggleBar('y');
-    // }
 
     template = $(() => {
-        return [
+        const temp = [
             'slot', {
-                $created: (element) => this.wrap = element
+                $created: (element: HTMLElement) => this.wrap = element
             },
             'm-bar', {
                 part: 'x',
                 $if: this.scrollX,
                 $css: { padding: this.barPadding },
-                $created: (element) => this.barX = element
+                $created: (element: HTMLElement) => this.barX = element
             }, [
                 'm-thumb', {
-                    $created: (element) => this.thumbX = element
+                    $created: (element: HTMLElement) => this.thumbX = element
                 }
             ],
             'm-bar', {
                 part: 'y',
                 $if: this.scrollY,
                 $css: { padding: this.barPadding },
-                $created: (element) => this.barY = element
+                $created: (element: HTMLElement) => this.barY = element
             }, [
                 'm-thumb', {
-                    $created: (element) => this.thumbY = element
+                    $created: (element: HTMLElement) => this.thumbY = element
                 }
             ]
-        ]
+        ];
+        console.log(temp);
+        return temp;
     });
 
     render() {
