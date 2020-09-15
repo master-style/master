@@ -33,6 +33,9 @@ export class PropComponent implements OnInit {
             case 'function':
                 return 'repeat-outline';
             case 'number':
+                if (this.name === 'type') {
+                    return 'text-outline';
+                }
                 return 'calculator-outline';
             case 'array':
                 return 'list-outline';
@@ -49,6 +52,9 @@ export class PropComponent implements OnInit {
             case 'function':
             case 'array':
             case 'number':
+                if (this.name === 'type') {
+                    value = "'" + value + "'";
+                }
                 return value;
             case undefined:
                 return 'undefined';
