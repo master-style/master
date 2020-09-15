@@ -25,6 +25,24 @@
     }
 }
 
+@include above(sm) {
+    [part="app-head"] {
+        transition: transform 0.3s ease;
+
+        &.hidden {
+            will-change: transform;
+            transform: translateY(-100%);
+        }
+    }
+}
+
+@include below(sm) {
+    [part="app-logo"] {
+        right: 0!important;
+        margin: auto;
+    }
+}
+
 h2+doc-prop {
     h3 {
         margin-top: 0 !important;

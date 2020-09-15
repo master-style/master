@@ -1,10 +1,4 @@
-<nav part="app-head" class="bb">
-    <m-button class="x square">
-        <i class="i-menu"></i>
-    </m-button>
-    <div part="app-logo" class="x">
-        <img src="assets/images/logo.svg" width="70">
-    </div>
+<nav part="app-head" class="bb" [ngClass]="{'hidden': scrollDirection === 'down'}">
     <div class="x f:xs show@md" id="nowTime"></div>
     <div class="x y:no ml:auto w:auto">
         <m-button class="x square"
@@ -14,6 +8,14 @@
         </m-button>
     </div>
 </nav>
+
+<div part="app-logo" class="x fixed left top" style="width: 200px">
+    <img src="assets/images/logo.svg" width="70">
+</div>
+
+<m-button class="fixed left top square">
+    <i class="i-menu"></i>
+</m-button>
 
 <main part="app-body" style="padding-top: 3rem">
     <article class="decorated" style="margin-bottom: 3rem">
@@ -37,10 +39,7 @@
     </article>
 </main>
 
-<aside part="app-side" class="br">
-    <div part="app-logo" class="x" style="width: 200px">
-        <img src="assets/images/logo.svg" width="70">
-    </div>
+<aside part="app-side" class="br" style="padding-top: 3rem">
     <m-content scroll-y guide class="x:fill">
         <m-list style="padding-top: .5rem">
             <ng-container *ngFor="let eachRoute of routes">
