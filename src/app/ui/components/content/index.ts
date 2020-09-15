@@ -248,7 +248,6 @@ export class MasterContent extends HTMLElement {
                 if (this['reach' + dir] !== reach) this['reach' + dir] = reach;
 
                 const thumb = this.#thumb[dir];
-                console.log(this.#thumb);
 
                 if (thumb) {
                     const
