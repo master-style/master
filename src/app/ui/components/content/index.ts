@@ -26,6 +26,7 @@ export class MasterContent extends HTMLElement {
 
     #time: any = {};
     #thumbSize: any = {};
+    #bar: any = {};
     #size: any = {};
     #wrapSize: any = {};
     #scrollSize: any = {};
@@ -45,7 +46,8 @@ export class MasterContent extends HTMLElement {
             part: 'x',
             hidden: !this.scrolling,
             $if: this.scrollX,
-            $css: { padding: this.barPadding }
+            $css: { padding: this.barPadding },
+            $created: (element: HTMLElement) => this.#bar.X = element
         }, [
             'm-thumb', {
                 $created: (element: HTMLElement) => this.#thumb.X = element
@@ -55,7 +57,8 @@ export class MasterContent extends HTMLElement {
             part: 'y',
             hidden: !this.scrolling,
             $if: this.scrollY,
-            $css: { padding: this.barPadding }
+            $css: { padding: this.barPadding },
+            $created: (element: HTMLElement) => this.#bar.Y = element
         }, [
             'm-thumb', {
                 $created: (element: HTMLElement) => this.#thumb.Y = element
@@ -261,10 +264,11 @@ export class MasterContent extends HTMLElement {
                     const
                         barPosition = scrollPosition < 0 ? 0 : (scrollPosition > maxPosition ? maxPosition : scrollPosition);
                     const
-                        thumbSize = size * size / (scrollSize + padding) - this.barPadding * 2,
+                        barSize = this.#bar[dir][CLIENT_SIZE_KEY[dir]],
+                        thumbSize = barSize * barSize / (scrollSize + padding) - this.barPadding * 4,
                         TRANSLATE = 'translate' + dir;
                     thumb.style.transform =
-                        TRANSLATE + '(' + barPosition / (maxPosition + size) * size + 'px)';
+                        TRANSLATE + '(' + barPosition / (maxPosition + barSize) * barSize + 'px)';
                     if (this.#thumbSize[dir] !== thumbSize) {
                         this.#thumbSize[dir] = thumbSize;
                         thumb.style[SIZE_KEY[dir]] = thumbSize + 'px';

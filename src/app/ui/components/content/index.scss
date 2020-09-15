@@ -1,6 +1,10 @@
 @import '../../variables';
 
 :host {
+    --offset-top: 0px;
+    --offset-bottom: 0px;
+    --offset-left: 0px;
+    --offset-right: 0px;
     position: relative;
     contain: style;
     width: 100%;
@@ -136,8 +140,8 @@ m-thumb {
 
 m-bar[part=x] {
     bottom: 0;
-    left: 0;
-    width: 100%;
+    left: var(--offset-left);
+    width: calc(100% - var(--offset-left) - var(--offset-right));
 
     m-thumb {
         height: 4px;
