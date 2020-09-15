@@ -6,7 +6,7 @@ const NAME = 'content';
 
 const
     SCROLL_KEY = 'scroll',
-    OFFSET_KEY = 'scroll',
+    OFFSET_KEY = 'offset',
     WIDTH_KEY = 'Width',
     HEIGHT_KEY = 'Height',
     LEFT_KEY = 'Left',
