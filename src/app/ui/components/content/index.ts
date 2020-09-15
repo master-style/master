@@ -36,45 +36,41 @@ export class MasterContent extends HTMLElement {
     #scrollSizeY: number;
     #scrollEndTimeout: any;
     #animationFrame: any;
+    #enabled: boolean;
 
-    template = $(() => {
-        const template = [
-            'slot', {
-                $created: (element: HTMLElement) => {
-                    this.scrollWrap = element;
-                    console.log('wrap');
-                }
-            },
-            'm-bar', {
-                part: 'x',
-                hidden: !this.scrolling,
-                $if: this.scrollX,
-                $css: { padding: this.barPadding },
-                $created: (element: HTMLElement) => this.barX = element
-            }, [
-                'm-thumb', {
-                    $created: (element: HTMLElement) => this.thumbX = element
-                }
-            ],
-            'm-bar', {
-                part: 'y',
-                hidden: !this.scrolling,
-                $if: this.scrollY,
-                $css: { padding: this.barPadding },
-                $created: (element: HTMLElement) => this.barY = element
-            }, [
-                'm-thumb', {
-                    $created: (element: HTMLElement) => this.thumbY = element
-                }
-            ]
-        ];
-        console.log(template);
-        return template;
-    });
+    template = $(() => [
+        'slot', {
+            $created: (element: HTMLElement) => {
+                this.scrollWrap = element;
+                console.log('wrap');
+            }
+        },
+        'm-bar', {
+            part: 'x',
+            hidden: !this.scrolling,
+            $if: this.scrollX,
+            $css: { padding: this.barPadding },
+            $created: (element: HTMLElement) => this.barX = element
+        }, [
+            'm-thumb', {
+                $created: (element: HTMLElement) => this.thumbX = element
+            }
+        ],
+        'm-bar', {
+            part: 'y',
+            hidden: !this.scrolling,
+            $if: this.scrollY,
+            $css: { padding: this.barPadding },
+            $created: (element: HTMLElement) => this.barY = element
+        }, [
+            'm-thumb', {
+                $created: (element: HTMLElement) => this.thumbY = element
+            }
+        ]
+    ]);
 
     scrollWrap: HTMLElement;
     scrolling = false;
-    enabled: boolean;
     barX: any;
     barY: any;
     thumbY: any;
@@ -115,19 +111,18 @@ export class MasterContent extends HTMLElement {
 
     render() {
         this.template.render(this.shadowRoot);
-        this.renderPartly();
+        this.renderScrolling();
         this.toggleListener(this.scrollX || this.scrollY);
     }
 
     toggleListener(whether: boolean) {
-        if (whether && !this.enabled) {
-            this.enabled = true;
-            console.log('enabled');
+        if (whether && !this.#enabled) {
+            this.#enabled = true;
             this.scrollWrap.on('scroll', (event: any) => {
-                if (!this.renderPartly()) return;
+                if (!this.renderScrolling()) return;
                 if (!this.scrolling) {
                     this.scrolling = true;
-                    this.render();
+                    this.template.render(this.shadowRoot);
                 }
                 if (this.#scrollEndTimeout) this.#scrollEndTimeout = clearTimeout(this.#scrollEndTimeout);
                 this.#scrollEndTimeout = setTimeout(() => {
@@ -139,13 +134,12 @@ export class MasterContent extends HTMLElement {
             });
 
             window.on('resize', debounce(() => {
-                this.renderPartly();
+                this.renderScrolling();
             }, 70), {
                 id: this
             });
-        } else if (!whether && this.enabled) {
-            console.log('disabled');
-            this.enabled = false;
+        } else if (!whether && this.#enabled) {
+            this.#enabled = false;
             this.scrollWrap.off({ id: 'scroll' });
             window.off({ id: this });
         }
@@ -235,7 +229,7 @@ export class MasterContent extends HTMLElement {
         }
     }
 
-    private renderPartly() {
+    private renderScrolling() {
         const render = (dir: string) => {
             if (this['scroll' + dir]) {
                 const
