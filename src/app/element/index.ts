@@ -82,7 +82,7 @@ export function Element(options: ElementOptions) {
                     shadowRoot.appendChild(styleElement);
                 }
             }
-            if (this.render && this.template) this.render();
+            if (this.render) this.render();
             if (onConnected) onConnected.call(this);
         };
 

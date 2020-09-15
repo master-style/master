@@ -22,49 +22,7 @@ const
     tag: 'm-' + NAME,
     css
 })
-export class MasterList extends HTMLElement {
-
-    template = $(() => [
-        'slot', {
-            $created: (element: HTMLElement) => {
-                this.scrollWrap = element;
-                console.log('wrap');
-            }
-        },
-        'm-bar', {
-            part: 'x',
-            hidden: !this.scrolling,
-            $if: this.scrollX,
-            $css: { padding: this.barPadding },
-            $created: (element: HTMLElement) => this.barX = element
-        }, [
-            'm-thumb', {
-                $created: (element: HTMLElement) => this.thumbX = element
-            }
-        ],
-        'm-bar', {
-            part: 'y',
-            hidden: !this.scrolling,
-            $if: this.scrollY,
-            $css: { padding: this.barPadding },
-            $created: (element: HTMLElement) => this.barY = element
-        }, [
-            'm-thumb', {
-                $created: (element: HTMLElement) => this.thumbY = element
-            }
-        ]
-    ]);
-
-    render() {
-        this.template.render(this.shadowRoot);
-        this.renderPartly();
-    }
-
-    scrollWrap: HTMLElement;
-    barX: any;
-    barY: any;
-    thumbY: any;
-    thumbX: any;
+export class MasterContent extends HTMLElement {
 
     #timeX: number;
     #timeY: number;
@@ -76,15 +34,54 @@ export class MasterList extends HTMLElement {
     #wrapSizeY: number;
     #scrollSizeX: number;
     #scrollSizeY: number;
-
     #scrollEndTimeout: any;
+    #animationFrame: any;
+
+    template = $(() => {
+        const template = [
+            'slot', {
+                $created: (element: HTMLElement) => {
+                    this.scrollWrap = element;
+                    console.log('wrap');
+                }
+            },
+            'm-bar', {
+                part: 'x',
+                hidden: !this.scrolling,
+                $if: this.scrollX,
+                $css: { padding: this.barPadding },
+                $created: (element: HTMLElement) => this.barX = element
+            }, [
+                'm-thumb', {
+                    $created: (element: HTMLElement) => this.thumbX = element
+                }
+            ],
+            'm-bar', {
+                part: 'y',
+                hidden: !this.scrolling,
+                $if: this.scrollY,
+                $css: { padding: this.barPadding },
+                $created: (element: HTMLElement) => this.barY = element
+            }, [
+                'm-thumb', {
+                    $created: (element: HTMLElement) => this.thumbY = element
+                }
+            ]
+        ];
+        console.log(template);
+        return template;
+    });
+
+    scrollWrap: HTMLElement;
+    scrolling = false;
+    enabled: boolean;
+    barX: any;
+    barY: any;
+    thumbY: any;
+    thumbX: any;
 
     maxX: number;
     maxY: number;
-
-    scrolling = false;
-
-    #animationFrame: any;
 
     @Attr({ reflect: false, render: false })
     duration: number = 300;
@@ -116,28 +113,42 @@ export class MasterList extends HTMLElement {
     @Attr({ reflect: false })
     barPadding = 4;
 
-    onConnected() {
-        this.scrollWrap.on('scroll', (event: any) => {
-            console.log('scroll')
-            if (!this.renderPartly()) return;
-            if (!this.scrolling) {
-                this.scrolling = true;
-                this.render();
-            }
-            if (this.#scrollEndTimeout) this.#scrollEndTimeout = clearTimeout(this.#scrollEndTimeout);
-            this.#scrollEndTimeout = setTimeout(() => {
-                this.stopScrolling();
-            }, 100);
-        }, {
-            id: 'scroll',
-            passive: true
-        });
+    render() {
+        this.template.render(this.shadowRoot);
+        this.renderPartly();
+        this.toggleListener(this.scrollX || this.scrollY);
+    }
 
-        window.on('resize', debounce(() => {
-            this.renderPartly();
-        }, 70), {
-            id: this
-        });
+    toggleListener(whether: boolean) {
+        if (whether && !this.enabled) {
+            this.enabled = true;
+            console.log('enabled');
+            this.scrollWrap.on('scroll', (event: any) => {
+                if (!this.renderPartly()) return;
+                if (!this.scrolling) {
+                    this.scrolling = true;
+                    this.render();
+                }
+                if (this.#scrollEndTimeout) this.#scrollEndTimeout = clearTimeout(this.#scrollEndTimeout);
+                this.#scrollEndTimeout = setTimeout(() => {
+                    this.stopScrolling();
+                }, 100);
+            }, {
+                id: 'scroll',
+                passive: true
+            });
+
+            window.on('resize', debounce(() => {
+                this.renderPartly();
+            }, 70), {
+                id: this
+            });
+        } else if (!whether && this.enabled) {
+            console.log('disabled');
+            this.enabled = false;
+            this.scrollWrap.off({ id: 'scroll' });
+            window.off({ id: this });
+        }
     }
 
     get scrollable(): boolean {
@@ -282,8 +293,7 @@ export class MasterList extends HTMLElement {
     }
 
     onDisconnected() {
-        this.scrollWrap.off({ id: 'scroll' });
-        window.off({ id: this });
+        this.toggleListener(false);
     }
 
 }

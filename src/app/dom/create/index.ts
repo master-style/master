@@ -94,7 +94,7 @@ class MasterTemplate {
                         let eachOldNode = eachOldNodes[i];
                         const eachOldElement = eachOldNode?.element;
                         const hasIf = eachNode.hasOwnProperty('$if');
-                        const whether = hasIf && !!eachNode.$if || !hasIf;
+                        const whether = hasIf && eachNode.$if || !hasIf;
                         if (eachOldElement && eachNode.tag === eachOldNode.tag) {
                             if (!eachNodes[i + 1]) {
                                 eachOldNodes.splice(i + 1)
@@ -141,7 +141,7 @@ class MasterTemplate {
                                 const removed = eachNode.$removed;
                                 if (removed) removed(eachOldElement);
                                 continue;
-                            } else if (whether) {
+                            } else if (!whether) {
                                 continue;
                             }
                             let skipChildren = false;
