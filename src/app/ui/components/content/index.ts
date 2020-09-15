@@ -24,21 +24,15 @@ const
 })
 export class MasterContent extends HTMLElement {
 
-    #timeX: number;
-    #timeY: number;
-    #thumbSizeX: number;
-    #thumbSizeY: number;
-    #sizeX: number;
-    #sizeY: number;
-    #wrapSizeX: number;
-    #wrapSizeY: number;
-    #scrollSizeX: number;
-    #scrollSizeY: number;
+    #time: any = {};
+    #thumbSize: any = {};
+    #size: any = {};
+    #wrapSize: any = {};
+    #scrollSize: any = {};
     #scrollEndTimeout: any;
     #animationFrame: any;
     #enabled: boolean;
-    #yThumb: any;
-    #xThumb: any;
+    #thumb: any = {};
 
     template = $(() => [
         'slot', {
@@ -54,7 +48,7 @@ export class MasterContent extends HTMLElement {
             $css: { padding: this.barPadding }
         }, [
             'm-thumb', {
-                $created: (element: HTMLElement) => this.#xThumb = element
+                $created: (element: HTMLElement) => this.#thumb.X = element
             }
         ],
         'm-bar', {
@@ -64,7 +58,7 @@ export class MasterContent extends HTMLElement {
             $css: { padding: this.barPadding }
         }, [
             'm-thumb', {
-                $created: (element: HTMLElement) => this.#yThumb = element
+                $created: (element: HTMLElement) => this.#thumb.Y = element
             }
         ]
     ]);
@@ -97,10 +91,10 @@ export class MasterContent extends HTMLElement {
     overscroll: boolean;
 
     @Attr({ observe: false, render: false })
-    xReach: number;
+    reachX: number;
 
     @Attr({ observe: false, render: false })
-    yReach: number;
+    reachY: number;
 
     @Attr({ reflect: false })
     barPadding = 4;
@@ -196,7 +190,7 @@ export class MasterContent extends HTMLElement {
 
         if (this.scrolling) {
             if (this.#animationFrame) this.#animationFrame = cancelAnimationFrame(this.#animationFrame);
-            this.#timeX = this.#timeY = 0;
+            this.#time.X = this.#time.Y = 0;
         }
 
         if (duration === 0) {
@@ -206,12 +200,12 @@ export class MasterContent extends HTMLElement {
             duration = duration || this.duration;
             this.scrolling = true;
             const scroll = (dir: string, currentValue: number, toValue: number) => {
-                this['#time' + dir] += 20;
+                this.#time[dir] += 20;
                 const newValue =
                     (function (t, b, c, d) {
                         t = (t /= d) * .5;
                         return Math.round(b + c * t);
-                    })(this['#time' + dir], currentValue, toValue - currentValue, duration);
+                    })(this.#time[dir], currentValue, toValue - currentValue, duration);
                 if (currentValue !== Math.round(toValue)) {
                     this.wrap[SCROLL_POSITION_KEY[dir]] = newValue;
                     this.#animationFrame = requestAnimationFrame(() => scroll(dir, newValue, toValue));
@@ -229,9 +223,9 @@ export class MasterContent extends HTMLElement {
         const render = (dir: string) => {
             if (this['scroll' + dir]) {
                 const
-                    scrollSize = this['#scrollSize' + dir] = this.wrap[SCROLL_SIZE_KEY[dir]],
-                    size = this['#size' + dir] = this[CLIENT_SIZE_KEY[dir]],
-                    wrapSize = this['#wrapSize' + dir] = this.wrap[CLIENT_SIZE_KEY[dir]],
+                    scrollSize = this.#scrollSize[dir] = this.wrap[SCROLL_SIZE_KEY[dir]],
+                    size = this.#size[dir] = this[CLIENT_SIZE_KEY[dir]],
+                    wrapSize = this.#wrapSize[dir] = this.wrap[CLIENT_SIZE_KEY[dir]],
                     padding = size - wrapSize,
                     scrollPosition = this.wrap[SCROLL_POSITION_KEY[dir]],
                     maxPosition = this['max' + dir] = scrollSize - wrapSize < 0 ? 0 : (scrollSize - wrapSize),
@@ -251,21 +245,23 @@ export class MasterContent extends HTMLElement {
                     this.wrap.style.webkitMaskImage = this.wrap.style.maskImage = maskImage;
                 }
 
-                if (dir === 'X' && this.xReach !== reach) this.xReach = reach;
-                if (dir === 'Y' && this.yReach !== reach) this.yReach = reach;
+                if (this['reach' + dir] !== reach) this['reach' + dir] = reach;
 
-                const thumb = dir === 'X' ? this.#xThumb : this.#yThumb;
+                const thumb = this.#thumb[dir];
+                console.log(this.#thumb);
 
-                const
-                    barPosition = scrollPosition < 0 ? 0 : (scrollPosition > maxPosition ? maxPosition : scrollPosition);
-                const
-                    thumbSize = size * size / (scrollSize + padding) - this.barPadding * 2,
-                    TRANSLATE = 'translate' + dir;
-                thumb.style.transform =
-                    TRANSLATE + '(' + barPosition / (maxPosition + size) * size + 'px)';
-                if (this['#thumbSize' + dir] !== thumbSize) {
-                    this['#thumbSize' + dir] = thumbSize;
-                    thumb.style[SIZE_KEY[dir]] = thumbSize + 'px';
+                if (thumb) {
+                    const
+                        barPosition = scrollPosition < 0 ? 0 : (scrollPosition > maxPosition ? maxPosition : scrollPosition);
+                    const
+                        thumbSize = size * size / (scrollSize + padding) - this.barPadding * 2,
+                        TRANSLATE = 'translate' + dir;
+                    thumb.style.transform =
+                        TRANSLATE + '(' + barPosition / (maxPosition + size) * size + 'px)';
+                    if (this.#thumbSize[dir] !== thumbSize) {
+                        this.#thumbSize[dir] = thumbSize;
+                        thumb.style[SIZE_KEY[dir]] = thumbSize + 'px';
+                    }
                 }
                 return scrollPosition !== maxPosition;
             } else {
@@ -279,7 +275,7 @@ export class MasterContent extends HTMLElement {
     stopScrolling() {
         if (this.#animationFrame) this.#animationFrame = cancelAnimationFrame(this.#animationFrame);
         this.scrolling = false;
-        this.#timeX = this.#timeY = 0;
+        this.#time.X = this.#time.Y = 0;
         this.render();
     }
 
