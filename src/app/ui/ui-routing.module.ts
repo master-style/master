@@ -22,7 +22,6 @@ import { ModalComponent } from './components/modal/modal.component';
 import { PopupComponent } from './components/popup/popup.component';
 import { ProgressComponent } from './components/progress/progress.component';
 import { RibbonComponent } from './components/ribbon/ribbon.component';
-import { ScrollComponent } from './components/scroll/scroll.component';
 import { TableComponent } from './components/table/table.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { BreadcrumbComponent } from './decorators/breadcrumb/breadcrumb.component';
@@ -85,10 +84,9 @@ export const uiRoutes: Routes = [
             { path: 'navigator' },
             { path: 'tabs', component: TabsComponent, resolve: { route: RouteResolver } },
             { path: 'interactive' },
-            { path: 'collapse', component: ContentComponent, resolve: { route: RouteResolver } },
+            { path: 'collapse', component: CollapseComponent, resolve: { route: RouteResolver } },
             { path: 'modal', component: ModalComponent, resolve: { route: RouteResolver } },
             { path: 'popup', component: PopupComponent, resolve: { route: RouteResolver } },
-            { path: 'scroll', component: ContentComponent, resolve: { route: RouteResolver } },
             { path: 'loading-indicator' },
             { path: 'progress', component: ProgressComponent, resolve: { route: RouteResolver } },
             { path: 'skeleton', component: SkeletonComponent, resolve: { route: RouteResolver } },

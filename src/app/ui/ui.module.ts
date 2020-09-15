@@ -17,7 +17,6 @@ import { ModalComponent } from './components/modal/modal.component';
 import { PopupComponent } from './components/popup/popup.component';
 import { ProgressComponent } from './components/progress/progress.component';
 import { RibbonComponent } from './components/ribbon/ribbon.component';
-import { ScrollComponent } from './components/scroll/scroll.component';
 import { TableComponent } from './components/table/table.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { InstallationComponent } from './guideline/installation/installation.component';

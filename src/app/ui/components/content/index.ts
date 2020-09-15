@@ -127,12 +127,11 @@ export class MasterContent extends HTMLElement {
                     passive: true
                 })
                 .on('slotchange', (event) => {
-                    console.log(event);
                     this.renderScrolling();
                 }, {
                     id: 'scroll',
                     passive: true
-                })
+                });
 
             window.on('resize', debounce(() => {
                 this.renderScrolling();
