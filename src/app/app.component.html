@@ -1,19 +1,25 @@
-<nav part="app-head" class="sticky bb y:no c-wrap:no" id="appHead">
+<nav part="app-head" class="bb">
+    <m-button class="x square transparent">
+        <i class="i-menu"></i>
+    </m-button>
+    <div part="app-logo" class="x" style="width: 200px">
+        <img src="assets/images/logo.svg" width="70">
+    </div>
     <div class="x">
         <div class="c:stack">
-            <button is="m-button"
-                    id="side-toggle"
-                    collapse=".appSide"
-                    class="square transparent">
+            <m-button is="m-button"
+                      id="side-toggle"
+                      collapse=".appSide"
+                      class="square transparent">
                 <i class="i-maximize-2"></i>
-            </button>
-            <!-- <button is="m-button" toggle="#side .user" class="transparent">
+            </m-button>
+            <!-- <button toggle="#side .user" class="transparent">
                     <i class="i-user"></i>
                 </button> -->
-            <button is="m-button" id="themeToggle" class="square transparent">
+            <m-button id="themeToggle" class="square transparent">
                 <i class="i-moon f:fade++ hide@active"></i>
                 <i class="i-sun f:yellow show@active"></i>
-            </button>
+            </m-button>
         </div>
     </div>
     <div class="x f:xs show@md" id="nowTime"></div>
@@ -31,12 +37,13 @@
                     <option value="Curacao" head="🇨🇼">Curacao</option>
                 </select>
             </label> -->
-        <button is="m-button" class="square transparent">
+        <m-button class="square transparent">
             <i class="i-power"></i>
-        </button>
+        </m-button>
     </div>
 </nav>
-<main part="app-body">
+
+<main part="app-body" style="padding-top: 3rem">
     <article class="decorated" style="margin-bottom: 3rem">
         <nav aria-label="breadcrumb" class="decorated">
             <a *ngFor="let eachRoute of appService?.currentRoute?.pathFromRoot"
@@ -57,21 +64,20 @@
         <router-outlet></router-outlet>
     </article>
 </main>
-<aside part="app-side" class="sticky br">
-    <div class="y:no c:row c-wrap:no">
-        <div class="x c:center" style="height: 3rem">
-            <img src="assets/images/logo.svg" width="70">
-        </div>
-        <m-content scroll-y guide class="x:fill">
-            <m-list>
-                <ng-container *ngFor="let eachRoute of routes">
-                    <ng-container [ngTemplateOutlet]="routeGroup"
-                                  [ngTemplateOutletContext]="{route: eachRoute, size: 'sm'}">
-                    </ng-container>
-                </ng-container>
-            </m-list>
-        </m-content>
+
+<aside part="app-side" class="br">
+    <div part="app-logo" class="x" style="width: 200px">
+        <img src="assets/images/logo.svg" width="70">
     </div>
+    <m-content scroll-y guide class="x:fill">
+        <m-list style="padding-top: .5rem">
+            <ng-container *ngFor="let eachRoute of routes">
+                <ng-container [ngTemplateOutlet]="routeGroup"
+                              [ngTemplateOutletContext]="{route: eachRoute, size: 'sm'}">
+                </ng-container>
+            </ng-container>
+        </m-list>
+    </m-content>
 </aside>
 
 <ng-template #routeGroup let-route="route" let-size="size">

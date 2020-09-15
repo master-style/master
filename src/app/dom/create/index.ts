@@ -140,7 +140,6 @@ class MasterTemplate {
                                 eachOldElement.remove();
                                 const removed = eachNode.$removed;
                                 if (removed) removed(eachOldElement);
-                                continue;
                             } else if (!whether) {
                                 continue;
                             }
