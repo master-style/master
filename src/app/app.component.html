@@ -58,7 +58,6 @@
     </label>
     <m-item [routerLink]="route?.paths ? route?.paths : ''"
             *ngIf="route?.component || route?.children"
-            style="--px: 1.25rem"
             [class]="size"
             type="button">
         <i class="i-{{route?.data?.icon}} f:fade++" style="margin-right: .625rem" *ngIf="route?.data?.icon"></i>

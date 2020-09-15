@@ -110,6 +110,7 @@ m-bar {
     contain: content;
     opacity: 1;
 
+
     &[hidden] {
         opacity: 0;
         transition: opacity .2s ease-out .5s;
@@ -144,9 +145,9 @@ m-bar[part=x] {
 }
 
 m-bar[part=y] {
-    top: 0;
+    top: var(--offset-top);
     right: 0;
-    height: 100%;
+    height: calc(100% - var(--offset-top) - var(--offset-bottom));
 
     m-thumb {
         width: 4px;
