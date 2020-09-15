@@ -1,44 +1,16 @@
 <nav part="app-head" class="bb">
-    <m-button class="x square transparent">
+    <m-button class="x square">
         <i class="i-menu"></i>
     </m-button>
-    <div part="app-logo" class="x" style="width: 200px">
+    <div part="app-logo" class="x">
         <img src="assets/images/logo.svg" width="70">
     </div>
-    <div class="x">
-        <div class="c:stack">
-            <m-button is="m-button"
-                      id="side-toggle"
-                      collapse=".appSide"
-                      class="square transparent">
-                <i class="i-maximize-2"></i>
-            </m-button>
-            <!-- <button toggle="#side .user" class="transparent">
-                    <i class="i-user"></i>
-                </button> -->
-            <m-button id="themeToggle" class="square transparent">
-                <i class="i-moon f:fade++ hide@active"></i>
-                <i class="i-sun f:yellow show@active"></i>
-            </m-button>
-        </div>
-    </div>
     <div class="x f:xs show@md" id="nowTime"></div>
-    <div class="x a:right c:middle">
-        <!-- <label class="ctl demoItem">
-                <select is="m-select">
-                    <option value="Taiwan" head="🇹🇼">Taiwan</option>
-                    <option value="Albania" head="🇦🇱">Albania</option>
-                    <option value="Australia" head="🇦🇺">Australia</option>
-                    <option value="Azerbaijan" head="🇦🇿">Azerbaijan</option>
-                    <option value="Belgium" head="🇧🇪" selected>Belgium</option>
-                    <option value="Bhutan" head="🇧🇹">Bhutan</option>
-                    <option value="Belize" head="🇧🇿">Belize</option>
-                    <option value="Chile" head="🇨🇱">Chile</option>
-                    <option value="Curacao" head="🇨🇼">Curacao</option>
-                </select>
-            </label> -->
-        <m-button class="square transparent">
-            <i class="i-power"></i>
+    <div class="x y:no ml:auto w:auto">
+        <m-button class="x square"
+                  id="themeToggle">
+            <i class="i-moon f:fade++ hide@active"></i>
+            <i class="i-sun f:yellow show@active"></i>
         </m-button>
     </div>
 </nav>
