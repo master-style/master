@@ -18,20 +18,27 @@
 
 <main part="app-body" style="padding-top: 3rem">
     <article class="decorated" style="margin-bottom: 3rem">
-        <nav aria-label="breadcrumb" class="decorated">
-            <a *ngFor="let eachRoute of appService?.currentRoute?.pathFromRoot"
-               [attr.aria-current]="appService?.currentRoute === eachRoute ? 'page': null">{{ eachRoute?.routeConfig?.path || 'home' | translate }}</a>
-        </nav>
-        <nav aria-label="breadcrumb" class="decorated">
+        <!-- skeleton -->
+        <nav aria-label="breadcrumb" class="decorated" *ngIf="navigating">
             <a *ngFor="let each of ','.repeat(3).split(',')">
                 <m-skeleton class="animated" width="2em"></m-skeleton>
             </a>
         </nav>
+        <nav aria-label="breadcrumb" class="decorated" *ngIf="!navigating">
+            <a *ngFor="let eachRoute of appService?.currentRoute?.pathFromRoot"
+               [attr.aria-current]="appService?.currentRoute === eachRoute ? 'page': null">{{ eachRoute?.routeConfig?.path || 'home' | translate }}</a>
+        </nav>
         <h1>
-            <m-skeleton class="animated" width="20%"></m-skeleton>
+            <ng-container *ngIf="navigating">
+                <m-skeleton class="animated" width="20%"></m-skeleton>
+            </ng-container>
+            <ng-container *ngIf="!navigating">
+                {{ appService?.currentRoute?.routeConfig?.path | translate }}
+            </ng-container>
         </h1>
-        <h1>{{ appService?.currentRoute?.routeConfig?.path | translate }}</h1>
-        <div class="y:no my">
+        <m-skeleton *ngIf="navigating" class="animated" width="7.5rem" style="height: 24px; margin: .6rem 0">
+        </m-skeleton>
+        <div class="y:no my" *ngIf="!navigating">
             <m-chip class="x sm red+"
                     [ngClass]="{
                         'red+': eachComposition === 'HTML',
@@ -42,6 +49,19 @@
                 {{ eachComposition }}
             </m-chip>
         </div>
+        <m-skeleton *ngIf="navigating" style="height: 150px" class="mt"></m-skeleton>
+        <p *ngIf="navigating" class="mt">
+            <m-skeleton class="animated" height="60%"></m-skeleton>
+            <m-skeleton class="animated" height="60%"></m-skeleton>
+            <m-skeleton class="animated" height="60%"></m-skeleton>
+            <m-skeleton class="animated" height="60%" width="30%"></m-skeleton>
+        </p>
+        <p *ngIf="navigating" class="mt">
+            <m-skeleton class="animated" height="60%"></m-skeleton>
+            <m-skeleton class="animated" height="60%"></m-skeleton>
+            <m-skeleton class="animated" height="60%"></m-skeleton>
+            <m-skeleton class="animated" height="60%" width="30%"></m-skeleton>
+        </p>
         <router-outlet></router-outlet>
     </article>
 </main>
