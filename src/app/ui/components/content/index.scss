@@ -2,7 +2,10 @@
 
 :host {
     position: relative;
-    contain: size style;
+    contain: style;
+    width: 100%;
+    height: 100%;
+    display: block;
     -webkit-user-drag: none;
     -webkit-touch-callout: none;
     -ms-overflow-style: none;
@@ -93,10 +96,10 @@ slot {
     display: block;
     width: 100%;
     height: 100%;
-}
-
-.scrollItems {
-    display: flex;
+    box-sizing: border-box;
+    contain: size;
+    padding-top: var(--offset-top);
+    padding-bottom: var(--offset-bottom);
 }
 
 m-bar {

@@ -105,23 +105,31 @@ export class MasterContent extends HTMLElement {
         this.toggleListener(this.scrollX || this.scrollY);
     }
 
-    toggleListener(whether: boolean) {
+    private toggleListener(whether: boolean) {
         if (whether && !this.#enabled) {
             this.#enabled = true;
-            this.wrap.on('scroll', (event: any) => {
-                if (!this.renderScrolling()) return;
-                if (!this.scrolling) {
-                    this.scrolling = true;
-                    this.template.render(this.shadowRoot);
-                }
-                if (this.#scrollEndTimeout) this.#scrollEndTimeout = clearTimeout(this.#scrollEndTimeout);
-                this.#scrollEndTimeout = setTimeout(() => {
-                    this.stopScrolling();
-                }, 100);
-            }, {
-                id: 'scroll',
-                passive: true
-            });
+            this.wrap
+                .on('scroll', (event: any) => {
+                    if (!this.renderScrolling()) return;
+                    if (!this.scrolling) {
+                        this.scrolling = true;
+                        this.template.render(this.shadowRoot);
+                    }
+                    if (this.#scrollEndTimeout) this.#scrollEndTimeout = clearTimeout(this.#scrollEndTimeout);
+                    this.#scrollEndTimeout = setTimeout(() => {
+                        this.stop();
+                    }, 100);
+                }, {
+                    id: 'scroll',
+                    passive: true
+                })
+                .on('slotchange', (event) => {
+                    console.log(event);
+                    this.renderScrolling();
+                }, {
+                    id: 'scroll',
+                    passive: true
+                })
 
             window.on('resize', debounce(() => {
                 this.renderScrolling();
@@ -271,7 +279,7 @@ export class MasterContent extends HTMLElement {
     }
 
     // stop current animation
-    stopScrolling() {
+    stop() {
         if (this.#animationFrame) this.#animationFrame = cancelAnimationFrame(this.#animationFrame);
         this.scrolling = false;
         this.#time.X = this.#time.Y = 0;

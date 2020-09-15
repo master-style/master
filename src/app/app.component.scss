@@ -173,34 +173,56 @@ code.default {
     }
 }
 
-.dark .phoneMockup {
+.mobile {
+    position: relative;
+    display: flex;
+    border: 13px solid black;
+    border-radius: 2.875rem;
+    width: 344px;
+    height: 704px;
+    box-shadow:
+        0 0.8px 1.1px rgba(0, 0, 0, 0.034),
+        0 2px 2.6px rgba(0, 0, 0, 0.048),
+        0 3.8px 4.9px rgba(0, 0, 0, 0.06),
+        0 6.7px 8.7px rgba(0, 0, 0, 0.072),
+        0 12.5px 16.3px rgba(0, 0, 0, 0.086),
+        0 30px 39px rgba(0, 0, 0, 0.12);
+
     &:after {
-        -webkit-filter: invert(100%);
-        /* Safari/Chrome */
-        filter: invert(100%);
+        content: '';
+        position: absolute;
+        top: 0px;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 60%;
+        height: 60px;
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+        background-position: top center;
+        background-image: url(/assets/images/iphone-bar.svg);
     }
 }
 
-.phoneMockupWrap {
+.mobile-wrap {
     position: relative;
     overflow: hidden;
-    border-radius: 2rem;
+    width: 100%;
+    flex: 1 1 auto;
+    background-color: var(--theme);
+    border-radius: 2.5rem;
 
-    &:before {
-        position: absolute;
+    &:after {
         content: '';
-        pointer-events: none;
+        position: absolute;
+        bottom: .5rem;
         left: 0;
-        top: 0;
-        z-index: $z-up;
-        display: block;
-        width: 100%;
-        height: 35px;
-        @include blurBg(var(--themeRgb), .9);
-    }
-
-    .scrollWrap {
-        padding-top: $lg;
+        right: 0;
+        margin: auto;
+        width: 33.3%;
+        height: 5px;
+        border-radius: 2.5px;
+        background-color: black;
     }
 }
 
