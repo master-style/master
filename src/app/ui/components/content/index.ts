@@ -37,11 +37,13 @@ export class MasterContent extends HTMLElement {
     #scrollEndTimeout: any;
     #animationFrame: any;
     #enabled: boolean;
+    #yThumb: any;
+    #xThumb: any;
 
     template = $(() => [
         'slot', {
             $created: (element: HTMLElement) => {
-                this.scrollWrap = element;
+                this.wrap = element;
                 console.log('wrap');
             }
         },
@@ -49,32 +51,26 @@ export class MasterContent extends HTMLElement {
             part: 'x',
             hidden: !this.scrolling,
             $if: this.scrollX,
-            $css: { padding: this.barPadding },
-            $created: (element: HTMLElement) => this.barX = element
+            $css: { padding: this.barPadding }
         }, [
             'm-thumb', {
-                $created: (element: HTMLElement) => this.thumbX = element
+                $created: (element: HTMLElement) => this.#xThumb = element
             }
         ],
         'm-bar', {
             part: 'y',
             hidden: !this.scrolling,
             $if: this.scrollY,
-            $css: { padding: this.barPadding },
-            $created: (element: HTMLElement) => this.barY = element
+            $css: { padding: this.barPadding }
         }, [
             'm-thumb', {
-                $created: (element: HTMLElement) => this.thumbY = element
+                $created: (element: HTMLElement) => this.#yThumb = element
             }
         ]
     ]);
 
-    scrollWrap: HTMLElement;
+    wrap: HTMLElement;
     scrolling = false;
-    barX: any;
-    barY: any;
-    thumbY: any;
-    thumbX: any;
 
     maxX: number;
     maxY: number;
@@ -101,10 +97,10 @@ export class MasterContent extends HTMLElement {
     overscroll: boolean;
 
     @Attr({ observe: false, render: false })
-    reachX: number;
+    xReach: number;
 
     @Attr({ observe: false, render: false })
-    reachY: number;
+    yReach: number;
 
     @Attr({ reflect: false })
     barPadding = 4;
@@ -118,7 +114,7 @@ export class MasterContent extends HTMLElement {
     toggleListener(whether: boolean) {
         if (whether && !this.#enabled) {
             this.#enabled = true;
-            this.scrollWrap.on('scroll', (event: any) => {
+            this.wrap.on('scroll', (event: any) => {
                 if (!this.renderScrolling()) return;
                 if (!this.scrolling) {
                     this.scrolling = true;
@@ -140,7 +136,7 @@ export class MasterContent extends HTMLElement {
             });
         } else if (!whether && this.#enabled) {
             this.#enabled = false;
-            this.scrollWrap.off({ id: 'scroll' });
+            this.wrap.off({ id: 'scroll' });
             window.off({ id: this });
         }
     }
@@ -163,7 +159,7 @@ export class MasterContent extends HTMLElement {
                     if (this.center) {
                         const
                             elementSize = element[CLIENT_SIZE_KEY[dir]],
-                            offsetSize = this.scrollWrap[OFFSET_SIZE_KEY[dir]],
+                            offsetSize = this.wrap[OFFSET_SIZE_KEY[dir]],
                             centerOffset = (offsetSize - elementSize) / 2;
                         if (to[dir] < centerOffset) {
                             to[dir] = 0;
@@ -186,7 +182,7 @@ export class MasterContent extends HTMLElement {
                     } else if (to[dir] < 0) {
                         to[dir] = 0;
                     }
-                    const current = this.scrollWrap[SCROLL_POSITION_KEY[dir]];
+                    const current = this.wrap[SCROLL_POSITION_KEY[dir]];
                     if (to[dir] === current) return to[dir] = null;
                 };
             if (this.scrollX) calc('X');
@@ -204,8 +200,8 @@ export class MasterContent extends HTMLElement {
         }
 
         if (duration === 0) {
-            if (this.scrollX && to.X) this.scrollWrap.scrollLeft = to.X;
-            if (this.scrollY && to.Y) this.scrollWrap.scrollTop = to.Y;
+            if (this.scrollX && to.X) this.wrap.scrollLeft = to.X;
+            if (this.scrollY && to.Y) this.wrap.scrollTop = to.Y;
         } else {
             duration = duration || this.duration;
             this.scrolling = true;
@@ -217,15 +213,15 @@ export class MasterContent extends HTMLElement {
                         return Math.round(b + c * t);
                     })(this['#time' + dir], currentValue, toValue - currentValue, duration);
                 if (currentValue !== Math.round(toValue)) {
-                    this.scrollWrap[SCROLL_POSITION_KEY[dir]] = newValue;
+                    this.wrap[SCROLL_POSITION_KEY[dir]] = newValue;
                     this.#animationFrame = requestAnimationFrame(() => scroll(dir, newValue, toValue));
                 } else {
                     this.scrolling = false;
                     if (complete) complete();
                 }
             };
-            if (this.scrollX && to.X) scroll('X', this.scrollWrap[SCROLL_POSITION_KEY.X], to.X);
-            if (this.scrollY && to.Y) scroll('Y', this.scrollWrap[SCROLL_POSITION_KEY.Y], to.Y);
+            if (this.scrollX && to.X) scroll('X', this.wrap[SCROLL_POSITION_KEY.X], to.X);
+            if (this.scrollY && to.Y) scroll('Y', this.wrap[SCROLL_POSITION_KEY.Y], to.Y);
         }
     }
 
@@ -233,11 +229,11 @@ export class MasterContent extends HTMLElement {
         const render = (dir: string) => {
             if (this['scroll' + dir]) {
                 const
-                    scrollSize = this['#scrollSize' + dir] = this.scrollWrap[SCROLL_SIZE_KEY[dir]],
+                    scrollSize = this['#scrollSize' + dir] = this.wrap[SCROLL_SIZE_KEY[dir]],
                     size = this['#size' + dir] = this[CLIENT_SIZE_KEY[dir]],
-                    wrapSize = this['#wrapSize' + dir] = this.scrollWrap[CLIENT_SIZE_KEY[dir]],
+                    wrapSize = this['#wrapSize' + dir] = this.wrap[CLIENT_SIZE_KEY[dir]],
                     padding = size - wrapSize,
-                    scrollPosition = this.scrollWrap[SCROLL_POSITION_KEY[dir]],
+                    scrollPosition = this.wrap[SCROLL_POSITION_KEY[dir]],
                     maxPosition = this['max' + dir] = scrollSize - wrapSize < 0 ? 0 : (scrollSize - wrapSize),
                     reach = scrollPosition <= 0 ? -1 : scrollPosition >= maxPosition ? 1 : 0;
                 if (this.guide) {
@@ -252,12 +248,13 @@ export class MasterContent extends HTMLElement {
                                 `linear-gradient(to ${dir === 'X' ? 'right' : 'bottom'},rgba(0,0,0,0) 0px,rgba(0,0,0,1) ${startGuide}px,rgba(0,0,0,1) ${endGuide}px,rgba(0,0,0,0) ${size}px)` :
                                 '';
                     // tslint:disable-next-line: deprecation
-                    this.scrollWrap.style.webkitMaskImage = this.scrollWrap.style.maskImage = maskImage;
+                    this.wrap.style.webkitMaskImage = this.wrap.style.maskImage = maskImage;
                 }
 
-                if (this['reach' + dir] !== reach) this['reach' + dir] = reach;
+                if (dir === 'X' && this.xReach !== reach) this.xReach = reach;
+                if (dir === 'Y' && this.yReach !== reach) this.yReach = reach;
 
-                const thumb = this['thumb' + dir];
+                const thumb = dir === 'X' ? this.#xThumb : this.#yThumb;
 
                 const
                     barPosition = scrollPosition < 0 ? 0 : (scrollPosition > maxPosition ? maxPosition : scrollPosition);
