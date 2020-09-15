@@ -4,6 +4,7 @@ import { domRoutes } from './dom/dom-routing.module';
 import { AppService } from './app.service';
 import { elementRoutes } from './element/element-routing.module';
 import throttle from 'lodash/throttle';
+import { NavigationStart, NavigationEnd, Router, RouterEvent } from '@angular/router';
 
 @Component({
     selector: 'doc-root',
@@ -13,14 +14,26 @@ import throttle from 'lodash/throttle';
 })
 export class AppComponent implements OnInit {
     routes = [];
+    navigating = false;
     constructor(
-        public appService: AppService
+        public appService: AppService,
+        private router: Router
     ) {
         this.routes.push(
             ...this.resolvePaths(['ui'], uiRoutes),
             ...this.resolvePaths(['dom'], domRoutes),
             ...this.resolvePaths(['element'], elementRoutes)
         );
+
+        router.events.subscribe((event: RouterEvent) => {
+            if (event instanceof NavigationStart) {
+                this.navigating = true;
+            }
+            if (event instanceof NavigationEnd) {
+                this.navigating = false;
+            }
+        });
+
     }
 
     scrollDirection = 'up';

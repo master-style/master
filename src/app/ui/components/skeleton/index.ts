@@ -10,11 +10,13 @@ const NAME = 'skeleton';
 export class MasterSkeleton extends HTMLElement {
 
     template = $(() => {
-        let style = '';
-        if (this.height) style += 'height:' + this.height + ';';
-        if (this.width) style += 'width:' + this.width;
+        this.css('width', this.width);
         return [
-            'div', { part: 'bg', style }
+            'div', {
+                part: 'bg', $css: {
+                    height: this.height
+                }
+            }
         ];
     });
 

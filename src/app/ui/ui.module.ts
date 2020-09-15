@@ -71,7 +71,6 @@ import { ContentComponent } from './components/content/content.component';
         PopupComponent,
         ProgressComponent,
         RibbonComponent,
-        ScrollComponent,
         TableComponent,
         TabsComponent,
         InstallationComponent,

@@ -22,6 +22,14 @@
             <a *ngFor="let eachRoute of appService?.currentRoute?.pathFromRoot"
                [attr.aria-current]="appService?.currentRoute === eachRoute ? 'page': null">{{ eachRoute?.routeConfig?.path || 'home' | translate }}</a>
         </nav>
+        <nav aria-label="breadcrumb" class="decorated">
+            <a *ngFor="let each of ','.repeat(3).split(',')">
+                <m-skeleton class="animated" width="2em"></m-skeleton>
+            </a>
+        </nav>
+        <h1>
+            <m-skeleton class="animated" width="20%"></m-skeleton>
+        </h1>
         <h1>{{ appService?.currentRoute?.routeConfig?.path | translate }}</h1>
         <div class="y:no my">
             <m-chip class="x sm red+"
