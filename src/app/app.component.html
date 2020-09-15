@@ -1,10 +1,9 @@
 <nav part="app-head" class="bb" [ngClass]="{'hidden': scrollDirection === 'down'}">
     <div class="x f:xs show@md" id="nowTime"></div>
     <div class="x y:no ml:auto w:auto">
-        <m-button class="x square"
-                  id="themeToggle">
-            <i class="i-moon f:fade++ hide@active"></i>
-            <i class="i-sun f:yellow show@active"></i>
+        <m-button class="x square" (click)="toggleTheme(!isDark)">
+            <i class="i-moon f:fade++" *ngIf="isDark"></i>
+            <i class="i-sun f:yellow" *ngIf="!isDark"></i>
         </m-button>
     </div>
 </nav>
@@ -13,7 +12,7 @@
     <img src="assets/images/logo.svg" width="70">
 </div>
 
-<m-button class="fixed left top square">
+<m-button class="fixed left top square" (click)="visibleSide = !visibleSide">
     <i class="i-menu"></i>
 </m-button>
 
@@ -39,7 +38,7 @@
     </article>
 </main>
 
-<aside part="app-side" class="br" style="padding-top: 3rem">
+<aside part="app-side" class="br" style="padding-top: 3rem" [ngClass]="{'hidden': !visibleSide}">
     <m-content scroll-y guide class="x:fill">
         <m-list style="padding-top: .5rem">
             <ng-container *ngFor="let eachRoute of routes">

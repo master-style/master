@@ -24,6 +24,8 @@ export class AppComponent implements OnInit {
     }
 
     scrollDirection = 'up';
+    visibleSide = window.outerWidth > 1024;
+    isDark = true;
 
     ngOnInit(): void {
         setTimeout(() => {
@@ -40,6 +42,52 @@ export class AppComponent implements OnInit {
                 lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
             }, 100, { leading: false }), { passive: true });
         }, 1000);
+
+        const clock = document.getElementById('clock');
+
+        if (clock) {
+
+            const day = {
+                0: '星期日',
+                1: '星期一',
+                2: '星期二',
+                3: '星期三',
+                4: '星期四',
+                5: '星期五',
+                6: '星期六'
+            };
+            const prefix0 = (num) => {
+                return num < 10 ? '0' + num : num;
+            };
+            const getTime = () => {
+                const date = new Date();
+                const h = date.getHours();
+                return `
+            ${day[date.getDay()]}
+            ${h >= 12 ? '下午' : '上午'}
+            ${h}:${prefix0(date.getMinutes())}:${prefix0(date.getSeconds())}
+            , ${date.getMonth() + 1} 月 ${prefix0(date.getDate() + 1)} 日
+        `;
+            }
+            clock.textContent = getTime();
+            setInterval(() => {
+                const date = new Date();
+                clock.textContent = getTime();
+            }, 1000);
+        }
+
+        const prefersDark: any = window.matchMedia('(prefers-color-scheme: dark)');
+        this.toggleTheme(JSON.parse(localStorage['isDark']) ?? prefersDark.matches);
+
+        // Listen for changes to the prefers-color-scheme media query
+        prefersDark.addListener((e) => this.toggleTheme(e.matches));
+        // Called by the media query to check/uncheck the toggle
+    }
+
+    toggleTheme(isDark) {
+        this.isDark = isDark;
+        document.documentElement.toggleClass('dark', isDark);
+        localStorage.isDark = isDark;
     }
 
     resolvePaths(parentPaths, routes) {

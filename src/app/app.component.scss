@@ -25,6 +25,15 @@
     }
 }
 
+[part="app-side"] {
+    transition: transform 0.3s ease;
+
+    &.hidden {
+        will-change: transform;
+        transform: translateX(-100%);
+    }
+}
+
 @include above(sm) {
     [part="app-head"] {
         transition: transform 0.3s ease;
@@ -38,9 +47,19 @@
 
 @include below(sm) {
     [part="app-logo"] {
-        right: 0!important;
+        right: 0 !important;
         margin: auto;
     }
+}
+
+html.dark {
+    [part="app-logo"] {
+        filter: none;
+    }
+}
+
+[part="app-logo"] {
+    filter: invert(1);
 }
 
 h2+doc-prop {
