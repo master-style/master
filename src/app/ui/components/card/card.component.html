@@ -50,17 +50,28 @@
 </div>
 
 <h2 id="structure">{{ 'structure' | translate }}</h2>
-<template [codeLang]="'html'">
-    <m-card>
-        <figure part="head" class="embedded by:3x2">
-            <img src="" loading="lazy" decoding="async" alt="">
-        </figure>
-        <div part="head"></div>
-        <div part="body"></div>
-        <div part="foot"></div>
-        <m-button part="foot"></m-button>
-    </m-card>
-</template>
+<div class="y">
+    <div class="x:6@sm">
+        <template [codeLang]="'html'">
+            <m-card>
+                <div part="head"></div>
+                <div part="body"></div>
+                <div part="foot"></div>
+            </m-card>
+        </template>
+    </div>
+    <div class="x:6@sm">
+        <template [codeLang]="'html'">
+            <m-card>
+                <figure part="head" class="embedded by:3x2">
+                    <img src="" loading="lazy" decoding="async" alt="">
+                </figure>
+                <article part="body" class="embedded"></article>
+                <m-button part="foot"></m-button>
+            </m-card>
+        </template>
+    </div>
+</div>
 
 <h2 id="example">{{ 'example' | translate }}</h2>
 <div class="y">
