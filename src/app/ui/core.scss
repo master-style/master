@@ -241,6 +241,7 @@ audio:not([controls]) {
 img {
     border-style: none;
     -webkit-user-drag: none;
+    background-color: rgba(var(--bg-skeletonRgb), .05);
 }
 
 /**
