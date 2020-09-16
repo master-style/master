@@ -53,7 +53,6 @@ import { ItemComponent } from './components/item/item.component';
 import { SkeletonComponent } from './components/skeleton/skeleton.component';
 import { BreadcrumbComponent } from './decorators/breadcrumb/breadcrumb.component';
 import { ContentComponent } from './components/content/content.component';
-import { ImgComponent } from './components/img/img.component';
 
 @NgModule({
     declarations: [
@@ -92,8 +91,7 @@ import { ImgComponent } from './components/img/img.component';
         ItemComponent,
         SkeletonComponent,
         BreadcrumbComponent,
-        ContentComponent,
-        ImgComponent
+        ContentComponent
     ],
     imports: [
         SharedModule,

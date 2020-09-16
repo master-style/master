@@ -36,7 +36,7 @@
                 {{ appService?.currentRoute?.routeConfig?.path | translate }}
             </ng-container>
         </h1>
-        <m-skeleton *ngIf="navigating" class="animated" width="7.5rem" style="height: 24px; margin: .6rem 0">
+        <m-skeleton *ngIf="navigating" width="7.5rem" style="height: 24px; margin: .6rem 0">
         </m-skeleton>
         <div class="y:no my" *ngIf="!navigating">
             <m-chip class="x sm red+"
