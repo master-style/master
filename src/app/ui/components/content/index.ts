@@ -46,7 +46,6 @@ export class MasterContent extends HTMLElement {
             part: 'x',
             hidden: !this.scrolling,
             $if: this.scrollX,
-            $css: { padding: this.barPadding },
             $created: (element: HTMLElement) => this.#bar.X = element
         }, [
             'm-thumb', {
@@ -57,7 +56,6 @@ export class MasterContent extends HTMLElement {
             part: 'y',
             hidden: !this.scrolling,
             $if: this.scrollY,
-            $css: { padding: this.barPadding },
             $created: (element: HTMLElement) => this.#bar.Y = element
         }, [
             'm-thumb', {
@@ -98,9 +96,6 @@ export class MasterContent extends HTMLElement {
 
     @Attr({ observe: false, render: false })
     reachY: number;
-
-    @Attr({ reflect: false })
-    barPadding = 4;
 
     render() {
         this.template.render(this.shadowRoot);
@@ -235,8 +230,8 @@ export class MasterContent extends HTMLElement {
                 const
                     scrollSize = this.#scrollSize[dir] = this.wrap[SCROLL_SIZE_KEY[dir]],
                     size = this.#size[dir] = this[CLIENT_SIZE_KEY[dir]],
+                    // tslint:disable-next-line: radix
                     wrapSize = this.#wrapSize[dir] = this.wrap[CLIENT_SIZE_KEY[dir]],
-                    padding = size - wrapSize,
                     scrollPosition = this.wrap[SCROLL_POSITION_KEY[dir]],
                     maxPosition = this['max' + dir] = scrollSize - wrapSize < 0 ? 0 : (scrollSize - wrapSize),
                     reach = scrollPosition <= 0 ? -1 : scrollPosition >= maxPosition ? 1 : 0;
@@ -263,11 +258,14 @@ export class MasterContent extends HTMLElement {
                     const
                         barPosition = scrollPosition < 0 ? 0 : (scrollPosition > maxPosition ? maxPosition : scrollPosition);
                     const
-                        barSize = this.#bar[dir][CLIENT_SIZE_KEY[dir]],
-                        thumbSize = barSize * barSize / (scrollSize + padding) - this.barPadding * 4,
-                        TRANSLATE = 'translate' + dir;
+                        // tslint:disable-next-line: radix
+                        barStyles = window.getComputedStyle(this.#bar[dir]),
+                        padding = parseInt(barStyles['padding']),
+                        barSize = parseInt(barStyles[SIZE_KEY[dir]]),
+                        ratio = (maxPosition + barSize) * barSize,
+                        thumbSize = barSize / ratio;
                     thumb.style.transform =
-                        TRANSLATE + '(' + barPosition / (maxPosition + barSize) * barSize + 'px)';
+                        'translate' + dir + '(' + barPosition / ratio + 'px)';
                     if (this.#thumbSize[dir] !== thumbSize) {
                         this.#thumbSize[dir] = thumbSize;
                         thumb.style[SIZE_KEY[dir]] = thumbSize + 'px';

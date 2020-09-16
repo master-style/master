@@ -96,6 +96,14 @@
     margin-left: var(--head-ml)
 }
 
+::slotted([role=img]),
+::slotted(img[part=head]) {
+    padding: 0;
+    width: calc(var(--size) - var(--p) * 2);
+    height: calc(var(--size) - var(--p) * 2);
+    object-fit: cover;
+}
+
 // ::slotted(img[part="head"]),
 // ::slotted(i[part="head"]) {
 //     margin: 0;

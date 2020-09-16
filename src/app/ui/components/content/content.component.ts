@@ -15,10 +15,11 @@ export class ContentComponent implements OnInit {
     items;
 
     ngOnInit(): void {
-        this.http.get('https://api.unsplash.com/photos/random/?client_id=jlEK9DMtCtnB7hg6E6Do3sGJwDnyNWocSs4m04oZDFk&count=30')
+        this.http.get('https://api.unsplash.com/photos/random/?client_id=yY6EAfiInBb_-KFF8QG7C1jg6bMAxfdK6MkZwqHnkjk&count=10')
             .subscribe((data) => {
-                this.items = data;
-                console.log(data);
+                setTimeout(() => {
+                    this.items = data;
+                }, 1000);
             });
     }
 

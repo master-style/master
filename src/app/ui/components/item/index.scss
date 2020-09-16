@@ -12,7 +12,8 @@
     text-align: left;
     flex-direction: column;
     justify-content: space-between;
-    flex: 1 1 auto;
+    flex: 1;
+    min-width: 0;
 }
 
 :host {
@@ -81,6 +82,7 @@
 // }
 
 [part=lower] {
+    width: 100%;
     flex-wrap: nowrap;
     flex: 1 1 auto;
     padding-right: var(--px);
@@ -118,7 +120,7 @@ slot[name=head]::slotted(*) {
     width: var(--icon-size);
 }
 
-slot[name=img]::slotted(img) {
+slot[name=img]::slotted(*) {
     object-fit: cover;
     margin: var(--img-m);
     margin-right: calc(var(--img-m) - var(--px));

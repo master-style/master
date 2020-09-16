@@ -2,11 +2,43 @@
     <div class="mobile-wrap">
         <m-content scroll-y guide class="h:full" style="--offset-top: 1.8rem; --offset-bottom: 1.8rem;">
             <m-item class="lined c:middle" *ngFor="let item of items" style="--px: 1rem">
-                <h2>{{ item.alt_description }}</h2>
-                <p *ngIf="item.description">{{ item.description }}</p>
-                <img loading="lazy" encoding="async" slot="img" width="64" height="64" [src]="item.urls.thumb"
+                <article part="body" class="short">
+                    <h4 *ngIf="item.created_at">{{ item.created_at | date:'medium' }}</h4>
+                    <h2 class="t-line:3">{{ item.alt_description }}</h2>
+                    <p class="t-line:3" *ngIf="item.description">{{ item.description }}</p>
+                    <div class="y:xs">
+                        <m-chip class="x rounded outlined sm">
+                            <img loading="lazy" encoding="async" part="head"
+                                 [src]="item.user.profile_image.small"
+                                 [alt]="item.user.name">
+                            {{ item.user.name }}
+                        </m-chip>
+                        <m-chip class="x rounded outlined sm" *ngIf="item.location.city">
+                            <i class="i-map-pin" role="img" part="head"></i>
+                            {{ item.location.city }}
+                        </m-chip>
+                    </div>
+                </article>
+                <img loading="lazy" encoding="async" slot="img" width="80" height="80" [src]="item.urls.thumb"
                      [alt]="item.alt_description">
             </m-item>
+            <ng-container *ngIf="!items">
+                <m-item class="lined c:middle" *ngFor="let item of ','.repeat(8).split(',')" style="--px: 1rem">
+                    <article part="body" class="short">
+                        <h4>
+                            <m-skeleton height="60%" width="80%" class="animated"></m-skeleton>
+                        </h4>
+                        <h2>
+                            <m-skeleton height="60%" width="60%" class="animated"></m-skeleton>
+                        </h2>
+                        <p>
+                            <m-skeleton height="60%" class="animated"></m-skeleton>
+                            <m-skeleton height="60%" width="40%" class="animated"></m-skeleton>
+                        </p>
+                    </article>
+                    <m-skeleton slot="img" style="width: 80px; height: 80px;"></m-skeleton>
+                </m-item>
+            </ng-container>
         </m-content>
     </div>
 </div>
