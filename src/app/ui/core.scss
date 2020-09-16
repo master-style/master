@@ -455,6 +455,12 @@ textarea {
     margin: 0;
 }
 
+.remark {
+    font-size: var(--f-xxs);
+    color: var(--f-fade);
+    line-height: 1.4;
+}
+
 h1,
 h2,
 h3,
@@ -468,56 +474,6 @@ h6 {
     text-rendering: optimizeLegibility;
 }
 
-.remark {
-    font-size: var(--f-xxs);
-    color: var(--f-fade);
-    line-height: 1.4;
-}
-
-h1 {
-    font-size: var(--f-xxl);
-}
-
-h2 {
-    font-size: var(--f-xl);
-}
-
-h1,
-h2 {
-    line-height: 1.2;
-}
-
-h3 {
-    font-size: var(--f-lg);
-}
-
-h4 {
-    font-size: var(--f-md);
-}
-
-h3,
-h4 {
-    line-height: 1.3;
-}
-
-h5 {
-    font-size: var(--f-sm);
-}
-
-h6 {
-    font-size: var(--f-xs);
-}
-
-h5,
-h6 {
-    line-height: 1.4;
-}
-
-p {
-    margin: 0px;
-    line-height: 1.6;
-}
-
 hr {
     contain: style;
     display: block;
@@ -528,24 +484,4 @@ hr {
     background-color: var(--b-fadest);
 }
 
-@include below(sm) {
-    h1 {
-        font-size: var(--f-xl);
-    }
 
-    h2 {
-        font-size: var(--f-lg);
-    }
-
-    h3 {
-        font-size: var(--f-md);
-    }
-
-    h4 {
-        font-size: var(--f-sm);
-    }
-
-    h5 {
-        font-size: var(--f-xxs);
-    }
-}

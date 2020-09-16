@@ -2,9 +2,10 @@
     <div class="mobile-wrap">
         <m-content scroll-y guide class="h:full" style="--offset-top: 1.8rem; --offset-bottom: 1.8rem;">
             <m-item class="lined c:middle" *ngFor="let item of items" style="--px: 1rem">
-                <div class="f:md f:500">{{ item.alt_description }}</div>
+                <h2>{{ item.alt_description }}</h2>
                 <p *ngIf="item.description">{{ item.description }}</p>
-                <img loading="lazy" encoding="async" slot="img" width="64" height="64" [src]="item.urls.thumb" [alt]="item.alt_description">
+                <img loading="lazy" encoding="async" slot="img" width="64" height="64" [src]="item.urls.thumb"
+                     [alt]="item.alt_description">
             </m-item>
         </m-content>
     </div>
