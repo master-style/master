@@ -2,9 +2,10 @@
     <div class="demo-body">
         <div class="y">
             <m-card class="raised x:6">
-                <div part="head" class="by:3x2"
-                    style="background-image: url(https://images.pexels.com/photos/936611/pexels-photo-936611.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)">
-                </div>
+                <figure part="head" class="decorated by:3x2">
+                    <img src="https://images.pexels.com/photos/936611/pexels-photo-936611.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                         loading="lazy" decoding="async">
+                </figure>
                 <div part="body">
                     <h5>Wed Jan 22 2020</h5>
                     <h3>Healthy food</h3>
@@ -19,9 +20,10 @@
                 </div>
             </m-card>
             <m-card class="raised x:6">
-                <div part="head" class="by:3x2"
-                    style="background-image: url(https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)">
-                </div>
+                <figure part="head" class="decorated by:3x2">
+                    <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                         loading="lazy" decoding="async">
+                </figure>
                 <div part="body">
                     <h5>Wed Jan 22 2020</h5>
                     <h3>Healthy food</h3>
@@ -50,6 +52,9 @@
 <h2 id="structure">{{ 'structure' | translate }}</h2>
 <template [codeLang]="'html'">
     <m-card>
+        <figure part="head" class="decorated by:3x2">
+            <img src="" loading="lazy" decoding="async" alt="">
+        </figure>
         <div part="head"></div>
         <div part="body"></div>
         <div part="foot"></div>
@@ -62,9 +67,9 @@
     <div class="x:6@sm c:row">
         <template [codeLang]="'html'" [codeDemo]=true>
             <m-card class="raised">
-                <div part="head" class="by:3x2"
-                    style="background-image: url(https://images.pexels.com/photos/936611/pexels-photo-936611.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)">
-                </div>
+                <figure part="head" class="decorated by:3x2">
+                    <img src="https://images.pexels.com/photos/936611/pexels-photo-936611.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" loading="lazy" decoding="async" alt="">
+                </figure>
                 <div part="body">
                     <h5>Wed Jan 22 2020</h5>
                     <h3>Healthy food</h3>
@@ -83,9 +88,9 @@
     <div class="x:6@sm c:row">
         <template [codeLang]="'html'" [codeDemo]=true>
             <m-card class="raised">
-                <div part="head" class="by:3x2"
-                    style="background-image: url(https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)">
-                </div>
+                <figure part="head" class="decorated by:3x2">
+                    <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" loading="lazy" decoding="async" alt="">
+                </figure>
                 <div part="body">
                     <h5>Wed Jan 22 2020</h5>
                     <h3>Healthy food</h3>
@@ -102,9 +107,9 @@
     <div class="x:12@sm c:row">
         <template [codeLang]="'html'" [codeDemo]=true>
             <m-card class="raised head+body/foot">
-                <div part="head"
-                    style="background-image: url(https://images.pexels.com/photos/793765/pexels-photo-793765.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)">
-                </div>
+                <figure part="head" class="decorated by:3x2">
+                    <img src="https://images.pexels.com/photos/793765/pexels-photo-793765.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" loading="lazy" decoding="async" alt="">
+                </figure>
                 <div part="body">
                     <h5>Wed Jan 22 2020</h5>
                     <h3>Healthy food</h3>
@@ -121,9 +126,9 @@
     <div class="x:12@sm c:row">
         <template [codeLang]="'html'" [codeDemo]=true>
             <m-card class="outlined body/foot+head">
-                <div part="head"
-                    style="background-image: url(https://images.pexels.com/photos/416471/pexels-photo-416471.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500)">
-                </div>
+                <figure part="head" class="decorated by:3x2">
+                    <img src="https://images.pexels.com/photos/416471/pexels-photo-416471.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" loading="lazy" decoding="async" alt="">
+                </figure>
                 <div part="body">
                     <h5>Wed Jan 22 2020</h5>
                     <h3>Healthy food</h3>
@@ -142,9 +147,9 @@
             <m-card class="raised">
                 <figure part="head" class="decorated" style="background-color: #000">
                     <video playsinline muted autoplay loop
-                        src="https://player.vimeo.com/external/327849339.sd.mp4?s=d43df12c6b19a289137b374ad9ddad0c05abfdd2&profile_id=164&oauth2_token_id=57447761">
+                           src="https://player.vimeo.com/external/327849339.sd.mp4?s=d43df12c6b19a289137b374ad9ddad0c05abfdd2&profile_id=164&oauth2_token_id=57447761">
                         <source
-                            src="https://player.vimeo.com/external/327849339.sd.mp4?s=d43df12c6b19a289137b374ad9ddad0c05abfdd2&profile_id=164&oauth2_token_id=57447761">
+                                src="https://player.vimeo.com/external/327849339.sd.mp4?s=d43df12c6b19a289137b374ad9ddad0c05abfdd2&profile_id=164&oauth2_token_id=57447761">
                     </video>
                 </figure>
                 <div part="body">
@@ -169,10 +174,10 @@
                 </div>
                 <figure part="head" class="decorated" style="background-color: #000">
                     <video controls
-                        poster="https://www.apple.com/v/iphone/home/af/images/overview/hero/hero_iphone11_pro__je9i781j99u2_large_2x.jpg"
-                        src="https://www.apple.com/105/media/tw/iphone-11-pro/2019/3bd902e4-0752-4ac1-95f8-6225c32aec6d/films/product/iphone-11-pro-product-tpl-tw-2019_1280x720h.mp4">
+                           poster="https://www.apple.com/v/iphone/home/af/images/overview/hero/hero_iphone11_pro__je9i781j99u2_large_2x.jpg"
+                           src="https://www.apple.com/105/media/tw/iphone-11-pro/2019/3bd902e4-0752-4ac1-95f8-6225c32aec6d/films/product/iphone-11-pro-product-tpl-tw-2019_1280x720h.mp4">
                         <source
-                            src="https://www.apple.com/105/media/tw/iphone-11-pro/2019/3bd902e4-0752-4ac1-95f8-6225c32aec6d/films/product/iphone-11-pro-product-tpl-tw-2019_1280x720h.mp4">
+                                src="https://www.apple.com/105/media/tw/iphone-11-pro/2019/3bd902e4-0752-4ac1-95f8-6225c32aec6d/films/product/iphone-11-pro-product-tpl-tw-2019_1280x720h.mp4">
                     </video>
                 </figure>
                 <div part="body">
@@ -334,7 +339,7 @@
         </m-card>
         <m-card class="raised x:6">
             <div part="head" class="by:3x2"
-                style="background-image: url(https://images.pexels.com/photos/936611/pexels-photo-936611.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)">
+                 style="background-image: url(https://images.pexels.com/photos/936611/pexels-photo-936611.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)">
             </div>
             <div part="body">
                 <h5>Wed Jan 22 2020</h5>
@@ -358,9 +363,9 @@
 <template [codeLang]="'html'" [codeDemo]=true>
     <div class="y c:center">
         <m-card class="raised x:6" disabled>
-            <div part="head" class="by:3x2"
-                style="background-image: url(https://images.pexels.com/photos/936611/pexels-photo-936611.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)">
-            </div>
+            <figure part="head" class="decorated by:3x2">
+                <img src="https://images.pexels.com/photos/936611/pexels-photo-936611.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" loading="lazy" decoding="async" alt="">
+            </figure>
             <div part="body">
                 <h5>Wed Jan 22 2020</h5>
                 <h3>Healthy food</h3>
@@ -383,7 +388,7 @@
 
 <h2 id="type">{{ 'type' | translate }}</h2>
 <doc-prop [name]="'type'" [types]="['button', 'reset', 'submit']" [default]="'button'"
-    [description]="'The type of the button.'">
+          [description]="'The type of the button.'">
 </doc-prop>
 
 <doc-prop-hyperlink></doc-prop-hyperlink>
