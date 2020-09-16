@@ -27,8 +27,6 @@ export class MasterContent extends HTMLElement {
     #time: any = {};
     #thumbSize: any = {};
     #bar: any = {};
-    #size: any = {};
-    #wrapSize: any = {};
     #scrollSize: any = {};
     #scrollEndTimeout: any;
     #animationFrame: any;
@@ -229,9 +227,9 @@ export class MasterContent extends HTMLElement {
             if (this['scroll' + dir]) {
                 const
                     scrollSize = this.#scrollSize[dir] = this.wrap[SCROLL_SIZE_KEY[dir]],
-                    size = this.#size[dir] = this[CLIENT_SIZE_KEY[dir]],
+                    size = this[CLIENT_SIZE_KEY[dir]],
                     // tslint:disable-next-line: radix
-                    wrapSize = this.#wrapSize[dir] = this.wrap[CLIENT_SIZE_KEY[dir]],
+                    wrapSize = this.wrap[CLIENT_SIZE_KEY[dir]],
                     scrollPosition = this.wrap[SCROLL_POSITION_KEY[dir]],
                     maxPosition = this['max' + dir] = scrollSize - wrapSize < 0 ? 0 : (scrollSize - wrapSize),
                     reach = scrollPosition <= 0 ? -1 : scrollPosition >= maxPosition ? 1 : 0;
@@ -258,14 +256,14 @@ export class MasterContent extends HTMLElement {
                     const
                         barPosition = scrollPosition < 0 ? 0 : (scrollPosition > maxPosition ? maxPosition : scrollPosition);
                     const
-                        // tslint:disable-next-line: radix
                         barStyles = window.getComputedStyle(this.#bar[dir]),
+                        // tslint:disable-next-line: radix
                         padding = parseInt(barStyles['padding']),
-                        barSize = parseInt(barStyles[SIZE_KEY[dir]]),
-                        ratio = (maxPosition + barSize) * barSize,
-                        thumbSize = barSize / ratio;
+                        // tslint:disable-next-line: radix
+                        barSize = parseInt(barStyles[SIZE_KEY[dir]]) - padding * 2,
+                        thumbSize = barSize / (maxPosition + barSize) * barSize;
                     thumb.style.transform =
-                        'translate' + dir + '(' + barPosition / ratio + 'px)';
+                        'translate' + dir + '(' + barPosition / (maxPosition + barSize) * barSize + 'px)';
                     if (this.#thumbSize[dir] !== thumbSize) {
                         this.#thumbSize[dir] = thumbSize;
                         thumb.style[SIZE_KEY[dir]] = thumbSize + 'px';

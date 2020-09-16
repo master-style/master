@@ -5,7 +5,7 @@
     --offset-bottom: 0px;
     --offset-left: 0px;
     --offset-right: 0px;
-    --bar-p: 0px;
+    --bar-p: 4px;
     position: relative;
     contain: style;
     width: 100%;
@@ -108,11 +108,10 @@ m-bar {
     position: absolute;
     display: block;
     z-index: $z-overlay;
-    pointer-events: none;
+    pointer-events: none!important;
     box-sizing: border-box;
     contain: content;
-    opacity: 1!important;
-    background-color: red!important;
+    opacity: 1;
     padding: var(--bar-p);
 
     &[hidden] {
@@ -128,10 +127,8 @@ m-thumb {
     border-radius: 2px;
     box-sizing: border-box;
     background-color: var(--b-fade);
-    pointer-events: auto;
     contain: strict;
     will-change: transform;
-    background-color: white!important;
 
     // &:hover {
     //     width: 6px;

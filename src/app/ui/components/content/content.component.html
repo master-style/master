@@ -19,7 +19,7 @@
                         </m-chip>
                     </div>
                 </article>
-                <img loading="lazy" encoding="async" slot="img" width="80" height="80" [src]="item.urls.thumb"
+                <img loading="lazy" encoding="async" slot="img" width="64" height="64" [src]="item.urls.thumb"
                      [alt]="item.alt_description">
             </m-item>
             <ng-container *ngIf="!items">
@@ -36,7 +36,7 @@
                             <m-skeleton height="60%" width="40%" class="animated"></m-skeleton>
                         </p>
                     </article>
-                    <m-skeleton slot="img" style="width: 80px; height: 80px;"></m-skeleton>
+                    <m-skeleton slot="img" style="width: 64px; height: 64px;"></m-skeleton>
                 </m-item>
             </ng-container>
         </m-content>
