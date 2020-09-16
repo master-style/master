@@ -2,6 +2,8 @@ figure.decorated {
     position: relative;
     display: block;
     overflow: hidden;
+    width: 100%;
+    margin: 0;
 
     &:after {
         contain: strict;
@@ -16,6 +18,9 @@ figure.decorated {
     iframe {
         position: absolute;
         width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
         left: 0;
         top: 0;
         border: 0;

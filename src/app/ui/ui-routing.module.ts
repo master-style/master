@@ -24,8 +24,8 @@ import { ProgressComponent } from './components/progress/progress.component';
 import { RibbonComponent } from './components/ribbon/ribbon.component';
 import { TableComponent } from './components/table/table.component';
 import { TabsComponent } from './components/tabs/tabs.component';
+import { ImgComponent } from './components/img/img.component';
 import { BreadcrumbComponent } from './decorators/breadcrumb/breadcrumb.component';
-import { InstallationComponent } from './guideline/installation/installation.component';
 import { DisplayComponent } from './modifiers/display/display.component';
 import { VisibilityComponent } from './modifiers/visibility/visibility.component';
 import { ArticleComponent } from './decorators/article/article.component';
@@ -76,6 +76,7 @@ export const uiRoutes: Routes = [
             { path: 'chats', component: ChatsComponent, resolve: { route: RouteResolver } },
             { path: 'chip', component: ChipComponent, data: { compositions: ['HTML', 'CSS'] }, resolve: { route: RouteResolver } },
             { path: 'flows', component: FlowsComponent, resolve: { route: RouteResolver } },
+            { path: 'img', component: ImgComponent, resolve: { route: RouteResolver } },
             { path: 'info', component: InfoComponent, resolve: { route: RouteResolver } },
             { path: 'item', component: ItemComponent, resolve: { route: RouteResolver } },
             { path: 'list', component: ListComponent, resolve: { route: RouteResolver } },

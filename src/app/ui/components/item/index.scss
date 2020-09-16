@@ -6,25 +6,26 @@
 }
 
 [part=body] {
-    display: block;
+    display: flex;
     padding: var(--py) 0;
     line-height: 1.4;
     text-align: left;
-    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
     flex: 1 1 auto;
 }
 
 :host {
     --f-size: 1rem;
     --size: 3rem;
-    --py: .825rem;
+    --py: .8125rem;
     --px: 1.25rem;
-    --img-size: 2rem;
+    --icon-size: 2rem;
+    --img-m: .625rem;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     width: 100%;
-    contain: style;
     font-size: var(--f-size);
 }
 
@@ -50,14 +51,15 @@
     --f-size: .9125rem;
     --size: 2.5rem;
     --py: .625rem;
-    --img-size: 1.625rem;
+    --icon-size: 1.625rem;
 }
 
 :host(.xs) {
     --f-size: .875rem;
     --size: 2rem;
     --py: .375rem;
-    --img-size: 1.25rem;
+    --icon-size: 1.25rem;
+    --px: 1rem;
 }
 
 :host([active]) {
@@ -90,31 +92,35 @@ slot[name=head],
 [part=lower] {
     display: flex;
     contain: style;
-    min-height: var(--size);
 }
 
 slot[name=head] {
     text-align: center;
     white-space: nowrap;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    min-height: var(--size);
 }
 
 slot[name=foot] {
     color: var(--f-fade);
-    height: var(--size);
     align-items: center;
+    white-space: nowrap;
 }
 
-slot[name=head]::slotted([role=img]) {
-    width: var(--img-size);
-    height: var(--img-size);
-    margin-right: .625rem;
-    margin-left: -.375rem;
+slot[name=head]::slotted(*) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 .8125rem 0 calc(.8125rem - var(--px));
+    object-fit: cover;
+    height: var(--icon-size);
+    width: var(--icon-size);
 }
 
-slot[name=foot]::slotted([role=img]) {
-    margin-right: 0;
-    margin-left: .5rem;
-    margin-right: -.375rem;
+slot[name=img]::slotted(img) {
+    object-fit: cover;
+    margin: var(--img-m);
+    margin-right: calc(var(--img-m) - var(--px));
+    border-radius: $xxs;
 }

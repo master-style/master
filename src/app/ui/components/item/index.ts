@@ -13,7 +13,8 @@ export class MasterItem extends MasterClickable {
         'slot', { name: 'head' },
         'div', { part: 'lower' }, [
             'slot', { part: 'body' },
-            'slot', { name: 'foot' }
+            'slot', { name: 'foot' },
+            'slot', { name: 'img' }
         ]
     ];
 }

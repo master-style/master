@@ -1,9 +1,14 @@
-<div class="mobile mx:auto">
+<div class="mobile">
     <div class="mobile-wrap">
         <m-content scroll-y guide class="h:full" style="--offset-top: 1.8rem; --offset-bottom: 1.8rem;">
-            <m-item class="lined" *ngFor="let item of ','.repeat(50).split(',')" style="--px: 1.2rem">
-                Pasta
-                <span slot="foot">100 g</span>
+            <m-item class="lined c:middle" *ngFor="let item of ','.repeat(50).split(',')" style="--px: 1rem">
+                <div class="f:md f:500">Healthy food</div>
+                <!-- <p>Here's a low-calorie platter for a great afternoon light meal.</p> -->
+                <h5 class="f:400">
+                    <span class="f:xxs">$</span> 99
+                </h5>
+                <img loading="lazy" slot="img" width="64" height="64"
+                     src="https://images.pexels.com/photos/936611/pexels-photo-936611.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940">
             </m-item>
         </m-content>
     </div>

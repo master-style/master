@@ -143,13 +143,12 @@ article.decorated {
         margin-right: 5%;
     }
 
-    figure {
-        display: inline-block;
+    figure:not(.decorated) {
+        display: inline-flex;
         margin: 0 0 $md 0;
 
-        video,
-        img {
-            margin-bottom: $xs;
+        figcaption {
+            margin-top: $xs;
         }
     }
 

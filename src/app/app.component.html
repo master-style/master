@@ -80,7 +80,7 @@
 
 <ng-template #routeGroup let-route="route" let-size="size">
     <label *ngIf="!route?.component && !route?.children"
-           [ngStyle]="{'padding-left': size !== 'sm' ? '2.75rem' : '1.25rem'}"
+           [ngStyle]="{'padding-left': size !== 'sm' ? '2.9375rem' : '1.25rem'}"
            style="padding-right: 1.25rem">
         {{ route.path | translate }}
     </label>
@@ -88,8 +88,10 @@
             *ngIf="route?.component || route?.children"
             [class]="size"
             type="button">
-        <i class="i-{{route?.data?.icon}} f:fade++" style="margin-right: .625rem" *ngIf="route?.data?.icon"></i>
-        <span [ngStyle]="{'padding-left': size !== 'sm' ? '1.5rem' : null}">{{ route.path | translate }}</span>
+        <div slot="head" style="margin-right: .5rem" *ngIf="route?.data?.icon">
+            <i class="i-{{route?.data?.icon}} f:fade++"></i>
+        </div>
+        <span [ngStyle]="{'padding-left': size !== 'sm' ? '1.9375rem' : null}">{{ route.path | translate }}</span>
     </m-item>
     <m-collapse *ngIf="route.children">
         <m-list>
