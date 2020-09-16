@@ -27,7 +27,7 @@ import { TabsComponent } from './components/tabs/tabs.component';
 import { BreadcrumbComponent } from './decorators/breadcrumb/breadcrumb.component';
 import { DisplayComponent } from './modifiers/display/display.component';
 import { VisibilityComponent } from './modifiers/visibility/visibility.component';
-import { ArticleComponent } from './decorators/article/article.component';
+import { ArticleComponent } from './components/article/article.component';
 import { AlignmentComponent } from './modifiers/alignment/alignment.component';
 import { PositionComponent } from './modifiers/position/position.component';
 import { WrapComponent } from './modifiers/wrap/wrap.component';
@@ -61,6 +61,7 @@ export const uiRoutes: Routes = [
     { path: 'color', data: { icon: 'droplet' }, component: ColorComponent, resolve: { route: RouteResolver } },
     {
         path: 'components', data: { icon: 'box' }, children: [
+            { path: 'article', component: ArticleComponent, resolve: { route: RouteResolver } },
             { path: 'content', component: ContentComponent, resolve: { route: RouteResolver } },
             { path: 'control' },
             { path: 'button', component: ButtonComponent, data: { compositions: ['HTML', 'CSS', 'JS'] }, resolve: { route: RouteResolver } },
@@ -115,7 +116,6 @@ export const uiRoutes: Routes = [
     },
     {
         path: 'decorators', data: {}, children: [
-            { path: 'article', component: ArticleComponent, resolve: { route: RouteResolver } },
             { path: 'breadcrumb', component: BreadcrumbComponent, resolve: { route: RouteResolver } },
             { path: 'figure', component: FigureComponent, resolve: { route: RouteResolver } },
         ]

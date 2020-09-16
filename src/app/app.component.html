@@ -17,7 +17,7 @@
 </m-button>
 
 <main part="app-body" style="padding-top: 3rem">
-    <article class="decorated" style="margin-bottom: 3rem">
+    <m-article role="article" style="margin-bottom: 3rem">
         <!-- skeleton -->
         <nav aria-label="breadcrumb" class="decorated" *ngIf="navigating">
             <a *ngFor="let each of ','.repeat(3).split(',')">
@@ -63,7 +63,7 @@
             <m-skeleton class="animated" height="60%" width="30%"></m-skeleton>
         </p>
         <router-outlet></router-outlet>
-    </article>
+    </m-article>
 </main>
 
 <aside part="app-side" class="br" style="padding-top: 3rem" [ngClass]="{'hidden': !visibleSide}">
