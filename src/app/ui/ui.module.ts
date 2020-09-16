@@ -22,7 +22,7 @@ import { TabsComponent } from './components/tabs/tabs.component';
 import { InstallationComponent } from './guideline/installation/installation.component';
 import { DisplayComponent } from './modifiers/display/display.component';
 import { VisibilityComponent } from './modifiers/visibility/visibility.component';
-import { ArticleComponent } from './components/article/article.component';
+import { ArticleComponent } from './decorators/article/article.component';
 import { AlignmentComponent } from './modifiers/alignment/alignment.component';
 import { PositionComponent } from './modifiers/position/position.component';
 import { WrapComponent } from './modifiers/wrap/wrap.component';
