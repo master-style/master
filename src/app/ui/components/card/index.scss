@@ -45,7 +45,7 @@
     background-repeat: no-repeat;
     background-position: center center;
     width: 100%;
-    margin: 0 !important; // !important: conflict article.decorated
+    margin: 0 !important; // !important: conflict article.embedded
 
     ::slotted(m-skeleton) {
         height: 100%

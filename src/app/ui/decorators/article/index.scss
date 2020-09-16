@@ -145,7 +145,7 @@ article {
             margin-right: 5%;
         }
 
-        figure:not(.decorated) {
+        figure:not(.embedded) {
             display: inline-flex;
             margin: 0 0 $md 0;
 
@@ -259,12 +259,12 @@ article {
 
         h2,
         h3 {
-            margin: 0 0 $xs 0; // : conflict article.decorated
+            margin: 0 0 $xs 0; // : conflict article.embedded
         }
 
         h4 {
             font-size: var(--f-xxs);
-            margin-bottom: $xxs;
+            margin: 0 0 $xxs 0;
         }
 
         h3,
@@ -283,11 +283,11 @@ article {
             font-size: var(--f-xs);
             line-height: 1.4;
             text-align: inherit;
-            margin: 0 0 $xs 0; // : conflict article.decorated
+            margin: 0 0 $xs 0; // : conflict article.embedded
             color: var(--f-fade);
 
             &:last-child {
-                margin: 0; // : conflict article.decorated
+                margin: 0; // : conflict article.embedded
             }
         }
     }
