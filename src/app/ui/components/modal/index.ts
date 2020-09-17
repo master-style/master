@@ -101,12 +101,12 @@ export class MasterModal extends HTMLElement {
                 const keyframe = target.#keyframe(option); // after .animatings
                 // target | wrap animation
                 target.animatings.push(
-                    target.changing = (option.target || target).anime(keyframe, option, done)
+                    target.changing = (option.target || target).animate(keyframe, option, done)
                 );
                 // overlay animation
                 if (target['overlay']) {
                     target.animatings.push(
-                        target['$overlay'].anime({
+                        target['$overlay'].animate({
                             opacity: [0, 1]
                         }, option)
                     );
@@ -227,7 +227,7 @@ export class MasterModal extends HTMLElement {
                 const pushing = document.querySelector(this.pushing);
                 if (pushing) {
                     this.animatings.push(
-                        pushing.anime(pushingKeyframe, {
+                        pushing.animate(pushingKeyframe, {
                             ...option,
                             fill: 'forwards'
                         })
@@ -238,7 +238,7 @@ export class MasterModal extends HTMLElement {
 
         if (this.caller) {
             this.animatings.push(
-                this.caller.anime({
+                this.caller.animate({
                     opacity: [0, 1]
                 }, {
                     ...option,
