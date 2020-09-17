@@ -12,7 +12,7 @@ export function Attr(options?: AttrOptions) {
     return (target, propKey: string): any => {
         options.type = Reflect.getMetadata('design:type', target, propKey).name;
         options.propKey = propKey;
-        const _propKey = '#' + propKey;
+        const _propKey = '_' + propKey;
         const attrKey = options.key = (options.key || camelToKebabCase(propKey));
         const constructor = target.constructor;
         if (options.observe) {

@@ -99,6 +99,7 @@ export class MasterContent extends HTMLElement {
         this.template.render(this.shadowRoot);
         this.renderScrolling();
         this.toggleListener(this.scrollX || this.scrollY);
+        console.log(this.constructor.name);
     }
 
     private toggleListener(whether: boolean) {
