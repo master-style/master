@@ -1,4 +1,3 @@
-
 import { Element, Attr } from '@element';
 import MasterTogglable from '../../togglable';
 import css from './index.scss';
@@ -12,7 +11,7 @@ const PX = 'px';
 })
 export class MasterModal extends MasterTogglable {
 
-    private caller: HTMLElement;
+    private trigger: HTMLElement;
 
     template = $(() => [
         'div', {
@@ -21,7 +20,7 @@ export class MasterModal extends MasterTogglable {
         }, [
             'slot'
         ],
-        'div', { part: 'overlay', $if: this.overlay }
+        'm-overlay', { part: 'overlay', $if: this.overlay }
     ]);
 
     render() {
@@ -49,35 +48,35 @@ export class MasterModal extends MasterTogglable {
         const keyframes: any = {};
         const wrap = this.wrap;
         options.$target = wrap;
-        if (this.origin === 'toggle') {
-            if (this.caller) {
+        if (this.origin === 'trigger') {
+            if (this.trigger) {
                 if (wrap.tagName === 'M-CONTENT') {
                     wrap.to({ x: 0, y: 0 }, 0);
                 }
                 const
-                    toggleRect = this.caller.getBoundingClientRect(),
+                    callerRect = this.trigger.getBoundingClientRect(),
                     wrapRect = wrap.getBoundingClientRect(),
-                    originRect = this.querySelector('[part=origin]').getBoundingClientRect();
-                const scale = toggleRect.width / originRect.width;
+                    landingRect = this.querySelector('[part=loading]').getBoundingClientRect();
+                const scale = callerRect.width / landingRect.width;
                 keyframes.translateX = [
-                    toggleRect.left
-                    + toggleRect.width / 2
+                    callerRect.left
+                    + callerRect.width / 2
                     - wrapRect.left
                     - wrapRect.width / 2
                     + PX,
                     0
                 ];
                 keyframes.translateY = [
-                    toggleRect.top
-                    + toggleRect.height / 2
+                    callerRect.top
+                    + callerRect.height / 2
                     - wrapRect.top
                     - wrapRect.height / 2
-                    - originRect.top * scale / 2
+                    - landingRect.top * scale / 2
                     + PX,
                     0
                 ];
                 keyframes.scale = [scale, 1]; // after x,y
-                keyframes.height = [toggleRect.height / scale + originRect.top + PX, wrapRect.height + PX];
+                keyframes.height = [callerRect.height / scale + landingRect.top + PX, wrapRect.height + PX];
                 if (this.fade) keyframes.opacity = [0, 1];
             } else {
                 keyframes.scale = [this.opened ? 1.1 : .9, 1];
@@ -127,9 +126,9 @@ export class MasterModal extends MasterTogglable {
             }
         }
 
-        if (this.caller) {
+        if (this.trigger) {
             this.animatings.push(
-                this.caller.animate({
+                this.trigger.animate({
                     opacity: [0, 1]
                 }, {
                     ...options,

@@ -18,7 +18,7 @@ export default class MasterTogglable extends HTMLElement {
     changing: any = false;
 
     @Attr()
-    trigger: string = 'tap';
+    toggleEvent: string = 'tap';
 
     protected animatings = [];
 
@@ -114,26 +114,26 @@ export default class MasterTogglable extends HTMLElement {
         return whether;
     }
 
-    protected triggerHandler(value: any, oldValue: any) {
+    protected toggleEventHandler(value: any, oldValue: any) {
         if (this.isConnected) {
             if (value !== oldValue) {
-                this.removeTrigger(oldValue);
-                this.addTrigger(value);
+                this.removeToggleEvent(oldValue);
+                this.addToggleListener(value);
             } else if (!value && oldValue) {
-                this.removeTrigger(oldValue);
+                this.removeToggleEvent(oldValue);
             }
         }
         return { value, oldValue };
     }
 
-    private addTrigger(trigger: string) {
-        trigger += '.' + this.constructor.name.split('Master')[1].toLowerCase();
-        let liveTargets = liveTriggers[trigger];
+    private addToggleListener(toggleEvent: string) {
+        toggleEvent += '.' + this.constructor.name.split('Master')[1].toLowerCase();
+        let liveTargets = liveTriggers[toggleEvent];
         if (liveTargets) {
             liveTargets.push(this);
         } else {
-            liveTriggers[trigger] = liveTargets = [this];
-            document.body.on(trigger, '[' + name + ']', function (event) {
+            liveTriggers[toggleEvent] = liveTargets = [this];
+            document.body.on(toggleEvent, '[' + name + ']', function (event) {
                 const toggle = this;
                 if (this.disabled) return;
                 const targets = $(toggle.getAttribute(name));
@@ -153,14 +153,14 @@ export default class MasterTogglable extends HTMLElement {
                     } else {
                         whether = !eachTarget.opened;
                     }
-                    if (whether && !eachTarget.changing) eachTarget['caller'] = toggle;
+                    if (whether && !eachTarget.changing) eachTarget['trigger'] = toggle;
                     whether = eachTarget.toggle(whether);
                 });
             }, { passive: true });
         }
     }
 
-    private removeTrigger(trigger: string) {
+    private removeToggleEvent(trigger: string) {
         if (!trigger) return;
         trigger += '.' + this.constructor.name.split('Master')[1].toLowerCase();
         const liveTargets = liveTriggers[trigger];
