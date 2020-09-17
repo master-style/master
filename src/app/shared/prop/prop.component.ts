@@ -56,8 +56,13 @@ export class PropComponent implements OnInit {
                     value = "'" + value + "'";
                 }
                 return value;
+            case null:
+                return 'null';
             case undefined:
                 return 'undefined';
+            case true:
+            case false:
+                return value;
             default:
                 return "'" + value + "'";
         }
