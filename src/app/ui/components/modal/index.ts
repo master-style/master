@@ -45,10 +45,10 @@ export class MasterModal extends MasterTogglable {
     @Attr({ reflect: false })
     overlay: boolean;
 
-    keyframes(option) {
+    protected keyframes(options) {
         const keyframes: any = {};
         const wrap = this.wrap;
-        option.$target = wrap;
+        options.$target = wrap;
         if (this.origin === 'toggle') {
             if (this.caller) {
                 if (wrap.tagName === 'M-CONTENT') {
@@ -110,7 +110,7 @@ export class MasterModal extends MasterTogglable {
                     if (this.fade) {
                         keyframes.opacity = [0, 1];
                     } else {
-                        option.duration = 0;
+                        options.duration = 0;
                     }
             }
 
@@ -119,7 +119,7 @@ export class MasterModal extends MasterTogglable {
                 if (pushing) {
                     this.animatings.push(
                         pushing.animate(pushingKeyframe, {
-                            ...option,
+                            ...options,
                             fill: 'forwards'
                         })
                     );
@@ -132,7 +132,7 @@ export class MasterModal extends MasterTogglable {
                 this.caller.animate({
                     opacity: [0, 1]
                 }, {
-                    ...option,
+                    ...options,
                     fill: 'forwards'
                 })
             );

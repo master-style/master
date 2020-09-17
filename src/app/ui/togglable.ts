@@ -19,15 +19,15 @@ export default class MasterTogglable extends HTMLElement {
 
     @Attr()
     trigger: string = 'tap';
-    
+
     protected animatings = [];
 
     private prepare(whether, complete?: () => any) {
         const name = this.constructor.name.split('Master')[1].toLowerCase();
         $('[toggle-' + name + ']')
             .forEach((eachToggle: Element) => {
-                if (this.matches(eachToggle.attr(name))) {
-                    eachToggle.attr('aria-expanded', whether);
+                if (this.matches(eachToggle.getAttribute(name))) {
+                    eachToggle.toggleAttribute('aria-expanded', whether);
                     const icon = eachToggle
                         .children
                         .filter((eachChild) => eachChild.matches('m-icon'))[0];
@@ -49,7 +49,7 @@ export default class MasterTogglable extends HTMLElement {
                 this.changing = false;
                 this.animatings = null;
                 this.opened = whether;
-                this.attr('aria-hidden', !whether ? true : null);
+                this.toggleAttribute('aria-hidden', !whether ? true : null);
                 // $.cb.call(this, complete);
                 // if (target.onPrepared) target.onPrepared(whether);
                 // if (whether && target.onOpened) target.onOpened(whether);
@@ -57,26 +57,25 @@ export default class MasterTogglable extends HTMLElement {
                 // emit(target, whether ? 'opened' : 'closed');
             };
             if (this.isConnected && this.duration) {
-                this
-                    .toggleAttr('changing', true)
-                    .animatings = this.animatings ? this.animatings : [];
+                this.toggleAttribute('changing', true);
+                this.animatings = this.animatings ?? [];
 
-                const option: any = {
+                const options: any = {
                     easing: this.easing,
                     duration: this.duration,
                     reverse: !whether
                 };
-                const keyframes = this['keyframes'](option); // after .animatings
+                const keyframes = this['keyframes'](options); // after .animatings
                 // target | wrap animation
                 this.animatings.push(
-                    this.changing = (option.target || this).animate(keyframes, option, done)
+                    this.changing = (options.target || this).animate(keyframes, options, done)
                 );
                 // overlay animation
                 if (this['overlay']) {
                     this.animatings.push(
                         this['$overlay'].animate({
                             opacity: [0, 1]
-                        }, option)
+                        }, options)
                     );
                 }
             } else {
@@ -137,7 +136,7 @@ export default class MasterTogglable extends HTMLElement {
             document.body.on(trigger, '[' + name + ']', function (event) {
                 const toggle = this;
                 if (this.disabled) return;
-                const targets = $(toggle.attr(name));
+                const targets = $(toggle.getAttribute(name));
                 targets.forEach((eachTarget: MasterTogglable) => {
                     if (liveTargets.indexOf(eachTarget) === -1) return;
                     let whether: boolean;
