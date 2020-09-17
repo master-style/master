@@ -42,6 +42,9 @@ export class MasterModal extends MasterTogglable {
     closeOnScroll: boolean;
 
     @Attr({ reflect: false })
+    closeButton: boolean;
+
+    @Attr({ reflect: false })
     overlay: boolean;
 
     protected keyframes(options) {

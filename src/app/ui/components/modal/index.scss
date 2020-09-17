@@ -2,9 +2,9 @@
 @import '../../mixins';
 
 :host {
-    --modal-p: #{$md};
+    --p: #{$md};
     position: fixed;
-    z-index: $z-overlay !important;
+    z-index: $z-overlay;
     display: flex;
     left: 0px;
     top: 0px;
@@ -15,144 +15,95 @@
     flex-direction: column;
     flex-wrap: nowrap;
     contain: strict;
-    padding: var(--modal-p);
+    padding: var(--p);
 
-    &[changing] {
-        .modalWrap {
-            will-change: height, opacity, box-shadow;
-            overflow: hidden !important;
-        }
+    // &.long {
+    //     padding-top: 0;
+    //     padding-bottom: 0;
 
-        .modalHead {
-            z-index: $z-overlay;
-        }
+    //     [part=root] {
+    //         padding: var(--p) 0;
+    //     }
 
-        >m-scroll {
-            >.scrollBar {
-                visibility: hidden;
-            }
-        }
-    }
+    //     [part=head].sticky {
+    //         top: calc(var(--p) * -1);
+    //     }
 
-    &[opened]:not([changing]) {
-        .modalWrap {
-            transition: .3s box-shadow linear;
-            box-shadow: $s-xl;
-        }
-    }
+    //     [part=foot].sticky {
+    //         bottom: calc(var(--p) * -1);
+    //     }
+    // }
 
-    &:not(.show) {
-        display: none !important;
-    }
+}
 
-    &.long {
-        padding-top: 0;
-        padding-bottom: 0;
+:host([origin=left]) {
+    --p: 0;
 
-        .modalWrap {
-            padding: var(--modal-p) 0;
-        }
-
-        .modalHead.sticky {
-            top: calc(var(--modal-p) * -1);
-        }
-
-        .modalFoot.sticky {
-            bottom: calc(var(--modal-p) * -1);
-        }
-
-        >m-scroll {
-            &[reach-y='-1'] {
-                .modalToggle {
-                    top: calc(var(--modal-p) + .5rem);
-                }
-            }
-
-            >.scrollBar {
-                position: fixed;
-            }
-        }
-    }
-
-    &.abs {
-        .modalOverlay {
-            position: fixed;
-            top: 0;
-            height: 100vh;
-            contain: style;
-        }
-    }
-
-    &[origin=left] {
-
-        .modalWrap {
-            margin-left: 0;
-            height: 100%;
-        }
-    }
-
-    &[origin=right] {
-
-        .modalWrap {
-            margin-right: 0;
-            height: 100%;
-        }
-    }
-
-    &[origin=top] {
-
-        .modalWrap {
-            margin-top: 0;
-            width: 100%;
-            max-width: 100%;
-        }
-    }
-
-    &[origin=bottom] {
-
-        .modalWrap {
-            margin-bottom: 0;
-            width: 100%;
-            max-width: 100%;
-        }
-    }
-
-    &[origin=right],
-    &[origin=left],
-    &[origin=top],
-    &[origin=bottom] {
-        padding: 0;
-
-        .modalHead,
-        .modalFoot {
-            border-radius: 0;
-        }
+    [part=root] {
+        margin-left: 0;
+        height: 100%;
     }
 }
 
-.modalToggle {
-    position: absolute;
-    z-index: $z-overlay;
-    top: .5rem;
-    right: .5rem;
-    font-size: var(--f-xs);
-    transition: .1s top linear;
-    will-change: top;
-    @include blurBg(var(--theme), 0);
+:host([origin=right]) {
+    --p: 0;
+
+    [part=root] {
+        margin-right: 0;
+        height: 100%;
+    }
 }
 
-.modalOverlay {
-    position: fixed;
-    contain: strict;
-    height: 150%;
-    top: -25%;
-    z-index: $z-down;
-    background-color: rgba(0, 0, 0, .5);
-    // backdrop-filter: saturate(0%);
-    // -webkit-backdrop-filter: saturate(0%);
+:host([origin=top]) {
+    --p: 0;
+
+    [part=root] {
+        margin-top: 0;
+        width: 100%;
+        max-width: 100%;
+    }
 }
 
-.modalWrap {
+:host([origin=bottom]) {
+    --p: 0;
+
+    [part=root] {
+        margin-bottom: 0;
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+:host([changing]) {
+    [part=root] {
+        will-change: height, opacity, box-shadow;
+        overflow: hidden !important;
+    }
+
+    [part=head] {
+        z-index: $z-overlay;
+    }
+}
+
+:host([opened]:not([changing])) {
+    [part=root] {
+        transition: .3s box-shadow linear;
+        box-shadow: $s-xl;
+    }
+}
+
+// .modalToggle {
+//     position: absolute;
+//     z-index: $z-overlay;
+//     top: .5rem;
+//     right: .5rem;
+//     font-size: var(--f-xs);
+//     transition: .1s top linear;
+//     will-change: top;
+//     @include blurBg(var(--theme), 0);
+// }
+
+[part=root] {
     position: relative;
     contain: style;
     display: flex;
@@ -165,7 +116,7 @@
     overflow: hidden;
 }
 
-.modalBody {
+[part=body] {
     width: 100%;
     flex: 1 1 auto;
     background-color: var(--theme);
@@ -175,14 +126,8 @@
     }
 }
 
-m-scroll.modalBody {
-    >.scrollWrap {
-        padding: $md;
-    }
-}
-
-.modalHead,
-.modalFoot {
+[part=head],
+[part=foot] {
     position: relative;
     width: 100%;
     flex: 0 0 auto;
@@ -197,7 +142,7 @@ m-scroll.modalBody {
     }
 }
 
-.modalHead {
+[part=head] {
     padding: 1rem $md;
     top: 0;
     text-align: center;
@@ -206,7 +151,7 @@ m-scroll.modalBody {
     border-bottom-right-radius: 0;
 }
 
-.modalFoot {
+[part=foot] {
     width: 100%;
     bottom: 0;
     border-top-left-radius: 0;
@@ -215,7 +160,7 @@ m-scroll.modalBody {
 }
 
 @include below(sm) {
-    m-modal {
-        --modal-p: #{$sm};
+    :host {
+        --p: #{$sm};
     }
 }

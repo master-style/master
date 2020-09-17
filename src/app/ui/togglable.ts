@@ -17,7 +17,7 @@ export default class MasterTogglable extends HTMLElement {
     easing = 'cubic-bezier(.25,.8,.25,1)';
     changing: any = false;
 
-    @Attr()
+    @Attr({ reflect: false })
     toggleEvent: string = 'tap';
 
     protected animatings = [];

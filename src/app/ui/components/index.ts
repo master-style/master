@@ -7,3 +7,4 @@ import './item';
 import './content';
 import './collapse';
 import './modal';
+import './overlay';

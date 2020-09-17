@@ -1,0 +1,12 @@
+:host {
+    position: fixed;
+    contain: strict;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background-color: rgba(0, 0, 0, .5);
+    // backdrop-filter: saturate(0%);
+    // -webkit-backdrop-filter: saturate(0%);
+}
