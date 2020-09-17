@@ -117,16 +117,16 @@ export default class MasterTogglable extends HTMLElement {
     protected toggleEventHandler(value: any, oldValue: any) {
         if (this.isConnected) {
             if (value !== oldValue) {
-                this.removeToggleEvent(oldValue);
-                this.addToggleListener(value);
+                this.offToggleEvent(oldValue);
+                this.onToggleEvent(value);
             } else if (!value && oldValue) {
-                this.removeToggleEvent(oldValue);
+                this.offToggleEvent(oldValue);
             }
         }
         return { value, oldValue };
     }
 
-    private addToggleListener(toggleEvent: string) {
+    private onToggleEvent(toggleEvent: string) {
         toggleEvent += '.' + this.constructor.name.split('Master')[1].toLowerCase();
         let liveTargets = liveTriggers[toggleEvent];
         if (liveTargets) {
@@ -160,7 +160,7 @@ export default class MasterTogglable extends HTMLElement {
         }
     }
 
-    private removeToggleEvent(trigger: string) {
+    private offToggleEvent(trigger: string) {
         if (!trigger) return;
         trigger += '.' + this.constructor.name.split('Master')[1].toLowerCase();
         const liveTargets = liveTriggers[trigger];
