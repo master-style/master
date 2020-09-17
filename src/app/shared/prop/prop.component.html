@@ -26,25 +26,38 @@
                 </td>
             </tr>
             <tr>
-                <th class="fit t:left">attribute</th>
+                <th class="fit t:left">value</th>
                 <td>
-                    <m-chip class="theme+ sm">
-                        <code>{{ attr || camelToKebabCase(name) }}</code>
-                    </m-chip>
+                    <div class="y:xs">
+                        <m-chip class="x outlined blue+ sm">
+                            <div part="head">
+                                <ion-icon *ngIf="value !== undefined" [attr.name]="getTypeIcon(value)"></ion-icon>
+                                <span *ngIf="value === undefined">∅</span>
+                            </div>
+                            <code>{{ parsedStr(value) }}</code>
+                        </m-chip>
+                    </div>
                 </td>
             </tr>
-            <tr>
+            <tr *ngIf="default !== 'undefined'">
                 <th class="fit t:left">default</th>
                 <td>
                     <div class="y:xs">
                         <m-chip class="x outlined blue+ sm">
                             <div part="head">
-                                <ion-icon *ngIf="default !== undefined" [attr.name]="getTypeIcon(default)"></ion-icon>
-                                <span *ngIf="default === undefined">∅</span>
+                                <ion-icon [attr.name]="getTypeIcon(default)"></ion-icon>
                             </div>
                             <code>{{ parsedStr(default) }}</code>
                         </m-chip>
                     </div>
+                </td>
+            </tr>
+            <tr>
+                <th class="fit t:left">attribute</th>
+                <td>
+                    <m-chip class="theme+ sm">
+                        <code>{{ attr || camelToKebabCase(name) }}</code>
+                    </m-chip>
                 </td>
             </tr>
             <tr *ngIf="description">

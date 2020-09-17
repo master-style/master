@@ -12,6 +12,7 @@ export class PropComponent implements OnInit {
     @Input() name: string;
     @Input() attr: string;
     @Input() types: [];
+    @Input() value: any;
     @Input() default: any;
     @Input() description: string;
     @Input() readonly: boolean;
