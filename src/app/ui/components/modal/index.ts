@@ -1,5 +1,6 @@
 
 import { Element, Attr } from '@element';
+import MasterTogglable from '../../togglable';
 import css from './index.scss';
 
 const NAME = 'modal';
@@ -9,7 +10,9 @@ const PX = 'px';
     tag: 'm-' + NAME,
     css
 })
-export class MasterModal extends HTMLElement {
+export class MasterModal extends MasterTogglable {
+
+    private caller: HTMLElement;
 
     template = $(() => [
         'div', {
@@ -27,120 +30,8 @@ export class MasterModal extends HTMLElement {
 
     wrap: any;
 
-    #namespace: string;
-
-    easing = 'cubic-bezier(.25,.8,.25,1)';
-
-    private caller: HTMLElement;
-
     @Attr()
     origin: string;
-
-    @Attr()
-    opened: boolean;
-
-    @Attr()
-    duration = 300;
-
-    @Attr()
-    fade: boolean;
-
-    @Attr()
-    trigger: string = 'tap';
-
-    changing: any = false;
-    animatings = [];
-
-    #keyframe: any;
-
-    private prepare(whether, complete?: () => any) {
-        const target = this;
-        const name = this.constructor.name.split('Master')[1].toLowerCase();
-        $('[toggle-' + name + ']')
-            .forEach((eachToggle: Element) => {
-                if (target.matches(eachToggle.attr(name))) {
-                    eachToggle.attr('aria-expanded', whether);
-                    const icon = eachToggle
-                        .children
-                        .filter((eachChild) => eachChild.matches('m-icon'))[0];
-                    if (icon) icon.toggleAttribute('active', whether);
-                }
-            });
-        // custom.call(target, whether);
-        if (target.changing) {
-            for (const animating of target.animatings) {
-                animating.reverse();
-            }
-        } else {
-            const done = () => {
-                if (target.changing) {
-                    if (target.changing.reversed) whether = !whether;
-                    target.toggleAttr('changing', false);
-                }
-                if (!whether) target.rmClass('show');
-                target.changing = false;
-                delete target.animatings;
-                target.opened = whether;
-                target.attr('aria-hidden', !whether ? true : null);
-                // $.cb.call(this, complete);
-                // if (target.onPrepared) target.onPrepared(whether);
-                // if (whether && target.onOpened) target.onOpened(whether);
-                // if (!whether && target.onClosed) target.onClosed(whether);
-                // emit(target, whether ? 'opened' : 'closed');
-            };
-            if (target.isConnected && target.duration) {
-                target
-                    .toggleAttr('changing', true)
-                    .animatings = target.animatings ? target.animatings : [];
-
-                const option: any = {
-                    easing: target.easing,
-                    duration: target.duration,
-                    reverse: !whether
-                };
-                const keyframe = target.#keyframe(option); // after .animatings
-                // target | wrap animation
-                target.animatings.push(
-                    target.changing = (option.target || target).animate(keyframe, option, done)
-                );
-                // overlay animation
-                if (target['overlay']) {
-                    target.animatings.push(
-                        target['$overlay'].animate({
-                            opacity: [0, 1]
-                        }, option)
-                    );
-                }
-            } else {
-                done();
-            }
-        }
-
-        return target;
-    }
-
-    open(complete?: () => any) {
-        if (this.opened === true) {
-            if (complete) complete();
-            return;
-        }
-        this.opened = true;
-        this.addClass('show');
-        // custom.call(target); // custom callback
-        // emit(target, 'open');
-        this.prepare(true, complete);
-    }
-
-    close(complete?: () => any) {
-        if (this.opened === false) {
-            if (complete) complete();
-            return;
-        }
-        this.opened = false;
-        // custom.call(target); // custom callback
-        // emit(target, 'close');
-        this.prepare(false, complete);
-    }
 
     @Attr({ reflect: false })
     pushing: string;
@@ -154,8 +45,8 @@ export class MasterModal extends HTMLElement {
     @Attr({ reflect: false })
     overlay: boolean;
 
-    keyframe(option) {
-        const keyframe: any = {};
+    keyframes(option) {
+        const keyframes: any = {};
         const wrap = this.wrap;
         option.$target = wrap;
         if (this.origin === 'toggle') {
@@ -168,7 +59,7 @@ export class MasterModal extends HTMLElement {
                     wrapRect = wrap.getBoundingClientRect(),
                     originRect = this.querySelector('[part=origin]').getBoundingClientRect();
                 const scale = toggleRect.width / originRect.width;
-                keyframe.translateX = [
+                keyframes.translateX = [
                     toggleRect.left
                     + toggleRect.width / 2
                     - wrapRect.left
@@ -176,7 +67,7 @@ export class MasterModal extends HTMLElement {
                     + PX,
                     0
                 ];
-                keyframe.translateY = [
+                keyframes.translateY = [
                     toggleRect.top
                     + toggleRect.height / 2
                     - wrapRect.top
@@ -185,12 +76,12 @@ export class MasterModal extends HTMLElement {
                     + PX,
                     0
                 ];
-                keyframe.scale = [scale, 1]; // after x,y
-                keyframe.height = [toggleRect.height / scale + originRect.top + PX, wrapRect.height + PX];
-                if (this.fade) keyframe.opacity = [0, 1];
+                keyframes.scale = [scale, 1]; // after x,y
+                keyframes.height = [toggleRect.height / scale + originRect.top + PX, wrapRect.height + PX];
+                if (this.fade) keyframes.opacity = [0, 1];
             } else {
-                keyframe.scale = [this.opened ? 1.1 : .9, 1];
-                keyframe.opacity = [0, 1];
+                keyframes.scale = [this.opened ? 1.1 : .9, 1];
+                keyframes.opacity = [0, 1];
             }
         } else {
             const pushingKeyframe: any = {};
@@ -198,26 +89,26 @@ export class MasterModal extends HTMLElement {
                 case 'right':
                     if (this.pushing)
                         pushingKeyframe.translateX = [0, -wrap.offsetWidth / 3 + PX];
-                    keyframe.translateX = ['100%', 0];
+                    keyframes.translateX = ['100%', 0];
                     break;
                 case 'left':
                     if (this.pushing)
                         pushingKeyframe.translateX = [0, wrap.offsetWidth / 3 + PX];
-                    keyframe.translateX = ['-100%', 0];
+                    keyframes.translateX = ['-100%', 0];
                     break;
                 case 'bottom':
                     if (this.pushing)
                         pushingKeyframe.translateY = [0, -wrap.offsetHeight / 3 + PX];
-                    keyframe.translateY = ['100%', 0];
+                    keyframes.translateY = ['100%', 0];
                     break;
                 case 'top':
                     if (this.pushing)
                         pushingKeyframe.translateY = [0, wrap.offsetHeight / 3 + PX];
-                    keyframe.translateY = ['-100%', 0];
+                    keyframes.translateY = ['-100%', 0];
                     break;
                 default:
                     if (this.fade) {
-                        keyframe.opacity = [0, 1];
+                        keyframes.opacity = [0, 1];
                     } else {
                         option.duration = 0;
                     }
@@ -247,8 +138,7 @@ export class MasterModal extends HTMLElement {
             );
         }
 
-        return keyframe;
-    };
-
+        return keyframes;
+    }
 
 }
