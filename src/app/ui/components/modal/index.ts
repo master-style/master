@@ -20,7 +20,7 @@ export class MasterModal extends MasterTogglable {
         }, [
             'slot'
         ],
-        'm-overlay', { part: 'overlay', $if: this.overlay }
+        'm-overlay', { $if: this.overlay }
     ]);
 
     render() {
@@ -45,7 +45,7 @@ export class MasterModal extends MasterTogglable {
     closeButton: boolean;
 
     @Attr({ reflect: false })
-    overlay: boolean;
+    overlay: string = 'static';
 
     protected keyframes(options) {
         const keyframes: any = {};
