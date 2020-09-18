@@ -1,6 +1,6 @@
 <p>modal works!</p>
 
-<m-modal id="modal" close-button overlay="static" origin="bottom" hidden>
+<m-modal id="modal" close-button overlay="static" origin="bottom">
     <div part="head">header</div>
     <m-content part="body" scroll-y>
         <!-- <figure class="embedded by:1x1" part="landing">
@@ -15,7 +15,7 @@
             <p>內文</p>
         </article>
     </m-content>
-    <m-button part="foot" class="bt">footer</m-button>
+    <m-button toggle-modal="#modal" part="foot" class="bt">footer</m-button>
 </m-modal>
 
 <m-button toggle-modal="#modal">切換</m-button>

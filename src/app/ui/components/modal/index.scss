@@ -40,6 +40,10 @@
     // }
 }
 
+:host([changing]) {
+    display: flex!important;
+}
+
 :host([origin=left]) {
     --p: 0;
 
