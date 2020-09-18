@@ -102,6 +102,7 @@ export class MasterContent extends HTMLElement {
     }
 
     private toggleListener(whether: boolean) {
+        this.scrolling = false;
         if (whether && !this.#enabled) {
             this.#enabled = true;
             this.wrap
@@ -109,6 +110,7 @@ export class MasterContent extends HTMLElement {
                     if (!this.renderScrolling()) return;
                     if (!this.scrolling) {
                         this.scrolling = true;
+                        console.log('fuck');
                         this.template.render(this.shadowRoot);
                     }
                     if (this.#scrollEndTimeout) this.#scrollEndTimeout = clearTimeout(this.#scrollEndTimeout);
@@ -216,8 +218,8 @@ export class MasterContent extends HTMLElement {
                     if (complete) complete();
                 }
             };
-            if (this.scrollX && to.X) scroll('X', this.wrap[SCROLL_POSITION_KEY.X], to.X);
-            if (this.scrollY && to.Y) scroll('Y', this.wrap[SCROLL_POSITION_KEY.Y], to.Y);
+            if (this.scrollX && isNum(to.X)) scroll('X', this.wrap[SCROLL_POSITION_KEY.X], to.X);
+            if (this.scrollY && isNum(to.Y)) scroll('Y', this.wrap[SCROLL_POSITION_KEY.Y], to.Y);
         }
     }
 

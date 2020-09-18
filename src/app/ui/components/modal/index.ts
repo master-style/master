@@ -37,9 +37,6 @@ export class MasterModal extends MasterTogglable {
     pushing: string;
 
     @Attr({ reflect: false })
-    hideOrigin: boolean;
-
-    @Attr({ reflect: false })
     closeOnScroll: boolean;
 
     @Attr({ reflect: false })
@@ -50,9 +47,10 @@ export class MasterModal extends MasterTogglable {
 
     overlayElement: HTMLElement;
 
-    protected toggling() {
+    protected async toggling() {
 
         let keyframes: any[];
+        let content: any;
 
         const options = {
             easing: this.easing,
@@ -62,48 +60,45 @@ export class MasterModal extends MasterTogglable {
         const wrap = this.wrap;
 
         if (this.origin === 'trigger' && this.trigger) {
-            const landing = this.querySelector('[part=landing]');
-            let closer: any = landing.parentElement;
-            do {
-                if (closer.tagName === 'M-CONTENT') {
-                    break;
-                } else {
-                    closer = closer.parentElement;
-                }
-            } while (closer.tagName === 'M-MODAL');
 
-            if (closer.tagName === 'M-CONTENT') {
-                console.log(closer);
-                closer.to({ x: 0, y: 0 }, 0);
+            if (!this.hidden) {
+                this.trigger.toggleClass('invisible', true);
             }
+
+            content = this.querySelector('m-content');
+
+            if (content) {
+                content.toggleListener(false);
+                content.to({ x: 0, y: 0 }, this.duration);
+            }
+
             const
-                callerRect = this.trigger.getBoundingClientRect(),
-                wrapRect = wrap.getBoundingClientRect(),
-                landingRect = landing.getBoundingClientRect();
-            const scale = callerRect.width / landingRect.width;
+                triggerRect = this.trigger.getBoundingClientRect(),
+                wrapRect = wrap.getBoundingClientRect();
+            const scale = triggerRect.width / wrapRect.width;
             const x =
-                callerRect.left
-                + callerRect.width / 2
+                triggerRect.left
+                + triggerRect.width / 2
                 - wrapRect.left
                 - wrapRect.width / 2;
             const y =
-                callerRect.top
-                + callerRect.height / 2
-                - wrapRect.top
-                - wrapRect.height / 2
-                - landingRect.top * scale / 2;
+                triggerRect.top
+                + triggerRect.height / 2
+                - wrapRect.top / scale / 2
+                - wrapRect.height / 2;
             keyframes = [
                 {
-                    transform: `translateX(${x + PX}) translateY(${y + PX}) scale(${scale})`,
-                    height: callerRect.height / scale + landingRect.top + PX,
+                    transform: `translate(${x + PX}, ${y + PX}) scale(${scale})`,
+                    height: triggerRect.height / scale + PX,
                     opacity: this.fade ? 0 : 1
                 },
                 {
-                    transform: 'translateX(0) translateY(0) scale(1)',
+                    transform: 'translate(0,0) scale(1)',
                     height: wrapRect.height + PX,
                     opacity: 1
                 }
             ];
+            console.log(keyframes);
         } else {
             if (!this.origin || this.origin === 'trigger') {
                 keyframes = [
@@ -198,5 +193,18 @@ export class MasterModal extends MasterTogglable {
         }
 
         this.animation = this.wrap.animate(keyframes, options);
+        this.animations.push(this.animation);
+        this.animation.onfinish = () => {
+            this.toggleAttribute('changing', false);
+            this.animation = null;
+            this.animations = [];
+            if (this.hidden && this.trigger) {
+                this.trigger.toggleClass('invisible', false);
+            }
+            if (content && !this.hidden) {
+                content.toggleListener(true);
+            }
+        };
+        await this.animation.finished;
     }
 }

@@ -5,7 +5,7 @@ const liveTriggers = {};
 export default class MasterTogglable extends HTMLElement {
 
     @Attr()
-    hidden: boolean;
+    hidden: boolean = true;
 
     protected hiddenHandler(value: boolean, oldValue: boolean) {
         if (this.isConnected && value !== oldValue) {
@@ -47,23 +47,10 @@ export default class MasterTogglable extends HTMLElement {
             for (const eachAnimation of this.animations) {
                 eachAnimation.reverse();
             }
-        } else {
-            if (this.isConnected && this.duration) {
-                this.toggleAttribute('changing', true);
-                this['toggling']();
-                this.animations.push(this.animation);
-                this.animation.onfinish = () => this.finishToggling();
-                await this.animation.finished;
-            } else {
-                this.finishToggling();
-            }
+        } else if (this.isConnected && this.duration) {
+            this.toggleAttribute('changing', true);
+            await this['toggling']();
         }
-    }
-
-    protected finishToggling() {
-        this.toggleAttribute('changing', false);
-        this.animation = null;
-        this.animations = [];
     }
 
     async open() {
