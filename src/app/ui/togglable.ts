@@ -5,7 +5,7 @@ const liveTriggers = {};
 export default class MasterTogglable extends HTMLElement {
 
     @Attr()
-    hidden: boolean = true;
+    hidden: boolean;
 
     protected hiddenHandler(value: boolean, oldValue: boolean) {
         if (this.isConnected && value !== oldValue) {
@@ -42,7 +42,6 @@ export default class MasterTogglable extends HTMLElement {
                 }
             });
         // custom.call(target, whether);
-        console.log('fuck', this.animation);
         if (this.animation) {
             for (const eachAnimation of this.animations) {
                 eachAnimation.reverse();
@@ -68,25 +67,27 @@ export default class MasterTogglable extends HTMLElement {
 
                 const options: any = {
                     easing: this.easing,
-                    duration: this.duration,
-                    reverse: !whether
+                    duration: this.duration
                 };
                 if (options.duration) {
-                    const keyframes = this['keyframes'](options); // after .animations
-                    console.log(keyframes);
-                    // target | wrap animation
+                    const keyframes = this['keyframes'](options, whether); // after .animations
+                    const overlayKeyframes = [
+                        { opacity: 0 },
+                        { opacity: 1 }
+                    ];
+                    if (!whether) {
+                        keyframes.reverse();
+                        overlayKeyframes.reverse();
+                    }
+                    if (this['overlay']) {
+                        this.animations.push(
+                            this['overlayElement'].animate(overlayKeyframes, options)
+                        );
+                    }
                     this.animations.push(
                         this.animation = (options.target || this).animate(keyframes, options)
                     );
                     this.animation.onfinish = done;
-                    // overlay animation
-                    if (this['overlay']) {
-                        this.animations.push(
-                            this['overlayElement'].animate({
-                                opacity: [0, 1]
-                            }, options)
-                        );
-                    }
                 } else {
                     done();
                 }

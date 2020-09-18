@@ -3,8 +3,10 @@
 
 :host {
     --p: #{$md};
+    --r: #{$sm};
     --head-height: 3rem;
     --foot-height: 3rem;
+    --max-width: #{$wrap-xs};
     position: fixed;
     z-index: $z-overlay;
     display: flex;
@@ -44,6 +46,8 @@
     [part=root] {
         margin-left: 0;
         height: 100%;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
     }
 }
 
@@ -53,6 +57,8 @@
     [part=root] {
         margin-right: 0;
         height: 100%;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
     }
 }
 
@@ -63,6 +69,8 @@
         margin-top: 0;
         width: 100%;
         max-width: 100%;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
     }
 }
 
@@ -72,7 +80,8 @@
     [part=root] {
         margin-bottom: 0;
         width: 100%;
-        max-width: 100%;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
     }
 }
 
@@ -85,6 +94,10 @@
     ::slotted([part=head]) {
         z-index: $z-overlay;
     }
+}
+
+:host([changing][hidden]) {
+    display: flex !important;
 }
 
 :host([opened]:not([changing])) {
@@ -119,14 +132,14 @@
     margin: auto;
     flex-direction: column;
     width: 100%;
-    max-width: $wrap-xxs;
+    max-width: var(--max-width);
     max-height: 100%;
     overflow: hidden;
     background-color: var(--theme);
-    border-radius: $sm;
     pointer-events: auto;
     mask-image: radial-gradient(circle, black, black);
     -webkit-mask-image: -webkit-radial-gradient(circle, black, black);
+    border-radius: var(--r);
 }
 
 ::slotted([part=body]) {

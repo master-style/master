@@ -50,7 +50,7 @@ export class MasterModal extends MasterTogglable {
 
     overlayElement: HTMLElement;
 
-    keyframes(options) {
+    keyframes(options: any, whether: boolean) {
         let keyframes;
         const wrap = this.wrap;
         options.target = wrap;
@@ -136,11 +136,14 @@ export class MasterModal extends MasterTogglable {
                     ];
             }
 
-            if (this.pushing)
+            if (this.pushing) {
                 pushingKeyframes = [
                     { transform: 'translate' + dir + '(0)' },
                     { transform: 'translate' + dir + '(' + pushingOffset + ')' }
                 ];
+                if (!whether)
+                    pushingKeyframes.reverse();
+            }
 
             keyframes = [
                 { transform: 'translate' + dir + '(' + offset + ')' },
@@ -161,11 +164,14 @@ export class MasterModal extends MasterTogglable {
         }
 
         if (this.trigger) {
+            const triggerKeyframes = [
+                { opacity: 0 },
+                { opacity: 1 }
+            ];
+            if (!whether)
+                keyframes.reverse();
             this.animations.push(
-                this.trigger.animate([
-                    { opacity: 0 },
-                    { opacity: 1 }
-                ], {
+                this.trigger.animate(triggerKeyframes, {
                     ...options,
                     fill: 'forwards'
                 })
