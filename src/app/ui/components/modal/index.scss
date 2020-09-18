@@ -96,10 +96,6 @@
     }
 }
 
-:host([changing][hidden]) {
-    display: flex !important;
-}
-
 :host([opened]:not([changing])) {
     [part=root] {
         transition: .3s box-shadow linear;
