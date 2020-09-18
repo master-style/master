@@ -1,6 +1,7 @@
 import { Element, Attr } from '@element';
 import debounce from 'lodash/debounce';
 import css from './index.scss';
+import isNum from '@utils/is-num';
 
 const NAME = 'content';
 
@@ -143,8 +144,7 @@ export class MasterContent extends HTMLElement {
 
     to(to: any, duration?: any, complete?: any) {
         if (!this.scrollable) return;
-
-        to = { X: null, Y: null };
+        to = { X: to.x, Y: to.y };
 
         if (to instanceof HTMLElement) {
             // change by element
@@ -196,8 +196,8 @@ export class MasterContent extends HTMLElement {
         }
 
         if (duration === 0) {
-            if (this.scrollX && to.X) this.wrap.scrollLeft = to.X;
-            if (this.scrollY && to.Y) this.wrap.scrollTop = to.Y;
+            if (this.scrollX && isNum(to.X)) this.wrap.scrollLeft = to.X;
+            if (this.scrollY && isNum(to.Y)) this.wrap.scrollTop = to.Y;
         } else {
             duration = duration || this.duration;
             this.scrolling = true;
