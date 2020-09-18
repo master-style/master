@@ -24,16 +24,17 @@ export default class MasterTogglable extends HTMLElement {
     easing = 'cubic-bezier(.25,.8,.25,1)';
 
     @Attr({ reflect: false })
-    toggleEvent: string = 'tap';
+    toggleEvent: string = 'click';
 
     protected animations: Animation[] = [];
     protected animation: Animation;
 
     private prepare(whether, complete?: () => any) {
         const name = this.constructor.name.split('Master')[1].toLowerCase();
-        $('[toggle-' + name + ']')
+        const toggleAttrKey = 'toggle-' + name;
+        $('[' + toggleAttrKey + ']')
             .forEach((eachToggle: Element) => {
-                if (this.matches(eachToggle.getAttribute(name))) {
+                if (this.matches(eachToggle.getAttribute(toggleAttrKey))) {
                     eachToggle.toggleAttribute('aria-expanded', whether);
                     const icon = eachToggle
                         .children
@@ -55,8 +56,9 @@ export default class MasterTogglable extends HTMLElement {
                 // if (!whether) this.hidden = true;
                 this.animation = null;
                 this.animations = [];
-                this.hidden = !whether;
+                // this.hidden = !whether;
                 // $.cb.call(this, complete);
+                if (complete) complete();
                 // if (target.onPrepared) target.onPrepared(whether);
                 // if (whether && target.onOpened) target.onOpened(whether);
                 // if (!whether && target.onClosed) target.onClosed(whether);
@@ -102,7 +104,7 @@ export default class MasterTogglable extends HTMLElement {
             if (complete) complete();
             return;
         }
-        // this.hidden = false;
+        this['_hidden'] = false;
         // custom.call(target); // custom callback
         // emit(target, 'open');
         this.prepare(true, complete);
@@ -113,6 +115,8 @@ export default class MasterTogglable extends HTMLElement {
             if (complete) complete();
             return;
         }
+
+        this['_hidden'] = true;
         // custom.call(target); // custom callback
         // emit(target, 'close');
         this.prepare(false, complete);
@@ -126,28 +130,28 @@ export default class MasterTogglable extends HTMLElement {
     }
 
     protected toggleEventHandler(value: any, oldValue: any) {
-        if (this.isConnected) {
-            if (value !== oldValue) {
-                this.offToggleEvent(oldValue);
-                this.onToggleEvent(value);
-            } else if (!value && oldValue) {
-                this.offToggleEvent(oldValue);
-            }
+        if (value !== oldValue) {
+            this.offToggleEvent(oldValue);
+            this.onToggleEvent(value);
+        } else if (!value && oldValue) {
+            this.offToggleEvent(oldValue);
         }
         return { value, oldValue };
     }
 
     private onToggleEvent(toggleEvent: string) {
-        toggleEvent += '.' + this.constructor.name.split('Master')[1].toLowerCase();
+        const name = this.constructor.name.split('Master')[1].toLowerCase();
+        const toggleAttrKey = 'toggle-' + name;
+        toggleEvent += '.' + name;
         let liveTargets = liveTriggers[toggleEvent];
         if (liveTargets) {
             liveTargets.push(this);
         } else {
             liveTriggers[toggleEvent] = liveTargets = [this];
-            document.body.on(toggleEvent, '[' + name + ']', function (event) {
+            document.body.on(toggleEvent, '[' + toggleAttrKey + ']', function (event) {
                 const toggle = this;
                 if (this.disabled) return;
-                const targets = $(toggle.getAttribute(name));
+                const targets = $(toggle.getAttribute(toggleAttrKey));
                 targets.forEach((eachTarget: MasterTogglable) => {
                     if (liveTargets.indexOf(eachTarget) === -1) return;
                     let whether: boolean;
@@ -165,7 +169,7 @@ export default class MasterTogglable extends HTMLElement {
                         whether = eachTarget.hidden;
                     }
                     if (whether && !eachTarget.animation) eachTarget['trigger'] = toggle;
-                    whether = eachTarget.toggle(whether);
+                    eachTarget.toggle(whether);
                 });
             }, { passive: true });
         }
