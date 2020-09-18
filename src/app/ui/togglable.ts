@@ -29,7 +29,7 @@ export default class MasterTogglable extends HTMLElement {
     protected animations: Animation[] = [];
     protected animation: Animation;
 
-    private prepare(complete?: () => any) {
+    private async prepare() {
         const name = this.constructor.name.split('Master')[1].toLowerCase();
         const toggleAttrKey = 'toggle-' + name;
         $('[' + toggleAttrKey + ']')
@@ -54,7 +54,6 @@ export default class MasterTogglable extends HTMLElement {
                 this.animations = [];
                 console.log('finished');
                 // $.cb.call(this, complete);
-                if (complete) complete();
                 // if (target.onPrepared) target.onPrepared(whether);
                 // if (whether && target.onOpened) target.onOpened(whether);
                 // if (!whether && target.onClosed) target.onClosed(whether);
@@ -85,44 +84,41 @@ export default class MasterTogglable extends HTMLElement {
                     this.animation = (options.target || this).animate(keyframes, options)
                 );
                 this.animation.onfinish = done;
+                await this.animation.finished;
             } else {
                 done();
             }
         }
     }
 
-    open(complete?: () => any) {
+    async open() {
         if (this.hidden === false) {
-            if (complete) complete();
             return;
         }
-        console.log('open', this.hidden);
+        // 此繞過 this.hidden 設置
         this['_hidden'] = false;
         this.toggleAttribute('hidden', false);
         // custom.call(target); // custom callback
         // emit(target, 'open');
-        this.prepare(complete);
+        await this.prepare();
     }
 
-    close(complete?: () => any) {
+    async close() {
         if (this.hidden === true) {
-            if (complete) complete();
             return;
         }
-        console.log('close', this.hidden);
+        // 此繞過 this.hidden 設置
         this['_hidden'] = true;
         this.toggleAttribute('hidden', true);
         // this.hidden = true;
         // custom.call(target); // custom callback
         // emit(target, 'close');
-        this.prepare(complete);
+        await this.prepare();
     }
 
-    toggle(whether?: boolean) {
-        const that: any = this;
+    async toggle(whether?: boolean) {
         whether = typeof whether === 'boolean' ? whether : this.hidden;
-        whether ? that.open() : that.close();
-        return whether;
+        await (whether ? this.open() : this.close());
     }
 
     protected toggleEventHandler(value: any, oldValue: any) {
