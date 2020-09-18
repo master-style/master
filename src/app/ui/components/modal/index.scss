@@ -46,6 +46,7 @@
 
 :host([origin=left]) {
     --p: 0;
+    --r: 0;
 
     [part=root] {
         margin-left: 0;
@@ -57,12 +58,11 @@
 
 :host([origin=right]) {
     --p: 0;
+    --r: 0;
 
     [part=root] {
         margin-right: 0;
         height: 100%;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
     }
 }
 

@@ -15,7 +15,7 @@ export default class MasterTogglable extends HTMLElement {
     }
 
     @Attr({ reflect: false })
-    duration = 1000;
+    duration = 500;
 
     @Attr({ reflect: false })
     fade: boolean;
