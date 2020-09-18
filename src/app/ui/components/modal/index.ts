@@ -18,7 +18,10 @@ export class MasterModal extends MasterTogglable {
             part: 'root',
             $created: (element: HTMLElement) => this.wrap = element
         },
-        'm-overlay', { $if: this.overlay }
+        'm-overlay', {
+            $if: this.overlay,
+            $created: (element: HTMLElement) => this.overlayElement = element
+        }
     ]);
 
     render() {
@@ -45,10 +48,12 @@ export class MasterModal extends MasterTogglable {
     @Attr({ reflect: false })
     overlay: string = 'static';
 
-    protected keyframes(options) {
-        const keyframes: any = {};
+    overlayElement: HTMLElement;
+
+    keyframes(options) {
+        let keyframes;
         const wrap = this.wrap;
-        options.$target = wrap;
+        options.target = wrap;
         if (this.origin === 'trigger') {
             if (this.trigger) {
                 if (wrap.tagName === 'M-CONTENT') {
@@ -59,66 +64,94 @@ export class MasterModal extends MasterTogglable {
                     wrapRect = wrap.getBoundingClientRect(),
                     landingRect = this.querySelector('[part=landing]').getBoundingClientRect();
                 const scale = callerRect.width / landingRect.width;
-                keyframes.translateX = [
+                const x =
                     callerRect.left
                     + callerRect.width / 2
                     - wrapRect.left
-                    - wrapRect.width / 2
-                    + PX,
-                    0
-                ];
-                keyframes.translateY = [
+                    - wrapRect.width / 2;
+                const y =
                     callerRect.top
                     + callerRect.height / 2
                     - wrapRect.top
                     - wrapRect.height / 2
-                    - landingRect.top * scale / 2
-                    + PX,
-                    0
+                    - landingRect.top * scale / 2;
+                keyframes = [
+                    {
+                        transform: `translateX(${x + PX}) translateY(${y + PX}) scale${scale}`,
+                        height: callerRect.height / scale + landingRect.top + PX,
+                        opacity: this.fade && 0
+                    },
+                    {
+                        transform: 'translateX(0) translateY(0) scale(1)',
+                        height: wrapRect.height + PX,
+                        opacity: this.fade && 1
+                    }
                 ];
-                keyframes.scale = [scale, 1]; // after x,y
-                keyframes.height = [callerRect.height / scale + landingRect.top + PX, wrapRect.height + PX];
-                if (this.fade) keyframes.opacity = [0, 1];
             } else {
-                keyframes.scale = [this.hidden ? .9 : 1.1, 1];
-                keyframes.opacity = [0, 1];
+                keyframes = [
+                    {
+                        transform: `scale(${this.hidden ? .9 : .11})`,
+                        opacity: 0
+                    },
+                    {
+                        transform: 'scale(1)',
+                        opacity: 1
+                    }
+                ];
             }
         } else {
-            const pushingKeyframe: any = {};
+            let pushingKeyframes;
+            let dir;
+            let offset;
+            let pushingOffset;
             switch (this.origin) {
                 case 'right':
+                    dir = 'X';
+                    offset = '100%';
                     if (this.pushing)
-                        pushingKeyframe.translateX = [0, -wrap.offsetWidth / 3 + PX];
-                    keyframes.translateX = ['100%', 0];
+                        pushingOffset = -wrap.offsetWidth / 3;
                     break;
                 case 'left':
+                    dir = 'X';
+                    offset = '-100%';
                     if (this.pushing)
-                        pushingKeyframe.translateX = [0, wrap.offsetWidth / 3 + PX];
-                    keyframes.translateX = ['-100%', 0];
+                        pushingOffset = wrap.offsetWidth / 3;
                     break;
                 case 'bottom':
+                    dir = 'Y';
+                    offset = '100%';
                     if (this.pushing)
-                        pushingKeyframe.translateY = [0, -wrap.offsetHeight / 3 + PX];
-                    keyframes.translateY = ['100%', 0];
+                        pushingOffset = -wrap.offsetHeight / 3;
                     break;
                 case 'top':
+                    dir = 'Y';
+                    offset = '-100%';
                     if (this.pushing)
-                        pushingKeyframe.translateY = [0, wrap.offsetHeight / 3 + PX];
-                    keyframes.translateY = ['-100%', 0];
+                        pushingOffset = wrap.offsetHeight / 3;
                     break;
                 default:
-                    if (this.fade) {
-                        keyframes.opacity = [0, 1];
-                    } else {
-                        options.duration = 0;
-                    }
+                    keyframes = [
+                        { opacity: 0 },
+                        { opacity: 1 }
+                    ];
             }
+
+            if (this.pushing)
+                pushingKeyframes = [
+                    { transform: 'translate' + dir + '(0)' },
+                    { transform: 'translate' + dir + '(' + pushingOffset + ')' }
+                ];
+
+            keyframes = [
+                { transform: 'translate' + dir + '(' + offset + ')' },
+                { transform: 'translate' + dir + '(0)' }
+            ];
 
             if (this.pushing) {
                 const pushing = document.querySelector(this.pushing);
                 if (pushing) {
-                    this.animatings.push(
-                        pushing.animate(pushingKeyframe, {
+                    this.animations.push(
+                        pushing.animate(pushingKeyframes, {
                             ...options,
                             fill: 'forwards'
                         })
@@ -128,10 +161,11 @@ export class MasterModal extends MasterTogglable {
         }
 
         if (this.trigger) {
-            this.animatings.push(
-                this.trigger.animate({
-                    opacity: [0, 1]
-                }, {
+            this.animations.push(
+                this.trigger.animate([
+                    { opacity: 0 },
+                    { opacity: 1 }
+                ], {
                     ...options,
                     fill: 'forwards'
                 })

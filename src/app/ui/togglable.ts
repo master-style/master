@@ -22,12 +22,12 @@ export default class MasterTogglable extends HTMLElement {
 
     @Attr({ reflect: false })
     easing = 'cubic-bezier(.25,.8,.25,1)';
-    changing: any = false;
 
     @Attr({ reflect: false })
     toggleEvent: string = 'tap';
 
-    protected animatings = [];
+    protected animations: Animation[] = [];
+    protected animation: Animation;
 
     private prepare(whether, complete?: () => any) {
         const name = this.constructor.name.split('Master')[1].toLowerCase();
@@ -42,19 +42,20 @@ export default class MasterTogglable extends HTMLElement {
                 }
             });
         // custom.call(target, whether);
-        if (this.changing) {
-            for (const animating of this.animatings) {
-                animating.reverse();
+        console.log('fuck', this.animation);
+        if (this.animation) {
+            for (const eachAnimation of this.animations) {
+                eachAnimation.reverse();
             }
         } else {
             const done = () => {
-                if (this.changing) {
-                    if (this.changing.reversed) whether = !whether;
-                    this.toggleAttr('changing', false);
+                if (this.animation) {
+                    if (this.animation.playbackRate === -1) whether = !whether;
                 }
+                this.toggleAttribute('changing', false);
                 // if (!whether) this.hidden = true;
-                this.changing = false;
-                this.animatings = null;
+                this.animation = null;
+                this.animations = [];
                 this.hidden = !whether;
                 // $.cb.call(this, complete);
                 // if (target.onPrepared) target.onPrepared(whether);
@@ -64,25 +65,30 @@ export default class MasterTogglable extends HTMLElement {
             };
             if (this.isConnected && this.duration) {
                 this.toggleAttribute('changing', true);
-                this.animatings = this.animatings ?? [];
 
                 const options: any = {
                     easing: this.easing,
                     duration: this.duration,
                     reverse: !whether
                 };
-                const keyframes = this['keyframes'](options); // after .animatings
-                // target | wrap animation
-                this.animatings.push(
-                    this.changing = (options.target || this).animate(keyframes, options, done)
-                );
-                // overlay animation
-                if (this['overlay']) {
-                    this.animatings.push(
-                        this['$overlay'].animate({
-                            opacity: [0, 1]
-                        }, options)
+                if (options.duration) {
+                    const keyframes = this['keyframes'](options); // after .animations
+                    console.log(keyframes);
+                    // target | wrap animation
+                    this.animations.push(
+                        this.animation = (options.target || this).animate(keyframes, options)
                     );
+                    this.animation.onfinish = done;
+                    // overlay animation
+                    if (this['overlay']) {
+                        this.animations.push(
+                            this['overlayElement'].animate({
+                                opacity: [0, 1]
+                            }, options)
+                        );
+                    }
+                } else {
+                    done();
                 }
             } else {
                 done();
@@ -157,7 +163,7 @@ export default class MasterTogglable extends HTMLElement {
                     } else {
                         whether = eachTarget.hidden;
                     }
-                    if (whether && !eachTarget.changing) eachTarget['trigger'] = toggle;
+                    if (whether && !eachTarget.animation) eachTarget['trigger'] = toggle;
                     whether = eachTarget.toggle(whether);
                 });
             }, { passive: true });
