@@ -48,46 +48,22 @@ export default class MasterTogglable extends HTMLElement {
                 eachAnimation.reverse();
             }
         } else {
-            const done = () => {
-                this.toggleAttribute('changing', false);
-                this.animation = null;
-                this.animations = [];
-                // $.cb.call(this, complete);
-                // if (target.onPrepared) target.onPrepared(whether);
-                // if (whether && target.onOpened) target.onOpened(whether);
-                // if (!whether && target.onClosed) target.onClosed(whether);
-                // emit(target, whether ? 'hidden' : 'closed');
-            };
             if (this.isConnected && this.duration) {
                 this.toggleAttribute('changing', true);
-
-                const options: any = {
-                    easing: this.easing,
-                    duration: this.duration
-                };
-                const keyframes = this['keyframes'](options, this.hidden); // after .animations
-                const overlayKeyframes = [
-                    { opacity: 0 },
-                    { opacity: 1 }
-                ];
-                if (this.hidden) {
-                    keyframes.reverse();
-                    overlayKeyframes.reverse();
-                }
-                if (this['overlay']) {
-                    this.animations.push(
-                        this['overlayElement'].animate(overlayKeyframes, options)
-                    );
-                }
-                this.animations.push(
-                    this.animation = (options.target || this).animate(keyframes, options)
-                );
-                this.animation.onfinish = done;
+                this['toggling']();
+                this.animations.push(this.animation);
+                this.animation.onfinish = () => this.finishToggling();
                 await this.animation.finished;
             } else {
-                done();
+                this.finishToggling();
             }
         }
+    }
+
+    protected finishToggling() {
+        this.toggleAttribute('changing', false);
+        this.animation = null;
+        this.animations = [];
     }
 
     async open() {
