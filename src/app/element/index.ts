@@ -45,7 +45,7 @@ export function Element(options: ElementOptions) {
                     const eachAttrOptions: AttrOptions = attrOptionsMap[eachAttrKey];
                     const eachPropValue = this['_' + eachAttrOptions.propKey];
                     const eachAttr = attributes[eachAttrKey];
-                    if (!eachAttr && eachPropValue === undefined) continue;
+                    if (eachPropValue === undefined) continue;
                     let value: any;
                     let eachAttrValue: any;
                     if (eachAttr) {

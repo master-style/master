@@ -19,6 +19,7 @@ export class ContentComponent implements OnInit {
             .subscribe((data) => {
                 setTimeout(() => {
                     this.items = data;
+                    console.log(this.items);
                 }, 1000);
             });
     }

@@ -14,12 +14,10 @@ export class MasterModal extends MasterTogglable {
     private trigger: HTMLElement;
 
     template = $(() => [
-        'div', {
+        'slot', {
             part: 'root',
             $created: (element: HTMLElement) => this.wrap = element
-        }, [
-            'slot'
-        ],
+        },
         'm-overlay', { $if: this.overlay }
     ]);
 
@@ -59,7 +57,7 @@ export class MasterModal extends MasterTogglable {
                 const
                     callerRect = this.trigger.getBoundingClientRect(),
                     wrapRect = wrap.getBoundingClientRect(),
-                    landingRect = this.querySelector('[part=loading]').getBoundingClientRect();
+                    landingRect = this.querySelector('[part=landing]').getBoundingClientRect();
                 const scale = callerRect.width / landingRect.width;
                 keyframes.translateX = [
                     callerRect.left
@@ -82,7 +80,7 @@ export class MasterModal extends MasterTogglable {
                 keyframes.height = [callerRect.height / scale + landingRect.top + PX, wrapRect.height + PX];
                 if (this.fade) keyframes.opacity = [0, 1];
             } else {
-                keyframes.scale = [this.opened ? 1.1 : .9, 1];
+                keyframes.scale = [this.hidden ? .9 : 1.1, 1];
                 keyframes.opacity = [0, 1];
             }
         } else {

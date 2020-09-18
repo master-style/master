@@ -5,7 +5,14 @@ const liveTriggers = {};
 export default class MasterTogglable extends HTMLElement {
 
     @Attr()
-    opened: boolean;
+    hidden: boolean = true;
+
+    protected hiddenHandler(value: boolean, oldValue: boolean) {
+        if (this.isConnected && value !== oldValue) {
+            value ? this.close() : this.open();
+        }
+        return { value, oldValue };
+    }
 
     @Attr({ reflect: false })
     duration = 300;
@@ -45,16 +52,15 @@ export default class MasterTogglable extends HTMLElement {
                     if (this.changing.reversed) whether = !whether;
                     this.toggleAttr('changing', false);
                 }
-                if (!whether) this.rmClass('show');
+                // if (!whether) this.hidden = true;
                 this.changing = false;
                 this.animatings = null;
-                this.opened = whether;
-                this.toggleAttribute('aria-hidden', !whether ? true : null);
+                this.hidden = !whether;
                 // $.cb.call(this, complete);
                 // if (target.onPrepared) target.onPrepared(whether);
                 // if (whether && target.onOpened) target.onOpened(whether);
                 // if (!whether && target.onClosed) target.onClosed(whether);
-                // emit(target, whether ? 'opened' : 'closed');
+                // emit(target, whether ? 'hidden' : 'closed');
             };
             if (this.isConnected && this.duration) {
                 this.toggleAttribute('changing', true);
@@ -85,23 +91,21 @@ export default class MasterTogglable extends HTMLElement {
     }
 
     open(complete?: () => any) {
-        if (this.opened === true) {
+        if (this.hidden === false) {
             if (complete) complete();
             return;
         }
-        this.opened = true;
-        this.addClass('show');
+        // this.hidden = false;
         // custom.call(target); // custom callback
         // emit(target, 'open');
         this.prepare(true, complete);
     }
 
     close(complete?: () => any) {
-        if (this.opened === false) {
+        if (this.hidden === true) {
             if (complete) complete();
             return;
         }
-        this.opened = false;
         // custom.call(target); // custom callback
         // emit(target, 'close');
         this.prepare(false, complete);
@@ -109,7 +113,7 @@ export default class MasterTogglable extends HTMLElement {
 
     toggle(whether?: boolean) {
         const that: any = this;
-        whether = typeof whether === 'boolean' ? whether : !this.opened;
+        whether = typeof whether === 'boolean' ? whether : this.hidden;
         whether ? that.open() : that.close();
         return whether;
     }
@@ -151,7 +155,7 @@ export default class MasterTogglable extends HTMLElement {
                     ) {
                         whether = !!toggle.value;
                     } else {
-                        whether = !eachTarget.opened;
+                        whether = eachTarget.hidden;
                     }
                     if (whether && !eachTarget.changing) eachTarget['trigger'] = toggle;
                     whether = eachTarget.toggle(whether);

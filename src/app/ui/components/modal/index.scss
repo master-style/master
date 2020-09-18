@@ -3,6 +3,8 @@
 
 :host {
     --p: #{$md};
+    --head-height: 3rem;
+    --foot-height: 3rem;
     position: fixed;
     z-index: $z-overlay;
     display: flex;
@@ -16,24 +18,24 @@
     flex-wrap: nowrap;
     contain: strict;
     padding: var(--p);
+    pointer-events: none;
 
     // &.long {
     //     padding-top: 0;
     //     padding-bottom: 0;
 
-    //     [part=root] {
+    //     [part=root]{
     //         padding: var(--p) 0;
     //     }
 
-    //     [part=head].sticky {
+    //     ::slotted([part=head]).sticky {
     //         top: calc(var(--p) * -1);
     //     }
 
-    //     [part=foot].sticky {
+    //     ::slotted([part=foot]).sticky {
     //         bottom: calc(var(--p) * -1);
     //     }
     // }
-
 }
 
 :host([origin=left]) {
@@ -80,7 +82,7 @@
         overflow: hidden !important;
     }
 
-    [part=head] {
+    ::slotted([part=head]) {
         z-index: $z-overlay;
     }
 }
@@ -88,7 +90,13 @@
 :host([opened]:not([changing])) {
     [part=root] {
         transition: .3s box-shadow linear;
-        box-shadow: $s-xl;
+        box-shadow:
+            0 0.8px 1.1px rgba(0, 0, 0, 0.034),
+            0 2px 2.6px rgba(0, 0, 0, 0.048),
+            0 3.8px 4.9px rgba(0, 0, 0, 0.06),
+            0 6.7px 8.7px rgba(0, 0, 0, 0.072),
+            0 12.5px 16.3px rgba(0, 0, 0, 0.086),
+            0 30px 39px rgba(0, 0, 0, 0.12);
     }
 }
 
@@ -114,49 +122,54 @@
     max-width: $wrap-xxs;
     max-height: 100%;
     overflow: hidden;
-}
-
-[part=body] {
-    width: 100%;
-    flex: 1 1 auto;
-    background-color: var(--theme);
-
-    &:not(m-scroll) {
-        padding: $md;
-    }
-}
-
-[part=head],
-[part=foot] {
-    position: relative;
-    width: 100%;
-    flex: 0 0 auto;
     background-color: var(--theme);
     border-radius: $sm;
-    overflow: hidden;
-
-    /* for IOS safari */
-    @supports (-webkit-overflow-scrolling: touch) {
-        mask-image: radial-gradient(circle, black, black);
-        -webkit-mask-image: -webkit-radial-gradient(circle, black, black);
-    }
+    pointer-events: auto;
+    mask-image: radial-gradient(circle, black, black);
+    -webkit-mask-image: -webkit-radial-gradient(circle, black, black);
 }
 
-[part=head] {
-    padding: 1rem $md;
+::slotted([part=body]) {
+    width: 100%;
+    min-height: 0;
+    flex: 1 1 auto;
+    background-color: var(--theme);
+}
+
+::slotted(m-content[part=body]) {
+    --offset-top: var(--head-height);
+    --offset-bottom: var(--foot-height);
+}
+
+::slotted([part=head]),
+::slotted([part=foot]) {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: $z-overlay;
+    left: 0;
+    width: 100%;
+    flex: 0 0 auto;
+    border-radius: 0;
+    min-height: 3rem;
+    @include blurBg(var(--themeRgb), .9);
+}
+
+::slotted([part=head]) {
+    padding: 0 $sm;
     top: 0;
     text-align: center;
     text-align-last: center;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
 }
 
-[part=foot] {
+::slotted([part=foot]) {
     width: 100%;
     bottom: 0;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    min-height: 3rem;
+}
+
+m-overlay {
+    pointer-events: auto;
 }
 
 @include below(sm) {

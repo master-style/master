@@ -1,18 +1,21 @@
 <p>modal works!</p>
 
-<m-modal close-button>
-    <div part="head"></div>
-    <m-content part="body">
-        <figure class="embedded by:3x2" part="loading">
+<m-modal close-button overlay="static">
+    <div part="head">header</div>
+    <m-content part="body" scroll-y>
+        <figure class="embedded by:1x1" part="landing">
             <img src="https://photo.eyescream.com.tw/photo/photo/ow/11030250-B51-06.jpg" alt="">
         </figure>
         <article class="prose">
             <h1>標題</h1>
             <h2>次標題</h2>
             <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
         </article>
     </m-content>
-    <div part="foot"></div>
+    <m-button part="foot" class="bt">footer</m-button>
 </m-modal>
 
 <m-chip>
