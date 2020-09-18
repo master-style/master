@@ -54,51 +54,38 @@ export class MasterModal extends MasterTogglable {
         let keyframes;
         const wrap = this.wrap;
         options.target = wrap;
-        if (this.origin === 'trigger') {
-            if (this.trigger) {
-                if (wrap.tagName === 'M-CONTENT') {
-                    wrap.to({ x: 0, y: 0 }, 0);
-                }
-                const
-                    callerRect = this.trigger.getBoundingClientRect(),
-                    wrapRect = wrap.getBoundingClientRect(),
-                    landingRect = this.querySelector('[part=landing]').getBoundingClientRect();
-                const scale = callerRect.width / landingRect.width;
-                const x =
-                    callerRect.left
-                    + callerRect.width / 2
-                    - wrapRect.left
-                    - wrapRect.width / 2;
-                const y =
-                    callerRect.top
-                    + callerRect.height / 2
-                    - wrapRect.top
-                    - wrapRect.height / 2
-                    - landingRect.top * scale / 2;
-                keyframes = [
-                    {
-                        transform: `translateX(${x + PX}) translateY(${y + PX}) scale${scale}`,
-                        height: callerRect.height / scale + landingRect.top + PX,
-                        opacity: this.fade && 0
-                    },
-                    {
-                        transform: 'translateX(0) translateY(0) scale(1)',
-                        height: wrapRect.height + PX,
-                        opacity: this.fade && 1
-                    }
-                ];
-            } else {
-                keyframes = [
-                    {
-                        transform: `scale(${this.hidden ? .11 : .9})`,
-                        opacity: 0
-                    },
-                    {
-                        transform: 'scale(1)',
-                        opacity: 1
-                    }
-                ];
+        if (this.origin === 'trigger' && this.trigger) {
+            if (wrap.tagName === 'M-CONTENT') {
+                wrap.to({ x: 0, y: 0 }, 0);
             }
+            const
+                callerRect = this.trigger.getBoundingClientRect(),
+                wrapRect = wrap.getBoundingClientRect(),
+                landingRect = this.querySelector('[part=landing]').getBoundingClientRect();
+            const scale = callerRect.width / landingRect.width;
+            const x =
+                callerRect.left
+                + callerRect.width / 2
+                - wrapRect.left
+                - wrapRect.width / 2;
+            const y =
+                callerRect.top
+                + callerRect.height / 2
+                - wrapRect.top
+                - wrapRect.height / 2
+                - landingRect.top * scale / 2;
+            keyframes = [
+                {
+                    transform: `translateX(${x + PX}) translateY(${y + PX}) scale${scale}`,
+                    height: callerRect.height / scale + landingRect.top + PX,
+                    opacity: this.fade && 0
+                },
+                {
+                    transform: 'translateX(0) translateY(0) scale(1)',
+                    height: wrapRect.height + PX,
+                    opacity: this.fade && 1
+                }
+            ];
         } else {
             let pushingKeyframes;
             let dir;
@@ -129,6 +116,18 @@ export class MasterModal extends MasterTogglable {
                     if (this.pushing)
                         pushingOffset = wrap.offsetHeight / 3;
                     break;
+                case 'center':
+                    keyframes = [
+                        {
+                            transform: `scale(${this.hidden ? .9 : 1.1})`,
+                            opacity: 0
+                        },
+                        {
+                            transform: 'scale(1)',
+                            opacity: 1
+                        }
+                    ];
+                    break;
                 default:
                     keyframes = [
                         { opacity: 0 },
@@ -136,49 +135,32 @@ export class MasterModal extends MasterTogglable {
                     ];
             }
 
-            if (this.pushing) {
-                pushingKeyframes = [
-                    { transform: 'translate' + dir + '(0)' },
-                    { transform: 'translate' + dir + '(' + pushingOffset + ')' }
-                ];
-                if (!this.hidden)
-                    pushingKeyframes.reverse();
-            }
-
-            keyframes = [
-                { transform: 'translate' + dir + '(' + offset + ')' },
-                { transform: 'translate' + dir + '(0)' }
-            ];
-
-            if (this.pushing) {
-                const pushing = document.querySelector(this.pushing);
-                if (pushing) {
-                    this.animations.push(
-                        pushing.animate(pushingKeyframes, {
-                            ...options,
-                            fill: 'forwards'
-                        })
-                    );
+            if (this.origin && this.origin !== 'center') {
+                if (this.pushing) {
+                    pushingKeyframes = [
+                        { transform: 'translate' + dir + '(0)' },
+                        { transform: 'translate' + dir + '(' + pushingOffset + ')' }
+                    ];
+                    if (!this.hidden)
+                        pushingKeyframes.reverse();
+                    const pushing = document.querySelector(this.pushing);
+                    if (pushing) {
+                        this.animations.push(
+                            pushing.animate(pushingKeyframes, {
+                                ...options,
+                                fill: 'forwards'
+                            })
+                        );
+                    }
                 }
-            }
-        }
 
-        if (this.trigger) {
-            const triggerKeyframes = [
-                { opacity: 0 },
-                { opacity: 1 }
-            ];
-            if (!this.hidden)
-                triggerKeyframes.reverse();
-            this.animations.push(
-                this.trigger.animate(triggerKeyframes, {
-                    ...options,
-                    fill: 'forwards'
-                })
-            );
+                keyframes = [
+                    { transform: 'translate' + dir + '(' + offset + ')' },
+                    { transform: 'translate' + dir + '(0)' }
+                ];
+            }
         }
 
         return keyframes;
     }
-
 }

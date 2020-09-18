@@ -52,7 +52,6 @@ export default class MasterTogglable extends HTMLElement {
                 this.toggleAttribute('changing', false);
                 this.animation = null;
                 this.animations = [];
-                console.log('finished');
                 // $.cb.call(this, complete);
                 // if (target.onPrepared) target.onPrepared(whether);
                 // if (whether && target.onOpened) target.onOpened(whether);
