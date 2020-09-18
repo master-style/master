@@ -4,7 +4,7 @@ article {
     margin: auto;
 
     &.prose {
-        max-width: $wrap-xs;
+        max-width: var(--wrap-xs);
         padding: $md;
         font-size: 1.125rem;
         color: var(--f-theme);

@@ -1,29 +1,39 @@
+html {
+    --wrap-xxs: 400px;
+    --wrap-xs: 700px;
+    --wrap-sm: 840px;
+    --wrap-md: 1024px;
+    --wrap-lg: 1140px;
+    --wrap-xl: 1280px;
+    --wrap-xxl: 1440px;
+}
+
 .wrap\:xxl {
-    max-width: $wrap-xxl !important;
+    max-width: var(--wrap-xxl) !important;
 }
 
 .wrap\:xl {
-    max-width: $wrap-xl !important;
+    max-width: var(--wrap-xl) !important;
 }
 
 .wrap\:lg {
-    max-width: $wrap-lg !important;
+    max-width: var(--wrap-lg) !important;
 }
 
 .wrap {
-    max-width: $wrap-md !important;
+    max-width: var(--wrap-md) !important;
 }
 
 .wrap\:sm {
-    max-width: $wrap-sm !important;
+    max-width: var(--wrap-sm) !important;
 }
 
 .wrap\:xs {
-    max-width: $wrap-xs !important;
+    max-width: var(--wrap-xs) !important;
 }
 
 .wrap\:xxs {
-    max-width: $wrap-xxs !important;
+    max-width: var(--wrap-xxs) !important;
 }
 
 .wrap,
