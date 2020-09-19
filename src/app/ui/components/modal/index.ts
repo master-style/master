@@ -20,6 +20,9 @@ export class MasterModal extends MasterTogglable {
         },
         'm-overlay', {
             $if: this.overlay,
+            $handled: () => {
+                console.log('handled');
+            },
             $created: (element: HTMLElement) => {
                 this.overlayElement = element
                     .on('click', () => {
@@ -32,6 +35,10 @@ export class MasterModal extends MasterTogglable {
 
     render() {
         this.template.render(this.shadowRoot);
+    }
+
+    removeRender() {
+        this.template.remove();
     }
 
     wrap: any;

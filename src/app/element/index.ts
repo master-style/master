@@ -25,8 +25,8 @@ export function Element(options: ElementOptions) {
         const prototype = constructor.prototype;
         const attrOptionsMap = constructor.attrOptionsMap;
         const onConnected = prototype.onConnected;
+        const onDisconnected = prototype.onDisconnected;
         const onAttrChanged = prototype.onAttrChanged;
-        prototype.disconnectedCallback = prototype.onDisconnected;
         prototype.attributeChangedCallback = function (attrKey, oldValue, value) {
             if (value === oldValue) return;
             const eachAttrOptions = attrOptionsMap[attrKey];
@@ -84,6 +84,11 @@ export function Element(options: ElementOptions) {
             }
             if (this.render) this.render();
             if (onConnected) onConnected.call(this);
+        };
+
+        prototype.disconnectedCallback = function () {
+            if (this.removeRender) this.removeRender();
+            if (onDisconnected) onDisconnected.call(this);
         };
 
         window.customElements.define(options.tag, constructor);

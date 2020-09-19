@@ -230,7 +230,7 @@ class MasterTemplate {
     }
 
     remove() {
-        if (this.nodes) {
+        if (this.nodes.length) {
             this.container = null;
             this.nodes
                 .forEach((eachNode) => {
