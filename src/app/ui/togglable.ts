@@ -4,6 +4,8 @@ const liveTriggers = {};
 
 export default class MasterTogglable extends HTMLElement {
 
+    protected ready = false;
+
     @Attr()
     hidden: boolean;
 
@@ -39,14 +41,15 @@ export default class MasterTogglable extends HTMLElement {
                     if (icon) icon.toggleAttribute('active', this.hidden);
                 }
             });
-        // custom.call(target, whether);
-        if (this.animation) {
-            for (const eachAnimation of this.animations) {
-                eachAnimation.reverse();
+        if (this.ready) {
+            if (this.animation) {
+                for (const eachAnimation of this.animations) {
+                    eachAnimation.reverse();
+                }
+            } else if (this.duration) {
+                this.toggleAttribute('changing', true);
+                await this['toggling']();
             }
-        } else if (this.isConnected && this.duration) {
-            this.toggleAttribute('changing', true);
-            await this['toggling']();
         }
     }
 
@@ -81,11 +84,14 @@ export default class MasterTogglable extends HTMLElement {
     }
 
     protected toggleEventUpdater(value: any, oldValue: any) {
+        if (
+            !value && oldValue ||
+            value && oldValue
+        ) {
+            this.offToggleEvent(oldValue);
+        }
         if (value) {
-            this.offToggleEvent(oldValue);
             this.onToggleEvent(value);
-        } else if (!value && oldValue) {
-            this.offToggleEvent(oldValue);
         }
     }
 
