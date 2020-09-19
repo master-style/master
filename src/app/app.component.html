@@ -25,7 +25,8 @@
             </m-breadcrumb>
         </nav>
         <nav aria-label="breadcrumb" *ngIf="!navigating">
-            <m-breadcrumb type="anchor" [routerLink]="eachRoute?.routeConfig?.paths" *ngFor="let eachRoute of appService?.currentRoute?.pathFromRoot"
+            <m-breadcrumb type="anchor" [routerLink]="eachRoute?.routeConfig?.paths"
+                          *ngFor="let eachRoute of appService?.currentRoute?.pathFromRoot"
                           [attr.aria-current]="appService?.currentRoute === eachRoute ? 'page': null">
                 <i slot="head" *ngIf="eachRoute?.data?.icon" class="i-{{eachRoute?.data?.icon}} f:fade++"></i>
                 {{ eachRoute?.routeConfig?.path || 'home' | translate }}
@@ -69,7 +70,7 @@
     </article>
 </main>
 
-<aside part="app-side" class="br" style="padding-top: 3rem" [ngClass]="{'hidden': !visibleSide}">
+<aside id="app-side" part="app-side" class="br" style="padding-top: 3rem" [ngClass]="{'hidden': !visibleSide}">
     <m-content scroll-y guide class="h:full">
         <m-list style="padding-top: .5rem">
             <ng-container *ngFor="let eachRoute of routes">

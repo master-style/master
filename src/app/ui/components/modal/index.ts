@@ -162,7 +162,7 @@ export class MasterModal extends MasterTogglable {
                 if (this.pushing) {
                     pushingKeyframes = [
                         { transform: 'translate' + dir + '(0)' },
-                        { transform: 'translate' + dir + '(' + pushingOffset + ')' }
+                        { transform: 'translate' + dir + '(' + pushingOffset + PX + ')' }
                     ];
 
                     if (this.hidden)
