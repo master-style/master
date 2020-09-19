@@ -5,13 +5,10 @@ const liveTriggers = {};
 export default class MasterTogglable extends HTMLElement {
 
     @Attr()
-    hidden: boolean = true;
+    hidden: boolean;
 
     protected hiddenUpdater(value: boolean, oldValue: boolean) {
-        if (value !== oldValue) {
-            value ? this.close() : this.open();
-        }
-        return { value, oldValue };
+        value ? this.close() : this.open();
     }
 
     @Attr({ reflect: false })
