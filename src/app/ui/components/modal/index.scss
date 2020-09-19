@@ -45,9 +45,16 @@
     pointer-events: none !important;
 }
 
-:host([origin=trigger]) {
-    --head-height: 0px;
-    --foot-height: 0px;
+:host(.covered\:head) {
+    ::slotted([part=body]) {
+        --offset-top: var(--head-height);
+    }
+}
+
+:host(.covered\:foot) {
+    ::slotted([part=body]) {
+        --offset-bottom: var(--foot-height);
+    }
 }
 
 :host([origin=left]) {
@@ -152,11 +159,6 @@
     width: 100%;
     min-height: 0;
     flex: 1 1 auto;
-}
-
-::slotted(m-content[part=body]) {
-    --offset-top: var(--head-height);
-    --offset-bottom: var(--foot-height);
 }
 
 ::slotted([part=head]),

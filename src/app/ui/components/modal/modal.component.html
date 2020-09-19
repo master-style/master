@@ -1,6 +1,11 @@
 <p>modal works!</p>
 
-<m-modal id="modal" close-button overlay="close" origin="trigger" hidden style="--max-width: 400px">
+<m-modal id="modal"
+         close-button
+         overlay="close"
+         origin="trigger"
+         hidden
+         style="--max-width: 400px">
     <m-content part="body" scroll-y>
         <figure class="embedded by:1x1">
             <img src="https://photo.eyescream.com.tw/photo/photo/ow/11030250-B51-06.jpg" alt="">
@@ -29,7 +34,16 @@
     </m-content>
 </m-modal>
 
-<m-modal id="modal-drawer" close-button overlay="close" origin="right" pushing="#app-side" hidden>
+<m-modal id="modal-drawer"
+         close-button
+         overlay="close"
+         origin="right"
+         pushing="#app-side"
+         class="covered:head covered:foot"
+         hidden>
+    <div part="head">
+        title
+    </div>
     <m-content part="body" scroll-y>
         <figure class="embedded by:1x1">
             <img src="https://photo.eyescream.com.tw/photo/photo/ow/11030250-B51-06.jpg" alt="">
@@ -55,11 +69,28 @@
             <p>內文</p>
         </article>
     </m-content>
+    <div part="foot">
+        title
+    </div>
 </m-modal>
 
-<m-button toggle-modal="#modal">切換</m-button>
-<m-button toggle-modal="#modal-drawer">切換</m-button>
+<div class="demo">
+    <div class="demo-body">
+        <m-button toggle-modal="#modal">切換</m-button>
+        <m-button toggle-modal="#modal-drawer">切換</m-button>
 
-<figure toggle-modal="#modal" class="embedded by:1x1 r:xs" style="width: 200px">
-    <img src="https://photo.eyescream.com.tw/photo/photo/ow/11030250-B51-06.jpg" alt="">
-</figure>
+        <figure toggle-modal="#modal" class="embedded by:1x1 r:xs" style="width: 200px">
+            <img src="https://photo.eyescream.com.tw/photo/photo/ow/11030250-B51-06.jpg" alt="">
+        </figure>
+
+    </div>
+</div>
+
+<h2 id="structure">{{ 'structure' | translate }}</h2>
+<template [codeLang]="'html'">
+    <m-modal>
+        <div part="head"></div>
+        <m-content part="body" scroll-y></m-content>
+        <div part="foot"></div>
+    </m-modal>
+</template>
