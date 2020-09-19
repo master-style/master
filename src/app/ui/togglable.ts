@@ -84,13 +84,12 @@ export default class MasterTogglable extends HTMLElement {
     }
 
     protected toggleEventChanged(value: any, oldValue: any) {
-        if (value !== oldValue) {
+        if (value) {
             this.offToggleEvent(oldValue);
             this.onToggleEvent(value);
         } else if (!value && oldValue) {
             this.offToggleEvent(oldValue);
         }
-        return { value, oldValue };
     }
 
     private onToggleEvent(toggleEvent: string) {
