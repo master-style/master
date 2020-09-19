@@ -17,7 +17,6 @@
     flex-direction: column;
     flex-wrap: nowrap;
     contain: strict;
-    padding: var(--p);
     pointer-events: none;
 
     // &.long {
@@ -91,7 +90,6 @@
 :host([changing]) {
     [part=root] {
         will-change: height, opacity, box-shadow;
-        overflow: hidden !important;
     }
 
     ::slotted([part=head]) {
@@ -133,45 +131,48 @@
     width: 100%;
     max-width: var(--max-width);
     max-height: 100%;
-    overflow: hidden;
-    background-color: var(--theme);
     pointer-events: auto;
-    mask-image: radial-gradient(circle, black, black);
-    -webkit-mask-image: -webkit-radial-gradient(circle, black, black);
-    border-radius: var(--r);
+    --offset-top: var(--p);
+    --offset-bottom: var(--p);
 }
 
 ::slotted([part=body]) {
     width: 100%;
     min-height: 0;
     flex: 1 1 auto;
+    background-color: var(--theme);
 }
 
 ::slotted([part=head]),
 ::slotted([part=foot]) {
-    @include sticky(!important);
+    @include sticky( !important);
+    @include blurBg(var(--themeRgb), .9);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: $z-overlay;
-    left: 0;
     width: 100%;
     flex: 0 0 auto;
-    border-radius: 0;
     min-height: 3rem;
-    @include blurBg(var(--themeRgb), .9);
+    mask-image: radial-gradient(circle, black, black);
+    -webkit-mask-image: -webkit-radial-gradient(circle, black, black);
+    border-radius: var(--r);
 }
 
 ::slotted([part=head]) {
     padding: 0 $sm;
-    top: 0;
+    top: calc(var(--p) * -1);
     text-align: center;
     text-align-last: center;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 ::slotted([part=foot]) {
     width: 100%;
-    bottom: 0;
+    bottom: calc(var(--p) * -1);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 m-overlay {
