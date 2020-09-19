@@ -23,7 +23,7 @@ export default class MasterTogglable extends HTMLElement {
     easing = 'cubic-bezier(.25,.8,.25,1)';
 
     @Attr({ reflect: false })
-    toggleEvent: string = 'click';
+    triggerEvent: string = 'click';
 
     protected animations: Animation[] = [];
     protected animation: Animation;
@@ -83,28 +83,28 @@ export default class MasterTogglable extends HTMLElement {
         await (whether ? this.open() : this.close());
     }
 
-    protected toggleEventUpdater(value: any, oldValue: any) {
+    protected triggerEventUpdater(value: any, oldValue: any) {
         if (
             !value && oldValue ||
             value && oldValue
         ) {
-            this.offToggleEvent(oldValue);
+            this.offTriggerEvent(oldValue);
         }
         if (value) {
-            this.onToggleEvent(value);
+            this.onTriggerEvent(value);
         }
     }
 
-    private onToggleEvent(toggleEvent: string) {
+    private onTriggerEvent(triggerEvent: string) {
         const name = this.constructor.name.split('Master')[1].toLowerCase();
         const toggleAttrKey = 'toggle-' + name;
-        toggleEvent += '.' + name;
-        let liveTargets = liveTriggers[toggleEvent];
+        triggerEvent += '.' + name;
+        let liveTargets = liveTriggers[triggerEvent];
         if (liveTargets) {
             liveTargets.push(this);
         } else {
-            liveTriggers[toggleEvent] = liveTargets = [this];
-            document.body.on(toggleEvent, '[' + toggleAttrKey + ']', function (event) {
+            liveTriggers[triggerEvent] = liveTargets = [this];
+            document.body.on(triggerEvent, '[' + toggleAttrKey + ']', function (event) {
                 const toggle = this;
                 if (this.disabled) return;
                 const targets = $(toggle.getAttribute(toggleAttrKey));
@@ -131,7 +131,7 @@ export default class MasterTogglable extends HTMLElement {
         }
     }
 
-    private offToggleEvent(trigger: string) {
+    private offTriggerEvent(trigger: string) {
         if (!trigger) return;
         trigger += '.' + this.constructor.name.split('Master')[1].toLowerCase();
         const liveTargets = liveTriggers[trigger];

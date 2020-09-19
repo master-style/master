@@ -98,45 +98,44 @@ export class MasterContent extends HTMLElement {
     render() {
         this.template.render(this.shadowRoot);
         this.renderScrolling();
-        this.toggleListener(this.scrollX || this.scrollY);
+        (this.scrollX || this.scrollY) ? this.enable() : this.disable();
     }
 
-    private toggleListener(whether: boolean) {
-        this.scrolling = false;
-        if (whether && !this.#enabled) {
-            this.#enabled = true;
-            this.wrap
-                .on('scroll', (event: any) => {
-                    if (!this.renderScrolling()) return;
-                    if (!this.scrolling) {
-                        this.scrolling = true;
-                        this.template.render(this.shadowRoot);
-                    }
-                    if (this.#scrollEndTimeout) this.#scrollEndTimeout = clearTimeout(this.#scrollEndTimeout);
-                    this.#scrollEndTimeout = setTimeout(() => {
-                        this.stop();
-                    }, 100);
-                }, {
-                    id: 'scroll',
-                    passive: true
-                })
-                .on('slotchange', (event) => {
-                    this.renderScrolling();
-                }, {
-                    id: 'scroll',
-                    passive: true
-                });
-
-            window.on('resize', debounce(() => {
+    enable() {
+        if (this.#enabled) return;
+        this.wrap
+            .on('scroll', (event: any) => {
+                if (!this.renderScrolling()) return;
+                if (!this.scrolling) {
+                    this.scrolling = true;
+                    this.template.render(this.shadowRoot);
+                }
+                if (this.#scrollEndTimeout) this.#scrollEndTimeout = clearTimeout(this.#scrollEndTimeout);
+                this.#scrollEndTimeout = setTimeout(() => {
+                    this.stop();
+                }, 100);
+            }, {
+                id: 'scroll',
+                passive: true
+            })
+            .on('slotchange', (event) => {
                 this.renderScrolling();
-            }, 70), {
-                id: this
+            }, {
+                id: 'scroll',
+                passive: true
             });
-        } else if (!whether && this.#enabled) {
-            this.#enabled = false;
-            this.wrap.off({ id: 'scroll' });
-            window.off({ id: this });
-        }
+
+        window.on('resize', debounce(() => {
+            this.renderScrolling();
+        }, 70), {
+            id: this
+        });
+    }
+
+    disable() {
+        if (!this.#enabled) return;
+        this.wrap.off({ id: 'scroll' });
+        window.off({ id: this });
     }
 
     get scrollable(): boolean {
@@ -286,7 +285,7 @@ export class MasterContent extends HTMLElement {
     }
 
     onDisconnected() {
-        this.toggleListener(false);
+        this.disable();
     }
 
 }

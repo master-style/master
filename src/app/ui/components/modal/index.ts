@@ -83,7 +83,7 @@ export class MasterModal extends MasterTogglable {
             content = this.querySelector('m-content');
 
             if (content) {
-                content.toggleListener(false);
+                content.disable();
                 content.to({ x: 0, y: 0 }, this.duration);
             }
 
@@ -213,7 +213,7 @@ export class MasterModal extends MasterTogglable {
                 this.trigger.toggleClass('invisible', false);
             }
             if (content && !this.hidden) {
-                content.toggleListener(true);
+                content.enable();
             }
         };
         await this.animation.finished;
