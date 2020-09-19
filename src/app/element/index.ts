@@ -43,7 +43,8 @@ export function Element(options: ElementOptions) {
                 const attributes = this.attributes;
                 for (const eachAttrKey in attrOptionsMap) {
                     const eachAttrOptions: AttrOptions = attrOptionsMap[eachAttrKey];
-                    const eachPropValue = this['_' + eachAttrOptions.propKey];
+                    const eachpropKey = eachAttrOptions.propKey;
+                    const eachPropValue = this['_' + eachpropKey];
                     const eachAttr = attributes[eachAttrKey];
                     if (eachPropValue === undefined) continue;
                     let value: any;
@@ -69,7 +70,6 @@ export function Element(options: ElementOptions) {
                     }
                 }
             }
-            this.ready = true;
             if (options.shadow && !this.shadowRoot) {
                 const shadowRoot = this.attachShadow({ mode: 'open' });
                 if (options.css && shadowRoot['adoptedStyleSheets']) {
@@ -83,6 +83,16 @@ export function Element(options: ElementOptions) {
                 }
             }
             if (this.render) this.render();
+            for (const eachAttrKey in attrOptionsMap) {
+                const eachAttrOptions: AttrOptions = attrOptionsMap[eachAttrKey];
+                const eachpropKey = eachAttrOptions.propKey;
+                const eachPropValue = this['_' + eachpropKey];
+                const propUpdater = this[eachpropKey + 'Updater'];
+                if (propUpdater) {
+                    propUpdater.call(this, eachPropValue);
+                }
+            }
+            this.ready = true;
             if (onConnected) onConnected.call(this);
         };
 

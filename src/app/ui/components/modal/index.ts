@@ -50,6 +50,7 @@ export class MasterModal extends MasterTogglable {
     overlay: string = 'static';
 
     protected overlayUpdater(value, oldValue) {
+        console.log(this.isConnected, value);
         if (value === 'close') {
             this.overlayElement
                 .on('click', () => this.close(), { passive: true, id: 'modal' });

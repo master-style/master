@@ -8,7 +8,7 @@ export default class MasterTogglable extends HTMLElement {
     hidden: boolean = true;
 
     protected hiddenUpdater(value: boolean, oldValue: boolean) {
-        if (this.isConnected && value !== oldValue) {
+        if (value !== oldValue) {
             value ? this.close() : this.open();
         }
         return { value, oldValue };
