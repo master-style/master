@@ -60,7 +60,7 @@ export const uiRoutes: Routes = [
     { path: 'breakpoint', data: { icon: 'git-commit' }, component: BreakpointComponent, resolve: { route: RouteResolver } },
     { path: 'color', data: { icon: 'droplet' }, component: ColorComponent, resolve: { route: RouteResolver } },
     {
-        path: 'components', data: { icon: 'box' }, children: [
+        path: 'components', data: { icon: 'box' }, resolve: { route: RouteResolver }, children: [
             { path: 'content', component: ContentComponent, resolve: { route: RouteResolver } },
             { path: 'control' },
             { path: 'button', component: ButtonComponent, data: { compositions: ['HTML', 'CSS', 'JS'] }, resolve: { route: RouteResolver } },

@@ -48,9 +48,14 @@
 
 :host([aria-current="page"]) {
     pointer-events: none;
+
     [part=body] {
         font-style: italic;
         color: var(--f-theme);
+    }
+
+    slot[name=head] {
+        display: none;
     }
 }
 
