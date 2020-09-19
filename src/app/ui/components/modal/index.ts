@@ -20,16 +20,7 @@ export class MasterModal extends MasterTogglable {
         },
         'm-overlay', {
             $if: this.overlay,
-            $handled: () => {
-                console.log('handled');
-            },
-            $created: (element: HTMLElement) => {
-                this.overlayElement = element
-                    .on('click', () => {
-                        if (this.overlay !== 'close') return;
-                        this.close();
-                    }, { passive: true });
-            }
+            $created: (element: HTMLElement) => this.overlayElement = element,
         }
     ]);
 
@@ -57,6 +48,19 @@ export class MasterModal extends MasterTogglable {
 
     @Attr({ reflect: false })
     overlay: string = 'static';
+
+    protected overlayHandler(value, oldValue) {
+        if (this.isConnected && value !== oldValue) {
+            console.log('幹');
+            if (value === 'close') {
+                this.overlayElement
+                    .on('click', () => this.close(), { passive: true, id: 'modal' });
+            }
+            if (oldValue === 'close') {
+                this.overlayElement.off({ id: 'modal' });
+            }
+        }
+    }
 
     overlayElement: HTMLElement;
 

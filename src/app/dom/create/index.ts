@@ -98,7 +98,11 @@ class MasterTemplate {
                         if (eachOldElement && eachNode.tag === eachOldNode.tag) {
                             if (!eachNodes[i + 1]) {
                                 eachOldNodes.splice(i + 1)
-                                    .forEach((deletedOldNode) => deletedOldNode.element.remove());
+                                    .forEach((deletedOldNode) => {
+                                        deletedOldNode.element.remove();
+                                        const removed = deletedOldNode.$removed;
+                                        if (removed) removed(deletedOldNode.element);
+                                    });
                             }
                             if (whether) {
                                 const element = eachNode.element = eachOldElement;
@@ -130,6 +134,8 @@ class MasterTemplate {
                                 if (eachNode.children) {
                                     renderNodes(eachNode.children, eachOldNode.children, element);
                                 }
+                                const updated = eachNode.$updated;
+                                if (updated) updated(element);
                             } else if (eachOldElement) {
                                 eachOldElement.remove();
                                 const removed = eachNode.$removed;
@@ -145,8 +151,6 @@ class MasterTemplate {
                             }
                             let skipChildren = false;
                             const element = eachNode.element = document.createElement(eachNode.tag);
-                            const created = eachNode.$created;
-                            if (created) created(element);
                             if (eachOldElement) {
                                 eachOldElement.before(element);
                                 eachOldNode = (eachOldElement.remove() as undefined);
@@ -170,6 +174,11 @@ class MasterTemplate {
                             if (!skipChildren && eachNode.children) {
                                 renderNodes(eachNode.children, [], element);
                             }
+
+                            const created = eachNode.$created;
+                            if (created) created(element);
+                            const updated = eachNode.$updated;
+                            if (updated) updated(element);
 
                             if (i === 0) {
                                 parent.prepend(element);
@@ -204,6 +213,8 @@ class MasterTemplate {
                     const element = eachNode.element = document.createElement(eachNode.tag);
                     const created = eachNode.$created;
                     if (created) created(element);
+                    const updated = eachNode.$updated;
+                    if (updated) updated(element);
                     let skipChildren = false;
                     if (eachNode.$html !== undefined) {
                         element.innerHTML = eachNode.$html;
