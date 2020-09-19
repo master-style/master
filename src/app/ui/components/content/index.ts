@@ -110,7 +110,6 @@ export class MasterContent extends HTMLElement {
                     if (!this.renderScrolling()) return;
                     if (!this.scrolling) {
                         this.scrolling = true;
-                        console.log('fuck');
                         this.template.render(this.shadowRoot);
                     }
                     if (this.#scrollEndTimeout) this.#scrollEndTimeout = clearTimeout(this.#scrollEndTimeout);

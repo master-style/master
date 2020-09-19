@@ -20,7 +20,13 @@ export class MasterModal extends MasterTogglable {
         },
         'm-overlay', {
             $if: this.overlay,
-            $created: (element: HTMLElement) => this.overlayElement = element
+            $created: (element: HTMLElement) => {
+                this.overlayElement = element
+                    .on('click', () => {
+                        if (this.overlay !== 'close') return;
+                        this.close();
+                    }, { passive: true });
+            }
         }
     ]);
 
