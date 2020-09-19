@@ -1,30 +1,44 @@
 @import '../../variables';
+@import '../../clickable';
 
 :host {
+    display: inline-flex;
     font-size: var(--f-xs);
     color: var(--f-fade);
 }
 
-::slotted(a) {
+[part=root] {
     white-space: nowrap;
-
-    // i {
-    //     margin-right: $xs;
-    //     font-size: 90%;
-    //     display: inline-block;
-    //     vertical-align: baseline;
-    // }
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
 }
 
-::slotted(a:hover) {
-    text-decoration: underline;
-    color: var(--f-theme);
+// i {
+//     margin-right: $xs;
+//     font-size: 90%;
+//     display: inline-block;
+//     vertical-align: baseline;
+// }
+
+@media (any-hover: hover) {
+    .touch {
+        &:hover:not([disabled]) {
+            background-color: transparent;
+
+            [part=body] {
+                text-decoration: underline;
+                color: var(--f-theme);
+            }
+        }
+    }
 }
 
-::slotted(a:not(:last-of-type)) {
+:host(:not(:last-of-type)) {
     &:after {
         content: '\0002f';
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
         margin: 0 .5rem;
         font-size: 90%;
         color: var(--f-fadest);
@@ -32,13 +46,21 @@
     }
 }
 
-::slotted(a[aria-current="page"]) {
-    cursor: default;
-    font-style: italic;
-    color: var(--f-theme);
-    text-decoration: none;
+:host([aria-current="page"]) {
+    pointer-events: none;
+    [part=body] {
+        font-style: italic;
+        color: var(--f-theme);
+    }
 }
 
-::slotted(a[disabled]) {
-    color: var(--f-fade);
+slot[name=head]::slotted(*) {
+    margin-right: $xs;
+}
+
+slot[name=head]::slotted(img) {
+    width: 1rem;
+    height: 1rem;
+    object-fit: cover;
+    border-radius: 50%;
 }

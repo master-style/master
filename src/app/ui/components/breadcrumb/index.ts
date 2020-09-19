@@ -1,4 +1,5 @@
 import { Element } from '@element';
+import MasterClickable from '../../clickable';
 import css from './index.scss';
 
 const NAME = 'breadcrumb';
@@ -7,9 +8,9 @@ const NAME = 'breadcrumb';
     tag: 'm-' + NAME,
     css
 })
-export class MasterBreadcrumb extends HTMLElement {
-    template = $(() => ['slot']);
-    render() {
-        this.template.render(this.shadowRoot);
-    }
+export class MasterBreadcrumb extends MasterClickable {
+    slotTemplate = [
+        'slot', { name: 'head' },
+        'slot', { part: 'body' }
+    ];
 }
