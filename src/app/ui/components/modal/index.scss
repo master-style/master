@@ -4,8 +4,6 @@
 :host {
     --p: #{$md};
     --r: #{$sm};
-    --head-height: 3rem;
-    --foot-height: 3rem;
     --max-width: var(--wrap-xs);
     position: fixed;
     z-index: $z-overlay;
@@ -43,18 +41,6 @@
 :host([changing]) {
     display: flex !important;
     pointer-events: none !important;
-}
-
-:host(.covered\:head) {
-    ::slotted([part=body]) {
-        --offset-top: var(--head-height);
-    }
-}
-
-:host(.covered\:foot) {
-    ::slotted([part=body]) {
-        --offset-bottom: var(--foot-height);
-    }
 }
 
 :host([origin=left]) {
@@ -163,7 +149,7 @@
 
 ::slotted([part=head]),
 ::slotted([part=foot]) {
-    position: absolute;
+    @include sticky(!important);
     display: flex;
     align-items: center;
     justify-content: center;
