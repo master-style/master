@@ -51,7 +51,7 @@ import { CheckComponent } from './components/controls/check/check.component';
 import { FigureComponent } from './decorators/figure/figure.component';
 import { ItemComponent } from './components/item/item.component';
 import { SkeletonComponent } from './components/skeleton/skeleton.component';
-import { BreadcrumbComponent } from './decorators/breadcrumb/breadcrumb.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { ContentComponent } from './components/content/content.component';
 import { OverlayComponent } from './components/overlay/overlay.component';
 

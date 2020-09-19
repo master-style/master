@@ -8,3 +8,5 @@ import './content';
 import './collapse';
 import './modal';
 import './overlay';
+import './breadcrumb';
+

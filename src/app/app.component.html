@@ -19,15 +19,15 @@
 <main part="app-body" style="padding-top: 3rem">
     <article class="prose" style="margin-bottom: 3rem">
         <!-- skeleton -->
-        <nav aria-label="breadcrumb" class="embedded" *ngIf="navigating">
+        <m-breadcrumb aria-label="breadcrumb" *ngIf="navigating">
             <a *ngFor="let each of ','.repeat(3).split(',')">
                 <m-skeleton class="animated" width="2em"></m-skeleton>
             </a>
-        </nav>
-        <nav aria-label="breadcrumb" class="embedded" *ngIf="!navigating">
+        </m-breadcrumb>
+        <m-breadcrumb aria-label="breadcrumb" *ngIf="!navigating">
             <a *ngFor="let eachRoute of appService?.currentRoute?.pathFromRoot"
                [attr.aria-current]="appService?.currentRoute === eachRoute ? 'page': null">{{ eachRoute?.routeConfig?.path || 'home' | translate }}</a>
-        </nav>
+        </m-breadcrumb>
         <h1>
             <ng-container *ngIf="navigating">
                 <m-skeleton class="animated" width="20%"></m-skeleton>
