@@ -30,9 +30,9 @@ export function Attr(options?: AttrOptions) {
             },
             set(value: any, settedAttr?: boolean) {
                 let oldValue = this[_propKey];
-                const propPreprocessor = this[propKey + 'Preprocessor'];
-                if (propPreprocessor) {
-                    const prop = propPreprocessor.call(this, value, oldValue);
+                const propParser = this[propKey + 'Parser'];
+                if (propParser) {
+                    const prop = propParser.call(this, value, oldValue);
                     if (prop) {
                         oldValue = prop.oldValue;
                         value = prop.value;
@@ -40,9 +40,9 @@ export function Attr(options?: AttrOptions) {
                 }
                 if (value === oldValue) return;
                 this[_propKey] = value;
-                const propChanged = this[propKey + 'Changed'];
-                if (propChanged) {
-                    propChanged.call(this, value, oldValue);
+                const propUpdater = this[propKey + 'Updater'];
+                if (propUpdater) {
+                    propUpdater.call(this, value, oldValue);
                 }
                 if (this.isConnected) {
                     if (options.reflect && !settedAttr) {

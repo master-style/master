@@ -49,7 +49,7 @@ export class MasterModal extends MasterTogglable {
     @Attr({ reflect: false })
     overlay: string = 'static';
 
-    protected overlayChanged(value, oldValue) {
+    protected overlayUpdater(value, oldValue) {
         if (value === 'close') {
             this.overlayElement
                 .on('click', () => this.close(), { passive: true, id: 'modal' });

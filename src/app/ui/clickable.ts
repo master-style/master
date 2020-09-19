@@ -56,7 +56,7 @@ export default class MasterClickable extends HTMLElement {
     @Attr()
     target: string;
 
-    protected typeChanged(value, oldValue) {
+    protected typeUpdater(value, oldValue) {
         if (value === 'submit') {
             this.on('click', () => {
                 this.closest('FORM').dispatchEvent(new Event('submit'));

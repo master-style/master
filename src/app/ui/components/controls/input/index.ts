@@ -34,7 +34,7 @@ export class MasterInput extends MasterControl {
         'm-label', { $text: this.label }
     ]);
 
-    protected valuePreprocessor(value: any, oldValue: any) {
+    protected valueParser(value: any, oldValue: any) {
         if (this.type === 'number') {
             if (value === '') {
                 value = null;
@@ -45,7 +45,7 @@ export class MasterInput extends MasterControl {
         return { value, oldValue };
     }
 
-    protected valueChanged(value) {
+    protected valueUpdater(value) {
         this.empty = value === null || value === undefined || value === '';
         this.controlTemplate.nodes[0].element.value = value ?? null;
     }
@@ -59,7 +59,7 @@ export class MasterInput extends MasterControl {
             .on('input', '[part=body]', (event: any) => {
                 this.value = event.target.value;
             }, { id: this, passive: true });
-        this.updateValue(this.value);
+        this.valueUpdater(this.value);
     }
 
     onDisconnected() {
