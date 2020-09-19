@@ -79,7 +79,6 @@ export class MasterModal extends MasterTogglable {
             const x =
                 triggerRect.left - wrapRect.left
                 + (triggerRect.width - wrapRect.width) / 2;
-            console.log(triggerRect.left, triggerRect.width / 2, wrapRect.left / scale / 2, scale);
             const y =
                 triggerRect.top
                 - wrapRect.top
