@@ -28,7 +28,7 @@ export function Attr(options?: AttrOptions) {
             get() {
                 return this[_propKey];
             },
-            set(value: any, fromAttr?: boolean) {
+            set(value: any, settedAttr?: boolean) {
                 let oldValue = this[_propKey];
                 const propHandler = this[propKey + 'Handler'];
                 if (propHandler) {
@@ -41,14 +41,18 @@ export function Attr(options?: AttrOptions) {
                 if (value === oldValue) return;
                 this[_propKey] = value;
                 if (this.isConnected) {
-                    if (options.reflect && !fromAttr) {
+                    if (options.reflect && !settedAttr) {
                         if (options.type === 'Boolean') {
                             this.toggleAttribute(attrKey, !!value);
                         } else {
                             this.setAttribute(attrKey, value);
                         }
                     }
-                    if (options.render && this.render && this.ready) {
+                    if (
+                        this.ready
+                        && options.render
+                        && this.render
+                    ) {
                         this.render();
                     }
                 }

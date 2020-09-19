@@ -49,7 +49,7 @@ export class MasterModal extends MasterTogglable {
     @Attr({ reflect: false })
     overlay: string = 'static';
 
-    protected overlayHandler(value, oldValue) {
+    protected overlayPreprocessor(value, oldValue) {
         if (this.isConnected && value !== oldValue) {
             console.log('幹');
             if (value === 'close') {

@@ -34,7 +34,7 @@ export class MasterInput extends MasterControl {
         'm-label', { $text: this.label }
     ]);
 
-    protected valueHandler(value: any, oldValue: any) {
+    protected valuePreprocessor(value: any, oldValue: any) {
         if (this.type === 'number') {
             if (value === '') {
                 value = null;
