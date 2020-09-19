@@ -14,16 +14,17 @@ export class MasterModal extends MasterTogglable {
     private trigger: HTMLElement;
 
     template = $(() => [
-        'm-content', {
-            'scroll-y': true, part: 'root',
-            $created: (element: HTMLElement) => this.wrap = element
-        }, [
-            'slot'
-        ],
         'm-overlay', {
             $if: this.overlay,
             $created: (element: HTMLElement) => this.overlayElement = element,
-        }
+        },
+        'm-content', {
+            'scroll-y': true,
+            part: 'root',
+            $created: (element: HTMLElement) => this.root = element
+        }, [
+            'slot',
+        ],
     ]);
 
     render() {
@@ -34,10 +35,11 @@ export class MasterModal extends MasterTogglable {
         this.template.remove();
     }
 
-    wrap: any;
+    root: any;
+    origin: any;
 
     @Attr()
-    origin: string;
+    placement: string;
 
     @Attr({ reflect: false })
     pushing: string;
@@ -73,28 +75,30 @@ export class MasterModal extends MasterTogglable {
             duration: this.duration
         };
 
-        const wrap = this.wrap;
+        const root = this.root;
 
-        if (this.origin === 'trigger' && this.trigger) {
+        if (this.placement === 'origin' && this.trigger) {
 
             if (!this.hidden) {
                 this.trigger.toggleClass('invisible', true);
             }
 
-            this.wrap.disable();
-            this.wrap.to({ x: 0, y: 0 }, this.duration);
+            this.root.disable();
+            this.root.to({ x: 0, y: 0 }, this.duration);
 
             const
                 triggerRect = this.trigger.getBoundingClientRect(),
-                wrapRect = wrap.getBoundingClientRect();
+                rootRect = this.root.getBoundingClientRect(),
+                wrapRect = root.getBoundingClientRect();
             const scale = triggerRect.width / wrapRect.width;
             const x =
                 triggerRect.left - wrapRect.left
                 + (triggerRect.width - wrapRect.width) / 2;
             const y =
                 triggerRect.top
-                - wrapRect.top
+                - rootRect.top
                 + (triggerRect.height - wrapRect.height) / 2;
+
             keyframes = [
                 {
                     transform: `translate(${x + PX}, ${y + PX}) scale(${scale})`,
@@ -108,12 +112,12 @@ export class MasterModal extends MasterTogglable {
                 }
             ];
         } else {
-            if (!this.origin || this.origin === 'trigger') {
+            if (!this.placement || this.placement === 'origin') {
                 keyframes = [
                     { opacity: 0 },
                     { opacity: 1 }
                 ];
-            } else if (this.origin === 'center') {
+            } else if (this.placement === 'center') {
                 keyframes = [
                     {
                         transform: `scale(${this.hidden ? .9 : 1.1})`,
@@ -129,30 +133,30 @@ export class MasterModal extends MasterTogglable {
                 let dir;
                 let offset;
                 let pushingOffset;
-                switch (this.origin) {
+                switch (this.placement) {
                     case 'right':
                         dir = 'X';
                         offset = '100%';
                         if (this.pushing)
-                            pushingOffset = -wrap.offsetWidth / 3;
+                            pushingOffset = -root.offsetWidth / 3;
                         break;
                     case 'left':
                         dir = 'X';
                         offset = '-100%';
                         if (this.pushing)
-                            pushingOffset = wrap.offsetWidth / 3;
+                            pushingOffset = root.offsetWidth / 3;
                         break;
                     case 'bottom':
                         dir = 'Y';
                         offset = '100%';
                         if (this.pushing)
-                            pushingOffset = -wrap.offsetHeight / 3;
+                            pushingOffset = -root.offsetHeight / 3;
                         break;
                     case 'top':
                         dir = 'Y';
                         offset = '-100%';
                         if (this.pushing)
-                            pushingOffset = wrap.offsetHeight / 3;
+                            pushingOffset = root.offsetHeight / 3;
                         break;
                 }
 
@@ -200,7 +204,7 @@ export class MasterModal extends MasterTogglable {
             );
         }
 
-        this.animation = this.wrap.animate(keyframes, options);
+        this.animation = this.root.animate(keyframes, options);
         this.animations.push(this.animation);
         this.animation.onfinish = () => {
             this.toggleAttribute('changing', false);
@@ -210,7 +214,7 @@ export class MasterModal extends MasterTogglable {
                 this.trigger.toggleClass('invisible', false);
             }
             if (!this.hidden) {
-                this.wrap.enable();
+                this.root.enable();
             }
         };
         await this.animation.finished;

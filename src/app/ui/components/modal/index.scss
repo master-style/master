@@ -17,7 +17,6 @@
     flex-direction: column;
     flex-wrap: nowrap;
     contain: strict;
-    pointer-events: none;
 
     // &.long {
     //     padding-top: 0;
@@ -42,7 +41,7 @@
     pointer-events: none !important;
 }
 
-:host([origin=left]) {
+:host([placement=left]) {
     --p: 0px;
     --r: 0px;
 
@@ -54,7 +53,7 @@
     }
 }
 
-:host([origin=right]) {
+:host([placement=right]) {
     --p: 0px;
     --r: 0px;
 
@@ -64,7 +63,7 @@
     }
 }
 
-:host([origin=top]) {
+:host([placement=top]) {
     --p: 0px;
 
     [part=root] {
@@ -76,7 +75,7 @@
     }
 }
 
-:host([origin=bottom]) {
+:host([placement=bottom]) {
     --p: 0px;
 
     [part=root] {
@@ -132,8 +131,6 @@
     flex-direction: column;
     width: 100%;
     max-width: var(--max-width);
-    max-height: 100%;
-    pointer-events: auto;
 }
 
 ::slotted([part=body]) {
@@ -146,6 +143,7 @@
 ::slotted([part=head]),
 ::slotted([part=foot]) {
     @include blurBg(var(--themeRgb), .9);
+    @include sticky('');
     display: flex;
     align-items: center;
     justify-content: center;
@@ -173,10 +171,6 @@
     bottom: 0;
     border-top-right-radius: 0;
     border-top-left-radius: 0;
-}
-
-m-overlay {
-    pointer-events: auto;
 }
 
 @include below(sm) {

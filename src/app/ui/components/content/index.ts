@@ -35,12 +35,12 @@ export class MasterContent extends HTMLElement {
     #thumb: any = {};
 
     template = $(() => [
-        'div', {
+        'slot', {
             part: 'root',
             $created: (element: HTMLElement) => {
                 this.wrap = element;
             }
-        }, ['slot'],
+        },
         'm-bar', {
             part: 'x',
             hidden: !this.scrolling,
