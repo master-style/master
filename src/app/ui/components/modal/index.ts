@@ -49,16 +49,13 @@ export class MasterModal extends MasterTogglable {
     @Attr({ reflect: false })
     overlay: string = 'static';
 
-    protected overlayPreprocessor(value, oldValue) {
-        if (this.isConnected && value !== oldValue) {
-            console.log('幹');
-            if (value === 'close') {
-                this.overlayElement
-                    .on('click', () => this.close(), { passive: true, id: 'modal' });
-            }
-            if (oldValue === 'close') {
-                this.overlayElement.off({ id: 'modal' });
-            }
+    protected overlayChanged(value, oldValue) {
+        if (value === 'close') {
+            this.overlayElement
+                .on('click', () => this.close(), { passive: true, id: 'modal' });
+        }
+        if (oldValue === 'close') {
+            this.overlayElement.off({ id: 'modal' });
         }
     }
 

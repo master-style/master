@@ -7,7 +7,7 @@ export default class MasterTogglable extends HTMLElement {
     @Attr()
     hidden: boolean = true;
 
-    protected hiddenPreprocessor(value: boolean, oldValue: boolean) {
+    protected hiddenChanged(value: boolean, oldValue: boolean) {
         if (this.isConnected && value !== oldValue) {
             value ? this.close() : this.open();
         }
@@ -83,7 +83,7 @@ export default class MasterTogglable extends HTMLElement {
         await (whether ? this.open() : this.close());
     }
 
-    protected toggleEventPreprocessor(value: any, oldValue: any) {
+    protected toggleEventChanged(value: any, oldValue: any) {
         if (value !== oldValue) {
             this.offToggleEvent(oldValue);
             this.onToggleEvent(value);

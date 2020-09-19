@@ -42,13 +42,10 @@ export class MasterInput extends MasterControl {
                 value = isNaN(+value) ? value : +value;
             }
         }
-        if (this.isConnected && value !== oldValue) {
-            this.updateValue(value);
-        }
         return { value, oldValue };
     }
 
-    protected updateValue(value: any) {
+    protected valueChanged(value) {
         this.empty = value === null || value === undefined || value === '';
         this.controlTemplate.nodes[0].element.value = value ?? null;
     }
