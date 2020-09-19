@@ -77,15 +77,13 @@ export class MasterModal extends MasterTogglable {
                 wrapRect = wrap.getBoundingClientRect();
             const scale = triggerRect.width / wrapRect.width;
             const x =
-                triggerRect.left
-                + triggerRect.width / 2
-                - wrapRect.left
-                - wrapRect.width / 2;
+                triggerRect.left - wrapRect.left
+                + (triggerRect.width - wrapRect.width) / 2;
+            console.log(triggerRect.left, triggerRect.width / 2, wrapRect.left / scale / 2, scale);
             const y =
                 triggerRect.top
-                + triggerRect.height / 2
-                - wrapRect.top / scale / 2
-                - wrapRect.height / 2;
+                - wrapRect.top
+                + (triggerRect.height - wrapRect.height) / 2;
             keyframes = [
                 {
                     transform: `translate(${x + PX}, ${y + PX}) scale(${scale})`,
@@ -98,7 +96,6 @@ export class MasterModal extends MasterTogglable {
                     opacity: 1
                 }
             ];
-            console.log(keyframes);
         } else {
             if (!this.origin || this.origin === 'trigger') {
                 keyframes = [

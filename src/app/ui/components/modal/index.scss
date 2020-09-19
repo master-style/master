@@ -42,6 +42,7 @@
 
 :host([changing]) {
     display: flex !important;
+    pointer-events: none!important;
 }
 
 :host([origin=trigger]) {
