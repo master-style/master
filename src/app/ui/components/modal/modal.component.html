@@ -5,45 +5,8 @@
          overlay="close"
          placement="origin"
          hidden>
-    <figure class="embedded by:1x1">
-        <img src="https://photo.eyescream.com.tw/photo/photo/ow/11030250-B51-06.jpg" alt="">
-    </figure>
-    <div part="body">
-        <article class="prose">
-            <h1>標題</h1>
-            <h2>次標題</h2>
-            <p>內文</p>
-            <p>內文</p>
-            <p>內文</p>
-            <p>內文</p>
-            <p>內文</p>
-            <p>內文</p>
-            <p>內文</p>
-            <p>內文</p>
-            <p>內文</p>
-            <p>內文</p>
-            <p>內文</p>
-            <p>內文</p>
-            <p>內文</p>
-            <p>內文</p>
-            <p>內文</p>
-            <p>內文</p>
-        </article>
-        <m-button toggle-modal="#modal">close</m-button>
-    </div>
-</m-modal>
-
-<m-modal id="modal-drawer"
-         close-button
-         overlay="close"
-         placement="right"
-         pushing="#app-side"
-         class="covered:head covered:foot"
-         hidden>
-    <div part="head">
-        title
-    </div>
-    <div part="body">
+    <m-content part="body"
+               scroll-y>
         <figure class="embedded by:1x1">
             <img src="https://photo.eyescream.com.tw/photo/photo/ow/11030250-B51-06.jpg" alt="">
         </figure>
@@ -67,7 +30,47 @@
             <p>內文</p>
             <p>內文</p>
         </article>
+        <m-button toggle-modal="#modal">close</m-button>
+    </m-content>
+</m-modal>
+
+<m-modal id="modal-drawer"
+         close-button
+         overlay="close"
+         placement="left"
+         pushing="#app-side"
+         class="covered:head covered:foot"
+         hidden>
+    <div part="head">
+        title
     </div>
+    <m-content part="body"
+               scroll-y
+               style="--offset-top: 3rem; --offset-bottom: 3rem;">
+        <figure class="embedded by:1x1">
+            <img src="https://photo.eyescream.com.tw/photo/photo/ow/11030250-B51-06.jpg" alt="">
+        </figure>
+        <article class="prose">
+            <h1>標題</h1>
+            <h2>次標題</h2>
+            <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
+        </article>
+    </m-content>
     <div part="foot">
         title
     </div>

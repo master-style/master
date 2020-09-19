@@ -5,6 +5,7 @@ figure.embedded {
     width: 100%;
     margin: 0;
     background-color: rgba(var(--bg-skeletonRgb), .05);
+    contain: content;
 
     &:after {
         contain: strict;

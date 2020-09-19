@@ -6,7 +6,6 @@
     --offset-left: 0px;
     --offset-right: 0px;
     --bar-p: 4px;
-    --bar-position: absolute;
     position: relative;
     contain: style;
     width: 100%;
@@ -102,15 +101,14 @@ slot {
     height: 100%;
     box-sizing: border-box;
     contain: style;
-    padding-top: var(--offset-top);
-    padding-bottom: var(--offset-bottom);
     margin: auto;
+    padding: var(--offset-top) var(--offset-right) var(--offset-bottom) var(--offset-left)
 }
 
 m-bar {
-    position: var(--bar-position);
+    position: absolute;
     display: block;
-    z-index: $z-overlay;
+    z-index: $z-abs;
     pointer-events: none !important;
     box-sizing: border-box;
     contain: content;
@@ -129,9 +127,10 @@ m-thumb {
     display: block;
     border-radius: 2px;
     box-sizing: border-box;
-    background-color: var(--b-fade);
+    background-color: var(--f-fadest);
     contain: strict;
     will-change: transform;
+    opacity: .5;
 
     // &:hover {
     //     width: 6px;

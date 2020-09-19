@@ -17,6 +17,7 @@
     flex-direction: column;
     flex-wrap: nowrap;
     contain: strict;
+    padding: var(--p)
 
     // &.long {
     //     padding-top: 0;
@@ -121,8 +122,7 @@
 // }
 
 [part=root] {
-    --offset-top: var(--p);
-    --offset-bottom: var(--p);
+    max-width: var(--max-width);
     position: relative;
     contain: style;
     display: flex;
@@ -130,20 +130,25 @@
     margin: auto;
     flex-direction: column;
     width: 100%;
-    max-width: var(--max-width);
+    max-height: 100%;
+    border-radius: var(--r);
+    overflow: hidden;
+    background-color: var(--theme);
+    mask-image: radial-gradient(circle, black, black);
+    -webkit-mask-image: -webkit-radial-gradient(circle, black, black);
 }
 
 ::slotted([part=body]) {
+    display: block;
     width: 100%;
     min-height: 0;
     flex: 1 1 auto;
-    background-color: var(--theme);
 }
 
 ::slotted([part=head]),
 ::slotted([part=foot]) {
     @include blurBg(var(--themeRgb), .9);
-    @include sticky('');
+    position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -151,10 +156,6 @@
     width: 100%;
     flex: 0 0 auto;
     min-height: 3rem;
-    border-radius: var(--r);
-    mask-image: radial-gradient(circle, black, black);
-    -webkit-mask-image: -webkit-radial-gradient(circle, black, black);
-    overflow: hidden;
 }
 
 ::slotted([part=head]) {

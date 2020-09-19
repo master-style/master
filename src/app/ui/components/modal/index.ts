@@ -18,13 +18,10 @@ export class MasterModal extends MasterTogglable {
             $if: this.overlay,
             $created: (element: HTMLElement) => this.overlayElement = element,
         },
-        'm-content', {
-            'scroll-y': true,
+        'slot', {
             part: 'root',
             $created: (element: HTMLElement) => this.root = element
-        }, [
-            'slot',
-        ],
+        }
     ]);
 
     render() {
@@ -69,6 +66,7 @@ export class MasterModal extends MasterTogglable {
     protected async toggling() {
 
         let keyframes: any[];
+        let content;
 
         const options = {
             easing: this.easing,
@@ -83,8 +81,12 @@ export class MasterModal extends MasterTogglable {
                 this.trigger.toggleClass('invisible', true);
             }
 
-            this.root.disable();
-            this.root.to({ x: 0, y: 0 }, this.duration);
+            content = this.querySelector('m-content');
+
+            if (content) {
+                content.disable();
+                content.to({ x: 0, y: 0 }, this.duration);
+            }
 
             const
                 triggerRect = this.trigger.getBoundingClientRect(),
@@ -213,8 +215,8 @@ export class MasterModal extends MasterTogglable {
             if (this.hidden && this.trigger) {
                 this.trigger.toggleClass('invisible', false);
             }
-            if (!this.hidden) {
-                this.root.enable();
+            if (content && !this.hidden) {
+                content.enable();
             }
         };
         await this.animation.finished;
