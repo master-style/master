@@ -43,8 +43,8 @@
 }
 
 :host([origin=left]) {
-    --p: 0;
-    --r: 0;
+    --p: 0px;
+    --r: 0px;
 
     [part=root] {
         margin-left: 0;
@@ -55,8 +55,8 @@
 }
 
 :host([origin=right]) {
-    --p: 0;
-    --r: 0;
+    --p: 0px;
+    --r: 0px;
 
     [part=root] {
         margin-right: 0;
@@ -65,7 +65,7 @@
 }
 
 :host([origin=top]) {
-    --p: 0;
+    --p: 0px;
 
     [part=root] {
         margin-top: 0;
@@ -77,7 +77,7 @@
 }
 
 :host([origin=bottom]) {
-    --p: 0;
+    --p: 0px;
 
     [part=root] {
         margin-bottom: 0;
@@ -122,6 +122,8 @@
 // }
 
 [part=root] {
+    --offset-top: var(--p);
+    --offset-bottom: var(--p);
     position: relative;
     contain: style;
     display: flex;
@@ -132,8 +134,6 @@
     max-width: var(--max-width);
     max-height: 100%;
     pointer-events: auto;
-    --offset-top: var(--p);
-    --offset-bottom: var(--p);
 }
 
 ::slotted([part=body]) {
@@ -145,7 +145,6 @@
 
 ::slotted([part=head]),
 ::slotted([part=foot]) {
-    @include sticky( !important);
     @include blurBg(var(--themeRgb), .9);
     display: flex;
     align-items: center;
@@ -154,25 +153,26 @@
     width: 100%;
     flex: 0 0 auto;
     min-height: 3rem;
+    border-radius: var(--r);
     mask-image: radial-gradient(circle, black, black);
     -webkit-mask-image: -webkit-radial-gradient(circle, black, black);
-    border-radius: var(--r);
+    overflow: hidden;
 }
 
 ::slotted([part=head]) {
     padding: 0 $sm;
-    top: calc(var(--p) * -1);
+    top: 0;
     text-align: center;
     text-align-last: center;
-    border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
 }
 
 ::slotted([part=foot]) {
     width: 100%;
-    bottom: calc(var(--p) * -1);
-    border-top-left-radius: 0;
+    bottom: 0;
     border-top-right-radius: 0;
+    border-top-left-radius: 0;
 }
 
 m-overlay {

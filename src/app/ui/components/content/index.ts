@@ -35,11 +35,12 @@ export class MasterContent extends HTMLElement {
     #thumb: any = {};
 
     template = $(() => [
-        'slot', {
+        'div', {
+            part: 'root',
             $created: (element: HTMLElement) => {
                 this.wrap = element;
             }
-        },
+        }, ['slot'],
         'm-bar', {
             part: 'x',
             hidden: !this.scrolling,
@@ -103,6 +104,8 @@ export class MasterContent extends HTMLElement {
 
     enable() {
         if (this.#enabled) return;
+        this.#enabled = true;
+        this.scrolling = false;
         this.wrap
             .on('scroll', (event: any) => {
                 if (!this.renderScrolling()) return;
@@ -134,6 +137,7 @@ export class MasterContent extends HTMLElement {
 
     disable() {
         if (!this.#enabled) return;
+        this.#enabled = false;
         this.wrap.off({ id: 'scroll' });
         window.off({ id: this });
     }

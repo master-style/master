@@ -20,7 +20,7 @@
 
 :host([scroll-y]),
 :host([scroll-x]) {
-    slot {
+    [part=root] {
         will-change: scroll-position, -webkit-mask-image;
         -webkit-overflow-scrolling: touch;
         -ms-overflow-style: none;
@@ -33,7 +33,7 @@
 }
 
 :host([scroll-x]) {
-    slot {
+    [part=root] {
         overflow-y: hidden;
         overflow-x: auto;
         overscroll-behavior-x: contain;
@@ -62,7 +62,7 @@
 
 :host([scroll-y]) {
 
-    slot {
+    [part=root] {
         overflow-y: auto;
         overflow-x: hidden;
         overscroll-behavior-y: contain;
@@ -83,7 +83,7 @@
 }
 
 :host([scroll-x][scroll-y]) {
-    slot {
+    [part=root] {
         overflow: auto;
         touch-action: manipulation;
     }
@@ -95,7 +95,7 @@
 }
 
 
-slot {
+[part=root] {
     display: block;
     width: 100%;
     height: 100%;
@@ -109,7 +109,7 @@ m-bar {
     position: absolute;
     display: block;
     z-index: $z-overlay;
-    pointer-events: none!important;
+    pointer-events: none !important;
     box-sizing: border-box;
     contain: content;
     opacity: 1;
