@@ -95,6 +95,7 @@ export class AppComponent implements OnInit {
         // Listen for changes to the prefers-color-scheme media query
         prefersDark.addListener((e) => this.toggleTheme(e.matches));
         // Called by the media query to check/uncheck the toggle
+
     }
 
     toggleTheme(isDark) {

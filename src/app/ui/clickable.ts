@@ -7,7 +7,6 @@ export default class MasterClickable extends HTMLElement {
     slotTemplate: (elementToken | (() => elementToken[]))[];
 
     template = $(() => {
-        console.log(this.href);
         const tag = ((this.href || this.type === 'anchor') && !this.disabled)
             ? 'a'
             : (this.type || this.disabled) ? 'button' : null;
