@@ -90,16 +90,14 @@ export class MasterModal extends MasterTogglable {
 
             const
                 triggerRect = this.trigger.getBoundingClientRect(),
-                rootRect = this.root.getBoundingClientRect(),
-                wrapRect = root.getBoundingClientRect();
-            const scale = triggerRect.width / wrapRect.width;
+                rootRect = this.root.getBoundingClientRect();
+            const scale = triggerRect.width / rootRect.width;
             const x =
-                triggerRect.left - wrapRect.left
-                + (triggerRect.width - wrapRect.width) / 2;
+                triggerRect.left - rootRect.left
+                + (triggerRect.width - rootRect.width) / 2;
             const y =
-                triggerRect.top
-                - rootRect.top
-                + (triggerRect.height - wrapRect.height) / 2;
+                triggerRect.top - rootRect.top
+                + (triggerRect.height - rootRect.height) / 2;
 
             keyframes = [
                 {
@@ -109,7 +107,7 @@ export class MasterModal extends MasterTogglable {
                 },
                 {
                     transform: 'translate(0,0) scale(1)',
-                    height: wrapRect.height + PX,
+                    height: rootRect.height + PX,
                     opacity: 1
                 }
             ];
