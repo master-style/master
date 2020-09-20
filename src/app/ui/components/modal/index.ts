@@ -55,7 +55,7 @@ export class MasterModal extends MasterTogglable {
     closeOnScroll: boolean;
 
     @Attr({
-        updater: (modal: MasterModal, value, oldValue) => {
+        updater(modal: MasterModal, value, oldValue) {
             if (
                 value && oldValue ||
                 !value && oldValue
@@ -75,7 +75,7 @@ export class MasterModal extends MasterTogglable {
 
     @Attr({
         reflect: false,
-        updater: (modal: MasterModal, value: string, oldValue: string) => {
+        updater(modal: MasterModal, value: string, oldValue: string) {
             if (oldValue === 'close') {
                 modal.overlayElement.off({ id: 'modal' });
             }

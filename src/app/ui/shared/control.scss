@@ -46,7 +46,7 @@
     --f-size: var(--f-sm);
     --b-width: 1px;
     --b-color: var(--b-fade);
-    --py: .9375rem;
+    --py: .90625rem;
     --px: 1rem;
     --size: 3rem;
     --label-px: .25rem;
@@ -71,14 +71,14 @@
 }
 
 :host(.sm) {
-    --py: .6875rem;
+    --py: 0.65625rem;
     --label-px: .25rem;
     --size: 2.5rem;
 }
 
 :host(.lg) {
     --f-size: var(--f-md);
-    --py: 1.03125rem;
+    --py: 1rem;
     --px: 1.2rem;
     --size: 3.5rem;
     --label-px: .3125rem;
@@ -320,7 +320,7 @@ m-badge {
 
 ::slotted([part=head]),
 ::slotted([part=foot]) {
-    display: flex!important;
+    display: flex !important;
     user-select: none;
     white-space: nowrap;
     align-items: center;

@@ -21,6 +21,7 @@ export class MasterTextarea extends MasterControl {
             required: this.required,
             readonly: this.readOnly,
             rows: this.rows,
+            value: this.value,
             $created: (element: HTMLElement) => this.body = element
         }
     ]);
@@ -34,6 +35,30 @@ export class MasterTextarea extends MasterControl {
         ],
         'label', { $text: this.label }
     ]);
+    @Attr()
+    placeholder: string;
+
+    @Attr()
+    label: string;
+
+    @Attr()
+    type: string;
+
+    @Attr({ render: false })
+    expanded: boolean;
+
+    @Attr({
+        reflect: false,
+        render: false,
+        updater(textarea: MasterTextarea, value: any, oldValue: any) {
+            textarea.empty = value === null || value === undefined || value === '';
+            textarea.body.value = value ?? null;
+        }
+    })
+    value: any;
+
+    @Attr({ observe: false, render: false })
+    empty: boolean;
 
     @Attr()
     autocomplete: string;
@@ -46,6 +71,17 @@ export class MasterTextarea extends MasterControl {
 
     @Attr()
     rows: number = 1;
+
+    onConnected() {
+        this
+            .on('click', (event: any) => {
+                if (event.target === this.body) return;
+                this.body.focus();
+            }, { id: this.elementName, passive: true })
+            .on('input', '[part=body]', (event: any) => {
+                this.value = event.target.value;
+            }, { id: this.elementName, passive: true });
+    }
 
     render() {
         this.bodyTemplate.render(this);

@@ -7,7 +7,7 @@ export default class MasterTogglable extends HTMLElement {
     protected ready = false;
 
     @Attr({
-        updater: (togglable: MasterTogglable, value: boolean, oldValue: boolean) => {
+        updater(togglable: MasterTogglable, value: boolean, oldValue: boolean) {
             value ? togglable.close() : togglable.open();
         }
     })
@@ -24,7 +24,7 @@ export default class MasterTogglable extends HTMLElement {
 
     @Attr({
         reflect: false,
-        updater: (togglable: MasterTogglable, value: any, oldValue: any) => {
+        updater(togglable: MasterTogglable, value: any, oldValue: any) {
             if (
                 !value && oldValue ||
                 value && oldValue

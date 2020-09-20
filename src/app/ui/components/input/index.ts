@@ -37,6 +37,40 @@ export class MasterInput extends MasterControl {
     ]);
 
     @Attr()
+    placeholder: string;
+
+    @Attr()
+    label: string;
+
+    @Attr()
+    type: string;
+
+    @Attr({ render: false })
+    expanded: boolean;
+
+    @Attr({
+        parser(input: MasterInput, value: any, oldValue: any) {
+            if (input.type === 'number') {
+                if (value === '') {
+                    value = null;
+                } else {
+                    value = isNaN(+value) ? value : +value;
+                }
+            }
+            return { value, oldValue };
+        },
+        updater(input: MasterInput, value: any) {
+            console.log('check value');
+            input.empty = value === null || value === undefined || value === '';
+            input.body.value = value ?? null;
+        }
+    })
+    value: any;
+
+    @Attr({ observe: false, render: false })
+    empty: boolean;
+
+    @Attr()
     autocomplete: string;
 
     @Attr()
@@ -59,6 +93,17 @@ export class MasterInput extends MasterControl {
 
     @Attr()
     step: number;
+
+    onConnected() {
+        this
+            .on('click', (event: any) => {
+                if (event.target === this.body) return;
+                this.body.focus();
+            }, { id: this.elementName, passive: true })
+            .on('input', '[part=body]', (event: any) => {
+                this.value = event.target.value;
+            }, { id: this.elementName, passive: true });
+    }
 
     render() {
         this.bodyTemplate.render(this);

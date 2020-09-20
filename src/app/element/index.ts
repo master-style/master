@@ -23,13 +23,13 @@ export function Element(options: ElementOptions) {
     options = { ...DEFAULT_ELEMENT_OPTION, ...options };
     return function (constructor: any) {
         const prototype = constructor.prototype;
-        const attrOptionsMap = constructor.attrOptionsMap;
+        const allAttrOptions = constructor.allAttrOptions;
         const onConnected = prototype.onConnected;
         const onDisconnected = prototype.onDisconnected;
         const onAttrChanged = prototype.onAttrChanged;
         prototype.attributeChangedCallback = function (attrKey, oldValue, value) {
             if (value === oldValue) return;
-            const eachAttrOptions = attrOptionsMap[attrKey];
+            const eachAttrOptions = allAttrOptions[attrKey];
             const type = eachAttrOptions.type;
             value = parseAttrValue(value, type);
             oldValue = parseAttrValue(oldValue, type);
@@ -38,11 +38,11 @@ export function Element(options: ElementOptions) {
         };
         prototype.connectedCallback = function () {
             this.ready = false; // prevent rendering many times
-            if (attrOptionsMap) {
+            if (allAttrOptions) {
                 // 取得當前 attr 與 prop 比對，避免重複設置相同 attr
                 const attributes = this.attributes;
-                for (const eachAttrKey in attrOptionsMap) {
-                    const eachAttrOptions: AttrOptions = attrOptionsMap[eachAttrKey];
+                for (const eachAttrKey in allAttrOptions) {
+                    const eachAttrOptions: AttrOptions = allAttrOptions[eachAttrKey];
                     const eachpropKey = eachAttrOptions.propKey;
                     const eachPropValue = this['_' + eachpropKey];
                     const eachAttr = attributes[eachAttrKey];
@@ -83,13 +83,15 @@ export function Element(options: ElementOptions) {
                 }
             }
             if (this.render) this.render();
-            for (const eachAttrKey in attrOptionsMap) {
-                const eachAttrOptions: AttrOptions = attrOptionsMap[eachAttrKey];
-                const eachUpdater = eachAttrOptions.updater;
-                const eachpropKey = eachAttrOptions.propKey;
-                const eachPropValue = this['_' + eachpropKey];
-                if (eachUpdater) {
-                    eachUpdater(this, eachPropValue);
+            if (allAttrOptions) {
+                for (const eachAttrKey in allAttrOptions) {
+                    const eachAttrOptions: AttrOptions = allAttrOptions[eachAttrKey];
+                    const eachPropKey = eachAttrOptions.propKey;
+                    const eachPropValue = this['_' + eachPropKey];
+                    const eachUpdater = eachAttrOptions.updater;
+                    if (eachUpdater) {
+                        eachUpdater(this, eachPropValue);
+                    }
                 }
             }
             this.ready = true;

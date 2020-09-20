@@ -23,8 +23,8 @@ export function Attr(options?: AttrOptions) {
             }
             constructor.observedAttributes.push(attrKey);
         }
-        if (!constructor.attrOptionsMap) {
-            constructor.attrOptionsMap = {};
+        if (!constructor.allAttrOptions) {
+            constructor.allAttrOptions = {};
         }
         const descriptor = {
             get() {
@@ -59,7 +59,7 @@ export function Attr(options?: AttrOptions) {
             }
         };
         options.setProp = descriptor.set;
-        constructor.attrOptionsMap[attrKey] = options;
+        constructor.allAttrOptions[attrKey] = options;
         return descriptor;
     };
 }

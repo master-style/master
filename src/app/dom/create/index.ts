@@ -129,10 +129,16 @@ class MasterTemplate {
                                         }
                                     }
                                 }
-                                if (eachNode.$html !== undefined) {
+                                if (
+                                    eachNode.$html !== undefined &&
+                                    eachNode.$html !== eachOldNode.$html
+                                ) {
                                     element.innerHTML = eachNode.$html;
                                     skipChildren = true;
-                                } else if (eachNode.$text !== undefined) {
+                                } else if (
+                                    eachNode.$text !== undefined &&
+                                    eachNode.$text !== eachOldNode.$text
+                                ) {
                                     element.textContent = eachNode.$text;
                                 }
                                 if (!skipChildren && eachNode.children) {

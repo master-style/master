@@ -1,6 +1,7 @@
 import './button';
 import './textarea';
 import './input';
+import './check';
 import './skeleton';
 import './chip';
 import './card';

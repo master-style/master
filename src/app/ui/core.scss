@@ -90,6 +90,10 @@ i {
     display: none;
 }
 
+::-ms-check {
+    display: none;
+}
+
 ::-webkit-inner-spin-button,
 ::-webkit-outer-spin-button {
     display: none;
