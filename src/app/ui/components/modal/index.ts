@@ -23,7 +23,12 @@ export class MasterModal extends MasterTogglable {
             $created: (element: HTMLElement) => this.root = element
         }, [
             'slot',
-            'm-button', { part: 'close', class: 'round xs', $if: this.closeButton }, [
+            'm-button', {
+                part: 'close',
+                class: 'round xs',
+                $if: this.closeButton,
+                $created: (element: HTMLElement) => this.closeElement = element,
+            }, [
                 'm-icon', { name: this.closeButton, direction: 'left' }
             ]
         ]
@@ -59,17 +64,30 @@ export class MasterModal extends MasterTogglable {
     overlay: string = 'static';
 
     protected overlayUpdater(value, oldValue) {
-        console.log(this.isConnected, value);
+        if (oldValue === 'close') {
+            this.overlayElement.off({ id: 'modal' });
+        }
         if (value === 'close') {
             this.overlayElement
                 .on('click', () => this.close(), { passive: true, id: 'modal' });
         }
-        if (oldValue === 'close') {
-            this.overlayElement.off({ id: 'modal' });
+    }
+
+    protected closeButtonUpdater(value, oldValue) {
+        if (
+            value && oldValue ||
+            !value && oldValue
+        ) {
+            this.closeElement.off({ id: 'modal' });
+        }
+        if (value) {
+            this.closeElement
+                .on('click', () => this.close(), { passive: true, id: 'modal' });
         }
     }
 
     overlayElement: HTMLElement;
+    closeElement: HTMLElement;
 
     protected async toggling() {
 
