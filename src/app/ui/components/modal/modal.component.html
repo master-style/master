@@ -1,10 +1,10 @@
 <p>modal works!</p>
 
 <m-modal id="modal"
-         close-button
          overlay="close"
          placement="origin"
          hidden
+         close-button="close"
          class="full"
          style="--max-width: var(--wrap-xs)">
     <m-content part="body"
@@ -37,11 +37,11 @@
 </m-modal>
 
 <m-modal id="modal-drawer"
-         close-button
          overlay="close"
          placement="left"
          pushing="#app-side"
          class="covered:head covered:foot"
+         close-button="chevron"
          hidden>
     <div part="head">
         title

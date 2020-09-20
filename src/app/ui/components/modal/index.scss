@@ -108,6 +108,7 @@
     }
 }
 
+
 :host(.full) {
     --r: 0px;
     --p: 0px;
@@ -196,6 +197,13 @@
 
     m-icon {
         stroke-width: 3px;
+    }
+}
+
+:host([close-button="close"]) {
+    [part=close] {
+        right: .5rem;
+        left: auto;
     }
 }
 

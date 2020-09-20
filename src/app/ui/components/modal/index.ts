@@ -23,8 +23,8 @@ export class MasterModal extends MasterTogglable {
             $created: (element: HTMLElement) => this.root = element
         }, [
             'slot',
-            'm-button', { part: 'close', class: 'round xs' }, [
-                'm-icon', { name: 'chevron', direction: 'left' }
+            'm-button', { part: 'close', class: 'round xs', $if: this.closeButton }, [
+                'm-icon', { name: this.closeButton, direction: 'left' }
             ]
         ]
     ]);
@@ -49,8 +49,8 @@ export class MasterModal extends MasterTogglable {
     @Attr({ reflect: false })
     closeOnScroll: boolean;
 
-    @Attr({ reflect: false })
-    closeButton: boolean;
+    @Attr()
+    closeButton: string;
 
     @Attr({ reflect: false })
     hideTrigger: boolean;
