@@ -9,6 +9,9 @@ const NAME = 'button';
     css
 })
 export class MasterButton extends MasterClickable {
+
+    readonly elementName = NAME;
+
     @Attr()
     type: string = 'button';
 

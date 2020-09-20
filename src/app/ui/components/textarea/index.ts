@@ -10,7 +10,7 @@ const NAME = 'textarea';
 })
 export class MasterTextarea extends MasterControl {
 
-    readonly masterName = NAME;
+    readonly elementName = NAME;
 
     bodyTemplate = $(() => [
         'textarea', {

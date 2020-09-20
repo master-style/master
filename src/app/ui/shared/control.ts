@@ -4,7 +4,7 @@ type elementToken = string | { [key: string]: any };
 
 export default class MasterControl extends HTMLElement {
 
-    readonly masterName: string;
+    readonly elementName: string;
 
     body: any;
 
@@ -69,19 +69,19 @@ export default class MasterControl extends HTMLElement {
     empty: boolean;
 
     onConnected() {
-        console.log(this.masterName);
+        console.log(this.elementName);
         this
             .on('click', (event: any) => {
                 if (event.target === this.body) return;
                 this.body.focus();
-            }, { id: this.masterName, passive: true })
+            }, { id: this.elementName, passive: true })
             .on('input', '[part=body]', (event: any) => {
                 this.value = event.target.value;
-            }, { id: this.masterName, passive: true });
+            }, { id: this.elementName, passive: true });
     }
 
     onDisconnected() {
-        this.off({ id: this.masterName });
+        this.off({ id: this.elementName });
     }
 
 }

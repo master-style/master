@@ -10,7 +10,7 @@ const NAME = 'input';
 })
 export class MasterInput extends MasterControl {
 
-    readonly masterName = NAME;
+    readonly elementName = NAME;
 
     bodyTemplate = $(() => [
         'input', {

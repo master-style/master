@@ -9,6 +9,9 @@ const NAME = 'item';
     css
 })
 export class MasterItem extends MasterClickable {
+
+    readonly elementName = NAME;
+
     slotTemplate = [
         'slot', { name: 'head' },
         'div', { part: 'lower' }, [

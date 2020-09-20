@@ -8,4 +8,6 @@ const NAME = 'card';
     tag: 'm-' + NAME,
     css
 })
-export class MasterCard extends MasterClickable { }
+export class MasterCard extends MasterClickable {
+    readonly elementName = NAME;
+}

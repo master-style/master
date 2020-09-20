@@ -9,6 +9,9 @@ const NAME = 'breadcrumb';
     css
 })
 export class MasterBreadcrumb extends MasterClickable {
+
+    readonly elementName = NAME;
+
     slotTemplate = [
         'slot', { name: 'head' },
         'slot', { part: 'body' }
