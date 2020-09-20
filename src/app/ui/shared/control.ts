@@ -4,6 +4,8 @@ type elementToken = string | { [key: string]: any };
 
 export default class MasterControl extends HTMLElement {
 
+    controlElement: any;
+
     template = $(() => [
         'slot'
     ]);
@@ -41,34 +43,15 @@ export default class MasterControl extends HTMLElement {
     @Attr()
     warning: string;
 
-    @Attr()
-    autocomplete: string;
-
-    @Attr()
-    max: number;
-
-    @Attr()
-    min: number;
-
-    @Attr()
-    maxLength: number;
-
-    @Attr()
-    minLength: number;
-
-    @Attr()
-    pattern: string;
-
-    @Attr()
-    size: number;
-
-    @Attr()
-    step: number;
-
     @Attr({ reflect: false, render: false })
     value: any;
 
     @Attr({ observe: false, render: false })
     empty: boolean;
+
+    protected valueUpdater(value) {
+        this.empty = value === null || value === undefined || value === '';
+        this.controlElement.value = value ?? null;
+    }
 
 }

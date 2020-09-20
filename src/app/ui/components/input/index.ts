@@ -1,5 +1,5 @@
 import MasterControl from '@ui/shared/control';
-import { Element } from '@element';
+import { Element, Attr } from '@element';
 import css from './index.scss';
 
 const NAME = 'input';
@@ -20,6 +20,7 @@ export class MasterInput extends MasterControl {
             required: this.required,
             readonly: this.readOnly,
             pattern: this.pattern,
+            $created: (element: HTMLElement) => this.controlElement = element
         }
     ]);
 
@@ -33,6 +34,30 @@ export class MasterInput extends MasterControl {
         'm-label', { $text: this.label }
     ]);
 
+    @Attr()
+    autocomplete: string;
+
+    @Attr()
+    max: number;
+
+    @Attr()
+    min: number;
+
+    @Attr()
+    maxLength: number;
+
+    @Attr()
+    minLength: number;
+
+    @Attr()
+    pattern: string;
+
+    @Attr()
+    size: number;
+
+    @Attr()
+    step: number;
+
     protected valueParser(value: any, oldValue: any) {
         if (this.type === 'number') {
             if (value === '') {
@@ -42,11 +67,6 @@ export class MasterInput extends MasterControl {
             }
         }
         return { value, oldValue };
-    }
-
-    protected valueUpdater(value) {
-        this.empty = value === null || value === undefined || value === '';
-        this.controlTemplate.nodes[0].element.value = value ?? null;
     }
 
     onConnected() {
