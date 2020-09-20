@@ -18,10 +18,15 @@ export class MasterModal extends MasterTogglable {
             $if: this.overlay,
             $created: (element: HTMLElement) => this.overlayElement = element,
         },
-        'slot', {
+        'div', {
             part: 'root',
             $created: (element: HTMLElement) => this.root = element
-        }
+        }, [
+            'slot',
+            'm-button', { part: 'close', class: 'round xs' }, [
+                'm-icon', { name: 'chevron', direction: 'left' }
+            ]
+        ]
     ]);
 
     render() {

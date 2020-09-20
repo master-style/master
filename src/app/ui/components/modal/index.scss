@@ -181,6 +181,24 @@
     border-top-left-radius: 0;
 }
 
+[part=close] {
+    --bg-theme: transparent;
+    --bg-theme-hover: transparent;
+    backdrop-filter: blur(35px);
+    color: var(--f-fade);
+    -webkit-backdrop-filter: blur(35px);
+    position: absolute;
+    z-index: $z-overlay;
+    top: .5rem;
+    left: .5rem;
+    border-radius: 50%;
+    font-size: 1.25rem;
+
+    m-icon {
+        stroke-width: 3px;
+    }
+}
+
 @include below(sm) {
     :host {
         --p: #{$sm};
