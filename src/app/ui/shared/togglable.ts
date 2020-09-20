@@ -29,10 +29,52 @@ export default class MasterTogglable extends HTMLElement {
                 !value && oldValue ||
                 value && oldValue
             ) {
-                togglable.offTriggerEvent(oldValue);
+                if (!oldValue) return;
+                oldValue += '.' + togglable.constructor.name.split('Master')[1].toLowerCase();
+                const liveTargets = liveTriggers[oldValue];
+                if (liveTargets) {
+                    if (liveTargets.length) {
+                        liveTargets.splice(liveTargets.indexOf(togglable), 1);
+                    } else {
+                        document.body.off(oldValue);
+                        delete liveTargets[oldValue];
+                    }
+                }
             }
             if (value) {
-                togglable.onTriggerEvent(value);
+                const name = togglable.constructor.name.split('Master')[1].toLowerCase();
+                const toggleAttrKey = 'toggle-' + name;
+                value += '.' + name;
+                let liveTargets = liveTriggers[value];
+                if (liveTargets) {
+                    liveTargets.push(togglable);
+                } else {
+                    liveTriggers[value] = liveTargets = [togglable];
+                    document.body.on(value, '[' + toggleAttrKey + ']', function (event) {
+                        const toggle = this;
+                        if (this.disabled) return;
+                        const targets = $(toggle.getAttribute(toggleAttrKey));
+                        targets.forEach((eachTarget: MasterTogglable) => {
+                            if (liveTargets.indexOf(eachTarget) === -1) return;
+                            let whether: boolean;
+                            const tag = toggle.tagName;
+                            const type = toggle.type;
+                            if (type === 'checkbox' || type === 'radio') {
+                                whether = !!toggle.checked;
+                            } else if (
+                                tag === 'M-INPUT' ||
+                                tag === 'M-SELECT' ||
+                                tag === 'M-TEXTAREA'
+                            ) {
+                                whether = !!toggle.value;
+                            } else {
+                                whether = eachTarget.hidden;
+                            }
+                            if (whether && !eachTarget.animation) eachTarget['trigger'] = toggle;
+                            eachTarget.toggle(whether);
+                        });
+                    }, { passive: true });
+                }
             }
         }
     })
@@ -96,53 +138,4 @@ export default class MasterTogglable extends HTMLElement {
         await (whether ? this.open() : this.close());
     }
 
-    private onTriggerEvent(triggerEvent: string) {
-        const name = this.constructor.name.split('Master')[1].toLowerCase();
-        const toggleAttrKey = 'toggle-' + name;
-        triggerEvent += '.' + name;
-        let liveTargets = liveTriggers[triggerEvent];
-        if (liveTargets) {
-            liveTargets.push(this);
-        } else {
-            liveTriggers[triggerEvent] = liveTargets = [this];
-            document.body.on(triggerEvent, '[' + toggleAttrKey + ']', function (event) {
-                const toggle = this;
-                if (this.disabled) return;
-                const targets = $(toggle.getAttribute(toggleAttrKey));
-                targets.forEach((eachTarget: MasterTogglable) => {
-                    if (liveTargets.indexOf(eachTarget) === -1) return;
-                    let whether: boolean;
-                    const tag = toggle.tagName;
-                    const type = toggle.type;
-                    if (type === 'checkbox' || type === 'radio') {
-                        whether = !!toggle.checked;
-                    } else if (
-                        tag === 'M-INPUT' ||
-                        tag === 'M-SELECT' ||
-                        tag === 'M-TEXTAREA'
-                    ) {
-                        whether = !!toggle.value;
-                    } else {
-                        whether = eachTarget.hidden;
-                    }
-                    if (whether && !eachTarget.animation) eachTarget['trigger'] = toggle;
-                    eachTarget.toggle(whether);
-                });
-            }, { passive: true });
-        }
-    }
-
-    private offTriggerEvent(trigger: string) {
-        if (!trigger) return;
-        trigger += '.' + this.constructor.name.split('Master')[1].toLowerCase();
-        const liveTargets = liveTriggers[trigger];
-        if (liveTargets) {
-            if (liveTargets.length) {
-                liveTargets.splice(liveTargets.indexOf(this), 1);
-            } else {
-                document.body.off(trigger);
-                delete liveTargets[trigger];
-            }
-        }
-    }
 }
