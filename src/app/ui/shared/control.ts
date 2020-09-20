@@ -1,4 +1,4 @@
-import { Attr } from '../../../element';
+import { Attr } from '@element';
 
 type elementToken = string | { [key: string]: any };
 

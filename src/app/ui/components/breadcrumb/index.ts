@@ -1,5 +1,5 @@
 import { Element } from '@element';
-import MasterClickable from '../../clickable';
+import MasterClickable from '@ui/shared/clickable';
 import css from './index.scss';
 
 const NAME = 'breadcrumb';

@@ -1,6 +1,5 @@
-import MasterControl from '../control';
-
-import { Element, Attr } from '@element';
+import MasterControl from '@ui/shared/control';
+import { Element } from '@element';
 import css from './index.scss';
 
 const NAME = 'input';
