@@ -10,6 +10,8 @@ const NAME = 'input';
 })
 export class MasterInput extends MasterControl {
 
+    readonly masterName = NAME;
+
     bodyTemplate = $(() => [
         'input', {
             part: 'body',
@@ -57,21 +59,6 @@ export class MasterInput extends MasterControl {
 
     @Attr()
     step: number;
-
-    onConnected() {
-        this
-            .on('click', (event: any) => {
-                if (event.target.tagName === 'INPUT') return;
-                this.body.focus();
-            }, { id: this, passive: true })
-            .on('input', '[part=body]', (event: any) => {
-                this.value = event.target.value;
-            }, { id: this, passive: true });
-    }
-
-    onDisconnected() {
-        this.off('input', { id: this });
-    }
 
     render() {
         this.bodyTemplate.render(this);

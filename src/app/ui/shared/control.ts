@@ -4,6 +4,8 @@ type elementToken = string | { [key: string]: any };
 
 export default class MasterControl extends HTMLElement {
 
+    readonly masterName: string;
+
     body: any;
 
     template = $(() => [
@@ -65,5 +67,21 @@ export default class MasterControl extends HTMLElement {
 
     @Attr({ observe: false, render: false })
     empty: boolean;
+
+    onConnected() {
+        console.log(this.masterName);
+        this
+            .on('click', (event: any) => {
+                if (event.target === this.body) return;
+                this.body.focus();
+            }, { id: this.masterName, passive: true })
+            .on('input', '[part=body]', (event: any) => {
+                this.value = event.target.value;
+            }, { id: this.masterName, passive: true });
+    }
+
+    onDisconnected() {
+        this.off({ id: this.masterName });
+    }
 
 }

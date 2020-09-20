@@ -10,6 +10,8 @@ const NAME = 'textarea';
 })
 export class MasterTextarea extends MasterControl {
 
+    readonly masterName = NAME;
+
     bodyTemplate = $(() => [
         'textarea', {
             part: 'body',
@@ -44,21 +46,6 @@ export class MasterTextarea extends MasterControl {
 
     @Attr()
     rows: number = 1;
-
-    onConnected() {
-        this
-            .on('click', (event: any) => {
-                if (event.target.tagName === 'TEXTAREA') return;
-                this.body.focus();
-            }, { id: this, passive: true })
-            .on('input', '[part=body]', (event: any) => {
-                this.value = event.target.value;
-            }, { id: this, passive: true });
-    }
-
-    onDisconnected() {
-        this.off('textarea', { id: this });
-    }
 
     render() {
         this.bodyTemplate.render(this);
