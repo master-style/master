@@ -13,6 +13,7 @@ interface TemplateNode {
     $text?: string;
     $if?: boolean;
     $css?: { [key: string]: any };
+    $namespace?: string;
     $created?: (element: Element) => void;
     $removed?: (element: Element) => void;
     $updated?: (element: Element) => void;

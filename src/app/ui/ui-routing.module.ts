@@ -120,7 +120,7 @@ export const uiRoutes: Routes = [
             { path: 'figure', component: FigureComponent, resolve: { route: RouteResolver } },
         ]
     },
-    { path: 'icon', data: {}, component: IconComponent },
+    { path: 'icon', data: {}, component: IconComponent, resolve: { route: RouteResolver } },
 ];
 
 @NgModule({

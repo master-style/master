@@ -17,9 +17,7 @@
     flex-direction: column;
     flex-wrap: nowrap;
     contain: strict;
-    padding: var(--p)
-
-    // &.long {
+    padding: var(--p) // &.long {
     //     padding-top: 0;
     //     padding-bottom: 0;
 
@@ -107,6 +105,15 @@
             0 6.7px 8.7px rgba(0, 0, 0, 0.072),
             0 12.5px 16.3px rgba(0, 0, 0, 0.086),
             0 30px 39px rgba(0, 0, 0, 0.12);
+    }
+}
+
+:host(.full) {
+    --r: 0px;
+    --p: 0px;
+
+    [part=root] {
+        height: 100%;
     }
 }
 

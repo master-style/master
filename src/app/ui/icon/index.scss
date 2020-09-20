@@ -1,0 +1,157 @@
+@import '../variables';
+
+:host {
+    --rotate: 0deg;
+    position: relative;
+    display: inline-flex;
+    // color: rgba(255, 255, 255, .3);
+    stroke-width: 2;
+    contain: content;
+    // &:before {
+    //     position: absolute;
+    //     left: 0;
+    //     right: 0;
+    //     top: 0;
+    //     bottom: 0;
+    //     margin: auto;
+    //     content: '';
+    //     width: 20rem;
+    //     height: 20rem;
+    //     background-color: rgba(255, 255, 255, .1);
+    // }
+}
+
+svg,
+[part=root] {
+    display: flex;
+    width: 1em;
+    height: 1em;
+    transition: transform .2s ease;
+    will-change: transform;
+    contain: strict;
+}
+
+[part=root] {
+    transform: rotate(var(--dir-rotate));
+}
+
+svg {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke: currentColor;
+    transform: rotate(var(--rotate));
+}
+
+path {
+    fill: currentColor;
+    stroke-width: 0;
+}
+
+line,
+g {
+    transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+    transition-duration: .3s;
+    transition-property: transform, opacity;
+    transform: none;
+    opacity: 1;
+    will-change: transform, opacity;
+}
+
+:host([name=close]),
+:host([name=menu]) {
+
+    .l1 {
+        transform-origin: 80.2% 37.5%;
+    }
+
+    .l2 {
+        opacity: 1;
+    }
+
+    .l3 {
+        transform-origin: 80.2% 62.5%;
+    }
+}
+
+:host([name=menu][active]),
+:host([name=close]) {
+    .l1 {
+        transform: rotate(-45deg);
+    }
+
+    .l2 {
+        opacity: 0;
+    }
+
+    .l3 {
+        transform: rotate(45deg);
+    }
+}
+
+:host([name=chevron]) {
+    line {
+        transform-origin: center;
+    }
+
+    g {
+        transform: translateY(12.5%);
+    }
+
+    .l1 {
+        transform: rotate(35deg);
+    }
+
+    .l2 {
+        transform: rotate(-35deg);
+    }
+
+    &[active] {
+        g {
+            transform: translateY(-12.5%);
+        }
+
+        .l1 {
+            transform: rotate(-35deg);
+        }
+
+        .l2 {
+            transform: rotate(35deg);
+        }
+    }
+}
+
+:host([name=caret][active]) {
+    --dir-rotate: 180deg;
+}
+
+:host([direction=top]) {
+    --rotate: 180deg;
+}
+
+:host([direction=left]) {
+    --rotate: 90deg;
+}
+
+:host([direction=right]) {
+    --rotate: -90deg;
+}
+
+.stroke\:1 {
+    stroke-width: 1px !important;
+}
+
+.stroke\:2 {
+    stroke-width: 2px !important;
+}
+
+.stroke\:3 {
+    stroke-width: 3px !important;
+}
+
+.stroke\:4 {
+    stroke-width: 4px !important;
+}
+
+.stroke\:5 {
+    stroke-width: 5px !important;
+}

@@ -48,6 +48,9 @@ export class MasterModal extends MasterTogglable {
     closeButton: boolean;
 
     @Attr({ reflect: false })
+    hideTrigger: boolean;
+
+    @Attr({ reflect: false })
     overlay: string = 'static';
 
     protected overlayUpdater(value, oldValue) {
@@ -77,7 +80,7 @@ export class MasterModal extends MasterTogglable {
 
         if (this.placement === 'origin' && this.trigger) {
 
-            if (!this.hidden) {
+            if (!this.hidden && this.hideTrigger) {
                 this.trigger.toggleClass('invisible', true);
             }
 
@@ -210,7 +213,7 @@ export class MasterModal extends MasterTogglable {
             this.toggleAttribute('changing', false);
             this.animation = null;
             this.animations = [];
-            if (this.hidden && this.trigger) {
+            if (this.hidden && this.trigger && this.hideTrigger) {
                 this.trigger.toggleClass('invisible', false);
             }
             if (content && !this.hidden) {

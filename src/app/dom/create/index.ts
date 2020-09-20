@@ -150,7 +150,13 @@ class MasterTemplate {
                                 continue;
                             }
                             let skipChildren = false;
-                            const element = eachNode.element = document.createElement(eachNode.tag);
+                            let element;
+                            if (eachNode.$namespace) {
+                                element = document.createElementNS(eachNode.$namespace, eachNode.tag);
+                            } else {
+                                element = document.createElement(eachNode.tag);
+                            }
+                            eachNode.element = element;
                             if (eachOldElement) {
                                 eachOldElement.before(element);
                                 eachOldNode = (eachOldElement.remove() as undefined);
@@ -210,7 +216,13 @@ class MasterTemplate {
                 eachNodes.forEach((eachNode) => {
                     const hasIf = eachNode.hasOwnProperty('$if');
                     if (hasIf && !eachNode.$if) return;
-                    const element = eachNode.element = document.createElement(eachNode.tag);
+                    let element;
+                    if (eachNode.$namespace) {
+                        element = document.createElementNS(eachNode.$namespace, eachNode.tag);
+                    } else {
+                        element = document.createElement(eachNode.tag);
+                    }
+                    eachNode.element = element;
                     const created = eachNode.$created;
                     if (created) created(element);
                     const updated = eachNode.$updated;

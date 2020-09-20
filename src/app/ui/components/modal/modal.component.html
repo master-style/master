@@ -4,7 +4,9 @@
          close-button
          overlay="close"
          placement="origin"
-         hidden>
+         hidden
+         class="full"
+         style="--max-width: var(--wrap-xs)">
     <m-content part="body"
                scroll-y>
         <figure class="embedded by:1x1">
@@ -78,13 +80,13 @@
 
 <div class="demo">
     <div class="demo-body">
-        <m-button toggle-modal="#modal">切換</m-button>
-        <m-button toggle-modal="#modal-drawer">切換</m-button>
-
         <figure toggle-modal="#modal" class="embedded by:1x1 r:xs" style="width: 200px">
             <img src="https://photo.eyescream.com.tw/photo/photo/ow/11030250-B51-06.jpg" alt="">
         </figure>
-
+        <m-button toggle-modal="#modal">切換</m-button>
+        <m-button toggle-modal="#modal-drawer">
+            <m-icon name="menu"></m-icon>
+        </m-button>
     </div>
 </div>
 
