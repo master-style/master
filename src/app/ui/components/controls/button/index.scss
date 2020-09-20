@@ -2,17 +2,13 @@
 
 @import '../../../clickable';
 
-[part=root] {
-    padding: var(--py) var(--px);
-    min-width: var(--size);
-    min-height: var(--size);
-}
-
 :host {
     --px: #{$md};
     --py: 0;
     --size: 3rem;
     --f-size: #{var(--f-sm)};
+    --b-theme: transparent;
+    --b-theme-hover: transparent;
     display: inline-flex;
     font-size: var(--f-size);
     color: var(--f-theme);
@@ -90,6 +86,12 @@
     }
 }
 
+[part=root] {
+    padding: var(--py) var(--px);
+    min-width: var(--size);
+    min-height: var(--size);
+}
+
 ::slotted([part=head]),
 ::slotted([part=foot]) {
     align-items: center;
@@ -116,13 +118,13 @@
     margin-right: calc(var(--px) - .3rem);
 }
 
-.close-button {
+:host([part=close]) {
     --bg-theme: var(--b-fade);
     --bg-theme-hover: var(--f-fadest);
     --b-theme-hover: transparent;
     color: var(--theme);
 
-    m-icon {
+    ::slotted(m-icon) {
         stroke-width: 4px;
     }
 }

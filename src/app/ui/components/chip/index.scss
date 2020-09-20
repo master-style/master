@@ -22,7 +22,7 @@
     --p: .25rem;
     --px: .625rem;
     --f-size: 0.8125rem;
-    --head-ml: calc(var(--p) - var(--px));
+    --mx: calc(var(--p) - var(--px));
     display: inline-flex;
     border-radius: $xs;
 
@@ -32,6 +32,10 @@
 
     ::slotted([part=head]),
     ::slotted([part=foot]) {
+        border-radius: 50%;
+    }
+    
+    ::slotted([part=close]) {
         border-radius: 50%;
     }
 }
@@ -46,10 +50,9 @@
     }
 
     ::slotted([part=close]) {
+        --size: .875rem;
         font-size: .625rem;
-        width: .875rem;
-        height: .875rem;
-        margin-right: 0;
+        margin-right: -.125rem;
     }
 }
 
@@ -57,17 +60,17 @@
     background-color: transparent;
 
     ::slotted([part=head]) {
-        margin-left: calc(var(--head-ml) - 1px);
+        margin-left: calc(var(--mx) - 1px);
     }
 }
 
 ::slotted([part=close]) {
+    --size: 1.125rem;
+    --px: 0px;
+    border-radius: $xxs;
     font-size: var(--f-xxs);
-    width: 1.125rem;
-    height: 1.125rem;
-    min-width: auto;
-    min-height: auto;
-    margin-right: calc(1px + var(--head-ml));
+    margin-right: -.1875rem;
+    margin-left: .375rem;
 }
 
 [part=body],
@@ -93,7 +96,7 @@
     padding: 0 $xs;
     min-width: calc(var(--size) - var(--p) * 2);
     margin-right: .375rem;
-    margin-left: var(--head-ml)
+    margin-left: var(--mx)
 }
 
 ::slotted([role=img]),
