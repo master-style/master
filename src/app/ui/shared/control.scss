@@ -52,7 +52,6 @@
     --label-f-size: var(--f-xxs);
     position: relative;
     display: inline-flex;
-    align-items: center;
     font-size: var(--f-size);
     // ~m-icon {
     //     margin: 0 .5rem 0 .2rem;
@@ -94,7 +93,7 @@
     ::slotted([part=head]),
     ::slotted([part=foot]),
     ::slotted([part=body]),
-    m-label {
+    label {
         cursor: no-drop !important;
         color: var(--f-fadest) !important;
     }
@@ -142,7 +141,7 @@
         max-width: 0;
     }
 
-    m-label {
+    label {
         transition-delay: .1s;
         transform: translate(0, var(--py));
     }
@@ -210,7 +209,7 @@ m-ripples {
     border-radius: inherit;
 }
 
-m-label {
+label {
     position: absolute;
     top: 0;
     left: var(--px);
@@ -315,8 +314,10 @@ m-badge {
 
 ::slotted([part=head]),
 ::slotted([part=foot]) {
+    display: flex;
     user-select: none;
     white-space: nowrap;
+    align-items: center;
 }
 
 ::slotted([part=head]) {
@@ -344,7 +345,7 @@ m-badge {
 //             border-color: var(--green);
 //         }
 
-//         ~m-label {
+//         ~label {
 //             color: var(--f-green)
 //         }
 
@@ -368,7 +369,7 @@ m-badge {
 //             border-color: var(--red);
 //         }
 
-//         ~m-label {
+//         ~label {
 //             color: var(--f-red)
 //         }
 
@@ -386,7 +387,7 @@ m-badge {
 //         border-color: var(--yellow);
 //     }
 
-//     ~m-label {
+//     ~label {
 //         color: var(--f-yellow)
 //     }
 

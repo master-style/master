@@ -10,7 +10,7 @@ const NAME = 'input';
 })
 export class MasterInput extends MasterControl {
 
-    controlTemplate = $(() => [
+    bodyTemplate = $(() => [
         'input', {
             part: 'body',
             type: this.type,
@@ -20,7 +20,7 @@ export class MasterInput extends MasterControl {
             required: this.required,
             readonly: this.readOnly,
             pattern: this.pattern,
-            $created: (element: HTMLElement) => this.controlElement = element
+            $created: (element: HTMLElement) => this.body = element
         }
     ]);
 
@@ -31,7 +31,7 @@ export class MasterInput extends MasterControl {
                 'span', { $text: this.label }
             ]
         ],
-        'm-label', { $text: this.label }
+        'label', { $text: this.label }
     ]);
 
     @Attr()
@@ -73,7 +73,7 @@ export class MasterInput extends MasterControl {
         this
             .on('click', (event: any) => {
                 if (event.target.tagName === 'INPUT') return;
-                this.controlTemplate.nodes[0].element.focus();
+                this.body.focus();
             }, { id: this, passive: true })
             .on('input', '[part=body]', (event: any) => {
                 this.value = event.target.value;
@@ -86,7 +86,7 @@ export class MasterInput extends MasterControl {
     }
 
     render() {
-        this.controlTemplate.render(this);
+        this.bodyTemplate.render(this);
         this.template.render(this.shadowRoot);
     }
 }

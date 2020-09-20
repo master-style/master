@@ -4,7 +4,7 @@ type elementToken = string | { [key: string]: any };
 
 export default class MasterControl extends HTMLElement {
 
-    controlElement: any;
+    body: any;
 
     template = $(() => [
         'slot'
@@ -51,7 +51,7 @@ export default class MasterControl extends HTMLElement {
 
     protected valueUpdater(value) {
         this.empty = value === null || value === undefined || value === '';
-        this.controlElement.value = value ?? null;
+        this.body.value = value ?? null;
     }
 
 }

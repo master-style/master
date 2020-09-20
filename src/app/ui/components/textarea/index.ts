@@ -10,7 +10,7 @@ const NAME = 'textarea';
 })
 export class MasterTextarea extends MasterControl {
 
-    controlTemplate = $(() => [
+    bodyTemplate = $(() => [
         'textarea', {
             part: 'body',
             name: this.name,
@@ -18,7 +18,8 @@ export class MasterTextarea extends MasterControl {
             disabled: this.disabled,
             required: this.required,
             readonly: this.readOnly,
-            $created: (element: HTMLElement) => this.controlElement = element
+            rows: this.rows,
+            $created: (element: HTMLElement) => this.body = element
         }
     ]);
 
@@ -29,7 +30,7 @@ export class MasterTextarea extends MasterControl {
                 'span', { $text: this.label }
             ]
         ],
-        'm-label', { $text: this.label }
+        'label', { $text: this.label }
     ]);
 
     @Attr()
@@ -41,13 +42,16 @@ export class MasterTextarea extends MasterControl {
     @Attr()
     minLength: number;
 
+    @Attr()
+    rows: number = 1;
+
     onConnected() {
         this
             .on('click', (event: any) => {
-                if (event.target.tagName === 'INPUT') return;
-                this.controlTemplate.nodes[0].element.focus();
+                if (event.target.tagName === 'TEXTAREA') return;
+                this.body.focus();
             }, { id: this, passive: true })
-            .on('textarea', '[part=body]', (event: any) => {
+            .on('input', '[part=body]', (event: any) => {
                 this.value = event.target.value;
             }, { id: this, passive: true });
         this.valueUpdater(this.value);
@@ -58,7 +62,7 @@ export class MasterTextarea extends MasterControl {
     }
 
     render() {
-        this.controlTemplate.render(this);
+        this.bodyTemplate.render(this);
         this.template.render(this.shadowRoot);
     }
 }
