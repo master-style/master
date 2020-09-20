@@ -9,5 +9,5 @@ interface AttrOptions {
     render?: boolean;
     type?: string;
     updater?: (element: any, value: any, oldValue?: any) => void;
-    parser?: (element: any, value: any, oldValue?: any) => void;
+    parser?: (element: any, value: any, oldValue?: any) => { value: any, oldValue: any };
 }

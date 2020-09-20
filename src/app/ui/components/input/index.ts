@@ -58,17 +58,6 @@ export class MasterInput extends MasterControl {
     @Attr()
     step: number;
 
-    protected valueParser(value: any, oldValue: any) {
-        if (this.type === 'number') {
-            if (value === '') {
-                value = null;
-            } else {
-                value = isNaN(+value) ? value : +value;
-            }
-        }
-        return { value, oldValue };
-    }
-
     onConnected() {
         this
             .on('click', (event: any) => {
@@ -78,7 +67,6 @@ export class MasterInput extends MasterControl {
             .on('input', '[part=body]', (event: any) => {
                 this.value = event.target.value;
             }, { id: this, passive: true });
-        this.valueUpdater(this.value);
     }
 
     onDisconnected() {

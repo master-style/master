@@ -43,15 +43,27 @@ export default class MasterControl extends HTMLElement {
     @Attr()
     warning: string;
 
-    @Attr({ reflect: false, render: false })
+    @Attr({
+        reflect: false,
+        render: false,
+        parser: (control: MasterControl, value: any, oldValue: any) => {
+            if (control.type === 'number') {
+                if (value === '') {
+                    value = null;
+                } else {
+                    value = isNaN(+value) ? value : +value;
+                }
+            }
+            return { value, oldValue };
+        },
+        updater: (control: MasterControl, value: any, oldValue: any) => {
+            control.empty = value === null || value === undefined || value === '';
+            control.body.value = value ?? null;
+        }
+    })
     value: any;
 
     @Attr({ observe: false, render: false })
     empty: boolean;
-
-    protected valueUpdater(value) {
-        this.empty = value === null || value === undefined || value === '';
-        this.body.value = value ?? null;
-    }
 
 }

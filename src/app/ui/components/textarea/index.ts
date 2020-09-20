@@ -54,7 +54,6 @@ export class MasterTextarea extends MasterControl {
             .on('input', '[part=body]', (event: any) => {
                 this.value = event.target.value;
             }, { id: this, passive: true });
-        this.valueUpdater(this.value);
     }
 
     onDisconnected() {
