@@ -1,4 +1,4 @@
-@import '@ui/shared/control';
+@import '../../shared/control';
 
 :host(.outlined) {
     ::slotted([part=body]) {

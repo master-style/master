@@ -1,9 +1,9 @@
-import { TextareaComponent } from './components/controls/textarea/textarea.component';
-import { SwitchComponent } from './components/controls/switch/switch.component';
-import { SelectComponent } from './components/controls/select/select.component';
-import { InputComponent } from './components/controls/input/input.component';
-import { CheckComponent } from './components/controls/check/check.component';
-import { ButtonComponent } from './components/controls/button/button.component';
+import { TextareaComponent } from './components/textarea/textarea.component';
+import { SwitchComponent } from './components/switch/switch.component';
+import { SelectComponent } from './components/select/select.component';
+import { InputComponent } from './components/input/input.component';
+import { CheckComponent } from './components/check/check.component';
+import { ButtonComponent } from './components/button/button.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 

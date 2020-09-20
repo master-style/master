@@ -1,5 +1,5 @@
-@import '@ui/variables.scss';
-@import '@ui/shared/clickable';
+@import '../../variables';
+@import '../../shared/clickable';
 
 :host {
     --px: #{$md};
