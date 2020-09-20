@@ -54,37 +54,38 @@ export class MasterModal extends MasterTogglable {
     @Attr({ reflect: false })
     closeOnScroll: boolean;
 
-    @Attr()
+    @Attr({
+        updater: (modal: MasterModal, value, oldValue) => {
+            if (
+                value && oldValue ||
+                !value && oldValue
+            ) {
+                modal.closeElement.off({ id: 'modal' });
+            }
+            if (value) {
+                modal.closeElement
+                    .on('click', () => modal.close(), { passive: true, id: 'modal' });
+            }
+        }
+    })
     closeButton: string;
 
     @Attr({ reflect: false })
     hideTrigger: boolean;
 
-    @Attr({ reflect: false })
+    @Attr({
+        reflect: false,
+        updater: (modal: MasterModal, value: string, oldValue: string) => {
+            if (oldValue === 'close') {
+                modal.overlayElement.off({ id: 'modal' });
+            }
+            if (value === 'close') {
+                modal.overlayElement
+                    .on('click', () => modal.close(), { passive: true, id: 'modal' });
+            }
+        }
+    })
     overlay: string = 'static';
-
-    protected overlayUpdater(value, oldValue) {
-        if (oldValue === 'close') {
-            this.overlayElement.off({ id: 'modal' });
-        }
-        if (value === 'close') {
-            this.overlayElement
-                .on('click', () => this.close(), { passive: true, id: 'modal' });
-        }
-    }
-
-    protected closeButtonUpdater(value, oldValue) {
-        if (
-            value && oldValue ||
-            !value && oldValue
-        ) {
-            this.closeElement.off({ id: 'modal' });
-        }
-        if (value) {
-            this.closeElement
-                .on('click', () => this.close(), { passive: true, id: 'modal' });
-        }
-    }
 
     overlayElement: HTMLElement;
     closeElement: HTMLElement;

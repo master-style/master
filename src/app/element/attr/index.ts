@@ -15,6 +15,8 @@ export function Attr(options?: AttrOptions) {
         const _propKey = '_' + propKey;
         const attrKey = options.key = (options.key || camelToKebabCase(propKey));
         const constructor = target.constructor;
+        const updater = options.updater;
+        const parser = options.parser;
         if (options.observe) {
             if (!constructor.observedAttributes) {
                 constructor.observedAttributes = [];
@@ -30,9 +32,8 @@ export function Attr(options?: AttrOptions) {
             },
             set(value: any, settedAttr?: boolean) {
                 let oldValue = this[_propKey];
-                const propParser = this[propKey + 'Parser'];
-                if (propParser) {
-                    const prop = propParser.call(this, value, oldValue);
+                if (parser) {
+                    const prop = parser(this, value, oldValue);
                     if (prop) {
                         oldValue = prop.oldValue;
                         value = prop.value;
@@ -41,9 +42,8 @@ export function Attr(options?: AttrOptions) {
                 if (value === oldValue) return;
                 this[_propKey] = value;
                 if (this.ready) {
-                    const propUpdater = this[propKey + 'Updater'];
-                    if (propUpdater) {
-                        propUpdater.call(this, value, oldValue);
+                    if (updater) {
+                        updater(this, value, oldValue);
                     }
                     if (options.reflect && !settedAttr) {
                         if (options.type === 'Boolean') {

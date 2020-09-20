@@ -6,12 +6,12 @@ export default class MasterTogglable extends HTMLElement {
 
     protected ready = false;
 
-    @Attr()
+    @Attr({
+        updater: (togglable: MasterTogglable, value: boolean, oldValue: boolean) => {
+            value ? togglable.close() : togglable.open();
+        }
+    })
     hidden: boolean;
-
-    protected hiddenUpdater(value: boolean, oldValue: boolean) {
-        value ? this.close() : this.open();
-    }
 
     @Attr({ reflect: false })
     duration = 500;
@@ -22,7 +22,20 @@ export default class MasterTogglable extends HTMLElement {
     @Attr({ reflect: false })
     easing = 'cubic-bezier(.25,.8,.25,1)';
 
-    @Attr({ reflect: false })
+    @Attr({
+        reflect: false,
+        updater: (togglable: MasterTogglable, value: any, oldValue: any) => {
+            if (
+                !value && oldValue ||
+                value && oldValue
+            ) {
+                togglable.offTriggerEvent(oldValue);
+            }
+            if (value) {
+                togglable.onTriggerEvent(value);
+            }
+        }
+    })
     triggerEvent: string = 'click';
 
     protected animations: Animation[] = [];
@@ -81,18 +94,6 @@ export default class MasterTogglable extends HTMLElement {
     async toggle(whether?: boolean) {
         whether = typeof whether === 'boolean' ? whether : this.hidden;
         await (whether ? this.open() : this.close());
-    }
-
-    protected triggerEventUpdater(value: any, oldValue: any) {
-        if (
-            !value && oldValue ||
-            value && oldValue
-        ) {
-            this.offTriggerEvent(oldValue);
-        }
-        if (value) {
-            this.onTriggerEvent(value);
-        }
     }
 
     private onTriggerEvent(triggerEvent: string) {

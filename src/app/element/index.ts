@@ -85,11 +85,11 @@ export function Element(options: ElementOptions) {
             if (this.render) this.render();
             for (const eachAttrKey in attrOptionsMap) {
                 const eachAttrOptions: AttrOptions = attrOptionsMap[eachAttrKey];
+                const eachUpdater = eachAttrOptions.updater;
                 const eachpropKey = eachAttrOptions.propKey;
                 const eachPropValue = this['_' + eachpropKey];
-                const propUpdater = this[eachpropKey + 'Updater'];
-                if (propUpdater) {
-                    propUpdater.call(this, eachPropValue);
+                if (eachUpdater) {
+                    eachUpdater(this, eachPropValue);
                 }
             }
             this.ready = true;
