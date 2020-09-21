@@ -59,6 +59,7 @@ export function Attr(options?: AttrOptions) {
             }
         };
         options.setProp = descriptor.set;
+        options['constructor'] = constructor.name;
         constructor.allAttrOptions[attrKey] = options;
         return descriptor;
     };

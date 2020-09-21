@@ -51,6 +51,7 @@ export class MasterTextarea extends MasterControl {
         reflect: false,
         render: false,
         updater(textarea: MasterTextarea, value: any, oldValue: any) {
+            console.log('textarea updater');
             textarea.empty = value === null || value === undefined || value === '';
             textarea.body.value = value ?? null;
         }

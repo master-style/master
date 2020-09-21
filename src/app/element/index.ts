@@ -84,11 +84,13 @@ export function Element(options: ElementOptions) {
             }
             if (this.render) this.render();
             if (allAttrOptions) {
-                for (const eachAttrKey in allAttrOptions) {
+                for (const eachAttrKey in constructor.allAttrOptions) {
                     const eachAttrOptions: AttrOptions = allAttrOptions[eachAttrKey];
                     const eachPropKey = eachAttrOptions.propKey;
                     const eachPropValue = this['_' + eachPropKey];
                     const eachUpdater = eachAttrOptions.updater;
+                    if (constructor.name === 'MasterCheck' && eachPropKey === 'value')
+                        console.log(constructor.name, eachAttrOptions['constructor']);
                     if (eachUpdater) {
                         eachUpdater(this, eachPropValue);
                     }

@@ -60,7 +60,9 @@ export class MasterInput extends MasterControl {
             return { value, oldValue };
         },
         updater(input: MasterInput, value: any) {
-            console.log('check value');
+            setTimeout(() => {
+                console.log('input value updater');
+            })
             input.empty = value === null || value === undefined || value === '';
             input.body.value = value ?? null;
         }
