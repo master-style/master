@@ -17,15 +17,6 @@ export function Attr(options?: AttrOptions) {
         const constructor = target.constructor;
         const updater = options.updater;
         const parser = options.parser;
-        if (options.observe) {
-            if (!constructor.observedAttributes) {
-                constructor.observedAttributes = [];
-            }
-            constructor.observedAttributes.push(attrKey);
-        }
-        if (!constructor.allAttrOptions) {
-            constructor.allAttrOptions = {};
-        }
         const descriptor = {
             get() {
                 return this[_propKey];
@@ -60,7 +51,21 @@ export function Attr(options?: AttrOptions) {
         };
         options.setProp = descriptor.set;
         options['constructor'] = constructor.name;
+        if (options.observe) {
+            if (!constructor.observedAttributes) {
+                constructor.observedAttributes = [];
+            }
+            constructor.observedAttributes.push(attrKey);
+        }
+
+        if (!constructor.allAttrOptions) {
+            constructor.allAttrOptions = {};
+        } else {
+            constructor.allAttrOptions = Object.assign({}, constructor.allAttrOptions);
+        }
         constructor.allAttrOptions[attrKey] = options;
+        console.log(constructor.name, constructor.allAttrOptions);
+
         return descriptor;
     };
 }
