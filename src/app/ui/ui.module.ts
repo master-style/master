@@ -55,8 +55,11 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
 import { ContentComponent } from './components/content/content.component';
 import { OverlayComponent } from './components/overlay/overlay.component';
 
+import { MasterRadioValueAccessor, MasterRadioRegistry } from './components/check/check.directive';
+
 @NgModule({
     declarations: [
+        MasterRadioValueAccessor,
         IconComponent,
         ColorComponent,
         BreakpointComponent,
@@ -100,6 +103,7 @@ import { OverlayComponent } from './components/overlay/overlay.component';
         UiRoutingModule,
         FormsModule
     ],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    providers: [MasterRadioRegistry]
 })
 export class UiModule { }
