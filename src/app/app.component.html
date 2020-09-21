@@ -71,7 +71,7 @@
 </main>
 
 <aside id="app-side" part="app-side" class="br" style="padding-top: 3rem" [ngClass]="{'hidden': !visibleSide}">
-    <m-content scroll-y guide class="h:full">
+    <m-content scroll-y class="h:full">
         <m-list style="padding-top: .5rem">
             <ng-container *ngFor="let eachRoute of routes">
                 <ng-container [ngTemplateOutlet]="routeGroup"
@@ -88,21 +88,24 @@
            style="padding-right: 1.25rem">
         {{ route.path | translate }}
     </label>
-    <m-item [routerLink]="route?.paths ? route?.paths : ''"
-            *ngIf="route?.component || route?.children"
-            [class]="size"
-            type="button">
-        <div slot="head" style="margin-right: .5rem" *ngIf="route?.data?.icon">
-            <i class="i-{{route?.data?.icon}} f:fade++"></i>
-        </div>
-        <span [ngStyle]="{'padding-left': size !== 'sm' ? '1.9375rem' : null}">{{ route.path | translate }}</span>
-    </m-item>
-    <m-collapse *ngIf="route.children">
-        <m-list>
-            <ng-container *ngFor="let eachRoute of route.children"
-                          [ngTemplateOutlet]="routeGroup"
-                          [ngTemplateOutletContext]="{route: eachRoute, size: 'xs'}">
-            </ng-container>
-        </m-list>
-    </m-collapse>
+    <div>
+        <m-item [routerLink]="route?.paths ? route?.paths : ''"
+                *ngIf="route?.component || route?.children"
+                class="bg:theme {{size}}"
+                [ngClass]="{'sticky z:abs': route?.children}"
+                type="button">
+            <div slot="head" style="margin-right: .5rem" *ngIf="route?.data?.icon">
+                <i class="i-{{route?.data?.icon}} f:fade++"></i>
+            </div>
+            <span [ngStyle]="{'padding-left': size !== 'sm' ? '1.9375rem' : null}">{{ route.path | translate }}</span>
+        </m-item>
+        <m-collapse *ngIf="route.children">
+            <m-list>
+                <ng-container *ngFor="let eachRoute of route.children"
+                              [ngTemplateOutlet]="routeGroup"
+                              [ngTemplateOutletContext]="{route: eachRoute, size: 'xs'}">
+                </ng-container>
+            </m-list>
+        </m-collapse>
+    </div>
 </ng-template>
