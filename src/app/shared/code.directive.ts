@@ -46,8 +46,7 @@ export class CodeDirective {
     @Input() selector: string;
 
     @Input()
-    set codeChangesFactor(value) {
-        console.log(value);
+    set codeFactors(value) {
         window.requestAnimationFrame(() => {
             this.highlight();
         });

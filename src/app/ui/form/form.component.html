@@ -22,10 +22,19 @@
                     <label>{{ color }}</label>
                 </m-check>
             </div>
+            <div class="y:lg">
+                <m-input type="text"
+                         name="name"
+                         ngModel
+                         ngDefaultControl
+                         required
+                         class="x">
+                </m-input>
+            </div>
         </form>
     </div>
 </div>
 <!-- <m-button class="outlined" (click)="submit(form)">送出</m-button> -->
-<template [codeLang]="'typescript'" [codeChangesFactor]="form.value" [codeCopy]=false *ngIf="form.dirty">
+<template [codeLang]="'typescript'" [codeFactors]="form.value" [codeCopy]=false *ngIf="form.dirty">
 form.value = {{ form.value | json }}
 </template>
