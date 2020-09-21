@@ -7,15 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CheckComponent implements OnInit {
 
-    value;
-
-    nativeValue;
-
-    colors = [
-        { name: 'red' },
-        { name: 'blue' }
-    ];
-
     constructor() { }
 
     ngOnInit(): void {

@@ -33,7 +33,7 @@ export default class MasterControl extends HTMLElement {
     @Attr()
     warning: string;
 
-    onDisconnected() {
+    onRemoved() {
         this.off({ id: this.elementName });
     }
 

@@ -3,6 +3,7 @@ import { Element, Attr } from '@element';
 import css from './index.scss';
 
 const connectedChecks = new Set();
+const updatingRadioNames = new Set();
 
 const NAME = 'check';
 
@@ -46,12 +47,13 @@ export class MasterCheck extends MasterControl {
     @Attr({
         updater(check: MasterCheck, value: any, oldValue: any) {
 
-            console.log(check, value, oldValue);
-
             check.body.checked = value;
             check.toggleAttribute('aria-checked', !!value);
 
+            if (updatingRadioNames.has(check.name)) return;
+
             if (check.type === 'radio' && check.name) {
+                updatingRadioNames.add(check.name);
                 connectedChecks
                     .forEach((eachCheck: MasterCheck) => {
                         if (
@@ -62,6 +64,7 @@ export class MasterCheck extends MasterControl {
                             eachCheck.checked = false;
                         }
                     });
+                updatingRadioNames.delete(check.name);
             }
         }
     })
@@ -80,20 +83,20 @@ export class MasterCheck extends MasterControl {
     })
     value: any;
 
-    onConnected() {
+    onAdded() {
         this.body
             .on('input', (event: any) => {
                 this.checked = event.target.checked;
             }, { id: this.elementName, passive: true });
+
         connectedChecks.add(this);
     }
 
-    onDisconnected() {
+    onRemoved() {
         connectedChecks.delete(this);
     }
 
     render() {
-        console.log('render');
         this.bodyTemplate.render(this);
         this.template.render(this.shadowRoot);
     }

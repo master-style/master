@@ -24,8 +24,8 @@ export function Element(options: ElementOptions) {
     return function (constructor: any) {
         const prototype = constructor.prototype;
         const allAttrOptions = constructor.allAttrOptions;
-        const onConnected = prototype.onConnected;
-        const onDisconnected = prototype.onDisconnected;
+        const onAdded = prototype.onAdded;
+        const onRemoved = prototype.onRemoved;
         const onAttrChanged = prototype.onAttrChanged;
         prototype.attributeChangedCallback = function (attrKey, oldValue, value) {
             if (value === oldValue) return;
@@ -95,12 +95,12 @@ export function Element(options: ElementOptions) {
                 }
             }
             this.ready = true;
-            if (onConnected) onConnected.call(this);
+            if (onAdded) onAdded.call(this);
         };
 
         prototype.disconnectedCallback = function () {
             if (this.removeRender) this.removeRender();
-            if (onDisconnected) onDisconnected.call(this);
+            if (onRemoved) onRemoved.call(this);
         };
 
         window.customElements.define(options.tag, constructor);

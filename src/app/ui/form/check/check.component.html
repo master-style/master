@@ -1,16 +1,16 @@
 <div class="demo">
     <div class="demo-body">
         <form #form="ngForm">
-            <ng-container *ngFor="let eachColor of colors">
-                <m-check type="radio" name="color" [value]="eachColor.name" required>
-                    <label>{{ eachColor.name }}</label>
-                </m-check>
-                <!-- <input type="radio" name="native-color" [value]="eachColor.name" [(ngModel)]="nativeValue"> -->
-            </ng-container>
-            <m-button (click)="submit(form)">送出</m-button>
+            <m-check type="radio"
+                     name="sex"
+                     [value]="sex"
+                     ngModel
+                     required
+                     *ngFor="let sex of ['male', 'female']">
+                <label>{{ sex }}</label>
+            </m-check>
         </form>
-        <span>{{ value }}</span>
-        <span>{{ nativeValue }}</span>
+        <m-button (click)="submit(form)">送出</m-button>
     </div>
 </div>
 {{ form.valid }}, {{ form.value | json }}

@@ -288,7 +288,7 @@ export class MasterContent extends HTMLElement {
         this.render();
     }
 
-    onDisconnected() {
+    onRemoved() {
         this.disable();
     }
 

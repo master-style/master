@@ -93,7 +93,7 @@ export class MasterInput extends MasterControl {
     @Attr()
     step: number;
 
-    onConnected() {
+    onAdded() {
         this
             .on('click', (event: any) => {
                 if (event.target === this.body) return;

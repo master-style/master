@@ -73,7 +73,7 @@ export class MasterTextarea extends MasterControl {
     @Attr()
     rows: number = 1;
 
-    onConnected() {
+    onAdded() {
         this
             .on('click', (event: any) => {
                 if (event.target === this.body) return;
