@@ -61,10 +61,10 @@ export function Attr(options?: AttrOptions) {
         if (!constructor.allAttrOptions) {
             constructor.allAttrOptions = {};
         } else {
+            // 必須 assign，否則會污染到繼承的父元素
             constructor.allAttrOptions = Object.assign({}, constructor.allAttrOptions);
         }
         constructor.allAttrOptions[attrKey] = options;
-        console.log(constructor.name, constructor.allAttrOptions);
 
         return descriptor;
     };
