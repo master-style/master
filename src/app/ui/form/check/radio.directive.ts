@@ -1,33 +1,25 @@
 import { Directive, ElementRef, forwardRef, Injectable, Injector, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
-
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
 
 export const RADIO_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => RadioValueAccessor),
+    useExisting: forwardRef(() => MasterRadioValueAccessor),
     multi: true
 };
-
-function throwNameError() {
-    throw new Error(`
-      If you define both a name and a formControlName attribute on your radio button, their values
-      must match. Ex: <input type="radio" formControlName="food" name="food">
-    `);
-}
 
 /**
  * @description
  * Class used by Angular to track radio buttons. For internal use only.
  */
 @Injectable()
-export class RadioRegistry {
+export class MasterRadioRegistry {
     private _accessors: any[] = [];
 
     /**
      * @description
      * Adds a control to the internal registry. For internal use only.
      */
-    add(control: NgControl, accessor: RadioValueAccessor) {
+    add(control: NgControl, accessor: MasterRadioValueAccessor) {
         this._accessors.push([control, accessor]);
     }
 
@@ -35,7 +27,7 @@ export class RadioRegistry {
      * @description
      * Removes a control from the internal registry. For internal use only.
      */
-    remove(accessor: RadioValueAccessor) {
+    remove(accessor: MasterRadioValueAccessor) {
         for (let i = this._accessors.length - 1; i >= 0; --i) {
             if (this._accessors[i][1] === accessor) {
                 this._accessors.splice(i, 1);
@@ -48,7 +40,7 @@ export class RadioRegistry {
      * @description
      * Selects a radio button. For internal use only.
      */
-    select(accessor: RadioValueAccessor) {
+    select(accessor: MasterRadioValueAccessor) {
         this._accessors.forEach((c) => {
             if (this._isSameGroup(c, accessor) && c[1] !== accessor) {
                 c[1].fireUncheck(accessor.value);
@@ -57,8 +49,8 @@ export class RadioRegistry {
     }
 
     private _isSameGroup(
-        controlPair: [NgControl, RadioValueAccessor],
-        accessor: RadioValueAccessor): boolean {
+        controlPair: [NgControl, MasterRadioValueAccessor],
+        accessor: MasterRadioValueAccessor): boolean {
         if (!controlPair[0].control) return false;
         return controlPair[0]['_parent'] === accessor._control['_parent'] &&
             controlPair[1].name === accessor.name;
@@ -92,7 +84,7 @@ export class RadioRegistry {
     host: { '(change)': 'onChange()', '(blur)': 'onTouched()' },
     providers: [RADIO_VALUE_ACCESSOR]
 })
-export class RadioValueAccessor implements ControlValueAccessor, OnDestroy, OnInit {
+export class MasterRadioValueAccessor implements ControlValueAccessor, OnDestroy, OnInit {
     /** @internal */
     // TODO(issue/24571): remove '!'.
     _state!: boolean;
@@ -138,7 +130,7 @@ export class RadioValueAccessor implements ControlValueAccessor, OnDestroy, OnIn
 
     constructor(
         private _renderer: Renderer2, private _elementRef: ElementRef,
-        private _registry: RadioRegistry, private _injector: Injector) { }
+        private _registry: MasterRadioRegistry, private _injector: Injector) { }
 
     /** @nodoc */
     ngOnInit(): void {

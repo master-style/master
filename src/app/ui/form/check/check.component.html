@@ -2,8 +2,8 @@
     <div class="demo-body">
         <form #form="ngForm">
             <ng-container *ngFor="let eachColor of colors">
-                <m-check #color required type="radio" name="color" [value]="eachColor.name" [(ngModel)]="value">
-                    <label>{{ eachColor.name }}, {{ color.valid }}</label>
+                <m-check type="radio" name="color" [value]="eachColor.name" [(ngModel)]="value" required>
+                    <label>{{ eachColor.name }}</label>
                 </m-check>
                 <!-- <input type="radio" name="native-color" [value]="eachColor.name" [(ngModel)]="nativeValue"> -->
             </ng-container>
