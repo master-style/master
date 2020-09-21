@@ -78,6 +78,7 @@ export class MasterCheck extends MasterControl {
     }
 
     render() {
+        console.log('render');
         this.bodyTemplate.render(this);
         this.template.render(this.shadowRoot);
     }

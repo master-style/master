@@ -185,6 +185,12 @@
     }
 }
 
+:host([type=radio]) {
+    [part=check] {
+        border-radius: 50%;
+    }
+}
+
 [part=check] {
     width: 20px;
     height: 20px;

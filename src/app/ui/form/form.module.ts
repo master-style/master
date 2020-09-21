@@ -1,22 +1,22 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MasterRadioValueAccessor, MasterRadioRegistry } from './check/radio.directive';
+import { RadioValueAccessor, RadioRegistry } from './check/radio.directive';
 
 @NgModule({
     declarations: [
-        MasterRadioValueAccessor
+        RadioValueAccessor
     ],
     imports: [
         CommonModule,
         FormsModule
     ],
     providers: [
-        MasterRadioRegistry
+        RadioRegistry
     ],
     exports: [
         FormsModule,
-        MasterRadioValueAccessor
+        RadioValueAccessor
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
