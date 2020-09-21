@@ -2,6 +2,8 @@ import MasterControl from '@ui/form/control';
 import { Element, Attr } from '@element';
 import css from './index.scss';
 
+const connectedChecks = new Set();
+
 const NAME = 'check';
 
 @Element({
@@ -43,15 +45,19 @@ export class MasterCheck extends MasterControl {
 
     @Attr({
         updater(check: MasterCheck, value: any, oldValue: any) {
+
+            console.log(check, value, oldValue);
+
             check.body.checked = value;
             check.toggleAttribute('aria-checked', !!value);
 
             if (check.type === 'radio' && check.name) {
-                document.getElementsByName(check.name)
+                connectedChecks
                     .forEach((eachCheck: MasterCheck) => {
                         if (
                             eachCheck !== check
-                            && eachCheck.tagName === 'M-CHECK'
+                            && eachCheck.name === check.name
+                            && eachCheck.checked !== false
                         ) {
                             eachCheck.checked = false;
                         }
@@ -75,10 +81,15 @@ export class MasterCheck extends MasterControl {
     value: any;
 
     onConnected() {
-        this
-            .on('input', '[part=body]', (event: any) => {
+        this.body
+            .on('input', (event: any) => {
                 this.checked = event.target.checked;
             }, { id: this.elementName, passive: true });
+        connectedChecks.add(this);
+    }
+
+    onDisconnected() {
+        connectedChecks.delete(this);
     }
 
     render() {
