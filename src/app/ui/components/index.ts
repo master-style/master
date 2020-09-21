@@ -1,7 +1,3 @@
-import './button';
-import './textarea';
-import './check';
-import './input';
 import './skeleton';
 import './chip';
 import './card';

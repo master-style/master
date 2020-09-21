@@ -1,9 +1,4 @@
-import { TextareaComponent } from './components/textarea/textarea.component';
-import { SwitchComponent } from './components/switch/switch.component';
-import { SelectComponent } from './components/select/select.component';
-import { InputComponent } from './components/input/input.component';
-import { CheckComponent } from './components/check/check.component';
-import { ButtonComponent } from './components/button/button.component';
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -54,6 +49,13 @@ import { ItemComponent } from './components/item/item.component';
 import { SkeletonComponent } from './components/skeleton/skeleton.component';
 import { ContentComponent } from './components/content/content.component';
 
+import { TextareaComponent } from './form/textarea/textarea.component';
+import { SwitchComponent } from './form/switch/switch.component';
+import { SelectComponent } from './form/select/select.component';
+import { InputComponent } from './form/input/input.component';
+import { CheckComponent } from './form/check/check.component';
+import { ButtonComponent } from './form/button/button.component';
+
 export const uiRoutes: Routes = [
     { path: 'ui' },
     { path: 'animation', data: { icon: 'activity' }, component: AnimationComponent, resolve: { route: RouteResolver } },
@@ -62,13 +64,6 @@ export const uiRoutes: Routes = [
     {
         path: 'components', data: { icon: 'box' }, resolve: { route: RouteResolver }, children: [
             { path: 'content', component: ContentComponent, resolve: { route: RouteResolver } },
-            { path: 'control' },
-            { path: 'button', component: ButtonComponent, data: { compositions: ['HTML', 'CSS', 'JS'] }, resolve: { route: RouteResolver } },
-            { path: 'select', component: SelectComponent, resolve: { route: RouteResolver } },
-            { path: 'input', component: InputComponent, resolve: { route: RouteResolver } },
-            { path: 'textarea', component: TextareaComponent, resolve: { route: RouteResolver } },
-            { path: 'check', component: CheckComponent, resolve: { route: RouteResolver } },
-            { path: 'switch', component: SwitchComponent, resolve: { route: RouteResolver } },
             { path: 'data-render' },
             { path: 'badge', component: BadgeComponent, resolve: { route: RouteResolver } },
             { path: 'card', component: CardComponent, data: { compositions: ['HTML', 'CSS', 'JS'] }, resolve: { route: RouteResolver } },
@@ -90,6 +85,16 @@ export const uiRoutes: Routes = [
             { path: 'loading-indicator' },
             { path: 'progress', component: ProgressComponent, resolve: { route: RouteResolver } },
             { path: 'skeleton', component: SkeletonComponent, resolve: { route: RouteResolver } },
+        ]
+    },
+    {
+        path: 'form', data: { icon: 'sliders' }, resolve: { route: RouteResolver }, children: [
+            { path: 'button', component: ButtonComponent, data: { compositions: ['HTML', 'CSS', 'JS'] }, resolve: { route: RouteResolver } },
+            { path: 'select', component: SelectComponent, resolve: { route: RouteResolver } },
+            { path: 'input', component: InputComponent, resolve: { route: RouteResolver } },
+            { path: 'textarea', component: TextareaComponent, resolve: { route: RouteResolver } },
+            { path: 'check', component: CheckComponent, resolve: { route: RouteResolver } },
+            { path: 'switch', component: SwitchComponent, resolve: { route: RouteResolver } },
         ]
     },
     {

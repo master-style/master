@@ -42,12 +42,6 @@ import { DialogComponent } from './interactions/dialog/dialog.component';
 import { RippleComponent } from './interactions/ripple/ripple.component';
 import { LoadingComponent } from './interactions/loading/loading.component';
 import { AnimationComponent } from './animation/animation.component';
-import { ButtonComponent } from './components/button/button.component';
-import { InputComponent } from './components/input/input.component';
-import { SelectComponent } from './components/select/select.component';
-import { TextareaComponent } from './components/textarea/textarea.component';
-import { SwitchComponent } from './components/switch/switch.component';
-import { CheckComponent } from './components/check/check.component';
 import { FigureComponent } from './decorators/figure/figure.component';
 import { ItemComponent } from './components/item/item.component';
 import { SkeletonComponent } from './components/skeleton/skeleton.component';
@@ -55,11 +49,17 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
 import { ContentComponent } from './components/content/content.component';
 import { OverlayComponent } from './components/overlay/overlay.component';
 
-import { MasterRadioValueAccessor, MasterRadioRegistry } from './components/check/check.directive';
+import { ButtonComponent } from './form/button/button.component';
+import { InputComponent } from './form/input/input.component';
+import { SelectComponent } from './form/select/select.component';
+import { TextareaComponent } from './form/textarea/textarea.component';
+import { SwitchComponent } from './form/switch/switch.component';
+import { CheckComponent } from './form/check/check.component';
+
+import { FormModule } from './form/form.module';
 
 @NgModule({
     declarations: [
-        MasterRadioValueAccessor,
         IconComponent,
         ColorComponent,
         BreakpointComponent,
@@ -85,25 +85,25 @@ import { MasterRadioValueAccessor, MasterRadioRegistry } from './components/chec
         RippleComponent,
         LoadingComponent,
         AnimationComponent,
-        ButtonComponent,
-        InputComponent,
-        SelectComponent,
-        TextareaComponent,
-        SwitchComponent,
-        CheckComponent,
         FigureComponent,
         ItemComponent,
         SkeletonComponent,
         BreadcrumbComponent,
         ContentComponent,
-        OverlayComponent
+        OverlayComponent,
+        ButtonComponent,
+        InputComponent,
+        SelectComponent,
+        TextareaComponent,
+        SwitchComponent,
+        CheckComponent
     ],
     imports: [
         SharedModule,
         UiRoutingModule,
+        FormModule,
         FormsModule
     ],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    providers: [MasterRadioRegistry]
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class UiModule { }

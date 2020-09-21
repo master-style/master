@@ -1,4 +1,4 @@
-import MasterControl from '@ui/shared/control';
+import MasterControl from '@ui/form/control';
 import { Element, Attr } from '@element';
 import css from './index.scss';
 
