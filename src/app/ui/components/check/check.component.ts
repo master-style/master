@@ -7,12 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CheckComponent implements OnInit {
 
-    value = 'female';
+    value;
+
     nativeValue;
 
     colors = [
         { name: 'red' },
-        { name: 'blue', checked: true }
+        { name: 'blue' }
     ];
 
     constructor() { }
@@ -21,7 +22,8 @@ export class CheckComponent implements OnInit {
     }
 
     submit(form) {
-        console.log(form.value, this.colors);
+        if (!form.valid) return console.log('invalid');
+        console.log('submit', form.value);
     }
 
 }

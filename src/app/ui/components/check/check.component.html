@@ -1,17 +1,16 @@
 <div class="demo">
     <div class="demo-body">
-        <form #heroForm="ngForm" (ngSubmit)="submit(heroForm)">
+        <form #form="ngForm">
             <ng-container *ngFor="let eachColor of colors">
-                <m-check type="checkbox" name="color" [(ngModel)]="eachColor.checked" ngDefaultControl>
-                    <label>{{ eachColor.name }}</label>
+                <m-check #color type="checkbox" required name="color" [value]="eachColor.name" ngDefaultControl>
+                    <label>{{ eachColor.name }}, {{ color.valid }}</label>
                 </m-check>
-                <!-- <input type="checkbox" name="color" [ngModel]="eachColor.name"> -->
+                <!-- <input type="radio" name="native-color" [value]="eachColor.name" [(ngModel)]="nativeValue"> -->
             </ng-container>
-            <button type="submit" ngDefaultControl>
-                送出
-            </button>
+            <m-button (click)="submit(form)">送出</m-button>
         </form>
         <span>{{ value }}</span>
         <span>{{ nativeValue }}</span>
     </div>
 </div>
+{{ form.valid }}, {{ form.value | json }}

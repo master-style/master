@@ -283,21 +283,21 @@
 </template>
 
 <h2 id="state">{{ 'state' | translate }}</h2>
+<doc-prop [name]="'busy'" [types]="['boolean']"></doc-prop>
+<div class="demo">
+    <div class="demo-body">
+        <div class="y:sm c:center">
+            <m-button class="x theme+" busy>submit</m-button>
+        </div>
+    </div>
+</div>
+
 <doc-prop [name]="'disabled'" [types]="['boolean']" [description]="'The user cannot interact with the component.'">
 </doc-prop>
 <div class="demo">
     <div class="demo-body">
         <div class="y:sm c:center">
             <m-button class="x" disabled>submit</m-button>
-        </div>
-    </div>
-</div>
-
-<doc-prop [name]="'loading'" [types]="['boolean']"></doc-prop>
-<div class="demo">
-    <div class="demo-body">
-        <div class="y:sm c:center">
-            <m-button class="x theme+" loading>submit</m-button>
         </div>
     </div>
 </div>

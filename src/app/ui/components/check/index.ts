@@ -37,7 +37,24 @@ export class MasterCheck extends MasterControl {
     @Attr()
     type: string = 'checkbox';
 
-    @Attr()
+    @Attr({
+        updater(check: MasterCheck, value: any, oldValue: any) {
+            check.body.checked = value;
+            check.toggleAttribute('aria-checked', !!value);
+
+            if (check.type === 'radio' && check.name) {
+                document.getElementsByName(check.name)
+                    .forEach((eachCheck: MasterCheck) => {
+                        if (
+                            eachCheck !== check
+                            && eachCheck.tagName === 'M-CHECK'
+                        ) {
+                            eachCheck.checked = false;
+                        }
+                    });
+            }
+        }
+    })
     checked: boolean;
 
     @Attr()
@@ -46,10 +63,10 @@ export class MasterCheck extends MasterControl {
     @Attr({
         reflect: false,
         render: false,
-        updater(input: MasterCheck, value: any, oldValue: any) {
-            console.log(input);
+        updater(check: MasterCheck, value: any, oldValue: any) {
+            console.log(check);
             console.log(':', value, ':', oldValue);
-            input.body.value = value ?? null;
+            check.body.value = value ?? null;
         }
     })
     value: any;

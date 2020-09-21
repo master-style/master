@@ -31,15 +31,44 @@ export default class MasterClickable extends HTMLElement {
                 }, this.slotTemplate || ['slot']
             ];
         } else {
-            return this.slotTemplate ? [
-                'div', { part: 'root' },
-                this.slotTemplate
-            ] : ['slot', { part: 'root' }];
+            return this.slotTemplate
+                ? [
+                    'div', {
+                        part: 'root'
+                    },
+                    this.slotTemplate
+                ]
+                : [
+                    'slot', {
+                        part: 'root'
+                    }
+                ];
         }
     });
 
-    @Attr()
-    type: string;
+    @Attr({
+        updater(clickable: MasterClickable, value: string, oldValue: string) {
+            if (value === 'submit') {
+                clickable.on('click', () => {
+                    const form = clickable.closest('form');
+                    if (form) {
+                        if (!form.checkValidity()) return;
+                        if (form.requestSubmit) {
+                            form.requestSubmit(this);
+                        } else {
+                            form.submit();
+                        }
+                    }
+                }, { id: clickable, passive: true });
+            } else if (
+                value !== 'submit'
+                || oldValue === 'submit'
+            ) {
+                clickable.off({ id: clickable });
+            }
+        }
+    })
+    type: string = 'button';
 
     @Attr()
     rel: string;
@@ -55,16 +84,6 @@ export default class MasterClickable extends HTMLElement {
 
     @Attr()
     target: string;
-
-    protected typeUpdater(value, oldValue) {
-        if (value === 'submit') {
-            this.on('click', () => {
-                this.closest('FORM').dispatchEvent(new Event('submit'));
-            }, { id: this, passive: true });
-        } else if (oldValue === 'submit') {
-            this.off({ id: this });
-        }
-    };
 
     render() {
         this.template.render(this.shadowRoot);

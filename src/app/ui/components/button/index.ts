@@ -12,9 +12,6 @@ export class MasterButton extends MasterClickable {
 
     readonly elementName = NAME;
 
-    @Attr()
-    type: string = 'button';
-
     @Attr({ render: false })
-    loading: boolean;
+    busy: boolean;
 }
