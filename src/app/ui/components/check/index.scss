@@ -185,7 +185,7 @@
     }
 }
 
-svg {
+[part=check] {
     width: 20px;
     height: 20px;
     border: 2px solid;
@@ -194,7 +194,7 @@ svg {
     border-radius: 0.1875rem;
 }
 
-path {
+[part=check] path {
     fill: none;
     box-sizing: border-box;
     stroke: var(--f-theme);
@@ -217,7 +217,7 @@ path {
         font-weight: 500;
     }
 
-    path {
+    [part=check] path {
         stroke-dashoffset: 0;
     }
 }

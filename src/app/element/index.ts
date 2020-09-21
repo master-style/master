@@ -89,8 +89,6 @@ export function Element(options: ElementOptions) {
                     const eachPropKey = eachAttrOptions.propKey;
                     const eachPropValue = this['_' + eachPropKey];
                     const eachUpdater = eachAttrOptions.updater;
-                    if (constructor.name === 'MasterCheck' && eachPropKey === 'value')
-                        console.log(constructor.name, eachAttrOptions['constructor']);
                     if (eachUpdater) {
                         eachUpdater(this, eachPropValue);
                     }

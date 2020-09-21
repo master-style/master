@@ -26,6 +26,7 @@ export class MasterCheck extends MasterControl {
 
     template = $(() => [
         'svg', {
+            part: 'check',
             viewBox: '0 0 20 20',
             $namespace: 'http://www.w3.org/2000/svg',
             $html: '<path d="M5.5 10l2 2 1 1 6 -6">'
@@ -46,7 +47,8 @@ export class MasterCheck extends MasterControl {
         reflect: false,
         render: false,
         updater(input: MasterCheck, value: any, oldValue: any) {
-            console.log('check value updater', input.constructor.name);
+            console.log(input);
+            console.log(':', value, ':', oldValue);
             input.body.value = value ?? null;
         }
     })

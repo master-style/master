@@ -11,8 +11,9 @@
             </m-input>
             <m-input class="x:4@sm outlined" label="company" value="Aoyue Design" type="text" readonly>
             </m-input>
-            <m-input class="x:4@sm underlined" label="username" placeholder="enter your email" expanded type="email">
+            <m-input class="x:4@sm underlined" label="username" placeholder="enter your email" expanded type="email" ngDefaultControl [(ngModel)]="mail">
             </m-input>
+            {{ mail }}
         </div>
     </div>
 </div>

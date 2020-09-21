@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InputComponent implements OnInit {
 
+    mail: string;
+
     constructor() { }
 
     ngOnInit(): void { }
