@@ -48,6 +48,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
 import { ContentComponent } from './components/content/content.component';
 import { OverlayComponent } from './components/overlay/overlay.component';
 
+import { FormComponent } from './form/form.component';
 import { ButtonComponent } from './form/button/button.component';
 import { InputComponent } from './form/input/input.component';
 import { SelectComponent } from './form/select/select.component';
@@ -95,7 +96,8 @@ import { FormModule } from './form/form.module';
         SelectComponent,
         TextareaComponent,
         SwitchComponent,
-        CheckComponent
+        CheckComponent,
+        FormComponent
     ],
     imports: [
         SharedModule,

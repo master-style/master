@@ -49,6 +49,7 @@ import { ItemComponent } from './components/item/item.component';
 import { SkeletonComponent } from './components/skeleton/skeleton.component';
 import { ContentComponent } from './components/content/content.component';
 
+import { FormComponent } from './form/form.component';
 import { TextareaComponent } from './form/textarea/textarea.component';
 import { SwitchComponent } from './form/switch/switch.component';
 import { SelectComponent } from './form/select/select.component';
@@ -88,7 +89,7 @@ export const uiRoutes: Routes = [
         ]
     },
     {
-        path: 'form', data: { icon: 'sliders' }, resolve: { route: RouteResolver }, children: [
+        path: 'form', component: FormComponent, data: { icon: 'sliders' }, resolve: { route: RouteResolver }, children: [
             { path: 'button', component: ButtonComponent, data: { compositions: ['HTML', 'CSS', 'JS'] }, resolve: { route: RouteResolver } },
             { path: 'select', component: SelectComponent, resolve: { route: RouteResolver } },
             { path: 'input', component: InputComponent, resolve: { route: RouteResolver } },

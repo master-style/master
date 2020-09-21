@@ -44,16 +44,52 @@ export class CodeDirective {
     @Input() codeCollapsed: boolean;
     @Input() selector: string;
 
+    @Input()
+    set codeChangesFactor(value) {
+        console.log(value);
+        window.requestAnimationFrame(() => {
+            this.highlight();
+        });
+    }
+
     demoElement: Element;
     preElement: Element;
     collapseButton: Element;
     copyButton: Element;
+    functionElement: Element;
+
+    init = false;
 
     constructor(
         private elementRef: ElementRef
     ) { }
 
     ngAfterContentInit(): void {
+        //Called after ngOnInit when the component's or directive's content has been initialized.
+        //Add 'implements AfterContentInit' to the class.
+        if (!this.init) {
+            this.highlight();
+        }
+    }
+
+    highlight(): void {
+        this.init = true;
+
+        if (this.demoElement) {
+            this.demoElement.remove();
+            this.demoElement = null;
+        }
+
+        if (this.preElement) {
+            this.preElement.remove();
+            this.preElement = null;
+        }
+
+        if (this.functionElement) {
+            this.functionElement.remove();
+            this.functionElement = null;
+        }
+
         const element = this.elementRef.nativeElement;
         const isTemplateTag = element.tagName === 'TEMPLATE';
         const isCodeTag = element.tagName === 'CODE';
@@ -89,68 +125,65 @@ export class CodeDirective {
                 break;
         }
 
-        window.requestAnimationFrame(() => {
+        code = prettier.format(code, {
+            parser: this.codeLang,
+            plugins: [prettierParser[this.codeLang]],
+            ...prettierOpiton
+        })
+            .replace('=""', '');
 
-            code = prettier.format(code, {
-                parser: this.codeLang,
-                plugins: [prettierParser[this.codeLang]],
-                ...prettierOpiton
-            })
-                .replace('=""', '');
+        code = Prism.highlight(code, Prism.languages[this.codeLang], this.codeLang);
 
-            code = Prism.highlight(code, Prism.languages[this.codeLang], this.codeLang);
-
-            if (isCodeTag) {
-                element.innerHTML = code;
-            } else {
-                const codeWrapElement =
-                    $('div', { class: 'code-wrap' },
-                        $('code', { class: 'language-' + this.codeLang }).html(code)
-                    );
-                this.preElement = $('pre', {},
-                    $('div', { class: 'code-language' }, this.codeLang),
-                    codeWrapElement
+        if (isCodeTag) {
+            element.innerHTML = code;
+        } else {
+            const codeWrapElement =
+                $('div', { class: 'code-wrap' },
+                    $('code', { class: 'language-' + this.codeLang }).html(code)
                 );
-                element.before(this.preElement);
-                const functionElement =
-                    $('div', { class: 'code-function c:right', style: 'margin-top: .25rem' });
-                if (this.codeDemo) {
-                    this.collapseButton =
-                        $('m-button', { class: 'round xs f:fade++' })
-                            .html('<i class="i-code">')
-                            .on('click', () => {
-                                this.demoElement.toggleAttr('collapsed');
-                            });
-                    functionElement.append(this.collapseButton);
-                }
-                this.copyButton =
+            this.preElement = $('pre', {},
+                $('div', { class: 'code-language' }, this.codeLang),
+                codeWrapElement
+            );
+            element.before(this.preElement);
+            this.functionElement =
+                $('div', { class: 'code-function c:right', style: 'margin-top: .25rem' });
+            if (this.codeDemo) {
+                this.collapseButton =
                     $('m-button', { class: 'round xs f:fade++' })
-                        .html('<i class="i-copy">')
-                        .on('click', (e) => {
-                            // Select some text (you could also create a range)
-                            this.preElement.css('display', 'block');
-                            const range = document.createRange();
-                            range.selectNode(codeWrapElement);
-                            const selection = window.getSelection();
-                            selection.removeAllRanges();
-                            selection.addRange(range);
-
-                            if (document.execCommand('copy')) {
-                                console.log('copied');
-                            }
-                            this.preElement.css('display', null);
+                        .html('<i class="i-code">')
+                        .on('click', () => {
+                            this.demoElement.toggleAttr('collapsed');
                         });
-
-                functionElement.append(this.copyButton);
-                element.before(functionElement);
+                this.functionElement.append(this.collapseButton);
             }
+            this.copyButton =
+                $('m-button', { class: 'round xs f:fade++' })
+                    .html('<i class="i-copy">')
+                    .on('click', (e) => {
+                        // Select some text (you could also create a range)
+                        this.preElement.css('display', 'block');
+                        const range = document.createRange();
+                        range.selectNode(codeWrapElement);
+                        const selection = window.getSelection();
+                        selection.removeAllRanges();
+                        selection.addRange(range);
 
-            if (this.codeCollapsed === undefined)
-                this.codeCollapsed = this.codeDemo ?? false;
-            if (this.demoElement)
-                this.demoElement.toggleAttr('collapsed', this.codeCollapsed);
+                        if (document.execCommand('copy')) {
+                            console.log('copied');
+                        }
+                        this.preElement.css('display', null);
+                    });
 
-        });
+            this.functionElement.append(this.copyButton);
+            element.before(this.functionElement);
+        }
+
+        if (this.codeCollapsed === undefined)
+            this.codeCollapsed = this.codeDemo ?? false;
+        if (this.demoElement)
+            this.demoElement.toggleAttr('collapsed', this.codeCollapsed);
+
     }
 
 }

@@ -12,9 +12,4 @@ export class CheckComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    submit(form) {
-        if (!form.valid) return console.log('invalid');
-        console.log('submit', form.value);
-    }
-
 }

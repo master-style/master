@@ -1,0 +1,31 @@
+<div class="demo">
+    <div class="demo-body">
+        <form #form="ngForm">
+            <div class="y:lg">
+                <m-check type="radio"
+                         name="sex"
+                         [value]="sex"
+                         ngModel
+                         required
+                         class="x"
+                         *ngFor="let sex of ['male', 'female']">
+                    <label>{{ sex }}</label>
+                </m-check>
+            </div>
+            <div class="y:lg" ngModelGroup="color">
+                <m-check type="checkbox"
+                         [name]="color"
+                         ngModel
+                         required
+                         class="x"
+                         *ngFor="let color of ['red', 'blue']">
+                    <label>{{ color }}</label>
+                </m-check>
+            </div>
+        </form>
+    </div>
+</div>
+<m-button class="outlined" (click)="submit(form)">送出</m-button>
+<template [codeLang]="'typescript'" [codeChangesFactor]="form.value" *ngIf="form.dirty">
+   const value = {{ form.value | json }}
+</template>
