@@ -25,7 +25,7 @@
         </form>
     </div>
 </div>
-<m-button class="outlined" (click)="submit(form)">送出</m-button>
-<template [codeLang]="'typescript'" [codeChangesFactor]="form.value" *ngIf="form.dirty">
-   const value = {{ form.value | json }}
+<!-- <m-button class="outlined" (click)="submit(form)">送出</m-button> -->
+<template [codeLang]="'typescript'" [codeChangesFactor]="form.value" [codeCopy]=false *ngIf="form.dirty">
+form.value = {{ form.value | json }}
 </template>

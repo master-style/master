@@ -42,6 +42,7 @@ export class CodeDirective {
     @Input() codeLang: string;
     @Input() codeDemo: boolean;
     @Input() codeCollapsed: boolean;
+    @Input() codeCopy: boolean = true;
     @Input() selector: string;
 
     @Input()
@@ -157,25 +158,28 @@ export class CodeDirective {
                         });
                 this.functionElement.append(this.collapseButton);
             }
-            this.copyButton =
-                $('m-button', { class: 'round xs f:fade++' })
-                    .html('<i class="i-copy">')
-                    .on('click', (e) => {
-                        // Select some text (you could also create a range)
-                        this.preElement.css('display', 'block');
-                        const range = document.createRange();
-                        range.selectNode(codeWrapElement);
-                        const selection = window.getSelection();
-                        selection.removeAllRanges();
-                        selection.addRange(range);
 
-                        if (document.execCommand('copy')) {
-                            console.log('copied');
-                        }
-                        this.preElement.css('display', null);
-                    });
+            if (this.codeCopy) {
+                this.copyButton =
+                    $('m-button', { class: 'round xs f:fade++' })
+                        .html('<i class="i-copy">')
+                        .on('click', (e) => {
+                            // Select some text (you could also create a range)
+                            this.preElement.css('display', 'block');
+                            const range = document.createRange();
+                            range.selectNode(codeWrapElement);
+                            const selection = window.getSelection();
+                            selection.removeAllRanges();
+                            selection.addRange(range);
 
-            this.functionElement.append(this.copyButton);
+                            if (document.execCommand('copy')) {
+                                console.log('copied');
+                            }
+                            this.preElement.css('display', null);
+                        });
+
+                this.functionElement.append(this.copyButton);
+            }
             element.before(this.functionElement);
         }
 

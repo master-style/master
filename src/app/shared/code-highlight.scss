@@ -48,6 +48,10 @@ pre {
     +template+h2 {
         margin-top: .25rem;
     }
+
+    &:empty {
+        display: none;
+    }
 }
 
 .code-wrap {
