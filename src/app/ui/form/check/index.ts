@@ -34,7 +34,11 @@ export class MasterCheck extends MasterControl {
         'slot'
     ]);
 
-    @Attr()
+    @Attr({
+        updater(check: MasterCheck, value: any, oldValue: any) {
+            check.setAttribute('role', value);
+        }
+    })
     type: string = 'checkbox';
 
     @Attr({
