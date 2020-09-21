@@ -77,7 +77,7 @@ export class MasterCheck extends MasterControl {
         reflect: false,
         render: false,
         updater(check: MasterCheck, value: any, oldValue: any) {
-            console.log(':', value, ':', oldValue);
+            if (value === oldValue) return;
             check.body.value = value ?? null;
         }
     })
