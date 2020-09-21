@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RadioControlValueAccessor, RadioControlRegistry } from './check/radio.directive';
 import { CheckboxRequiredValidator, CheckboxControlValueAccessor } from './check/checkbox.directive';
+import { DefaultValueAccessor } from './control.directive';
 
 const SHARED_DIRECTIVES: any[] = [
     RadioControlValueAccessor,
     CheckboxControlValueAccessor,
-    CheckboxRequiredValidator
+    CheckboxRequiredValidator,
+    DefaultValueAccessor
 ];
 
 @NgModule({
