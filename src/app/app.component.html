@@ -100,7 +100,7 @@
             <span [ngStyle]="{'padding-left': size !== 'sm' ? '1.9375rem' : null}">{{ route.path | translate }}</span>
         </m-item>
         <m-collapse *ngIf="route.children">
-            <m-list>
+            <m-list style="margin-bottom: .5rem">
                 <ng-container *ngFor="let eachRoute of route.children"
                               [ngTemplateOutlet]="routeGroup"
                               [ngTemplateOutletContext]="{route: eachRoute, size: 'xs'}">
