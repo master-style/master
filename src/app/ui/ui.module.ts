@@ -1,5 +1,4 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { UiRoutingModule } from './ui-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { IconComponent } from './icon/icon.component';
@@ -101,8 +100,7 @@ import { FormModule } from './form/form.module';
     imports: [
         SharedModule,
         UiRoutingModule,
-        FormModule,
-        FormsModule
+        FormModule
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -12,12 +12,12 @@ import { FormsModule } from '@angular/forms';
         CommonModule,
         FormsModule
     ],
-    exports: [
-        RadioValueAccessor
-    ],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
     providers: [
         RadioRegistry
-    ]
+    ],
+    exports: [
+        FormsModule
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class FormModule { }

@@ -54,7 +54,7 @@ export class MasterInput extends MasterControl {
                 if (value === '') {
                     value = null;
                 } else {
-                    value = isNaN(+value) ? value : +value;
+                    value = isNaN(+value) ? null : +value;
                 }
             }
             return { value, oldValue };
