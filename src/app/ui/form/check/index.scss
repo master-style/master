@@ -59,6 +59,10 @@
     [part=ban-icon] {
         display: block;
     }
+
+    ::slotted(label) {
+        color: var(--f-fadest);
+    }
 }
 
 :host([disabled][checked]) {
