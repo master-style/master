@@ -52,8 +52,14 @@ export class MasterCheck extends HTMLElement {
     required: boolean;
 
     @Attr()
-    prompt: string;
+    promptValid: string;
 
+    @Attr()
+    promptInvalid: string;
+
+    @Attr()
+    promptWarning: string;
+    
     @Attr()
     autocomplete: string;
 

@@ -56,7 +56,13 @@ export class MasterSelect extends HTMLElement {
     required: boolean;
 
     @Attr()
-    prompt: string;
+    promptValid: string;
+
+    @Attr()
+    promptInvalid: string;
+
+    @Attr()
+    promptWarning: string;
 
     @Attr({ key: 'readonly' })
     readOnly: boolean;

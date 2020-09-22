@@ -21,9 +21,14 @@ export class MasterInput extends HTMLElement {
             required: this.required,
             readonly: this.readOnly,
             pattern: this.pattern,
-            $created: (element: HTMLElement) => this.body = element
+            $created: (element: HTMLInputElement) => {
+                this.body = element;
+                this.validity = element.validity;
+            }
         }
     ]);
+
+    validity: ValidityState;
 
     template = $(() => [
         'slot',
@@ -50,7 +55,13 @@ export class MasterInput extends HTMLElement {
     required: boolean;
 
     @Attr()
-    prompt: string;
+    promptValid: string;
+
+    @Attr()
+    promptInvalid: string;
+
+    @Attr()
+    promptWarning: string;
 
     @Attr({ key: 'readonly' })
     readOnly: boolean;
@@ -82,6 +93,7 @@ export class MasterInput extends HTMLElement {
             input.empty = value === null || value === undefined || value === '';
             input.body.value = value ?? null;
         },
+        render: false,
         reflect: false
     })
     value: any;

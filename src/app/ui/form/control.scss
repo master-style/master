@@ -203,12 +203,6 @@ label {
     white-space: nowrap;
     letter-spacing: inherit;
     font-weight: inherit;
-    // i {
-    //     display: inline-flex;
-    //     color: inherit;
-    //     margin-right: $xs;
-    //     line-height: 0;
-    // }
 }
 
 fieldset {
@@ -318,66 +312,72 @@ m-icon {
     color: var(--f-fade);
 }
 
-// [validate] {
+:host([prompt-valid][class*=-valid][class*=-dirty]),
+:host([prompt-valid][class*=-valid][class*=-dirty]) {
 
-//     &:valid:not(:placeholder-shown),
-//     &:valid[class*=dirty],
-//     &.valid[class*=dirty],
-//     &[class*=valid][class*=dirty] {
-//         ~fieldset {
-//             --theme: var(--green);
-//             border-color: var(--green);
-//         }
+    label {
+        color: var(--green)
+    }
 
-//         ~label {
-//             color: var(--f-green)
-//         }
+    &:after {
+        content: attr(prompt-valid);
+        position: absolute;
+        z-index: $z-abs;
+        bottom: -.1875rem;
+        right: 0;
+        transform: translateY(100%);
+        font-size: var(--f-xxs);
+        font-weight: 500;
+        color: var(--green);
+        border-radius: $xxs;
+        background-color: var(--greenFader);
+        padding: .1875rem .375rem;
+    }
+}
 
-//         ~.validate {
-//             --bg-theme: var(--greenFader);
-//             --f-theme: var(--green);
-//             visibility: visible;
-//         }
-//     }
-// }
+:host([prompt-warning]),
+:host([prompt-warning]) {
 
-// [invalidate] {
+    label {
+        color: var(--f-yellow)!important
+    }
 
-//     /* state: invalid */
-//     &:invalid:not(:placeholder-shown),
-//     &:invalid[class*=dirty],
-//     &.invalid[class*=dirty],
-//     &[class*=-invalid][class*=dirty] {
-//         ~fieldset {
-//             --theme: var(--red);
-//             border-color: var(--red);
-//         }
+    &:after {
+        content: attr(prompt-warning);
+        position: absolute;
+        z-index: $z-abs;
+        bottom: -.1875rem;
+        right: 0;
+        transform: translateY(100%);
+        font-size: var(--f-xxs);
+        font-weight: 500;
+        color: var(--f-yellow)!important;
+        border-radius: $xxs;
+        background-color: var(--yellowFader)!important;
+        padding: .1875rem .375rem;
+    }
+}
 
-//         ~label {
-//             color: var(--f-red)
-//         }
+:host([prompt-invalid][class*=-invalid][class*=-dirty]),
+:host([prompt-invalid][class*=-invalid][class*=-dirty]) {
+    --b-color: var(--red);
 
-//         ~.invalidate {
-//             --bg-theme: var(--redFader);
-//             --f-theme: var(--red);
-//             visibility: visible;
-//         }
-//     }
-// }
+    label {
+        color: var(--f-red)!important
+    }
 
-// [warning]:not(:placeholder-shown) {
-//     ~fieldset {
-//         --theme: var(--yellow);
-//         border-color: var(--yellow);
-//     }
-
-//     ~label {
-//         color: var(--f-yellow)
-//     }
-
-//     ~m-badge.warning {
-//         --bg-theme: var(--yellowFader);
-//         --f-theme: var(--yellow);
-//         visibility: visible;
-//     }
-// }
+    &:after {
+        content: attr(prompt-invalid);
+        position: absolute;
+        z-index: $z-abs;
+        bottom: -.1875rem;
+        right: 0;
+        transform: translateY(100%);
+        font-size: var(--f-xxs);
+        font-weight: 500;
+        color: var(--f-red)!important;
+        border-radius: $xxs;
+        background-color: var(--redFader)!important;
+        padding: .1875rem .375rem;
+    }
+}
