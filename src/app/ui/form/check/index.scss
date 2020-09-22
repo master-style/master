@@ -200,18 +200,42 @@
     border-radius: 0.1875rem;
 }
 
-[part=check] path {
+[part=ban-icon] {
+    stroke: var(--b-fadest);
+    display: none;
+}
+
+[part=check-icon],
+[part=ban-icon] {
     fill: none;
     box-sizing: border-box;
-    stroke: var(--f-theme);
     stroke-width: 2px;
     stroke-linecap: round;
     stroke-linejoin: round;
+}
+
+[part=check-icon] {
+    stroke: var(--f-theme);
     stroke-dasharray: 100%;
     stroke-dashoffset: 100%;
     will-change: stroke-dashoffset;
-    contain: strict;
     transition: .3s ease-out stroke-dashoffset;
+}
+
+:host([disabled]) {
+    [part=check-icon] {
+        stroke: var(--f-fadest);
+    }
+
+    [part=ban-icon] {
+        display: block;
+    }
+}
+
+:host([disabled][checked]) {
+    [part=ban-icon] {
+        display: none;
+    }
 }
 
 ::slotted(label) {

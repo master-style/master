@@ -32,7 +32,7 @@ export class MasterCheck extends MasterControl {
             part: 'check',
             viewBox: '0 0 20 20',
             $namespace: 'http://www.w3.org/2000/svg',
-            $html: '<path d="M5.5 10l2 2 1 1 6 -6">'
+            $html: '<path part="check-icon" d="M5.5 10l2 2 1 1 6 -6"/><path part="ban-icon" d="M19 19L1 1h0"/>'
         },
         'slot'
     ]);
