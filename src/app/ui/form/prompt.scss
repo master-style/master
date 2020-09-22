@@ -1,0 +1,71 @@
+@import '../variables';
+
+:host([prompt-valid][class*=-valid][class*=-dirty]),
+:host([prompt-valid][class*=-valid][class*=-dirty]) {
+
+    label {
+        color: var(--green)
+    }
+
+    &:after {
+        content: attr(prompt-valid);
+        position: absolute;
+        z-index: $z-abs;
+        bottom: -.1875rem;
+        right: 0;
+        transform: translateY(100%);
+        font-size: var(--f-xxs);
+        font-weight: 500;
+        color: var(--green);
+        border-radius: $xxs;
+        background-color: var(--greenFader);
+        padding: .1875rem .375rem;
+    }
+}
+
+:host([prompt-warning]),
+:host([prompt-warning]) {
+
+    label {
+        color: var(--f-yellow) !important
+    }
+
+    &:after {
+        content: attr(prompt-warning);
+        position: absolute;
+        z-index: $z-abs;
+        bottom: -.1875rem;
+        right: 0;
+        transform: translateY(100%);
+        font-size: var(--f-xxs);
+        font-weight: 500;
+        color: var(--f-yellow) !important;
+        border-radius: $xxs;
+        background-color: var(--yellowFader) !important;
+        padding: .1875rem .375rem;
+    }
+}
+
+:host([prompt-invalid][class*=-invalid][class*=-dirty]),
+:host([prompt-invalid][class*=-invalid][class*=-dirty]) {
+    --b-color: var(--red);
+
+    label {
+        color: var(--f-red) !important
+    }
+
+    &:after {
+        content: attr(prompt-invalid);
+        position: absolute;
+        z-index: $z-abs;
+        bottom: -.1875rem;
+        right: 0;
+        transform: translateY(100%);
+        font-size: var(--f-xxs);
+        font-weight: 500;
+        color: var(--f-red) !important;
+        border-radius: $xxs;
+        background-color: var(--redFader) !important;
+        padding: .1875rem .375rem;
+    }
+}

@@ -1,4 +1,5 @@
 @import '../control';
+@import '../prompt';
 
 :host(.outlined) {
     ::slotted([part=body]) {
