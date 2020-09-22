@@ -30,6 +30,7 @@ export function Element(options: ElementOptions) {
         prototype.attributeChangedCallback = function (attrKey, oldValue, value) {
             if (value === oldValue) return;
             const eachAttrOptions = allAttrOptions[attrKey];
+            console.log(attrKey, eachAttrOptions);
             const type = eachAttrOptions.type;
             value = parseAttrValue(value, type);
             oldValue = parseAttrValue(oldValue, type);
