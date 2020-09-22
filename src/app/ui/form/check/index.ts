@@ -1,4 +1,3 @@
-import MasterControl from '@ui/form/control';
 import { Element, Attr } from '@element';
 import css from './index.scss';
 
@@ -11,7 +10,7 @@ const NAME = 'check';
     tag: 'm-' + NAME,
     css
 })
-export class MasterCheck extends MasterControl {
+export class MasterCheck extends HTMLElement {
 
     readonly elementName: string = NAME;
 
@@ -37,6 +36,26 @@ export class MasterCheck extends MasterControl {
         },
         'slot'
     ]);
+
+    body: any;
+
+    @Attr({ observe: false, render: false })
+    role: string;
+
+    @Attr()
+    name: string;
+
+    @Attr()
+    disabled: boolean;
+
+    @Attr()
+    required: boolean;
+
+    @Attr()
+    prompt: string;
+
+    @Attr()
+    autocomplete: string;
 
     @Attr()
     interface: string = 'check';
@@ -95,6 +114,7 @@ export class MasterCheck extends MasterControl {
 
     onRemoved() {
         connectedChecks.delete(this);
+        this.off({ id: this.elementName });
     }
 
     render() {

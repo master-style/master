@@ -1,4 +1,3 @@
-import MasterControl from '@ui/form/control';
 import { Element, Attr } from '@element';
 import css from './index.scss';
 
@@ -8,7 +7,7 @@ const NAME = 'textarea';
     tag: 'm-' + NAME,
     css
 })
-export class MasterTextarea extends MasterControl {
+export class MasterTextarea extends HTMLElement {
 
     readonly elementName = NAME;
 
@@ -35,6 +34,23 @@ export class MasterTextarea extends MasterControl {
         ],
         'label', { $text: this.label }
     ]);
+
+    body: any;
+
+    @Attr({ observe: false, render: false })
+    role: string = 'textbox';
+
+    @Attr()
+    name: string;
+
+    @Attr()
+    disabled: boolean;
+
+    @Attr()
+    required: boolean;
+
+    @Attr()
+    prompt: string;
 
     @Attr({ key: 'readonly' })
     readOnly: boolean;

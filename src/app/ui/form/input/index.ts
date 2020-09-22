@@ -1,4 +1,3 @@
-import MasterControl from '@ui/form/control';
 import { Element, Attr } from '@element';
 import css from './index.scss';
 
@@ -8,11 +7,9 @@ const NAME = 'input';
     tag: 'm-' + NAME,
     css
 })
-export class MasterInput extends MasterControl {
+export class MasterInput extends HTMLElement {
 
     readonly elementName = NAME;
-
-    _role = 'textbox';
 
     controlTemplate = $(() => [
         'input', {
@@ -37,6 +34,23 @@ export class MasterInput extends MasterControl {
         ],
         'label', { $text: this.label }
     ]);
+
+    body: any;
+
+    @Attr({ observe: false, render: false })
+    role: string = 'textbox';
+
+    @Attr()
+    name: string;
+
+    @Attr()
+    disabled: boolean;
+
+    @Attr()
+    required: boolean;
+
+    @Attr()
+    prompt: string;
 
     @Attr({ key: 'readonly' })
     readOnly: boolean;
