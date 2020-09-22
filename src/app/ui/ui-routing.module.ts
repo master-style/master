@@ -89,7 +89,8 @@ export const uiRoutes: Routes = [
         ]
     },
     {
-        path: 'form', component: FormComponent, data: { icon: 'sliders' }, resolve: { route: RouteResolver }, children: [
+        path: 'form', data: { icon: 'sliders' }, resolve: { route: RouteResolver }, children: [
+            { path: 'overview', component: FormComponent, resolve: { route: RouteResolver } },
             { path: 'button', component: ButtonComponent, data: { compositions: ['HTML', 'CSS', 'JS'] }, resolve: { route: RouteResolver } },
             { path: 'select', component: SelectComponent, resolve: { route: RouteResolver } },
             { path: 'input', component: InputComponent, resolve: { route: RouteResolver } },

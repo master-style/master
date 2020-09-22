@@ -80,7 +80,7 @@ export class RadioControlRegistry {
 // tslint:disable-next-line: max-classes-per-file
 @Directive({
     selector:
-        'm-check[type=radio][formControlName],m-check[type=radio][formControl],m-check[type=radio][ngModel]',
+        'm-check[type=radio][formControlName],m-check[type=radio][formControl],m-check[type=radio][ngModel],m-switch[type=radio][formControlName],m-switch[type=radio][formControl],m-switch[type=radio][ngModel]',
     host: { '(change)': 'onChange()', '(blur)': 'onTouched()' },
     providers: [RADIO_VALUE_ACCESSOR]
 })

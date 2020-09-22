@@ -1,8 +1,8 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RadioControlValueAccessor, RadioControlRegistry } from './check/radio.directive';
-import { CheckboxRequiredValidator, CheckboxControlValueAccessor } from './check/checkbox.directive';
+import { RadioControlValueAccessor, RadioControlRegistry } from './radio.directive';
+import { CheckboxRequiredValidator, CheckboxControlValueAccessor } from './checkbox.directive';
 import { DefaultValueAccessor } from './control.directive';
 
 const SHARED_DIRECTIVES: any[] = [

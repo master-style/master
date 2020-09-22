@@ -50,7 +50,7 @@ export const CHECKBOX_REQUIRED_VALIDATOR: StaticProvider = {
  */
 @Directive({
     selector:
-        'm-check[type=checkbox][formControlName],m-check[type=checkbox][formControl],m-check[type=checkbox][ngModel]',
+        'm-check[type=checkbox][formControlName],m-check[type=checkbox][formControl],m-check[type=checkbox][ngModel],m-switch[type=checkbox][formControlName],m-switch[type=checkbox][formControl],m-switch[type=checkbox][ngModel]',
     host: { '(change)': 'onChange($event.target.checked)', '(blur)': 'onTouched()' },
     providers: [CHECKBOX_VALUE_ACCESSOR]
 })
