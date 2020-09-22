@@ -114,6 +114,7 @@
     transition: transform .2s ease, width .2s ease;
     transform: translateX(-6px);
     transform-origin: 0px -6px;
+    filter: url(#s);
 }
 
 :host([checked]) {
@@ -138,5 +139,17 @@
         width: 20px;
         transform: translateX(2px);
         transform-origin: 0px 2px;
+    }
+}
+
+:host([interface=switch][disabled]) {
+    [part=button-icon] {
+        filter: none;
+    }
+}
+
+:host([interface=switch][disabled][checked]) {
+    [part="switch"] {
+        opacity: .5;
     }
 }
