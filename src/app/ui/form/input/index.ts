@@ -73,7 +73,7 @@ export class MasterInput extends HTMLElement {
                 if (value === '') {
                     value = null;
                 } else {
-                    value = isNaN(+value) ? null : +value;
+                    value = isNaN(+value) ? 0 : +value;
                 }
             }
             return { value, oldValue };
@@ -121,6 +121,10 @@ export class MasterInput extends HTMLElement {
             .on('input', '[part=body]', (event: any) => {
                 this.value = event.target.value;
             }, { id: this.elementName, passive: true });
+    }
+
+    onRemoved() {
+        this.off({ id: this.elementName });
     }
 
     render() {

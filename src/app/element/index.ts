@@ -61,6 +61,7 @@ export function Element(options: ElementOptions) {
                     } else {
                         continue;
                     }
+
                     if (eachAttrOptions.reflect) {
                         if (eachAttrOptions.type === 'Boolean') {
                             this.toggleAttribute(eachAttrKey, value);
@@ -83,6 +84,7 @@ export function Element(options: ElementOptions) {
                 }
             }
             if (this.render) this.render();
+            this.ready = true;
             if (allAttrOptions) {
                 for (const eachAttrKey in constructor.allAttrOptions) {
                     const eachAttrOptions: AttrOptions = allAttrOptions[eachAttrKey];
@@ -94,7 +96,6 @@ export function Element(options: ElementOptions) {
                     }
                 }
             }
-            this.ready = true;
             if (onAdded) onAdded.call(this);
         };
 
