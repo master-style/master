@@ -70,8 +70,7 @@ export class MasterTextarea extends HTMLElement {
     @Attr({
         reflect: false,
         render: false,
-        updater(textarea: MasterTextarea, value: any, oldValue: any) {
-            console.log('textarea updater');
+        updater(textarea: MasterTextarea, value: any) {
             textarea.empty = value === null || value === undefined || value === '';
             textarea.body.value = value ?? null;
         }
@@ -99,6 +98,10 @@ export class MasterTextarea extends HTMLElement {
             .on('input', '[part=body]', (event: any) => {
                 this.value = event.target.value;
             }, { id: this.elementName, passive: true });
+    }
+
+    onRemoved() {
+        this.off({ id: this.elementName });
     }
 
     render() {
