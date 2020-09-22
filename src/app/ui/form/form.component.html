@@ -56,13 +56,15 @@
                         </m-input>
                     </div>
                     <div class="x">
-                        <m-select name="country"
-                                  label="country"
+                        <m-select name="city"
+                                  label="city"
                                   ngModel
                                   required
                                   class="outlined">
-                            <m-option value="test">1</m-option>
-                            <m-option value="235">2</m-option>
+                            <m-option *ngFor="let city of ['taichung', 'kaosiung', 'taipei']"
+                                      [value]="city">
+                                {{city}}
+                            </m-option>
                         </m-select>
                     </div>
                 </div>
