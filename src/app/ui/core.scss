@@ -121,8 +121,8 @@ m-option,
 
 ::placeholder {
     opacity: 1; // fixed safari default opacity
-    color: var(--disabled-f-color, var(--f-fader));
-    -webkit-text-fill-color: var(--disabled-f-color, var(--f-fader)); // fix safari opacity problem
+    color: var(--f-fadest);
+    -webkit-text-fill-color: var(--f-fadest); // fix safari opacity problem
 }
 
 :-moz-read-only {

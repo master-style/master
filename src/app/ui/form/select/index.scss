@@ -7,11 +7,18 @@
 
 [part=body] {
     cursor: pointer;
+    min-height: var(--size);
+    letter-spacing: inherit;
+    font-weight: inherit;
 
-    &:empty {
-        &:before {
-            content: '\00a0 '
-        }
+    &:empty[placeholder]:before {
+        content: attr(placeholder);
+        color: var(--f-fadest);
+    }
+
+    &:empty[label]:not([placeholder]):before {
+        content: attr(label);
+        color: transparent;
     }
 }
 
@@ -25,6 +32,7 @@ m-icon {
     color: var(--f-fadest);
     padding-right: calc(var(--px) / 2);
     font-size: var(--f-size);
+    margin-left: calc(var(--px) / -2)
 }
 
 @media (any-hover: hover) {

@@ -52,7 +52,6 @@
 }
 
 :host([disabled]) {
-    --disabled-f-color: var(--f-fadest);
     cursor: no-drop !important;
     color: var(--f-fadest) !important;
     -webkit-text-fill-color: var(--f-fadest); // fix safari opacity problem
@@ -202,7 +201,8 @@ label {
     color: var(--f-themeFader);
     transform: scale(.75) translate(0, -65%);
     white-space: nowrap;
-    letter-spacing: normal;
+    letter-spacing: inherit;
+    font-weight: inherit;
     // i {
     //     display: inline-flex;
     //     color: inherit;

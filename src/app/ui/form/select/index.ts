@@ -29,7 +29,12 @@ export class MasterSelect extends MasterControl {
 
     template = $(() => [
         'slot',
-        'div', { part: 'body', $text: this.value },
+        'div', {
+            part: 'body',
+            placeholder: this.placeholder,
+            label: this.label, // for default select width
+            $text: this.value
+        },
         'm-icon', { name: 'unfold' },
         'fieldset', [
             'legend', [
