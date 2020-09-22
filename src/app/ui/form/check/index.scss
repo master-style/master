@@ -186,12 +186,12 @@
 }
 
 :host([type=radio]) {
-    [part=check] {
+    [part=icon] {
         border-radius: 50%;
     }
 }
 
-[part=check] {
+[part=icon] {
     width: 20px;
     height: 20px;
     border: 2px solid;
@@ -216,10 +216,10 @@
 
 [part=check-icon] {
     stroke: var(--f-theme);
-    stroke-dasharray: 100%;
-    stroke-dashoffset: 100%;
+    stroke-dasharray: 65%;
+    stroke-dashoffset: 65%;
     will-change: stroke-dashoffset;
-    transition: .3s ease-out stroke-dashoffset;
+    transition: .2s ease-out stroke-dashoffset;
 }
 
 :host([disabled]) {
@@ -247,7 +247,7 @@
         font-weight: 500;
     }
 
-    [part=check] path {
+    [part=icon] path {
         stroke-dashoffset: 0;
     }
 }
