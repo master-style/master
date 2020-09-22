@@ -35,6 +35,10 @@ export class MasterTextarea extends MasterControl {
         ],
         'label', { $text: this.label }
     ]);
+
+    @Attr({ key: 'readonly' })
+    readOnly: boolean;
+    
     @Attr()
     placeholder: string;
 

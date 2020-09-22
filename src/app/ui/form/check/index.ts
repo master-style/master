@@ -21,7 +21,6 @@ export class MasterCheck extends MasterControl {
             type: this.type,
             name: this.name,
             disabled: this.disabled,
-            readonly: this.readOnly,
             required: this.required,
             $created: (element: HTMLElement) => this.body = element
         }

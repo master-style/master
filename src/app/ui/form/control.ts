@@ -21,9 +21,6 @@ export default class MasterControl extends HTMLElement {
     @Attr()
     disabled: boolean;
 
-    @Attr({ key: 'readonly' })
-    readOnly: boolean;
-
     @Attr()
     required: boolean;
 
