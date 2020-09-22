@@ -26,7 +26,6 @@
     height: 20px;
     border: 2px solid;
     border-color: var(--b-fadest);
-    color: var(--checkedBg);
     border-radius: 0.1875rem;
 }
 
@@ -73,11 +72,16 @@
 }
 
 :host([checked]) {
+    [part=icon] {
+        background-color: var(--b-fadest);
+        border-color: transparent;
+    }
+
     ::slotted(label) {
         font-weight: 500;
     }
 
-    [part=icon] path {
+    [part=check-icon] {
         stroke-dashoffset: 0;
     }
 }
