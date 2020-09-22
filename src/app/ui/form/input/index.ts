@@ -81,7 +81,8 @@ export class MasterInput extends HTMLElement {
         updater(input: MasterInput, value: any) {
             input.empty = value === null || value === undefined || value === '';
             input.body.value = value ?? null;
-        }
+        },
+        reflect: false
     })
     value: any;
 

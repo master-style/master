@@ -75,19 +75,14 @@ export class MasterSelect extends HTMLElement {
 
     @Attr({
         parser(select: MasterSelect, value: any, oldValue: any) {
-            if (select.type === 'number') {
-                if (value === '') {
-                    value = null;
-                } else {
-                    value = isNaN(+value) ? null : +value;
-                }
-            }
+     
             return { value, oldValue };
         },
         updater(select: MasterSelect, value: any) {
             select.empty = value === null || value === undefined || value === '';
             select.body.value = value ?? null;
-        }
+        },
+        reflect: false
     })
     value: any;
 
