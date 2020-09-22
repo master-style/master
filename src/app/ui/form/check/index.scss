@@ -1,6 +1,7 @@
 @import '../../variables';
 
 :host {
+    --size: 1.25rem;
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -22,8 +23,8 @@
 }
 
 [part=icon] {
-    width: 20px;
-    height: 20px;
+    width: var(--size);
+    height: var(--size);
     border: 2px solid;
     border-color: var(--b-fadest);
     border-radius: 0.1875rem;

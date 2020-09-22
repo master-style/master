@@ -13,7 +13,7 @@ const NAME = 'check';
 })
 export class MasterCheck extends MasterControl {
 
-    readonly elementName = NAME;
+    readonly elementName: string = NAME;
 
     bodyTemplate = $(() => [
         'input', {
@@ -69,9 +69,6 @@ export class MasterCheck extends MasterControl {
         }
     })
     checked: boolean;
-
-    @Attr()
-    autocomplete: string;
 
     @Attr({
         reflect: false,

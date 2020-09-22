@@ -36,6 +36,9 @@ export default class MasterControl extends HTMLElement {
     @Attr()
     warning: string;
 
+    @Attr()
+    autocomplete: string;
+
     onRemoved() {
         this.off({ id: this.elementName });
     }

@@ -62,9 +62,6 @@ export class MasterTextarea extends MasterControl {
     empty: boolean;
 
     @Attr()
-    autocomplete: string;
-
-    @Attr()
     maxLength: number;
 
     @Attr()

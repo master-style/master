@@ -3,6 +3,17 @@
         <div class="demo-body">
             <form #form="ngForm">
                 <div class="y">
+                    <div class="x" *ngFor="let theme of ['dark', 'light']">
+                        <m-switch type="checkbox"
+                                  name="theme"
+                                  [value]="theme"
+                                  ngModel
+                                  required>
+                            <label>{{ theme }}</label>
+                        </m-switch>
+                    </div>
+                </div>
+                <div class="y">
                     <div class="x" *ngFor="let sex of ['male', 'female']">
                         <m-check type="radio"
                                  name="sex"
