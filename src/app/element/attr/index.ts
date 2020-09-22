@@ -55,7 +55,6 @@ export function Attr(options?: AttrOptions) {
             if (!constructor.observedAttributes) {
                 constructor.observedAttributes = [];
             }
-            console.log(constructor.name);
             constructor.observedAttributes.push(attrKey);
         }
 
