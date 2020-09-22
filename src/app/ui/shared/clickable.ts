@@ -68,7 +68,7 @@ export default class MasterClickable extends HTMLElement {
             }
         }
     })
-    type: string = 'button';
+    type: string;
 
     @Attr()
     rel: string;

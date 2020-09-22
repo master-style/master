@@ -14,4 +14,6 @@ export class MasterButton extends MasterClickable {
 
     @Attr({ render: false })
     busy: boolean;
+
+    _type: string = 'button';
 }
