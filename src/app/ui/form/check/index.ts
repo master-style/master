@@ -15,7 +15,7 @@ export class MasterCheck extends MasterControl {
 
     readonly elementName: string = NAME;
 
-    bodyTemplate = $(() => [
+    controlTemplate = $(() => [
         'input', {
             part: 'body',
             type: this.type,
@@ -98,7 +98,7 @@ export class MasterCheck extends MasterControl {
     }
 
     render() {
-        this.bodyTemplate.render(this);
+        this.controlTemplate.render(this);
         this.template.render(this.shadowRoot);
     }
 }

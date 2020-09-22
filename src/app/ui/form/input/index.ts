@@ -14,7 +14,7 @@ export class MasterInput extends MasterControl {
 
     _role = 'textbox';
 
-    bodyTemplate = $(() => [
+    controlTemplate = $(() => [
         'input', {
             part: 'body',
             type: this.type,
@@ -110,7 +110,7 @@ export class MasterInput extends MasterControl {
     }
 
     render() {
-        this.bodyTemplate.render(this);
+        this.controlTemplate.render(this);
         this.template.render(this.shadowRoot);
     }
 }

@@ -1,1 +1,19 @@
 @import '../control';
+
+:host {
+    min-width: 3rem;
+}
+
+[part=body] {
+    &:empty {
+        &:before {
+            content: '\00a0 '
+        }
+    }
+}
+
+::slotted(input) {
+    position: absolute;
+    width: 100%;
+    visibility: hidden;
+}

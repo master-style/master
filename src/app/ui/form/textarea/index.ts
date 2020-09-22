@@ -12,7 +12,7 @@ export class MasterTextarea extends MasterControl {
 
     readonly elementName = NAME;
 
-    bodyTemplate = $(() => [
+    controlTemplate = $(() => [
         'textarea', {
             part: 'body',
             name: this.name,
@@ -86,7 +86,7 @@ export class MasterTextarea extends MasterControl {
     }
 
     render() {
-        this.bodyTemplate.render(this);
+        this.controlTemplate.render(this);
         this.template.render(this.shadowRoot);
     }
 }

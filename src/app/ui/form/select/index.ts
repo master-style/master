@@ -14,9 +14,11 @@ export class MasterSelect extends MasterControl {
 
     _role = 'listbox';
 
-    bodyTemplate = $(() => [
+    @Attr({ key: 'tabindex' })
+    tabIndex = -1;
+
+    controlTemplate = $(() => [
         'input', {
-            part: 'body',
             'aria-hidden': true,
             tabindex: -1,
             name: this.name,
@@ -27,6 +29,8 @@ export class MasterSelect extends MasterControl {
 
     template = $(() => [
         'slot',
+        'div', { part: 'body', $text: this.value },
+        'm-icon', { name: 'unfold' },
         'fieldset', [
             'legend', [
                 'span', { $text: this.label }
@@ -107,7 +111,7 @@ export class MasterSelect extends MasterControl {
     }
 
     render() {
-        this.bodyTemplate.render(this);
+        this.controlTemplate.render(this);
         this.template.render(this.shadowRoot);
     }
 }

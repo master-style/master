@@ -98,6 +98,8 @@
     ::slotted([part=head]),
     ::slotted([part=foot]),
     ::slotted([part=body]),
+    m-icon,
+    [part=body],
     label {
         cursor: no-drop !important;
         color: var(--f-fadest) !important;
@@ -128,7 +130,8 @@
 :host(:focus-within:not([readonly]):not([disabled])) {
     --b-width: 2px;
 
-    ::slotted([part=body]) {
+    ::slotted([part=body]),
+    [part=body] {
         color: var(--f-fade);
     }
 }
@@ -137,7 +140,8 @@
 
     ::slotted([part=head]),
     ::slotted([part=foot]),
-    ::slotted([part=body]) {
+    ::slotted([part=body]),
+    [part=body] {
         opacity: 0;
         transition-delay: 0s;
     }
@@ -204,7 +208,9 @@
 
     ::slotted([part=head]),
     ::slotted([part=foot]),
-    ::slotted([part=body]) {
+    ::slotted([part=body]),
+    m-icon,
+    [part=body] {
         padding-top: calc(var(--py) + .125rem);
         padding-bottom: calc(var(--py) - .125rem);
     }
@@ -289,14 +295,18 @@ m-badge {
 
 ::slotted([part=head]),
 ::slotted([part=foot]),
-::slotted([part=body]) {
+::slotted([part=body]),
+m-icon,
+[part=body] {
+    box-sizing: border-box;
     padding-top: var(--py);
     padding-bottom: var(--py);
     transition: opacity .2s .1s cubic-bezier(0, 0, .2, 1);
     will-change: opacity;
 }
 
-::slotted([part=body]) {
+::slotted([part=body]),
+[part=body] {
     -webkit-appearance: none !important;
     text-overflow: ellipsis;
     -ms-text-overflow: ellipsis;
@@ -319,7 +329,8 @@ m-badge {
 }
 
 ::slotted([part=head]),
-::slotted([part=foot]) {
+::slotted([part=foot]),
+m-icon {
     display: flex !important;
     user-select: none;
     white-space: nowrap;
@@ -333,12 +344,19 @@ m-badge {
     order: -1;
 }
 
+m-icon,
 ::slotted([part=foot]) {
     order: 1;
     margin-left: .3125rem;
     padding-right: var(--px);
     font-size: var(--f-xxs);
     color: var(--f-fade);
+}
+
+m-icon {
+    padding-right: calc(var(--px) / 2);
+    margin-left: var(--px);
+    font-size: var(--f-size);
 }
 
 // [validate] {
