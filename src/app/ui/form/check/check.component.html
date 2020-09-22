@@ -96,8 +96,7 @@
 <h2 id="structure">{{ 'structure' | translate }}</h2>
 <template [codeLang]="'html'">
     <m-check>
-        <label part="head"></label>
-        <label part="foot"></label>
+        <label>text...</label>
     </m-check>
 </template>
 
@@ -114,48 +113,38 @@
         <tbody>
             <tr>
                 <td>
-                    <code class="f:blue">xs</code>
-                </td>
-                <td><code>2rem</code></td>
-                <td><b>特小</b></td>
-            </tr>
-            <tr>
-                <td>
                     <code class="f:blue">sm</code>
                 </td>
-                <td><code>2.5rem</code></td>
+                <td><code>1.25rem</code></td>
                 <td><b>小</b></td>
             </tr>
             <tr>
                 <td>
                     <code class="default">∅</code>
                 </td>
-                <td><code>3rem</code></td>
+                <td><code>1.5rem</code></td>
                 <td><b>適中</b>，預設</td>
             </tr>
             <tr>
                 <td>
                     <code class="f:blue">lg</code>
                 </td>
-                <td><code>3.5rem</code></td>
+                <td><code>2rem</code></td>
                 <td><b>大</b></td>
             </tr>
         </tbody>
     </table>
 </m-table>
 <template [codeLang]="'html'" [codeDemo]=true [selector]="'m-check'">
-    <div class="y:xl c:bottom c:center">
-        <div class="x:3@sm">
-            <m-check class="xs"></m-check>
+    <div class="y c:bottom c:center">
+        <div class="x:2@sm">
+            <m-check interface="switch" class="sm" checked></m-check>
         </div>
-        <div class="x:3@sm">
-            <m-check class="sm"></m-check>
+        <div class="x:2@sm">
+            <m-check interface="switch" checked></m-check>
         </div>
-        <div class="x:3@sm">
-            <m-check></m-check>
-        </div>
-        <div class="x:3@sm">
-            <m-check class="lg"></m-check>
+        <div class="x:2@sm">
+            <m-check interface="switch" class="lg" checked></m-check>
         </div>
     </div>
 </template>
