@@ -1,15 +1,17 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RadioControlValueAccessor, RadioControlRegistry } from './radio.directive';
-import { CheckboxRequiredValidator, CheckboxControlValueAccessor } from './checkbox.directive';
-import { DefaultValueAccessor } from './control.directive';
+import { RadioControlValueAccessor, RadioControlRegistry } from './directives/radio.directive';
+import { CheckboxRequiredValidator, CheckboxControlValueAccessor } from './directives/checkbox.directive';
+import { DefaultValueAccessor } from './directives/control.directive';
+import { NumberValueAccessor } from './directives/number.directive';
 
 const SHARED_DIRECTIVES: any[] = [
     RadioControlValueAccessor,
     CheckboxControlValueAccessor,
     CheckboxRequiredValidator,
-    DefaultValueAccessor
+    DefaultValueAccessor,
+    NumberValueAccessor
 ];
 
 @NgModule({

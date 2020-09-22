@@ -1,5 +1,5 @@
 import { Element } from '@element';
-import MasterClickable from '@ui/shared/clickable';
+import MasterClickable from '@ui/clickable';
 import css from './index.scss';
 
 const NAME = 'item';

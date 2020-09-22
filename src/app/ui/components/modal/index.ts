@@ -1,5 +1,5 @@
 import { Element, Attr } from '@element';
-import MasterTogglable from '@ui/shared/togglable';
+import MasterTogglable from '@ui/togglable';
 import css from './index.scss';
 
 const NAME = 'modal';
