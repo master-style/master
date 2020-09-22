@@ -12,6 +12,9 @@ export default class MasterControl extends HTMLElement {
         'slot'
     ]);
 
+    @Attr({ observe: false, render: false })
+    role: string;
+
     @Attr()
     name: string;
 

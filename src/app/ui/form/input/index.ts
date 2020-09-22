@@ -12,6 +12,8 @@ export class MasterInput extends MasterControl {
 
     readonly elementName = NAME;
 
+    _role = 'textbox';
+    
     bodyTemplate = $(() => [
         'input', {
             part: 'body',

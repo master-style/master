@@ -39,7 +39,7 @@ export class MasterCheck extends MasterControl {
 
     @Attr({
         updater(check: MasterCheck, value: any, oldValue: any) {
-            check.setAttribute('role', value);
+            check.role = value;
         }
     })
     type: string = 'checkbox';
