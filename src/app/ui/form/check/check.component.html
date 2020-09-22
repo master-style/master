@@ -100,6 +100,42 @@
     </m-check>
 </template>
 
+<h2 id="interface">{{ 'interface' | translate }}</h2>
+<m-table class="sm neat axis:x">
+    <table>
+        <thead>
+            <tr part="table-head">
+                <th class="fit t:left bg:theme sticky">interface</th>
+                <th class="t:left bg:theme sticky">description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <code class="default" style="font-size: 13px">check</code>
+                </td>
+                <td><b>勾選</b>，預設</td>
+            </tr>
+            <tr>
+                <td>
+                    <code class="f:blue">switch</code>
+                </td>
+                <td><b>切換</b></td>
+            </tr>
+        </tbody>
+    </table>
+</m-table>
+<template [codeLang]="'html'" [codeDemo]=true [selector]="'m-check'">
+    <div class="y c:bottom c:center">
+        <div class="x">
+            <m-check></m-check>
+        </div>
+        <div class="x">
+            <m-check interface="switch"></m-check>
+        </div>
+    </div>
+</template>
+
 <h2 id="size">{{ 'size' | translate }}</h2>
 <m-table class="sm neat axis:x">
     <table>
@@ -137,13 +173,22 @@
 </m-table>
 <template [codeLang]="'html'" [codeDemo]=true [selector]="'m-check'">
     <div class="y c:bottom c:center">
-        <div class="x:2@sm">
+        <div class="x">
+            <m-check class="sm" checked></m-check>
+        </div>
+        <div class="x">
+            <m-check checked></m-check>
+        </div>
+        <div class="x">
+            <m-check class="lg" checked></m-check>
+        </div>
+        <div class="x">
             <m-check interface="switch" class="sm" checked></m-check>
         </div>
-        <div class="x:2@sm">
+        <div class="x">
             <m-check interface="switch" checked></m-check>
         </div>
-        <div class="x:2@sm">
+        <div class="x">
             <m-check interface="switch" class="lg" checked></m-check>
         </div>
     </div>

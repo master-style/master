@@ -4,17 +4,22 @@
     margin-left: .5rem;
 }
 
-// check
 :host {
+    --size: 1.5rem;
     position: relative;
     display: inline-flex;
     align-items: center;
 }
 
-:host([interface=check]) {
+:host(.sm) {
     --size: 1.25rem;
 }
 
+:host(.lg) {
+    --size: 2rem;
+}
+
+// check
 ::slotted([part=body]) {
     opacity: 0;
     position: absolute;
@@ -31,6 +36,7 @@
 }
 
 [part=check] {
+    box-sizing: border-box;
     width: var(--size);
     height: var(--size);
     border: 2px solid;
@@ -98,11 +104,11 @@
 // switch
 :host([interface=switch]) {
     --bg-theme: #56dd6a;
-    --size: 1.5rem;
 }
 
 [part=switch] {
-    width: 38px;
+    box-sizing: border-box;
+    width: calc(var(--size) * 1.6);
     height: var(--size);
     border-radius: var(--size);
     background-color: var(--b-fadest);
