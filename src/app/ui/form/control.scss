@@ -8,40 +8,6 @@
    * 2. Change font properties to `inherit` in Safari.
    */
 
-// .ctlField {
-//     --set-size: calc(3rem - 2px);
-//     border: 1px solid var(--b-fade);
-//     border-radius: $xs;
-//     min-height: var(--set-size);
-//     padding: 0 1rem;
-
-//     legend {
-//         position: relative;
-//         top: -1px;
-//         display: block;
-//         line-height: 0;
-//         font-size: var(--f-xxs);
-//         color: var(--f-themeFader);
-//         padding: 0 3px 0 4px;
-//         margin: 0 -5px;
-//     }
-
-//     .ctl {
-//         margin-right: $sm;
-//         height: var(--set-size);
-//     }
-
-//     @media (any-hover: hover) {
-//         &:not([disabled]):hover {
-//             border-color: var(--f-fadest)
-//         }
-//     }
-
-//     &:focus-within {
-//         border-color: var(--f-fadest)
-//     }
-// }
-
 :host {
     --f-size: var(--f-sm);
     --b-width: 1px;
@@ -325,13 +291,13 @@ m-icon,
     -webkit-user-select: text;
     padding-left: var(--px);
     padding-right: var(--px);
-    cursor: text !important;
+    cursor: text;
 }
 
 ::slotted([part=head]),
 ::slotted([part=foot]),
 m-icon {
-    display: flex !important;
+    display: flex;
     user-select: none;
     white-space: nowrap;
     align-items: center;
@@ -344,19 +310,12 @@ m-icon {
     order: -1;
 }
 
-m-icon,
 ::slotted([part=foot]) {
     order: 1;
     margin-left: .3125rem;
     padding-right: var(--px);
     font-size: var(--f-xxs);
     color: var(--f-fade);
-}
-
-m-icon {
-    padding-right: calc(var(--px) / 2);
-    margin-left: var(--px);
-    font-size: var(--f-size);
 }
 
 // [validate] {

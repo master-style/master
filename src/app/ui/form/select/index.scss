@@ -2,9 +2,12 @@
 
 :host {
     min-width: 3rem;
+    cursor: pointer;
 }
 
 [part=body] {
+    cursor: pointer;
+
     &:empty {
         &:before {
             content: '\00a0 '
@@ -16,4 +19,18 @@
     position: absolute;
     width: 100%;
     visibility: hidden;
+}
+
+m-icon {
+    color: var(--f-fadest);
+    padding-right: calc(var(--px) / 2);
+    font-size: var(--f-size);
+}
+
+@media (any-hover: hover) {
+    :host(:not([disabled]):not([readonly]):hover) {
+        m-icon {
+            color: var(--f-fade);
+        }
+    }
 }
