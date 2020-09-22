@@ -11,9 +11,9 @@
             </m-input>
             <m-input class="x:4@sm outlined" label="company" value="Aoyue Design" type="text" readonly>
             </m-input>
-            <m-input class="x:4@sm underlined" label="username" placeholder="enter your email" expanded type="email" ngDefaultControl [(ngModel)]="mail">
+            <m-input class="x:4@sm underlined" label="username" placeholder="enter your email" expanded type="email"
+                     [(ngModel)]="mail">
             </m-input>
-            {{ mail }}
         </div>
     </div>
 </div>
@@ -170,26 +170,6 @@
           [description]="'The type of control to display. The default type is text.'" [default]="'text'">
 </doc-prop>
 
-<doc-prop [name]="'accept'" [types]="['string']"
-          [description]="'If the value of the type attribute is `file`, then this attribute will indicate the types of files that the server accepts, otherwise it will be ignored. The value must be a comma-separated list of unique content type specifiers.'">
-</doc-prop>
-
-<doc-prop [name]="'autocomplete'"
-          [types]="['on', 'off', 'name', 'honorific-prefix', 'given-name', 'additional-name', 'family-name', 'honorific-suffix', 'nickname', 'email', 'username', 'new-password', 'current-password', 'one-time-code', 'organization-title', 'organization', 'street-address', 'address-line1', 'address-line2', 'address-line3', 'address-level4', 'address-level3', 'address-level2', 'address-level1', 'country', 'country-name', 'postal-code', 'cc-name', 'cc-given-name', 'cc-additional-name', 'cc-family-name', 'cc-number', 'cc-exp', 'cc-exp-month', 'cc-exp-year', 'cc-csc', 'cc-type', 'transaction-currency', 'transaction-amount', 'language', 'bday', 'bday-day', 'bday-month', 'bday-year', 'sex', 'tel', 'tel-country-code', 'tel-national', 'tel-area-code', 'tel-local', 'tel-extension', 'impp', 'url', 'photo']"
-          [description]="'Indicates whether the value of the control can be automatically completed by the browser.'"
-          [default]="'off'">
-</doc-prop>
-
-<doc-prop [name]="'autofocus'" [types]="['boolean']"
-          [description]="'This Boolean attribute lets you specify that a form control should have input focus when the page loads.'"
-          [default]="false">
-</doc-prop>
-
-<doc-prop [name]="'autocorrect'" [types]="['off', 'on']"
-          [description]="'Whether auto correction should be enabled when the user is entering/editing the text value.'"
-          [default]="'off'">
-</doc-prop>
-
 <doc-prop [name]="'inputmode'"
           [types]="['decimal', 'email', 'none', 'numeric', 'search', 'tel', 'text', 'url']"
           [description]="'A hint to the browser for which keyboard to display. Possible values: `none`, `text`, `tel`, `url`, `email`, `numeric`, `decimal`, and `search`.'">
@@ -215,10 +195,6 @@
           [description]="'If true, the user can enter more than one value. This attribute applies when the type attribute is set to `email` or `file`, otherwise it is ignored.'">
 </doc-prop>
 
-<doc-prop [name]="'name'" [types]="['string']"
-          [description]="'The name of the control, which is submitted with the form data.'">
-</doc-prop>
-
 <doc-prop [name]="'pattern'" [types]="['string']"
           [description]="'A regular expression that the value is checked against. The pattern must match the entire value, not just some subset. Use the title attribute to describe the pattern to help the user. This attribute applies when the value of the type attribute is `text`, `search`, `tel`, `url`, `email`, `date`, or `password`, otherwise it is ignored. When the type attribute is `date`, pattern will only be used in browsers that do not support the `date` input type natively. See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date for more information.'">
 </doc-prop>
@@ -227,8 +203,8 @@
           [description]="'Instructional text that shows before the input has a value.'">
 </doc-prop>
 
-<doc-prop [name]="'required'" [types]="['boolean']"
-          [description]="'If true, the user must fill in a value before submitting a form.'" [default]="false">
+<doc-prop [name]="'accept'" [types]="['string']"
+          [description]="'If the value of the type attribute is `file`, then this attribute will indicate the types of files that the server accepts, otherwise it will be ignored. The value must be a comma-separated list of unique content type specifiers.'">
 </doc-prop>
 
 <doc-prop [name]="'size'" [types]="['number']"
@@ -243,11 +219,9 @@
           [description]="'Works with the min and max attributes to limit the increments at which a value can be set. Possible values are: `any` or a positive floating point number.'">
 </doc-prop>
 
-<doc-prop [name]="'value'" [types]="[null, 'number', 'string']" [description]="'The value of the input.'"
-          [default]="''">
-</doc-prop>
-
 <doc-prop [name]="'autocapitalize'" [types]="['string']"
           [description]="'Indicates whether and how the text value should be automatically capitalized as it is entered/edited by the user.'"
           [default]="'off'">
 </doc-prop>
+
+<doc-control-prop></doc-control-prop>
