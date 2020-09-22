@@ -51,7 +51,6 @@ import { ContentComponent } from './components/content/content.component';
 
 import { FormComponent } from './form/form.component';
 import { TextareaComponent } from './form/textarea/textarea.component';
-import { SwitchComponent } from './form/switch/switch.component';
 import { SelectComponent } from './form/select/select.component';
 import { InputComponent } from './form/input/input.component';
 import { CheckComponent } from './form/check/check.component';
@@ -96,7 +95,6 @@ export const uiRoutes: Routes = [
             { path: 'input', component: InputComponent, resolve: { route: RouteResolver } },
             { path: 'textarea', component: TextareaComponent, resolve: { route: RouteResolver } },
             { path: 'check', component: CheckComponent, resolve: { route: RouteResolver } },
-            { path: 'switch', component: SwitchComponent, resolve: { route: RouteResolver } },
         ]
     },
     {

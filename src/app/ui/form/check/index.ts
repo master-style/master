@@ -29,13 +29,18 @@ export class MasterCheck extends MasterControl {
 
     template = $(() => [
         'svg', {
-            part: 'icon',
+            part: this.interface,
             viewBox: '0 0 20 20',
             $namespace: 'http://www.w3.org/2000/svg',
-            $html: '<path part="check-icon" d="M5.5 10l2 2 1 1 6 -6"/><path part="ban-icon" d="M19 19L1 1h0"/>'
+            $html: this.interface === 'switch'
+                ? '<rect x=2 y=2 rx=8 width=16 height=16 part="button-icon" style="filter: url(#s)"/><filter id="s" x="0" y="0" filterUnits="userSpaceOnUse"><feOffset dy="1" input="SourceAlpha"/><feGaussianBlur stdDeviation="1" result="b"/><feFlood flood-opacity="0.161"/><feComposite operator="in" in2="b"/><feComposite in="SourceGraphic"/></filter>'
+                : '<path part="check-icon" d="M5.5 10l2 2 1 1 6 -6"/><path part="ban-icon" d="M19 19L1 1h0"/>'
         },
         'slot'
     ]);
+
+    @Attr()
+    interface: string = 'check';
 
     @Attr({
         updater(check: MasterCheck, value: any, oldValue: any) {

@@ -1,10 +1,18 @@
 @import '../../variables';
 
+::slotted(label) {
+    margin-left: .5rem;
+}
+
+// check
 :host {
-    --size: 1.25rem;
     position: relative;
     display: inline-flex;
     align-items: center;
+}
+
+:host([interface=check]) {
+    --size: 1.25rem;
 }
 
 ::slotted([part=body]) {
@@ -17,12 +25,12 @@
 }
 
 :host([type=radio]) {
-    [part=icon] {
+    [part=check] {
         border-radius: 50%;
     }
 }
 
-[part=icon] {
+[part=check] {
     width: var(--size);
     height: var(--size);
     border: 2px solid;
@@ -72,21 +80,63 @@
     }
 }
 
-::slotted(label) {
-    margin-left: .5rem;
-}
-
 :host([checked]) {
-    [part=icon] {
+    [part=check] {
         background-color: var(--b-fadest);
         border-color: transparent;
+    }
+
+    [part=check-icon] {
+        stroke-dashoffset: 0;
     }
 
     ::slotted(label) {
         font-weight: 500;
     }
+}
 
-    [part=check-icon] {
-        stroke-dashoffset: 0;
+// switch
+:host([interface=switch]) {
+    --bg-theme: #56dd6a;
+    --size: 1.5rem;
+}
+
+[part=switch] {
+    width: 38px;
+    height: var(--size);
+    border-radius: var(--size);
+    background-color: var(--b-fadest);
+    transition: .2s ease background-color;
+}
+
+[part=button-icon] {
+    fill: #fff;
+    transition: transform .2s ease, width .2s ease;
+    transform: translateX(-6px);
+    transform-origin: 0px -6px;
+}
+
+:host([checked]) {
+    [part=switch] {
+        background-color: var(--bg-theme);
+    }
+
+    [part=button-icon] {
+        transform: translateX(6px);
+        transform-origin: 0px 6px;
+    }
+}
+
+:host(:not([disabled]):active) {
+    [part=button-icon] {
+        width: 20px;
+    }
+}
+
+:host(:not([disabled])[checked]:active) {
+    [part=button-icon] {
+        width: 20px;
+        transform: translateX(2px);
+        transform-origin: 0px 2px;
     }
 }

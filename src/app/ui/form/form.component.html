@@ -4,13 +4,14 @@
             <form #form="ngForm">
                 <div class="y">
                     <div class="x" *ngFor="let theme of ['dark', 'light']">
-                        <m-switch type="checkbox"
-                                  name="theme"
-                                  [value]="theme"
-                                  ngModel
-                                  required>
+                        <m-check type="checkbox"
+                                 interface="switch"
+                                 name="theme"
+                                 [value]="theme"
+                                 ngModel
+                                 required>
                             <label>{{ theme }}</label>
-                        </m-switch>
+                        </m-check>
                     </div>
                 </div>
                 <div class="y">

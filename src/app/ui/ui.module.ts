@@ -53,7 +53,6 @@ import { ButtonComponent } from './form/button/button.component';
 import { InputComponent } from './form/input/input.component';
 import { SelectComponent } from './form/select/select.component';
 import { TextareaComponent } from './form/textarea/textarea.component';
-import { SwitchComponent } from './form/switch/switch.component';
 import { CheckComponent } from './form/check/check.component';
 
 import { FormModule } from './form/form.module';
@@ -95,7 +94,6 @@ import { FormModule } from './form/form.module';
         InputComponent,
         SelectComponent,
         TextareaComponent,
-        SwitchComponent,
         CheckComponent,
         FormComponent
     ],
