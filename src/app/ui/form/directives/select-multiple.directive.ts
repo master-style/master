@@ -226,7 +226,9 @@ export class SelectMultipleControlValueAccessor implements ControlValueAccessor 
  * @ngModule FormsModule
  * @publicApi
  */
-@Directive({ selector: 'option' })
+// tslint:disable-next-line: max-classes-per-file
+@Directive({ selector: 'm-option' })
+// tslint:disable-next-line: class-name
 export class ɵNgSelectMultipleOption implements OnDestroy {
     // TODO(issue/24571): remove '!'.
     id!: string;

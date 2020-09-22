@@ -38,7 +38,7 @@ export class MasterTextarea extends MasterControl {
 
     @Attr({ key: 'readonly' })
     readOnly: boolean;
-    
+
     @Attr()
     placeholder: string;
 

@@ -196,7 +196,7 @@ export class SelectControlValueAccessor implements ControlValueAccessor {
  * @publicApi
  */
 // tslint:disable-next-line: max-classes-per-file
-@Directive({ selector: 'option' })
+@Directive({ selector: 'm-option' })
 export class NgSelectOption implements OnDestroy {
     /**
      * @description

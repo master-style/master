@@ -13,6 +13,11 @@
 
 :host(.sm) {
     --size: 1.25rem;
+
+    [part=check-icon],
+    [part=ban-icon] {
+        stroke-width: 2.5px;
+    }
 }
 
 :host(.lg) {
