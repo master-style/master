@@ -128,7 +128,7 @@
 <template [codeLang]="'html'" [codeDemo]=true [selector]="'m-check'">
     <div class="y c:bottom c:center">
         <div class="x">
-            <m-check></m-check>
+            <m-check checked></m-check>
         </div>
         <div class="x">
             <m-check interface="switch"></m-check>
@@ -194,45 +194,6 @@
     </div>
 </template>
 
-<h2 id="borderline">{{ 'borderline' | translate }}</h2>
-<m-table class="sm neat axis:x">
-    <table>
-        <thead>
-            <tr>
-                <th class="fit t:left bg:theme sticky">class</th>
-                <th class="t:left bg:theme sticky">description</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <code class="f:blue">outlined</code>
-                </td>
-                <td><b>外框</b></td>
-            </tr>
-            <tr>
-                <td>
-                    <code class="f:blue">underlined</code>
-                </td>
-                <td><b>底線</b></td>
-            </tr>
-        </tbody>
-    </table>
-</m-table>
-<template [codeLang]="'html'" [codeDemo]=true>
-    <div class="y c:center">
-        <div class="x">
-            <m-check></m-check>
-        </div>
-        <div class="x">
-            <m-check class="underlined"></m-check>
-        </div>
-        <div class="x">
-            <m-check class="outlined"></m-check>
-        </div>
-    </div>
-</template>
-
 <h2 id="state">{{ 'state' | translate }}</h2>
 <doc-prop [name]="'disabled'" [types]="['boolean']" [default]=false
           [description]="'The user cannot interact with the component.'">
@@ -240,7 +201,12 @@
 <div class="demo">
     <div class="demo-body">
         <div class="y c:center">
-            <m-check class="x" disabled></m-check>
+            <div class="x">
+                <m-check disabled></m-check>
+            </div>
+            <div class="x">
+                <m-check interface="switch" disabled></m-check>
+            </div>
         </div>
     </div>
 </div>
