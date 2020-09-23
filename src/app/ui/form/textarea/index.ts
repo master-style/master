@@ -40,6 +40,9 @@ export class MasterTextarea extends MasterControl {
     ]);
 
     @Attr({ observe: false, render: false })
+    empty: boolean;
+
+    @Attr({ observe: false, render: false })
     role: string = 'textbox';
 
     @Attr({ key: 'readonly' })

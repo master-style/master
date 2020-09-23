@@ -99,6 +99,8 @@ export class MasterCheck extends MasterControl {
                     });
                 updatingRadioNames.delete(check.name);
             }
+
+            check.validate();
         }
     })
     checked: boolean;

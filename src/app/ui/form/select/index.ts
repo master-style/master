@@ -47,6 +47,9 @@ export class MasterSelect extends MasterControl {
     ]);
 
     @Attr({ observe: false, render: false })
+    empty: boolean;
+
+    @Attr({ observe: false, render: false })
     role: string = 'listbox';
 
     @Attr({ key: 'readonly' })
@@ -74,9 +77,6 @@ export class MasterSelect extends MasterControl {
         reflect: false
     })
     value: any;
-
-    @Attr({ observe: false, render: false })
-    empty: boolean;
 
     @Attr()
     autocomplete: string;

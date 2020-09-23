@@ -1,4 +1,6 @@
 import { Attr } from '@element';
+import { MasterTextarea } from '../textarea';
+import { MasterSelect } from '../select';
 
 const NAME = 'control';
 
@@ -16,9 +18,6 @@ export class MasterControl extends HTMLElement {
 
     @Attr()
     required: boolean;
-
-    @Attr({ observe: false, render: false })
-    empty: boolean;
 
     @Attr()
     promptValid: string;
@@ -40,7 +39,7 @@ export class MasterControl extends HTMLElement {
 
     validate() {
         this.valid = this.validity.valid;
-        this.invalid = this.validity.valid;
+        this.invalid = !this.validity.valid;
     }
 
     onAdded() {
@@ -73,7 +72,7 @@ export class MasterControl extends HTMLElement {
     }
 }
 
-export function valueUpdater(control: MasterControl, value: any) {
+export function valueUpdater(control: any, value: any) {
     control.empty = value === null || value === undefined || value === '';
     control.body.value = value ?? null;
     control.validate();
