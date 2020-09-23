@@ -1,0 +1,45 @@
+<doc-prop [name]="'promptValid'" [types]="['string']"
+          [description]="'Prompt that the input result is valid when the state of the control is valid.'">
+</doc-prop>
+<template [codeLang]="'html'" [codeDemo]=true>
+    <m-input class="outlined"
+             type="url"
+             label="url"
+             prompt-valid="The url is valid."
+             value="http://master.style"
+             dirty>
+    </m-input>
+</template>
+
+<doc-prop [name]="'promptInvalid'" [types]="['string']"
+          [description]="'Prompt that the input result is invalid when the state of the control is invalid.'">
+</doc-prop>
+<template [codeLang]="'html'" [codeDemo]=true>
+    <m-input class="outlined"
+             type="email"
+             label="email"
+             prompt-invalid="Error email format."
+             value="username@"
+             dirty>
+        <div part="foot" class="f:sm">
+            <ion-icon name="mail"></ion-icon>
+        </div>
+    </m-input>
+</template>
+
+<doc-prop [name]="'promptWarning'" [types]="['string']"
+          [description]="'Toggle the warning attribute to trigger the prompt-warning prompt when necessary, such as when the password is too weak.'">
+</doc-prop>
+<template [codeLang]="'html'" [codeDemo]=true>
+    <m-input class="outlined"
+             type="password"
+             label="password"
+             prompt-warning="Password is too weak."
+             value="123456"
+             warning
+             dirty>
+        <div part="foot" class="f:sm">
+            <ion-icon name="lock-closed"></ion-icon>
+        </div>
+    </m-input>
+</template>

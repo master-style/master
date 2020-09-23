@@ -56,6 +56,7 @@ import { TextareaComponent } from './form/textarea/textarea.component';
 import { CheckComponent } from './form/check/check.component';
 
 import { FormModule } from './form/form.module';
+import { ValidationComponent } from './form/validation/validation.component';
 
 @NgModule({
     declarations: [
@@ -95,7 +96,8 @@ import { FormModule } from './form/form.module';
         SelectComponent,
         TextareaComponent,
         CheckComponent,
-        FormComponent
+        FormComponent,
+        ValidationComponent
     ],
     imports: [
         SharedModule,
