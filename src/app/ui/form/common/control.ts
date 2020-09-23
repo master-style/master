@@ -19,15 +19,6 @@ export class MasterControl extends HTMLElement {
     @Attr()
     required: boolean;
 
-    @Attr()
-    promptValid: string;
-
-    @Attr()
-    promptWarning: string;
-
-    @Attr()
-    promptInvalid: string;
-
     @Attr({ observe: false, render: false })
     valid: boolean;
 
