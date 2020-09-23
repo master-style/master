@@ -85,13 +85,6 @@
     }
 }
 
-:host(:-webkit-autofill) {
-    transition: background-color 5000s ease-in-out 0s;
-    border-style: dashed !important;
-    color: var(--f-blue);
-    -webkit-text-fill-color: var(--f-blue);
-}
-
 :host(:active:not([readonly]):not([disabled])),
 :host(:focus-within:not([readonly]):not([disabled])) {
     --b-width: 2px;

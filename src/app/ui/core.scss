@@ -125,6 +125,15 @@ m-option,
     -webkit-text-fill-color: var(--f-fadest); // fix safari opacity problem
 }
 
+
+:-webkit-autofill {
+    transition: background-color 5000s ease-in-out 0s;
+    border-style: dashed !important;
+    color: var(--f-blue);
+    caret-color: var(--f-theme);
+    -webkit-text-fill-color: var(--f-blue);
+}
+
 :-moz-read-only {
     cursor: default;
     caret-color: transparent;

@@ -20,6 +20,8 @@ export class MasterInput extends MasterControl {
             required: this.required,
             readonly: this.readOnly,
             pattern: this.pattern,
+            autocomplete: this.autocomplete,
+            autofocus: this.autofocus,
             $created: (element: HTMLInputElement) => {
                 this.body = element;
                 this.validity = element.validity;
