@@ -130,4 +130,5 @@ export class MasterCheck extends MasterControl {
         connectedChecks.delete(this);
         this.off({ id: this.elementName });
     }
+
 }

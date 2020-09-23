@@ -296,10 +296,3 @@ m-icon {
     font-size: var(--f-xxs);
     color: var(--f-fade);
 }
-
-::slotted(m-badge) {
-    position: absolute;
-    bottom: -.25rem;
-    right: 0;
-    transform: translateY(100%);
-}

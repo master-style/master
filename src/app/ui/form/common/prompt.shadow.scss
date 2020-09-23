@@ -1,41 +1,62 @@
 @import '../../variables';
 
-:host([prompt-valid][valid][dirty]),
-:host([prompt-valid][class*=-valid][class*=-dirty]) {
+:host([valid][dirty]),
+:host([class*=-valid][class*=-dirty]) {
     --prompt-bg-theme: var(--greenFader);
     --prompt-f-color: var(--green);
     --label-f-color: var(--green);
-
 }
 
-:host([prompt-warning]) {
-    --prompt-bg-theme: var(--yellowFader);
-    --prompt-f-color: var(--f-yellow);
-    --label-f-color: var(--f-yellow);
+:host([prompt-valid]:not([prompt-valid=""])[valid][dirty]),
+:host([prompt-valid]:not([prompt-valid=""])[class*=-valid][class*=-dirty]) {
+    &:after {
+        content: attr(prompt-valid);
+    }
+}
 
+:host([warning][dirty]),
+:host([warning][class*=-dirty]) {
+    --prompt-bg-theme: var(--yellowFader) !important;
+    --prompt-f-color: var(--f-yellow) !important;
+    --label-f-color: var(--f-yellow) !important;
+}
+
+:host([prompt-warning]:not([prompt-warning=""][dirty])),
+:host([prompt-warning]:not([prompt-warning=""][class*=-dirty])) {
+    &:after {
+        content: attr(prompt-warning) !important;
+    }
 }
 
 :host([invalid][dirty]),
 :host([class*=-invalid][class*=-dirty]) {
-    --prompt-bg-theme: var(--redFader);
-    --prompt-f-color: var(--f-red);
-    --label-f-color: var(--f-red);
-    --b-color: var(--red);
-
+    --prompt-bg-theme: var(--redFader) !important;
+    --prompt-f-color: var(--f-red) !important;
+    --label-f-color: var(--f-red) !important;
+    --b-color: var(--red) !important;
 }
 
-m-badge {
-    position: absolute;
-    z-index: $z-abs;
-    bottom: -.1875rem;
-    right: 0;
-    transform: translateY(100%);
-    font-size: var(--f-xxs);
-    font-weight: 500;
-    border-radius: $xxs;
-    padding: .1875rem .375rem;
-    color: var(--prompt-f-color);
-    background-color: var(--prompt-bg-theme);
-    white-space: normal;
-    text-align: right;
+:host([prompt-invalid]:not([prompt-invalid=""])[invalid][dirty]),
+:host([prompt-invalid]:not([prompt-invalid=""])[class*=-invalid][class*=-dirty]) {
+    &:after {
+        content: attr(prompt-invalid);
+    }
+}
+
+:host {
+    &:after {
+        position: absolute;
+        z-index: 1000;
+        bottom: -.1875rem;
+        right: 0;
+        transform: translateY(100%);
+        font-size: var(--f-xxs);
+        font-weight: 500;
+        border-radius: $xxs;
+        padding: .1875rem .375rem;
+        color: var(--prompt-f-color);
+        background-color: var(--prompt-bg-theme);
+        white-space: normal;
+        text-align: right;
+    }
 }
