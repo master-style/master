@@ -1,6 +1,6 @@
-@import '../variables';
+@import '../../variables';
 
-:host([prompt-valid][class*=-valid][class*=-dirty]),
+:host([prompt-valid][valid][dirty]),
 :host([prompt-valid][class*=-valid][class*=-dirty]) {
 
     label {
@@ -46,7 +46,7 @@
     }
 }
 
-:host([prompt-invalid][class*=-invalid][class*=-dirty]),
+:host([prompt-invalid][invalid][dirty]),
 :host([prompt-invalid][class*=-invalid][class*=-dirty]) {
     --b-color: var(--red);
 

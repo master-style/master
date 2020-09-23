@@ -1,4 +1,6 @@
 import { Element, Attr } from '@element';
+import { MasterControl, valueUpdater } from '../common/control';
+
 import css from './index.scss';
 
 const NAME = 'select';
@@ -7,7 +9,7 @@ const NAME = 'select';
     tag: 'm-' + NAME,
     css
 })
-export class MasterSelect extends HTMLElement {
+export class MasterSelect extends MasterControl {
 
     readonly elementName = NAME;
 
@@ -20,7 +22,10 @@ export class MasterSelect extends HTMLElement {
             tabindex: -1,
             name: this.name,
             required: this.required,
-            $created: (element: HTMLElement) => this.body = element
+            $created: (element: HTMLInputElement) => {
+                this.body = element;
+                this.validity = element.validity;
+            }
         }
     ]);
 
@@ -41,28 +46,8 @@ export class MasterSelect extends HTMLElement {
         'label', { $text: this.label }
     ]);
 
-    body: any;
-
     @Attr({ observe: false, render: false })
     role: string = 'listbox';
-
-    @Attr()
-    name: string;
-
-    @Attr()
-    disabled: boolean;
-
-    @Attr()
-    required: boolean;
-
-    @Attr()
-    promptValid: string;
-
-    @Attr()
-    promptInvalid: string;
-
-    @Attr()
-    promptWarning: string;
 
     @Attr({ key: 'readonly' })
     readOnly: boolean;
@@ -81,12 +66,10 @@ export class MasterSelect extends HTMLElement {
 
     @Attr({
         parser(select: MasterSelect, value: any, oldValue: any) {
-     
             return { value, oldValue };
         },
         updater(select: MasterSelect, value: any) {
-            select.empty = value === null || value === undefined || value === '';
-            select.body.value = value ?? null;
+            valueUpdater(select, value);
         },
         reflect: false
     })
@@ -119,19 +102,4 @@ export class MasterSelect extends HTMLElement {
     @Attr()
     step: number;
 
-    onAdded() {
-        this
-            .on('click', (event: any) => {
-                if (event.target === this.body) return;
-                this.body.focus();
-            }, { id: this.elementName, passive: true })
-            .on('input', '[part=body]', (event: any) => {
-                this.value = event.target.value;
-            }, { id: this.elementName, passive: true });
-    }
-
-    render() {
-        this.controlTemplate.render(this);
-        this.template.render(this.shadowRoot);
-    }
 }

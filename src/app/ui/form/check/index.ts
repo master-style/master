@@ -1,5 +1,6 @@
 import { Element, Attr } from '@element';
 import css from './index.scss';
+import { MasterControl } from '../common/control';
 
 const connectedChecks = new Set();
 const updatingRadioNames = new Set();
@@ -10,7 +11,7 @@ const NAME = 'check';
     tag: 'm-' + NAME,
     css
 })
-export class MasterCheck extends HTMLElement {
+export class MasterCheck extends MasterControl {
 
     readonly elementName: string = NAME;
 
@@ -21,7 +22,10 @@ export class MasterCheck extends HTMLElement {
             name: this.name,
             disabled: this.disabled,
             required: this.required,
-            $created: (element: HTMLElement) => this.body = element
+            $created: (element: HTMLInputElement) => {
+                this.body = element;
+                this.validity = element.validity;
+            }
         }
     ]);
 
@@ -59,7 +63,7 @@ export class MasterCheck extends HTMLElement {
 
     @Attr()
     promptWarning: string;
-    
+
     @Attr()
     autocomplete: string;
 
@@ -110,6 +114,8 @@ export class MasterCheck extends HTMLElement {
     value: any;
 
     onAdded() {
+        this.validate();
+
         this.body
             .on('input', (event: any) => {
                 this.checked = event.target.checked;
@@ -121,10 +127,5 @@ export class MasterCheck extends HTMLElement {
     onRemoved() {
         connectedChecks.delete(this);
         this.off({ id: this.elementName });
-    }
-
-    render() {
-        this.controlTemplate.render(this);
-        this.template.render(this.shadowRoot);
     }
 }

@@ -1,4 +1,4 @@
-@import '../variables';
+@import '../../variables';
 
 /**
    * Remove the inner padding and cancel buttons in Chrome and Safari on macOS.
@@ -310,4 +310,11 @@ m-icon {
     padding-right: var(--px);
     font-size: var(--f-xxs);
     color: var(--f-fade);
+}
+
+::slotted(m-badge) {
+    position: absolute;
+    bottom: -.25rem;
+    right: 0;
+    transform: translateY(100%);
 }

@@ -1,4 +1,6 @@
 import { Element, Attr } from '@element';
+import { MasterControl, valueUpdater } from '../common/control';
+
 import css from './index.scss';
 
 const NAME = 'textarea';
@@ -7,7 +9,7 @@ const NAME = 'textarea';
     tag: 'm-' + NAME,
     css
 })
-export class MasterTextarea extends HTMLElement {
+export class MasterTextarea extends MasterControl {
 
     readonly elementName = NAME;
 
@@ -20,8 +22,10 @@ export class MasterTextarea extends HTMLElement {
             required: this.required,
             readonly: this.readOnly,
             rows: this.rows,
-            value: this.value,
-            $created: (element: HTMLElement) => this.body = element
+            $created: (element: HTMLInputElement) => {
+                this.body = element;
+                this.validity = element.validity;
+            }
         }
     ]);
 
@@ -35,28 +39,8 @@ export class MasterTextarea extends HTMLElement {
         'label', { $text: this.label }
     ]);
 
-    body: any;
-
     @Attr({ observe: false, render: false })
     role: string = 'textbox';
-
-    @Attr()
-    name: string;
-
-    @Attr()
-    disabled: boolean;
-
-    @Attr()
-    required: boolean;
-
-    @Attr()
-    promptValid: string;
-
-    @Attr()
-    promptInvalid: string;
-
-    @Attr()
-    promptWarning: string;
 
     @Attr({ key: 'readonly' })
     readOnly: boolean;
@@ -76,15 +60,9 @@ export class MasterTextarea extends HTMLElement {
     @Attr({
         reflect: false,
         render: false,
-        updater(textarea: MasterTextarea, value: any) {
-            textarea.empty = value === null || value === undefined || value === '';
-            textarea.body.value = value ?? null;
-        }
+        updater: valueUpdater
     })
     value: any;
-
-    @Attr({ observe: false, render: false })
-    empty: boolean;
 
     @Attr()
     maxLength: number;
@@ -95,23 +73,4 @@ export class MasterTextarea extends HTMLElement {
     @Attr()
     rows: number = 1;
 
-    onAdded() {
-        this
-            .on('click', (event: any) => {
-                if (event.target === this.body) return;
-                this.body.focus();
-            }, { id: this.elementName, passive: true })
-            .on('input', '[part=body]', (event: any) => {
-                this.value = event.target.value;
-            }, { id: this.elementName, passive: true });
-    }
-
-    onRemoved() {
-        this.off({ id: this.elementName });
-    }
-
-    render() {
-        this.controlTemplate.render(this);
-        this.template.render(this.shadowRoot);
-    }
 }

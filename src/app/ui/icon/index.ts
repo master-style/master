@@ -16,14 +16,11 @@ const ICON = {
 })
 export class MasterIcon extends HTMLElement {
 
-    template = $(() => {
-        console.log(this.name);
-        return [
-            'div', { part: 'root' }, [
-                'svg', { viewBox: '0 0 24 24', $namespace: 'http://www.w3.org/2000/svg', $html: ICON[this.name] }
-            ]
+    template = $(() => [
+        'div', { part: 'root' }, [
+            'svg', { viewBox: '0 0 24 24', $namespace: 'http://www.w3.org/2000/svg', $html: ICON[this.name] }
         ]
-    });
+    ]);
 
     @Attr()
     name: string;

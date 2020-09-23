@@ -1,4 +1,5 @@
 import { Element, Attr } from '@element';
+import { MasterControl, valueUpdater } from '../common/control';
 import css from './index.scss';
 
 const NAME = 'input';
@@ -7,9 +8,7 @@ const NAME = 'input';
     tag: 'm-' + NAME,
     css
 })
-export class MasterInput extends HTMLElement {
-
-    readonly elementName = NAME;
+export class MasterInput extends MasterControl {
 
     controlTemplate = $(() => [
         'input', {
@@ -28,8 +27,6 @@ export class MasterInput extends HTMLElement {
         }
     ]);
 
-    validity: ValidityState;
-
     template = $(() => [
         'slot',
         'fieldset', [
@@ -40,28 +37,8 @@ export class MasterInput extends HTMLElement {
         'label', { $text: this.label }
     ]);
 
-    body: any;
-
     @Attr({ observe: false, render: false })
     role: string = 'textbox';
-
-    @Attr()
-    name: string;
-
-    @Attr()
-    disabled: boolean;
-
-    @Attr()
-    required: boolean;
-
-    @Attr()
-    promptValid: string;
-
-    @Attr()
-    promptInvalid: string;
-
-    @Attr()
-    promptWarning: string;
 
     @Attr({ key: 'readonly' })
     readOnly: boolean;
@@ -89,17 +66,11 @@ export class MasterInput extends HTMLElement {
             }
             return { value, oldValue };
         },
-        updater(input: MasterInput, value: any) {
-            input.empty = value === null || value === undefined || value === '';
-            input.body.value = value ?? null;
-        },
+        updater: valueUpdater,
         render: false,
         reflect: false
     })
     value: any;
-
-    @Attr({ observe: false, render: false })
-    empty: boolean;
 
     @Attr()
     autocomplete: string;
@@ -125,23 +96,4 @@ export class MasterInput extends HTMLElement {
     @Attr()
     step: number;
 
-    onAdded() {
-        this
-            .on('click', (event: any) => {
-                if (event.target === this.body) return;
-                this.body.focus();
-            }, { id: this.elementName, passive: true })
-            .on('input', '[part=body]', (event: any) => {
-                this.value = event.target.value;
-            }, { id: this.elementName, passive: true });
-    }
-
-    onRemoved() {
-        this.off({ id: this.elementName });
-    }
-
-    render() {
-        this.controlTemplate.render(this);
-        this.template.render(this.shadowRoot);
-    }
 }

@@ -1,5 +1,5 @@
-@import '../control';
-@import '../prompt';
+@import '../common/field.shadow';
+@import '../common/prompt.shadow';
 
 :host {
     min-width: 3rem;
