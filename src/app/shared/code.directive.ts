@@ -8,10 +8,12 @@ import 'prismjs/components/prism-typescript.min.js';
 import prettier from 'prettier';
 import htmlParser from 'prettier/parser-html.js';
 import typescriptParser from 'prettier/parser-typescript.js';
+import postcssParser from 'prettier/parser-postcss';
 
 const prettierParser = {
     'html': htmlParser,
-    'typescript': typescriptParser
+    'typescript': typescriptParser,
+    'css': postcssParser
 };
 
 const prettierOpiton = {
@@ -118,9 +120,11 @@ export class CodeDirective {
                 }
                 break;
             case 'typescript':
-                // code = element;
                 code = element.textContent;
                 break;
+            case 'css':
+                console.log((element.innerHTML));
+                code = element.innerHTML;
             default:
                 break;
         }

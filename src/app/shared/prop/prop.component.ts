@@ -12,10 +12,11 @@ export class PropComponent implements OnInit {
     @Input() name: string;
     @Input() attr: string;
     @Input() types: [];
-    @Input() value: any;
     @Input() default: any;
     @Input() description: string;
     @Input() readonly: boolean;
+    @Input() auto: boolean;
+    @Input() activated: string;
 
     camelToKebabCase = camelToKebabCase;
 
@@ -25,6 +26,8 @@ export class PropComponent implements OnInit {
 
     getTypeIcon(value) {
         switch (value) {
+            case true:
+            case false:
             case 'boolean':
                 return 'toggle-outline';
             case 'string':
@@ -53,6 +56,7 @@ export class PropComponent implements OnInit {
             case 'function':
             case 'array':
             case 'number':
+            case 'Auto':
                 if (this.name === 'type') {
                     value = "'" + value + "'";
                 }
