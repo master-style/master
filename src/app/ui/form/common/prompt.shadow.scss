@@ -3,59 +3,47 @@
 :host([prompt-valid][valid][dirty]),
 :host([prompt-valid][class*=-valid][class*=-dirty]) {
 
-    label {
-        color: var(--green)
-    }
+    --prompt-bg-theme: var(--greenFader);
+    --prompt-f-color: var(--green);
 
     &:after {
         content: attr(prompt-valid);
-        position: absolute;
-        z-index: $z-abs;
-        bottom: -.1875rem;
-        right: 0;
-        transform: translateY(100%);
-        font-size: var(--f-xxs);
-        font-weight: 500;
-        color: var(--green);
-        border-radius: $xxs;
-        background-color: var(--greenFader);
-        padding: .1875rem .375rem;
     }
 }
 
-:host([prompt-warning]),
 :host([prompt-warning]) {
 
-    label {
-        color: var(--f-yellow) !important
-    }
+    --prompt-bg-theme: var(--yellowFader);
+    --prompt-f-color: var(--f-yellow);
 
     &:after {
         content: attr(prompt-warning);
-        position: absolute;
-        z-index: $z-abs;
-        bottom: -.1875rem;
-        right: 0;
-        transform: translateY(100%);
-        font-size: var(--f-xxs);
-        font-weight: 500;
-        color: var(--f-yellow) !important;
-        border-radius: $xxs;
-        background-color: var(--yellowFader) !important;
-        padding: .1875rem .375rem;
     }
 }
 
 :host([prompt-invalid][invalid][dirty]),
 :host([prompt-invalid][class*=-invalid][class*=-dirty]) {
-    --b-color: var(--red);
 
-    label {
-        color: var(--f-red) !important
-    }
+    --prompt-bg-theme: var(--redFader);
+    --prompt-f-color: var(--f-red);
+    --b-color: var(--red);
 
     &:after {
         content: attr(prompt-invalid);
+    }
+}
+
+
+:host([prompt-valid][valid][dirty]),
+:host([prompt-valid][class*=-valid][class*=-dirty]),
+:host([prompt-warning]),
+:host([prompt-invalid][invalid][dirty]),
+:host([prompt-invalid][class*=-invalid][class*=-dirty]) {
+    label {
+        color: var(--prompt-f-color);
+    }
+
+    &:after {
         position: absolute;
         z-index: $z-abs;
         bottom: -.1875rem;
@@ -63,9 +51,9 @@
         transform: translateY(100%);
         font-size: var(--f-xxs);
         font-weight: 500;
-        color: var(--f-red) !important;
         border-radius: $xxs;
-        background-color: var(--redFader) !important;
         padding: .1875rem .375rem;
+        color: var(--prompt-f-color);
+        background-color: var(--prompt-bg-theme);
     }
 }
