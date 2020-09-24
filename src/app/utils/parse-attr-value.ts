@@ -1,3 +1,4 @@
+
 export default function parseAttrValue(value) {
     if (value === undefined || value === '' || value === null) {
         return value;
@@ -6,4 +7,4 @@ export default function parseAttrValue(value) {
     } else {
         return isNaN(+value) ? value : +value;
     }
-};
+}
