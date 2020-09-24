@@ -60,27 +60,6 @@ body {
     -webkit-overflow-scrolling: touch;
 }
 
-
-// ::-webkit-scrollbar {
-//     background-color: transparent;
-//     width: 15px;
-// }
-
-// ::-webkit-scrollbar-track {
-//     background-color: transparent;
-// }
-
-// ::-webkit-scrollbar-thumb {
-//     background-color: var(--b-fadest);
-//     border: 5px transparent solid;
-//     background-clip: padding-box;
-//     border-radius: 10px;
-
-//     &:hover {
-//         background-color: var(--b-fade);
-//     }
-// }
-
 i {
     line-height: 1;
     vertical-align: middle;
@@ -89,58 +68,6 @@ i {
 m-option,
 [hidden] {
     display: none;
-}
-
-::-ms-check {
-    display: none;
-}
-
-::-webkit-inner-spin-button,
-::-webkit-outer-spin-button {
-    display: none;
-}
-
-[type=search] {
-    -webkit-appearance: textfield;
-    /* 1 */
-    outline-offset: -2px;
-    /* 2 */
-}
-
-[type="search"]::-webkit-search-cancel-button,
-[type="search"]::-webkit-search-decoration {
-    -webkit-appearance: none;
-}
-
-::-webkit-file-upload-button {
-    -webkit-appearance: button;
-    /* 1 */
-    font: inherit;
-    /* 2 */
-}
-
-::placeholder {
-    opacity: 1; // fixed safari default opacity
-    color: var(--f-fadest);
-    -webkit-text-fill-color: var(--f-fadest); // fix safari opacity problem
-}
-
-
-:-webkit-autofill {
-    transition: background-color 5000s ease-in-out 0s;
-    border-style: dashed !important;
-    color: var(--f-blue);
-    caret-color: var(--f-theme);
-    -webkit-text-fill-color: var(--f-blue);
-}
-
-:-moz-read-only {
-    cursor: default;
-    caret-color: transparent;
-}
-
-::selection {
-    color: #000;
 }
 
 /**
@@ -155,20 +82,6 @@ m-option,
 b,
 strong {
     font-weight: bolder;
-}
-
-/**
-   * 1. Correct the inheritance and scaling of font size in all browsers.
-   * 2. Correct the odd `rem` font sizing in all browsers.
-   */
-
-code,
-kbd,
-samp {
-    font-family: monospace, monospace;
-    /* 1 */
-    font-size: 1rem;
-    /* 2 */
 }
 
 /**
@@ -214,15 +127,6 @@ a {
     }
 }
 
-ul {
-    margin: 0;
-    padding: 0;
-}
-
-li {
-    list-style: none;
-}
-
 ::selection {
     background-color: var(--b-fader);
 }
@@ -231,50 +135,10 @@ li {
     outline: none;
 }
 
-.touch,
-a,
-button {
-    -webkit-user-select: none;
-    user-select: none;
-    cursor: pointer;
-}
-
-button {
-    box-sizing: border-box;
-    color: inherit;
-    font-size: inherit;
-    -webkit-appearance: none;
-    margin: 0;
-    border: 0;
-}
-
-input,
-optgroup,
-select,
-textarea {
-    font-family: inherit;
-    line-height: normal;
-    font-size: 100%;
-    margin: 0;
-}
-
 .remark {
     font-size: var(--f-xxs);
     color: var(--f-fade);
     line-height: 1.4;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    color: var(--f-theme);
-    margin: 0px;
-    font-weight: 500;
-    -webkit-font-smoothing: subpixel-antialiased;
-    text-rendering: optimizeLegibility;
 }
 
 hr {
