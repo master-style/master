@@ -23,7 +23,7 @@ const
     tag: 'm-' + NAME,
     css
 })
-export class MasterContent extends HTMLElement {
+export class ContentElement extends HTMLElement {
 
     #time: any = {};
     #thumbSize: any = {};

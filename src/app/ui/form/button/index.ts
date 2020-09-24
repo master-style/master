@@ -7,7 +7,7 @@ const NAME = 'button';
     tag: 'm-' + NAME,
     css
 })
-export class MasterButton extends ClickableElement {
+export class ButtonElement extends ClickableElement {
 
     @Attr({ render: false })
     busy: boolean;

@@ -10,7 +10,7 @@ const NAME = 'check';
     tag: 'm-' + NAME,
     css
 })
-export class MasterCheck extends ControlElement {
+export class CheckElement extends ControlElement {
 
     controlTemplate = $(() => [
         'input', {
@@ -68,14 +68,14 @@ export class MasterCheck extends ControlElement {
     interface: string = 'check';
 
     @Attr({
-        updater(check: MasterCheck, value: any, oldValue: any) {
+        updater(check: CheckElement, value: any, oldValue: any) {
             check.role = value;
         }
     })
     type: string = 'checkbox';
 
     @Attr({
-        updater(check: MasterCheck, value: any, oldValue: any) {
+        updater(check: CheckElement, value: any, oldValue: any) {
 
             check.body.checked = value;
             check.toggleAttribute('aria-checked', !!value);
@@ -85,7 +85,7 @@ export class MasterCheck extends ControlElement {
             if (check.type === 'radio' && check.name) {
                 updatingRadioNames.add(check.name);
                 connectedChecks
-                    .forEach((eachCheck: MasterCheck) => {
+                    .forEach((eachCheck: CheckElement) => {
                         if (
                             eachCheck !== check
                             && eachCheck.name === check.name
@@ -105,7 +105,7 @@ export class MasterCheck extends ControlElement {
     @Attr({
         reflect: false,
         render: false,
-        updater(check: MasterCheck, value: any, oldValue: any) {
+        updater(check: CheckElement, value: any, oldValue: any) {
             if (value === oldValue) return;
             check.body.value = value ?? null;
         }

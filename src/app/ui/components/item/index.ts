@@ -7,7 +7,7 @@ const NAME = 'item';
     tag: 'm-' + NAME,
     css
 })
-export class MasterItem extends ClickableElement {
+export class ItemElement extends ClickableElement {
 
     slotTemplate = [
         'slot', { name: 'head' },

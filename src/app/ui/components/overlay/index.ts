@@ -7,4 +7,4 @@ const NAME = 'overlay';
     tag: 'm-' + NAME,
     css
 })
-export class MasterOverlay extends HTMLElement {}
+export class SkeletonOverlay extends HTMLElement {}

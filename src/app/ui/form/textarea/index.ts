@@ -8,7 +8,7 @@ const NAME = 'textarea';
     tag: 'm-' + NAME,
     css
 })
-export class MasterTextarea extends ControlElement {
+export class TextareaElement extends ControlElement {
 
     controlTemplate = $(() => [
         'textarea', {

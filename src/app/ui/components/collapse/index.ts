@@ -1,5 +1,5 @@
 // import { Element, Attr } from '@element';
-// import { MasterTogglable } from '../../togglable';
+// import { TogglableElement } from '../../togglable';
 // import css from './index.scss';
 
 // const NAME = 'collapse';
@@ -8,7 +8,7 @@
 //     tag: 'm-' + NAME,
 //     css
 // })
-// export class MasterCollapse extends MasterTogglable {
+// export class CollapseElement extends TogglableElement {
 
 //     template = $(() => [
 //         'slot'

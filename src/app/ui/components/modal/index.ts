@@ -8,7 +8,7 @@ const PX = 'px';
     tag: 'm-' + NAME,
     css
 })
-export class MasterModal extends ToggleableElement {
+export class ModalElement extends ToggleableElement {
 
     private trigger: HTMLElement;
 
@@ -54,7 +54,7 @@ export class MasterModal extends ToggleableElement {
     closeOnScroll: boolean;
 
     @Attr({
-        updater(modal: MasterModal, value, oldValue) {
+        updater(modal: ModalElement, value, oldValue) {
             if (
                 value && oldValue ||
                 !value && oldValue
@@ -74,7 +74,7 @@ export class MasterModal extends ToggleableElement {
 
     @Attr({
         reflect: false,
-        updater(modal: MasterModal, value: string, oldValue: string) {
+        updater(modal: ModalElement, value: string, oldValue: string) {
             if (oldValue === 'close') {
                 modal.overlayElement.off({ id: 'modal' });
             }

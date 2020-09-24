@@ -7,4 +7,4 @@ const NAME = 'card';
     tag: 'm-' + NAME,
     css
 })
-export class MasterCard extends ClickableElement {}
+export class CardElement extends ClickableElement {}

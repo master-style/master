@@ -14,7 +14,7 @@ const ICON = {
     tag: 'm-' + NAME,
     css
 })
-export class MasterIcon extends HTMLElement {
+export class IconElement extends HTMLElement {
 
     template = $(() => [
         'div', { part: 'root' }, [

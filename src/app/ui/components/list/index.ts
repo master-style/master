@@ -7,7 +7,7 @@ const NAME = 'list';
     tag: 'm-' + NAME,
     css
 })
-export class MasterList extends HTMLElement {
+export class ListElement extends HTMLElement {
     template = $(() => [
         'slot'
     ]);

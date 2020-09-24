@@ -7,7 +7,7 @@ const NAME = 'skeleton';
     tag: 'm-' + NAME,
     css
 })
-export class MasterSkeleton extends HTMLElement {
+export class SkeletonElement extends HTMLElement {
 
     template = $(() => {
         this.css('width', this.width);

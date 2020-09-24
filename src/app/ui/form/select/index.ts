@@ -9,7 +9,7 @@ const NAME = 'select';
     tag: 'm-' + NAME,
     css
 })
-export class MasterSelect extends ControlElement {
+export class SelectElement extends ControlElement {
 
     @Attr({ key: 'tabindex' })
     tabIndex = -1;
@@ -93,7 +93,7 @@ export class MasterSelect extends ControlElement {
     expanded: boolean;
 
     @Attr({
-        updater(select: MasterSelect, value: any) {
+        updater(select: SelectElement, value: any) {
             ControlElement.valueUpdater(select, value);
             select.body.value = value;
             console.log(select.value);

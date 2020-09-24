@@ -7,4 +7,4 @@ const NAME = 'chip';
     tag: 'm-' + NAME,
     css
 })
-export class MasterChip extends ClickableElement {}
+export class ChipElement extends ClickableElement {}
