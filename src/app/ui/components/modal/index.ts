@@ -10,6 +10,8 @@ const PX = 'px';
 })
 export class MasterModal extends ToggleableElement {
 
+    static readonly namespace = NAME;
+
     private trigger: HTMLElement;
 
     template = $(() => [

@@ -4,6 +4,8 @@ const liveTriggers = {};
 
 export class ToggleableElement extends HTMLElement {
 
+    static readonly namespace: string;
+
     protected ready = false;
 
     @Attr({
@@ -30,7 +32,7 @@ export class ToggleableElement extends HTMLElement {
                 value && oldValue
             ) {
                 if (!oldValue) return;
-                oldValue += '.' + togglable.constructor.name.split('Element')[0].toLowerCase();
+                oldValue += '.' + togglable.constructor['namespace'];
                 const liveTargets = liveTriggers[oldValue];
                 if (liveTargets) {
                     if (liveTargets.length) {
@@ -42,7 +44,8 @@ export class ToggleableElement extends HTMLElement {
                 }
             }
             if (value) {
-                const name = togglable.constructor.name.split('Element')[0].toLowerCase();
+                console.log(togglable.constructor['namespace']);
+                const name = togglable.constructor['namespace'];
                 const toggleAttrKey = 'toggle-' + name;
                 value += '.' + name;
                 let liveTargets = liveTriggers[value];
