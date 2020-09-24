@@ -5,13 +5,13 @@
                 <m-item class="indent-lined">
                     <img slot="head" src="assets/images/ios-icons/airplane.svg">
                     Airplane Mode
-                    <img loading="lazy" slot="img" width="64" height="64"
-                         src="https://images.pexels.com/photos/936611/pexels-photo-936611.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940">
+                    <m-check slot="foot" interface="switch" name="food"></m-check>
                 </m-item>
                 <m-item class="indent-lined" type="button">
                     <img slot="head" src="assets/images/ios-icons/wifi.svg">
                     Wi-Fi
                     <span slot="foot">Aoyue Design</span>
+                    <m-check slot="foot" name="food"></m-check>
                 </m-item>
                 <m-item class="indent-lined" type="button">
                     <img slot="head" src="assets/images/ios-icons/bluetooth.svg">
@@ -56,6 +56,49 @@
                 <m-item class="lined">
                     Water
                     <span slot="foot">120 cc</span>
+                </m-item>
+            </div>
+            <div class="x:6@sm">
+                <m-item class="lined">
+                    <m-check slot="head"></m-check>
+                    Pasta
+                    <span slot="foot">100 g</span>
+                </m-item>
+                <m-item class="lined">
+                    <m-check slot="head"></m-check>
+                    Clams
+                    <span slot="foot">300 g</span>
+                </m-item>
+                <m-item class="lined">
+                    <m-check slot="head"></m-check>
+                    Carlic
+                    <span slot="foot">3 petals</span>
+                </m-item>
+            </div>
+            <div class="x:6@sm">
+                <m-item class="indent-lined">
+                    <m-check slot="head" type="radio" name="food"></m-check>
+                    Chili
+                    <article part="body" class="short">
+                        <p>This's a delicious food from taiwan.</p>
+                    </article>
+                    <img loading="lazy" slot="img" width="64" height="64"
+                         src="https://images.pexels.com/photos/936611/pexels-photo-936611.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940">
+                </m-item>
+                <m-item class="lined">
+                    <m-check slot="head" type="radio" name="food"></m-check>
+                    Pasta
+                    <span slot="foot">100 g</span>
+                </m-item>
+                <m-item class="lined">
+                    <m-check slot="head" type="radio" name="food"></m-check>
+                    Clams
+                    <span slot="foot">300 g</span>
+                </m-item>
+                <m-item class="lined">
+                    <m-check slot="head" type="radio" name="food"></m-check>
+                    Carlic
+                    <span slot="foot">3 petals</span>
                 </m-item>
             </div>
         </div>

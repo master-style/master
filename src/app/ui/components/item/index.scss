@@ -3,12 +3,12 @@
 
 [part=root] {
     padding-left: var(--px);
+    line-height: 1.4;
 }
 
 [part=body] {
     display: flex;
     padding: var(--py) 0;
-    line-height: 1.4;
     text-align: left;
     flex-direction: column;
     justify-content: space-between;
@@ -22,7 +22,6 @@
     --py: .8125rem;
     --px: 1.25rem;
     --icon-size: 2rem;
-    --img-m: .625rem;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -51,6 +50,7 @@
 :host(.sm) {
     --f-size: .9125rem;
     --size: 2.5rem;
+    --px: 1.125rem;
     --py: .625rem;
     --icon-size: 1.625rem;
 }
@@ -58,9 +58,9 @@
 :host(.xs) {
     --f-size: .875rem;
     --size: 2rem;
+    --px: 1rem;
     --py: .375rem;
     --icon-size: 1.25rem;
-    --px: 1rem;
 }
 
 :host([active]) {
@@ -69,6 +69,9 @@
 
 :host([disabled]) {
     background-color: transparent !important;
+    slot[name=foot] {
+        color: var(--f-fadest)!important;
+    }
 }
 
 // [is=m-check]~i {
@@ -108,6 +111,10 @@ slot[name=foot] {
     color: var(--f-fade);
     align-items: center;
     white-space: nowrap;
+
+    &::slotted(*) {
+        margin-left: calc(var(--px) / 2);
+    }
 }
 
 slot[name=head]::slotted(*) {
@@ -122,7 +129,7 @@ slot[name=head]::slotted(*) {
 
 slot[name=img]::slotted(*) {
     object-fit: cover;
-    margin: var(--img-m);
-    margin-right: calc(var(--img-m) - var(--px));
+    margin: calc(var(--px) / 2);
+    margin-right: calc(var(--px) / -2);
     border-radius: $xxs;
 }
