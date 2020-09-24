@@ -1,5 +1,4 @@
-import { Element, Attr } from '@element';
-import { MasterControl, valueUpdater } from '../common/control';
+import { Element, Attr, ControlElement } from '@element';
 import css from './index.scss';
 
 const NAME = 'input';
@@ -8,7 +7,7 @@ const NAME = 'input';
     tag: 'm-' + NAME,
     css
 })
-export class MasterInput extends MasterControl {
+export class InputElement extends ControlElement {
 
     controlTemplate = $(() => [
         'input', {
@@ -61,7 +60,7 @@ export class MasterInput extends MasterControl {
     expanded: boolean;
 
     @Attr({
-        parser(input: MasterInput, value: any, oldValue: any) {
+        parser(input: InputElement, value: any, oldValue: any) {
             if (input.type === 'number') {
                 if (value === '') {
                     value = null;
@@ -71,7 +70,7 @@ export class MasterInput extends MasterControl {
             }
             return { value, oldValue };
         },
-        updater: valueUpdater,
+        updater: ControlElement.valueUpdater,
         render: false,
         reflect: false
     })

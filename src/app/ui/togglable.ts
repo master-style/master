@@ -30,7 +30,7 @@ export default class MasterTogglable extends HTMLElement {
                 value && oldValue
             ) {
                 if (!oldValue) return;
-                oldValue += '.' + togglable.constructor.name.split('Master')[1].toLowerCase();
+                oldValue += '.' + togglable.constructor.name.split('Element')[0].toLowerCase();
                 const liveTargets = liveTriggers[oldValue];
                 if (liveTargets) {
                     if (liveTargets.length) {
@@ -42,7 +42,7 @@ export default class MasterTogglable extends HTMLElement {
                 }
             }
             if (value) {
-                const name = togglable.constructor.name.split('Master')[1].toLowerCase();
+                const name = togglable.constructor.name.split('Element')[0].toLowerCase();
                 const toggleAttrKey = 'toggle-' + name;
                 value += '.' + name;
                 let liveTargets = liveTriggers[value];

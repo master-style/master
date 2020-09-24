@@ -1,5 +1,4 @@
-import { Element, Attr } from '@element';
-import { MasterControl, valueUpdater } from '../common/control';
+import { Element, Attr, ControlElement } from '@element';
 
 import css from './index.scss';
 
@@ -9,7 +8,7 @@ const NAME = 'textarea';
     tag: 'm-' + NAME,
     css
 })
-export class MasterTextarea extends MasterControl {
+export class MasterTextarea extends ControlElement {
 
     readonly elementName = NAME;
 
@@ -63,7 +62,7 @@ export class MasterTextarea extends MasterControl {
     @Attr({
         reflect: false,
         render: false,
-        updater: valueUpdater
+        updater: ControlElement.valueUpdater
     })
     value: any;
 

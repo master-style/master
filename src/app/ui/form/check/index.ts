@@ -1,6 +1,5 @@
-import { Element, Attr } from '@element';
+import { Element, Attr, ControlElement } from '@element';
 import css from './index.scss';
-import { MasterControl } from '../common/control';
 
 const connectedChecks = new Set();
 const updatingRadioNames = new Set();
@@ -11,7 +10,7 @@ const NAME = 'check';
     tag: 'm-' + NAME,
     css
 })
-export class MasterCheck extends MasterControl {
+export class MasterCheck extends ControlElement {
 
     readonly elementName: string = NAME;
 

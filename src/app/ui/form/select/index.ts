@@ -1,5 +1,4 @@
-import { Element, Attr } from '@element';
-import { MasterControl, valueUpdater } from '../common/control';
+import { Element, Attr, ControlElement } from '@element';
 
 import css from './index.scss';
 
@@ -9,7 +8,7 @@ const NAME = 'select';
     tag: 'm-' + NAME,
     css
 })
-export class MasterSelect extends MasterControl {
+export class MasterSelect extends ControlElement {
 
     readonly elementName = NAME;
 
@@ -72,7 +71,7 @@ export class MasterSelect extends MasterControl {
             return { value, oldValue };
         },
         updater(select: MasterSelect, value: any) {
-            valueUpdater(select, value);
+            ControlElement.valueUpdater(select, value);
         },
         reflect: false
     })

@@ -4,6 +4,12 @@ const NAME = 'control';
 
 export class ControlElement extends HTMLElement {
 
+    static valueUpdater(control: any, value: any) {
+        control.empty = value === null || value === undefined || value === '';
+        control.body.value = value ?? null;
+        control.validate();
+    }
+
     validity: ValidityState;
 
     body: any;
@@ -71,10 +77,4 @@ export class ControlElement extends HTMLElement {
         (this as any).controlTemplate.render(this);
         (this as any).template.render(this.shadowRoot);
     }
-}
-
-export function valueUpdater(control: any, value: any) {
-    control.empty = value === null || value === undefined || value === '';
-    control.body.value = value ?? null;
-    control.validate();
 }
