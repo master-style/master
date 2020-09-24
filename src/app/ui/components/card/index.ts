@@ -1,5 +1,4 @@
-import { Element } from '@element';
-import MasterClickable from '@ui/clickable';
+import { Element, ClickableElement } from '@element';
 import css from './index.scss';
 
 const NAME = 'card';
@@ -8,6 +7,6 @@ const NAME = 'card';
     tag: 'm-' + NAME,
     css
 })
-export class MasterCard extends MasterClickable {
+export class MasterCard extends ClickableElement {
     readonly elementName = NAME;
 }

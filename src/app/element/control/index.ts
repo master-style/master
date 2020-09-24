@@ -2,7 +2,7 @@ import { Attr } from '@element';
 
 const NAME = 'control';
 
-export class MasterControl extends HTMLElement {
+export class ControlElement extends HTMLElement {
 
     validity: ValidityState;
 

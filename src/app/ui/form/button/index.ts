@@ -1,5 +1,4 @@
-import { Element, Attr } from '@element';
-import MasterClickable from '@ui/clickable';
+import { Element, Attr, ClickableElement } from '@element';
 import css from './index.scss';
 
 const NAME = 'button';
@@ -8,7 +7,7 @@ const NAME = 'button';
     tag: 'm-' + NAME,
     css
 })
-export class MasterButton extends MasterClickable {
+export class MasterButton extends ClickableElement {
 
     readonly elementName = NAME;
 

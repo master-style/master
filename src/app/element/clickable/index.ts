@@ -2,7 +2,7 @@ import { Attr } from '@element';
 
 type elementToken = string | { [key: string]: any };
 
-export default class MasterClickable extends HTMLElement {
+export class ClickableElement extends HTMLElement {
 
     slotTemplate: (elementToken | (() => elementToken[]))[];
 

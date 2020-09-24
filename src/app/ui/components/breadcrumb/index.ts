@@ -1,5 +1,4 @@
-import { Element } from '@element';
-import MasterClickable from '@ui/clickable';
+import { Element, ClickableElement } from '@element';
 import css from './index.scss';
 
 const NAME = 'breadcrumb';
@@ -8,7 +7,7 @@ const NAME = 'breadcrumb';
     tag: 'm-' + NAME,
     css
 })
-export class MasterBreadcrumb extends MasterClickable {
+export class MasterBreadcrumb extends ClickableElement {
 
     readonly elementName = NAME;
 
