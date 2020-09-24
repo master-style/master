@@ -6,6 +6,7 @@ const DEFAULT_ELEMENT_OPTION = {
 export function Element(options: ElementOptions) {
     options = { ...DEFAULT_ELEMENT_OPTION, ...options };
     return function (constructor: any) {
+        constructor['elementName'] = options.tag.split('-').splice(1).join('-');
         const prototype = constructor.prototype;
         const allAttrOptions = constructor.allAttrOptions;
         const onAdded = prototype.onAdded;

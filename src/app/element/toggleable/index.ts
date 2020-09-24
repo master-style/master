@@ -4,10 +4,6 @@ const liveTriggers = {};
 
 export class ToggleableElement extends HTMLElement {
 
-    static readonly namespace: string;
-
-    protected ready = false;
-
     @Attr({
         updater(togglable: ToggleableElement, value: boolean, oldValue: boolean) {
             value ? togglable.close() : togglable.open();
@@ -32,7 +28,7 @@ export class ToggleableElement extends HTMLElement {
                 value && oldValue
             ) {
                 if (!oldValue) return;
-                oldValue += '.' + togglable.tagName;
+                oldValue += '.' + togglable.constructor['elementName'];
                 const liveTargets = liveTriggers[oldValue];
                 if (liveTargets) {
                     if (liveTargets.length) {
@@ -44,7 +40,7 @@ export class ToggleableElement extends HTMLElement {
                 }
             }
             if (value) {
-                const name = togglable.tagName;
+                const name = togglable.constructor['elementName'];
                 const toggleAttrKey = 'toggle-' + name;
                 value += '.' + name;
                 let liveTargets = liveTriggers[value];
@@ -98,7 +94,7 @@ export class ToggleableElement extends HTMLElement {
                     if (icon) icon.toggleAttribute('active', !this.hidden);
                 }
             });
-        if (this.ready) {
+        if (this['ready']) {
             if (this.animation) {
                 for (const eachAnimation of this.animations) {
                     eachAnimation.reverse();
