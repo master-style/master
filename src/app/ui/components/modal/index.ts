@@ -1,5 +1,4 @@
-import { Element, Attr } from '@element';
-import MasterTogglable from '@ui/togglable';
+import { Element, Attr, ToggleableElement } from '@element';
 import css from './index.scss';
 
 const NAME = 'modal';
@@ -9,7 +8,7 @@ const PX = 'px';
     tag: 'm-' + NAME,
     css
 })
-export class MasterModal extends MasterTogglable {
+export class MasterModal extends ToggleableElement {
 
     private trigger: HTMLElement;
 

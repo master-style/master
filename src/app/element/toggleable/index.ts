@@ -2,12 +2,12 @@ import { Attr } from '@element';
 
 const liveTriggers = {};
 
-export default class MasterTogglable extends HTMLElement {
+export class ToggleableElement extends HTMLElement {
 
     protected ready = false;
 
     @Attr({
-        updater(togglable: MasterTogglable, value: boolean, oldValue: boolean) {
+        updater(togglable: ToggleableElement, value: boolean, oldValue: boolean) {
             value ? togglable.close() : togglable.open();
         }
     })
@@ -24,7 +24,7 @@ export default class MasterTogglable extends HTMLElement {
 
     @Attr({
         reflect: false,
-        updater(togglable: MasterTogglable, value: any, oldValue: any) {
+        updater(togglable: ToggleableElement, value: any, oldValue: any) {
             if (
                 !value && oldValue ||
                 value && oldValue
@@ -54,7 +54,7 @@ export default class MasterTogglable extends HTMLElement {
                         const toggle = this;
                         if (this.disabled) return;
                         const targets = $(toggle.getAttribute(toggleAttrKey));
-                        targets.forEach((eachTarget: MasterTogglable) => {
+                        targets.forEach((eachTarget: ToggleableElement) => {
                             if (liveTargets.indexOf(eachTarget) === -1) return;
                             let whether: boolean;
                             const tag = toggle.tagName;
