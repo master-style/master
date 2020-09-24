@@ -9,7 +9,7 @@ const NAME = 'breadcrumb';
 })
 export class MasterBreadcrumb extends ClickableElement {
 
-    readonly elementName = NAME;
+    static readonly namespace: string = NAME;
 
     slotTemplate = [
         'slot', { name: 'head' },

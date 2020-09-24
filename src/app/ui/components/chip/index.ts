@@ -8,5 +8,5 @@ const NAME = 'chip';
     css
 })
 export class MasterChip extends ClickableElement {
-    readonly elementName = NAME;
+    static readonly namespace: string = NAME;
 }

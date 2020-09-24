@@ -12,7 +12,7 @@ const NAME = 'check';
 })
 export class MasterCheck extends ControlElement {
 
-    readonly elementName: string = NAME;
+    static readonly namespace: string = NAME;
 
     controlTemplate = $(() => [
         'input', {
@@ -120,14 +120,14 @@ export class MasterCheck extends ControlElement {
         this.body
             .on('input', (event: any) => {
                 this.checked = event.target.checked;
-            }, { id: this.elementName, passive: true });
+            }, { id: NAME, passive: true });
 
         connectedChecks.add(this);
     }
 
     onRemoved() {
         connectedChecks.delete(this);
-        this.off({ id: this.elementName });
+        this.off({ id: NAME });
     }
 
 }

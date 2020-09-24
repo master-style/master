@@ -10,7 +10,7 @@ const NAME = 'textarea';
 })
 export class MasterTextarea extends ControlElement {
 
-    readonly elementName = NAME;
+    static readonly namespace: string = NAME;
 
     controlTemplate = $(() => [
         'textarea', {

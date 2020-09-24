@@ -9,7 +9,7 @@ const NAME = 'item';
 })
 export class MasterItem extends ClickableElement {
 
-    readonly elementName = NAME;
+    static readonly namespace: string = NAME;
 
     slotTemplate = [
         'slot', { name: 'head' },

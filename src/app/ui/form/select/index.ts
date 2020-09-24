@@ -10,7 +10,7 @@ const NAME = 'select';
 })
 export class MasterSelect extends ControlElement {
 
-    readonly elementName = NAME;
+    static readonly namespace: string = NAME;
 
     @Attr({ key: 'tabindex' })
     tabIndex = -1;

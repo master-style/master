@@ -8,5 +8,5 @@ const NAME = 'card';
     css
 })
 export class MasterCard extends ClickableElement {
-    readonly elementName = NAME;
+    static readonly namespace: string = NAME;
 }
