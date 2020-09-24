@@ -1,5 +1,5 @@
 import { Element, Attr } from '@element';
-import debounce from 'lodash/debounce';
+import { debounce } from 'lodash-es';
 import css from './index.scss';
 import isNum from '@utils/is-num';
 

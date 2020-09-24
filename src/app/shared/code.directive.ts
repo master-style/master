@@ -1,20 +1,8 @@
-import { Directive, ElementRef, Input, Output, SimpleChange } from '@angular/core';
+import { Directive, ElementRef, Input } from '@angular/core';
 
-import Prism from 'prismjs';
-import 'prismjs/components/prism-scss.min.js';
-import 'prismjs/components/prism-bash.min.js';
-import 'prismjs/components/prism-typescript.min.js';
-
-import prettier from 'prettier';
-import htmlParser from 'prettier/parser-html.js';
-import typescriptParser from 'prettier/parser-typescript.js';
-import postcssParser from 'prettier/parser-postcss';
-
-const prettierParser = {
-    'html': htmlParser,
-    'typescript': typescriptParser,
-    'css': postcssParser
-};
+declare const Prism: any;
+declare const prettier: any;
+declare const prettierPlugins: any;
 
 const prettierOpiton = {
     'arrowParens': 'always',
@@ -131,7 +119,7 @@ export class CodeDirective {
 
         code = prettier.format(code, {
             parser: this.codeLang,
-            plugins: [prettierParser[this.codeLang]],
+            plugins: (prettierPlugins),
             ...prettierOpiton
         })
             .replace('=""', '');
