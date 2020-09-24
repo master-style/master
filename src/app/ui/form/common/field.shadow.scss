@@ -261,9 +261,16 @@ m-icon,
     // will-change: color;
     user-select: text;
     -webkit-user-select: text;
+    cursor: text;
     padding-left: var(--px);
     padding-right: var(--px);
-    cursor: text;
+    outline: none;
+    background-color: transparent;
+    -webkit-user-drag: none;
+    touch-action: manipulation;
+    -webkit-touch-action: manipulation;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 ::slotted([part=head]),

@@ -144,58 +144,9 @@ m-option,
 }
 
 /**
-   * Add the correct display in IE 9-.
-   */
-label,
-area,
-aside,
-footer,
-header,
-nav,
-section {
-    display: block;
-}
-
-/* Grouping content
-     ========================================================================== */
-
-/**
-   * Add the correct display in IE 9-.
-   * 1. Add the correct display in IE.
-   */
-
-figcaption,
-figure,
-main {
-    /* 1 */
-    display: block;
-}
-
-/**
-   * 1. Correct the inheritance and scaling of font size in all browsers.
-   * 2. Correct the odd `rem` font sizing in all browsers.
-   */
-
-pre {
-    font-family: monospace, monospace;
-    /* 1 */
-    font-size: 1rem;
-    /* 2 */
-}
-
-/**
    * 1. Remove the bottom border in Chrome 57- and Firefox 39-.
    * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
    */
-
-abbr[title] {
-    border-bottom: none;
-    /* 1 */
-    text-decoration: underline;
-    /* 2 */
-    text-decoration: underline dotted;
-    /* 2 */
-}
 
 /**
    * Add the correct font weight in Chrome, Edge, and Safari.
@@ -221,88 +172,12 @@ samp {
 }
 
 /**
-   * Add the correct font style in Android 4.3-.
-   */
-
-dfn {
-    font-style: italic;
-}
-
-/**
-   * Add the correct background and color in IE 9-.
-   */
-
-mark {
-    background-color: #ff0;
-    color: var(--f-theme);
-}
-
-/**
-   * Add the correct font size in all browsers.
-   */
-
-small {
-    font-size: 90%;
-}
-
-/**
-   * Prevent `sub` and `sup` elements from affecting the line height in
-   * all browsers.
-   */
-
-sub,
-sup {
-    font-size: 75%;
-    line-height: 0;
-    position: relative;
-    vertical-align: baseline;
-}
-
-sub {
-    bottom: -0.25rem;
-}
-
-sup {
-    top: -0.5rem;
-}
-
-/* Embedded content
-     ========================================================================== */
-
-/**
-   * Add the correct display in IE 9-.
-   */
-
-audio,
-video {
-    display: inline-block;
-}
-
-/**
-   * Add the correct display in iOS 4-7.
-   */
-
-audio:not([controls]) {
-    display: none;
-    height: 0;
-}
-
-/**
    * Remove the border on images inside links in IE 10-.
    */
 
 img {
-    border-style: none;
     -webkit-user-drag: none;
     background-color: rgba(var(--bg-skeletonRgb), .05);
-}
-
-/**
-   * Hide the overflow in IE.
-   */
-
-svg:not(:root) {
-    overflow: hidden;
 }
 
 /* Forms
@@ -312,93 +187,6 @@ form {
     margin: 0;
 }
 
-/**
-   * Correct the padding in Firefox.
-   */
-
-fieldset {
-    margin: 0;
-    padding: 0;
-    border: 0;
-}
-
-/**
-   * 1. Correct the text wrapping in Edge and IE.
-   * 2. Correct the color inheritance from `fieldset` elements in IE.
-   * 3. Remove the padding so developers are not caught out when they zero out
-   *    `fieldset` elements in all browsers.
-   */
-
-legend {
-    box-sizing: border-box;
-    /* 1 */
-    color: inherit;
-    /* 2 */
-    display: block;
-    /* 1 */
-    max-width: 100%;
-    /* 1 */
-    padding: 0;
-    /* 3 */
-    white-space: normal;
-    /* 1 */
-}
-
-/**
-   * 1. Add the correct display in IE 9-.
-   * 2. Add the correct vertical alignment in Chrome, Firefox, and Opera.
-   */
-
-progress {
-    display: inline-block;
-    /* 1 */
-    vertical-align: baseline;
-    /* 2 */
-}
-
-/* Interactive
-     ========================================================================== */
-
-/*
-   * Add the correct display in IE 9-.
-   * 1. Add the correct display in Edge, IE, and Firefox.
-   */
-
-details,
-/* 1 */
-
-menu {
-    display: block;
-}
-
-/*
-   * Add the correct display in all browsers.
-   */
-
-summary {
-    display: list-item;
-}
-
-/* Scripting
-     ========================================================================== */
-
-/**
-   * Add the correct display in IE 9-.
-   */
-
-canvas {
-    display: inline-block;
-}
-
-/**
-   * Add the correct display in IE.
-   */
-
-template {
-    display: none;
-}
-
-//
 * {
     border-width: 0;
     box-sizing: border-box;
@@ -439,47 +227,8 @@ li {
     background-color: var(--b-fader);
 }
 
-[href] {
-    cursor: pointer;
-}
-
-[disabled] {
-    cursor: no-drop !important;
-}
-
 [tabindex] {
     outline: none;
-}
-
-a,
-button,
-input,
-optgroup,
-select,
-textarea {
-    border: 0;
-    letter-spacing: 0.4px;
-    background-color: transparent;
-}
-
-.touch,
-a,
-button,
-input,
-optgroup,
-select,
-textarea {
-    cursor: pointer;
-    outline: none;
-    -webkit-user-drag: none;
-    touch-action: manipulation;
-    -webkit-touch-action: manipulation;
-    -webkit-touch-callout: none;
-    -webkit-tap-highlight-color: transparent;
-
-    @media (any-pointer: coarse) {
-        letter-spacing: 0px;
-    }
 }
 
 .touch,
@@ -487,6 +236,7 @@ a,
 button {
     -webkit-user-select: none;
     user-select: none;
+    cursor: pointer;
 }
 
 button {
