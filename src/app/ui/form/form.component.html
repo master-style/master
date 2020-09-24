@@ -67,10 +67,8 @@
                                   required
                                   class="outlined">
                             <label part="head">$</label>
-                            <m-options>
-                                <m-option *ngFor="let city of ['taichung', 'kaosiung', 'taipei']"
-                                          [value]="city">{{city}}</m-option>
-                            </m-options>
+                            <m-option *ngFor="let city of ['taichung', 'kaosiung', 'taipei']"
+                                      [value]="city">{{city}}</m-option>
                         </m-select>
                     </div>
                     <div class="x">

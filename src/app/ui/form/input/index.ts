@@ -60,7 +60,7 @@ export class InputElement extends ControlElement {
     expanded: boolean;
 
     @Attr({
-        parser(input: InputElement, value: any, oldValue: any) {
+        parser(input: InputElement, value: any) {
             if (input.type === 'number') {
                 if (value === '') {
                     value = null;
@@ -68,7 +68,7 @@ export class InputElement extends ControlElement {
                     value = isNaN(+value) ? 0 : +value;
                 }
             }
-            return { value, oldValue };
+            return value;
         },
         updater: ControlElement.valueUpdater,
         render: false,

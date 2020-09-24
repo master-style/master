@@ -13,6 +13,33 @@ export class MasterSelect extends ControlElement {
     @Attr({ key: 'tabindex' })
     tabIndex = -1;
 
+    readonly #options = [];
+
+    get options() {
+        return this.#options;
+    }
+
+    add(option) {
+        this.#options.push(option);
+        this.updateValue();
+    }
+
+    delete(option) {
+        this.#options.splice(this.#options.indexOf(option), 1);
+    }
+
+    updateValue() {
+        if (this.multiple) {
+            // value and oldValue always not be same
+            this.value = this.#options
+                .filter((eachOption) => eachOption.selected)
+                .map((eachOption) => eachOption.value);
+        } else {
+            this.value = this.#options
+                .find((eachOption) => eachOption.selected);
+        }
+    }
+
     controlTemplate = $(() => [
         'input', {
             'aria-hidden': true,
@@ -59,15 +86,12 @@ export class MasterSelect extends ControlElement {
     label: string;
 
     @Attr()
-    type: string;
+    multiple: boolean;
 
     @Attr({ render: false })
     expanded: boolean;
 
     @Attr({
-        parser(select: MasterSelect, value: any, oldValue: any) {
-            return { value, oldValue };
-        },
         updater(select: MasterSelect, value: any) {
             ControlElement.valueUpdater(select, value);
         },
@@ -78,25 +102,8 @@ export class MasterSelect extends ControlElement {
     @Attr()
     autocomplete: string;
 
-    @Attr()
-    max: number;
-
-    @Attr()
-    min: number;
-
-    @Attr()
-    maxLength: number;
-
-    @Attr()
-    minLength: number;
-
-    @Attr()
-    pattern: string;
-
-    @Attr()
-    size: number;
-
-    @Attr()
-    step: number;
+    onAdded() {
+        super.onAdded();
+    }
 
 }
