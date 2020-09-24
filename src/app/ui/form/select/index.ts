@@ -1,4 +1,5 @@
 import { Element, Attr, ControlElement } from '@element';
+import { OptionElement } from '../option';
 
 import css from './index.scss';
 
@@ -19,12 +20,12 @@ export class MasterSelect extends ControlElement {
         return this.#options;
     }
 
-    add(option) {
+    add(option: OptionElement) {
         this.#options.push(option);
         this.updateValue();
     }
 
-    delete(option) {
+    delete(option: OptionElement) {
         this.#options.splice(this.#options.indexOf(option), 1);
     }
 
@@ -36,7 +37,7 @@ export class MasterSelect extends ControlElement {
                 .map((eachOption) => eachOption.value);
         } else {
             this.value = this.#options
-                .find((eachOption) => eachOption.selected);
+                .find((eachOption) => eachOption.selected)?.value;
         }
     }
 
@@ -94,6 +95,8 @@ export class MasterSelect extends ControlElement {
     @Attr({
         updater(select: MasterSelect, value: any) {
             ControlElement.valueUpdater(select, value);
+            select.body.value = value;
+            console.log(select.value);
         },
         reflect: false
     })

@@ -8,16 +8,20 @@ const NAME = 'option';
     tag: 'm-' + NAME,
     css
 })
-export class MasterOption extends HTMLElement {
+export class OptionElement extends HTMLElement {
 
     @Attr()
     disabled: boolean;
 
-    @Attr()
+    @Attr({
+        updater(option: OptionElement) {
+            option.parentElement['updateValue']();
+        }
+    })
     selected: boolean;
 
     @Attr({
-        updater(option: MasterOption) {
+        updater(option: OptionElement) {
             option.parentElement['updateValue']();
         },
         reflect: false

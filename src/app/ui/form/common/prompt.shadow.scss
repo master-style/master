@@ -58,6 +58,6 @@
 :host([prompt-invalid]:not([prompt-invalid=""])[invalid][dirty]),
 :host([prompt-invalid]:not([prompt-invalid=""])[class*=-invalid][class*=-dirty]) {
     &:after {
-        content: attr(prompt-invalid);
+        content: attr(prompt-invalid) !important;
     }
 }

@@ -63,11 +63,12 @@
                     <div class="x">
                         <m-select name="city"
                                   label="city"
-                                  ngModel
                                   required
+                                  ngModel="taipei"
                                   class="outlined">
-                            <label part="head">$</label>
                             <m-option *ngFor="let city of ['taichung', 'kaosiung', 'taipei']"
+                                      [value]="city">{{city}}</m-option>
+                            <m-option *ngFor="let city of ['taoyuan']"
                                       [value]="city">{{city}}</m-option>
                         </m-select>
                     </div>
