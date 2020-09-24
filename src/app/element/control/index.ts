@@ -49,26 +49,6 @@ export class ControlElement extends HTMLElement {
         this.invalid = !this.validity.valid;
     }
 
-    onAdded() {
-        this.validate();
-
-        this
-            .on('click', (event: any) => {
-                if (event.target === this.body) return;
-                this.body.focus();
-            }, {
-                id: NAME,
-                passive: true
-            });
-
-        this.body.on('input', (event: any) => {
-            this['value'] = event.target.value;
-        }, {
-            id: NAME,
-            passive: true
-        });
-    }
-
     onRemoved() {
         this.off({ id: NAME });
     }

@@ -73,4 +73,23 @@ export class TextareaElement extends ControlElement {
     @Attr()
     rows: number = 1;
 
+    onAdded() {
+        this.validate();
+
+        this
+            .on('click', (event: any) => {
+                if (event.target === this.body) return;
+                this.body.focus();
+            }, {
+                id: NAME,
+                passive: true
+            });
+
+        this.body.on('input', (event: any) => {
+            this['value'] = event.target.value;
+        }, {
+            id: NAME,
+            passive: true
+        });
+    }
 }
