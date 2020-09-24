@@ -7,9 +7,7 @@ const NAME = 'breadcrumb';
     tag: 'm-' + NAME,
     css
 })
-export class MasterBreadcrumb extends ClickableElement {
-
-    static readonly namespace: string = NAME;
+export class BreadcrumbElement extends ClickableElement {
 
     slotTemplate = [
         'slot', { name: 'head' },

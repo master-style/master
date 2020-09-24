@@ -7,6 +7,4 @@ const NAME = 'chip';
     tag: 'm-' + NAME,
     css
 })
-export class MasterChip extends ClickableElement {
-    static readonly namespace: string = NAME;
-}
+export class MasterChip extends ClickableElement {}

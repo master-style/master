@@ -32,7 +32,7 @@ export class ToggleableElement extends HTMLElement {
                 value && oldValue
             ) {
                 if (!oldValue) return;
-                oldValue += '.' + togglable.constructor['namespace'];
+                oldValue += '.' + togglable.tagName;
                 const liveTargets = liveTriggers[oldValue];
                 if (liveTargets) {
                     if (liveTargets.length) {
@@ -44,8 +44,7 @@ export class ToggleableElement extends HTMLElement {
                 }
             }
             if (value) {
-                console.log(togglable.constructor['namespace']);
-                const name = togglable.constructor['namespace'];
+                const name = togglable.tagName;
                 const toggleAttrKey = 'toggle-' + name;
                 value += '.' + name;
                 let liveTargets = liveTriggers[value];

@@ -9,8 +9,6 @@ const NAME = 'button';
 })
 export class MasterButton extends ClickableElement {
 
-    static readonly namespace: string = NAME;
-
     @Attr({ render: false })
     busy: boolean;
 

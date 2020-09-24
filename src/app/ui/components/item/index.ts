@@ -9,8 +9,6 @@ const NAME = 'item';
 })
 export class MasterItem extends ClickableElement {
 
-    static readonly namespace: string = NAME;
-
     slotTemplate = [
         'slot', { name: 'head' },
         'div', { part: 'lower' }, [
@@ -19,4 +17,5 @@ export class MasterItem extends ClickableElement {
             'slot', { name: 'img' }
         ]
     ];
+
 }

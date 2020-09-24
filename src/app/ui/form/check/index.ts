@@ -12,8 +12,6 @@ const NAME = 'check';
 })
 export class MasterCheck extends ControlElement {
 
-    static readonly namespace: string = NAME;
-
     controlTemplate = $(() => [
         'input', {
             part: 'body',

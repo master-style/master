@@ -7,6 +7,4 @@ const NAME = 'card';
     tag: 'm-' + NAME,
     css
 })
-export class MasterCard extends ClickableElement {
-    static readonly namespace: string = NAME;
-}
+export class MasterCard extends ClickableElement {}
