@@ -46,7 +46,14 @@ export class CheckElement extends ControlElement {
     @Attr()
     name: string;
 
-    @Attr()
+    @Attr({
+        updater(check: CheckElement, value) {
+            const parent: any = check.parentElement;
+            if (parent.tagName === 'M-ITEM') {
+                parent.disabled = value;
+            }
+        }
+    })
     disabled: boolean;
 
     @Attr()

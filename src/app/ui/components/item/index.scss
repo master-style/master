@@ -69,8 +69,14 @@
 
 :host([disabled]) {
     background-color: transparent !important;
-    slot[name=foot] {
-        color: var(--f-fadest)!important;
+
+    ::slotted(*) {
+        color: var(--f-fadest) !important;
+    }
+
+    ::slotted(img) {
+        opacity: .25;
+        filter: grayscale(1);
     }
 }
 
