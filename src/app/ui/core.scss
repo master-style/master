@@ -58,6 +58,7 @@ body {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -webkit-overflow-scrolling: touch;
+    font-family: var(--f-sans-serif);
 }
 
 i {
@@ -105,26 +106,6 @@ form {
     box-sizing: border-box;
     background-origin: border-box;
     -webkit-tap-highlight-color: transparent;
-}
-
-body,
-input,
-textarea,
-select,
-button,
-a {
-    font-family: var(--f-sans-serif);
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-    background-color: transparent;
-    -webkit-text-decoration-skip: objects;
-
-    &:hover {
-        text-decoration: none;
-    }
 }
 
 ::selection {
