@@ -8,67 +8,6 @@ export const SELECT_MULTIPLE_VALUE_ACCESSOR: StaticProvider = {
     multi: true
 };
 
-function _buildValueString(id: string, value: any): string {
-    if (id == null) return `${value}`;
-    if (typeof value === 'string') value = `'${value}'`;
-    if (value && typeof value === 'object') value = 'Object';
-    console.log( `${id}: ${value}`.slice(0, 50))
-    return `${id}: ${value}`.slice(0, 50);
-}
-
-function _extractId(valueString: string): string {
-    console.log(valueString,valueString.split(':')[0]);
-    return valueString.split(':')[0];
-}
-
-/** Mock interface for HTML Options */
-interface HTMLOption {
-    value: string;
-    selected: boolean;
-}
-
-/** Mock interface for HTMLCollection */
-abstract class HTMLCollection {
-    // TODO(issue/24571): remove '!'.
-    length!: number;
-    abstract item(_: number): HTMLOption;
-}
-
-/**
- * @description
- * The `ControlValueAccessor` for writing multi-select control values and listening to multi-select
- * control changes. The value accessor is used by the `FormControlDirective`, `FormControlName`, and
- * `NgModel` directives.
- *
- * @see `SelectControlValueAccessor`
- *
- * @usageNotes
- *
- * ### Using a multi-select control
- *
- * The follow example shows you how to use a multi-select control with a reactive form.
- *
- * ```ts
- * const countryControl = new FormControl();
- * ```
- *
- * ```
- * <select multiple name="countries" [formControl]="countryControl">
- *   <option *ngFor="let country of countries" [ngValue]="country">
- *     {{ country.name }}
- *   </option>
- * </select>
- * ```
- *
- * ### Customizing option selection
- *
- * To customize the default option comparison algorithm, `<select>` supports `compareWith` input.
- * See the `SelectControlValueAccessor` for usage.
- *
- * @ngModule ReactiveFormsModule
- * @ngModule FormsModule
- * @publicApi
- */
 // tslint:disable-next-line: max-classes-per-file
 @Directive({
     selector:
@@ -82,11 +21,6 @@ export class SelectMultipleControlValueAccessor implements ControlValueAccessor 
      * The current value
      */
     value: any;
-
-    /** @internal */
-    _optionMap: Map<string, ɵNgSelectMultipleOption> = new Map<string, ɵNgSelectMultipleOption>();
-    /** @internal */
-    _idCounter: number = 0;
 
     /**
      * @description
@@ -126,19 +60,6 @@ export class SelectMultipleControlValueAccessor implements ControlValueAccessor 
      */
     writeValue(value: any): void {
         this.value = value;
-        let optionSelectedStateSetter: (opt: ɵNgSelectMultipleOption, o: any) => void;
-        if (Array.isArray(value)) {
-            // convert values to ids
-            const ids = value.map((v) => this._getOptionId(v));
-            optionSelectedStateSetter = (opt, o) => {
-                opt._setSelected(ids.indexOf(o.toString()) > -1);
-            };
-        } else {
-            optionSelectedStateSetter = (opt) => {
-                opt._setSelected(false);
-            };
-        }
-        this._optionMap.forEach(optionSelectedStateSetter);
     }
 
     /**
@@ -150,28 +71,8 @@ export class SelectMultipleControlValueAccessor implements ControlValueAccessor 
      */
     registerOnChange(fn: (value: any) => any): void {
         this.onChange = (_: any) => {
-            const selected: any[] = [];
-            if (_.hasOwnProperty('selectedOptions')) {
-                const options: HTMLCollection = _.selectedOptions;
-                for (let i = 0; i < options.length; i++) {
-                    const opt: any = options.item(i);
-                    const val: any = this._getOptionValue(opt.value);
-                    selected.push(val);
-                }
-            }
-            // Degrade on IE
-            else {
-                const options: HTMLCollection = <HTMLCollection>_.options;
-                for (let i = 0; i < options.length; i++) {
-                    const opt: HTMLOption = options.item(i);
-                    if (opt.selected) {
-                        const val: any = this._getOptionValue(opt.value);
-                        selected.push(val);
-                    }
-                }
-            }
-            this.value = selected;
-            fn(selected);
+            this.value = _.value;
+            fn(this.value);
         };
     }
 
@@ -194,28 +95,6 @@ export class SelectMultipleControlValueAccessor implements ControlValueAccessor 
         this._renderer.setProperty(this._elementRef.nativeElement, 'disabled', isDisabled);
     }
 
-    /** @internal */
-    _registerOption(value: ɵNgSelectMultipleOption): string {
-        const id: string = (this._idCounter++).toString();
-        this._optionMap.set(id, value);
-        return id;
-    }
-
-    /** @internal */
-    _getOptionId(value: any): string | null {
-        for (const id of Array.from(this._optionMap.keys())) {
-            // tslint:disable-next-line: no-non-null-assertion
-            if (this._compareWith(this._optionMap.get(id)!._value, value)) return id;
-        }
-        return null;
-    }
-
-    /** @internal */
-    _getOptionValue(valueString: string): any {
-        const id: string = _extractId(valueString);
-        // tslint:disable-next-line: no-non-null-assertion
-        return this._optionMap.has(id) ? this._optionMap.get(id)!._value : valueString;
-    }
 }
 
 /**
@@ -231,7 +110,7 @@ export class SelectMultipleControlValueAccessor implements ControlValueAccessor 
 // tslint:disable-next-line: max-classes-per-file
 @Directive({ selector: 'm-option' })
 // tslint:disable-next-line: class-name
-export class ɵNgSelectMultipleOption implements OnDestroy {
+export class ɵNgSelectMultipleOption {
     // TODO(issue/24571): remove '!'.
     id!: string;
     /** @internal */
@@ -240,9 +119,6 @@ export class ɵNgSelectMultipleOption implements OnDestroy {
     constructor(
         private _element: ElementRef, private _renderer: Renderer2,
         @Optional() @Host() private _select: SelectMultipleControlValueAccessor) {
-        if (this._select) {
-            this.id = this._select._registerOption(this);
-        }
     }
 
     /**
@@ -252,10 +128,8 @@ export class ɵNgSelectMultipleOption implements OnDestroy {
      */
     @Input('ngValue')
     set ngValue(value: any) {
-        if (this._select == null) return;
         this._value = value;
-        this._setElementValue(_buildValueString(this.id, value));
-        this._select.writeValue(this._select.value);
+        this._setElementValue(value);
     }
 
     /**
@@ -265,13 +139,8 @@ export class ɵNgSelectMultipleOption implements OnDestroy {
      */
     @Input('value')
     set value(value: any) {
-        if (this._select) {
-            this._value = value;
-            this._setElementValue(_buildValueString(this.id, value));
-            this._select.writeValue(this._select.value);
-        } else {
-            this._setElementValue(value);
-        }
+        this._value = value;
+        this._setElementValue(value);
     }
 
     /** @internal */
@@ -284,16 +153,6 @@ export class ɵNgSelectMultipleOption implements OnDestroy {
         this._renderer.setProperty(this._element.nativeElement, 'selected', selected);
     }
 
-    /**
-     * @description
-     * Lifecycle method called before the directive's instance is destroyed. For internal use only.
-     */
-    ngOnDestroy(): void {
-        if (this._select) {
-            this._select._optionMap.delete(this.id);
-            this._select.writeValue(this._select.value);
-        }
-    }
 }
 
 export { ɵNgSelectMultipleOption as NgSelectMultipleOption };
