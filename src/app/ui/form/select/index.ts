@@ -20,32 +20,42 @@ export class SelectElement extends ControlElement {
 
     popup: SelectPopupElement = $('m-select-popup', {});
 
-    readonly #options = this.popup.options = [];
+    readonly options: OptionElement[] = this.popup.options = [];
 
-    get options() {
-        return this.#options;
-    }
+    // simulate native mutiple select.selectedOptions
+    selectedOptions = new Proxy(this.options, {
+        get(options, prop) {
+            if (prop === 'length') {
+                return options.length;
+            }
+            if (prop === 'item') {
+                return function (index: number) {
+                    return options[index];
+                };
+            }
+        }
+    });
 
     add(option: OptionElement) {
-        this.#options.push(option);
+        this.options.push(option);
         this.updateValue();
         if (option.selected)
             this.selectOption(option);
     }
 
     delete(option: OptionElement) {
-        this.#options.splice(this.#options.indexOf(option), 1);
+        this.options.splice(this.options.indexOf(option), 1);
         this.updateValue();
     }
 
     updateValue() {
         if (this.multiple) {
             // value and oldValue always not be same
-            this.value = this.#options
+            this.value = this.options
                 .filter((eachOption: OptionElement) => eachOption.selected)
                 .map((eachOption: OptionElement) => eachOption.value);
         } else {
-            this.value = this.#options
+            this.value = this.options
                 .find((eachOption: OptionElement) => eachOption.selected)?.value;
         }
     }
@@ -59,18 +69,18 @@ export class SelectElement extends ControlElement {
         const event = new Event('change');
 
         if (this.multiple) {
-            this.dispatchEvent(event);
+            console.log(option);
         } else {
             this.#updating = true;
-            this.#options.forEach((eachOption: OptionElement) => {
+            this.options.forEach((eachOption: OptionElement) => {
                 if (option !== eachOption && eachOption.selected) {
                     eachOption['_selected'] = false;
                 }
             });
-            this.updateValue();
             this.#updating = false;
-            this.dispatchEvent(event);
         }
+        this.updateValue();
+        this.dispatchEvent(event);
     }
 
     controlTemplate = $(() => [
@@ -128,7 +138,6 @@ export class SelectElement extends ControlElement {
         updater(select: SelectElement, value: any) {
             ControlElement.valueUpdater(select, value);
             select.body.value = value;
-            console.log(select.value);
         },
         reflect: false
     })

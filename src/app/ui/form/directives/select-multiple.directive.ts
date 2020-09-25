@@ -12,10 +12,12 @@ function _buildValueString(id: string, value: any): string {
     if (id == null) return `${value}`;
     if (typeof value === 'string') value = `'${value}'`;
     if (value && typeof value === 'object') value = 'Object';
+    console.log( `${id}: ${value}`.slice(0, 50))
     return `${id}: ${value}`.slice(0, 50);
 }
 
 function _extractId(valueString: string): string {
+    console.log(valueString,valueString.split(':')[0]);
     return valueString.split(':')[0];
 }
 

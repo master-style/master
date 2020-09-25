@@ -18,7 +18,11 @@ export class FormComponent implements OnInit {
         console.log('submit', form);
     }
 
-    change(event) {
+    masterChange(event) {
+        console.log(event, event.target.value);
+    }
+
+    nativeChange(event) {
         console.log(event, event.target.value);
     }
 

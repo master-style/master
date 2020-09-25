@@ -7,22 +7,39 @@
                         <m-select name="city"
                                   label="city"
                                   required
+                                  (change)="masterChange($event)"
                                   multiple
-                                  ngModel="taipei"
+                                  ngModel
                                   class="outlined">
                             <m-option *ngFor="let city of ['taichung', 'kaosiung', 'taipei']"
                                       [value]="city">{{city}}</m-option>
                             <m-option *ngFor="let city of ['taoyuan']"
-                                      [value]="city" selected>{{city}}</m-option>
+                                      [value]="city">{{city}}</m-option>
                         </m-select>
                     </div>
                     <div class="x">
-                        <select name="sweet"
+                        <select name="nativeMultipleCity"
                                 ngModel
+                                (change)="nativeChange($event)"
                                 multiple
+                                ngModel
                                 required>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
+                            <option *ngFor="let city of ['taichung', 'kaosiung', 'taipei']"
+                                      [value]="city">{{city}}</option>
+                            <option *ngFor="let city of ['taoyuan']"
+                                      [value]="city">{{city}}</option>
+                        </select>
+                    </div>
+                    <div class="x">
+                        <select name="nativeCity"
+                                ngModel
+                                (change)="nativeChange($event)"
+                                ngModel
+                                required>
+                            <option *ngFor="let city of ['taichung', 'kaosiung', 'taipei']"
+                                      [value]="city">{{city}}</option>
+                            <option *ngFor="let city of ['taoyuan']"
+                                      [value]="city">{{city}}</option>
                         </select>
                     </div>
                     <div class="x" *ngFor="let theme of ['dark', 'light']">
