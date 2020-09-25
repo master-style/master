@@ -23,12 +23,16 @@ export class OptionElement extends HTMLElement {
     selected: boolean = false;
 
     @Attr({
-        updater(option: OptionElement) {
+        updater(option: OptionElement, value) {
             option.parentElement['updateValue']();
+            option.empty = value === null || value === undefined || value === '';
         },
         reflect: false
     })
     value: any;
+
+    @Attr({ observe: false, render: false })
+    empty: boolean = false;
 
     onAdded() {
         this.parentElement['add'](this);
