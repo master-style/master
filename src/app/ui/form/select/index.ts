@@ -22,28 +22,17 @@ export class SelectElement extends ControlElement {
 
     readonly options: OptionElement[] = this.popup.options = [];
 
-    // simulate native mutiple select.selectedOptions
-    selectedOptions = new Proxy(this.options, {
-        get(options, prop) {
-            if (prop === 'length') {
-                return options.length;
-            }
-            if (prop === 'item') {
-                return function (index: number) {
-                    return options[index];
-                };
-            }
-        }
-    });
-
-    add(option: OptionElement) {
+    addOption(option: OptionElement) {
         this.options.push(option);
-        this.updateValue();
-        if (option.selected)
-            this.selectOption(option);
+        if (option.selected) {
+            this.updateSelected(option);
+            this.updateValue();
+        } else {
+            this.updateValue();
+        }
     }
 
-    delete(option: OptionElement) {
+    removeOption(option: OptionElement) {
         this.options.splice(this.options.indexOf(option), 1);
         this.updateValue();
     }
@@ -60,27 +49,19 @@ export class SelectElement extends ControlElement {
         }
     }
 
-    #updating = false;
+    event = new Event('change');
 
-    selectOption(option: OptionElement) {
-
-        if (this.#updating) return;
-
-        const event = new Event('change');
+    updateSelected(option: OptionElement) {
 
         if (this.multiple) {
-            console.log(option);
+
         } else {
-            this.#updating = true;
             this.options.forEach((eachOption: OptionElement) => {
                 if (option !== eachOption && eachOption.selected) {
                     eachOption['_selected'] = false;
                 }
             });
-            this.#updating = false;
         }
-        this.updateValue();
-        this.dispatchEvent(event);
     }
 
     controlTemplate = $(() => [

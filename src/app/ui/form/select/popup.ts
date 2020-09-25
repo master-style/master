@@ -39,15 +39,72 @@ export class SelectPopupElement extends ToggleableElement {
                 $data: eachOption,
                 $created: (element: ItemElement, node: TemplateNode) => {
                     element.on('click', () => {
-                        node.$data.selected = true;
-                        if (!this.select.multiple) {
+                        if (this.select.multiple) {
+                            node.$data.selected = !node.$data.selected;
+                        } else {
                             this.close();
+                            node.$data.selected = true;
                         }
                     }, { passive: true, id: this });
                 }
             }
         ]),
     ]);
+
+    updatePosition() {
+        const itemNodes = this.template.nodes[0].children;
+        let originItemNode: TemplateNode;
+
+        if (this.select.multiple) {
+            // value and oldValue always not be same
+            originItemNode = itemNodes
+                .filter((eachItemNode) => eachItemNode.$data.selected)[0];
+        } else {
+            originItemNode = itemNodes
+                .find((eachItemNode) => eachItemNode.$data.selected);
+        }
+
+        let originItemRect = { top: 0, height: 0 };
+        let originItem: ItemElement;
+
+        if (originItemNode && !originItemNode.$data.hidden) {
+            originItem = originItemNode.element;
+            this.content.to(originItem, 0);
+            originItemRect = originItem.getBoundingClientRect();
+        }
+        const
+            selectRect = this.select.getBoundingClientRect(),
+            height = this.offsetHeight,
+            width = this.offsetWidth,
+            windowH = window.innerHeight,
+            windowW = window.innerWidth,
+            originOffsetTop = originItemRect.top + originItemRect.height / 2;
+        let top = selectRect.top + (originItem ? selectRect.height / 2 : 0) - originOffsetTop + 1;
+        let left = selectRect.left;
+        // exceed Y
+        let exceedY = 0;
+        if (top <= 5) {
+            exceedY = top - 5;
+            top = 5;
+        } else if (top + height >= windowH - 5) {
+            exceedY = top + height - windowH + 5;
+            top = windowH - height - 5;
+        }
+
+        // exceed X
+        if (left <= 5) {
+            left = 5;
+        } else if (left + width >= windowW - 5) {
+            left = windowW - width - 5;
+        }
+
+        this.css({
+            top,
+            left,
+            minWidth: selectRect.width,
+            transformOrigin: '0 ' + (originOffsetTop + exceedY) + 'px'
+        });
+    }
 
     protected toggling(
         options: KeyframeEffectOptions
@@ -66,58 +123,7 @@ export class SelectPopupElement extends ToggleableElement {
 
         if (!this.hidden) {
             // prepare to open
-            const itemNodes = this.template.nodes[0].children;
-            let originItemNode: TemplateNode;
-
-            if (this.select.multiple) {
-                // value and oldValue always not be same
-                originItemNode = itemNodes
-                    .filter((eachItemNode) => eachItemNode.$data.selected)[0];
-            } else {
-                originItemNode = itemNodes
-                    .find((eachItemNode) => eachItemNode.$data.selected);
-            }
-
-            let originItemRect = { top: 0, height: 0 };
-            let originItem: ItemElement;
-
-            if (originItemNode && !originItemNode.$data.hidden) {
-                originItem = originItemNode.element;
-                this.content.to(originItem, 0);
-                originItemRect = originItem.getBoundingClientRect();
-            }
-            const
-                selectRect = this.select.getBoundingClientRect(),
-                height = this.offsetHeight,
-                width = this.offsetWidth,
-                windowH = window.innerHeight,
-                windowW = window.innerWidth,
-                originOffsetTop = originItemRect.top + originItemRect.height / 2;
-            let top = selectRect.top + (originItem ? selectRect.height / 2 : 0) - originOffsetTop + 1;
-            let left = selectRect.left;
-            // exceed Y
-            let exceedY = 0;
-            if (top <= 5) {
-                exceedY = top - 5;
-                top = 5;
-            } else if (top + height >= windowH - 5) {
-                exceedY = top + height - windowH + 5;
-                top = windowH - height - 5;
-            }
-
-            // exceed X
-            if (left <= 5) {
-                left = 5;
-            } else if (left + width >= windowW - 5) {
-                left = windowW - width - 5;
-            }
-
-            this.css({
-                top,
-                left,
-                minWidth: selectRect.width,
-                transformOrigin: '0 ' + (originOffsetTop + exceedY) + 'px'
-            });
+            this.updatePosition();
         } else {
             keyframes.reverse();
         }

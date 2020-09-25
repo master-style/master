@@ -14,9 +14,8 @@ export class OptionElement extends HTMLElement {
     disabled: boolean;
 
     @Attr({
-        updater(option: OptionElement, value) {
-            if (value)
-                option.parentElement['selectOption'](option);
+        updater(option: OptionElement) {
+            option.parentElement['updateSelected'](option);
         },
         reflect: false
     })
@@ -35,10 +34,10 @@ export class OptionElement extends HTMLElement {
     empty: boolean = false;
 
     onAdded() {
-        this.parentElement['add'](this);
+        this.parentElement['addOption'](this);
     }
 
     onRemoved() {
-        this.parentElement['delete'](this);
+        this.parentElement['removeOption'](this);
     }
 }
