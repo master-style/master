@@ -12,7 +12,7 @@ const NAME = 'select-popup';
 export class SelectPopupElement extends ToggleableElement {
 
     @Attr({ reflect: false, observe: false })
-    options = [];
+    options;
 
     @Attr({ reflect: false, observe: false })
     multiple: boolean;
@@ -29,14 +29,10 @@ export class SelectPopupElement extends ToggleableElement {
         ]),
     ]);
 
-    protected async toggling() {
-
-        let keyframes: KeyframeEffect[];
-
-        const options: KeyframeEffectOptions = {
-            easing: this.easing,
-            duration: this.duration
-        };
+    protected async toggling(
+        options: KeyframeEffectOptions
+    ) {
+        let keyframes: any;
 
         let originOption: OptionElement;
 
@@ -88,6 +84,10 @@ export class SelectPopupElement extends ToggleableElement {
         // });
 
         await this.animation.finished;
+    }
+
+    render() {
+        this.template.render(this.shadowRoot);
     }
 
     removeRender() {

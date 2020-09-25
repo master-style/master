@@ -101,7 +101,10 @@ export class ToggleableElement extends HTMLElement {
                 }
             } else if (this.duration) {
                 this.toggleAttribute('changing', true);
-                await this['toggling']();
+                await this['toggling']({
+                    easing: this.easing,
+                    duration: this.duration
+                });
             }
         }
     }

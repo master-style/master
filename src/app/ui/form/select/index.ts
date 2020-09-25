@@ -4,6 +4,7 @@ import { OptionElement } from '../option';
 import css from './index.scss';
 
 import './popup';
+import { SelectPopupElement } from './popup';
 
 const NAME = 'select';
 
@@ -16,7 +17,9 @@ export class SelectElement extends ControlElement {
     @Attr({ key: 'tabindex' })
     tabIndex = -1;
 
-    readonly #options = [];
+    selectPopup: SelectPopupElement = $('m-select-popup', {});
+
+    readonly #options = this.selectPopup.options = [];
 
     get options() {
         return this.#options;

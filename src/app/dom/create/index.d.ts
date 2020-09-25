@@ -1,5 +1,5 @@
 interface Master {
-    (selector: string, attrs: { [key: string]: any }, ...children: (Element | string)[]): Element;
+    <T extends Element>(selector: string, attrs: { [key: string]: any }, ...children: (Element | string)[]): T;
     (selector: string): NodeList;
     (template: () => Array<any>): MasterTemplate;
 }

@@ -89,15 +89,12 @@ export class ModalElement extends ToggleableElement {
     overlayElement: HTMLElement;
     closeElement: HTMLElement;
 
-    protected async toggling() {
+    protected async toggling(
+        options: KeyframeEffectOptions
+    ) {
+        let keyframes: any;
 
-        let keyframes: any[];
         let content;
-
-        const options = {
-            easing: this.easing,
-            duration: this.duration
-        };
 
         const root = this.root;
 
