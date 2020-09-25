@@ -7,13 +7,14 @@ import isAutoPx from '@utils/is-auto-px';
 Element.prototype.css = function (param?: any, value?: any) {
     const element = this;
     if (value !== undefined) {
-        param = camelToKebabCase(param);
-        if (isAutoPx(param) && isNum(value)) {
-            value = value + 'px';
-        }
         if (param[0] === '-') {
             // set with css variable
             element.style.setProperty(param, value);
+            return element;
+        }
+        param = camelToKebabCase(param);
+        if (isAutoPx(param) && isNum(value)) {
+            value += 'px';
         } else {
             element.style[param] = value;
         }

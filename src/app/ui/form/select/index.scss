@@ -23,6 +23,12 @@
     }
 }
 
+:host(.underlined) {
+    m-icon {
+        margin-left: .375rem;
+    }
+}
+
 ::slotted(input) {
     position: absolute;
     width: 100%;

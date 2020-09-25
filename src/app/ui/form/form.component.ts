@@ -18,4 +18,8 @@ export class FormComponent implements OnInit {
         console.log('submit', form);
     }
 
+    change(event) {
+        console.log(event, event.target.value);
+    }
+
 }

@@ -7,7 +7,6 @@
                         <m-select name="city"
                                   label="city"
                                   required
-                                  ngModel="taipei"
                                   class="outlined">
                             <m-option *ngFor="let city of ['taichung', 'kaosiung', 'taipei']"
                                       [value]="city">{{city}}</m-option>
@@ -17,6 +16,7 @@
                     </div>
                     <div class="x">
                         <select name="sweet"
+                                (change)="change($event)"
                                 ngModel
                                 multiple
                                 required>
