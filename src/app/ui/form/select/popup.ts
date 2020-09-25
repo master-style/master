@@ -33,6 +33,8 @@ export class SelectPopupElement extends ToggleableElement {
             'm-item', {
                 class: 'xs',
                 type: 'button',
+                empty: eachOption.empty,
+                selected: eachOption.selected,
                 $text: eachOption.textContent,
                 $data: eachOption,
                 $created: (element: ItemElement, node: TemplateNode) => {
