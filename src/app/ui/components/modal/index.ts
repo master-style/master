@@ -230,17 +230,12 @@ export class ModalElement extends ToggleableElement {
 
         this.animation = this.root.animate(keyframes, options);
         this.animations.push(this.animation);
-        this.animation.onfinish = () => {
-            this.toggleAttribute('changing', false);
-            this.animation = null;
-            this.animations = [];
-            if (this.hidden && this.trigger && this.hideTrigger) {
-                this.trigger.toggleClass('invisible', false);
-            }
-            if (content && !this.hidden) {
-                content.enable();
-            }
-        };
         await this.animation.finished;
+        if (this.hidden && this.trigger && this.hideTrigger) {
+            this.trigger.toggleClass('invisible', false);
+        }
+        if (content && !this.hidden) {
+            content.enable();
+        }
     }
 }

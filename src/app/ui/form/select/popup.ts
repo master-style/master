@@ -45,6 +45,8 @@ export class SelectPopupElement extends ToggleableElement {
         options: KeyframeEffectOptions
     ) {
 
+        options.fill = 'forwards';
+
         const keyframes = [
             {
                 transform: 'scaleY(.9)',
@@ -115,7 +117,6 @@ export class SelectPopupElement extends ToggleableElement {
         }
 
         this.animation = this.animate(keyframes, options);
-
         this.animations.push(this.animation);
 
         await this.animation.finished;
