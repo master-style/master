@@ -14,8 +14,8 @@ interface TemplateNode {
     $if?: boolean;
     $css?: { [key: string]: any };
     $namespace?: string;
-    $created?: <T extends Element>(element: T) => void;
-    $removed?: <T extends Element>(element: T) => void;
-    $updated?: <T extends Element>(element: T) => void;
+    $created?: <T extends Element>(element: T, node: TemplateNode) => void;
+    $removed?: <T extends Element>(element: T, node: TemplateNode) => void;
+    $updated?: <T extends Element>(element: T, node: TemplateNode) => void;
     $data?: any;
 }

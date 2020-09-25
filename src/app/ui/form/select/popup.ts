@@ -39,7 +39,12 @@ export class SelectPopupElement extends ToggleableElement {
                 class: 'xs',
                 type: 'button',
                 $text: eachOption.textContent,
-                $data: eachOption
+                $data: eachOption,
+                $created: (element: ItemElement, node: TemplateNode) => {
+                    element.on('click', () => {
+                        node.$data.selected = true;
+                    });
+                }
             }
         ]),
     ]);

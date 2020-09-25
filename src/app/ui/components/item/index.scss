@@ -29,6 +29,12 @@
     font-size: var(--f-size);
 }
 
+:host([type=button]) {
+    ::slotted(m-check) {
+        --position: static;
+    }
+}
+
 :host(.lined:not(:last-of-type)) {
     [part=root] {
         border-bottom: 1px solid var(--b-fadest);
@@ -79,16 +85,6 @@
         filter: grayscale(1);
     }
 }
-
-// [is=m-check]~i {
-//     --checkedBg: transparent;
-//     --checkedBorder: var(--b-fadest);
-//     --checked: var(--blue);
-// }
-
-// [is=m-check][type=radio]~i {
-//     --checkedBorder: transparent;
-// }
 
 [part=lower] {
     width: 100%;

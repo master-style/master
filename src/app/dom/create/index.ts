@@ -84,7 +84,7 @@ class MasterTemplate {
                             if (element) {
                                 element.remove();
                                 const removed = eachNode.$removed;
-                                if (removed) removed(element);
+                                if (removed) removed(element, eachNode);
                             }
                         });
                 } else {
@@ -102,7 +102,7 @@ class MasterTemplate {
                                     .forEach((deletedOldNode) => {
                                         deletedOldNode.element.remove();
                                         const removed = deletedOldNode.$removed;
-                                        if (removed) removed(deletedOldNode.element);
+                                        if (removed) removed(deletedOldNode.element, deletedOldNode);
                                     });
                             }
                             if (whether) {
@@ -145,7 +145,7 @@ class MasterTemplate {
                                     renderNodes(eachNode.children, eachOldNode.children, element);
                                 }
                                 const updated = eachNode.$updated;
-                                if (updated) updated(element);
+                                if (updated) updated(element, eachNode);
                             } else if (eachOldElement) {
                                 eachOldElement.remove();
                                 const removed = eachNode.$removed;
@@ -191,9 +191,9 @@ class MasterTemplate {
                             }
 
                             const created = eachNode.$created;
-                            if (created) created(element);
+                            if (created) created(element, eachNode);
                             const updated = eachNode.$updated;
-                            if (updated) updated(element);
+                            if (updated) updated(element, eachNode);
 
                             if (i === 0) {
                                 parent.prepend(element);
@@ -233,9 +233,9 @@ class MasterTemplate {
                     }
                     eachNode.element = element;
                     const created = eachNode.$created;
-                    if (created) created(element);
+                    if (created) created(element, eachNode);
                     const updated = eachNode.$updated;
-                    if (updated) updated(element);
+                    if (updated) updated(element, eachNode);
                     let skipChildren = false;
                     if (eachNode.$html !== undefined) {
                         element.innerHTML = eachNode.$html;
@@ -270,7 +270,7 @@ class MasterTemplate {
                     if (element) {
                         element.remove();
                         const removed = eachNode.$removed;
-                        if (removed) removed(element);
+                        if (removed) removed(element, eachNode);
                     }
                 });
             this.nodes = [];

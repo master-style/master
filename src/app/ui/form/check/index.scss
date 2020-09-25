@@ -6,8 +6,9 @@
 }
 
 :host {
+    --position: relative;
     --size: 1.5rem;
-    position: relative;
+    position: var(--position);
     display: inline-flex;
     align-items: center;
     cursor: pointer;
@@ -41,6 +42,10 @@
     [part=check] {
         border-radius: 50%;
     }
+}
+
+:host([type=radio][checked]) {
+    pointer-events: none;
 }
 
 [part=check] {

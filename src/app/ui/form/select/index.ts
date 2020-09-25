@@ -45,6 +45,10 @@ export class SelectElement extends ControlElement {
             this.value = this.#options
                 .find((eachOption) => eachOption.selected)?.value;
         }
+        const event = new CustomEvent('change', {
+
+        });
+        this.dispatchEvent(event);
     }
 
     controlTemplate = $(() => [
