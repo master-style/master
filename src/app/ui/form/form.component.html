@@ -3,6 +3,27 @@
         <div class="demo-body">
             <form #form="ngForm">
                 <div class="y">
+                    <div class="x">
+                        <m-select name="city"
+                                  label="city"
+                                  required
+                                  ngModel="taipei"
+                                  class="outlined">
+                            <m-option *ngFor="let city of ['taichung', 'kaosiung', 'taipei']"
+                                      [value]="city">{{city}}</m-option>
+                            <m-option *ngFor="let city of ['taoyuan']"
+                                      [value]="city">{{city}}</m-option>
+                        </m-select>
+                    </div>
+                    <div class="x">
+                        <select name="sweet"
+                                ngModel
+                                multiple
+                                required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                        </select>
+                    </div>
                     <div class="x" *ngFor="let theme of ['dark', 'light']">
                         <m-check type="radio"
                                  interface="switch"
@@ -59,27 +80,6 @@
                                  class="outlined">
                         </m-input>
                         <input type="number" ngModel name="test">
-                    </div>
-                    <div class="x">
-                        <m-select name="city"
-                                  label="city"
-                                  required
-                                  ngModel="taipei"
-                                  class="outlined">
-                            <m-option *ngFor="let city of ['taichung', 'kaosiung', 'taipei']"
-                                      [value]="city">{{city}}</m-option>
-                            <m-option *ngFor="let city of ['taoyuan']"
-                                      [value]="city">{{city}}</m-option>
-                        </m-select>
-                    </div>
-                    <div class="x">
-                        <select name="sweet"
-                                ngModel
-                                multiple
-                                required>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                        </select>
                     </div>
                 </div>
             </form>

@@ -1,3 +1,4 @@
+import camelToKebabCase from '@utils/camel-to-kebab-case';
 
 const DEFAULT_ELEMENT_OPTION = {
     shadow: true
@@ -6,7 +7,8 @@ const DEFAULT_ELEMENT_OPTION = {
 export function Element(options: ElementOptions) {
     options = { ...DEFAULT_ELEMENT_OPTION, ...options };
     return function (constructor: any) {
-        constructor['elementName'] = options.tag.split('-').splice(1).join('-');
+        const name = constructor.name.charAt(0).toLowerCase() + constructor.name.slice(1);
+        constructor['elementName'] = camelToKebabCase(name.split('Element')[0]);
         const prototype = constructor.prototype;
         const allAttrOptions = constructor.allAttrOptions;
         const onAdded = prototype.onAdded;

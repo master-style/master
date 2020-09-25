@@ -82,7 +82,7 @@ export class ToggleableElement extends HTMLElement {
     protected animation: Animation;
 
     private async prepare() {
-        const name = this.constructor.name.split('Master')[1].toLowerCase();
+        const name = this.constructor['elementName'];
         const toggleAttrKey = 'toggle-' + name;
         $('[' + toggleAttrKey + ']')
             .forEach((eachToggle: Element) => {
