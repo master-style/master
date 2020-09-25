@@ -115,6 +115,7 @@ export class ModalElement extends ToggleableElement {
                 triggerRect = this.trigger.getBoundingClientRect(),
                 rootRect = this.root.getBoundingClientRect();
             const scale = triggerRect.width / rootRect.width;
+            console.log(rootRect);
             const x =
                 triggerRect.left - rootRect.left
                 + (triggerRect.width - rootRect.width) / 2;

@@ -107,6 +107,8 @@ export class ToggleableElement extends HTMLElement {
                     easing: this.easing,
                     duration: this.duration
                 });
+                this.animation = null;
+                this.animations = [];
             }
         }
     }

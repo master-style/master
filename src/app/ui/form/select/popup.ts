@@ -45,6 +45,17 @@ export class SelectPopupElement extends ToggleableElement {
         options: KeyframeEffectOptions
     ) {
 
+        const keyframes = [
+            {
+                transform: 'scaleY(.9)',
+                opacity: 0
+            },
+            {
+                transform: 'scaleY(1)',
+                opacity: 1
+            }
+        ];
+
         if (!this.hidden) {
             // prepare to open
             const itemNodes = this.template.nodes[0].children;
@@ -99,33 +110,13 @@ export class SelectPopupElement extends ToggleableElement {
                 minWidth: selectRect.width,
                 transformOrigin: '0 ' + (originOffsetTop + exceedY) + 'px'
             });
+        } else {
+            keyframes.reverse();
         }
 
-        console.log([
-            {
-                transform: 'scaleY(.9)',
-                opacity: 0
-            },
-            {
-                transform: 'scaleY(1)',
-                opacity: 1
-            }
-        ]);
+        this.animation = this.animate(keyframes, options);
 
-        this.animations.push(
-            this.animation = this.animate(
-                [
-                    {
-                        transform: 'scaleY(.9)',
-                        opacity: 0
-                    },
-                    {
-                        transform: 'scaleY(1)',
-                        opacity: 1
-                    }
-                ]
-                , options)
-        )
+        this.animations.push(this.animation);
 
         await this.animation.finished;
     }
