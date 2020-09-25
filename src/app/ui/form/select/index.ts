@@ -1,9 +1,9 @@
 import { Element, Attr, ControlElement } from '@element';
-import { OptionElement } from '../option';
 
 import css from './index.scss';
-
 import './popup';
+
+import { OptionElement } from '../option';
 import { SelectPopupElement } from './popup';
 
 const NAME = 'select';
@@ -17,9 +17,9 @@ export class SelectElement extends ControlElement {
     @Attr({ key: 'tabindex' })
     tabIndex = -1;
 
-    selectPopup: SelectPopupElement = $('m-select-popup', {});
+    popup: SelectPopupElement = $('m-select-popup', {});
 
-    readonly #options = this.selectPopup.options = [];
+    readonly #options = this.popup.options = [];
 
     get options() {
         return this.#options;
@@ -113,6 +113,9 @@ export class SelectElement extends ControlElement {
     onAdded() {
         this.on('focus', (event) => {
             console.log(event);
+            this.popup.select = this;
+            document.body.append(this.popup);
+            this.popup.open();
         });
     }
 
