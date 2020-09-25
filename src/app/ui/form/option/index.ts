@@ -17,7 +17,8 @@ export class OptionElement extends HTMLElement {
         updater(option: OptionElement, value) {
             if (value)
                 option.parentElement['selectOption'](option);
-        }
+        },
+        reflect: false
     })
     selected: boolean = false;
 

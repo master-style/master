@@ -64,7 +64,7 @@ export class SelectElement extends ControlElement {
             this.#updating = true;
             this.#options.forEach((eachOption: OptionElement) => {
                 if (option !== eachOption && eachOption.selected) {
-                    eachOption.selected = false;
+                    eachOption['_selected'] = false;
                 }
             });
             this.updateValue();
