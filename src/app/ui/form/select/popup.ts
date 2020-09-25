@@ -26,7 +26,7 @@ export class SelectPopupElement extends ToggleableElement {
         'm-content', {
             'scroll-y': true,
             class: 'bg:popup',
-            created: (element: ContentElement) => this.content = element
+            $created: (element: ContentElement) => this.content = element
         }, () => this.options.map((eachOption: OptionElement) => [
             'm-item', {
                 $text: eachOption.textContent,
@@ -42,6 +42,8 @@ export class SelectPopupElement extends ToggleableElement {
 
         const itemNodes = this.template.nodes[0].children;
 
+        console.log(this.content);
+
         let originItemNode: TemplateNode;
 
         if (this.multiple) {
@@ -49,7 +51,7 @@ export class SelectPopupElement extends ToggleableElement {
             originItemNode = itemNodes
                 .filter((eachItemNode) => eachItemNode.$data.selected)[0];
         } else {
-            originItemNode = this.options
+            originItemNode = itemNodes
                 .find((eachItemNode) => eachItemNode.$data.selected);
         }
 
