@@ -1,4 +1,4 @@
-// the regex visualized:
+
 //
 //                         /----------\
 //                        |            |    /-------\
@@ -58,6 +58,5 @@ const
     ]
 
 export default function isAutoPx(propKey: string) {
-    console.log(propKey, autoPxProps.indexOf(propKey) !== -1)
     return autoPxProps.indexOf(propKey) !== -1;
 }
