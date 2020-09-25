@@ -2,8 +2,8 @@
 @import '../../../element/clickable';
 
 :host {
-    --bg-theme: var(--bg-object);
-    --bg-disabled: var(--bg-theme);
+    --bg-color: var(--bg-object);
+    --bg-disabled: var(--bg-color);
     --foot-px: 1rem;
     --foot-py: .8rem;
     display: flex;

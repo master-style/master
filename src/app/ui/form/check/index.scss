@@ -111,7 +111,7 @@
 
 // switch
 :host([interface=switch]) {
-    --bg-theme: #56dd6a;
+    --bg-color: #56dd6a;
 }
 
 [part=switch] {
@@ -133,7 +133,7 @@
 
 :host([checked]) {
     [part=switch] {
-        background-color: var(--bg-theme);
+        background-color: var(--bg-color);
     }
 
     [part=button-icon] {

@@ -1,4 +1,5 @@
 import { Element, Attr, ControlElement } from '@element';
+import { isClickedOutside } from '@utils/is-clicked-outside';
 
 import css from './index.scss';
 import './popup';
@@ -111,11 +112,20 @@ export class SelectElement extends ControlElement {
     autocomplete: string;
 
     onAdded() {
-        this.on('focus', (event) => {
-            console.log(event);
+        this.on('focus', async (focusEvent) => {
             this.popup.select = this;
             document.body.append(this.popup);
-            this.popup.open();
+            await this.popup.open();
+            document.body
+                .on('click', async (clickEvent: Event) => {
+                    if (clickEvent.target === this.popup) return;
+                    if (isClickedOutside(clickEvent, this.popup)) {
+                        // 待改寫成 hook close 事件
+                        await this.popup.close();
+                        document.body.off({ id: this });
+                        console.log('outside');
+                    }
+                }, { passive: true, id: this });
         });
     }
 

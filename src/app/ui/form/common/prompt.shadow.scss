@@ -11,7 +11,7 @@
         font-weight: 500;
         border-radius: $xxs;
         color: var(--prompt-f-color);
-        background-color: var(--prompt-bg-theme);
+        background-color: var(--prompt-bg-color);
         white-space: normal;
         text-align: right;
         line-height: 1.2;
@@ -21,7 +21,7 @@
 
 :host([valid][dirty]),
 :host([class*=-valid][class*=-dirty]) {
-    --prompt-bg-theme: var(--greenFader);
+    --prompt-bg-color: var(--greenFader);
     --prompt-f-color: var(--green);
     --label-f-color: var(--green);
 }
@@ -35,7 +35,7 @@
 
 :host([warning][dirty]),
 :host([warning][class*=-dirty]) {
-    --prompt-bg-theme: var(--yellowFader) !important;
+    --prompt-bg-color: var(--yellowFader) !important;
     --prompt-f-color: var(--f-yellow) !important;
     --label-f-color: var(--f-yellow) !important;
 }
@@ -49,7 +49,7 @@
 
 :host([invalid][dirty]),
 :host([class*=-invalid][class*=-dirty]) {
-    --prompt-bg-theme: var(--redFader) !important;
+    --prompt-bg-color: var(--redFader) !important;
     --prompt-f-color: var(--f-red) !important;
     --label-f-color: var(--f-red) !important;
     --b-color: var(--red) !important;

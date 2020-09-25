@@ -40,7 +40,7 @@
     --f-fade: #68738c;
     --f-fader: #a1a8b9;
     --f-fadest: #bec3cf;
-    --bg-theme-hover: rgba(0, 27, 83, .05);
+    --bg-color-hover: rgba(0, 27, 83, .05);
     --switch-button-color: var(--theme);
 
     &.dark {
@@ -79,168 +79,168 @@
         --b-fade: rgba(var(--b-fadeRgb), .16);
         --b-fader: rgba(var(--b-fadeRgb), .12);
         --b-fadest: rgba(var(--b-fadeRgb), .08);
-        --bg-theme-hover: rgba(255, 255, 255, .05);
+        --bg-color-hover: rgba(255, 255, 255, .05);
         --switch-button-color: var(--f-fadest);
     }
 }
 
 .blue {
-    --bg-theme: var(--blue);
-    --bg-theme-hover: var(--f-blue);
+    --bg-color: var(--blue);
+    --bg-color-hover: var(--f-blue);
 
     &.outlined {
         --f-theme: var(--f-blue);
         --bg-light: var(--blueFader);
-        --bg-theme-hover: var(--blueFader);
-        --b-theme: var(--blue);
-        --b-theme-hover: var(--blue);
+        --bg-color-hover: var(--blueFader);
+        --b-color: var(--blue);
+        --b-color-hover: var(--blue);
     }
 }
 
 .blue\+ {
     --bg-light: var(--blueFade);
-    --bg-theme: var(--blueFader);
-    --bg-theme-hover: var(--blueFade);
+    --bg-color: var(--blueFader);
+    --bg-color-hover: var(--blueFade);
     --f-theme: var(--f-blue);
 
     &.outlined {
         --bg-light: var(--blueFader);
-        --bg-theme-hover: var(--blueFader);
-        --b-theme: var(--b-fadest);
-        --b-theme-hover: var(--blueFade);
+        --bg-color-hover: var(--blueFader);
+        --b-color: var(--b-fadest);
+        --b-color-hover: var(--blueFade);
     }
 }
 
 .green {
-    --bg-theme: var(--green);
-    --bg-theme-hover: var(--f-green);
+    --bg-color: var(--green);
+    --bg-color-hover: var(--f-green);
 
     &.outlined {
         --f-theme: var(--f-green);
         --bg-light: var(--greenFader);
-        --bg-theme-hover: var(--greenFader);
-        --b-theme: var(--green);
-        --b-theme-hover: var(--green);
+        --bg-color-hover: var(--greenFader);
+        --b-color: var(--green);
+        --b-color-hover: var(--green);
     }
 }
 
 .green\+ {
     --bg-light: var(--greenFade);
-    --bg-theme: var(--greenFader);
-    --bg-theme-hover: var(--greenFade);
+    --bg-color: var(--greenFader);
+    --bg-color-hover: var(--greenFade);
     --f-theme: var(--f-green);
 
     &.outlined {
         --bg-light: var(--greenFader);
-        --bg-theme-hover: var(--greenFader);
-        --b-theme: var(--b-fadest);
-        --b-theme-hover: var(--greenFade);
+        --bg-color-hover: var(--greenFader);
+        --b-color: var(--b-fadest);
+        --b-color-hover: var(--greenFade);
     }
 }
 
 .red {
-    --bg-theme: var(--red);
-    --bg-theme-hover: var(--f-red);
+    --bg-color: var(--red);
+    --bg-color-hover: var(--f-red);
 
     &.outlined {
         --f-theme: var(--f-red);
         --bg-light: var(--redFader);
-        --bg-theme-hover: var(--redFader);
-        --b-theme: var(--red);
-        --b-theme-hover: var(--red);
+        --bg-color-hover: var(--redFader);
+        --b-color: var(--red);
+        --b-color-hover: var(--red);
     }
 }
 
 .red\+ {
     --bg-light: var(--redFade);
-    --bg-theme: var(--redFader);
-    --bg-theme-hover: var(--redFade);
+    --bg-color: var(--redFader);
+    --bg-color-hover: var(--redFade);
     --f-theme: var(--f-red);
 
     &.outlined {
         --bg-light: var(--redFader);
-        --bg-theme-hover: var(--redFader);
-        --b-theme: var(--b-fadest);
-        --b-theme-hover: var(--redFade);
+        --bg-color-hover: var(--redFader);
+        --b-color: var(--b-fadest);
+        --b-color-hover: var(--redFade);
     }
 }
 
 .purple {
-    --bg-theme: var(--purple);
-    --bg-theme-hover: var(--f-purple);
+    --bg-color: var(--purple);
+    --bg-color-hover: var(--f-purple);
 
     &.outlined {
         --f-theme: var(--f-purple);
         --bg-light: var(--purpleFader);
-        --bg-theme-hover: var(--purpleFader);
-        --b-theme: var(--purple);
-        --b-theme-hover: var(--purple);
+        --bg-color-hover: var(--purpleFader);
+        --b-color: var(--purple);
+        --b-color-hover: var(--purple);
     }
 }
 
 .purple\+ {
     --bg-light: var(--purpleFade);
-    --bg-theme: var(--purpleFader);
-    --bg-theme-hover: var(--purpleFade);
+    --bg-color: var(--purpleFader);
+    --bg-color-hover: var(--purpleFade);
     --f-theme: var(--f-purple);
 
     &.outlined {
         --bg-light: var(--purpleFader);
-        --bg-theme-hover: var(--purpleFader);
-        --b-theme: var(--b-fadest);
-        --b-theme-hover: var(--purpleFade);
+        --bg-color-hover: var(--purpleFader);
+        --b-color: var(--b-fadest);
+        --b-color-hover: var(--purpleFade);
     }
 }
 
 .yellow {
-    --bg-theme: var(--yellow);
-    --bg-theme-hover: var(--f-yellow);
+    --bg-color: var(--yellow);
+    --bg-color-hover: var(--f-yellow);
 
     &.outlined {
         --f-theme: var(--f-yellow);
         --bg-light: var(--yellowFader);
-        --bg-theme-hover: var(--yellowFader);
-        --b-theme: var(--yellow);
-        --b-theme-hover: var(--yellow);
+        --bg-color-hover: var(--yellowFader);
+        --b-color: var(--yellow);
+        --b-color-hover: var(--yellow);
     }
 }
 
 .yellow\+ {
     --bg-light: var(--yellowFade);
-    --bg-theme: var(--yellowFader);
-    --bg-theme-hover: var(--yellowFade);
+    --bg-color: var(--yellowFader);
+    --bg-color-hover: var(--yellowFade);
     --f-theme: var(--f-yellow);
 
     &.outlined {
         --bg-light: var(--yellowFader);
-        --bg-theme-hover: var(--yellowFader);
-        --b-theme: var(--b-fadest);
-        --b-theme-hover: var(--yellowFade);
+        --bg-color-hover: var(--yellowFader);
+        --b-color: var(--b-fadest);
+        --b-color-hover: var(--yellowFade);
     }
 }
 
 .theme {
-    --bg-theme: var(--bg-object);
+    --bg-color: var(--bg-object);
     --bg-light: var(--themeFade);
-    --bg-theme-hover: var(--themeFade);
+    --bg-color-hover: var(--themeFade);
 
     &.outlined {
-        --bg-theme-hover: var(--themeFader);
-        --b-theme: var(--b-fader);
-        --b-theme-hover: var(--b-fade);
+        --bg-color-hover: var(--themeFader);
+        --b-color: var(--b-fader);
+        --b-color-hover: var(--b-fade);
     }
 }
 
 .theme\+ {
     --bg-light: var(--theme);
-    --bg-theme: var(--themeFade);
-    --bg-theme-hover: var(--themeFader);
+    --bg-color: var(--themeFade);
+    --bg-color-hover: var(--themeFader);
 
     &.outlined {
         --bg-light: var(--themeFader);
-        --bg-theme-hover: var(--themeFade);
-        --b-theme: var(--b-fadest);
-        --b-theme-hover: var(--b-fade);
+        --bg-color-hover: var(--themeFade);
+        --b-color: var(--b-fadest);
+        --b-color-hover: var(--b-fade);
     }
 }
 

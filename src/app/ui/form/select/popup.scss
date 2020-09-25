@@ -35,10 +35,17 @@
             0 7.9px 12.1px rgba(0, 0, 0, 0.043),
             0 19px 29px rgba(0, 0, 0, 0.06);
     }
+}
 
+:host([changing]) {
+    will-change: transform, opacity;
 }
 
 :root.dark :host {
     background-color: var(--themeFader);
     @include blurBg(var(--themeFaderRgb), .6);
+}
+
+m-item {
+    --f-size: var(--f-sm);
 }

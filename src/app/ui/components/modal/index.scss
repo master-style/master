@@ -35,11 +35,6 @@
     // }
 }
 
-:host([changing]) {
-    display: flex !important;
-    pointer-events: none !important;
-}
-
 :host([placement=left]) {
     --p: 0px;
     --r: 0px;
@@ -183,8 +178,8 @@
 }
 
 [part=close] {
-    --bg-theme: transparent;
-    --bg-theme-hover: transparent;
+    --bg-color: transparent;
+    --bg-color-hover: transparent;
     backdrop-filter: blur(35px);
     color: var(--f-fader);
     -webkit-backdrop-filter: blur(35px);
