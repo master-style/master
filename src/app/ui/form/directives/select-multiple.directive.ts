@@ -65,6 +65,7 @@ export class SelectMultipleControlValueAccessor implements ControlValueAccessor 
      */
     registerOnChange(fn: (value: any) => any): void {
         this.onChange = (_: any) => {
+            console.log('乾', _.value);
             fn(_.value);
         };
     }

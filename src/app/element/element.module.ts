@@ -5,6 +5,7 @@ import { AttrComponent } from './attr/attr.component';
 import { ClickableComponent } from './clickable/clickable.component';
 import { ControlComponent } from './control/control.component';
 import { ToggleableComponent } from './toggleable/toggleable.component';
+import { EventComponent } from './event/event.component';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { ToggleableComponent } from './toggleable/toggleable.component';
         AttrComponent,
         ClickableComponent,
         ControlComponent,
-        ToggleableComponent
+        ToggleableComponent,
+        EventComponent
     ],
     imports: [
         CommonModule,

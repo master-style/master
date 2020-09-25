@@ -1,4 +1,4 @@
-import { Element, Attr, ControlElement } from '@element';
+import { Element, Attr, Event, ControlElement } from '@element';
 import { isClickedOutside } from '@utils/is-clicked-outside';
 
 import css from './index.scss';
@@ -17,6 +17,9 @@ export class SelectElement extends ControlElement {
 
     @Attr({ key: 'tabindex' })
     tabIndex = -1;
+
+    @Event()
+    changeEmitter: EventEmitter;
 
     popup: SelectPopupElement = $('m-select-popup', {});
 
@@ -48,8 +51,6 @@ export class SelectElement extends ControlElement {
                 .find((eachOption: OptionElement) => eachOption.selected)?.value;
         }
     }
-
-    event = new Event('change');
 
     updateSelected(option: OptionElement) {
 

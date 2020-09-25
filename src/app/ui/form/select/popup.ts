@@ -45,6 +45,7 @@ export class SelectPopupElement extends ToggleableElement {
                             this.close();
                             node.$data.selected = true;
                         }
+                        this.select.changeEmitter(this.select.value);
                     }, { passive: true, id: this });
                 }
             }
