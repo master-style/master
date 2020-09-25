@@ -138,7 +138,7 @@ export class SelectElement extends ControlElement {
     autocomplete: string;
 
     onAdded() {
-        this.on('focus', async (focusEvent) => {
+        this.on('click', async () => {
             this.popup.select = this;
             document.body.append(this.popup);
             await this.popup.open();
