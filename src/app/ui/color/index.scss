@@ -40,8 +40,8 @@
     --f-fade: #68738c;
     --f-fader: #a1a8b9;
     --f-fadest: #bec3cf;
-    --hover-theme: rgba(0, 27, 83, .05);
-    --switch-button-theme: var(--theme);
+    --bg-theme-hover: rgba(0, 27, 83, .05);
+    --switch-button-color: var(--theme);
 
     &.dark {
         --blueFade: #{rgba($blue, .2)};
@@ -79,8 +79,8 @@
         --b-fade: rgba(var(--b-fadeRgb), .16);
         --b-fader: rgba(var(--b-fadeRgb), .12);
         --b-fadest: rgba(var(--b-fadeRgb), .08);
-        --hover-theme: rgba(255, 255, 255, .05);
-        --switch-button-theme: var(--f-fadest);
+        --bg-theme-hover: rgba(255, 255, 255, .05);
+        --switch-button-color: var(--f-fadest);
     }
 }
 

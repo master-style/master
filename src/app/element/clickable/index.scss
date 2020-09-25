@@ -62,7 +62,7 @@
 @media (any-hover: hover) {
     .touch {
         &:hover:not([disabled]) {
-            background-color: var(--bg-theme-hover, var(--themeFade));
+            background-color: var(--bg-theme-hover);
             box-shadow: inset 0 0 0 1px var(--b-theme-hover);
         }
     }
@@ -70,7 +70,7 @@
     :host(.outlined) {
         .touch {
             &:hover:not([disabled]) {
-                background-color: var(--bg-theme-hover, var(--themeFade));
+                background-color: var(--bg-theme-hover);
                 border-color: var(--b-theme-hover);
             }
         }

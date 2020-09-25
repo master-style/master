@@ -31,6 +31,7 @@ export class SelectPopupElement extends ToggleableElement {
         }, () => this.options.map((eachOption: OptionElement) => [
             'm-item', {
                 class: 'xs',
+                type: 'button',
                 $text: eachOption.textContent,
                 $data: eachOption
             }

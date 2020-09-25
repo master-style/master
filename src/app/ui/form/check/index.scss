@@ -164,7 +164,7 @@
 
 :host([interface=switch][disabled]:not([checked])) {
     [part=button-icon] {
-        fill: var(--switch-button-theme);
+        fill: var(--switch-button-color);
     }
 }
 
