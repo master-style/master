@@ -18,12 +18,6 @@ export const SELECT_MULTIPLE_VALUE_ACCESSOR: StaticProvider = {
 export class SelectMultipleControlValueAccessor implements ControlValueAccessor {
     /**
      * @description
-     * The current value
-     */
-    value: any;
-
-    /**
-     * @description
      * The registered callback function called when a change event occurs on the input element.
      */
     onChange = (_: any) => { };
@@ -58,9 +52,7 @@ export class SelectMultipleControlValueAccessor implements ControlValueAccessor 
      *
      * @param value The value
      */
-    writeValue(value: any): void {
-        this.value = value;
-    }
+    writeValue(value: any): void { }
 
     /**
      * @description
@@ -71,8 +63,7 @@ export class SelectMultipleControlValueAccessor implements ControlValueAccessor 
      */
     registerOnChange(fn: (value: any) => any): void {
         this.onChange = (_: any) => {
-            this.value = _.value;
-            fn(this.value);
+            fn(_.value);
         };
     }
 
@@ -114,7 +105,6 @@ export class ɵNgSelectMultipleOption {
     // TODO(issue/24571): remove '!'.
     id!: string;
     /** @internal */
-    _value: any;
 
     constructor(
         private _element: ElementRef, private _renderer: Renderer2,
@@ -128,7 +118,6 @@ export class ɵNgSelectMultipleOption {
      */
     @Input('ngValue')
     set ngValue(value: any) {
-        this._value = value;
         this._setElementValue(value);
     }
 
@@ -139,7 +128,6 @@ export class ɵNgSelectMultipleOption {
      */
     @Input('value')
     set value(value: any) {
-        this._value = value;
         this._setElementValue(value);
     }
 
