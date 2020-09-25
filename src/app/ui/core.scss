@@ -2,6 +2,9 @@ html {
     height: 100%;
     overflow-y: overlay;
     overflow-x: hidden;
+}
+
+body {
     --f-sans-serif: Roboto, PingFang TC, -apple-system, Noto Sans, Helvetica Neue, Microsoft JhengHei, sans-serif;
     --x12: 100%;
     --x11: 91.666666%;
@@ -22,10 +25,7 @@ html {
     --f-lg: 1.563rem; // 25px
     --f-xl: 2rem; // 32px
     --f-xxl: 2.5rem; // 40px
-}
 
-body,
-html {
     width: 100%;
     contain: style;
     width: 100%;
@@ -34,7 +34,7 @@ html {
     padding: 0;
     letter-spacing: 0.4px;
     line-height: normal;
-    color: var(--f-themeFader);
+    color: var(--f-theme);
 
     @media (any-pointer: coarse) {
         letter-spacing: 0px;

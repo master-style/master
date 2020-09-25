@@ -16,6 +16,8 @@
     // fix safari ui
     &:after {
         position: absolute;
+        top: 0;
+        left: 0;
         pointer-events: none;
         border: 1px solid var(--b-fadest);
         box-sizing: border-box;

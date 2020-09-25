@@ -1,15 +1,3 @@
-.bg\:popup {
-    background-color: var(--theme);
-    @include blurBg(var(--themeRgb), .7);
-}
-
-.dark {
-    .bg\:popup {
-        background-color: var(--themeFader);
-        @include blurBg(var(--themeFaderRgb), .6);
-    }
-}
-
 .bg\:transparent {
     background: none !important;
 }

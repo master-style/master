@@ -1,7 +1,8 @@
 import { Element, Attr, ToggleableElement } from '@element';
 import { OptionElement } from '../option';
 
-import css from './index.scss';
+import css from './popup.scss';
+
 import { ContentElement } from '@ui/components/content';
 import { SelectElement } from '.';
 
@@ -29,6 +30,7 @@ export class SelectPopupElement extends ToggleableElement {
             $created: (element: ContentElement) => this.content = element
         }, () => this.options.map((eachOption: OptionElement) => [
             'm-item', {
+                class: 'xs',
                 $text: eachOption.textContent,
                 $data: eachOption
             }
@@ -41,8 +43,6 @@ export class SelectPopupElement extends ToggleableElement {
         let keyframes: any;
 
         const itemNodes = this.template.nodes[0].children;
-
-        console.log(this.content);
 
         let originItemNode: TemplateNode;
 
@@ -87,6 +87,7 @@ export class SelectPopupElement extends ToggleableElement {
         } else if (left + width >= windowW - 5) {
             left = windowW - width - 5;
         }
+
         this.css({
             top,
             left,
