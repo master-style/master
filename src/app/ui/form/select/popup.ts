@@ -18,9 +18,7 @@ export class SelectPopupElement extends ToggleableElement {
     @Attr({ reflect: false, observe: false })
     options;
 
-    @Attr({ reflect: false })
     duration = 300;
-
     triggerEvent = null;
 
     content: ContentElement;
