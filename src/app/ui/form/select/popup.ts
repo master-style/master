@@ -2,6 +2,8 @@ import { Element, Attr, ToggleableElement } from '@element';
 import { OptionElement } from '../option';
 
 import css from './index.scss';
+import { ContentElement } from '@ui/components/content';
+import { SelectElement } from '.';
 
 const NAME = 'select-popup';
 
@@ -17,14 +19,18 @@ export class SelectPopupElement extends ToggleableElement {
     @Attr({ reflect: false, observe: false })
     multiple: boolean;
 
+    content: ContentElement;
+    select: SelectElement;
+
     template = $(() => [
         'm-content', {
             'scroll-y': true,
-            class: 'bg:popup'
+            class: 'bg:popup',
+            created: (element: ContentElement) => this.content = element
         }, () => this.options.map((eachOption: OptionElement) => [
             'm-item', {
                 $text: eachOption.textContent,
-                $option: eachOption
+                $data: eachOption
             }
         ]),
     ]);
@@ -34,56 +40,59 @@ export class SelectPopupElement extends ToggleableElement {
     ) {
         let keyframes: any;
 
-        let originOption: OptionElement;
+        const itemNodes = this.template.nodes[0].children;
+
+        let originItemNode: TemplateNode;
 
         if (this.multiple) {
             // value and oldValue always not be same
-            originOption = this.options
-                .filter((eachOption) => eachOption.selected)[0];
+            originItemNode = itemNodes
+                .filter((eachItemNode) => eachItemNode.$data.selected)[0];
         } else {
-            originOption = this.options
-                .find((eachOption) => eachOption.selected);
+            originItemNode = this.options
+                .find((eachItemNode) => eachItemNode.$data.selected);
         }
 
-        let originRect = { top: 0, height: 0 };
-        let $origin;
-        // if (originOption && !originOption.hidden) {
-        //     $origin = originOption.$wrap;
-        //     this.$selectWrap.to($origin, 0);
-        //     originRect = $origin.getBoundingClientRect();
-        // }
-        // const
-        //     selectRect = this.$container.getBoundingClientRect(),
-        //     wrapH = this.$selectWrap.offsetHeight,
-        //     wrapW = this.$selectWrap.offsetWidth,
-        //     windowH = $window.innerHeight,
-        //     windowW = $window.innerWidth,
-        //     originOffsetTop = originRect.top + originRect.height / 2;
-        // let top = selectRect.top + ($origin ? selectRect.height / 2 : 0) - originOffsetTop;
-        // let left = selectRect.left;
-        // // exceed Y
-        // let exceedY = 0;
-        // if (top <= 5) {
-        //     exceedY = top - 5;
-        //     top = 5;
-        // } else if (top + wrapH >= windowH - 5) {
-        //     exceedY = top + wrapH - windowH + 5;
-        //     top = windowH - wrapH - 5;
-        // };
-        // // exceed X
-        // if (left <= 5) {
-        //     left = 5;
-        // } else if (left + wrapW >= windowW - 5) {
-        //     left = windowW - wrapW - 5;
-        // }
-        // this.$selectWrap.css({
-        //     top,
-        //     left,
-        //     minWidth: selectRect.width,
-        //     transformOrigin: '0 ' + (originOffsetTop + exceedY) + 'px'
-        // });
+        let originItemRect = { top: 0, height: 0 };
+        let originItem;
 
-        await this.animation.finished;
+        if (originItemNode && !originItemNode.$data.hidden) {
+            originItem = originItemNode.element;
+            this.content.to(originItem, 0);
+            originItemRect = originItem.getBoundingClientRect();
+        }
+        const
+            selectRect = this.select.getBoundingClientRect(),
+            height = this.offsetHeight,
+            width = this.offsetWidth,
+            windowH = window.innerHeight,
+            windowW = window.innerWidth,
+            originOffsetTop = originItemRect.top + originItemRect.height / 2;
+        let top = selectRect.top + (originItem ? selectRect.height / 2 : 0) - originOffsetTop;
+        let left = selectRect.left;
+        // exceed Y
+        let exceedY = 0;
+        if (top <= 5) {
+            exceedY = top - 5;
+            top = 5;
+        } else if (top + height >= windowH - 5) {
+            exceedY = top + height - windowH + 5;
+            top = windowH - height - 5;
+        };
+        // exceed X
+        if (left <= 5) {
+            left = 5;
+        } else if (left + width >= windowW - 5) {
+            left = windowW - width - 5;
+        }
+        this.css({
+            top,
+            left,
+            minWidth: selectRect.width,
+            transformOrigin: '0 ' + (originOffsetTop + exceedY) + 'px'
+        });
+
+        // await this.animation.finished;
     }
 
     render() {
