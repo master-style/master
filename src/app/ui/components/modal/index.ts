@@ -90,8 +90,7 @@ export class ModalElement extends ToggleableElement {
     closeElement: HTMLElement;
 
     protected toggling(
-        options: KeyframeEffectOptions,
-        finish: () => void
+        options: KeyframeEffectOptions
     ) {
         let keyframes: any;
 
@@ -231,14 +230,16 @@ export class ModalElement extends ToggleableElement {
 
         this.animation = this.root.animate(keyframes, options);
         this.animations.push(this.animation);
-        this.animation.onfinish = () => {
-            if (this.hidden && this.trigger && this.hideTrigger) {
-                this.trigger.toggleClass('invisible', false);
-            }
-            if (content && !this.hidden) {
-                content.enable();
-            }
-            finish();
-        };
+        return new Promise((finish) => {
+            this.animation.onfinish = () => {
+                if (this.hidden && this.trigger && this.hideTrigger) {
+                    this.trigger.toggleClass('invisible', false);
+                }
+                if (content && !this.hidden) {
+                    content.enable();
+                }
+                finish();
+            };
+        });
     }
 }
