@@ -14,8 +14,9 @@ export class OptionElement extends HTMLElement {
     disabled: boolean;
 
     @Attr({
-        updater(option: OptionElement) {
-            option.parentElement['updateValue']();
+        updater(option: OptionElement, value) {
+            if (value)
+                option.parentElement['selectOption'](option);
         }
     })
     selected: boolean = false;

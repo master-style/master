@@ -29,26 +29,48 @@ export class SelectElement extends ControlElement {
     add(option: OptionElement) {
         this.#options.push(option);
         this.updateValue();
+        if (option.selected)
+            this.selectOption(option);
     }
 
     delete(option: OptionElement) {
         this.#options.splice(this.#options.indexOf(option), 1);
+        this.updateValue();
     }
 
     updateValue() {
         if (this.multiple) {
             // value and oldValue always not be same
             this.value = this.#options
-                .filter((eachOption) => eachOption.selected)
-                .map((eachOption) => eachOption.value);
+                .filter((eachOption: OptionElement) => eachOption.selected)
+                .map((eachOption: OptionElement) => eachOption.value);
         } else {
             this.value = this.#options
-                .find((eachOption) => eachOption.selected)?.value;
+                .find((eachOption: OptionElement) => eachOption.selected)?.value;
         }
-        const event = new CustomEvent('change', {
+    }
 
-        });
-        this.dispatchEvent(event);
+    #updating = false;
+
+    selectOption(option: OptionElement) {
+
+        if (this.#updating) return;
+
+        const event = new Event('change');
+
+        if (this.multiple) {
+            this.dispatchEvent(event);
+        } else {
+            this.#updating = true;
+            this.#options.forEach((eachOption: OptionElement) => {
+                if (option !== eachOption && eachOption.selected) {
+                    eachOption.selected = false;
+                }
+            });
+            this.updateValue();
+            this.#updating = false;
+            this.dispatchEvent(event);
+        }
     }
 
     controlTemplate = $(() => [

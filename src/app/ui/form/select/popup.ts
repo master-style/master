@@ -18,9 +18,6 @@ export class SelectPopupElement extends ToggleableElement {
     @Attr({ reflect: false, observe: false })
     options;
 
-    @Attr({ reflect: false, observe: false })
-    multiple: boolean;
-
     @Attr({ reflect: false })
     duration = 300;
 
@@ -43,7 +40,10 @@ export class SelectPopupElement extends ToggleableElement {
                 $created: (element: ItemElement, node: TemplateNode) => {
                     element.on('click', () => {
                         node.$data.selected = true;
-                    });
+                        if (!this.select.multiple) {
+                            this.close();
+                        }
+                    }, { passive: true, id: this });
                 }
             }
         ]),
@@ -69,7 +69,7 @@ export class SelectPopupElement extends ToggleableElement {
             const itemNodes = this.template.nodes[0].children;
             let originItemNode: TemplateNode;
 
-            if (this.multiple) {
+            if (this.select.multiple) {
                 // value and oldValue always not be same
                 originItemNode = itemNodes
                     .filter((eachItemNode) => eachItemNode.$data.selected)[0];
