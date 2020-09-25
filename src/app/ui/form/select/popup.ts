@@ -21,6 +21,9 @@ export class SelectPopupElement extends ToggleableElement {
     @Attr({ reflect: false, observe: false })
     multiple: boolean;
 
+    @Attr({ reflect: false })
+    duration = 300;
+
     triggerEvent = null;
 
     content: ContentElement;
@@ -41,13 +44,11 @@ export class SelectPopupElement extends ToggleableElement {
         ]),
     ]);
 
-    protected async toggling(
+    protected toggling(
         options: KeyframeEffectOptions
     ) {
 
-        options.fill = 'forwards';
-
-        const keyframes = [
+        const keyframes: any = [
             {
                 transform: 'scaleY(.9)',
                 opacity: 0
@@ -118,8 +119,19 @@ export class SelectPopupElement extends ToggleableElement {
 
         this.animation = this.animate(keyframes, options);
         this.animations.push(this.animation);
-
-        await this.animation.finished;
+        return new Promise((finish) => {
+            this.animation.onfinish = () => {
+                if (this.hidden) {
+                    this.css({
+                        top: '',
+                        left: '',
+                        minWidth: '',
+                        transformOrigin: ''
+                    });
+                }
+                finish();
+            };
+        });
     }
 
     render() {
