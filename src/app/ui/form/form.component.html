@@ -9,7 +9,7 @@
                                   required
                                   (change)="masterChange($event)"
                                   multiple
-                                  ngModel
+                                  ngModel="taipei"
                                   class="outlined">
                             <m-option *ngFor="let city of ['taichung', 'kaosiung', 'taipei']"
                                       [value]="city">{{city}}</m-option>

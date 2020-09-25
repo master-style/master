@@ -52,7 +52,9 @@ export class SelectMultipleControlValueAccessor implements ControlValueAccessor 
      *
      * @param value The value
      */
-    writeValue(value: any): void { }
+    writeValue(value: any): void {
+        this._setElementValue(value);
+    }
 
     /**
      * @description
@@ -75,6 +77,11 @@ export class SelectMultipleControlValueAccessor implements ControlValueAccessor 
      */
     registerOnTouched(fn: () => any): void {
         this.onTouched = fn;
+    }
+
+    /** @internal */
+    _setElementValue(value: string): void {
+        this._renderer.setProperty(this._elementRef.nativeElement, 'value', value);
     }
 
     /**
