@@ -29,7 +29,6 @@ export class SelectElement extends ControlElement {
         this.options.push(option);
         if (option.selected) {
             this.updateSelected(option);
-            this.updateValue();
         } else {
             this.updateValue();
         }
@@ -63,6 +62,7 @@ export class SelectElement extends ControlElement {
                 }
             });
         }
+        this.updateValue();
     }
 
     controlTemplate = $(() => [

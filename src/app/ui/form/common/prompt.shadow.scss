@@ -19,8 +19,8 @@
     }
 }
 
-:host([valid][dirty]),
-:host([class*=-valid][class*=-dirty]) {
+:host([prompt-valid][valid][dirty]),
+:host([prompt-valid][class*=-valid][class*=-dirty]) {
     --prompt-bg-color: var(--greenFader);
     --prompt-f-color: var(--green);
     --label-f-color: var(--green);
@@ -33,8 +33,8 @@
     }
 }
 
-:host([warning][dirty]),
-:host([warning][class*=-dirty]) {
+:host([prompt-warning][warning][dirty]),
+:host([prompt-warning][warning][class*=-dirty]) {
     --prompt-bg-color: var(--yellowFader) !important;
     --prompt-f-color: var(--f-yellow) !important;
     --label-f-color: var(--f-yellow) !important;
@@ -47,8 +47,8 @@
     }
 }
 
-:host([invalid][dirty]),
-:host([class*=-invalid][class*=-dirty]) {
+:host([prompt-invalid][invalid][dirty]),
+:host([prompt-invalid][class*=-invalid][class*=-dirty]) {
     --prompt-bg-color: var(--redFader) !important;
     --prompt-f-color: var(--f-red) !important;
     --label-f-color: var(--f-red) !important;

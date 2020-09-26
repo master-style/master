@@ -41,6 +41,7 @@ export class SelectPopupElement extends ToggleableElement {
                     element.on('click', () => {
                         if (this.select.multiple) {
                             node.$data.selected = !node.$data.selected;
+                            this.updatePosition();
                         } else {
                             this.close();
                             node.$data.selected = true;
@@ -51,6 +52,8 @@ export class SelectPopupElement extends ToggleableElement {
             }
         ]),
     ]);
+
+    #offsetTop = 0;
 
     updatePosition() {
         const itemNodes = this.template.nodes[0].children;
@@ -79,8 +82,10 @@ export class SelectPopupElement extends ToggleableElement {
             width = this.offsetWidth,
             windowH = window.innerHeight,
             windowW = window.innerWidth,
-            originOffsetTop = originItemRect.top + originItemRect.height / 2;
-        let top = selectRect.top + (originItem ? selectRect.height / 2 : 0) - originOffsetTop + 1;
+            diffTop = (originItem ? selectRect.height / 2 : 0) - originItemRect.height / 2,
+            offsetTop = selectRect.top - originItemRect.top + diffTop;
+        this.#offsetTop += offsetTop;
+        let top = this.#offsetTop + 1;
         let left = selectRect.left;
         // exceed Y
         let exceedY = 0;
@@ -103,7 +108,7 @@ export class SelectPopupElement extends ToggleableElement {
             top,
             left,
             minWidth: selectRect.width,
-            transformOrigin: '0 ' + (originOffsetTop + exceedY) + 'px'
+            transformOrigin: '0 ' + (originItemRect.top + diffTop + 1) + 'px'
         });
     }
 
@@ -134,6 +139,7 @@ export class SelectPopupElement extends ToggleableElement {
         return new Promise((finish) => {
             this.animation.onfinish = () => {
                 if (this.hidden) {
+                    this.#offsetTop = 0;
                     this.css({
                         top: '',
                         left: '',
