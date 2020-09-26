@@ -1,5 +1,6 @@
 import { Element, Attr, ToggleableElement } from '@element';
 import { OptionElement } from '../option';
+import { isClickedOutside } from '@utils/is-clicked-outside';
 
 import css from './popup.scss';
 
@@ -24,6 +25,8 @@ export class SelectPopupElement extends ToggleableElement {
     content: ContentElement;
     select: SelectElement;
 
+    #offsetTop = 0;
+
     template = $(() => [
         'm-content', {
             'scroll-y': true,
@@ -39,10 +42,10 @@ export class SelectPopupElement extends ToggleableElement {
                 $data: eachOption,
                 $created: (element: ItemElement, node: TemplateNode) => {
                     element.on('click', () => {
-                        this.render();
                         if (this.select.multiple) {
                             node.$data.selected = !node.$data.selected;
                             this.updatePosition();
+                            this.render();
                         } else {
                             this.close();
                             node.$data.selected = true;
@@ -61,7 +64,29 @@ export class SelectPopupElement extends ToggleableElement {
         ]),
     ]);
 
-    #offsetTop = 0;
+    onOpen() {
+        document.body.append(this);
+    }
+
+    onOpened() {
+        document.documentElement.css('overflow', 'hidden');
+        document.body
+            .on('click', async (clickEvent: Event) => {
+                if (clickEvent.target === this) return;
+                if (isClickedOutside(clickEvent, this)) {
+                    this.close();
+                }
+            }, { passive: true, id: this });
+    }
+
+    onClose() {
+        document.body.off({ id: this });
+        document.documentElement.css('overflow', '');
+    }
+
+    onClosed() {
+        this.remove();
+    }
 
     updatePosition() {
         const itemNodes = this.template.nodes[0].children;

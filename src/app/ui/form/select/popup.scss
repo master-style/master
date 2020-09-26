@@ -16,6 +16,7 @@
     background-color: var(--bg-object);
     backdrop-filter: blur(35px);
     -webkit-backdrop-filter: blur(35px);
+
     // fix safari ui
     &:after {
         position: absolute;
@@ -45,4 +46,8 @@
 
 m-item {
     --f-size: var(--f-sm);
+
+    &[selected] {
+        font-weight: 600;
+    }
 }

@@ -121,9 +121,11 @@ export class ToggleableElement extends HTMLElement {
         // 此繞過 this.hidden 設置
         this['_hidden'] = false;
         this.toggleAttribute('hidden', false);
-        // custom.call(target); // custom callback
-        // emit(target, 'open');
+        const onOpen = this['onOpen'];
+        if (onOpen) onOpen.call(this);
         await this.prepare();
+        const onOpened = this['onOpened'];
+        if (onOpened) onOpened.call(this);
     }
 
     async close() {
@@ -133,10 +135,11 @@ export class ToggleableElement extends HTMLElement {
         // 此繞過 this.hidden 設置
         this['_hidden'] = true;
         this.toggleAttribute('hidden', true);
-        // this.hidden = true;
-        // custom.call(target); // custom callback
-        // emit(target, 'close');
+        const onClose = this['onClose'];
+        if (onClose) onClose.call(this);
         await this.prepare();
+        const onClosed = this['onClosed'];
+        if (onClosed) onClosed.call(this);
     }
 
     async toggle(whether?: boolean) {

@@ -1,5 +1,4 @@
 import { Element, Attr, Event, ControlElement } from '@element';
-import { isClickedOutside } from '@utils/is-clicked-outside';
 
 import css from './index.scss';
 import './popup';
@@ -131,21 +130,7 @@ export class SelectElement extends ControlElement {
     onAdded() {
         this.on('click', async () => {
             this.popup.select = this;
-            document.body.append(this.popup);
-            await this.popup.open();
-            document.documentElement.css('overflow', 'hidden');
-            document.body
-                .on('click', async (clickEvent: Event) => {
-                    if (clickEvent.target === this.popup) return;
-                    if (isClickedOutside(clickEvent, this.popup)) {
-                        // 待改寫成 hook close 事件
-                        document.body.off({ id: this });
-                        document.documentElement.css('overflow', '');
-                        await this.popup.close();
-                        this.popup.remove();
-                        console.log('close');
-                    }
-                }, { passive: true, id: this });
+            this.popup.open();
         }, { passive: true, id: this });
     }
 
