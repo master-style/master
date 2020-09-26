@@ -25,7 +25,7 @@
 [part=app-foot] {
     width: 100%;
     background-color: var(--theme);
-    @include blurBg(var(--themeRgb), .9);
+    @include bgBlur(var(--themeRgb), .9);
 }
 
 [part=app-head] {

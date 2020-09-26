@@ -64,17 +64,17 @@
 
 .bg\:theme {
     background-color: var(--theme) !important;
-    @include blurBg(var(--themeRgb), .9);
+    @include bgBlur(var(--themeRgb), .9);
 }
 
 .bg\:theme\+ {
     background-color: var(--themeFade) !important;
-    @include blurBg(var(--themeFadeRgb), .9);
+    @include bgBlur(var(--themeFadeRgb), .9);
 }
 
 .bg\:theme\+\+ {
     background-color: var(--themeFader) !important;
-    @include blurBg(var(--themeFaderRgb), .9);
+    @include bgBlur(var(--themeFaderRgb), .9);
 }
 
 // .gt\:white {

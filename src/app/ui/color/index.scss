@@ -84,6 +84,16 @@
     }
 }
 
+@supports (backdrop-filter: none) or (-webkit-backdrop-filter: none) {
+    :root {
+        --bg-object: rgba(var(--bg-objectRgb), .7)
+    }
+
+    :root.dark {
+        --bg-object: rgba(var(--bg-objectRgb), .7)
+    }
+}
+
 .blue {
     --bg-color: var(--blue);
     --bg-color-hover: var(--f-blue);

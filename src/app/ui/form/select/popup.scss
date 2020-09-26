@@ -13,9 +13,9 @@
     will-change: transform, opacity;
     max-height: 240px;
     overflow: visible;
-    background-color: var(--theme);
-    @include blurBg(var(--themeRgb), .7);
-
+    background-color: var(--bg-object);
+    backdrop-filter: blur(35px);
+    -webkit-backdrop-filter: blur(35px);
     // fix safari ui
     &:after {
         position: absolute;
@@ -41,11 +41,6 @@
 
 :host([changing]) {
     will-change: transform, opacity;
-}
-
-:root.dark :host {
-    background-color: var(--themeFader);
-    @include blurBg(var(--themeFaderRgb), .6);
 }
 
 m-item {

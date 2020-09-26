@@ -123,7 +123,7 @@
 //     font-size: var(--f-xs);
 //     transition: .1s top linear;
 //     will-change: top;
-//     @include blurBg(var(--theme), 0);
+//     @include bgBlur(var(--theme), 0);
 // }
 
 [part=root] {
@@ -152,7 +152,7 @@
 
 ::slotted([part=head]),
 ::slotted([part=foot]) {
-    @include blurBg(var(--themeRgb), .9);
+    @include bgBlur(var(--themeRgb), .9);
     position: absolute;
     display: flex;
     align-items: center;
