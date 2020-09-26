@@ -129,7 +129,7 @@
     }
 }
 
-:host(.outlined[label]) {
+:host(.outlined[label]:not([label=""])) {
     span {
         padding: 0 var(--label-px);
         letter-spacing: normal;
