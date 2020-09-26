@@ -109,7 +109,7 @@ export class SelectPopupElement extends ToggleableElement {
             top,
             left,
             minWidth: selectRect.width,
-            transformOrigin: '0 ' + (selectRect.top - this.#offsetTop + 2 * diffTop) + 'px'
+            transformOrigin: '0 ' + (selectRect.top - this.#offsetTop + 3 * diffTop) + 'px'
         });
     }
 
