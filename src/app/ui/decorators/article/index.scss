@@ -205,7 +205,7 @@ article {
 
         h5,
         h6 {
-            line-height: 1.25;
+            line-height: 1.2;
         }
 
         p {
@@ -281,7 +281,7 @@ article {
 
         p {
             font-size: var(--f-xs);
-            line-height: 1.25;
+            line-height: 1.2;
             text-align: inherit;
             margin: 0 0 $xs 0; // : conflict article.embedded
             color: var(--f-fade);

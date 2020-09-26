@@ -98,12 +98,13 @@ export class SelectElement extends ControlElement {
             part: 'body',
             placeholder: this.placeholder,
             label: this.label, // for default select width
-            $text: Array.isArray(this.value) ? this.value.join(' , ') : this.value
-        },
+        }, [
+            'span', { $text: Array.isArray(this.value) ? this.value.join(' , ') : this.value }
+        ],
         'm-icon', { name: 'unfold' },
         'fieldset', [
             'legend', [
-                'span', { $text: this.label }
+                'span', { part: 'label', $text: this.label }
             ]
         ],
         'label', { $text: this.label }

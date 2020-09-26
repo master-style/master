@@ -30,7 +30,7 @@ export class TextareaElement extends ControlElement {
         'slot',
         'fieldset', [
             'legend', [
-                'span', { $text: this.label }
+                'span', { part: 'label', $text: this.label }
             ]
         ],
         'label', { $text: this.label }

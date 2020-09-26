@@ -8,10 +8,17 @@
 
 [part=body] {
     cursor: pointer;
+    display: flex;
+    align-items: center;
     min-height: var(--size);
     letter-spacing: inherit;
     font-weight: inherit;
-    white-space: pre-wrap;
+    overflow: hidden;
+    word-wrap: normal;
+    text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
 
     &:empty[placeholder]:before {
         content: attr(placeholder);

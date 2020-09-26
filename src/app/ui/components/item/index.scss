@@ -3,7 +3,7 @@
 
 [part=root] {
     padding-left: var(--px);
-    line-height: 1.25;
+    line-height: 1.2;
 }
 
 [part=body] {
@@ -19,7 +19,7 @@
 :host {
     --f-size: 1rem;
     --size: 3rem;
-    --py: .8125rem;
+    --py: .875rem;
     --px: 1.25rem;
     --icon-size: 2rem;
     display: flex;
@@ -57,7 +57,7 @@
     --f-size: .9125rem;
     --size: 2.5rem;
     --px: 1.125rem;
-    --py: .625rem;
+    --py: .6875rem;
     --icon-size: 1.625rem;
 }
 
@@ -65,7 +65,7 @@
     --f-size: .875rem;
     --size: 2rem;
     --px: 1rem;
-    --py: .375rem;
+    --py: .5rem;
     --icon-size: 1.25rem;
 }
 
