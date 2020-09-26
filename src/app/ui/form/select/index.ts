@@ -143,6 +143,7 @@ export class SelectElement extends ControlElement {
                         document.documentElement.css('overflow', '');
                         await this.popup.close();
                         this.popup.remove();
+                        console.log('close');
                     }
                 }, { passive: true, id: this });
         }, { passive: true, id: this });

@@ -39,6 +39,7 @@ export class SelectPopupElement extends ToggleableElement {
                 $data: eachOption,
                 $created: (element: ItemElement, node: TemplateNode) => {
                     element.on('click', () => {
+                        this.render();
                         if (this.select.multiple) {
                             node.$data.selected = !node.$data.selected;
                             this.updatePosition();
@@ -53,8 +54,8 @@ export class SelectPopupElement extends ToggleableElement {
                 'm-check', {
                     slot: 'foot',
                     class: 'sm',
-                    type: this.select.multiple ? 'checkbox' : 'radio',
-                    checked: eachOption.selected
+                    checked: eachOption.selected,
+                    type: this.select.multiple ? 'checkbox' : 'radio'
                 }
             ]
         ]),
