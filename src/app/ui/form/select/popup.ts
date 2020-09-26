@@ -82,6 +82,7 @@ export class SelectPopupElement extends ToggleableElement {
     onClose() {
         document.body.off({ id: this });
         document.documentElement.css('overflow', '');
+        this.select.focus();
     }
 
     onClosed() {
