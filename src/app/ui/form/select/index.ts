@@ -74,7 +74,22 @@ export class SelectElement extends ControlElement {
                 this.body = element;
                 this.validity = element.validity;
             }
-        }
+        },
+        // 'div', { part: 'output', $if: this.multiple }, [
+        //     'div', { class: 'y:xs' }, () => {
+        //         if (this.multiple && this.value) {
+        //             return this.value.map((eachValue) => [
+        //                 'm-chip', {
+        //                     class: 'x sm theme+',
+        //                     style: '--b-color: transparent',
+        //                     $text: eachValue
+        //                 },
+        //             ]);
+        //         } else {
+        //             return [];
+        //         }
+        //     }
+        // ]
     ]);
 
     template = $(() => [
@@ -83,7 +98,7 @@ export class SelectElement extends ControlElement {
             part: 'body',
             placeholder: this.placeholder,
             label: this.label, // for default select width
-            $text: this.value
+            $text: Array.isArray(this.value) ? this.value.join(' , ') : this.value
         },
         'm-icon', { name: 'unfold' },
         'fieldset', [

@@ -11,6 +11,7 @@
     min-height: var(--size);
     letter-spacing: inherit;
     font-weight: inherit;
+    white-space: pre-wrap;
 
     &:empty[placeholder]:before {
         content: attr(placeholder);
@@ -30,9 +31,7 @@
 }
 
 ::slotted(input) {
-    position: absolute;
-    width: 100%;
-    visibility: hidden;
+    display: none;
 }
 
 m-icon {
