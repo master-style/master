@@ -26,19 +26,26 @@ export class SelectElement extends ControlElement {
 
     addOption(option: OptionElement) {
         this.options.push(option);
-        if (option.selected) {
-            this.updateSelected(option);
-        } else {
-            this.updateValue();
-        }
     }
 
     removeOption(option: OptionElement) {
         this.options.splice(this.options.indexOf(option), 1);
-        this.updateValue();
+        this.output();
     }
 
-    updateValue() {
+    updateSelected(option?) {
+        if (option) {
+            if (option.selected && !this.multiple) {
+                this.options.forEach((eachOption: OptionElement) => {
+                    if (option !== eachOption && eachOption.selected) {
+                        eachOption['_selected'] = false;
+                    }
+                });
+            }
+        }
+    }
+
+    output() {
         if (this.multiple) {
             // value and oldValue always not be same
             this.value = this.options
@@ -49,20 +56,6 @@ export class SelectElement extends ControlElement {
                 .find((eachOption: OptionElement) => eachOption.selected)?.value;
         }
         this.body.value = Array.isArray(this.value) ? this.value.join(' , ') : this.value;
-    }
-
-    updateSelected(option: OptionElement) {
-
-        if (this.multiple) {
-
-        } else {
-            this.options.forEach((eachOption: OptionElement) => {
-                if (option !== eachOption && eachOption.selected) {
-                    eachOption['_selected'] = false;
-                }
-            });
-        }
-        this.updateValue();
     }
 
     controlTemplate = $(() => [
@@ -131,6 +124,7 @@ export class SelectElement extends ControlElement {
         updater(select: SelectElement, value: any) {
             ControlElement.valueUpdater(select, value);
             select.body.value = value;
+            console.log(select.options, value);
         },
         reflect: false
     })
@@ -141,6 +135,7 @@ export class SelectElement extends ControlElement {
 
     onAdded() {
         this.on('click', async () => {
+            if (this.disabled) return;
             this.popup.select = this;
             this.popup.open();
         }, { passive: true, id: this });
