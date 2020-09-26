@@ -12,7 +12,7 @@
     --f-size: var(--f-sm);
     --b-width: 1px;
     --b-color: var(--b-fade);
-    --py: .875rem;
+    --py: .90625rem;
     --px: 1rem;
     --size: 3rem;
     --label-px: .25rem;
@@ -22,7 +22,6 @@
     display: inline-flex;
     align-items: flex-start;
     font-size: var(--f-size);
-    min-height: var(--size);
     // ~m-icon {
     //     margin: 0 .5rem 0 .2rem;
     //     color: var(--f-fadest);
@@ -242,6 +241,7 @@ m-icon,
     padding-bottom: var(--py);
     transition: opacity .2s .1s cubic-bezier(0, 0, .2, 1);
     will-change: opacity;
+    min-height: var(--size);
 }
 
 ::slotted([part=body]),
@@ -258,6 +258,7 @@ m-icon,
     font-weight: 500;
     font-size: inherit;
     line-height: inherit;
+    letter-spacing: inherit;
     color: var(--f-theme);
     -webkit-text-fill-color: unset; // fix safari opacity problem
     // transition: color .2s ease;
@@ -283,7 +284,6 @@ m-icon {
     user-select: none;
     white-space: nowrap;
     align-items: center;
-    min-height: var(--size);
 }
 
 ::slotted([part=head]) {

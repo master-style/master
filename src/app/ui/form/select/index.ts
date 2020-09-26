@@ -48,6 +48,7 @@ export class SelectElement extends ControlElement {
             this.value = this.options
                 .find((eachOption: OptionElement) => eachOption.selected)?.value;
         }
+        this.body.value = Array.isArray(this.value) ? this.value.join(' , ') : this.value;
     }
 
     updateSelected(option: OptionElement) {
@@ -66,10 +67,12 @@ export class SelectElement extends ControlElement {
 
     controlTemplate = $(() => [
         'input', {
-            'aria-hidden': true,
-            tabindex: -1,
+            part: 'body',
             name: this.name,
+            placeholder: this.placeholder,
+            disabled: this.disabled,
             required: this.required,
+            readonly: true,
             $created: (element: HTMLInputElement) => {
                 this.body = element;
                 this.validity = element.validity;
@@ -94,13 +97,6 @@ export class SelectElement extends ControlElement {
 
     template = $(() => [
         'slot',
-        'div', {
-            part: 'body',
-            placeholder: this.placeholder,
-            label: this.label, // for default select width
-        }, [
-            'span', { $text: Array.isArray(this.value) ? this.value.join(' , ') : this.value }
-        ],
         'm-icon', { name: 'unfold' },
         'fieldset', [
             'legend', [
