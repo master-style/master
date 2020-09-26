@@ -17,41 +17,18 @@
                         </m-select>
                     </div>
                     <div class="x">
-                        <select name="city-native"
-                                (change)="nativeChange($event)"
-                                ngModel="taipei"
-                                required>
-                            <option *ngFor="let city of ['taichung', 'kaosiung', 'taipei']"
-                                    [value]="city">{{city}}</option>
-                            <option *ngFor="let city of ['taoyuan']"
-                                    [value]="city">{{city}}</option>
-                        </select>
-                    </div>
-                    <div class="x">
                         <m-select name="city-multiple"
                                   label="city"
                                   required
                                   (change)="masterChange($event)"
                                   multiple
-                                  [ngModel]
+                                  [ngModel]="['taipei']"
                                   class="outlined">
                             <m-option *ngFor="let city of ['taichung', 'kaosiung', 'taipei', 'hualien']"
                                       [value]="city">{{city}}</m-option>
                             <m-option *ngFor="let city of ['taoyuan']"
                                       [value]="city">{{city}}</m-option>
                         </m-select>
-                    </div>
-                    <div class="x">
-                        <select name="city-native-multiple"
-                                (change)="nativeChange($event)"
-                                multiple
-                                [ngModel]="['taipei', 'taichung']"
-                                required>
-                            <option *ngFor="let city of ['taichung', 'kaosiung', 'taipei']"
-                                    [value]="city">{{city}}</option>
-                            <option *ngFor="let city of ['taoyuan']"
-                                    [value]="city">{{city}}</option>
-                        </select>
                     </div>
                     <div class="x" *ngFor="let theme of ['dark', 'light']">
                         <m-check type="radio"
@@ -108,7 +85,6 @@
                                  required
                                  class="outlined">
                         </m-input>
-                        <input type="number" ngModel name="test">
                     </div>
                 </div>
             </form>

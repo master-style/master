@@ -117,6 +117,10 @@ slot[name=foot] {
     &::slotted(*) {
         margin-left: calc(var(--px) / 2);
     }
+
+    &::slotted(m-check) {
+        margin-right: calc(var(--px) / -4);
+    }
 }
 
 slot[name=head]::slotted(*) {

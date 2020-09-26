@@ -49,7 +49,14 @@ export class SelectPopupElement extends ToggleableElement {
                         this.select.changeEmitter(this.select.value);
                     }, { passive: true, id: this });
                 }
-            }
+            }, [
+                'm-check', {
+                    slot: 'foot',
+                    class: 'sm',
+                    type: this.select.multiple ? 'checkbox' : 'radio',
+                    checked: eachOption.selected
+                }
+            ]
         ]),
     ]);
 
