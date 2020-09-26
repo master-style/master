@@ -33,7 +33,7 @@ body {
     margin: 0;
     padding: 0;
     letter-spacing: 0.4px;
-    line-height: normal;
+    line-height: 1.25;
     color: var(--f-theme);
 
     @media (any-pointer: coarse) {
@@ -120,7 +120,7 @@ form {
 .remark {
     font-size: var(--f-xxs);
     color: var(--f-fade);
-    line-height: 1.45;
+    line-height: 1.25;
 }
 
 hr {
