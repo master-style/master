@@ -90,7 +90,8 @@
     border-color: var(--b-fadest) !important;
 }
 
-.outlined {
+.outlined,
+.underlined {
     --b-color: var(--b-fadest);
-    --b-color-hover: var(--b-fadest);
+    --b-color-active: var(--b-fade);
 }

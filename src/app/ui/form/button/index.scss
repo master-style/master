@@ -7,7 +7,7 @@
     --size: 3rem;
     --f-size: #{var(--f-sm)};
     --b-color: transparent;
-    --b-color-hover: transparent;
+    --b-color-active: transparent;
     display: inline-flex;
     font-size: var(--f-size);
     color: var(--f-theme);
@@ -120,7 +120,7 @@
 :host([part=close]) {
     --bg-color: var(--b-fade);
     --bg-color-hover: var(--f-fadest);
-    --b-color-hover: transparent;
+    --b-color-active: transparent;
     color: var(--themeFade);
 
     ::slotted(m-icon) {

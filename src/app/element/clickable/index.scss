@@ -63,7 +63,7 @@
     .touch {
         &:hover:not([disabled]) {
             background-color: var(--bg-color-hover);
-            box-shadow: inset 0 0 0 1px var(--b-color-hover);
+            box-shadow: inset 0 0 0 1px var(--b-color-active);
         }
     }
 
@@ -71,7 +71,7 @@
         .touch {
             &:hover:not([disabled]) {
                 background-color: var(--bg-color-hover);
-                border-color: var(--b-color-hover);
+                border-color: var(--b-color-active);
             }
         }
     }

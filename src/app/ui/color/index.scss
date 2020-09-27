@@ -103,7 +103,7 @@
         --bg-light: var(--blueFader);
         --bg-color-hover: var(--blueFader);
         --b-color: var(--blue);
-        --b-color-hover: var(--blue);
+        --b-color-active: var(--blue);
     }
 }
 
@@ -117,7 +117,7 @@
         --bg-light: var(--blueFader);
         --bg-color-hover: var(--blueFader);
         --b-color: var(--b-fadest);
-        --b-color-hover: var(--blueFade);
+        --b-color-active: var(--blueFade);
     }
 }
 
@@ -130,7 +130,7 @@
         --bg-light: var(--greenFader);
         --bg-color-hover: var(--greenFader);
         --b-color: var(--green);
-        --b-color-hover: var(--green);
+        --b-color-active: var(--green);
     }
 }
 
@@ -144,7 +144,7 @@
         --bg-light: var(--greenFader);
         --bg-color-hover: var(--greenFader);
         --b-color: var(--b-fadest);
-        --b-color-hover: var(--greenFade);
+        --b-color-active: var(--greenFade);
     }
 }
 
@@ -157,7 +157,7 @@
         --bg-light: var(--redFader);
         --bg-color-hover: var(--redFader);
         --b-color: var(--red);
-        --b-color-hover: var(--red);
+        --b-color-active: var(--red);
     }
 }
 
@@ -171,7 +171,7 @@
         --bg-light: var(--redFader);
         --bg-color-hover: var(--redFader);
         --b-color: var(--b-fadest);
-        --b-color-hover: var(--redFade);
+        --b-color-active: var(--redFade);
     }
 }
 
@@ -184,7 +184,7 @@
         --bg-light: var(--purpleFader);
         --bg-color-hover: var(--purpleFader);
         --b-color: var(--purple);
-        --b-color-hover: var(--purple);
+        --b-color-active: var(--purple);
     }
 }
 
@@ -198,7 +198,7 @@
         --bg-light: var(--purpleFader);
         --bg-color-hover: var(--purpleFader);
         --b-color: var(--b-fadest);
-        --b-color-hover: var(--purpleFade);
+        --b-color-active: var(--purpleFade);
     }
 }
 
@@ -211,7 +211,7 @@
         --bg-light: var(--yellowFader);
         --bg-color-hover: var(--yellowFader);
         --b-color: var(--yellow);
-        --b-color-hover: var(--yellow);
+        --b-color-active: var(--yellow);
     }
 }
 
@@ -225,7 +225,7 @@
         --bg-light: var(--yellowFader);
         --bg-color-hover: var(--yellowFader);
         --b-color: var(--b-fadest);
-        --b-color-hover: var(--yellowFade);
+        --b-color-active: var(--yellowFade);
     }
 }
 
@@ -237,7 +237,7 @@
     &.outlined {
         --bg-color-hover: var(--themeFader);
         --b-color: var(--b-fader);
-        --b-color-hover: var(--b-fade);
+        --b-color-active: var(--b-fade);
     }
 }
 
@@ -250,7 +250,7 @@
         --bg-light: var(--themeFader);
         --bg-color-hover: var(--themeFade);
         --b-color: var(--b-fadest);
-        --b-color-hover: var(--b-fade);
+        --b-color-active: var(--b-fade);
     }
 }
 

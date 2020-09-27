@@ -75,7 +75,9 @@
 
 @media (any-hover: hover) {
     :host(:not([disabled]):not([readonly]):hover) {
-        --b-color: var(--f-fadest);
+        fieldset {
+            border-color: var(--b-color-active);
+        }
     }
 }
 
@@ -87,7 +89,11 @@
 
 :host(:active:not([readonly]):not([disabled])),
 :host(:focus-within:not([readonly]):not([disabled])) {
-    --b-width: 2px;
+
+    fieldset {
+        --b-width: 2px;
+        border-color: var(--b-color-active);
+    }
 
     ::slotted([part=body]),
     [part=body] {
@@ -209,7 +215,9 @@ fieldset {
     margin: 0;
     display: flex;
     color: var(--theme, var(--f-themeFader));
-    border: 0px solid var(--b-color);
+    border-color: var(--b-color);
+    border-width: 0;
+    border-style: solid;
     padding: 0 calc(var(--px) - .3125rem);
     border-radius: inherit;
     pointer-events: none;
