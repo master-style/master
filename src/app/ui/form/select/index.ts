@@ -6,6 +6,8 @@ import './popup';
 import { OptionElement } from '../option';
 import { SelectPopupElement } from './popup';
 
+let uid = 0;
+
 const NAME = 'select';
 
 @Element({
@@ -20,6 +22,8 @@ export class SelectElement extends ControlElement {
     @Event()
     changeEmitter: EventEmitter;
 
+    uid: number;
+
     popup: SelectPopupElement = $('m-select-popup', {});
 
     readonly options: OptionElement[] = this.popup.options = [];
@@ -30,22 +34,10 @@ export class SelectElement extends ControlElement {
 
     removeOption(option: OptionElement) {
         this.options.splice(this.options.indexOf(option), 1);
-        this.output();
+        this.updateValue();
     }
 
-    updateSelected(option?) {
-        if (option) {
-            if (option.selected && !this.multiple) {
-                this.options.forEach((eachOption: OptionElement) => {
-                    if (option !== eachOption && eachOption.selected) {
-                        eachOption['_selected'] = false;
-                    }
-                });
-            }
-        }
-    }
-
-    output() {
+    updateValue() {
         if (this.multiple) {
             // value and oldValue always not be same
             this.value = this.options
@@ -71,7 +63,7 @@ export class SelectElement extends ControlElement {
                 this.validity = element.validity;
             }
         },
-        // 'div', { part: 'output', $if: this.multiple }, [
+        // 'div', { part: 'updateValue', $if: this.multiple }, [
         //     'div', { class: 'y:xs' }, () => {
         //         if (this.multiple && this.value) {
         //             return this.value.map((eachValue) => [
@@ -139,6 +131,7 @@ export class SelectElement extends ControlElement {
             this.popup.select = this;
             this.popup.open();
         }, { passive: true, id: this });
+        this.uid = uid++;
     }
 
 }

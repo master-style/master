@@ -7,6 +7,7 @@ import css from './popup.scss';
 import { ContentElement } from '@ui/components/content';
 import { SelectElement } from '.';
 import { ItemElement } from '@ui/components/item';
+import { CheckElement } from '../check';
 
 const NAME = 'select-popup';
 
@@ -38,27 +39,35 @@ export class SelectPopupElement extends ToggleableElement {
                 type: 'button',
                 empty: eachOption.empty,
                 selected: eachOption.selected,
-                $text: eachOption.textContent,
                 $data: eachOption,
-                $created: (element: ItemElement, node: TemplateNode) => {
-                    element.on('click', () => {
-                        if (this.select.multiple) {
-                            node.$data.selected = !node.$data.selected;
-                            this.updatePosition();
-                            this.render();
-                        } else {
-                            this.close();
-                            node.$data.selected = true;
-                        }
-                        this.select.changeEmitter(this.select.value);
-                    }, { passive: true, id: this });
-                }
+                $text: eachOption.textContent
             }, [
                 'm-check', {
                     slot: 'foot',
+                    name: '!option' + this.select.uid,
                     class: 'sm',
                     checked: eachOption.selected,
-                    type: this.select.multiple ? 'checkbox' : 'radio'
+                    $data: eachOption,
+                    type: this.select.multiple ? 'checkbox' : 'radio',
+                    $created: (check: CheckElement, node: TemplateNode) => {
+                        check
+                            .on('change', () => {
+                                if (this.select.multiple) {
+                                    node.$data.selected = check.checked;
+                                    this.updatePosition();
+                                    this.render();
+                                } else {
+                                    this.close();
+                                    node.$data.selected = check.checked;
+                                }
+                                this.select.changeEmitter(this.select.value);
+                            }, { passive: true, id: this })
+                            .on('click', () => {
+                                if (!this.select.multiple && check.checked) {
+                                    this.close();
+                                }
+                            }, { passive: true, id: this });
+                    }
                 }
             ]
         ]),

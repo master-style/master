@@ -1,4 +1,5 @@
 import { Element, Attr } from '@element';
+import { SelectElement } from '../select';
 
 import css from './index.scss';
 
@@ -15,7 +16,14 @@ export class OptionElement extends HTMLElement {
 
     @Attr({
         updater(option: OptionElement) {
-            option.parentElement['updateSelected'](option);
+            const select = (option.parentElement as SelectElement);
+            if (!select.multiple) {
+                select.options.forEach((eachOption) => {
+                    if (option !== eachOption)
+                        eachOption['_selected'] = false;
+                });
+            }
+            option.parentElement['updateValue']();
         },
         reflect: false
     })

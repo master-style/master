@@ -18,11 +18,11 @@ export class FormComponent implements OnInit {
     }
 
     masterChange(event) {
-        console.log(event, event.target.value);
+        // console.log(event, event.target.value);
     }
 
     nativeChange(event) {
-        console.log(event, event.target.value);
+        // console.log(event, event.target.value);
     }
 
 }

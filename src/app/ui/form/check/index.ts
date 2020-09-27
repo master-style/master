@@ -103,7 +103,6 @@ export class CheckElement extends ControlElement {
                     });
                 updatingRadioNames.delete(check.name);
             }
-
             check.validate();
         }
     })
