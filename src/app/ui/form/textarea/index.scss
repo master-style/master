@@ -2,6 +2,15 @@
 @import '../common/prompt.shadow';
 
 :host {
+    --f-size: var(--textarea-f-size, var(--f-sm));
+    --b-width: var(--textarea-b-width, 1px);
+    --b-color: var(--textarea-b-color, var(--b-fade));
+    --py: var(--textarea-py, .90625rem);
+    --px: var(--textarea-px, 1rem);
+    --size: var(--textarea-size, 3rem);
+    --label-px: var(--textarea-label-px, .25rem);
+    --label-f-size: var(--textarea-label-f-size, var(--f-xxs));
+    --label-f-color: var(--textarea-label-f-color, var(--f-theme-fader));
     flex-direction: column;
 }
 

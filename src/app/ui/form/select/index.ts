@@ -55,11 +55,7 @@ export class SelectElement extends ControlElement {
                 this.body = element;
                 this.validity = element.validity;
             }
-        }
-    ]);
-
-    template = $(() => [
-        'slot',
+        },
         'div', {
             part: 'body',
             placeholder: this.placeholder,
@@ -74,16 +70,21 @@ export class SelectElement extends ControlElement {
                 class: 'y:xs'
             }, () => this.value.map((eachValue: any) => [
                 'm-chip', {
-                    class: 'x',
+                    class: 'x sm',
                     $text: eachValue
                 }
+            ]).concat([
+                'input', {
+                    class: 'x',
+                    type: 'search',
+                    part: 'search'
+                },
             ])
         ],
-        'input', {
-            $if: this.searchable,
-            type: 'search',
-            part: 'body'
-        },
+    ]);
+
+    template = $(() => [
+        'slot',
         'm-icon', { name: 'unfold' },
         'fieldset', [
             'legend', [

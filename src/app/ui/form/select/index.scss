@@ -2,6 +2,15 @@
 @import '../common/prompt.shadow';
 
 :host {
+    --f-size: var(--select-f-size, var(--f-sm));
+    --b-width: var(--select-b-width, 1px);
+    --b-color: var(--select-b-color, var(--b-fade));
+    --py: var(--select-py, .90625rem);
+    --px: var(--select-px, 1rem);
+    --size: var(--select-size, 3rem);
+    --label-px: var(--select-label-px, .25rem);
+    --label-f-size: var(--select-label-f-size, var(--f-xxs));
+    --label-f-color: var(--select-label-f-color, var(--f-theme-fader));
     cursor: pointer;
 }
 
@@ -43,9 +52,8 @@ m-icon {
 }
 
 m-chip {
-    --bg-color: var(--theme-fader);
-    --b-color: transparent;
-    --size: calc(var(--size))
+    --chip-bg-color: var(--theme-fader);
+    --chip-b-color: transparent;
 }
 
 @media (any-hover: hover) {

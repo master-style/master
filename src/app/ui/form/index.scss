@@ -25,3 +25,28 @@
     cursor: default;
     caret-color: transparent;
 }
+
+input {
+    cursor: text;
+    border: 0;
+    font-weight: 500;
+    text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    color: var(--f-theme);
+    -webkit-appearance: none;
+    white-space: nowrap;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    -webkit-text-fill-color: unset; // fix safari opacity problem
+    user-select: text;
+    -webkit-user-select: text;
+    outline: none;
+    background-color: transparent;
+    -webkit-user-drag: none;
+    touch-action: manipulation;
+    -webkit-touch-action: manipulation;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+}

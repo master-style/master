@@ -9,15 +9,6 @@
    */
 
 :host {
-    --f-size: var(--f-sm);
-    --b-width: 1px;
-    --b-color: var(--b-fade);
-    --py: .90625rem;
-    --px: 1rem;
-    --size: 3rem;
-    --label-px: .25rem;
-    --label-f-size: var(--f-xxs);
-    --label-f-color: var(--f-theme-fader);
     position: relative;
     display: inline-flex;
     align-items: flex-start;
@@ -255,36 +246,12 @@ m-icon,
 
 ::slotted([part=body]),
 [part=body] {
-    -webkit-appearance: none !important;
-    text-overflow: ellipsis;
-    -ms-text-overflow: ellipsis;
-    white-space: nowrap;
-    font-family: inherit;
     z-index: $z-up;
     contain: style;
-    border: 0;
     width: 100%;
     height: 100%;
-    font-weight: 500;
-    font-size: inherit;
-    line-height: inherit;
-    letter-spacing: inherit;
-    color: var(--f-theme);
-    -webkit-text-fill-color: unset; // fix safari opacity problem
-    // transition: color .2s ease;
-    // will-change: color;
-    user-select: text;
-    -webkit-user-select: text;
-    cursor: text;
     padding-left: var(--px);
     padding-right: var(--px);
-    outline: none;
-    background-color: transparent;
-    -webkit-user-drag: none;
-    touch-action: manipulation;
-    -webkit-touch-action: manipulation;
-    -webkit-touch-callout: none;
-    -webkit-tap-highlight-color: transparent;
 }
 
 ::slotted([part=head]),

@@ -1,6 +1,18 @@
 @import '../common/field.shadow';
 @import '../common/prompt.shadow';
 
+:host {
+    --f-size: var(--input-f-size, var(--f-sm));
+    --b-width: var(--input-b-width, 1px);
+    --b-color: var(--input-b-color, var(--b-fade));
+    --py: var(--input-py, .90625rem);
+    --px: var(--input-px, 1rem);
+    --size: var(--input-size, 3rem);
+    --label-px: var(--input-label-px, .25rem);
+    --label-f-size: var(--input-label-f-size, var(--f-xxs));
+    --label-f-color: var(--input-label-f-color, var(--f-theme-fader));
+}
+
 :host(.outlined) {
     ::slotted([part=body]) {
         padding-left: 0;
