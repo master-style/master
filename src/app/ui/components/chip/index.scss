@@ -3,6 +3,9 @@
 
 :host {
     --bg-color: var(--chip-bg-color, transparent);
+    --bg-color-hover: var(--chip-bg-color-hover, var(--bg-color-hover));
+    --b-color-active: var(--chip-b-color-active, var(--b-color-active));
+    --bg-disabled: var(--chip-bg-disabled, var(--bg-disabled));
     --size: var(--chip-size, 2rem);
     --p: var(--chip-p, .25rem);
     --px: var(--chip-px, .625rem);

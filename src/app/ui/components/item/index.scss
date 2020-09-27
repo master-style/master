@@ -3,6 +3,9 @@
 
 :host {
     --bg-color: var(--item-bg-color, transparent);
+    --bg-color-hover: var(--item-bg-color-hover, var(--hover-theme));
+    --b-color-active: var(--item-b-color-active, var(--b-color-active));
+    --bg-disabled: var(--item-bg-disabled);
     --f-size: var(--item-f-size, 1rem);
     --size: var(--item-size, 3rem);
     --py: var(--item-py, .875rem);
@@ -45,12 +48,6 @@
 :host(.indent-lined:not(:last-of-type)) {
     [part=lower] {
         border-bottom: 1px solid var(--b-fadest);
-    }
-}
-
-@media (any-hover: hover) {
-    :host(.touch:hover) {
-        background-color: var(--hover-theme);
     }
 }
 
