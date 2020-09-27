@@ -24,6 +24,7 @@
 
 [part=body] {
     cursor: pointer;
+    font-weight: 500;
 
     &:empty[placeholder]:before {
         content: attr(placeholder);

@@ -82,8 +82,11 @@ export class SelectPopupElement extends ToggleableElement {
     onOpened() {
         document.documentElement.css('overflow', 'hidden');
         document.body
-            .on('click', async (clickEvent: Event) => {
-                if (clickEvent.target === this) return;
+            .on('click', async (clickEvent: any) => {
+                if (
+                    clickEvent.target === this ||
+                    this.select.contains(clickEvent.target)
+                ) return;
                 if (isClickedOutside(clickEvent, this)) {
                     this.close();
                 }
@@ -105,6 +108,7 @@ export class SelectPopupElement extends ToggleableElement {
         let top = 0;
         let left = 0;
         let diffTop = 0;
+        let origin = 0;
 
         const
             rect = this.getBoundingClientRect(),
@@ -144,6 +148,7 @@ export class SelectPopupElement extends ToggleableElement {
 
             top = this.#offsetTop;
             left = selectRect.left;
+            origin = selectRect.top - this.#offsetTop + 3 * diffTop;
         }
 
         // exceed Y
@@ -167,7 +172,7 @@ export class SelectPopupElement extends ToggleableElement {
             top,
             left,
             minWidth: selectRect.width,
-            transformOrigin: '0 ' + (selectRect.top - this.#offsetTop + 3 * diffTop + exceedY) + 'px'
+            transformOrigin: '0 ' + (origin + exceedY) + 'px'
         });
     }
 
