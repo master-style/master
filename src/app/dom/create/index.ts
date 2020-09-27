@@ -147,11 +147,6 @@ class MasterTemplate {
                                 if (removed) removed(eachOldElement);
                             }
                         } else if (whether) {
-                            if (eachOldElement) {
-                                eachOldElement.remove();
-                                const removed = eachNode.$removed;
-                                if (removed) removed(eachOldElement);
-                            }
                             let element;
                             if (eachNode.$namespace) {
                                 element = document.createElementNS(eachNode.$namespace, eachNode.tag);
@@ -161,9 +156,9 @@ class MasterTemplate {
                             eachNode.element = element;
                             if (eachOldElement) {
                                 eachOldElement.before(element);
-                                eachOldNode = (eachOldElement.remove() as undefined);
+                                eachOldElement.remove();
                                 const removed = eachNode.$removed;
-                                if (removed) removed(eachOldNode.element);
+                                if (removed) removed(eachOldElement);
                             }
                             const attr = eachNode.attr;
                             if (attr) {

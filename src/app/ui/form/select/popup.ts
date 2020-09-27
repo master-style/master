@@ -94,6 +94,9 @@ export class SelectPopupElement extends ToggleableElement {
     }
 
     onClose() {
+        if (this.select.search) {
+            this.select.search.value = this.select.keyword = '';
+        }
         this.select.focus();
         document.body.off({ id: this });
         document.documentElement.css('overflow', '');

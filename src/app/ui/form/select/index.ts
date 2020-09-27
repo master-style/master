@@ -17,7 +17,7 @@ const NAME = 'select';
 export class SelectElement extends ControlElement {
 
     @Attr({ key: 'tabindex' })
-    tabIndex = -1;
+    tabIndex = 0;
 
     @Event()
     changeEmitter: EventEmitter;
@@ -25,9 +25,9 @@ export class SelectElement extends ControlElement {
     uid: number;
 
     popup: SelectPopupElement = $('m-select-popup', {});
-    search: HTMLElement;
+    search: HTMLInputElement;
 
-    #searchValue: string;
+    keyword: string;
 
     readonly options: OptionElement[] = this.popup.options = [];
 
@@ -86,13 +86,14 @@ export class SelectElement extends ControlElement {
                     part: 'search',
                     type: 'search',
                     placeholder: this.placeholder,
-                    value: this.#searchValue,
+                    value: this.keyword,
                     $created: (element: HTMLInputElement) =>
                         this.search = element
                             .on('input', (event: any) => {
-                                this.#searchValue = event.target.value;
-                                this.search.css('width', this.#searchValue.length + 'rem');
-                            }, { passive: true, id: NAME })
+                                this.keyword = event.target.value;
+                                this.search.css('width', this.keyword.length + 'rem');
+                            }, { passive: true, id: NAME }),
+                    $removed: () => this.search = null
                 },
             ])
         ],
