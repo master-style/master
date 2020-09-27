@@ -59,6 +59,7 @@ export function Element(options: ElementOptions) {
                 }
             }
             if (options.shadow && !this.shadowRoot) {
+                // https://www.npmjs.com/package/construct-style-sheets-polyfill
                 const shadowRoot = this.attachShadow({ mode: 'open' });
                 if (options.css && shadowRoot['adoptedStyleSheets']) {
                     const styleSheet = new CSSStyleSheet();

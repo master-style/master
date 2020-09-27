@@ -74,12 +74,16 @@ export class SelectElement extends ControlElement {
                 class: 'y:xs'
             }, () => this.value.map((eachValue: any) => [
                 'm-chip', {
-                    class: 'x sm theme+',
-                    style: '--b-color: transparent',
+                    class: 'x',
                     $text: eachValue
                 }
             ])
         ],
+        'input', {
+            $if: this.searchable,
+            type: 'search',
+            part: 'body'
+        },
         'm-icon', { name: 'unfold' },
         'fieldset', [
             'legend', [

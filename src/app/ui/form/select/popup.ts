@@ -102,37 +102,49 @@ export class SelectPopupElement extends ToggleableElement {
     }
 
     private updatePosition() {
-        const itemNodes = this.template.nodes[0].children;
-        let originItemNode: TemplateNode;
+        let top = 0;
+        let left = 0;
+        let diffTop = 0;
 
-        if (this.select.multiple) {
-            // value and oldValue always not be same
-            originItemNode = itemNodes
-                .filter((eachItemNode) => eachItemNode.$data.selected)[0];
-        } else {
-            originItemNode = itemNodes
-                .find((eachItemNode) => eachItemNode.$data.selected);
-        }
-
-        let originItemRect = { top: 0, height: 0 };
-        let originItem: ItemElement;
-
-        if (originItemNode && !originItemNode.$data.hidden) {
-            originItem = originItemNode.element;
-            this.content.to(originItem, 0);
-            originItemRect = originItem.getBoundingClientRect();
-        }
         const
             rect = this.getBoundingClientRect(),
             selectRect = this.select.getBoundingClientRect(),
             windowHeight = window.innerHeight,
-            windowWidth = window.innerWidth,
-            diffTop = (originItem ? selectRect.height / 2 : 0) - originItemRect.height / 2,
-            offsetTop = selectRect.top - originItemRect.top + diffTop;
-        if (!originItem) this.#offsetTop = 0;
-        this.#offsetTop += offsetTop;
-        let top = this.#offsetTop;
-        let left = selectRect.left;
+            windowWidth = window.innerWidth;
+
+        if (this.select.multiple || this.select.searchable) {
+            top = selectRect.top + selectRect.height;
+            left = selectRect.left;
+        } else {
+            const itemNodes = this.template.nodes[0].children;
+            let originItemNode: TemplateNode;
+
+            if (this.select.multiple) {
+                // value and oldValue always not be same
+                originItemNode = itemNodes
+                    .filter((eachItemNode) => eachItemNode.$data.selected)[0];
+            } else {
+                originItemNode = itemNodes
+                    .find((eachItemNode) => eachItemNode.$data.selected);
+            }
+
+            let originItemRect = { top: 0, height: 0 };
+            let originItem: ItemElement;
+
+            if (originItemNode && !originItemNode.$data.hidden) {
+                originItem = originItemNode.element;
+                this.content.to(originItem, 0);
+                originItemRect = originItem.getBoundingClientRect();
+            }
+            diffTop = (originItem ? selectRect.height / 2 : 0) - originItemRect.height / 2;
+            const
+                offsetTop = selectRect.top - originItemRect.top + diffTop;
+            if (!originItem) this.#offsetTop = 0;
+            this.#offsetTop += offsetTop;
+
+            top = this.#offsetTop;
+            left = selectRect.left;
+        }
 
         // exceed Y
         let exceedY = 0;

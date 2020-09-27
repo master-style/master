@@ -42,6 +42,12 @@ m-icon {
     margin-left: calc(var(--px) / -2)
 }
 
+m-chip {
+    --bg-color: var(--themeFader);
+    --b-color: transparent;
+    --size: calc(var(--size))
+}
+
 @media (any-hover: hover) {
     :host(:not([disabled]):not([readonly]):hover) {
         m-icon {
