@@ -180,8 +180,8 @@
 }
 
 [part=close] {
-    --bg-color: transparent;
-    --bg-color-hover: transparent;
+    --button-bg-color: transparent;
+    --button-bg-color-hover: transparent;
     backdrop-filter: blur(35px);
     color: var(--f-fader);
     -webkit-backdrop-filter: blur(35px);

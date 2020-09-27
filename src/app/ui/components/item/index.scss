@@ -3,7 +3,7 @@
 
 :host {
     --bg-color: var(--item-bg-color, transparent);
-    --bg-color-hover: var(--item-bg-color-hover, var(--hover-theme));
+    --bg-color-hover: var(--item-bg-color-hover, var(--bg-color-hover));
     --b-color-active: var(--item-b-color-active, var(--b-color-active));
     --bg-disabled: var(--item-bg-disabled);
     --f-size: var(--item-f-size, 1rem);
