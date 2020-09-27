@@ -48,14 +48,6 @@ export class SelectElement extends ControlElement {
         }
     }
 
-    output() {
-        this.body.value = (Array.isArray(this.value)
-            ? this.value.join(' , ')
-            : this.value
-        ) || '';
-        this.template.render(this.shadowRoot);
-    }
-
     controlTemplate = $(() => [
         'input', {
             part: 'output',
@@ -78,19 +70,15 @@ export class SelectElement extends ControlElement {
                 $text: this.value
             },
             'div', {
-                $if: this.multiple && Array.isArray(this.value),
+                $if: this.multiple && Array.isArray(this.value) && this.value.length,
                 class: 'y:xs'
-            }, () => {
-                console.log(this.value);
-                // console.log(this.multiple, Array.isArray(this.value))
-                return this.value.map((eachValue) => [
-                    'm-chip', {
-                        class: 'x sm theme+',
-                        style: '--b-color: transparent',
-                        $text: eachValue
-                    }
-                ]);
-            }
+            }, () => this.value.map((eachValue: any) => [
+                'm-chip', {
+                    class: 'x sm theme+',
+                    style: '--b-color: transparent',
+                    $text: eachValue
+                }
+            ])
         ],
         'm-icon', { name: 'unfold' },
         'fieldset', [
@@ -137,7 +125,7 @@ export class SelectElement extends ControlElement {
                 }
             });
             ControlElement.valueUpdater(select, value);
-            select.output();
+            select.body.value = value;
         },
         reflect: false
     })
