@@ -120,43 +120,42 @@ export class SelectPopupElement extends ToggleableElement {
         if (originItemNode && !originItemNode.$data.hidden) {
             originItem = originItemNode.element;
             this.content.to(originItem, 0);
-            console.log(this.content, originItem);
             originItemRect = originItem.getBoundingClientRect();
         }
         const
+            rect = this.getBoundingClientRect(),
             selectRect = this.select.getBoundingClientRect(),
-            height = this.offsetHeight,
-            width = this.offsetWidth,
-            windowH = window.innerHeight,
-            windowW = window.innerWidth,
+            windowHeight = window.innerHeight,
+            windowWidth = window.innerWidth,
             diffTop = (originItem ? selectRect.height / 2 : 0) - originItemRect.height / 2,
             offsetTop = selectRect.top - originItemRect.top + diffTop;
         if (!originItem) this.#offsetTop = 0;
         this.#offsetTop += offsetTop;
         let top = this.#offsetTop;
         let left = selectRect.left;
+
         // exceed Y
         let exceedY = 0;
         if (top <= 5) {
             exceedY = top - 5;
             top = 5;
-        } else if (top + height >= windowH - 5) {
-            exceedY = top + height - windowH + 5;
-            top = windowH - height - 5;
+        } else if (top + rect.height >= windowHeight - 5) {
+            exceedY = top + rect.height - windowHeight + 5;
+            top = windowHeight - rect.height - 5;
         }
 
         // exceed X
         if (left <= 5) {
             left = 5;
-        } else if (left + width >= windowW - 5) {
-            left = windowW - width - 5;
+        } else if (left + rect.width >= windowHeight - 5) {
+            left = windowHeight - rect.width - 5;
         }
 
         this.css({
             top,
             left,
             minWidth: selectRect.width,
-            transformOrigin: '0 ' + (selectRect.top - this.#offsetTop + 3 * diffTop) + 'px'
+            transformOrigin: '0 ' + (selectRect.top - this.#offsetTop + 3 * diffTop + exceedY) + 'px'
         });
     }
 

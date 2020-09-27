@@ -119,6 +119,9 @@ export class SelectElement extends ControlElement {
     @Attr({ render: false })
     expanded: boolean;
 
+    @Attr()
+    searchable: boolean;
+
     @Attr({
         updater(select: SelectElement, value: any) {
             const isArray = Array.isArray(value);
