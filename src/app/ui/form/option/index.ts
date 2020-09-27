@@ -23,7 +23,7 @@ export class OptionElement extends HTMLElement {
                         eachOption.selected = false;
                 });
             }
-            option.parentElement['updateValue']();
+            select.composeValue();
         },
         reflect: false
     })
@@ -32,7 +32,7 @@ export class OptionElement extends HTMLElement {
     @Attr({
         updater(option: OptionElement, value) {
             const select = (option.parentElement as SelectElement);
-            select.updateValue();
+            select.composeValue();
             option.empty = value === null || value === undefined || value === '';
         },
         reflect: false

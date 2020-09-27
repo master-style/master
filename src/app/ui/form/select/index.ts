@@ -36,25 +36,24 @@ export class SelectElement extends ControlElement {
         this.options.splice(this.options.indexOf(option), 1);
     }
 
-    updateValue() {
+    composeValue() {
         if (this.multiple) {
             // value and oldValue always not be same
-            this['_value'] = this.options
+            this.value = this.options
                 .filter((eachOption: OptionElement) => eachOption.selected)
                 .map((eachOption: OptionElement) => eachOption.value);
         } else {
-            this['_value'] = this.options
+            this.value = this.options
                 .find((eachOption: OptionElement) => eachOption.selected)?.value;
         }
-        this.output();
     }
 
     output() {
-        ControlElement.valueUpdater(this, this.value);
         this.body.value = (Array.isArray(this.value)
             ? this.value.join(' , ')
             : this.value
         ) || '';
+        this.template.render(this.shadowRoot);
     }
 
     controlTemplate = $(() => [
@@ -79,10 +78,10 @@ export class SelectElement extends ControlElement {
                 $text: this.value
             },
             'div', {
-                test: '乾',
                 $if: this.multiple && Array.isArray(this.value),
                 class: 'y:xs'
             }, () => {
+                console.log(this.value);
                 // console.log(this.multiple, Array.isArray(this.value))
                 return this.value.map((eachValue) => [
                     'm-chip', {
@@ -137,6 +136,7 @@ export class SelectElement extends ControlElement {
                     eachOption.selected = true;
                 }
             });
+            ControlElement.valueUpdater(select, value);
             select.output();
         },
         reflect: false
