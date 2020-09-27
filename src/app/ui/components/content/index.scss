@@ -1,11 +1,11 @@
 @import '../../variables';
 
 :host {
-    --offset-top: 0px;
-    --offset-bottom: 0px;
-    --offset-left: 0px;
-    --offset-right: 0px;
-    --bar-p: 4px;
+    --content-offset-top: 0px;
+    --content-offset-bottom: 0px;
+    --content-offset-left: 0px;
+    --content-offset-right: 0px;
+    --content-bar-p: 4px;
     position: relative;
     contain: style;
     width: 100%;
@@ -103,7 +103,7 @@ slot {
     box-sizing: border-box;
     contain: style;
     margin: auto;
-    padding: var(--offset-top) var(--offset-right) var(--offset-bottom) var(--offset-left)
+    padding: var(--content-offset-top) var(--content-offset-right) var(--content-offset-bottom) var(--content-offset-left)
 }
 
 m-bar {
@@ -114,7 +114,7 @@ m-bar {
     box-sizing: border-box;
     contain: content;
     opacity: 1;
-    padding: var(--bar-p);
+    padding: var(--content-bar-p);
 
     &[hidden] {
         opacity: 0;
@@ -142,8 +142,8 @@ m-thumb {
 
 m-bar[part=x] {
     bottom: 0;
-    left: var(--offset-left);
-    width: calc(100% - var(--offset-left) - var(--offset-right));
+    left: var(--content-offset-left);
+    width: calc(100% - var(--content-offset-left) - var(--content-offset-right));
 
     m-thumb {
         height: 4px;
@@ -151,9 +151,9 @@ m-bar[part=x] {
 }
 
 m-bar[part=y] {
-    top: var(--offset-top);
+    top: var(--content-offset-top);
     right: 0;
-    height: calc(100% - var(--offset-top) - var(--offset-bottom));
+    height: calc(100% - var(--content-offset-top) - var(--content-offset-bottom));
 
     m-thumb {
         width: 4px;
