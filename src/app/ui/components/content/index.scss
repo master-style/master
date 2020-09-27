@@ -16,6 +16,7 @@
     -webkit-touch-callout: none;
     -ms-overflow-style: none;
     user-select: none;
+    box-sizing: border-box;
 }
 
 :host([scroll-y]),

@@ -95,7 +95,6 @@ class MasterTemplate {
                         const eachOldElement = eachOldNode?.element;
                         const hasIf = eachNode.hasOwnProperty('$if');
                         const whether = hasIf && eachNode.$if || !hasIf;
-                        let skipChildren = false;
                         if (eachOldElement && eachNode.tag === eachOldNode.tag) {
                             if (!eachNodes[i + 1]) {
                                 eachOldNodes.splice(i + 1)
@@ -134,14 +133,13 @@ class MasterTemplate {
                                     eachNode.$html !== eachOldNode.$html
                                 ) {
                                     element.innerHTML = eachNode.$html;
-                                    skipChildren = true;
                                 } else if (
                                     eachNode.$text !== undefined &&
                                     eachNode.$text !== eachOldNode.$text
                                 ) {
                                     element.textContent = eachNode.$text;
                                 }
-                                if (!skipChildren && eachNode.children) {
+                                if (eachNode.children) {
                                     renderNodes(eachNode.children, eachOldNode.children, element);
                                 }
                                 const updated = eachNode.$updated;
@@ -182,11 +180,10 @@ class MasterTemplate {
                             }
                             if (eachNode.$html !== undefined) {
                                 element.innerHTML = eachNode.$html;
-                                skipChildren = true;
                             } else if (eachNode.$text !== undefined) {
                                 element.textContent = eachNode.$text;
                             }
-                            if (!skipChildren && eachNode.children) {
+                            if (eachNode.children) {
                                 renderNodes(eachNode.children, [], element);
                             }
 
@@ -236,10 +233,8 @@ class MasterTemplate {
                     if (created) created(element, eachNode);
                     const updated = eachNode.$updated;
                     if (updated) updated(element, eachNode);
-                    let skipChildren = false;
                     if (eachNode.$html !== undefined) {
                         element.innerHTML = eachNode.$html;
-                        skipChildren = true;
                     } else if (eachNode.$text !== undefined) {
                         element.textContent = eachNode.$text;
                     }
@@ -251,7 +246,7 @@ class MasterTemplate {
                     if (css) {
                         element.css(css);
                     }
-                    if (!skipChildren && eachNode.children) {
+                    if (eachNode.children) {
                         create(eachNode.children, element);
                     }
                     eachFragment.appendChild(element);

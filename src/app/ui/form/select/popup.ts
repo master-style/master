@@ -31,6 +31,7 @@ export class SelectPopupElement extends ToggleableElement {
     template = $(() => [
         'm-content', {
             'scroll-y': true,
+            guide: true,
             class: 'bg:popup',
             $created: (element: ContentElement) => this.content = element
         }, () => this.options.map((eachOption: OptionElement) => [

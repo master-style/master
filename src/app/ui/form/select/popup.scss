@@ -7,7 +7,6 @@
     position: fixed;
     top: 0;
     margin: auto;
-    padding: .375rem 0;
     z-index: $z-overlay;
     border-radius: $xs;
     will-change: transform, opacity;
@@ -42,6 +41,12 @@
 
 :host([changing]) {
     will-change: transform, opacity;
+}
+
+m-content {
+    max-height: inherit;
+    --offset-top: .375rem;
+    --offset-bottom: .375rem;
 }
 
 m-item {
