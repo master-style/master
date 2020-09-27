@@ -14,6 +14,10 @@
     cursor: pointer;
 }
 
+[part=search] {
+    min-width: 3rem;
+}
+
 [part=body] {
     cursor: pointer;
     overflow: hidden;
@@ -32,6 +36,10 @@
         content: attr(label);
         color: transparent;
     }
+}
+
+[contenteditable]:focus {
+    outline: none;
 }
 
 :host(.underlined) {

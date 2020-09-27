@@ -16,9 +16,6 @@ const NAME = 'select';
 })
 export class SelectElement extends ControlElement {
 
-    @Attr({ key: 'tabindex' })
-    tabIndex = -1;
-
     @Event()
     changeEmitter: EventEmitter;
 
@@ -55,7 +52,11 @@ export class SelectElement extends ControlElement {
                 this.body = element;
                 this.validity = element.validity;
             }
-        },
+        }
+    ]);
+
+    template = $(() => [
+        'slot',
         'div', {
             part: 'body',
             placeholder: this.placeholder,
@@ -74,17 +75,13 @@ export class SelectElement extends ControlElement {
                     $text: eachValue
                 }
             ]).concat([
-                'input', {
+                'div', {
                     class: 'x',
-                    type: 'search',
-                    part: 'search'
+                    part: 'search',
+                    contenteditable: true
                 },
             ])
         ],
-    ]);
-
-    template = $(() => [
-        'slot',
         'm-icon', { name: 'unfold' },
         'fieldset', [
             'legend', [
