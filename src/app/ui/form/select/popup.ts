@@ -147,8 +147,8 @@ export class SelectPopupElement extends ToggleableElement {
         // exceed X
         if (left <= 5) {
             left = 5;
-        } else if (left + rect.width >= windowHeight - 5) {
-            left = windowHeight - rect.width - 5;
+        } else if (left + rect.width >= windowWidth - 5) {
+            left = windowWidth - rect.width - 5;
         }
 
         this.css({

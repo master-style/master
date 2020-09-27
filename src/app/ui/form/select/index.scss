@@ -1,15 +1,38 @@
 @import '../common/field.shadow';
 @import '../common/prompt.shadow';
 
-:host,
-::slotted([part=body]) {
+:host {
     cursor: pointer;
+}
+
+[part=body] {
+    cursor: pointer;
+    overflow: hidden;
+    word-wrap: normal;
+    text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+
+    &:empty[placeholder]:before {
+        content: attr(placeholder);
+        color: var(--f-fadest);
+    }
+
+    &:empty[label]:not([placeholder]):before {
+        content: attr(label);
+        color: transparent;
+    }
 }
 
 :host(.underlined) {
     m-icon {
         margin-left: .375rem;
     }
+}
+
+::slotted([part=output]) {
+    display: none;
 }
 
 m-icon {

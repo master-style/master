@@ -59,36 +59,40 @@ export class SelectElement extends ControlElement {
 
     controlTemplate = $(() => [
         'input', {
-            part: 'body',
-            name: this.name,
-            placeholder: this.placeholder,
-            disabled: this.disabled,
-            required: this.required,
-            readonly: true,
+            part: 'output',
             $created: (element: HTMLInputElement) => {
                 this.body = element;
                 this.validity = element.validity;
             }
-        },
-        // 'div', { part: 'updateValue', $if: this.multiple }, [
-        //     'div', { class: 'y:xs' }, () => {
-        //         if (this.multiple && this.value) {
-        //             return this.value.map((eachValue) => [
-        //                 'm-chip', {
-        //                     class: 'x sm theme+',
-        //                     style: '--b-color: transparent',
-        //                     $text: eachValue
-        //                 },
-        //             ]);
-        //         } else {
-        //             return [];
-        //         }
-        //     }
-        // ]
+        }
     ]);
 
     template = $(() => [
         'slot',
+        'div', {
+            part: 'body',
+            placeholder: this.placeholder,
+            label: this.label, // for default select width
+        }, [
+            'span', {
+                $if: !this.multiple || !Array.isArray(this.value),
+                $text: this.value
+            },
+            'div', {
+                test: '乾',
+                $if: this.multiple && Array.isArray(this.value),
+                class: 'y:xs'
+            }, () => {
+                // console.log(this.multiple, Array.isArray(this.value))
+                return this.value.map((eachValue) => [
+                    'm-chip', {
+                        class: 'x sm theme+',
+                        style: '--b-color: transparent',
+                        $text: eachValue
+                    }
+                ]);
+            }
+        ],
         'm-icon', { name: 'unfold' },
         'fieldset', [
             'legend', [

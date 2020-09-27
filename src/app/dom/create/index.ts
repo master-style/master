@@ -53,22 +53,26 @@ class MasterTemplate {
                 if (tokenType === 'string') {
                     eachNode = { tag: token };
                     eachNodes.push(eachNode);
-                } else if (Array.isArray(token)) {
-                    generate(token, eachNode.children = []);
-                } else if (tokenType === 'function') {
-                    const children = token().reduce((acc, eachToken) => {
-                        return acc.concat(eachToken);
-                    }, []);
-                    generate(children, eachNode.children = []);
-                } else if (tokenType === 'object') {
-                    const attr = token;
-                    eachNode.attr = {};
-                    for (const attrKey in attr) {
-                        const eachAttrValue = attr[attrKey];
-                        if (attrKey[0] !== '$') {
-                            eachNode.attr[attrKey] = eachAttrValue;
-                        } else {
-                            eachNode[attrKey] = eachAttrValue;
+                } else {
+                    const hasIf = eachNode.hasOwnProperty('$if');
+                    const whether = hasIf && eachNode.$if || !hasIf;
+                    if (Array.isArray(token) && whether) {
+                        generate(token, eachNode.children = []);
+                    } else if (tokenType === 'function' && whether) {
+                        const children = token().reduce((acc, eachToken) => {
+                            return acc.concat(eachToken);
+                        }, []);
+                        generate(children, eachNode.children = []);
+                    } else if (tokenType === 'object') {
+                        const attr = token;
+                        eachNode.attr = {};
+                        for (const attrKey in attr) {
+                            const eachAttrValue = attr[attrKey];
+                            if (attrKey[0] !== '$') {
+                                eachNode.attr[attrKey] = eachAttrValue;
+                            } else {
+                                eachNode[attrKey] = eachAttrValue;
+                            }
                         }
                     }
                 }
@@ -78,6 +82,7 @@ class MasterTemplate {
         if (this.nodes && this.container === container) {
             (function renderNodes(eachNodes, eachOldNodes, parent) {
                 if (!eachNodes.length && eachOldNodes.length) {
+
                     eachOldNodes
                         .forEach((eachNode) => {
                             const element = eachNode.element;
