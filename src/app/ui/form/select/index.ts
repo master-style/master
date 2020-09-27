@@ -116,7 +116,6 @@ export class SelectElement extends ControlElement {
         updater(select: SelectElement, value: any) {
             ControlElement.valueUpdater(select, value);
             select.body.value = value;
-            console.log(select.options, value);
         },
         reflect: false
     })

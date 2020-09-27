@@ -2,7 +2,8 @@ import { Element, Attr, ControlElement } from '@element';
 import css from './index.scss';
 
 const connectedChecks = new Set();
-const updatingRadioNames = new Set();
+
+const nameMap = {};
 
 const NAME = 'check';
 
@@ -43,7 +44,20 @@ export class CheckElement extends ControlElement {
     @Attr({ observe: false, render: false })
     role: string;
 
-    @Attr()
+    @Attr({
+        updater(check: CheckElement, value, oldValue) {
+            if (value) {
+                let checks = nameMap[value];
+                if (!checks) checks = nameMap[value] = [];
+                checks.push(check);
+            }
+            if (oldValue) {
+                let oldChecks = nameMap[oldValue] || [];
+                if (!oldChecks) oldChecks = nameMap[oldValue] = [];
+                oldChecks.splice(oldChecks.indexOf(check), 1);
+            }
+        }
+    })
     name: string;
 
     @Attr({
@@ -87,26 +101,19 @@ export class CheckElement extends ControlElement {
             check.body.checked = value;
             check.toggleAttribute('aria-checked', !!value);
 
-            if (updatingRadioNames.has(check.name)) return;
-
-            if (check.type === 'radio' && check.name) {
-                updatingRadioNames.add(check.name);
-                connectedChecks
+            if (check.type === 'radio' && check.name && value) {
+                nameMap[check.name]
                     .forEach((eachCheck: CheckElement) => {
-                        if (
-                            eachCheck !== check
-                            && eachCheck.name === check.name
-                            && eachCheck.checked !== false
-                        ) {
+                        if (eachCheck !== check) {
                             eachCheck.checked = false;
                         }
                     });
-                updatingRadioNames.delete(check.name);
             }
+
             check.validate();
         }
     })
-    checked: boolean;
+    checked: boolean = false;
 
     @Attr({
         reflect: false,
