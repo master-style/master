@@ -34,20 +34,25 @@ export class SelectElement extends ControlElement {
 
     removeOption(option: OptionElement) {
         this.options.splice(this.options.indexOf(option), 1);
-        this.updateValue();
     }
 
     updateValue() {
         if (this.multiple) {
             // value and oldValue always not be same
-            this.value = this.options
+            this['_value'] = this.options
                 .filter((eachOption: OptionElement) => eachOption.selected)
                 .map((eachOption: OptionElement) => eachOption.value);
         } else {
-            this.value = this.options
+            this['_value'] = this.options
                 .find((eachOption: OptionElement) => eachOption.selected)?.value;
         }
-        this.body.value = Array.isArray(this.value) ? this.value.join(' , ') : this.value;
+        this.output();
+    }
+
+    output() {
+        this.body.value = Array.isArray(this.value)
+            ? this.value.join(' , ')
+            : this.value;
     }
 
     controlTemplate = $(() => [
@@ -114,8 +119,17 @@ export class SelectElement extends ControlElement {
 
     @Attr({
         updater(select: SelectElement, value: any) {
+            const isArray = Array.isArray(value);
+            select.options.forEach((eachOption) => {
+                if (
+                    isArray && value.indexOf(eachOption.value) !== -1
+                    || value === eachOption.value
+                ) {
+                    eachOption.selected = true;
+                }
+            });
             ControlElement.valueUpdater(select, value);
-            select.body.value = value;
+            select.output();
         },
         reflect: false
     })

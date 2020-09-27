@@ -31,7 +31,8 @@ export class OptionElement extends HTMLElement {
 
     @Attr({
         updater(option: OptionElement, value) {
-            option.parentElement['updateValue']();
+            const select = (option.parentElement as SelectElement);
+            select.updateValue();
             option.empty = value === null || value === undefined || value === '';
         },
         reflect: false
