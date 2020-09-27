@@ -40,7 +40,7 @@ export class SelectPopupElement extends ToggleableElement {
                 empty: eachOption.empty,
                 selected: eachOption.selected,
                 $data: eachOption,
-                $text: eachOption.textContent
+                $html: eachOption.innerHTML
             }, [
                 'm-check', {
                     slot: 'foot',
@@ -100,7 +100,7 @@ export class SelectPopupElement extends ToggleableElement {
         this.remove();
     }
 
-    updatePosition() {
+    private updatePosition() {
         const itemNodes = this.template.nodes[0].children;
         let originItemNode: TemplateNode;
 
