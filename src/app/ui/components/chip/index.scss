@@ -1,6 +1,17 @@
 @import '../../variables';
 @import '../../../element/clickable';
 
+:host {
+    --size: var(--chip-size, 2rem);
+    --p: var(--chip-p, .25rem);
+    --px: var(--chip-px, .625rem);
+    --f-size: var(--chip-f-size, .8125rem);
+    --mx: calc(var(--p) - var(--px));
+    display: inline-flex;
+    border-radius: $xs;
+
+}
+
 [part=root] {
     padding: var(--p) var(--px);
     white-space: nowrap;
@@ -17,24 +28,13 @@
     align-items: center;
 }
 
-:host {
-    --size: 2rem;
-    --p: .25rem;
-    --px: .625rem;
-    --f-size: 0.8125rem;
-    --mx: calc(var(--p) - var(--px));
-    display: inline-flex;
-    border-radius: $xs;
-
-}
-
 :host(.rounded) {
 
     ::slotted([part=head]),
     ::slotted([part=foot]) {
         border-radius: 50%;
     }
-    
+
     ::slotted([part=close]) {
         border-radius: 50%;
     }

@@ -4,9 +4,9 @@
 @import '../../../element/toggleable';
 
 :host {
-    --p: #{$md};
-    --r: #{$sm};
-    --max-width: var(--wrap-xs);
+    --p: var(--modal-p, #{$md});
+    --r: var(--modal-r, #{$sm});
+    --max-width: var(--modal-max-width, --wrap-xs);
     position: fixed;
     z-index: $z-overlay;
     display: flex;

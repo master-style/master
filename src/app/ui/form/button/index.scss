@@ -2,12 +2,12 @@
 @import '../../../element/clickable';
 
 :host {
-    --px: #{$md};
-    --py: 0;
-    --size: 3rem;
-    --f-size: #{var(--f-sm)};
-    --b-color: transparent;
-    --b-color-active: transparent;
+    --px: var(--button-px, #{$md});
+    --py: var(--button-py, 0rem);
+    --size: var(--button-size, 3rem);
+    --f-size: var(--button-f-size, #{var(--f-sm)});
+    --b-color: var(--button-b-color, transparent);
+    --b-color-active: var(--button-b-color-active, transparent);
     display: inline-flex;
     font-size: var(--f-size);
     color: var(--f-theme);

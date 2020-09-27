@@ -17,11 +17,11 @@
 }
 
 :host {
-    --f-size: 1rem;
-    --size: 3rem;
-    --py: .875rem;
-    --px: 1.25rem;
-    --icon-size: 2rem;
+    --f-size: var(--item-f-size, 1rem);
+    --size: var(--item-size, 3rem);
+    --py: var(--item-py, .875rem);
+    --px: var(--item-px, 1.25rem);
+    --icon-size: var(--item-icon-size, 2rem);
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -31,7 +31,7 @@
 
 :host([type=button]) {
     ::slotted(m-check) {
-        --position: static;
+        --chip-position: static;
     }
 }
 

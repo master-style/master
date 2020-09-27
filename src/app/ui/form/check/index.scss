@@ -6,8 +6,8 @@
 }
 
 :host {
-    --position: relative;
-    --size: 1.5rem;
+    --position: var(--chip-position, relative);
+    --size: var(--chip-size, 1.5rem);
     position: var(--position);
     display: inline-flex;
     align-items: center;
@@ -46,6 +46,7 @@
 
 :host([type=radio][checked]) {
     pointer-events: none;
+
     [part=check] {
         background-color: transparent;
     }

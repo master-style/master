@@ -2,10 +2,10 @@
 @import '../../../element/clickable';
 
 :host {
-    --bg-color: var(--bg-object);
-    --bg-disabled: var(--bg-color);
-    --foot-px: 1rem;
-    --foot-py: .8rem;
+    --bg-color: var(--card-bg-color, var(--bg-object));
+    --bg-disabled: var(--card-bg-disabled, var(--bg-color));
+    --foot-px: var(--card-foot-px, 1rem);
+    --foot-py: var(--card-foot-py, .8rem);
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
