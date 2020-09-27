@@ -143,7 +143,7 @@ export class SelectElement extends ControlElement {
         this.on('click', async () => {
             if (this.disabled) return;
             this.popup.select = this;
-            this.popup.open();
+            document.body.append(this.popup);
         }, { passive: true, id: this });
         this.uid = uid++;
     }

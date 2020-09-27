@@ -73,7 +73,7 @@ export class ContentElement extends HTMLElement {
     duration: number = 300;
 
     @Attr()
-    center: boolean;
+    center: boolean = true;
 
     @Attr({ reflect: false })
     guide: boolean;
@@ -146,13 +146,13 @@ export class ContentElement extends HTMLElement {
         return this.scrolling || !!(this.maxX || this.maxY);
     }
 
-    to(to: any, duration?: any, complete?: any) {
+    to(point: any, duration?: any, complete?: any) {
         if (!this.scrollable) return;
-        to = { X: to.x, Y: to.y };
+        const to = { X: point.x, Y: point.y };
 
-        if (to instanceof HTMLElement) {
+        if (point instanceof HTMLElement) {
             // change by element
-            const element = to;
+            const element = point;
             const
                 calc = (dir: string) => {
                     to[dir] = element[OFFSET_POSITION_KEY[dir]];
@@ -225,7 +225,7 @@ export class ContentElement extends HTMLElement {
         }
     }
 
-    private renderScrolling() {
+    renderScrolling() {
         const render = (dir: string) => {
             if (this['scroll' + dir]) {
                 const

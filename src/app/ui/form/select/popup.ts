@@ -75,8 +75,8 @@ export class SelectPopupElement extends ToggleableElement {
     ]);
 
     onOpen() {
-        document.body.append(this);
         this.select.expanded = true;
+        this.content.renderScrolling();
     }
 
     onOpened() {
@@ -120,6 +120,7 @@ export class SelectPopupElement extends ToggleableElement {
         if (originItemNode && !originItemNode.$data.hidden) {
             originItem = originItemNode.element;
             this.content.to(originItem, 0);
+            console.log(this.content, originItem);
             originItemRect = originItem.getBoundingClientRect();
         }
         const
@@ -197,6 +198,10 @@ export class SelectPopupElement extends ToggleableElement {
                 finish();
             };
         });
+    }
+
+    onAdded() {
+        this.open();
     }
 
     render() {
