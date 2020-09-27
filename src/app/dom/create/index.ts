@@ -82,7 +82,6 @@ class MasterTemplate {
         if (this.nodes && this.container === container) {
             (function renderNodes(eachNodes, eachOldNodes, parent) {
                 if (!eachNodes.length && eachOldNodes.length) {
-
                     eachOldNodes
                         .forEach((eachNode) => {
                             const element = eachNode.element;
@@ -100,15 +99,8 @@ class MasterTemplate {
                         const eachOldElement = eachOldNode?.element;
                         const hasIf = eachNode.hasOwnProperty('$if');
                         const whether = hasIf && eachNode.$if || !hasIf;
+
                         if (eachOldElement && eachNode.tag === eachOldNode.tag) {
-                            if (!eachNodes[i + 1]) {
-                                eachOldNodes.splice(i + 1)
-                                    .forEach((deletedOldNode) => {
-                                        deletedOldNode.element.remove();
-                                        const removed = deletedOldNode.$removed;
-                                        if (removed) removed(deletedOldNode.element, deletedOldNode);
-                                    });
-                            }
                             if (whether) {
                                 const element = eachNode.element = eachOldElement;
                                 const attr = eachNode.attr;
@@ -149,18 +141,16 @@ class MasterTemplate {
                                 }
                                 const updated = eachNode.$updated;
                                 if (updated) updated(element, eachNode);
-                            } else if (eachOldElement) {
+                            } else {
                                 eachOldElement.remove();
                                 const removed = eachNode.$removed;
                                 if (removed) removed(eachOldElement);
                             }
-                        } else {
-                            if (eachOldElement && whether) {
+                        } else if (whether) {
+                            if (eachOldElement) {
                                 eachOldElement.remove();
                                 const removed = eachNode.$removed;
                                 if (removed) removed(eachOldElement);
-                            } else if (!whether) {
-                                continue;
                             }
                             let element;
                             if (eachNode.$namespace) {
@@ -216,6 +206,15 @@ class MasterTemplate {
                                     parent.appendChild(element);
                                 }
                             }
+                        }
+
+                        if (eachNodes.length - 1 === i && eachOldNodes[i + 1]) {
+                            eachOldNodes.splice(i + 1)
+                                .forEach((deletedOldNode) => {
+                                    deletedOldNode.element.remove();
+                                    const removed = deletedOldNode.$removed;
+                                    if (removed) removed(deletedOldNode.element, deletedOldNode);
+                                });
                         }
                     }
                 }
