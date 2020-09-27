@@ -17,10 +17,10 @@ export class OptionElement extends HTMLElement {
     @Attr({
         updater(option: OptionElement) {
             const select = (option.parentElement as SelectElement);
-            if (!select.multiple) {
+            if (!select.multiple && option.selected) {
                 select.options.forEach((eachOption) => {
                     if (option !== eachOption)
-                        eachOption['_selected'] = false;
+                        eachOption.selected = false;
                 });
             }
             option.parentElement['updateValue']();
