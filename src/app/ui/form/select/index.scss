@@ -17,7 +17,7 @@
 [part=search] {
     max-width: fit-content;
     display: inline-flex;
-    flex: 1 1 auto;
+    flex: 1 1 auto!important;
     width: 0;
     min-width: 6rem;
 }

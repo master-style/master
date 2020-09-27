@@ -73,9 +73,9 @@ export class SelectElement extends ControlElement {
                 $text: this.value
             },
             'div', {
-                $if: this.multiple && Array.isArray(this.value) && this.value.length,
+                $if: this.multiple || this.multiple && this.searchable,
                 class: 'y:xs'
-            }, () => this.value.map((eachValue: any) => [
+            }, () => (this.value || []).map((eachValue: any) => [
                 'm-chip', {
                     class: 'x sm',
                     $text: eachValue
@@ -85,7 +85,7 @@ export class SelectElement extends ControlElement {
                     class: 'x',
                     part: 'search',
                     type: 'search',
-                    placeholder: 'search ...',
+                    placeholder: this.placeholder,
                     value: this.#searchValue,
                     $created: (element: HTMLInputElement) =>
                         this.search = element

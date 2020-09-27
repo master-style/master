@@ -250,6 +250,8 @@ m-icon,
 ::slotted([part=body]),
 [part=body] {
     z-index: $z-up;
+    display: flex;
+    align-items: center;
     contain: style;
     width: 100%;
     height: 100%;

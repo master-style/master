@@ -27,6 +27,7 @@
                                   (change)="masterChange($event)"
                                   multiple
                                   searchable
+                                  placeholder="search ..."
                                   [ngModel]="['taipei']"
                                   class="outlined">
                             <m-option *ngFor="let city of ['taichung', 'kaosiung', 'taipei', 'hualien']"
