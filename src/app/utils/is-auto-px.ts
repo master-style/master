@@ -54,7 +54,9 @@ const
         TOP,
         BOTTOM,
         LEFT,
-        RIGHT
+        RIGHT,
+        WIDTH,
+        HEIGHT
     ]
 
 export default function isAutoPx(propKey: string) {

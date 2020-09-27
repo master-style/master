@@ -85,10 +85,13 @@ export class SelectElement extends ControlElement {
                     class: 'x',
                     part: 'search',
                     type: 'search',
-                    $created: (element: HTMLElement) =>
+                    placeholder: 'search ...',
+                    value: this.#searchValue,
+                    $created: (element: HTMLInputElement) =>
                         this.search = element
                             .on('input', (event: any) => {
-                                console.log(event.target.value);
+                                this.#searchValue = event.target.value;
+                                this.search.css('width', this.#searchValue.length + 'rem');
                             }, { passive: true, id: NAME })
                 },
             ])

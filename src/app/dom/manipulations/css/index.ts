@@ -15,9 +15,8 @@ Element.prototype.css = function (param?: any, value?: any) {
         param = camelToKebabCase(param);
         if (isAutoPx(param) && isNum(value)) {
             value += 'px';
-        } else {
-            element.style[param] = value;
         }
+        element.style[param] = value;
         return element;
     } else if (isObjLike(param)) {
         // tslint:disable-next-line: forin

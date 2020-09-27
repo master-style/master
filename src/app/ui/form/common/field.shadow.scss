@@ -1,4 +1,5 @@
 @import '../../variables';
+@import './normalize';
 
 /**
    * Remove the inner padding and cancel buttons in Chrome and Safari on macOS.
@@ -303,12 +304,4 @@ m-icon {
     padding-right: var(--px);
     font-size: var(--f-xxs);
     color: var(--f-fade);
-}
-
-::slotted(:-webkit-autofill) {
-    transition: background-color 5000s ease-in-out 0s;
-    border-style: dashed !important;
-    color: var(--f-red);
-    caret-color: var(--f-theme);
-    -webkit-text-fill-color: var(--f-blue);
 }
