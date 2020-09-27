@@ -1,6 +1,20 @@
 @import '../../variables';
 @import '../../../element/clickable';
 
+:host {
+    --bg-color: var(--item-bg-color, transparent);
+    --f-size: var(--item-f-size, 1rem);
+    --size: var(--item-size, 3rem);
+    --py: var(--item-py, .875rem);
+    --px: var(--item-px, 1.25rem);
+    --icon-size: var(--item-icon-size, 2rem);
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    font-size: var(--f-size);
+}
+
 [part=root] {
     padding-left: var(--px);
     line-height: 1.2;
@@ -14,19 +28,6 @@
     justify-content: space-between;
     flex: 1;
     min-width: 0;
-}
-
-:host {
-    --f-size: var(--item-f-size, 1rem);
-    --size: var(--item-size, 3rem);
-    --py: var(--item-py, .875rem);
-    --px: var(--item-px, 1.25rem);
-    --icon-size: var(--item-icon-size, 2rem);
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    width: 100%;
-    font-size: var(--f-size);
 }
 
 :host([type=button]) {

@@ -8,6 +8,7 @@
     --f-size: var(--button-f-size, #{var(--f-sm)});
     --b-color: var(--button-b-color, transparent);
     --b-color-active: var(--button-b-color-active, transparent);
+    --bg-color: var(--button-bg-color, transparent);
     display: inline-flex;
     font-size: var(--f-size);
     color: var(--f-theme);

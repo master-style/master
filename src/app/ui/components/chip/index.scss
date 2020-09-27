@@ -2,6 +2,7 @@
 @import '../../../element/clickable';
 
 :host {
+    --bg-color: var(--chip-bg-color, transparent);
     --size: var(--chip-size, 2rem);
     --p: var(--chip-p, .25rem);
     --px: var(--chip-px, .625rem);
