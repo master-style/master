@@ -80,7 +80,8 @@
 }
 
 :host(:active:not([readonly]):not([disabled])),
-:host(:focus-within:not([readonly]):not([disabled])) {
+:host(:focus-within:not([readonly]):not([disabled])),
+:host([focused]:not([readonly]):not([disabled])) {
 
     fieldset {
         --b-width: 2px;
@@ -147,7 +148,8 @@
 
 // outlined
 :host(.outlined[label]:active:not([readonly]):not([disabled])),
-:host(.outlined[label]:focus-within:not([readonly]):not([disabled])) {
+:host(.outlined[label]:focus-within:not([readonly]):not([disabled])),
+:host(.outlined[label][focused]:not([readonly]):not([disabled])) {
     legend {
         transition:
             max-width .2s ease-in;
@@ -252,6 +254,32 @@ m-icon,
     height: 100%;
     padding-left: var(--px);
     padding-right: var(--px);
+}
+
+::slotted(input),
+input {
+    cursor: text;
+    border: 0;
+    font-weight: 500;
+    text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    color: var(--f-theme);
+    -webkit-appearance: none;
+    white-space: nowrap;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    -webkit-text-fill-color: unset; // fix safari opacity problem
+    user-select: text;
+    -webkit-user-select: text;
+    outline: none;
+    background-color: transparent;
+    -webkit-user-drag: none;
+    touch-action: manipulation;
+    -webkit-touch-action: manipulation;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 ::slotted([part=head]),

@@ -16,12 +16,18 @@ const NAME = 'select';
 })
 export class SelectElement extends ControlElement {
 
+    @Attr({ key: 'tabindex' })
+    tabIndex = -1;
+
     @Event()
     changeEmitter: EventEmitter;
 
     uid: number;
 
     popup: SelectPopupElement = $('m-select-popup', {});
+    search: HTMLElement;
+
+    #searchValue: string;
 
     readonly options: OptionElement[] = this.popup.options = [];
 
@@ -75,10 +81,15 @@ export class SelectElement extends ControlElement {
                     $text: eachValue
                 }
             ]).concat([
-                'div', {
+                'input', {
                     class: 'x',
                     part: 'search',
-                    contenteditable: true
+                    type: 'search',
+                    $created: (element: HTMLElement) =>
+                        this.search = element
+                            .on('input', (event: any) => {
+                                console.log(event.target.value);
+                            }, { passive: true, id: NAME })
                 },
             ])
         ],

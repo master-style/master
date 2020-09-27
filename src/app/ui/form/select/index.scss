@@ -16,6 +16,7 @@
 
 [part=search] {
     min-width: 3rem;
+    display: inline-flex;
 }
 
 [part=body] {
@@ -70,4 +71,17 @@ m-chip {
             color: var(--f-fade);
         }
     }
+}
+
+// 暫時解決排版問題，待改為 m-y m-x
+.y\:xs {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -$xs;
+    align-items: center;
+}
+
+.x {
+    flex: 0 0 auto;
+    margin: $xxs;
 }

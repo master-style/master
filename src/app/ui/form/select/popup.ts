@@ -75,7 +75,7 @@ export class SelectPopupElement extends ToggleableElement {
     ]);
 
     onOpen() {
-        this.select.expanded = true;
+        this.select.toggleAttribute('focused', true);
         this.content.renderScrolling();
     }
 
@@ -94,7 +94,7 @@ export class SelectPopupElement extends ToggleableElement {
         this.select.focus();
         document.body.off({ id: this });
         document.documentElement.css('overflow', '');
-        this.select.expanded = false;
+        this.select.toggleAttribute('focused', false);
     }
 
     onClosed() {
