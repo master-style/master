@@ -50,9 +50,11 @@ export class SelectElement extends ControlElement {
     }
 
     output() {
-        this.body.value = Array.isArray(this.value)
+        ControlElement.valueUpdater(this, this.value);
+        this.body.value = (Array.isArray(this.value)
             ? this.value.join(' , ')
-            : this.value;
+            : this.value
+        ) || '';
     }
 
     controlTemplate = $(() => [
@@ -128,7 +130,6 @@ export class SelectElement extends ControlElement {
                     eachOption.selected = true;
                 }
             });
-            ControlElement.valueUpdater(select, value);
             select.output();
         },
         reflect: false

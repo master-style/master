@@ -7,9 +7,11 @@
                         <m-select name="city"
                                   label="city"
                                   required
+                                  placeholder="current location"
                                   (change)="masterChange($event)"
                                   ngModel="taipei"
                                   class="outlined">
+                            <m-option>current</m-option>
                             <m-option *ngFor="let city of ['taichung', 'kaosiung', 'taipei', 'hualien']"
                                       [value]="city">{{city}}</m-option>
                             <m-option *ngFor="let city of ['taoyuan']"

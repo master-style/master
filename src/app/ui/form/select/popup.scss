@@ -50,4 +50,9 @@ m-item {
     &[selected] {
         font-weight: 500;
     }
+
+    &[empty] {
+        color: var(--f-fade);
+        font-weight: normal;
+    }
 }
