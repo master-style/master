@@ -122,7 +122,7 @@
     --bg-color: var(--b-fade);
     --bg-color-hover: var(--f-fadest);
     --b-color-active: transparent;
-    color: var(--themeFade);
+    color: var(--theme-fade);
 
     ::slotted(m-icon) {
         stroke-width: 4px;

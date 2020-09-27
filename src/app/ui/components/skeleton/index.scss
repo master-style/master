@@ -25,7 +25,7 @@
     border-radius: inherit;
     height: 100%;
     width: 100%;
-    background-color: rgba(var(--bg-skeletonRgb), .05);
+    background-color: rgba(var(--bg-skeleton-rgb), .05);
 }
 
 :host(.animated) {
@@ -33,7 +33,7 @@
 
     [part=bg] {
         background-color: transparent;
-        background-image: linear-gradient(to right, rgba(var(--bg-skeletonRgb), .05) 2%, rgba(var(--bg-skeletonRgb), .08) 18%, rgba(var(--bg-skeletonRgb), .05) 33%);
+        background-image: linear-gradient(to right, rgba(var(--bg-skeleton-rgb), .05) 2%, rgba(var(--bg-skeleton-rgb), .08) 18%, rgba(var(--bg-skeleton-rgb), .05) 33%);
         background-size: 800px 104px;
         animation-duration: 1s;
         animation-fill-mode: forwards;

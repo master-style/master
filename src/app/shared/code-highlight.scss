@@ -2,7 +2,7 @@ pre {
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: var(--themeFade);
+    background-color: var(--theme-fade);
     border-radius: $xs;
     font-size: var(--f-xs);
     line-height: 1.6;
@@ -10,7 +10,7 @@ pre {
     flex: 1 1 auto;
 
     code[class*="language-"] {
-        color: var(--f-themeFader);
+        color: var(--f-theme-fader);
         padding: .5rem 1.3rem .875rem 1.3rem;
         font-size: inherit;
         display: block;
@@ -69,7 +69,7 @@ pre {
 }
 
 code[class*="language"] {
-    color: var(--f-themeFade);
+    color: var(--f-theme-fade);
 }
 
 pre[class*="language-"].line-numbers {

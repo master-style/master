@@ -4,7 +4,7 @@ figure.embedded {
     overflow: hidden;
     width: 100%;
     margin: 0;
-    background-color: rgba(var(--bg-skeletonRgb), .05);
+    background-color: rgba(var(--bg-skeleton-rgb), .05);
     contain: content;
 
     &:after {

@@ -57,7 +57,7 @@
     margin-left: -1rem;
 
     .demo-body {
-        background-image: repeating-linear-gradient(90deg, transparent, transparent $md, var(--themeFade) $md, var(--themeFade) calc(100% / 12 - 1.7px))
+        background-image: repeating-linear-gradient(90deg, transparent, transparent $md, var(--theme-fade) $md, var(--theme-fade) calc(100% / 12 - 1.7px))
     }
 
     &.guide-gap {
@@ -72,7 +72,7 @@
     &.guide5 {
         .demo-body {
             &:before {
-                background-image: repeating-linear-gradient(90deg, transparent, transparent $md, var(--themeFade) $md, var(--themeFade) calc(100% / 10 - 2px))
+                background-image: repeating-linear-gradient(90deg, transparent, transparent $md, var(--theme-fade) $md, var(--theme-fade) calc(100% / 10 - 2px))
             }
         }
     }
@@ -90,7 +90,7 @@
     flex: 1 1 auto;
     background-origin: border-box;
     background-color: transparent;
-    background-image: repeating-linear-gradient(45deg, transparent, transparent 1rem, var(--themeFade) 1rem, var(--themeFade) 2rem);
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 1rem, var(--theme-fade) 1rem, var(--theme-fade) 2rem);
 
     +.code {
         border-top-left-radius: 0;
@@ -101,10 +101,10 @@
 // .demo-item {
 //     display: flex;
 //     flex-direction: column;
-//     border: 1px solid var(--blueFade);
+//     border: 1px solid var(--blue-fade);
 //     box-sizing: border-box;
 //     padding: 1rem $xs !important;
-//     background-color: rgba($blueFader, .6);
+//     background-color: rgba($blue-fader, .6);
 //     justify-content: center;
 //     align-items: center;
 

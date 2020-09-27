@@ -21,7 +21,7 @@
 
 :host([prompt-valid][valid][dirty]),
 :host([prompt-valid][class*=-valid][class*=-dirty]) {
-    --prompt-bg-color: var(--greenFader);
+    --prompt-bg-color: var(--green-fader);
     --prompt-f-color: var(--green);
     --label-f-color: var(--green);
 }
@@ -35,7 +35,7 @@
 
 :host([prompt-warning][warning][dirty]),
 :host([prompt-warning][warning][class*=-dirty]) {
-    --prompt-bg-color: var(--yellowFader) !important;
+    --prompt-bg-color: var(--yellow-fader) !important;
     --prompt-f-color: var(--f-yellow) !important;
     --label-f-color: var(--f-yellow) !important;
 }
@@ -49,7 +49,7 @@
 
 :host([prompt-invalid][invalid][dirty]),
 :host([prompt-invalid][class*=-invalid][class*=-dirty]) {
-    --prompt-bg-color: var(--redFader) !important;
+    --prompt-bg-color: var(--red-fader) !important;
     --prompt-f-color: var(--f-red) !important;
     --label-f-color: var(--f-red) !important;
     --b-color: var(--red) !important;

@@ -7,11 +7,11 @@
 }
 
 .bg\:blue\+ {
-    background-color: var(--blueFade) !important;
+    background-color: var(--blue-fade) !important;
 }
 
 .bg\:blue\+\+ {
-    background-color: var(--blueFader) !important;
+    background-color: var(--blue-fader) !important;
 }
 
 .bg\:green {
@@ -19,11 +19,11 @@
 }
 
 .bg\:green\+ {
-    background-color: var(--greenFade) !important;
+    background-color: var(--green-fade) !important;
 }
 
 .bg\:green\+\+ {
-    background-color: var(--greenFader) !important;
+    background-color: var(--green-fader) !important;
 }
 
 .bg\:red {
@@ -31,11 +31,11 @@
 }
 
 .bg\:red\+ {
-    background-color: var(--redFade) !important;
+    background-color: var(--red-fade) !important;
 }
 
 .bg\:red\+\+ {
-    background-color: var(--redFader) !important;
+    background-color: var(--red-fader) !important;
 }
 
 .bg\:purple {
@@ -43,11 +43,11 @@
 }
 
 .bg\:purple\+ {
-    background-color: var(--purpleFade) !important;
+    background-color: var(--purple-fade) !important;
 }
 
 .bg\:purple\+\+ {
-    background-color: var(--purpleFader) !important;
+    background-color: var(--purple-fader) !important;
 }
 
 .bg\:yellow {
@@ -55,26 +55,26 @@
 }
 
 .bg\:yellow\+ {
-    background-color: var(--yellowFade) !important;
+    background-color: var(--yellow-fade) !important;
 }
 
 .bg\:yellow\+\+ {
-    background-color: var(--yellowFader) !important;
+    background-color: var(--yellow-fader) !important;
 }
 
 .bg\:theme {
     background-color: var(--theme) !important;
-    @include bgBlur(var(--themeRgb), .9);
+    @include bgBlur(var(--theme-rgb), .9);
 }
 
 .bg\:theme\+ {
-    background-color: var(--themeFade) !important;
-    @include bgBlur(var(--themeFadeRgb), .9);
+    background-color: var(--theme-fade) !important;
+    @include bgBlur(var(--theme-fade-rgb), .9);
 }
 
 .bg\:theme\+\+ {
-    background-color: var(--themeFader) !important;
-    @include bgBlur(var(--themeFaderRgb), .9);
+    background-color: var(--theme-fader) !important;
+    @include bgBlur(var(--theme-fader-rgb), .9);
 }
 
 // .gt\:white {

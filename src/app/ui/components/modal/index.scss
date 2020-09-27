@@ -152,7 +152,7 @@
 
 ::slotted([part=head]),
 ::slotted([part=foot]) {
-    @include bgBlur(var(--themeRgb), .9);
+    @include bgBlur(var(--theme-rgb), .9);
     position: absolute;
     display: flex;
     align-items: center;

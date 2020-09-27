@@ -133,13 +133,13 @@
 
 .light\+\@hover {
     &:not([disabled]):hover {
-        background-color: var(--themeFade) !important;
+        background-color: var(--theme-fade) !important;
     }
 }
 
 .light\+\+\@hover {
     &:not([disabled]):hover {
-        background-color: var(--themeFader) !important;
+        background-color: var(--theme-fader) !important;
     }
 }
 
@@ -152,13 +152,13 @@
 
 .blue\+\@hover {
     &:not([disabled]):hover {
-        background-color: var(--blueFade) !important;
+        background-color: var(--blue-fade) !important;
     }
 }
 
 .blue\+\+\@hover {
     &:not([disabled]):hover {
-        background-color: var(--blueFader) !important;
+        background-color: var(--blue-fader) !important;
     }
 }
 
@@ -171,13 +171,13 @@
 
 .red\+\@hover {
     &:not([disabled]):hover {
-        background-color: var(--redFade) !important;
+        background-color: var(--red-fade) !important;
     }
 }
 
 .red\+\+\@hover {
     &:not([disabled]):hover {
-        background-color: var(--redFader) !important;
+        background-color: var(--red-fader) !important;
     }
 }
 
@@ -190,13 +190,13 @@
 
 .green\+\@hover {
     &:not([disabled]):hover {
-        background-color: var(--greenFade) !important;
+        background-color: var(--green-fade) !important;
     }
 }
 
 .green\+\+\@hover {
     &:not([disabled]):hover {
-        background-color: var(--greenFader) !important;
+        background-color: var(--green-fader) !important;
     }
 }
 
@@ -209,13 +209,13 @@
 
 .purple\+\@hover {
     &:not([disabled]):hover {
-        background-color: var(--purpleFade) !important;
+        background-color: var(--purple-fade) !important;
     }
 }
 
 .purple\+\+\@hover {
     &:not([disabled]):hover {
-        background-color: var(--purpleFader) !important;
+        background-color: var(--purple-fader) !important;
     }
 }
 
@@ -228,12 +228,12 @@
 
 .yellow\+\@hover {
     &:not([disabled]):hover {
-        background-color: var(--yellowFade) !important;
+        background-color: var(--yellow-fade) !important;
     }
 }
 
 .yellow\+\+\@hover {
     &:not([disabled]):hover {
-        background-color: var(--yellowFader) !important;
+        background-color: var(--yellow-fader) !important;
     }
 }

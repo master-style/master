@@ -17,7 +17,7 @@
     --size: 3rem;
     --label-px: .25rem;
     --label-f-size: var(--f-xxs);
-    --label-f-color: var(--f-themeFader);
+    --label-f-color: var(--f-theme-fader);
     position: relative;
     display: inline-flex;
     align-items: flex-start;
@@ -215,7 +215,7 @@ fieldset {
     height: 100%;
     margin: 0;
     display: flex;
-    color: var(--theme, var(--f-themeFader));
+    color: var(--theme, var(--f-theme-fader));
     border-color: var(--b-color);
     border-width: 0;
     border-style: solid;

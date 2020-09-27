@@ -128,11 +128,11 @@ m-table {
 
         &.light\@hover:hover {
             cursor: pointer;
-            background: var(--themeFade);
+            background: var(--theme-fade);
         }
 
         &[active] {
-            background-color: var(--blueFader);
+            background-color: var(--blue-fader);
         }
     }
 
