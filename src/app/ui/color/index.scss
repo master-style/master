@@ -100,7 +100,7 @@
 
     &.outlined {
         --f-theme: var(--f-blue);
-        --bg-light: var(--blueFader);
+        --bg-color-head: var(--blueFader);
         --bg-color-hover: var(--blueFader);
         --b-color: var(--blue);
         --b-color-active: var(--blue);
@@ -108,13 +108,13 @@
 }
 
 .blue\+ {
-    --bg-light: var(--blueFade);
+    --bg-color-head: var(--blueFade);
     --bg-color: var(--blueFader);
     --bg-color-hover: var(--blueFade);
     --f-theme: var(--f-blue);
 
     &.outlined {
-        --bg-light: var(--blueFader);
+        --bg-color-head: var(--blueFader);
         --bg-color-hover: var(--blueFader);
         --b-color: var(--b-fadest);
         --b-color-active: var(--blueFade);
@@ -127,7 +127,7 @@
 
     &.outlined {
         --f-theme: var(--f-green);
-        --bg-light: var(--greenFader);
+        --bg-color-head: var(--greenFader);
         --bg-color-hover: var(--greenFader);
         --b-color: var(--green);
         --b-color-active: var(--green);
@@ -135,13 +135,13 @@
 }
 
 .green\+ {
-    --bg-light: var(--greenFade);
+    --bg-color-head: var(--greenFade);
     --bg-color: var(--greenFader);
     --bg-color-hover: var(--greenFade);
     --f-theme: var(--f-green);
 
     &.outlined {
-        --bg-light: var(--greenFader);
+        --bg-color-head: var(--greenFader);
         --bg-color-hover: var(--greenFader);
         --b-color: var(--b-fadest);
         --b-color-active: var(--greenFade);
@@ -154,7 +154,7 @@
 
     &.outlined {
         --f-theme: var(--f-red);
-        --bg-light: var(--redFader);
+        --bg-color-head: var(--redFader);
         --bg-color-hover: var(--redFader);
         --b-color: var(--red);
         --b-color-active: var(--red);
@@ -162,13 +162,13 @@
 }
 
 .red\+ {
-    --bg-light: var(--redFade);
+    --bg-color-head: var(--redFade);
     --bg-color: var(--redFader);
     --bg-color-hover: var(--redFade);
     --f-theme: var(--f-red);
 
     &.outlined {
-        --bg-light: var(--redFader);
+        --bg-color-head: var(--redFader);
         --bg-color-hover: var(--redFader);
         --b-color: var(--b-fadest);
         --b-color-active: var(--redFade);
@@ -181,7 +181,7 @@
 
     &.outlined {
         --f-theme: var(--f-purple);
-        --bg-light: var(--purpleFader);
+        --bg-color-head: var(--purpleFader);
         --bg-color-hover: var(--purpleFader);
         --b-color: var(--purple);
         --b-color-active: var(--purple);
@@ -189,13 +189,13 @@
 }
 
 .purple\+ {
-    --bg-light: var(--purpleFade);
+    --bg-color-head: var(--purpleFade);
     --bg-color: var(--purpleFader);
     --bg-color-hover: var(--purpleFade);
     --f-theme: var(--f-purple);
 
     &.outlined {
-        --bg-light: var(--purpleFader);
+        --bg-color-head: var(--purpleFader);
         --bg-color-hover: var(--purpleFader);
         --b-color: var(--b-fadest);
         --b-color-active: var(--purpleFade);
@@ -208,7 +208,7 @@
 
     &.outlined {
         --f-theme: var(--f-yellow);
-        --bg-light: var(--yellowFader);
+        --bg-color-head: var(--yellowFader);
         --bg-color-hover: var(--yellowFader);
         --b-color: var(--yellow);
         --b-color-active: var(--yellow);
@@ -216,13 +216,13 @@
 }
 
 .yellow\+ {
-    --bg-light: var(--yellowFade);
+    --bg-color-head: var(--yellowFade);
     --bg-color: var(--yellowFader);
     --bg-color-hover: var(--yellowFade);
     --f-theme: var(--f-yellow);
 
     &.outlined {
-        --bg-light: var(--yellowFader);
+        --bg-color-head: var(--yellowFader);
         --bg-color-hover: var(--yellowFader);
         --b-color: var(--b-fadest);
         --b-color-active: var(--yellowFade);
@@ -231,7 +231,7 @@
 
 .theme {
     --bg-color: var(--bg-object);
-    --bg-light: var(--themeFade);
+    --bg-color-head: var(--themeFade);
     --bg-color-hover: var(--themeFade);
 
     &.outlined {
@@ -242,12 +242,12 @@
 }
 
 .theme\+ {
-    --bg-light: var(--theme);
+    --bg-color-head: var(--theme);
     --bg-color: var(--themeFade);
     --bg-color-hover: var(--themeFader);
 
     &.outlined {
-        --bg-light: var(--themeFader);
+        --bg-color-head: var(--themeFader);
         --bg-color-hover: var(--themeFade);
         --b-color: var(--b-fadest);
         --b-color-active: var(--b-fade);
@@ -260,7 +260,10 @@
 .green,
 .purple,
 .yellow {
-    --bg-light: rgba(0, 0, 0, .1);
+    --bg-color-head: rgba(0, 0, 0, .1);
     --f-theme: #fff;
-    --bg-disabled: var(--themeFader);
+
+    &[disabled] {
+        --bg-color: var(--themeFader);
+    }
 }

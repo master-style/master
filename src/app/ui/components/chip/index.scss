@@ -2,10 +2,10 @@
 @import '../../../element/clickable';
 
 :host {
-    --bg-color: var(--chip-bg-color, transparent);
-    --bg-color-hover: var(--chip-bg-color-hover, var(--bg-color-hover));
-    --b-color-active: var(--chip-b-color-active, var(--b-color-active));
-    --bg-disabled: var(--chip-bg-disabled, var(--bg-disabled));
+    --bg-color: var(--chip-bg-color);
+    --bg-color-hover: var(--chip-bg-color-hover);
+    --b-color-active: var(--chip-b-color-active);
+    --bg-disabled: var(--chip-bg-disabled);
     --size: var(--chip-size, 2rem);
     --p: var(--chip-p, .25rem);
     --px: var(--chip-px, .625rem);
@@ -96,7 +96,7 @@
     font-weight: 600;
     color: var(--f-theme);
     text-transform: uppercase;
-    background-color: var(--bg-light);
+    background-color: var(--bg-color-head);
     padding: 0 $xs;
     min-width: calc(var(--size) - var(--p) * 2);
     margin-right: .375rem;
