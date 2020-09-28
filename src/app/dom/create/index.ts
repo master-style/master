@@ -108,36 +108,34 @@ class MasterTemplate {
         if (this.nodes && this.container === container) {
             (function renderNodes(eachNodes, eachOldNodes, parent) {
                 if (!eachNodes.length && eachOldNodes.length) {
-                    eachOldNodes
-                        .forEach((eachNode) => removeNode(eachNode));
+                    removeNodes(eachOldNodes, true);
                 } else {
+                    // if (parent.tagName === 'DIV') {
+                    //     console.log(eachNodes, eachOldNodes);
+                    // }
                     // tslint:disable-next-line: prefer-for-of
                     for (let i = 0; i < eachNodes.length; i++) {
                         const eachNode = eachNodes[i];
                         const eachOldNode = eachOldNodes[i];
                         const existing = !!eachOldNode?.element;
-                        const same = eachNode.tag === eachOldNode.tag;
+                        const same = eachNode.tag === eachOldNode?.tag;
                         const hasIf = eachNode.hasOwnProperty('$if');
                         const whether = hasIf && eachNode.$if || !hasIf;
-
-                        if (eachNodes.length - 1 === i && eachOldNodes[i + 1]) {
-                            eachOldNodes.splice(i + 1)
-                                .forEach((targetOldNode) => removeNode(targetOldNode));
-                        }
 
                         if (
                             // old: true ; now: false
                             existing && !whether ||
                             existing && whether && !same
                         ) {
-                            if (parent.tagName === 'DIV') {
-                                console.log(eachNode, eachOldNode);
-                            }
                             removeNode(eachOldNode);
                         }
 
-                        if (!whether) return;
+                        if (eachNodes.length - 1 === i && eachOldNodes[i + 1]) {
+                            eachOldNodes.splice(i + 1)
+                                .forEach((targetOldNode) => removeNode(targetOldNode));
+                        }
 
+                        if (!whether) return;
                         if (existing && same) {
                             const element = eachNode.element = eachOldNode?.element;
                             const attr = eachNode.attr;
