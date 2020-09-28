@@ -1,5 +1,3 @@
-import { remove } from "lodash-es";
-
 const fragment = document.createDocumentFragment();
 
 window.Master = function (selector: any, attr?: { [key: string]: any }, ...children: (Element | string)[]) {
@@ -38,7 +36,7 @@ const removeNode = (node) => {
     node.element.remove();
     const removed = node.$removed;
     if (removed) removed(node.element, node);
-}
+};
 
 class MasterTemplate {
 
@@ -265,7 +263,7 @@ class MasterTemplate {
                             if (removed) removed(element, eachNode);
                         }
                         if (eachNode.children) {
-                            remove(eachNode.children);
+                            removeNodes(eachNode.children);
                         }
                     });
             })(this.nodes, true);
