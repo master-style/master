@@ -94,6 +94,7 @@ export class SelectElement extends ControlElement {
             ]
         ]), [
             'input', {
+                $if: this.searchable,
                 part: 'search',
                 type: 'search',
                 placeholder: this.placeholder,

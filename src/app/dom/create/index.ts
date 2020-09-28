@@ -112,9 +112,6 @@ class MasterTemplate {
                 if (!eachNodes.length && eachOldNodes.length) {
                     removeNodes(eachOldNodes, true);
                 } else {
-                    // if (parent.tagName === 'DIV') {
-                    //     console.log(eachNodes, eachOldNodes);
-                    // }
                     // tslint:disable-next-line: prefer-for-of
                     if (eachOldNodes && eachOldNodes[eachNodes.length]) {
                         eachOldNodes.splice(eachNodes.length)
