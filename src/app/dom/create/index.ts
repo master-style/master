@@ -89,6 +89,9 @@ class MasterTemplate {
             }
         })(this.template(), this.nodes);
 
+        if (this.container?.tagName === 'M-SELECT')
+            console.log(this.nodes);
+
         if (this.nodes && this.container === container) {
             (function renderNodes(eachNodes, eachOldNodes, parent) {
                 if (!eachNodes.length && eachOldNodes.length) {
