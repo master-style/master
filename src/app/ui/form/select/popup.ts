@@ -92,6 +92,7 @@ export class SelectPopupElement extends ToggleableElement {
     onOpen() {
         this.select.toggleAttribute('focused', true);
         this.content.renderScrolling();
+        if (this.select.search) this.select.search.focus();
     }
 
     onOpened() {
@@ -107,7 +108,6 @@ export class SelectPopupElement extends ToggleableElement {
                     this.close();
                 }
             }, { passive: true, id: this });
-        if (this.select.search) this.select.search.focus();
     }
 
     onClose() {
