@@ -1,3 +1,5 @@
+import { remove } from "lodash-es";
+
 const fragment = document.createDocumentFragment();
 
 window.Master = function (selector: any, attr?: { [key: string]: any }, ...children: (Element | string)[]) {
@@ -30,6 +32,13 @@ window.Master = function (selector: any, attr?: { [key: string]: any }, ...child
         return document.querySelectorAll(selector);
     }
 };
+
+const removeNode = (node) => {
+    if (!node?.element) return;
+    node.element.remove();
+    const removed = node.$removed;
+    if (removed) removed(node.element, node);
+}
 
 class MasterTemplate {
 
@@ -86,30 +95,19 @@ class MasterTemplate {
             (function renderNodes(eachNodes, eachOldNodes, parent) {
                 if (!eachNodes.length && eachOldNodes.length) {
                     eachOldNodes
-                        .forEach((eachNode) => {
-                            const element = eachNode.element;
-                            if (element) {
-                                element.remove();
-                                const removed = eachNode.$removed;
-                                if (removed) removed(element, eachNode);
-                            }
-                        });
+                        .forEach((eachNode) => removeNode(eachNode));
                 } else {
                     // tslint:disable-next-line: prefer-for-of
                     for (let i = 0; i < eachNodes.length; i++) {
                         const eachNode = eachNodes[i];
-                        let eachOldNode = eachOldNodes[i];
+                        const eachOldNode = eachOldNodes[i];
                         const eachOldElement = eachOldNode?.element;
                         const hasIf = eachNode.hasOwnProperty('$if');
                         const whether = hasIf && eachNode.$if || !hasIf;
 
                         if (eachNodes.length - 1 === i && eachOldNodes[i + 1]) {
                             eachOldNodes.splice(i + 1)
-                                .forEach((deletedOldNode) => {
-                                    deletedOldNode.element.remove();
-                                    const removed = deletedOldNode.$removed;
-                                    if (removed) removed(deletedOldNode.element, deletedOldNode);
-                                });
+                                .forEach((targetOldNode) => removeNode(targetOldNode));
                         }
 
                         if (eachOldElement && eachNode.tag === eachOldNode.tag) {
@@ -155,9 +153,7 @@ class MasterTemplate {
                                 const updated = eachNode.$updated;
                                 if (updated) updated(element, eachNode);
                             } else {
-                                eachOldElement.remove();
-                                const removed = eachNode.$removed;
-                                if (removed) removed(eachOldElement);
+                                removeNode(eachOldNode);
                             }
                         } else if (whether) {
                             let element;
@@ -167,12 +163,7 @@ class MasterTemplate {
                                 element = document.createElement(eachNode.tag);
                             }
                             eachNode.element = element;
-                            if (eachOldElement) {
-                                eachOldElement.before(element);
-                                eachOldElement.remove();
-                                const removed = eachNode.$removed;
-                                if (removed) removed(eachOldElement);
-                            }
+                            removeNode(eachOldNode);
                             const attr = eachNode.attr;
                             if (attr) {
                                 element.attr(attr);
@@ -263,7 +254,7 @@ class MasterTemplate {
     remove() {
         if (this.nodes.length) {
             this.container = null;
-            (function remove(eachNodes, isRoot?: boolean) {
+            (function removeNodes(eachNodes, isRoot?: boolean) {
                 eachNodes
                     .forEach((eachNode) => {
                         const element = eachNode.element;

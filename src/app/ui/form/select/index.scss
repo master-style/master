@@ -26,6 +26,7 @@
 [part=body] {
     cursor: pointer;
     font-weight: 500;
+    flex-wrap: wrap;
 
     &:empty[placeholder]:before {
         content: attr(placeholder);
@@ -70,16 +71,16 @@ m-chip {
 
 
 // 暫時解決排版問題，待改為 m-y m-x
-.y\:xs {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    margin-right: -$xs;
-    margin-bottom: -$xs;
-}
+// .y\:xs {
+//     display: flex;
+//     flex-wrap: wrap;
+//     align-items: center;
+//     margin-right: -$xs;
+//     margin-bottom: -$xs;
+// }
 
-.x {
+m-chip {
     flex: 0 0 auto;
-    margin-right: $xs;
-    margin-bottom: $xs;
+    // margin-right: $xs;
+    // margin-bottom: $xs;
 }

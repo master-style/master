@@ -82,7 +82,7 @@ export class SelectElement extends ControlElement {
         ], () => (this.#selectedOptions as any).map((eachOption: OptionElement) => [
             'm-chip', {
                 $if: this.multiple,
-                class: 'x sm',
+                class: 'sm',
                 $html: eachOption.innerHTML
                     .replace('slot', 'part')
             }, [
