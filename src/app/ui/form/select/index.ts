@@ -108,6 +108,7 @@ export class SelectElement extends ControlElement {
                                 event.stopPropagation();
                                 eachOption.selected = false;
                                 this.popup.render();
+                                this.popup.updatePosition();
                             }, { passive: true, id: this });
                         }
                     }, [

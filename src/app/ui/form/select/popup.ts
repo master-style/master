@@ -146,7 +146,7 @@ export class SelectPopupElement extends ToggleableElement {
         this.remove();
     }
 
-    private updatePosition() {
+    updatePosition() {
         let top = 0;
         let left = 0;
         let diffTop = 0;
