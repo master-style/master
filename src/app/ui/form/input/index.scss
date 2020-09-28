@@ -1,5 +1,5 @@
-@import '../common/field.shadow';
-@import '../common/prompt.shadow';
+@import '../field.shadow';
+@import '../prompt.shadow';
 
 :host {
     --f-size: var(--input-f-size, var(--f-sm));

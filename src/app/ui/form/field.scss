@@ -1,9 +1,9 @@
 ::slotted(input),
-input {
+::slotted(textarea),
+input,
+textarea {
     cursor: text;
     border: 0;
-    margin: 0;
-    padding: 0;
     font-weight: 500;
     color: var(--f-theme);
     -webkit-appearance: none;

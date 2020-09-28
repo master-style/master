@@ -1,5 +1,5 @@
-@import '../common/field.shadow';
-@import '../common/prompt.shadow';
+@import '../field.shadow';
+@import '../prompt.shadow';
 
 :host {
     --f-size: var(--select-f-size, var(--f-sm));
@@ -67,6 +67,7 @@
     flex: 1 1 auto;
     width: 0;
     min-width: 7rem;
+    padding: 0;
     margin: $xs;
     word-break: keep-all;
 }
