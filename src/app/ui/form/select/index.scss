@@ -62,6 +62,12 @@ m-icon[part=select] {
     margin-left: calc(var(--px) / -2)
 }
 
+[part=result] {
+    margin-top: -$xs;
+    margin-left: -$xs;
+    margin-bottom: -$xs;
+}
+
 m-chip {
     --chip-bg-color: var(--theme-fader);
     --chip-b-color: transparent;

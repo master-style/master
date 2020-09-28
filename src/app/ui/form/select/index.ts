@@ -79,7 +79,10 @@ export class SelectElement extends ControlElement {
                 $if: !this.multiple || !Array.isArray(this.value),
                 $text: this.value
             },
-            'div', { part: 'result' }, () => (this.#selectedOptions as any).map((eachOption: OptionElement) => [
+            'div', {
+                $if: this.#selectedOptions.length,
+                part: 'result',
+            }, () => this.#selectedOptions.map((eachOption: OptionElement) => [
                 'm-chip', {
                     $if: this.multiple,
                     class: 'sm',
