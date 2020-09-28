@@ -38,7 +38,7 @@
     margin: 0;
     padding: 0;
     -webkit-appearance: none;
-    cursor: pointer;
+    cursor: pointer!important;
 }
 
 :host([type=radio]) {
