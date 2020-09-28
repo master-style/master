@@ -83,13 +83,13 @@ class MasterTemplate {
                     const hasIf = eachNode.hasOwnProperty('$if');
                     const whether = hasIf && eachNode.$if || !hasIf;
                     if (Array.isArray(token) && whether) {
-                        eachNode.children = eachNode.children || [];
+                        if (!eachNode.children) eachNode.children = [];
                         generate(token, eachNode.children);
                     } else if (tokenType === 'function' && whether) {
                         const children = token().reduce((acc, eachToken) => {
                             return acc.concat(eachToken);
                         }, []);
-                        eachNode.children = eachNode.children || [];
+                        if (!eachNode.children) eachNode.children = [];
                         generate(children, eachNode.children);
                     } else if (tokenType === 'object') {
                         const attr = token;
@@ -112,7 +112,6 @@ class MasterTemplate {
                 if (!eachNodes.length && eachOldNodes.length) {
                     removeNodes(eachOldNodes, true);
                 } else {
-                    console.log(eachNodes, eachOldNodes);
                     // if (parent.tagName === 'DIV') {
                     //     console.log(eachNodes, eachOldNodes);
                     // }
@@ -124,7 +123,7 @@ class MasterTemplate {
 
                     for (let i = 0; i < eachNodes.length; i++) {
                         const eachNode = eachNodes[i];
-                        const eachOldNode = eachOldNodes && eachOldNodes[i];
+                        let eachOldNode = eachOldNodes && eachOldNodes[i];
                         const existing = !!eachOldNode?.element;
                         const same = eachNode.tag === eachOldNode?.tag;
                         const hasIf = eachNode.hasOwnProperty('$if');
@@ -136,6 +135,8 @@ class MasterTemplate {
                             existing && whether && !same
                         ) {
                             removeNode(eachOldNode);
+                            // 不要 remove 掉, 要保留陣列佔位供下一次快取判斷
+                            eachOldNode = null;
                         }
 
                         if (!whether) continue;
