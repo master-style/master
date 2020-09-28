@@ -96,7 +96,6 @@ export class SelectPopupElement extends ToggleableElement {
     }
 
     onOpened() {
-        console.log('opened');
         document.documentElement.css('overflow', 'hidden');
         document.body
             .on('click', async (clickEvent: any) => {
@@ -111,7 +110,6 @@ export class SelectPopupElement extends ToggleableElement {
     }
 
     onClose() {
-        console.log('close');
         if (this.select.search) {
             this.select.search.value = this.select.keyword = '';
         }
@@ -123,7 +121,6 @@ export class SelectPopupElement extends ToggleableElement {
     }
 
     onClosed() {
-        console.log('closed');
         this.remove();
     }
 

@@ -2,11 +2,14 @@
 
 :host {
     --rotate: 0deg;
+    --f-color: var(--icon-f-color, inherit);
     position: relative;
     display: inline-flex;
     // color: rgba(255, 255, 255, .3);
     stroke-width: 2;
     contain: content;
+    color: var(--f-color);
+    fill: inherit;
     // &:before {
     //     position: absolute;
     //     left: 0;

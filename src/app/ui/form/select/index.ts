@@ -86,7 +86,11 @@ export class SelectElement extends ControlElement {
                     class: 'x sm',
                     $html: eachOption.innerHTML
                         .replace('slot', 'part')
-                }
+                }, [
+                    'm-button', { part: 'close' }, [
+                        'm-icon', { name: 'close' }
+                    ]
+                ]
             ]).concat([
                 'input', {
                     class: 'x',
@@ -112,7 +116,10 @@ export class SelectElement extends ControlElement {
                 },
             ])
         ],
-        'm-icon', { name: this.multiple ? 'caret' : 'unfold' },
+        'm-icon', {
+            name: this.multiple ? 'caret' : 'unfold',
+            part: 'select'
+        },
         'fieldset', [
             'legend', [
                 'span', { part: 'label', $text: this.label }

@@ -71,10 +71,10 @@
 }
 
 ::slotted([part=close]) {
-    --size: 1.125rem;
-    --px: 0px;
+    --button-size: 1.125rem;
+    --button-px: 0px;
+    --button-f-size: var(--f-xxs);
     border-radius: $xxs;
-    font-size: var(--f-xxs);
     margin-right: -.1875rem;
     margin-left: .375rem;
 }

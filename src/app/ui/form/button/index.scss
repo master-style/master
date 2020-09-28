@@ -6,12 +6,13 @@
     --py: var(--button-py, 0rem);
     --size: var(--button-size, 3rem);
     --f-size: var(--button-f-size, #{var(--f-sm)});
+    --f-color: var(--button-f-color, var(--f-theme));
     --b-color: var(--button-b-color, transparent);
     --b-color-active: var(--button-b-color-active, transparent);
     --bg-color: var(--button-bg-color, transparent);
     display: inline-flex;
     font-size: var(--f-size);
-    color: var(--f-theme);
+    color: var(--f-color);
     font-weight: 500;
     letter-spacing: 1.25px;
     line-height: 1.2;
@@ -122,7 +123,7 @@
     --bg-color: var(--b-fade);
     --bg-color-hover: var(--f-fadest);
     --b-color-active: transparent;
-    color: var(--theme-fade);
+    --f-color: var(--theme-fade);
 
     ::slotted(m-icon) {
         stroke-width: 4px;

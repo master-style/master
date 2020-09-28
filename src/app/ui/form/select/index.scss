@@ -48,10 +48,10 @@
     display: none;
 }
 
-m-icon {
-    color: var(--f-fadest);
-    padding-right: calc(var(--px) / 2);
+m-icon[part=select] {
+    --f-color: var(--f-fadest);
     font-size: var(--f-size);
+    padding-right: calc(var(--px) / 2);
     margin-left: calc(var(--px) / -2)
 }
 
@@ -62,7 +62,7 @@ m-chip {
 
 @media (any-hover: hover) {
     :host(:not([disabled]):not([readonly]):hover) {
-        m-icon {
+        m-icon[part=select] {
             color: var(--f-fade);
         }
     }
