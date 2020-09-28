@@ -106,7 +106,8 @@ export class SelectElement extends ControlElement {
                         $created: (element: ButtonElement) => {
                             element.on('click', (event) => {
                                 event.stopPropagation();
-                                console.log(eachOption);
+                                eachOption.selected = false;
+                                this.popup.render();
                             }, { passive: true, id: this });
                         }
                     }, [
