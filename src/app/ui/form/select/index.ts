@@ -79,20 +79,20 @@ export class SelectElement extends ControlElement {
                 $if: !this.multiple || !Array.isArray(this.value),
                 $text: this.value
             },
-        ], () => (this.#selectedOptions as any).map((eachOption: OptionElement) => [
-            'm-chip', {
-                $if: this.multiple,
-                class: 'sm',
-                $html: eachOption.innerHTML
-                    .replace('slot', 'part')
-            }, [
-                'm-button', {
-                    part: 'close'
+            'div', { part: 'result' }, () => (this.#selectedOptions as any).map((eachOption: OptionElement) => [
+                'm-chip', {
+                    $if: this.multiple,
+                    class: 'sm',
+                    $html: eachOption.innerHTML
+                        .replace('slot', 'part')
                 }, [
-                    'm-icon', { name: 'close' }
+                    'm-button', {
+                        part: 'close'
+                    }, [
+                        'm-icon', { name: 'close' }
+                    ]
                 ]
-            ]
-        ]), [
+            ]),
             'input', {
                 $if: this.searchable,
                 part: 'search',
