@@ -139,6 +139,7 @@ class MasterTemplate {
                                     eachNode.$html !== eachOldNode.$html
                                 ) {
                                     element.innerHTML = eachNode.$html;
+                                    eachOldNode.children = [];
                                 } else if (
                                     eachNode.$text !== undefined &&
                                     eachNode.$text !== eachOldNode.$text
@@ -179,6 +180,7 @@ class MasterTemplate {
                             }
                             if (eachNode.$html !== undefined) {
                                 element.innerHTML = eachNode.$html;
+                                eachOldNode.children = [];
                             } else if (eachNode.$text !== undefined) {
                                 element.textContent = eachNode.$text;
                             }
@@ -192,7 +194,7 @@ class MasterTemplate {
                             if (updated) updated(element, eachNode);
 
                             if (i === 0) {
-                                parent.prepend(element);
+                                parent.appendChild(element);
                             } else {
                                 const existedNode =
                                     eachNodes

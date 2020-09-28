@@ -87,7 +87,9 @@ export class SelectElement extends ControlElement {
                     $html: eachOption.innerHTML
                         .replace('slot', 'part')
                 }, [
-                    'm-button', { part: 'close' }, [
+                    'm-button', {
+                        part: 'close'
+                    }, [
                         'm-icon', { name: 'close' }
                     ]
                 ]

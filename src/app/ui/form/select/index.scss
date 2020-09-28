@@ -39,7 +39,7 @@
 }
 
 :host(.underlined) {
-    m-icon {
+    m-icon[part=select] {
         margin-left: .375rem;
     }
 }
