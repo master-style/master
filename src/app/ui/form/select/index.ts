@@ -72,68 +72,81 @@ export class SelectElement extends ControlElement {
     template = $(() => [
         'slot',
         'div', {
-            part: 'body',
-            placeholder: this.placeholder,
-            label: this.label, // for default select width
-            $text: this.value,
-            $if: !this.multiple
-        },
-        'div', {
-            $if: this.multiple,
-            part: 'body',
-            placeholder: this.placeholder,
-            label: this.label, // for default select width
-        }, () => this.#selectedOptions.map((eachOption: OptionElement) => [
-            'm-chip', {
-                $if: this.multiple,
-                class: 'sm',
-                $html: eachOption.innerHTML
-                    .replace('slot', 'part')
-            }, [
-                'm-button', {
-                    part: 'close',
-                    $created: (element: ButtonElement) => {
-                        element.on('click', () => {
-                            console.log(eachOption);
-                        }, { passive: true, id: this });
-                    }
-                }, [
-                    'm-icon', { name: 'close' }
-                ]
-            ]
-        ]), [
-            'input', {
-                $if: this.searchable,
-                part: 'search',
-                type: 'search',
-                placeholder: this.placeholder,
-                value: this.keyword,
-                $created: (element: HTMLInputElement) =>
-                    this.search = element
-                        .on('input', (event: any) => {
-                            this.keyword = event.target.value;
-                            this.popup.toggleAttribute('searching', !!this.keyword);
-                            this.popup.items.forEach((eachItem: ItemElement) => {
-                                eachItem
-                                    .toggleAttribute('found', eachItem.textContent.indexOf(this.keyword) !== -1);
-                            });
-                            this.searchInfo = $('div', {
-                                part: 'search-info'
-                            }, 'Not Found');
-                        }, { passive: true, id: NAME }),
-                $removed: () => this.search = null
+            part: 'root',
+            $created: (element: HTMLDivElement) => {
+                element.on('click', () => {
+                    if (this.disabled || !this.popup.hidden) return;
+                    this.popup.select = this;
+                    document.body.append(this.popup);
+                    this.popup.open();
+                }, { passive: true, id: this });
             }
-        ],
-        'm-icon', {
-            name: this.multiple ? 'caret' : 'unfold',
-            part: 'select'
-        },
-        'fieldset', [
-            'legend', [
-                'span', { part: 'label', $text: this.label }
-            ]
-        ],
-        'label', { $text: this.label }
+        }, [
+            'div', {
+                part: 'body',
+                placeholder: this.placeholder,
+                label: this.label, // for default select width
+                $text: this.value,
+                $if: !this.multiple
+            },
+            'div', {
+                $if: this.multiple,
+                part: 'body',
+                placeholder: this.placeholder,
+                label: this.label, // for default select width
+            }, () => this.#selectedOptions.map((eachOption: OptionElement) => [
+                'm-chip', {
+                    $if: this.multiple,
+                    class: 'sm',
+                    $html: eachOption.innerHTML
+                        .replace('slot', 'part')
+                }, [
+                    'm-button', {
+                        part: 'close',
+                        $created: (element: ButtonElement) => {
+                            element.on('click', (event) => {
+                                event.stopPropagation();
+                                console.log(eachOption);
+                            }, { passive: true, id: this });
+                        }
+                    }, [
+                        'm-icon', { name: 'close' }
+                    ]
+                ]
+            ]), [
+                'input', {
+                    $if: this.searchable,
+                    part: 'search',
+                    type: 'search',
+                    placeholder: this.placeholder,
+                    value: this.keyword,
+                    $created: (element: HTMLInputElement) =>
+                        this.search = element
+                            .on('input', (event: any) => {
+                                this.keyword = event.target.value;
+                                this.popup.toggleAttribute('searching', !!this.keyword);
+                                this.popup.items.forEach((eachItem: ItemElement) => {
+                                    eachItem
+                                        .toggleAttribute('found', eachItem.textContent.indexOf(this.keyword) !== -1);
+                                });
+                                this.searchInfo = $('div', {
+                                    part: 'search-info'
+                                }, 'Not Found');
+                            }, { passive: true, id: NAME }),
+                    $removed: () => this.search = null
+                }
+            ],
+            'm-icon', {
+                name: this.multiple ? 'caret' : 'unfold',
+                part: 'select'
+            },
+            'fieldset', [
+                'legend', [
+                    'span', { part: 'label', $text: this.label }
+                ]
+            ],
+            'label', { $text: this.label }
+        ]
     ]);
 
     @Attr({ observe: false, render: false })
@@ -188,13 +201,6 @@ export class SelectElement extends ControlElement {
     autocomplete: string;
 
     onAdded() {
-        this.on('click', function (event) {
-            console.log(event.target);
-            if (this.disabled || !this.popup.hidden) return;
-            this.popup.select = this;
-            document.body.append(this.popup);
-            this.popup.open();
-        }, { passive: true, id: this });
         this.uid = uid++;
     }
 

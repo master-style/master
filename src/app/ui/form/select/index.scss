@@ -14,6 +14,29 @@
     cursor: pointer;
 }
 
+[part=root] {
+    display: inherit;
+    contain: style;
+    font: inherit;
+    flex-wrap: inherit;
+    flex-direction: inherit;
+    align-items: inherit;
+    justify-content: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+    text-transform: inherit;
+    text-overflow: inherit;
+    text-align: inherit;
+    white-space: inherit;
+    text-decoration: inherit;
+    color: inherit;
+    border-radius: inherit;
+    width: 100%;
+    height: 100%;
+    background-origin: border-box;
+    box-sizing: border-box;
+}
+
 [part=body] {
     cursor: pointer;
     font-weight: 500;
