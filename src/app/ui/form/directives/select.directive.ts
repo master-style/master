@@ -22,9 +22,7 @@ export class SelectControlValueAccessor implements ControlValueAccessor {
         console.log(el);
     }
 
-    onChange = (value: any) => {
-        console.log('on change');
-    }
+    onChange = (value: any) => {}
 
     onTouched = () => { };
 
