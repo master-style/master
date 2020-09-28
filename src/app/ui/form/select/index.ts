@@ -169,13 +169,7 @@ export class SelectElement extends ControlElement {
     @Attr({ render: false })
     expanded: boolean;
 
-    @Attr({
-        updater(select: SelectElement, value) {
-            if (select.popup) {
-                select.popup.searchable = value;
-            }
-        }
-    })
+    @Attr()
     searchable: boolean;
 
     @Attr({
@@ -191,6 +185,7 @@ export class SelectElement extends ControlElement {
             });
             ControlElement.valueUpdater(select, value);
             select.body.value = value;
+            select.changeEmitter(value);
         },
         reflect: false
     })
