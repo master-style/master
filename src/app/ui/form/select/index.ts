@@ -6,6 +6,7 @@ import './popup';
 import { OptionElement } from '../option';
 import { SelectPopupElement } from './popup';
 import { ItemElement } from '@ui/components/item';
+import { ButtonElement } from '../button';
 
 let uid = 0;
 
@@ -90,7 +91,12 @@ export class SelectElement extends ControlElement {
                     .replace('slot', 'part')
             }, [
                 'm-button', {
-                    part: 'close'
+                    part: 'close',
+                    $created: (element: ButtonElement) => {
+                        element.on('click', () => {
+                            console.log(eachOption);
+                        }, { passive: true, id: this });
+                    }
                 }, [
                     'm-icon', { name: 'close' }
                 ]
@@ -182,11 +188,12 @@ export class SelectElement extends ControlElement {
     autocomplete: string;
 
     onAdded() {
-        this.on('click', () => {
-            if (this.disabled) return;
+        this.on('click', function (event) {
+            console.log(event.target);
+            if (this.disabled || !this.popup.hidden) return;
             this.popup.select = this;
             document.body.append(this.popup);
-            this.popup.toggle();
+            this.popup.open();
         }, { passive: true, id: this });
         this.uid = uid++;
     }

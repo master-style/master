@@ -2,11 +2,12 @@
 
 :host {
     --rotate: 0deg;
+    --stroke-width: var(--icon-stroke-width, 2);
     --f-color: var(--icon-f-color, inherit);
     position: relative;
     display: inline-flex;
     // color: rgba(255, 255, 255, .3);
-    stroke-width: 2;
+    stroke-width: var(--icon-stroke-width);
     contain: content;
     color: var(--f-color);
     fill: inherit;
@@ -137,24 +138,4 @@ g {
 
 :host([direction=right]) {
     --rotate: -90deg;
-}
-
-.stroke\:1 {
-    stroke-width: 1px !important;
-}
-
-.stroke\:2 {
-    stroke-width: 2px !important;
-}
-
-.stroke\:3 {
-    stroke-width: 3px !important;
-}
-
-.stroke\:4 {
-    stroke-width: 4px !important;
-}
-
-.stroke\:5 {
-    stroke-width: 5px !important;
 }

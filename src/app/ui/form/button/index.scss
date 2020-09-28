@@ -126,6 +126,6 @@
     --f-color: var(--button-f-color, var(--theme-fade));
 
     ::slotted(m-icon) {
-        stroke-width: 4px;
+        --icon-stroke-width: 4px;
     }
 }

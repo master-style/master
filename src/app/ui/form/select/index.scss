@@ -75,6 +75,9 @@ m-button[part=close] {
     --button-bg-color-hover: var(--bg-object-hover);
     --button-bg-color: transparent;
     --button-f-color: var(--f-fader);
+    m-icon {
+        --icon-stroke-width: 3px;
+    }
 }
 
 @media (any-hover: hover) {

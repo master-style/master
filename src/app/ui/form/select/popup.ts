@@ -50,7 +50,6 @@ export class SelectPopupElement extends ToggleableElement {
                 $data: eachOption,
                 $html: eachOption.innerHTML,
                 $created: (item: ItemElement) => {
-                    console.log('add');
                     this.items.push(item);
                 },
                 $removed: (item: ItemElement) => {
@@ -231,7 +230,6 @@ export class SelectPopupElement extends ToggleableElement {
                         transformOrigin: ''
                     });
                 }
-                console.log(this.hidden);
                 finish();
             };
         });
