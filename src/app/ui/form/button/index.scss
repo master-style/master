@@ -120,10 +120,10 @@
 }
 
 :host([part=close]) {
-    --bg-color: var(--b-fade);
-    --bg-color-hover: var(--f-fadest);
-    --b-color-active: transparent;
-    --f-color: var(--theme-fade);
+    --bg-color: var(--button-bg-color, var(--b-fade));
+    --bg-color-hover: var(--button-bg-color-hover, var(--f-fadest));
+    --b-color-active: var(--button-b-color-active, transparent);
+    --f-color: var(--button-f-color, var(--theme-fade));
 
     ::slotted(m-icon) {
         stroke-width: 4px;

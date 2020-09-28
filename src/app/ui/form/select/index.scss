@@ -14,15 +14,6 @@
     cursor: pointer;
 }
 
-[part=search] {
-    max-width: fit-content;
-    display: inline-flex;
-    flex: 1 1 auto !important;
-    width: 0;
-    min-width: 6rem;
-    margin-bottom: $xs;
-}
-
 [part=body] {
     cursor: pointer;
     font-weight: 500;
@@ -41,8 +32,20 @@
 
 :host([multiple]) {
     [part=body] {
-        padding-bottom: calc(var(--py) - #{$xs})
-    }    
+        flex: 1 1 auto;
+        width: auto;
+        margin: #{-$xs};
+    }
+}
+
+[part=search] {
+    max-width: fit-content;
+    display: inline-flex;
+    flex: 1 1 auto;
+    width: 0;
+    min-width: 7rem;
+    margin: $xs;
+    word-break: keep-all;
 }
 
 :host(.underlined) {
@@ -62,17 +65,16 @@ m-icon[part=select] {
     margin-left: calc(var(--px) / -2)
 }
 
-[part=result] {
-    margin-top: -$xs;
-    margin-left: -$xs;
-    margin-bottom: -$xs;
-}
-
 m-chip {
     --chip-bg-color: var(--theme-fader);
     --chip-b-color: transparent;
-    margin-right: $xs;
-    margin-bottom: $xs;
+    margin: $xxs;
+}
+
+m-button[part=close] {
+    --button-bg-color-hover: var(--bg-color-hover);
+    --button-bg-color: transparent;
+    --button-f-color: var(--f-fader);
 }
 
 @media (any-hover: hover) {

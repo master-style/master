@@ -230,7 +230,7 @@ class MasterTemplate {
                                 if (existedNode) {
                                     existedNode.element.after(element);
                                 } else {
-                                    parent.appendChild(element);
+                                    parent.prepend(element);
                                 }
                             }
                         }

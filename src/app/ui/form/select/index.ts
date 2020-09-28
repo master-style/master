@@ -74,28 +74,28 @@ export class SelectElement extends ControlElement {
             part: 'body',
             placeholder: this.placeholder,
             label: this.label, // for default select width
-        }, [
-            'span', {
-                $if: !this.multiple || !Array.isArray(this.value),
-                $text: this.value
-            },
-            'div', {
-                $if: this.#selectedOptions.length,
-                part: 'result',
-            }, () => this.#selectedOptions.map((eachOption: OptionElement) => [
-                'm-chip', {
-                    $if: this.multiple,
-                    class: 'sm',
-                    $html: eachOption.innerHTML
-                        .replace('slot', 'part')
+            $text: this.value,
+            $if: !this.multiple
+        },
+        'div', {
+            $if: this.multiple,
+            part: 'body',
+            placeholder: this.placeholder,
+            label: this.label, // for default select width
+        }, () => this.#selectedOptions.map((eachOption: OptionElement) => [
+            'm-chip', {
+                $if: this.multiple,
+                class: 'sm',
+                $html: eachOption.innerHTML
+                    .replace('slot', 'part')
+            }, [
+                'm-button', {
+                    part: 'close'
                 }, [
-                    'm-button', {
-                        part: 'close'
-                    }, [
-                        'm-icon', { name: 'close' }
-                    ]
+                    'm-icon', { name: 'close' }
                 ]
-            ]),
+            ]
+        ]), [
             'input', {
                 $if: this.searchable,
                 part: 'search',
@@ -106,7 +106,6 @@ export class SelectElement extends ControlElement {
                     this.search = element
                         .on('input', (event: any) => {
                             this.keyword = event.target.value;
-                            this.search.css('width', this.keyword.length + 'rem');
                             this.popup.toggleAttribute('searching', !!this.keyword);
                             this.popup.items.forEach((eachItem: ItemElement) => {
                                 eachItem
