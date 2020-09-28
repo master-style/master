@@ -105,9 +105,6 @@ class MasterTemplate {
             }
         })(this.template(), this.nodes);
 
-        if (this.container?.tagName === 'M-SELECT')
-            console.log(this.nodes);
-
         if (this.nodes && this.container === container) {
             (function renderNodes(eachNodes, eachOldNodes, parent) {
                 if (!eachNodes.length && eachOldNodes.length) {
@@ -118,7 +115,8 @@ class MasterTemplate {
                     for (let i = 0; i < eachNodes.length; i++) {
                         const eachNode = eachNodes[i];
                         const eachOldNode = eachOldNodes[i];
-                        const eachOldElement = eachOldNode?.element;
+                        const existing = !!eachOldNode?.element;
+                        const same = eachNode.tag === eachOldNode.tag;
                         const hasIf = eachNode.hasOwnProperty('$if');
                         const whether = hasIf && eachNode.$if || !hasIf;
 
@@ -127,54 +125,63 @@ class MasterTemplate {
                                 .forEach((targetOldNode) => removeNode(targetOldNode));
                         }
 
-                        if (eachOldElement && eachNode.tag === eachOldNode.tag) {
-                            if (whether) {
-                                const element = eachNode.element = eachOldElement;
-                                const attr = eachNode.attr;
-                                const oldAttr = eachOldNode?.attr;
-                                if (attr) {
-                                    for (const eachAttrKey in attr) {
-                                        const value = attr[eachAttrKey];
-                                        const oldValue = oldAttr[eachAttrKey];
-                                        if (value !== oldValue) {
-                                            element.attr(eachAttrKey, value);
-                                        }
-                                    }
-                                }
-                                const css = eachNode.$css;
-                                const oldCss = eachOldNode?.$css;
-                                if (css) {
-                                    for (const eachPropKey in css) {
-                                        const value = css[eachPropKey];
-                                        const oldValue = oldCss[eachPropKey];
-                                        if (value !== oldValue) {
-                                            element.css(eachPropKey, value);
-                                        }
-                                    }
-                                }
-                                if (
-                                    eachNode.$html !== undefined &&
-                                    eachNode.$html !== eachOldNode.$html
-                                ) {
-                                    element.innerHTML = eachNode.$html;
-                                    if (eachOldNode) {
-                                        eachOldNode.children = [];
-                                    };
-                                } else if (
-                                    eachNode.$text !== undefined &&
-                                    eachNode.$text !== eachOldNode.$text
-                                ) {
-                                    element.textContent = eachNode.$text;
-                                }
-                                if (eachNode.children) {
-                                    renderNodes(eachNode.children, eachOldNode.children, element);
-                                }
-                                const updated = eachNode.$updated;
-                                if (updated) updated(element, eachNode);
-                            } else {
-                                removeNode(eachOldNode);
+                        if (
+                            // old: true ; now: false
+                            existing && !whether ||
+                            existing && whether && !same
+                        ) {
+                            if (parent.tagName === 'DIV') {
+                                console.log(eachNode, eachOldNode);
                             }
-                        } else if (whether) {
+                            removeNode(eachOldNode);
+                        }
+
+                        if (!whether) return;
+
+                        if (existing && same) {
+                            const element = eachNode.element = eachOldNode?.element;
+                            const attr = eachNode.attr;
+                            const oldAttr = eachOldNode?.attr;
+                            if (attr) {
+                                for (const eachAttrKey in attr) {
+                                    const value = attr[eachAttrKey];
+                                    const oldValue = oldAttr[eachAttrKey];
+                                    if (value !== oldValue) {
+                                        element.attr(eachAttrKey, value);
+                                    }
+                                }
+                            }
+                            const css = eachNode.$css;
+                            const oldCss = eachOldNode?.$css;
+                            if (css) {
+                                for (const eachPropKey in css) {
+                                    const value = css[eachPropKey];
+                                    const oldValue = oldCss[eachPropKey];
+                                    if (value !== oldValue) {
+                                        element.css(eachPropKey, value);
+                                    }
+                                }
+                            }
+                            if (
+                                eachNode.$html !== undefined &&
+                                eachNode.$html !== eachOldNode.$html
+                            ) {
+                                element.innerHTML = eachNode.$html;
+                                if (eachOldNode) {
+                                    eachOldNode.children = [];
+                                };
+                            } else if (
+                                eachNode.$text !== undefined &&
+                                eachNode.$text !== eachOldNode.$text
+                            ) {
+                                element.textContent = eachNode.$text;
+                            }
+                            if (eachNode.children) {
+                                renderNodes(eachNode.children, eachOldNode.children, element);
+                            }
+                            const updated = eachNode.$updated;
+                            if (updated) updated(element, eachNode);
+                        } else {
                             let element;
                             if (eachNode.$namespace) {
                                 element = document.createElementNS(eachNode.$namespace, eachNode.tag);
@@ -182,7 +189,6 @@ class MasterTemplate {
                                 element = document.createElement(eachNode.tag);
                             }
                             eachNode.element = element;
-                            removeNode(eachOldNode);
                             const attr = eachNode.attr;
                             if (attr) {
                                 element.attr(attr);
