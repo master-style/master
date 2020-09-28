@@ -20,11 +20,18 @@ export class SelectPopupElement extends ToggleableElement {
     @Attr({ reflect: false, observe: false })
     options;
 
+    items: ItemElement[] = [];
+
+    @Attr()
+    multiple: boolean = false;
+
     duration = 300;
     triggerEvent = null;
 
     content: ContentElement;
     select: SelectElement;
+
+    senseEdge = 5;
 
     #offsetTop = 0;
 
@@ -41,7 +48,14 @@ export class SelectPopupElement extends ToggleableElement {
                 empty: eachOption.empty,
                 selected: eachOption.selected,
                 $data: eachOption,
-                $html: eachOption.innerHTML
+                $html: eachOption.innerHTML,
+                $created: (item: ItemElement) => {
+                    console.log('add');
+                    this.items.push(item);
+                },
+                $removed: (item: ItemElement) => {
+                    this.items.splice(this.items.indexOf(item), 1);
+                }
             }, [
                 'm-check', {
                     slot: 'foot',
@@ -49,12 +63,13 @@ export class SelectPopupElement extends ToggleableElement {
                     class: 'sm',
                     checked: eachOption.selected,
                     $data: eachOption,
-                    type: this.select.multiple ? 'checkbox' : 'radio',
+                    type: this.multiple ? 'checkbox' : 'radio',
                     $created: (check: CheckElement, node: TemplateNode) => {
                         check
                             .on('change', () => {
-                                if (this.select.multiple) {
+                                if (this.multiple) {
                                     node.$data.selected = check.checked;
+                                    if (this.select.search) this.select.search.focus();
                                     this.updatePosition();
                                     this.render();
                                 } else {
@@ -64,7 +79,7 @@ export class SelectPopupElement extends ToggleableElement {
                                 this.select.changeEmitter(this.select.value);
                             }, { passive: true, id: this })
                             .on('click', () => {
-                                if (!this.select.multiple && check.checked) {
+                                if (!this.multiple && check.checked) {
                                     this.close();
                                 }
                             }, { passive: true, id: this });
@@ -80,6 +95,7 @@ export class SelectPopupElement extends ToggleableElement {
     }
 
     onOpened() {
+        console.log('opened');
         document.documentElement.css('overflow', 'hidden');
         document.body
             .on('click', async (clickEvent: any) => {
@@ -87,13 +103,15 @@ export class SelectPopupElement extends ToggleableElement {
                     clickEvent.target === this ||
                     this.select.contains(clickEvent.target)
                 ) return;
-                if (isClickedOutside(clickEvent, this)) {
+                if (isClickedOutside(this, clickEvent, this.senseEdge)) {
                     this.close();
                 }
             }, { passive: true, id: this });
+        if (this.select.search) this.select.search.focus();
     }
 
     onClose() {
+        console.log('close');
         if (this.select.search) {
             this.select.search.value = this.select.keyword = '';
         }
@@ -101,9 +119,11 @@ export class SelectPopupElement extends ToggleableElement {
         document.body.off({ id: this });
         document.documentElement.css('overflow', '');
         this.select.toggleAttribute('focused', false);
+        this.toggleAttribute('searching', false);
     }
 
     onClosed() {
+        console.log('closed');
         this.remove();
     }
 
@@ -119,14 +139,14 @@ export class SelectPopupElement extends ToggleableElement {
             windowHeight = window.innerHeight,
             windowWidth = window.innerWidth;
 
-        if (this.select.multiple || this.select.searchable) {
-            top = selectRect.top + selectRect.height;
+        if (this.multiple || this.select.searchable) {
+            top = selectRect.top + selectRect.height + 5;
             left = selectRect.left;
         } else {
             const itemNodes = this.template.nodes[0].children;
             let originItemNode: TemplateNode;
 
-            if (this.select.multiple) {
+            if (this.multiple) {
                 // value and oldValue always not be same
                 originItemNode = itemNodes
                     .filter((eachItemNode) => eachItemNode.$data.selected)[0];
@@ -214,13 +234,10 @@ export class SelectPopupElement extends ToggleableElement {
                         transformOrigin: ''
                     });
                 }
+                console.log(this.hidden);
                 finish();
             };
         });
-    }
-
-    onAdded() {
-        this.open();
     }
 
     render() {

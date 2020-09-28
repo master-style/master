@@ -17,7 +17,7 @@
 [part=search] {
     max-width: fit-content;
     display: inline-flex;
-    flex: 1 1 auto!important;
+    flex: 1 1 auto !important;
     width: 0;
     min-width: 6rem;
     height: 1.5rem;
@@ -36,10 +36,6 @@
         content: attr(label);
         color: transparent;
     }
-}
-
-[contenteditable]:focus {
-    outline: none;
 }
 
 :host(.underlined) {
@@ -72,15 +68,18 @@ m-chip {
     }
 }
 
+
 // 暫時解決排版問題，待改為 m-y m-x
 .y\:xs {
     display: flex;
     flex-wrap: wrap;
-    margin: -$xs;
     align-items: center;
+    margin-right: -$xs;
+    margin-bottom: -$xs;
 }
 
 .x {
     flex: 0 0 auto;
-    margin: $xxs;
+    margin-right: $xs;
+    margin-bottom: $xs;
 }

@@ -5,6 +5,7 @@ import './popup';
 
 import { OptionElement } from '../option';
 import { SelectPopupElement } from './popup';
+import { ItemElement } from '@ui/components/item';
 
 let uid = 0;
 
@@ -26,10 +27,13 @@ export class SelectElement extends ControlElement {
 
     popup: SelectPopupElement = $('m-select-popup', {});
     search: HTMLInputElement;
+    searchInfo: HTMLElement;
 
     keyword: string;
 
     readonly options: OptionElement[] = this.popup.options = [];
+
+    #selectedOptions: OptionElement[] = [];
 
     addOption(option: OptionElement) {
         this.options.push(option);
@@ -42,12 +46,14 @@ export class SelectElement extends ControlElement {
     composeValue() {
         if (this.multiple) {
             // value and oldValue always not be same
-            this.value = this.options
-                .filter((eachOption: OptionElement) => eachOption.selected)
+            this.#selectedOptions = this.options
+                .filter((eachOption: OptionElement) => eachOption.selected);
+            this.value = this.#selectedOptions
                 .map((eachOption: OptionElement) => eachOption.value);
         } else {
-            this.value = this.options
-                .find((eachOption: OptionElement) => eachOption.selected)?.value;
+            this.#selectedOptions = [this.options
+                .find((eachOption: OptionElement) => eachOption.selected)];
+            this.value = this.#selectedOptions[0]?.value;
         }
     }
 
@@ -75,10 +81,11 @@ export class SelectElement extends ControlElement {
             'div', {
                 $if: this.multiple || this.multiple && this.searchable,
                 class: 'y:xs'
-            }, () => (this.value || []).map((eachValue: any) => [
+            }, () => (this.#selectedOptions as any).map((eachOption: OptionElement) => [
                 'm-chip', {
                     class: 'x sm',
-                    $text: eachValue
+                    $html: eachOption.innerHTML
+                        .replace('slot', 'part')
                 }
             ]).concat([
                 'input', {
@@ -92,12 +99,20 @@ export class SelectElement extends ControlElement {
                             .on('input', (event: any) => {
                                 this.keyword = event.target.value;
                                 this.search.css('width', this.keyword.length + 'rem');
+                                this.popup.toggleAttribute('searching', !!this.keyword);
+                                this.popup.items.forEach((eachItem: ItemElement) => {
+                                    eachItem
+                                        .toggleAttribute('found', eachItem.textContent.indexOf(this.keyword) !== -1);
+                                });
+                                this.searchInfo = $('div', {
+                                    part: 'search-info'
+                                }, 'Not Found');
                             }, { passive: true, id: NAME }),
                     $removed: () => this.search = null
                 },
             ])
         ],
-        'm-icon', { name: 'unfold' },
+        'm-icon', { name: this.multiple ? 'caret' : 'unfold' },
         'fieldset', [
             'legend', [
                 'span', { part: 'label', $text: this.label }
@@ -121,8 +136,14 @@ export class SelectElement extends ControlElement {
     @Attr()
     label: string;
 
-    @Attr()
-    multiple: boolean;
+    @Attr({
+        updater(select: SelectElement, value) {
+            if (select.popup) {
+                select.popup.multiple = value;
+            }
+        }
+    })
+    multiple: boolean = false;
 
     @Attr({ render: false })
     expanded: boolean;
@@ -152,10 +173,11 @@ export class SelectElement extends ControlElement {
     autocomplete: string;
 
     onAdded() {
-        this.on('click', async () => {
+        this.on('click', () => {
             if (this.disabled) return;
             this.popup.select = this;
             document.body.append(this.popup);
+            this.popup.toggle();
         }, { passive: true, id: this });
         this.uid = uid++;
     }

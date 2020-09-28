@@ -100,6 +100,15 @@ class MasterTemplate {
                         const hasIf = eachNode.hasOwnProperty('$if');
                         const whether = hasIf && eachNode.$if || !hasIf;
 
+                        if (eachNodes.length - 1 === i && eachOldNodes[i + 1]) {
+                            eachOldNodes.splice(i + 1)
+                                .forEach((deletedOldNode) => {
+                                    deletedOldNode.element.remove();
+                                    const removed = deletedOldNode.$removed;
+                                    if (removed) removed(deletedOldNode.element, deletedOldNode);
+                                });
+                        }
+
                         if (eachOldElement && eachNode.tag === eachOldNode.tag) {
                             if (whether) {
                                 const element = eachNode.element = eachOldElement;
@@ -202,15 +211,6 @@ class MasterTemplate {
                                 }
                             }
                         }
-
-                        if (eachNodes.length - 1 === i && eachOldNodes[i + 1]) {
-                            eachOldNodes.splice(i + 1)
-                                .forEach((deletedOldNode) => {
-                                    deletedOldNode.element.remove();
-                                    const removed = deletedOldNode.$removed;
-                                    if (removed) removed(deletedOldNode.element, deletedOldNode);
-                                });
-                        }
                     }
                 }
             })(this.nodes, oldNodes, container);
@@ -258,15 +258,21 @@ class MasterTemplate {
     remove() {
         if (this.nodes.length) {
             this.container = null;
-            this.nodes
-                .forEach((eachNode) => {
-                    const element = eachNode.element;
-                    if (element) {
-                        element.remove();
-                        const removed = eachNode.$removed;
-                        if (removed) removed(element, eachNode);
-                    }
-                });
+            (function remove(eachNodes, isRoot?: boolean) {
+                eachNodes
+                    .forEach((eachNode) => {
+                        const element = eachNode.element;
+                        if (element) {
+                            // 父層被移除，後代也將一併被移除，無須再執行後代的 .remove()
+                            if (isRoot) element.remove();
+                            const removed = eachNode.$removed;
+                            if (removed) removed(element, eachNode);
+                        }
+                        if (eachNode.children) {
+                            remove(eachNode.children);
+                        }
+                    });
+            })(this.nodes, true);
             this.nodes = [];
         }
         return this;

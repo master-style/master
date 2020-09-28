@@ -1,12 +1,14 @@
 
 export function isClickedOutside(
-    event: any, target: Element
+    target: Element,
+    event: any,
+    senseEdge: number = 0
 ): boolean {
     const x = event.clientX;
     const y = event.clientY;
     const rect = target.getBoundingClientRect();
-    return rect.top > y ||
-        rect.top + rect.height < y ||
-        rect.left > x ||
-        rect.left + rect.width < x;
+    return rect.top > y + senseEdge ||
+        rect.top + rect.height < y - senseEdge ||
+        rect.left > x + senseEdge ||
+        rect.left + rect.width < x - senseEdge;
 }

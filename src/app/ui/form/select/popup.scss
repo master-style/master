@@ -43,6 +43,12 @@
     will-change: transform, opacity;
 }
 
+:host([searching]) {
+    m-item:not([found]) {
+        display: none;
+    }
+}
+
 m-content {
     max-height: inherit;
     --content-offset-top: .375rem;

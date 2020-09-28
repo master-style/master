@@ -29,9 +29,11 @@
                           [ngModel]="['taipei']"
                           class="outlined">
                     <m-option *ngFor="let city of ['taichung', 'kaosiung', 'taipei', 'hualien']"
-                              [value]="city">{{city}}</m-option>
+                              [value]="city">
+                              <span slot="head">🍉</span>{{city}}</m-option>
                     <m-option *ngFor="let city of ['taoyuan']"
-                              [value]="city">{{city}}</m-option>
+                              [value]="city">
+                              <span slot="head">🍉</span>{{city}}</m-option>
                 </m-select>
             </div>
             <div class="x" *ngFor="let theme of ['dark', 'light']">

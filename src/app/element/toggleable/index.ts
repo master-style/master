@@ -9,7 +9,7 @@ export class ToggleableElement extends HTMLElement {
             value ? togglable.close() : togglable.open();
         }
     })
-    hidden: boolean;
+    hidden: boolean = true;
 
     @Attr({ reflect: false })
     duration = 500;
@@ -81,7 +81,10 @@ export class ToggleableElement extends HTMLElement {
     protected animations: Animation[] = [];
     protected animation: Animation;
 
-    private async prepare() {
+    private async prepare(opening: boolean) {
+        // 此繞過 this.hidden 設置
+        this['_hidden'] = !opening;
+        this.toggleAttribute('hidden', !opening);
         if (this.triggerEvent) {
             const name = this.constructor['elementName'];
             const toggleAttrKey = 'toggle-' + name;
@@ -107,6 +110,8 @@ export class ToggleableElement extends HTMLElement {
                     easing: this.easing,
                     duration: this.duration
                 });
+                const completed = this.hidden ? this['onClosed'] : this['onOpened'];
+                if (completed) completed.call(this);
                 this.toggleAttribute('changing', false);
                 this.animation = null;
                 this.animations = [];
@@ -115,31 +120,21 @@ export class ToggleableElement extends HTMLElement {
     }
 
     async open() {
-        if (this.hidden === false) {
+        if (!this.hidden) {
             return;
         }
-        // 此繞過 this.hidden 設置
-        this['_hidden'] = false;
-        this.toggleAttribute('hidden', false);
         const onOpen = this['onOpen'];
         if (onOpen) onOpen.call(this);
-        await this.prepare();
-        const onOpened = this['onOpened'];
-        if (onOpened) onOpened.call(this);
+        await this.prepare(true);
     }
 
     async close() {
-        if (this.hidden === true) {
+        if (this.hidden) {
             return;
         }
-        // 此繞過 this.hidden 設置
-        this['_hidden'] = true;
-        this.toggleAttribute('hidden', true);
         const onClose = this['onClose'];
         if (onClose) onClose.call(this);
-        await this.prepare();
-        const onClosed = this['onClosed'];
-        if (onClosed) onClosed.call(this);
+        await this.prepare(false);
     }
 
     async toggle(whether?: boolean) {
