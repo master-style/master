@@ -79,43 +79,41 @@ export class SelectElement extends ControlElement {
                 $if: !this.multiple || !Array.isArray(this.value),
                 $text: this.value
             },
-            () => (this.#selectedOptions as any).map((eachOption: OptionElement) => [
-                'm-chip', {
-                    $if: this.multiple,
-                    class: 'x sm',
-                    $html: eachOption.innerHTML
-                        .replace('slot', 'part')
+        ], () => (this.#selectedOptions as any).map((eachOption: OptionElement) => [
+            'm-chip', {
+                $if: this.multiple,
+                class: 'x sm',
+                $html: eachOption.innerHTML
+                    .replace('slot', 'part')
+            }, [
+                'm-button', {
+                    part: 'close'
                 }, [
-                    'm-button', {
-                        part: 'close'
-                    }, [
-                        'm-icon', { name: 'close' }
-                    ]
+                    'm-icon', { name: 'close' }
                 ]
             ]
-            ), [
-                'input', {
-                    part: 'search',
-                    type: 'search',
-                    placeholder: this.placeholder,
-                    value: this.keyword,
-                    $created: (element: HTMLInputElement) =>
-                        this.search = element
-                            .on('input', (event: any) => {
-                                this.keyword = event.target.value;
-                                this.search.css('width', this.keyword.length + 'rem');
-                                this.popup.toggleAttribute('searching', !!this.keyword);
-                                this.popup.items.forEach((eachItem: ItemElement) => {
-                                    eachItem
-                                        .toggleAttribute('found', eachItem.textContent.indexOf(this.keyword) !== -1);
-                                });
-                                this.searchInfo = $('div', {
-                                    part: 'search-info'
-                                }, 'Not Found');
-                            }, { passive: true, id: NAME }),
-                    $removed: () => this.search = null
-                }
-            ]
+        ]), [
+            'input', {
+                part: 'search',
+                type: 'search',
+                placeholder: this.placeholder,
+                value: this.keyword,
+                $created: (element: HTMLInputElement) =>
+                    this.search = element
+                        .on('input', (event: any) => {
+                            this.keyword = event.target.value;
+                            this.search.css('width', this.keyword.length + 'rem');
+                            this.popup.toggleAttribute('searching', !!this.keyword);
+                            this.popup.items.forEach((eachItem: ItemElement) => {
+                                eachItem
+                                    .toggleAttribute('found', eachItem.textContent.indexOf(this.keyword) !== -1);
+                            });
+                            this.searchInfo = $('div', {
+                                part: 'search-info'
+                            }, 'Not Found');
+                        }, { passive: true, id: NAME }),
+                $removed: () => this.search = null
+            }
         ],
         'm-icon', {
             name: this.multiple ? 'caret' : 'unfold',

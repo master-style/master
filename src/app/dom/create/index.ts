@@ -51,18 +51,21 @@ class MasterTemplate {
             for (const token of tokens) {
                 const tokenType = typeof token;
                 if (tokenType === 'string') {
-                    eachNode = { tag: token };
+                    eachNode = {
+                        tag: token,
+                        children: []
+                    };
                     eachNodes.push(eachNode);
                 } else {
                     const hasIf = eachNode.hasOwnProperty('$if');
                     const whether = hasIf && eachNode.$if || !hasIf;
                     if (Array.isArray(token) && whether) {
-                        generate(token, eachNode.children = []);
+                        generate(token, eachNode.children);
                     } else if (tokenType === 'function' && whether) {
                         const children = token().reduce((acc, eachToken) => {
                             return acc.concat(eachToken);
                         }, []);
-                        generate(children, eachNode.children = []);
+                        generate(children, eachNode.children);
                     } else if (tokenType === 'object') {
                         const attr = token;
                         eachNode.attr = {};
