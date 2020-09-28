@@ -48,7 +48,7 @@ const removeNodes = (eachNodes, isRoot?: boolean) => {
                 const removed = eachNode.$removed;
                 if (removed) removed(element, eachNode);
             }
-            if (eachNode.children.length) {
+            if (eachNode.children) {
                 removeNodes(eachNode.children);
             }
         });
@@ -76,16 +76,20 @@ class MasterTemplate {
                 if (tokenType === 'string') {
                     eachNode = {
                         tag: token,
-                        children: []
+                        children: null
                     };
                     eachNodes.push(eachNode);
                 } else {
-                    if (Array.isArray(token)) {
+                    const hasIf = eachNode.hasOwnProperty('$if');
+                    const whether = hasIf && eachNode.$if || !hasIf;
+                    if (Array.isArray(token) && whether) {
+                        eachNode.children = eachNode.children || [];
                         generate(token, eachNode.children);
-                    } else if (tokenType === 'function') {
+                    } else if (tokenType === 'function' && whether) {
                         const children = token().reduce((acc, eachToken) => {
                             return acc.concat(eachToken);
                         }, []);
+                        eachNode.children = eachNode.children || [];
                         generate(children, eachNode.children);
                     } else if (tokenType === 'object') {
                         const attr = token;
@@ -107,16 +111,21 @@ class MasterTemplate {
             (function renderNodes(eachNodes, eachOldNodes, parent) {
                 if (!eachNodes.length && eachOldNodes.length) {
                     removeNodes(eachOldNodes, true);
-                    eachOldNodes = [];
                 } else {
+                    console.log(eachNodes, eachOldNodes);
                     // if (parent.tagName === 'DIV') {
                     //     console.log(eachNodes, eachOldNodes);
                     // }
                     // tslint:disable-next-line: prefer-for-of
+                    if (eachOldNodes && eachOldNodes[eachNodes.length]) {
+                        eachOldNodes.splice(eachNodes.length)
+                            .forEach((targetOldNode) => removeNode(targetOldNode));
+                    }
+
                     for (let i = 0; i < eachNodes.length; i++) {
                         const eachNode = eachNodes[i];
-                        const eachOldNode = eachOldNodes[i];
-                        const existing = eachOldNode?.element;
+                        const eachOldNode = eachOldNodes && eachOldNodes[i];
+                        const existing = !!eachOldNode?.element;
                         const same = eachNode.tag === eachOldNode?.tag;
                         const hasIf = eachNode.hasOwnProperty('$if');
                         const whether = hasIf && eachNode.$if || !hasIf;
@@ -124,17 +133,13 @@ class MasterTemplate {
                         if (
                             // old: true ; now: false
                             existing && !whether ||
-                            existing && !same
+                            existing && whether && !same
                         ) {
                             removeNode(eachOldNode);
                         }
 
-                        if (eachNodes.length - 1 === i && eachOldNodes[i + 1]) {
-                            eachOldNodes.splice(i + 1)
-                                .forEach((targetOldNode) => removeNode(targetOldNode));
-                        }
+                        if (!whether) continue;
 
-                        if (!whether) return;
                         if (existing && same) {
                             const element = eachNode.element = eachOldNode?.element;
                             const attr = eachNode.attr;
@@ -165,7 +170,7 @@ class MasterTemplate {
                             ) {
                                 element.innerHTML = eachNode.$html;
                                 if (eachOldNode) {
-                                    eachOldNode.children = [];
+                                    eachOldNode.children = null;
                                 };
                             } else if (
                                 eachNode.$text !== undefined &&
@@ -173,8 +178,8 @@ class MasterTemplate {
                             ) {
                                 element.textContent = eachNode.$text;
                             }
-                            if (eachNode.children.length) {
-                                renderNodes(eachNode.children, eachOldNode.children, element);
+                            if (eachNode.children) {
+                                renderNodes(eachNode.children, eachOldNode?.children, element);
                             }
                             const updated = eachNode.$updated;
                             if (updated) updated(element, eachNode);
@@ -197,13 +202,13 @@ class MasterTemplate {
                             if (eachNode.$html !== undefined) {
                                 element.innerHTML = eachNode.$html;
                                 if (eachOldNode) {
-                                    eachOldNode.children = [];
+                                    eachOldNode.children = null;
                                 }
                             } else if (eachNode.$text !== undefined) {
                                 element.textContent = eachNode.$text;
                             }
-                            if (eachNode.children.length) {
-                                renderNodes(eachNode.children, [], element);
+                            if (eachNode.children) {
+                                renderNodes(eachNode.children, eachOldNode?.children, element);
                             }
 
                             const created = eachNode.$created;
@@ -265,7 +270,7 @@ class MasterTemplate {
                     if (css) {
                         element.css(css);
                     }
-                    if (eachNode.children.length) {
+                    if (eachNode.children) {
                         create(eachNode.children, element);
                     }
                     eachFragment.appendChild(element);
