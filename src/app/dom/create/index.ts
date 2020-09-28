@@ -38,6 +38,22 @@ const removeNode = (node) => {
     if (removed) removed(node.element, node);
 };
 
+const removeNodes = (eachNodes, isRoot?: boolean) => {
+    eachNodes
+        .forEach((eachNode) => {
+            const element = eachNode.element;
+            if (element) {
+                // 父層被移除，後代也將一併被移除，無須再執行後代的 .remove()
+                if (isRoot) element.remove();
+                const removed = eachNode.$removed;
+                if (removed) removed(element, eachNode);
+            }
+            if (eachNode.children) {
+                removeNodes(eachNode.children);
+            }
+        });
+};
+
 class MasterTemplate {
 
     constructor(
@@ -141,7 +157,9 @@ class MasterTemplate {
                                     eachNode.$html !== eachOldNode.$html
                                 ) {
                                     element.innerHTML = eachNode.$html;
-                                    if (eachOldNode) eachOldNode.children = [];
+                                    if (eachOldNode) {
+                                        eachOldNode.children = [];
+                                    };
                                 } else if (
                                     eachNode.$text !== undefined &&
                                     eachNode.$text !== eachOldNode.$text
@@ -175,7 +193,9 @@ class MasterTemplate {
                             }
                             if (eachNode.$html !== undefined) {
                                 element.innerHTML = eachNode.$html;
-                                if (eachOldNode) eachOldNode.children = [];
+                                if (eachOldNode) {
+                                    eachOldNode.children = [];
+                                }
                             } else if (eachNode.$text !== undefined) {
                                 element.textContent = eachNode.$text;
                             }
@@ -255,21 +275,7 @@ class MasterTemplate {
     remove() {
         if (this.nodes.length) {
             this.container = null;
-            (function removeNodes(eachNodes, isRoot?: boolean) {
-                eachNodes
-                    .forEach((eachNode) => {
-                        const element = eachNode.element;
-                        if (element) {
-                            // 父層被移除，後代也將一併被移除，無須再執行後代的 .remove()
-                            if (isRoot) element.remove();
-                            const removed = eachNode.$removed;
-                            if (removed) removed(element, eachNode);
-                        }
-                        if (eachNode.children) {
-                            removeNodes(eachNode.children);
-                        }
-                    });
-            })(this.nodes, true);
+            removeNodes(this.nodes, true);
             this.nodes = [];
         }
         return this;
