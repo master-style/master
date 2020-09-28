@@ -139,7 +139,7 @@ class MasterTemplate {
                                     eachNode.$html !== eachOldNode.$html
                                 ) {
                                     element.innerHTML = eachNode.$html;
-                                    eachOldNode.children = [];
+                                    if (eachOldNode) eachOldNode.children = [];
                                 } else if (
                                     eachNode.$text !== undefined &&
                                     eachNode.$text !== eachOldNode.$text
@@ -180,7 +180,7 @@ class MasterTemplate {
                             }
                             if (eachNode.$html !== undefined) {
                                 element.innerHTML = eachNode.$html;
-                                eachOldNode.children = [];
+                                if (eachOldNode) eachOldNode.children = [];
                             } else if (eachNode.$text !== undefined) {
                                 element.textContent = eachNode.$text;
                             }

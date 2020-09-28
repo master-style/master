@@ -51,9 +51,10 @@ export class SelectElement extends ControlElement {
             this.value = this.#selectedOptions
                 .map((eachOption: OptionElement) => eachOption.value);
         } else {
-            this.#selectedOptions = [this.options
-                .find((eachOption: OptionElement) => eachOption.selected)];
-            this.value = this.#selectedOptions[0]?.value;
+            const selectedOption = this.options
+                .find((eachOption: OptionElement) => eachOption.selected);
+            if (selectedOption) this.#selectedOptions = [selectedOption];
+            this.value = selectedOption?.value;
         }
     }
 
@@ -78,11 +79,9 @@ export class SelectElement extends ControlElement {
                 $if: !this.multiple || !Array.isArray(this.value),
                 $text: this.value
             },
-            'div', {
-                $if: this.multiple || this.multiple && this.searchable,
-                class: 'y:xs'
-            }, () => (this.#selectedOptions as any).map((eachOption: OptionElement) => [
+            () => (this.#selectedOptions as any).map((eachOption: OptionElement) => [
                 'm-chip', {
+                    $if: this.multiple,
                     class: 'x sm',
                     $html: eachOption.innerHTML
                         .replace('slot', 'part')
@@ -93,9 +92,9 @@ export class SelectElement extends ControlElement {
                         'm-icon', { name: 'close' }
                     ]
                 ]
-            ]).concat([
+            ]
+            ), [
                 'input', {
-                    class: 'x',
                     part: 'search',
                     type: 'search',
                     placeholder: this.placeholder,
@@ -115,8 +114,8 @@ export class SelectElement extends ControlElement {
                                 }, 'Not Found');
                             }, { passive: true, id: NAME }),
                     $removed: () => this.search = null
-                },
-            ])
+                }
+            ]
         ],
         'm-icon', {
             name: this.multiple ? 'caret' : 'unfold',
