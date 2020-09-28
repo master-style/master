@@ -39,7 +39,6 @@ export class SelectPopupElement extends ToggleableElement {
         'm-content', {
             'scroll-y': true,
             guide: true,
-            class: 'bg:popup',
             $created: (element: ContentElement) => this.content = element
         }, () => this.options.map((eachOption: OptionElement) => [
             'm-item', {
@@ -85,8 +84,30 @@ export class SelectPopupElement extends ToggleableElement {
                     }
                 }
             ]
-        ]),
+        ]), [
+            'div', {
+                $if: this.#keyword && this.#foundCount === 0,
+                part: 'search-info',
+                $text: 'Not Found'
+            }
+        ]
     ]);
+
+    #foundCount: number = 0;
+    #keyword: string;
+
+    search(keyword: string) {
+        this.#keyword = keyword;
+        this.toggleAttribute('searching', !!keyword);
+        this.#foundCount = 0;
+        this.items.forEach((eachItem: ItemElement) => {
+            const found = eachItem.textContent.indexOf(keyword) !== -1;
+            if (found) this.#foundCount++;
+            eachItem
+                .toggleAttribute('found', found);
+        });
+        this.render();
+    }
 
     onOpen() {
         this.select.toggleAttribute('focused', true);
@@ -116,10 +137,12 @@ export class SelectPopupElement extends ToggleableElement {
         document.body.off({ id: this });
         document.documentElement.css('overflow', '');
         this.select.toggleAttribute('focused', false);
-        this.toggleAttribute('searching', false);
     }
 
     onClosed() {
+        this.#foundCount = 0;
+        this.#keyword = '';
+        this.toggleAttribute('searching', false);
         this.remove();
     }
 

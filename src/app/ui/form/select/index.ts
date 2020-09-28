@@ -120,19 +120,10 @@ export class SelectElement extends ControlElement {
                     part: 'search',
                     type: 'search',
                     placeholder: this.placeholder,
-                    value: this.keyword,
                     $created: (element: HTMLInputElement) =>
                         this.search = element
                             .on('input', (event: any) => {
-                                this.keyword = event.target.value;
-                                this.popup.toggleAttribute('searching', !!this.keyword);
-                                this.popup.items.forEach((eachItem: ItemElement) => {
-                                    eachItem
-                                        .toggleAttribute('found', eachItem.textContent.indexOf(this.keyword) !== -1);
-                                });
-                                this.searchInfo = $('div', {
-                                    part: 'search-info'
-                                }, 'Not Found');
+                                this.popup.search(event.target.value);
                             }, { passive: true, id: NAME }),
                     $removed: () => this.search = null
                 }
@@ -177,7 +168,13 @@ export class SelectElement extends ControlElement {
     @Attr({ render: false })
     expanded: boolean;
 
-    @Attr()
+    @Attr({
+        updater(select: SelectElement, value) {
+            if (select.popup) {
+                select.popup.searchable = value;
+            }
+        }
+    })
     searchable: boolean;
 
     @Attr({

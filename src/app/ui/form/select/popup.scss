@@ -6,6 +6,8 @@
 :host {
     position: fixed;
     top: 0;
+    display: flex;
+    flex-direction: column;
     margin: auto;
     z-index: $z-overlay;
     border-radius: $xs;
@@ -37,6 +39,15 @@
             0 7.9px 12.1px rgba(0, 0, 0, 0.043),
             0 19px 29px rgba(0, 0, 0, 0.06);
     }
+}
+
+[part=search-info] {
+    font-size: var(--f-xxs);
+    padding: .5rem;
+    font-style: italic;
+    text-align: center;
+    letter-spacing: 1px;
+    color: var(--f-fade);
 }
 
 :host([changing]) {
