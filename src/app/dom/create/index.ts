@@ -48,7 +48,7 @@ const removeNodes = (eachNodes, isRoot?: boolean) => {
                 const removed = eachNode.$removed;
                 if (removed) removed(element, eachNode);
             }
-            if (eachNode.children) {
+            if (eachNode.children.length) {
                 removeNodes(eachNode.children);
             }
         });
@@ -80,11 +80,9 @@ class MasterTemplate {
                     };
                     eachNodes.push(eachNode);
                 } else {
-                    const hasIf = eachNode.hasOwnProperty('$if');
-                    const whether = hasIf && eachNode.$if || !hasIf;
-                    if (Array.isArray(token) && whether) {
+                    if (Array.isArray(token)) {
                         generate(token, eachNode.children);
-                    } else if (tokenType === 'function' && whether) {
+                    } else if (tokenType === 'function') {
                         const children = token().reduce((acc, eachToken) => {
                             return acc.concat(eachToken);
                         }, []);
@@ -109,6 +107,7 @@ class MasterTemplate {
             (function renderNodes(eachNodes, eachOldNodes, parent) {
                 if (!eachNodes.length && eachOldNodes.length) {
                     removeNodes(eachOldNodes, true);
+                    eachOldNodes = [];
                 } else {
                     // if (parent.tagName === 'DIV') {
                     //     console.log(eachNodes, eachOldNodes);
@@ -117,7 +116,7 @@ class MasterTemplate {
                     for (let i = 0; i < eachNodes.length; i++) {
                         const eachNode = eachNodes[i];
                         const eachOldNode = eachOldNodes[i];
-                        const existing = !!eachOldNode?.element;
+                        const existing = eachOldNode?.element;
                         const same = eachNode.tag === eachOldNode?.tag;
                         const hasIf = eachNode.hasOwnProperty('$if');
                         const whether = hasIf && eachNode.$if || !hasIf;
@@ -125,7 +124,7 @@ class MasterTemplate {
                         if (
                             // old: true ; now: false
                             existing && !whether ||
-                            existing && whether && !same
+                            existing && !same
                         ) {
                             removeNode(eachOldNode);
                         }
@@ -174,7 +173,7 @@ class MasterTemplate {
                             ) {
                                 element.textContent = eachNode.$text;
                             }
-                            if (eachNode.children) {
+                            if (eachNode.children.length) {
                                 renderNodes(eachNode.children, eachOldNode.children, element);
                             }
                             const updated = eachNode.$updated;
@@ -203,7 +202,7 @@ class MasterTemplate {
                             } else if (eachNode.$text !== undefined) {
                                 element.textContent = eachNode.$text;
                             }
-                            if (eachNode.children) {
+                            if (eachNode.children.length) {
                                 renderNodes(eachNode.children, [], element);
                             }
 
@@ -266,7 +265,7 @@ class MasterTemplate {
                     if (css) {
                         element.css(css);
                     }
-                    if (eachNode.children) {
+                    if (eachNode.children.length) {
                         create(eachNode.children, element);
                     }
                     eachFragment.appendChild(element);
