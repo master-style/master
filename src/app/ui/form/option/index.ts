@@ -42,11 +42,14 @@ export class OptionElement extends HTMLElement {
     @Attr({ observe: false, render: false })
     empty: boolean = false;
 
+    select: SelectElement;
+
     onAdded() {
-        this.parentElement['addOption'](this);
+        this.select = (this.parentElement as any);
+        this.select.addOption(this);
     }
 
     onRemoved() {
-        this.parentElement['removeOption'](this);
+        this.select.removeOption(this);
     }
 }

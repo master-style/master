@@ -36,12 +36,19 @@ export class SelectElement extends ControlElement {
 
     #selectedOptions: OptionElement[] = [];
 
+    constructor() {
+        super();
+        this.popup.select = this;
+    }
+
     addOption(option: OptionElement) {
         this.options.push(option);
+        this.composeValue();
     }
 
     removeOption(option: OptionElement) {
         this.options.splice(this.options.indexOf(option), 1);
+        this.composeValue();
     }
 
     composeValue() {
@@ -56,6 +63,12 @@ export class SelectElement extends ControlElement {
                 .find((eachOption: OptionElement) => eachOption.selected);
             if (selectedOption) this.#selectedOptions = [selectedOption];
             this.value = selectedOption?.value;
+        }
+        if (this.popup) {
+            if (!this.popup.hidden) {
+                this.popup.render();
+                this.popup.updatePosition();
+            }
         }
     }
 
@@ -76,7 +89,6 @@ export class SelectElement extends ControlElement {
             $created: (element: HTMLDivElement) => {
                 element.on('click', () => {
                     if (this.disabled || !this.popup.hidden) return;
-                    this.popup.select = this;
                     document.body.append(this.popup);
                     this.popup.open();
                 }, { passive: true, id: this });
