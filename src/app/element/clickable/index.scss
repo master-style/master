@@ -106,16 +106,20 @@ a[part=root] {
 
 :host([busy]) {
 
-    pointer-events: none!important;
+    pointer-events: none !important;
+
+    [part=root] {
+        box-shadow: none !important;
+    }
 
     [part=root] *:not([part=icon]),
     ::slotted(*) {
-        visibility: hidden!important;
+        visibility: hidden !important;
     }
 
     slot,
     ::slotted(*) {
-        color: transparent!important;
+        color: transparent !important;
     }
 }
 
