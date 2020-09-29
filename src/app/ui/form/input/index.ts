@@ -35,7 +35,12 @@ export class InputElement extends ControlElement {
                 'span', { part: 'label', $text: this.label }
             ]
         ],
-        'label', { $text: this.label }
+        'label', { $text: this.label },
+        'm-icon', {
+            $if: this.busy,
+            name: 'spinner',
+            part: 'spinner'
+        }
     ]);
 
     @Attr({ observe: false, render: false })

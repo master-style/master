@@ -109,7 +109,7 @@ a[part=root] {
     pointer-events: none !important;
     box-shadow: none !important;
 
-    [part=root] *:not([part=icon]),
+    [part=root] *:not([part=spinner]),
     ::slotted(*) {
         visibility: hidden !important;
     }
@@ -120,7 +120,7 @@ a[part=root] {
     }
 }
 
-[part=icon] {
+[part=spinner] {
     position: absolute;
     top: 0;
     bottom: 0;

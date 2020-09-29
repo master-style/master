@@ -95,7 +95,7 @@
     }
 }
 
-:host([label][empty]:not([expanded]):not(:focus-within):not(:active):not([readonly]):not([disabled])) {
+:host([label][empty]:not([busy]):not([expanded]):not(:focus-within):not(:active):not([readonly]):not([disabled])) {
 
     ::slotted([part=head]),
     ::slotted([part=foot]),
@@ -138,6 +138,7 @@
 }
 
 // outlined
+:host(.outlined[busy]),
 :host(.outlined[expanded]),
 :host(.outlined[label]:not([empty]):not(:focus-within)) {
     legend {
@@ -282,4 +283,29 @@ m-icon {
     padding-right: var(--px);
     font-size: var(--f-xxs);
     color: var(--f-fade);
+}
+
+:host([busy]) {
+    pointer-events: none !important;
+
+    [part=body] {
+        visibility: hidden;
+    }
+
+    [part=icon] {
+        visibility: hidden;
+    }
+}
+
+[part=spinner] {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    height: fit-content;
+    width: fit-content;
+    padding-right: var(--px);
+    padding-left: calc(var(--px) / 2);
 }

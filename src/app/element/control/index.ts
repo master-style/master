@@ -15,6 +15,9 @@ export class ControlElement extends HTMLElement {
     body: any;
 
     @Attr()
+    busy: boolean;
+
+    @Attr()
     name: string;
 
     @Attr()

@@ -130,6 +130,11 @@ export class SelectElement extends ControlElement {
                 }
             ],
             'm-icon', {
+                $if: this.busy,
+                name: 'spinner',
+                part: 'spinner'
+            },
+            'm-icon', {
                 name: this.multiple ? 'caret' : 'unfold',
                 part: 'icon'
             },

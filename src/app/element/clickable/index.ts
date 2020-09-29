@@ -15,7 +15,7 @@ export class ClickableElement extends HTMLElement {
             'm-icon', {
                 $if: this.busy,
                 name: 'spinner',
-                part: 'icon'
+                part: 'spinner'
             }
         ];
 
