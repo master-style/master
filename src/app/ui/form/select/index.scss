@@ -117,18 +117,6 @@ m-button[part=close] {
     }
 }
 
-
-// 暫時解決排版問題，待改為 m-y m-x
-// .y\:xs {
-//     display: flex;
-//     flex-wrap: wrap;
-//     align-items: center;
-//     margin-right: -$xs;
-//     margin-bottom: -$xs;
-// }
-
 m-chip {
     flex: 0 0 auto;
-    // margin-right: $xs;
-    // margin-bottom: $xs;
 }

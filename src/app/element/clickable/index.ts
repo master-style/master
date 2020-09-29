@@ -19,8 +19,6 @@ export class ClickableElement extends HTMLElement {
             }
         ];
 
-        console.log(this.busy);
-
         switch (tag) {
             case 'button':
                 return [

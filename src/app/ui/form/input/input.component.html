@@ -125,6 +125,18 @@
 </template>
 
 <h2 id="state">{{ 'state' | translate }}</h2>
+<doc-prop [name]="'busy'" [types]="['boolean']" [default]=false
+          [description]="'The user cannot interact with the component.'">
+</doc-prop>
+<div class="demo">
+    <div class="demo-body">
+        <div class="y c:center">
+            <m-input class="x outlined" label="busy" value="value" busy></m-input>
+            <m-input class="x underlined" label="busy" value="value" busy></m-input>
+        </div>
+    </div>
+</div>
+
 <doc-prop [name]="'disabled'" [types]="['boolean']" [default]=false
           [description]="'The user cannot interact with the component.'">
 </doc-prop>

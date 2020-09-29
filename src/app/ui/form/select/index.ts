@@ -5,7 +5,6 @@ import './popup';
 
 import { OptionElement } from '../option';
 import { SelectPopupElement } from './popup';
-import { ItemElement } from '@ui/components/item';
 import { ButtonElement } from '../button';
 
 let uid = 0;

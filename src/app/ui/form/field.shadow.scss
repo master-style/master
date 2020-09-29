@@ -288,6 +288,7 @@ m-icon {
 :host([busy]) {
     pointer-events: none !important;
 
+    ::slotted([part=body]),
     [part=body] {
         visibility: hidden;
     }
@@ -295,6 +296,7 @@ m-icon {
     [part=icon] {
         visibility: hidden;
     }
+
 }
 
 [part=spinner] {
@@ -306,6 +308,6 @@ m-icon {
     margin: auto;
     height: fit-content;
     width: fit-content;
-    padding-right: var(--px);
-    padding-left: calc(var(--px) / 2);
+    // padding-right: var(--px);
+    // padding-left: calc(var(--px) / 2);
 }
