@@ -50,7 +50,6 @@ export class SelectPopupElement extends ToggleableElement {
                 $html: eachOption.innerHTML,
                 $created: (item: ItemElement) => {
                     this.items.push(item);
-                    console.log(eachOption.textContent, item);
                 },
                 $removed: (item: ItemElement) => {
                     this.items.splice(this.items.indexOf(item), 1);
