@@ -15,22 +15,22 @@ export function Attr(options?: AttrOptions) {
         const _propKey = '_' + propKey;
         const attrKey = options.key = (options.key || camelToKebabCase(propKey));
         const constructor = target.constructor;
-        const updater = options.updater;
-        const parser = options.parser;
+        const update = options.update;
+        const parse = options.parse;
         const descriptor = {
             get() {
                 return this[_propKey];
             },
             set(value: any, settedAttr?: boolean) {
                 const oldValue = this[_propKey];
-                if (parser) {
-                    value = parser(this, value);
+                if (parse) {
+                    value = parse(this, value);
                 }
                 if (value === oldValue) return;
                 this[_propKey] = value;
                 if (this.ready) {
-                    if (updater) {
-                        updater(this, value, oldValue);
+                    if (update) {
+                        update(this, value, oldValue);
                     }
                     if (options.reflect && !settedAttr) {
                         if (options.type === 'Boolean') {

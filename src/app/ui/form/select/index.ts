@@ -197,7 +197,7 @@ export class SelectElement extends ControlElement {
     label: string;
 
     @Attr({
-        updater(select: SelectElement, value) {
+        update(select: SelectElement, value) {
             if (select.popup) {
                 select.popup.multiple = value;
             }
@@ -212,7 +212,7 @@ export class SelectElement extends ControlElement {
     searchable: boolean;
 
     @Attr({
-        updater(select: SelectElement, value: any) {
+        update(select: SelectElement, value: any) {
             const isArray = Array.isArray(value);
             select.options.get().forEach((eachOption) => {
                 if (

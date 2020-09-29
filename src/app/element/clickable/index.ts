@@ -51,7 +51,7 @@ export class ClickableElement extends HTMLElement {
     });
 
     @Attr({
-        updater(clickable: ClickableElement, value: string, oldValue: string) {
+        update(clickable: ClickableElement, value: string, oldValue: string) {
             if (value === 'submit') {
                 clickable.on('click', () => {
                     const form = clickable.closest('form');

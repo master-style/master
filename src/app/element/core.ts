@@ -78,7 +78,7 @@ export function Element(options: ElementOptions) {
                     const eachAttrOptions: AttrOptions = allAttrOptions[eachAttrKey];
                     const eachPropKey = eachAttrOptions.propKey;
                     const eachPropValue = this['_' + eachPropKey];
-                    const eachUpdater = eachAttrOptions.updater;
+                    const eachUpdater = eachAttrOptions.update;
                     if (eachUpdater) {
                         eachUpdater(this, eachPropValue);
                     }

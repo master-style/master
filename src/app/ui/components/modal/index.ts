@@ -54,7 +54,7 @@ export class ModalElement extends ToggleableElement {
     closeOnScroll: boolean;
 
     @Attr({
-        updater(modal: ModalElement, value, oldValue) {
+        update(modal: ModalElement, value, oldValue) {
             if (
                 value && oldValue ||
                 !value && oldValue
@@ -74,7 +74,7 @@ export class ModalElement extends ToggleableElement {
 
     @Attr({
         reflect: false,
-        updater(modal: ModalElement, value: string, oldValue: string) {
+        update(modal: ModalElement, value: string, oldValue: string) {
             if (oldValue === 'close') {
                 modal.overlayElement.off({ id: 'modal' });
             }

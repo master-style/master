@@ -15,7 +15,7 @@ export class OptionElement extends HTMLElement {
     disabled: boolean;
 
     @Attr({
-        updater(option: OptionElement) {
+        update(option: OptionElement) {
             const select = (option.parentElement as SelectElement);
             if (!select.multiple && option.selected) {
                 select.options.get().forEach((eachOption) => {
@@ -30,7 +30,7 @@ export class OptionElement extends HTMLElement {
     selected: boolean = false;
 
     @Attr({
-        updater(option: OptionElement, value) {
+        update(option: OptionElement, value) {
             const select = (option.parentElement as SelectElement);
             select.composeValue();
             option.empty = value === null || value === undefined || value === '';

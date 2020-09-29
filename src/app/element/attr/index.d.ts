@@ -8,6 +8,6 @@ interface AttrOptions {
     default?: any;
     render?: boolean;
     type?: string;
-    updater?: (element: any, value: any, oldValue?: any) => void;
-    parser?: (element: any, value: any) => any;
+    update?: (element: any, value: any, oldValue?: any) => void;
+    parse?: (element: any, value: any) => any;
 }

@@ -65,7 +65,7 @@ export class InputElement extends ControlElement {
     expanded: boolean;
 
     @Attr({
-        parser(input: InputElement, value: any) {
+        parse(input: InputElement, value: any) {
             if (input.type === 'number') {
                 if (value === '') {
                     value = null;
@@ -75,7 +75,7 @@ export class InputElement extends ControlElement {
             }
             return value;
         },
-        updater: ControlElement.valueUpdater,
+        update: ControlElement.valueUpdater,
         render: false,
         reflect: false
     })

@@ -5,7 +5,7 @@ const liveTriggers = {};
 export class ToggleableElement extends HTMLElement {
 
     @Attr({
-        updater(togglable: ToggleableElement, value: boolean, oldValue: boolean) {
+        update(togglable: ToggleableElement, value: boolean, oldValue: boolean) {
             value ? togglable.close() : togglable.open();
         }
     })
@@ -22,7 +22,7 @@ export class ToggleableElement extends HTMLElement {
 
     @Attr({
         reflect: false,
-        updater(togglable: ToggleableElement, value: any, oldValue: any) {
+        update(togglable: ToggleableElement, value: any, oldValue: any) {
             if (
                 !value && oldValue ||
                 value && oldValue
