@@ -14,7 +14,8 @@ export class ClickableElement extends HTMLElement {
         const spinnerTemplate = [
             'm-icon', {
                 $if: this.busy,
-                name: 'spinner'
+                name: 'spinner',
+                part: 'icon'
             }
         ];
 
@@ -44,14 +45,10 @@ export class ClickableElement extends HTMLElement {
                     this.slotTemplate || ['slot'], spinnerTemplate
                 ];
             default:
-                return this.slotTemplate
-                    ? [
-                        'div', { part: 'root' },
-                        this.slotTemplate, spinnerTemplate
-                    ]
-                    : [
-                        'slot', { part: 'root' }, spinnerTemplate
-                    ];
+                return [
+                    'div', { part: 'root' },
+                    this.slotTemplate || ['slot'], spinnerTemplate
+                ];
         }
     });
 

@@ -131,7 +131,7 @@ export class SelectElement extends ControlElement {
             ],
             'm-icon', {
                 name: this.multiple ? 'caret' : 'unfold',
-                part: 'select'
+                part: 'icon'
             },
             'fieldset', [
                 'legend', [
