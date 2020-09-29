@@ -17,9 +17,6 @@ const NAME = 'select-popup';
 })
 export class SelectPopupElement extends ToggleableElement {
 
-    @Attr({ reflect: false, observe: false })
-    options;
-
     items: ItemElement[] = [];
 
     @Attr()
@@ -40,7 +37,7 @@ export class SelectPopupElement extends ToggleableElement {
             'scroll-y': true,
             guide: true,
             $created: (element: ContentElement) => this.content = element
-        }, () => this.options.map((eachOption: OptionElement) => [
+        }, () => this.select.options.get().map((eachOption: OptionElement) => [
             'm-item', {
                 class: 'xs',
                 type: 'button',

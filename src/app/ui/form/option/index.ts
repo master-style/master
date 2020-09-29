@@ -18,7 +18,7 @@ export class OptionElement extends HTMLElement {
         updater(option: OptionElement) {
             const select = (option.parentElement as SelectElement);
             if (!select.multiple && option.selected) {
-                select.options.forEach((eachOption) => {
+                select.options.get().forEach((eachOption) => {
                     if (option !== eachOption)
                         eachOption.selected = false;
                 });
@@ -46,10 +46,10 @@ export class OptionElement extends HTMLElement {
 
     onAdded() {
         this.select = (this.parentElement as any);
-        this.select.addOption(this);
+        this.select.options.add(this);
     }
 
     onRemoved() {
-        this.select.removeOption(this);
+        this.select.options.remove(this);
     }
 }

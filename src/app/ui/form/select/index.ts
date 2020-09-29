@@ -31,8 +31,6 @@ export class SelectElement extends ControlElement {
 
     keyword: string;
 
-    readonly options: OptionElement[] = this.popup.options = [];
-
     #selectedOptions: OptionElement[] = [];
 
     constructor() {
@@ -40,23 +38,40 @@ export class SelectElement extends ControlElement {
         this.popup.select = this;
     }
 
-    addOption(option: OptionElement) {
-        this.options.push(option);
-    }
+    #options: OptionElement[] = [];
 
-    removeOption(option: OptionElement) {
-        this.options.splice(this.options.indexOf(option), 1);
-    }
+    options = {
+        get: () => {
+            console.log(this);
+            return this.#options;
+        },
+        set: (options: OptionElement[]) => {
+            this.#options = options;
+            this.composeValue();
+        },
+        add: (option: OptionElement) => {
+            this.#options.push(option);
+            this.composeValue();
+        },
+        remove: (option: OptionElement) => {
+            this.#options.splice(this.#options.indexOf(option), 1);
+            this.composeValue();
+        },
+        clear: () => {
+            this.#options = [];
+            this.composeValue();
+        }
+    };
 
     composeValue() {
         if (this.multiple) {
             // value and oldValue always not be same
-            this.#selectedOptions = this.options
+            this.#selectedOptions = this.#options
                 .filter((eachOption: OptionElement) => eachOption.selected);
             this.value = this.#selectedOptions
                 .map((eachOption: OptionElement) => eachOption.value);
         } else {
-            const selectedOption = this.options
+            const selectedOption = this.#options
                 .find((eachOption: OptionElement) => eachOption.selected);
             if (selectedOption) this.#selectedOptions = [selectedOption];
             this.value = selectedOption?.value;
@@ -199,7 +214,7 @@ export class SelectElement extends ControlElement {
     @Attr({
         updater(select: SelectElement, value: any) {
             const isArray = Array.isArray(value);
-            select.options.forEach((eachOption) => {
+            select.options.get().forEach((eachOption) => {
                 if (
                     isArray && value.indexOf(eachOption.value) !== -1
                     || value === eachOption.value
