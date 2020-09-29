@@ -42,9 +42,13 @@
     font-weight: 500;
     flex-wrap: wrap;
 
-    &:empty[placeholder]:before {
-        content: attr(placeholder);
-        color: var(--f-fadest);
+    &:empty[placeholder] {
+        margin: 0!important;
+
+        &:before {
+            content: attr(placeholder);
+            color: var(--f-fadest);
+        }
     }
 
     &:empty[label]:not([placeholder]):before {
@@ -99,6 +103,7 @@ m-button[part=close] {
     --button-bg-color-hover: var(--bg-object-hover);
     --button-bg-color: transparent;
     --button-f-color: var(--f-fader);
+
     m-icon {
         --icon-stroke-width: 3px;
     }

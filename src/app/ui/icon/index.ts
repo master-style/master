@@ -3,6 +3,7 @@ import css from './index.scss';
 
 const NAME = 'icon';
 const ICON = {
+    spinner: '<circle class="spinner" cx="12" cy="12" r="10"/><circle class="track" cx="12" cy="12" r="10"/>',
     caret: '<path d="M5.581,6.763a1.253,1.253,0,0,0,1.664,0L12.4,2.185A1.25,1.25,0,0,0,11.571,0H1.255A1.25,1.25,0,0,0,.423,2.185Z" transform="translate(5.674 8.243)"/>',
     menu: '<line class="l1" x1="3" y1="6" x2="21" y2="6"/><line class="l2" x1="3" y1="12" x2="21" y2="12"/><line class="l3" x1="3" y1="18" x2="21" y2="18"/>',
     close: '<line class="l1" x1="3" y1="6" x2="21" y2="6"/><line class="l3" x1="3" y1="18" x2="21" y2="18"/>',

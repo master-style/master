@@ -2,12 +2,12 @@
 
 :host {
     --rotate: 0deg;
-    --stroke-width: var(--icon-stroke-width, 2);
+    --stroke-width: var(--icon-stroke-width, 2px);
     --f-color: var(--icon-f-color, inherit);
     position: relative;
     display: inline-flex;
     // color: rgba(255, 255, 255, .3);
-    stroke-width: var(--icon-stroke-width);
+    stroke-width: var(--stroke-width);
     contain: content;
     color: var(--f-color);
     fill: inherit;
@@ -59,6 +59,61 @@ g {
     transform: none;
     opacity: 1;
     will-change: transform, opacity;
+}
+
+:host([name=spinner]) {
+    svg {
+        animation: rotate 2s linear infinite;
+    }
+
+    .track {
+        fill: none;
+        opacity: .15;
+        animation: fadeSpinTrack 1.5s ease-in-out infinite;
+    }
+
+    .spinner {
+        fill: none;
+        stroke-linecap: round;
+        animation: spin 1.5s ease-in-out infinite;
+    }
+}
+
+@keyframes fadeSpinTrack {
+    0% {
+        opacity: .3;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: .3;
+    }
+}
+
+@keyframes spin {
+    0% {
+        stroke-dasharray: 0, 72;
+        stroke-dashoffset: 0;
+    }
+
+    50% {
+        stroke-dasharray: 42, 72;
+        stroke-dashoffset: -20;
+    }
+
+    100% {
+        stroke-dasharray: 42, 72;
+        stroke-dashoffset: -62;
+    }
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 :host([name=close]),
