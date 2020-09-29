@@ -10,39 +10,48 @@ export class ClickableElement extends HTMLElement {
         const tag = ((this.href || this.type === 'anchor') && !this.disabled)
             ? 'a'
             : (this.type || this.disabled) ? 'button' : null;
-        if (tag === 'button') {
-            return [
-                tag, {
-                    class: 'touch',
-                    part: 'root',
-                    disabled: this.disabled,
-                    type: this.type
-                }, this.slotTemplate || ['slot']
-            ];
-        } else if (tag === 'a') {
-            return [
-                tag, {
-                    class: 'touch',
-                    part: 'root',
-                    href: this.href,
-                    download: this.download,
-                    rel: this.rel,
-                    target: this.target
-                }, this.slotTemplate || ['slot']
-            ];
-        } else {
-            return this.slotTemplate
-                ? [
-                    'div', {
-                        part: 'root'
+
+        const spinnerTemplate = [
+            'm-icon', {
+                $if: this.busy,
+                name: 'spinner'
+            }
+        ];
+
+        console.log(this.busy);
+
+        switch (tag) {
+            case 'button':
+                return [
+                    tag, {
+                        class: 'touch',
+                        part: 'root',
+                        disabled: this.disabled,
+                        type: this.type
                     },
-                    this.slotTemplate
-                ]
-                : [
-                    'slot', {
-                        part: 'root'
-                    }
+                    this.slotTemplate || ['slot'], spinnerTemplate
                 ];
+            case 'a':
+                return [
+                    tag, {
+                        class: 'touch',
+                        part: 'root',
+                        href: this.href,
+                        download: this.download,
+                        rel: this.rel,
+                        target: this.target
+                    },
+                    this.slotTemplate || ['slot'], spinnerTemplate
+                ];
+            default:
+                return this.slotTemplate
+                    ? [
+                        'div', { part: 'root' },
+                        this.slotTemplate, spinnerTemplate
+                    ]
+                    : [
+                        'slot', { part: 'root' }, spinnerTemplate
+                    ];
         }
     });
 
@@ -69,6 +78,9 @@ export class ClickableElement extends HTMLElement {
         }
     })
     type: string;
+
+    @Attr()
+    busy: boolean;
 
     @Attr()
     rel: string;

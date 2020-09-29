@@ -9,8 +9,5 @@ const NAME = 'button';
 })
 export class ButtonElement extends ClickableElement {
 
-    @Attr({ render: false })
-    busy: boolean;
-
     _type: string = 'button';
 }

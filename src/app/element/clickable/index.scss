@@ -103,3 +103,9 @@ a[part=root] {
         box-shadow: none;
     }
 }
+
+:host([busy]) {
+    slot {
+        opacity: .5 !important;
+    }
+}
