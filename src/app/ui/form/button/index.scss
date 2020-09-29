@@ -77,16 +77,6 @@
     }
 }
 
-:host([loading]) {
-    cursor: progress !important;
-
-    [part=root] {
-        pointer-events: none !important;
-        color: transparent !important;
-        box-shadow: none !important;
-    }
-}
-
 [part=root] {
     padding: var(--py) var(--px);
     min-width: var(--size);

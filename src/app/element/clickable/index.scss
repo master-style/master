@@ -107,10 +107,7 @@ a[part=root] {
 :host([busy]) {
 
     pointer-events: none !important;
-
-    [part=root] {
-        box-shadow: none !important;
-    }
+    box-shadow: none !important;
 
     [part=root] *:not([part=icon]),
     ::slotted(*) {
