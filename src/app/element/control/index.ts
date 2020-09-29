@@ -4,7 +4,7 @@ const NAME = 'control';
 
 export class ControlElement extends HTMLElement {
 
-    static valueUpdater(control: any, value: any) {
+    static updateValue(control: any, value: any) {
         control.empty = value === null || value === undefined || value === '';
         control.body.value = value ?? null;
         control.validate();

@@ -75,7 +75,7 @@ export class InputElement extends ControlElement {
             }
             return value;
         },
-        update: ControlElement.valueUpdater,
+        update: ControlElement.updateValue,
         render: false,
         reflect: false
     })

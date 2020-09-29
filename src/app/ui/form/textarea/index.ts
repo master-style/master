@@ -65,7 +65,7 @@ export class TextareaElement extends ControlElement {
     @Attr({
         reflect: false,
         render: false,
-        update: ControlElement.valueUpdater
+        update: ControlElement.updateValue
     })
     value: any;
 

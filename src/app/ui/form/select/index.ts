@@ -222,7 +222,7 @@ export class SelectElement extends ControlElement {
                     eachOption.selected = true;
                 }
             });
-            ControlElement.valueUpdater(select, value);
+            ControlElement.updateValue(select, value);
             select.body.value = value;
             select.changeEmitter(value);
         },
