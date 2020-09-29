@@ -68,6 +68,7 @@
 [part=search] {
     max-width: fit-content;
     display: inline-flex;
+    order: 1;
     flex: 1 1 auto;
     width: 0;
     min-width: 7rem;

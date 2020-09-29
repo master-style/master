@@ -42,12 +42,10 @@ export class SelectElement extends ControlElement {
 
     addOption(option: OptionElement) {
         this.options.push(option);
-        this.composeValue();
     }
 
     removeOption(option: OptionElement) {
         this.options.splice(this.options.indexOf(option), 1);
-        this.composeValue();
     }
 
     composeValue() {
@@ -82,7 +80,14 @@ export class SelectElement extends ControlElement {
     ]);
 
     template = $(() => [
-        'slot',
+        'slot', {
+            $created: (element: HTMLSlotElement) => {
+                element.on('slotchange', (event) => {
+                    this.composeValue();
+                    console.log(event);
+                }, { passive: true, id: this });
+            }
+        },
         'div', {
             part: 'root',
             $created: (element: HTMLDivElement) => {
@@ -105,7 +110,23 @@ export class SelectElement extends ControlElement {
                 part: 'body',
                 placeholder: this.placeholder,
                 label: this.label, // for default select width
-            }, () => this.#selectedOptions.map((eachOption: OptionElement) => [
+            }, [
+                'input', {
+                    $if: this.searchable,
+                    part: 'search',
+                    type: 'search',
+                    value: this.keyword,
+                    placeholder: this.placeholder,
+                    $created: (element: HTMLInputElement) => {
+                        console.log('input');
+                        this.search = element
+                            .on('input', (event: any) => {
+                                this.popup.search(event.target.value);
+                            }, { passive: true, id: NAME });
+                    },
+                    $removed: () => this.search = null
+                }
+            ], () => this.#selectedOptions.map((eachOption: OptionElement) => [
                 'm-chip', {
                     $if: this.multiple,
                     class: 'sm',
@@ -126,20 +147,7 @@ export class SelectElement extends ControlElement {
                         'm-icon', { name: 'close' }
                     ]
                 ]
-            ]), [
-                'input', {
-                    $if: this.searchable,
-                    part: 'search',
-                    type: 'search',
-                    placeholder: this.placeholder,
-                    $created: (element: HTMLInputElement) =>
-                        this.search = element
-                            .on('input', (event: any) => {
-                                this.popup.search(event.target.value);
-                            }, { passive: true, id: NAME }),
-                    $removed: () => this.search = null
-                }
-            ],
+            ]),
             'm-icon', {
                 $if: this.busy,
                 name: 'spinner',

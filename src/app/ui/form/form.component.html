@@ -11,12 +11,12 @@
                           placeholder="search ..."
                           [ngModel]="['taipei']"
                           class="outlined">
-                    <m-option *ngFor="let city of ['taichung', 'kaosiung', 'taipei', 'hualien', 1, 2, 3, 4, 5, 6]"
+                    <m-option *ngFor="let city of ['taichung', 'kaosiung', 'taipei', 'hualien', 'taoyuan']"
                               [value]="city">
                         <span slot="head">🍉</span>{{city}}</m-option>
-                    <m-option *ngFor="let city of ['taoyuan']"
-                              [value]="city">
-                        <span slot="head">🍉</span>{{city}}</m-option>
+                    <m-option *ngFor="let option of options"
+                              [value]="option">
+                        <span slot="head">🍉</span>{{option}}</m-option>
                 </m-select>
             </div>
             <div class="x:6">
