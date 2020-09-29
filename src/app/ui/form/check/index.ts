@@ -104,7 +104,7 @@ export class CheckElement extends ControlElement {
             if (check.type === 'radio' && check.name && value) {
                 nameMap[check.name]
                     .forEach((eachCheck: CheckElement) => {
-                        if (eachCheck !== check) {
+                        if (eachCheck !== check && eachCheck.type === 'radio') {
                             eachCheck.checked = false;
                         }
                     });
