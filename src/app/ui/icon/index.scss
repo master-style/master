@@ -153,7 +153,7 @@ g {
     }
 
     g {
-        transform: translateY(12.5%);
+        transform: translateY(12%);
     }
 
     .l1 {
@@ -163,19 +163,19 @@ g {
     .l2 {
         transform: rotate(-35deg);
     }
+}
 
-    &[active] {
-        g {
-            transform: translateY(-12.5%);
-        }
+:host([name=chevron][active]) {
+    g {
+        transform: translateY(-12%);
+    }
 
-        .l1 {
-            transform: rotate(-35deg);
-        }
+    .l1 {
+        transform: rotate(-35deg);
+    }
 
-        .l2 {
-            transform: rotate(35deg);
-        }
+    .l2 {
+        transform: rotate(35deg);
     }
 }
 
