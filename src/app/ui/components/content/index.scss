@@ -1,22 +1,48 @@
 @import '../../variables';
 
 :host {
-    --content-offset-top: 0px;
-    --content-offset-bottom: 0px;
-    --content-offset-left: 0px;
-    --content-offset-right: 0px;
-    --content-bar-p: 4px;
+    --offset-top: var(--content-offset-top, 0px);
+    --offset-bottom: var(--content-offset-bottom, 0px);
+    --offset-left: var(--content-offset-left, 0px);
+    --offset-right: var(--content-offset-right, 0px);
+    --bar-p: var(--content-bar-p, 4px);
+    --display: var(--content-display, block);
     position: relative;
     contain: style;
     width: 100%;
     height: 100%;
-    display: flex;
+    display: var(--display);
     flex-direction: column;
     -webkit-user-drag: none;
     -webkit-touch-callout: none;
     -ms-overflow-style: none;
     user-select: none;
     box-sizing: border-box;
+}
+
+:host([changing]) {
+    display: var(--display) !important;
+}
+
+:host([changing]) {
+    overflow: hidden !important;
+    contain: style;
+}
+
+:host([collapse-x]) {
+    min-width: 0 !important;
+    will-change: width, opacity;
+}
+
+:host([collapse-y]) {
+    min-height: 0 !important;
+    will-change: height, opacity;
+}
+
+:host([collapse-x][collapse-y]) {
+    min-height: 0 !important;
+    min-width: 0 !important;
+    will-change: height, width, opacity;
 }
 
 :host([scroll-y]),
@@ -103,7 +129,7 @@
     box-sizing: border-box;
     contain: style;
     margin: auto;
-    padding: var(--content-offset-top) var(--content-offset-right) var(--content-offset-bottom) var(--content-offset-left)
+    padding: var(--offset-top) var(--offset-right) var(--offset-bottom) var(--offset-left)
 }
 
 m-bar {
@@ -114,7 +140,7 @@ m-bar {
     box-sizing: border-box;
     contain: content;
     opacity: 1;
-    padding: var(--content-bar-p);
+    padding: var(--bar-p);
 
     &[hidden] {
         opacity: 0;
@@ -142,8 +168,8 @@ m-thumb {
 
 m-bar[part=x] {
     bottom: 0;
-    left: var(--content-offset-left);
-    width: calc(100% - var(--content-offset-left) - var(--content-offset-right));
+    left: var(--offset-left);
+    width: calc(100% - var(--offset-left) - var(--offset-right));
 
     m-thumb {
         height: 4px;
@@ -151,9 +177,9 @@ m-bar[part=x] {
 }
 
 m-bar[part=y] {
-    top: var(--content-offset-top);
+    top: var(--offset-top);
     right: 0;
-    height: calc(100% - var(--content-offset-top) - var(--content-offset-bottom));
+    height: calc(100% - var(--offset-top) - var(--offset-bottom));
 
     m-thumb {
         width: 4px;

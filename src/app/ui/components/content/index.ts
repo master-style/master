@@ -1,9 +1,10 @@
-import { Element, Attr } from '@element';
+import { Element, Attr, ToggleableElement } from '@element';
 import { debounce } from 'lodash-es';
 import css from './index.scss';
 import isNum from '@utils/is-num';
 
 const NAME = 'content';
+const PX = 'px';
 
 const
     SCROLL_KEY = 'scroll',
@@ -23,7 +24,7 @@ const
     tag: 'm-' + NAME,
     css
 })
-export class ContentElement extends HTMLElement {
+export class ContentElement extends ToggleableElement {
 
     #time: any = {};
     #thumbSize: any = {};
@@ -71,6 +72,9 @@ export class ContentElement extends HTMLElement {
     maxX: number;
     maxY: number;
 
+    @Attr()
+    hidden: boolean = false;
+
     @Attr({ reflect: false, render: false })
     duration: number = 300;
 
@@ -97,6 +101,15 @@ export class ContentElement extends HTMLElement {
 
     @Attr({ observe: false, render: false })
     reachY: number;
+
+    @Attr()
+    name: string;
+
+    @Attr()
+    collapseX: boolean = false;
+
+    @Attr()
+    collapseY: boolean = false;
 
     render() {
         this.template.render(this.shadowRoot);
@@ -288,6 +301,44 @@ export class ContentElement extends HTMLElement {
         this.scrolling = false;
         this.#time.X = this.#time.Y = 0;
         this.render();
+    }
+
+    protected toggling(
+        options: KeyframeEffectOptions
+    ) {
+
+        const keyframes = [];
+        const startKeyframe: any = {};
+        const endKeyframe: any = {};
+
+        if (this.collapseY || this.collapseX && this.collapseY) {
+            startKeyframe.height = 0 + PX;
+            endKeyframe.height = this.offsetHeight + PX;
+        }
+
+        if (this.collapseX || this.collapseX && this.collapseY) {
+            startKeyframe.width = 0 + PX;
+            endKeyframe.width = this.offsetWidth + PX;
+        }
+
+        if (this.fade) {
+            startKeyframe.opacity = 0;
+            endKeyframe.opacity = 1;
+        }
+
+        if (this.hidden) {
+            keyframes.push(endKeyframe, startKeyframe);
+        } else {
+            keyframes.push(startKeyframe, endKeyframe);
+        }
+
+        console.log(keyframes);
+
+        this.animation = this.animate(keyframes, options);
+        this.animations.push(this.animation);
+        return new Promise((finish) => {
+            this.animation.onfinish = finish;
+        });
     }
 
     onRemoved() {
