@@ -55,20 +55,14 @@ export class ToggleableElement extends HTMLElement {
                         targets.forEach((eachTarget: ToggleableElement) => {
                             if (liveTargets.indexOf(eachTarget) === -1) return;
                             let whether: boolean;
-                            const tag = toggle.tagName;
-                            const type = toggle.type;
-                            if (type === 'checkbox' || type === 'radio') {
+                            if (toggle.hasOwnProperty('checked')) {
                                 whether = !!toggle.checked;
-                            } else if (
-                                tag === 'M-INPUT' ||
-                                tag === 'M-SELECT' ||
-                                tag === 'M-TEXTAREA'
-                            ) {
-                                whether = !!toggle.value;
                             } else {
                                 whether = eachTarget.hidden;
                             }
-                            if (whether && !eachTarget.animation) eachTarget['trigger'] = toggle;
+                            if (whether && !eachTarget.animation) {
+                                eachTarget['trigger'] = toggle;
+                            }
                             eachTarget.toggle(whether);
                         });
                     }, { passive: true });
