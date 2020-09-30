@@ -1,17 +1,15 @@
 @import '../../variables';
 @import '../../mixins';
 
-@import '../../../element/toggleable';
-
 :host {
     --p: var(--modal-p, #{$md});
     --r: var(--modal-r, #{$sm});
     --max-width: var(--modal-max-width, --wrap-xs);
     position: fixed;
     z-index: $z-overlay;
-    display: flex;
     left: 0px;
     top: 0px;
+    display: flex;
     width: 100vw;
     height: 100%;
     align-items: center;
@@ -35,6 +33,10 @@
     //         bottom: calc(var(--p) * -1);
     //     }
     // }
+}
+
+:host([changing]) {
+    display: flex !important;
 }
 
 :host([placement=left]) {

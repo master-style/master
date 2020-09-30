@@ -10,14 +10,7 @@ const PX = 'px';
 })
 export class CollapseElement extends ToggleableElement {
 
-    template = $(() => [
-        'div', {
-            part: 'root',
-            $created: (element: HTMLDivElement) => this.root = element
-        }, [
-            'slot'
-        ]
-    ]);
+    template = $(() => ['slot']);
 
     @Attr()
     name: string;
@@ -27,8 +20,6 @@ export class CollapseElement extends ToggleableElement {
 
     @Attr()
     collapseY: boolean = false;
-
-    root: HTMLDivElement;
 
     protected toggling(
         options: KeyframeEffectOptions
@@ -40,12 +31,12 @@ export class CollapseElement extends ToggleableElement {
 
         if (this.collapseY || this.collapseX && this.collapseY) {
             startKeyframe.height = 0 + PX;
-            endKeyframe.height = this.root.offsetHeight + PX;
+            endKeyframe.height = this.offsetHeight + PX;
         }
 
         if (this.collapseX || this.collapseX && this.collapseY) {
             startKeyframe.width = 0 + PX;
-            endKeyframe.width = this.root.offsetWidth + PX;
+            endKeyframe.width = this.offsetWidth + PX;
         }
 
         if (this.fade) {
@@ -61,7 +52,7 @@ export class CollapseElement extends ToggleableElement {
 
         console.log(keyframes);
 
-        this.animation = this.root.animate(keyframes, options);
+        this.animation = this.animate(keyframes, options);
         this.animations.push(this.animation);
         return new Promise((finish) => {
             this.animation.onfinish = finish;
