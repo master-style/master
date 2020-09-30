@@ -55,15 +55,11 @@ export class ToggleableElement extends HTMLElement {
                         targets.forEach((eachTarget: ToggleableElement) => {
                             if (liveTargets.indexOf(eachTarget) === -1) return;
                             let whether: boolean;
-                            if ('checked' in toggle) {
-                                if (event.type === 'click') {
-                                    whether = !toggle.checked;
-                                } else if (
-                                    event.type === 'input'
-                                    || event.type === 'change'
-                                ) {
-                                    whether = !!toggle.checked;
-                                }
+                            if (
+                                'checked' in toggle
+                                && (event.type === 'input' || event.type === 'change')
+                            ) {
+                                whether = !!toggle.checked;
                             } else {
                                 whether = eachTarget.hidden;
                             }
