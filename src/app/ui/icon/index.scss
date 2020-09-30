@@ -147,13 +147,20 @@ g {
     }
 }
 
+:host([name=check]) {
+    path {
+        stroke-width: inherit;
+        fill: none;
+    }
+}
+
 :host([name=chevron]) {
     line {
         transform-origin: center;
     }
 
     g {
-        transform: translateY(12%);
+        transform: translateY(12.5%);
     }
 
     .l1 {
@@ -167,7 +174,7 @@ g {
 
 :host([name=chevron][active]) {
     g {
-        transform: translateY(-12%);
+        transform: translateY(-12.5%);
     }
 
     .l1 {

@@ -12,6 +12,8 @@ export class ModalElement extends ToggleableElement {
 
     private trigger: HTMLElement;
 
+    rootTemplate;
+
     template = $(() => [
         'm-overlay', {
             $if: this.overlay,
@@ -20,7 +22,7 @@ export class ModalElement extends ToggleableElement {
         'div', {
             part: 'root',
             $created: (element: HTMLElement) => this.root = element
-        }, [
+        }, (this.rootTemplate && this.rootTemplate() || []).concat([
             'slot',
             'm-button', {
                 part: 'close',
@@ -30,7 +32,7 @@ export class ModalElement extends ToggleableElement {
             }, [
                 'm-icon', { name: this.closeButton, direction: 'left' }
             ]
-        ]
+        ])
     ]);
 
     render() {
