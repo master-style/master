@@ -7,4 +7,4 @@ import './content';
 import './modal';
 import './overlay';
 import './breadcrumb';
-
+import './dialog';

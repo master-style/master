@@ -1,0 +1,77 @@
+<p>dialog works!</p>
+
+<m-dialog id="dialog"
+          overlay="close"
+          close-button="close">
+    <m-content part="body"
+               scroll-y>
+        <article class="short">
+            <h2>Dialog</h2>
+            <p>don't do that plz</p>
+        </article>
+        <m-button toggle-dialog="#dialog">close</m-button>
+    </m-content>
+</m-dialog>
+
+<m-dialog id="dialog-drawer"
+          overlay="close"
+          placement="left"
+          pushing="#app-side"
+          class="covered:head covered:foot"
+          close-button="chevron"
+          hidden>
+    <div part="head">
+        title
+    </div>
+    <m-content part="body"
+               scroll-y
+               style="--content-offset-top: 3rem; --content-offset-bottom: 3rem;">
+        <figure class="embedded by:1x1">
+            <img src="https://photo.eyescream.com.tw/photo/photo/ow/11030250-B51-06.jpg" alt="">
+        </figure>
+        <article class="prose">
+            <h1>標題</h1>
+            <h2>次標題</h2>
+            <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
+            <p>內文</p>
+        </article>
+    </m-content>
+    <div part="foot">
+        title
+    </div>
+</m-dialog>
+
+<div class="demo">
+    <div class="demo-body">
+        <figure toggle-dialog="#dialog" class="embedded by:1x1 r:xs" style="width: 200px">
+            <img src="https://photo.eyescream.com.tw/photo/photo/ow/11030250-B51-06.jpg" alt="">
+        </figure>
+        <m-button toggle-dialog="#dialog">切換</m-button>
+        <m-button toggle-dialog="#dialog-drawer">
+            <m-icon name="menu"></m-icon>
+        </m-button>
+    </div>
+</div>
+
+<h2 id="structure">{{ 'structure' | translate }}</h2>
+<template [codeLang]="'html'">
+    <m-dialog>
+        <div part="head"></div>
+        <m-content part="body" scroll-y></m-content>
+        <div part="foot"></div>
+    </m-dialog>
+</template>

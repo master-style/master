@@ -38,12 +38,12 @@ import { ScaleComponent } from './modifiers/scale/scale.component';
 import { ShadowComponent } from './modifiers/shadow/shadow.component';
 import { TextComponent } from './modifiers/text/text.component';
 import { ZIndexComponent } from './modifiers/z-index/z-index.component';
-import { DialogComponent } from './interactions/dialog/dialog.component';
 import { RippleComponent } from './interactions/ripple/ripple.component';
 import { LoadingComponent } from './interactions/loading/loading.component';
 import { AnimationComponent } from './animation/animation.component';
 import { FigureComponent } from './decorators/figure/figure.component';
 
+import { DialogComponent } from './components/dialog/dialog.component';
 import { RouteResolver } from '../shared/route.resolver';
 import { ItemComponent } from './components/item/item.component';
 import { SkeletonComponent } from './components/skeleton/skeleton.component';
@@ -81,6 +81,7 @@ export const uiRoutes: Routes = [
             { path: 'tabs', component: TabsComponent, resolve: { route: RouteResolver } },
             { path: 'interactive' },
             { path: 'collapse', component: CollapseComponent, resolve: { route: RouteResolver } },
+            { path: 'dialog', component: DialogComponent, resolve: { route: RouteResolver } },
             { path: 'modal', component: ModalComponent, resolve: { route: RouteResolver } },
             { path: 'popup', component: PopupComponent, resolve: { route: RouteResolver } },
             { path: 'loading-indicator' },

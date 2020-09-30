@@ -37,7 +37,7 @@ import { ScaleComponent } from './modifiers/scale/scale.component';
 import { ShadowComponent } from './modifiers/shadow/shadow.component';
 import { TextComponent } from './modifiers/text/text.component';
 import { ZIndexComponent } from './modifiers/z-index/z-index.component';
-import { DialogComponent } from './interactions/dialog/dialog.component';
+import { DialogComponent } from './components/dialog/dialog.component';
 import { RippleComponent } from './interactions/ripple/ripple.component';
 import { LoadingComponent } from './interactions/loading/loading.component';
 import { AnimationComponent } from './animation/animation.component';

@@ -91,5 +91,6 @@
     "form": "表單",
     "interface": "介面",
     "validation": "驗證",
-    "prompt": "提示"
+    "prompt": "提示",
+    "dialog": "對話"
 }

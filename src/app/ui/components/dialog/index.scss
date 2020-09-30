@@ -1,0 +1,5 @@
+@import '../modal/index';
+
+:host {
+    --max-width: var(--wrap-xxs);
+}
