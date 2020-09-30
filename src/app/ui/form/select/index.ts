@@ -32,22 +32,12 @@ export class SelectElement extends ControlElement {
             $created: (element: HTMLSlotElement) => {
                 element.on('slotchange', (event) => {
                     this.composeValue();
-                    console.log(event);
-                }, { passive: true, id: this });
+                }, { passive: true, id: NAME });
             }
         },
         'div', {
             part: 'root',
-            $created: (element: HTMLDivElement) => {
-                element.on('click', () => {
-                    if (this.disabled || this.popup && !this.popup.hidden) return;
-                    this.popup = $('m-select-popup', {});
-                    this.popup.select = this;
-                    this.popup.multiple = this.multiple;
-                    document.body.append(this.popup);
-                    this.popup.open();
-                }, { passive: true, id: this });
-            }
+            $created: (element: HTMLDivElement) => this.root = element
         }, [
             'div', {
                 part: 'body',
@@ -63,9 +53,10 @@ export class SelectElement extends ControlElement {
                 label: this.label, // for default select width
             }, [
                 'input', {
-                    $if: this.searchable,
+                    $if: this.searchable && !this.readOnly,
                     part: 'search',
                     type: 'search',
+                    disabled: this.disabled,
                     value: this.keyword,
                     placeholder: this.placeholder,
                     $created: (element: HTMLInputElement) => {
@@ -85,7 +76,7 @@ export class SelectElement extends ControlElement {
                         .replace('slot', 'part')
                 }, [
                     'm-button', {
-                        $if: !this.readOnly || !this.disabled,
+                        $if: !this.readOnly && !this.disabled,
                         part: 'close',
                         $created: (element: ButtonElement) => {
                             element.on('click', (event) => {
@@ -93,7 +84,7 @@ export class SelectElement extends ControlElement {
                                 eachOption.selected = false;
                                 this.popup.render();
                                 this.popup.updatePosition();
-                            }, { passive: true, id: this });
+                            }, { passive: true, id: NAME });
                         }
                     }, [
                         'm-icon', { name: 'close' }
@@ -106,6 +97,7 @@ export class SelectElement extends ControlElement {
                 part: 'spinner'
             },
             'm-icon', {
+                $if: !this.readOnly,
                 name: this.multiple ? 'caret' : 'unfold',
                 part: 'icon'
             },
@@ -126,6 +118,7 @@ export class SelectElement extends ControlElement {
 
     uid: number;
 
+    root: HTMLDivElement;
     popup: SelectPopupElement;
     search: HTMLInputElement;
     searchInfo: HTMLElement;
@@ -179,14 +172,37 @@ export class SelectElement extends ControlElement {
         }
     }
 
+    private toggleListener() {
+        if (this.readOnly || this.disabled) {
+            this.root.off({ passive: true, id: NAME });
+        } else {
+            this.root.on('click', () => {
+                if (this.disabled || this.popup && !this.popup.hidden) return;
+                this.popup = $('m-select-popup', {});
+                this.popup.select = this;
+                this.popup.multiple = this.multiple;
+                document.body.append(this.popup);
+                this.popup.open();
+            }, { passive: true, id: NAME });
+        }
+    }
+
     @Attr({ observe: false, render: false })
     empty: boolean;
 
     @Attr({ observe: false, render: false })
     role: string = 'listbox';
 
-    @Attr({ key: 'readonly' })
-    readOnly: boolean;
+    @Attr({
+        key: 'readonly',
+        update: (select: SelectElement) => select.toggleListener()
+    })
+    readOnly: boolean = false;
+
+    @Attr({
+        update: (select: SelectElement) => select.toggleListener()
+    })
+    disabled: boolean = false;
 
     @Attr()
     placeholder: string;

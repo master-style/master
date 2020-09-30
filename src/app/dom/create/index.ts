@@ -91,6 +91,7 @@ class MasterTemplate {
                         const children = token().reduce((acc, eachToken) => {
                             return acc.concat(eachToken);
                         }, []);
+                        console.log(children);
                         if (!eachNode.children) eachNode.children = [];
                         generate(children, eachNode.children);
                     } else if (tokenType === 'object') {
@@ -171,7 +172,7 @@ class MasterTemplate {
                                 element.innerHTML = eachNode.$html;
                                 if (eachOldNode) {
                                     eachOldNode.children = null;
-                                };
+                                }
                             } else if (
                                 eachNode.$text !== undefined &&
                                 eachNode.$text !== eachOldNode.$text
