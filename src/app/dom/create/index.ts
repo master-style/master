@@ -65,6 +65,8 @@ class MasterTemplate {
 
     render(container) {
 
+        if (!container) return;
+
         // tslint:disable-next-line: prefer-for-of
         const oldNodes: TemplateNode[] = this.nodes;
         this.nodes = [];
@@ -107,7 +109,7 @@ class MasterTemplate {
             }
         })(this.template(), this.nodes);
 
-        if (this.nodes && this.container === container) {
+        if (this.nodes.length && this.container === container) {
             (function renderNodes(eachNodes, eachOldNodes, parent) {
                 if (!eachNodes.length && eachOldNodes.length) {
                     removeNodes(eachOldNodes, true);

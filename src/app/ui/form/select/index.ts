@@ -17,73 +17,6 @@ const NAME = 'select';
 })
 export class SelectElement extends ControlElement {
 
-    @Attr({ key: 'tabindex' })
-    tabIndex = 0;
-
-    @Event()
-    changeEmitter: EventEmitter;
-
-    uid: number;
-
-    popup: SelectPopupElement = $('m-select-popup', {});
-    search: HTMLInputElement;
-    searchInfo: HTMLElement;
-
-    keyword: string;
-
-    #selectedOptions: OptionElement[] = [];
-
-    constructor() {
-        super();
-        this.popup.select = this;
-    }
-
-    #options: OptionElement[] = [];
-
-    options = {
-        get: () => {
-            console.log(this);
-            return this.#options;
-        },
-        set: (options: OptionElement[]) => {
-            this.#options = options;
-            this.composeValue();
-        },
-        add: (option: OptionElement) => {
-            this.#options.push(option);
-            this.composeValue();
-        },
-        remove: (option: OptionElement) => {
-            this.#options.splice(this.#options.indexOf(option), 1);
-            this.composeValue();
-        },
-        clear: () => {
-            this.#options = [];
-            this.composeValue();
-        }
-    };
-
-    composeValue() {
-        if (this.multiple) {
-            // value and oldValue always not be same
-            this.#selectedOptions = this.#options
-                .filter((eachOption: OptionElement) => eachOption.selected);
-            this.value = this.#selectedOptions
-                .map((eachOption: OptionElement) => eachOption.value);
-        } else {
-            const selectedOption = this.#options
-                .find((eachOption: OptionElement) => eachOption.selected);
-            if (selectedOption) this.#selectedOptions = [selectedOption];
-            this.value = selectedOption?.value;
-        }
-        if (this.popup) {
-            if (!this.popup.hidden) {
-                this.popup.render();
-                this.popup.updatePosition();
-            }
-        }
-    }
-
     controlTemplate = $(() => [
         'input', {
             part: 'output',
@@ -107,7 +40,10 @@ export class SelectElement extends ControlElement {
             part: 'root',
             $created: (element: HTMLDivElement) => {
                 element.on('click', () => {
-                    if (this.disabled || !this.popup.hidden) return;
+                    if (this.disabled || this.popup && !this.popup.hidden) return;
+                    this.popup = $('m-select-popup', {});
+                    this.popup.select = this;
+                    this.popup.multiple = this.multiple;
                     document.body.append(this.popup);
                     this.popup.open();
                 }, { passive: true, id: this });
@@ -149,6 +85,7 @@ export class SelectElement extends ControlElement {
                         .replace('slot', 'part')
                 }, [
                     'm-button', {
+                        $if: !this.readOnly || !this.disabled,
                         part: 'close',
                         $created: (element: ButtonElement) => {
                             element.on('click', (event) => {
@@ -180,6 +117,67 @@ export class SelectElement extends ControlElement {
             'label', { $text: this.label }
         ]
     ]);
+
+    @Attr({ key: 'tabindex' })
+    tabIndex = 0;
+
+    @Event()
+    changeEmitter: EventEmitter;
+
+    uid: number;
+
+    popup: SelectPopupElement;
+    search: HTMLInputElement;
+    searchInfo: HTMLElement;
+
+    keyword: string;
+
+    #selectedOptions: OptionElement[] = [];
+
+    #options: OptionElement[] = [];
+
+    options = {
+        get: () => {
+            return this.#options;
+        },
+        set: (options: OptionElement[]) => {
+            this.#options = options;
+            this.composeValue();
+        },
+        add: (option: OptionElement) => {
+            this.#options.push(option);
+            this.composeValue();
+        },
+        remove: (option: OptionElement) => {
+            this.#options.splice(this.#options.indexOf(option), 1);
+            this.composeValue();
+        },
+        clear: () => {
+            this.#options = [];
+            this.composeValue();
+        }
+    };
+
+    composeValue() {
+        if (this.multiple) {
+            // value and oldValue always not be same
+            this.#selectedOptions = this.#options
+                .filter((eachOption: OptionElement) => eachOption.selected);
+            this.value = this.#selectedOptions
+                .map((eachOption: OptionElement) => eachOption.value);
+        } else {
+            const selectedOption = this.#options
+                .find((eachOption: OptionElement) => eachOption.selected);
+            if (selectedOption) this.#selectedOptions = [selectedOption];
+            this.value = selectedOption?.value;
+        }
+        if (this.popup) {
+            if (!this.popup.hidden) {
+                this.popup.render();
+                this.popup.updatePosition();
+            }
+        }
+    }
 
     @Attr({ observe: false, render: false })
     empty: boolean;
