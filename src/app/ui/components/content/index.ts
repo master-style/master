@@ -303,6 +303,10 @@ export class ContentElement extends ToggleableElement {
         this.render();
     }
 
+    protected onOpened() {
+        this.renderScrolling();
+    }
+
     protected toggling(
         options: KeyframeEffectOptions
     ) {
