@@ -1,1 +1,28 @@
 <p>collapse works!</p>
+<m-button class="theme" toggle-collapse="#target">
+    steak
+    <m-icon part="foot" name="chevron"></m-icon>
+</m-button>
+
+<br>
+<br>
+
+<m-collapse id="target" collapse-y>
+    <m-card>
+        <m-item class="lined" type="button">
+            <m-check slot="head"></m-check>
+            Pasta
+            <span slot="foot">100 g</span>
+        </m-item>
+        <m-item class="lined" type="button">
+            <m-check slot="head"></m-check>
+            Clams
+            <span slot="foot">300 g</span>
+        </m-item>
+        <m-item class="lined" type="button">
+            <m-check slot="head"></m-check>
+            Carlic
+            <span slot="foot">3 petals</span>
+        </m-item>
+    </m-card>
+</m-collapse>
