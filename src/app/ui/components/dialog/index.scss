@@ -7,25 +7,69 @@
 [part=icon] {
     display: flex;
     margin: 2.5rem auto 0 auto;
-    font-size: 5rem;
+    font-size: 4rem;
     border-radius: 50%;
+    stroke-dasharray: 100%;
+    stroke-dashoffset: 100%;
+    will-change: stroke-dashoffset;
+    opacity: 0;
+    animation: draw .3s ease forwards;
 
     &[name=check] {
         color: var(--green);
-        border-color: var(--green-fader);
+        filter: drop-shadow(0px 4px 8px rgba($green, .5));
+    }
+
+    &[name=close] {
+        color: var(--red);
+        transform: rotate(90deg);
+        filter: drop-shadow(0px 4px 8px rgba($red, .5));
+    }
+
+    +h2 {
+        margin-top: 1rem;
+    }
+}
+
+@keyframes draw {
+    to {
+        opacity: 1;
+        stroke-dashoffset: 0%;
     }
 }
 
 h2 {
-     font-weight: 500;
-     margin: 2rem auto 1rem auto;
-     padding: 0 1rem;
-     font-size: 1.875rem;
+    text-align: center;
+    font-weight: 500;
+    margin: 2.5rem 2rem;
+    font-size: 1.875rem;
+
+    +p {
+        margin-top: -1.5rem;
+    }
 }
 
 p {
     text-align: center;
-    padding: 0px 2rem 2rem 2rem;
-    margin: 0;
+    margin: 2rem;
     color: var(--f-theme-fader);
+    font-size: var(--f-sm);
+}
+
+[part=foot] {
+    display: flex;
+    border-top: 1px solid var(--b-fadest);
+
+    m-button {
+        flex: 1 1 0;
+        border-radius: 0;
+
+        &:first-child {
+            border-right: 1px solid var(--b-fadest);
+        }
+    }
+}
+
+[part=cancel] {
+    --button-f-color: var(--f-fader);
 }

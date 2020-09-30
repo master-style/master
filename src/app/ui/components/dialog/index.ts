@@ -4,6 +4,11 @@ import css from './index.scss';
 
 const NAME = 'dialog';
 
+const TYPE_ICON = {
+    success: 'check',
+    error: 'close'
+}
+
 @Element({
     tag: 'm-' + NAME,
     css
@@ -11,10 +16,20 @@ const NAME = 'dialog';
 export class DialogElement extends ModalElement {
 
     rootTemplate = () => [
-        'm-icon', { name: 'check', part: 'icon' },
+        'm-icon', {
+            $if: this.type,
+            name: TYPE_ICON[this.type], part: 'icon'
+        },
         'h2', { $text: this.title },
-        'p', { $text: this.text }
+        'p', { $text: this.text },
+        'div', { part: 'foot' }, [
+            'm-button', { part: 'cancel', $text: 'CANCEL' },
+            'm-button', { part: 'confirm', $text: 'OK' }
+        ]
     ]
+
+    @Attr()
+    duration: number = 300;
 
     @Attr({ reflect: false, observe: false })
     title: string = 'Created';
@@ -23,7 +38,7 @@ export class DialogElement extends ModalElement {
     text: string = 'The user has been created by Aron.';
 
     @Attr({ reflect: false, observe: false })
-    type: string = 'success';
+    type: string = 'error';
 
     @Attr()
     placement: string = 'center';
