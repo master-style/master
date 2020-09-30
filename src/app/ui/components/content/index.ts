@@ -35,12 +35,14 @@ export class ContentElement extends HTMLElement {
     #thumb: any = {};
 
     template = $(() => [
-        'slot', {
+        'div', {
             part: 'root',
             $created: (element: HTMLElement) => {
                 this.wrap = element;
             }
-        },
+        }, [
+            'slot'
+        ],
         'm-bar', {
             part: 'x',
             hidden: !this.scrolling,
