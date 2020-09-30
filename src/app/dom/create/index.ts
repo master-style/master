@@ -91,7 +91,6 @@ class MasterTemplate {
                         const children = token().reduce((acc, eachToken) => {
                             return acc.concat(eachToken);
                         }, []);
-                        console.log(children);
                         if (!eachNode.children) eachNode.children = [];
                         generate(children, eachNode.children);
                     } else if (tokenType === 'object') {
