@@ -1,3 +1,9 @@
+.bg\:object {
+    background-color: var(--bg-object);
+    backdrop-filter: blur(35px);
+    -webkit-backdrop-filter: blur(35px);
+}
+
 .bg\:transparent {
     background: none !important;
 }

@@ -8,6 +8,8 @@
     --bg-disabled: var(--card-bg-disabled, var(--bg-color));
     --foot-px: var(--card-foot-px, 1rem);
     --foot-py: var(--card-foot-py, .8rem);
+    backdrop-filter: blur(35px);
+    -webkit-backdrop-filter: blur(35px);
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;

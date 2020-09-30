@@ -1,5 +1,5 @@
 @import '../variables';
-@import './field';
+@import './normalize';
 
 /**
    * Remove the inner padding and cancel buttons in Chrome and Safari on macOS.
@@ -44,27 +44,6 @@
     --label-px: .3125rem;
     --label-f-size: .9375rem;
 }
-
-:host([disabled]) {
-    cursor: no-drop !important;
-    color: var(--f-fadest) !important;
-    -webkit-text-fill-color: var(--f-fadest); // fix safari opacity problem
-
-    fieldset {
-        border-style: dashed;
-    }
-
-    ::slotted([part=head]),
-    ::slotted([part=foot]),
-    ::slotted([part=body]),
-    m-icon,
-    [part=body],
-    label {
-        cursor: no-drop !important;
-        color: var(--f-fadest) !important;
-    }
-}
-
 
 @media (any-hover: hover) {
     :host(:not([disabled]):not([readonly]):hover) {
@@ -310,4 +289,21 @@ m-icon {
     width: fit-content;
     // padding-right: var(--px);
     // padding-left: calc(var(--px) / 2);
+}
+
+:host([disabled]) {
+
+    -webkit-text-fill-color: var(--f-fadest); // fix safari opacity problem
+    cursor: no-drop !important;
+    color: var(--f-fadest) !important;
+
+    fieldset {
+        border-style: dashed;
+        border-color: var(--b-color) !important;
+    }
+
+    &:after {
+        display: none;
+    }
+
 }
