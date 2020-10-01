@@ -5,8 +5,10 @@ const liveTriggers = {};
 export class ToggleableElement extends HTMLElement {
 
     @Attr({
-        update(togglable: ToggleableElement, value: boolean) {
-            value ? togglable.close() : togglable.open();
+        update(toggleable: ToggleableElement, value: boolean) {
+            const start = toggleable[value ? 'onClose' : 'onOpen'];
+            if (start) start();
+            toggleable.prepare();
         }
     })
     hidden: boolean = false;
@@ -78,10 +80,7 @@ export class ToggleableElement extends HTMLElement {
     protected animations: Animation[] = [];
     protected animation: Animation;
 
-    private async prepare(opening: boolean) {
-        // 此繞過 this.hidden 設置
-        this['_hidden'] = !opening;
-        this.toggleAttribute('hidden', !opening);
+    private async prepare() {
         if (this.triggerEvent) {
             const name = this.constructor['elementName'];
             const toggleAttrKey = 'toggle-' + name;
@@ -121,18 +120,22 @@ export class ToggleableElement extends HTMLElement {
         if (!this.hidden) {
             return;
         }
+        this['_hidden'] = false;
+        this.toggleAttribute('hidden', false);
         const onOpen = this['onOpen'];
         if (onOpen) onOpen.call(this);
-        await this.prepare(true);
+        await this.prepare();
     }
 
     async close() {
         if (this.hidden) {
             return;
         }
+        this['_hidden'] = true;
+        this.toggleAttribute('hidden', true);
         const onClose = this['onClose'];
         if (onClose) onClose.call(this);
-        await this.prepare(false);
+        await this.prepare();
     }
 
     async toggle(whether?: boolean) {

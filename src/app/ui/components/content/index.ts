@@ -72,9 +72,6 @@ export class ContentElement extends ToggleableElement {
     maxX: number;
     maxY: number;
 
-    @Attr()
-    hidden: boolean = false;
-
     @Attr({ reflect: false, render: false })
     duration: number = 300;
 
