@@ -114,7 +114,6 @@ export class ContentElement extends ToggleableElement {
     render() {
         this.template.render(this.shadowRoot);
         this.renderScrolling();
-        console.log('rendered');
         (this.scrollX || this.scrollY) ? this.enable() : this.disable();
     }
 
