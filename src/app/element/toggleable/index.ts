@@ -6,9 +6,11 @@ export class ToggleableElement extends HTMLElement {
 
     @Attr({
         update(toggleable: ToggleableElement, value: boolean) {
-            const start = toggleable[value ? 'onClose' : 'onOpen'];
-            if (start) start();
-            toggleable.prepare();
+            if (toggleable['ready']) {
+                const start = toggleable[value ? 'onClose' : 'onOpen'];
+                if (start) start();
+                toggleable.prepare();
+            }
         }
     })
     hidden: boolean = false;

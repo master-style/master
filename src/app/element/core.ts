@@ -73,7 +73,7 @@ export function Element(options: ElementOptions) {
                 }
             }
             if (this.render) this.render();
-            this.ready = true;
+            this.initial = true;
             if (allAttrOptions) {
                 for (const eachAttrKey in constructor.allAttrOptions) {
                     const eachAttrOptions: AttrOptions = allAttrOptions[eachAttrKey];
@@ -85,7 +85,7 @@ export function Element(options: ElementOptions) {
                     }
                 }
             }
-            this.initial = true;
+            this.ready = true;
             if (onAdded) onAdded.call(this);
         };
 

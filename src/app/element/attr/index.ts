@@ -28,7 +28,7 @@ export function Attr(options?: AttrOptions) {
                 }
                 if (value === oldValue) return;
                 this[_propKey] = value;
-                if (this.ready) {
+                if (this.initial) {
                     if (update) {
                         update(this, value, oldValue);
                     }

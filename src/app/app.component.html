@@ -99,7 +99,7 @@
                 <i class="i-{{route?.data?.icon}} f:fade++"></i>
             </div>
             <span [ngStyle]="{'padding-left': size !== 'sm' ? '1.9375rem' : null}">{{ route.path | translate }}</span>
-            <m-icon slot="foot" name="caret" *ngIf="route?.children"></m-icon>
+            <m-icon slot="foot" class="f:fade++" name="caret" *ngIf="route?.children"></m-icon>
         </m-item>
         <m-content *ngIf="route.children"
                    hidden
