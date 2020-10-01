@@ -198,10 +198,10 @@ export class ModalElement extends ToggleableElement {
 
                     pushing = document.querySelector(this.pushing);
                     if (pushing) {
-                        pushing.toggleAttribute('hidden', false);
                         this.animations.push(
                             pushing.animate(pushingKeyframes, {
-                                ...options
+                                ...options,
+                                fill: 'both'
                             })
                         );
                     }
@@ -241,9 +241,6 @@ export class ModalElement extends ToggleableElement {
                 }
                 if (content && !hidden) {
                     content.enable();
-                }
-                if (pushing) {
-                    pushing.toggleAttribute('hidden', !hidden);
                 }
                 finish();
             };

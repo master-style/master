@@ -333,8 +333,6 @@ export class ContentElement extends ToggleableElement {
             keyframes.push(startKeyframe, endKeyframe);
         }
 
-        console.log(keyframes);
-
         this.animation = this.animate(keyframes, options);
         this.animations.push(this.animation);
         return new Promise((finish) => {
