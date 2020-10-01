@@ -113,7 +113,7 @@ export class ContentElement extends ToggleableElement {
 
     render() {
         this.template.render(this.shadowRoot);
-        this.renderScrolling();
+        this.renderOnScroll();
         (this.scrollX || this.scrollY) ? this.enable() : this.disable();
     }
 
@@ -123,7 +123,7 @@ export class ContentElement extends ToggleableElement {
         this.scrolling = false;
         this.wrap
             .on('scroll', (event: any) => {
-                if (!this.renderScrolling()) return;
+                if (!this.renderOnScroll()) return;
                 if (!this.scrolling) {
                     this.scrolling = true;
                     this.template.render(this.shadowRoot);
@@ -137,14 +137,14 @@ export class ContentElement extends ToggleableElement {
                 passive: true
             })
             .on('slotchange', (event) => {
-                this.renderScrolling();
+                this.renderOnScroll();
             }, {
                 id: 'scroll',
                 passive: true
             });
 
         window.on('resize', debounce(() => {
-            this.renderScrolling();
+            this.renderOnScroll();
         }, 70), {
             id: this
         });
@@ -240,7 +240,7 @@ export class ContentElement extends ToggleableElement {
         }
     }
 
-    renderScrolling() {
+    renderOnScroll() {
         const render = (dir: string) => {
             if (this['scroll' + dir]) {
                 const
@@ -304,7 +304,7 @@ export class ContentElement extends ToggleableElement {
     }
 
     protected onOpened() {
-        this.renderScrolling();
+        this.renderOnScroll();
     }
 
     protected toggling(
