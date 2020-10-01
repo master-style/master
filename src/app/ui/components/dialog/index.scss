@@ -4,23 +4,19 @@
     --max-width: var(--wrap-xxs);
 }
 
-[part=head] {
-    display: flex;
+slot[name=icon]::slotted(*),
+[part=icon] {
     margin: 2.5rem auto 0 auto;
-
-    +h2 {
-        margin-top: 1rem;
-    }
+    font-size: 4rem;
+    border-radius: 50%;
 }
 
 [part=icon] {
-    font-size: 4rem;
-    border-radius: 50%;
     stroke-dasharray: 100%;
     stroke-dashoffset: 100%;
     will-change: stroke-dashoffset;
-    opacity: 0;
     animation: draw .3s ease forwards;
+    opacity: 0;
 
     &[name=check] {
         color: var(--green);
@@ -30,6 +26,11 @@
         color: var(--red);
         transform: rotate(90deg);
     }
+}
+
+[part=icon] + h2,
+slot[name=icon] + h2 {
+    margin-top: 1.5rem;
 }
 
 @keyframes draw {

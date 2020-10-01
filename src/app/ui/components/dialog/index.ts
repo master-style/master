@@ -4,25 +4,44 @@ import css from './index.scss';
 
 const NAME = 'dialog';
 
+enum TYPE_ICON {
+    success = 'check',
+    error = 'cross'
+}
+
 @Element({
     tag: 'm-' + NAME,
     css
 })
 export class DialogElement extends ModalElement {
 
-    contentTemplate = () => [
+    template = $(() => [
         'div', {
+            slot: 'icon',
             $if: this.icon,
-            part: 'head'
+            $html: this.icon
+        }
+    ]);
+
+    slotTokens = () => [
+        'm-icon', {
+            $if: this.type,
+            part: 'icon',
+            name: TYPE_ICON[this.type]
+        },
+        'slot', {
+            $if: this.icon,
+            name: 'icon'
+        },
+        'h2', {
+            $text: this.title
+        },
+        'p', {
+            $text: this.text
+        },
+        'div', {
+            part: 'foot'
         }, [
-            'm-icon', {
-                $if: this.icon,
-                name: this.icon, part: 'icon'
-            }
-        ],
-        'h2', { $text: this.title },
-        'p', { $text: this.text },
-        'div', { part: 'foot' }, [
             'm-button', {
                 $text: 'CANCEL'
             },
@@ -42,11 +61,15 @@ export class DialogElement extends ModalElement {
     text: string = 'The user has been created by Aron.';
 
     @Attr({ reflect: false, observe: false })
-    icon: string = '<i class="i-package">';
+    type: string = 'success';
+
+    @Attr({ reflect: false, observe: false })
+    icon: string;
 
     @Attr()
     placement: string = 'center';
 
     @Attr({ render: false, observe: false })
     role = 'dialog';
+
 }

@@ -12,9 +12,10 @@ export class ModalElement extends ToggleableElement {
 
     private trigger: HTMLElement;
 
-    contentTemplate;
+    contentTokens;
+    slotTokens: any = () => ['slot'];
 
-    template = $(() => [
+    shadowTemplate = $(() => [
         'm-overlay', {
             $if: attrEnabled(this.overlay),
             $created: (element: HTMLElement) => this.overlayElement = element,
@@ -22,8 +23,7 @@ export class ModalElement extends ToggleableElement {
         'div', {
             part: 'root',
             $created: (element: HTMLElement) => this.root = element
-        }, (this.contentTemplate && this.contentTemplate() || []).concat([
-            'slot',
+        }, this.slotTokens().concat([
             'm-button', {
                 part: 'close',
                 class: 'round xs',
@@ -35,12 +35,15 @@ export class ModalElement extends ToggleableElement {
         ])
     ]);
 
+    template: MasterTemplate;
+
     render() {
-        this.template.render(this.shadowRoot);
+        this.shadowTemplate.render(this.shadowRoot);
+        if (this.template) this.template.render(this);
     }
 
     removeRender() {
-        this.template.remove();
+        this.shadowTemplate.remove();
     }
 
     root: any;
