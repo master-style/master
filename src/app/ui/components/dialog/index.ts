@@ -69,16 +69,16 @@ export class DialogElement extends ModalElement {
     duration: number = 300;
 
     @Attr({ reflect: false, observe: false })
-    title: string = 'Created';
+    title: string;
 
     @Attr({ reflect: false, observe: false })
-    text: string = 'The user has been created by Aron.';
+    text: string;
 
     @Attr({ reflect: false, observe: false })
-    body: string = '<p>ts</p>';
+    body: string;
 
     @Attr({ reflect: false, observe: false })
-    type: string = 'success';
+    type: string;
 
     @Attr({ reflect: false, observe: false })
     icon: string;
@@ -90,3 +90,40 @@ export class DialogElement extends ModalElement {
     role = 'dialog';
 
 }
+
+const DIALOG_ELEMENT = document.createElement('m-dialog');
+
+$.dialog = (options) => {
+    const _dialog = (DIALOG_ELEMENT.cloneNode() as DialogElement);
+    for (const eachPropKey in options) {
+        const eachPropValue = options[eachPropKey];
+        _dialog[eachPropKey] = eachPropValue;
+        console.log(_dialog[eachPropKey]);
+    }
+    document.body.appendChild(_dialog);
+    return _dialog;
+};
+
+const dialog = $.dialog({
+    title: 'Created',
+    text: 'The user has been created by Aron.',
+    type: 'success',
+    buttons: {
+        confirm: {
+            $text: 'ok',
+            $on: {
+                click: () => {
+
+                }
+            }
+        },
+        cancel: {
+            $text: 'cancel',
+            $on: {
+                click: () => {
+                    dialog.close();
+                }
+            }
+        }
+    }
+});
