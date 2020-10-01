@@ -178,9 +178,11 @@ export class SelectElement extends ControlElement {
         } else {
             this.root.on('click', () => {
                 if (this.disabled || this.popup && !this.popup.hidden) return;
-                this.popup = $('m-select-popup', {});
+                this.popup = $('m-select-popup', {
+                    multiple: this.multiple,
+                    hidden: true
+                });
                 this.popup.select = this;
-                this.popup.multiple = this.multiple;
                 document.body.append(this.popup);
                 this.popup.open();
             }, { passive: true, id: NAME });
