@@ -107,6 +107,10 @@ export class SelectPopupElement extends ToggleableElement {
 
     onOpen() {
         this.content.renderOnScroll();
+        if (this.select.search) {
+            this.select.search.readOnly = false;
+            this.select.search.focus();
+        }
     }
 
     onOpened() {
@@ -136,6 +140,9 @@ export class SelectPopupElement extends ToggleableElement {
     }
 
     onClosed() {
+        if (this.select.search) {
+            this.select.search.readOnly = true;
+        }
         this.#foundCount = 0;
         this.#keyword = '';
         this.toggleAttribute('searching', false);

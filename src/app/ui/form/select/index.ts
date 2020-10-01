@@ -52,7 +52,7 @@ export class SelectElement extends ControlElement {
                     type: 'search',
                     spellcheck: 'false',
                     disabled: this.disabled,
-                    readonly: this.readOnly || !this.searchable || this.popup?.hidden,
+                    readonly: this.readOnly || !this.searchable,
                     value: this.keyword,
                     placeholder: this.placeholder,
                     $created: (element: HTMLInputElement) => {
