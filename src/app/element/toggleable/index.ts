@@ -5,11 +5,11 @@ const liveTriggers = {};
 export class ToggleableElement extends HTMLElement {
 
     @Attr({
-        update(togglable: ToggleableElement, value: boolean, oldValue: boolean) {
+        update(togglable: ToggleableElement, value: boolean) {
             value ? togglable.close() : togglable.open();
         }
     })
-    hidden: boolean = true;
+    hidden: boolean = false;
 
     @Attr({ reflect: false })
     duration = 500;
@@ -112,9 +112,6 @@ export class ToggleableElement extends HTMLElement {
                 if (completed) completed.call(this);
                 this.toggleAttribute('changing', false);
                 this.animation = null;
-                this.animations.forEach((eachAnimation) => {
-                    console.log(eachAnimation.cancel());
-                })
                 this.animations = [];
             }
         }
