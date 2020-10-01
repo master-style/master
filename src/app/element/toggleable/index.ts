@@ -95,24 +95,22 @@ export class ToggleableElement extends HTMLElement {
                     }
                 });
         }
-        if (this['ready']) {
-            if (this.animation) {
-                for (const eachAnimation of this.animations) {
-                    eachAnimation.reverse();
-                }
-            } else if (this.duration) {
-                this.toggleAttribute('changing', true);
-                await this['toggling']({
-                    easing: this.easing,
-                    duration: this.duration
-                });
-                const hidden = this.hidden;
-                const completed = hidden ? this['onClosed'] : this['onOpened'];
-                if (completed) completed.call(this);
-                this.toggleAttribute('changing', false);
-                this.animation = null;
-                this.animations = [];
+        if (this.animation) {
+            for (const eachAnimation of this.animations) {
+                eachAnimation.reverse();
             }
+        } else if (this.duration) {
+            this.toggleAttribute('changing', true);
+            await this['toggling']({
+                easing: this.easing,
+                duration: this.duration
+            });
+            const hidden = this.hidden;
+            const completed = hidden ? this['onClosed'] : this['onOpened'];
+            if (completed) completed.call(this);
+            this.toggleAttribute('changing', false);
+            this.animation = null;
+            this.animations = [];
         }
     }
 

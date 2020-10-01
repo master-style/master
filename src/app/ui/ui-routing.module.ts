@@ -124,12 +124,12 @@ export const uiRoutes: Routes = [
         ]
     },
     {
-        path: 'decorators', data: {}, children: [
+        path: 'decorators', data: { icon: 'edit' }, children: [
             { path: 'article', component: ArticleComponent, resolve: { route: RouteResolver } },
             { path: 'figure', component: FigureComponent, resolve: { route: RouteResolver } },
         ]
     },
-    { path: 'icon', data: {}, component: IconComponent, resolve: { route: RouteResolver } },
+    { path: 'icon', data: { icon: 'image' }, component: IconComponent, resolve: { route: RouteResolver } },
 ];
 
 @NgModule({

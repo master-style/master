@@ -25,6 +25,7 @@ export function Element(options: ElementOptions) {
         };
         prototype.connectedCallback = function () {
             this.ready = false; // prevent rendering many times
+            this.initial = false;
             if (allAttrOptions) {
                 // 取得當前 attr 與 prop 比對，避免重複設置相同 attr
                 const attributes = this.attributes;
@@ -84,6 +85,7 @@ export function Element(options: ElementOptions) {
                     }
                 }
             }
+            this.initial = true;
             if (onAdded) onAdded.call(this);
         };
 

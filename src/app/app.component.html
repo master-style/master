@@ -92,14 +92,20 @@
         <m-item [routerLink]="route?.paths ? route?.paths : ''"
                 *ngIf="route?.component || route?.children"
                 class="bg:theme {{size}}"
+                [attr.toggle-content]="'#' + route.path + '-menu'"
                 [ngClass]="{'sticky z:abs': route?.children}"
                 type="button">
             <div slot="head" style="margin-right: .5rem" *ngIf="route?.data?.icon">
                 <i class="i-{{route?.data?.icon}} f:fade++"></i>
             </div>
             <span [ngStyle]="{'padding-left': size !== 'sm' ? '1.9375rem' : null}">{{ route.path | translate }}</span>
+            <m-icon slot="foot" name="caret" *ngIf="route?.children"></m-icon>
         </m-item>
-        <m-content *ngIf="route.children" collapse-y style="--content-offset-top: 0px">
+        <m-content *ngIf="route.children"
+                   hidden
+                   [attr.id]="route.path + '-menu'"
+                   collapse-y
+                   style="--content-offset-top: 0px">
             <m-list style="margin-bottom: .5rem">
                 <ng-container *ngFor="let eachRoute of route.children"
                               [ngTemplateOutlet]="routeGroup"
