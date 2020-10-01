@@ -20,6 +20,11 @@ export class DialogElement extends ModalElement {
             slot: 'icon',
             $if: this.icon,
             $html: this.icon
+        },
+        'article', {
+            slot: 'body',
+            class: 'prose',
+            $html: this.body
         }
     ]);
 
@@ -36,15 +41,17 @@ export class DialogElement extends ModalElement {
         },
         'h2', {
             $if: this.title,
+            part: 'title',
             $text: this.title
         },
         'p', {
             $if: this.text,
+            part: 'text',
             $text: this.text
         },
-        'div', {
-            $if: this.content,
-            $text: this.content
+        'slot', {
+            name: 'body',
+            $if: this.body
         },
         'div', {
             part: 'foot'
@@ -68,7 +75,7 @@ export class DialogElement extends ModalElement {
     text: string = 'The user has been created by Aron.';
 
     @Attr({ reflect: false, observe: false })
-    content: string;
+    body: string = '<p>ts</p>';
 
     @Attr({ reflect: false, observe: false })
     type: string = 'success';

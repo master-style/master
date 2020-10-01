@@ -22,27 +22,33 @@ slot[name=icon]::slotted(*),
     }
 }
 
-[part=icon]+h2,
-slot[name=icon]+h2 {
-    margin-top: 1.5rem;
-}
-
-h2 {
+[part=title] {
     text-align: center;
     font-weight: 500;
     margin: 2.5rem 2rem;
     font-size: 1.875rem;
 
-    +p {
-        margin-top: -1.5rem;
+    ~[part=text],
+    ~slot[name=body]::slotted([slot=body]) {
+        margin-top: -1.5rem!important;
+        padding-top: 0!important;
     }
 }
 
-p {
+[part=text] {
     text-align: center;
     margin: 2rem;
     color: var(--f-theme-fader);
     font-size: var(--f-sm);
+}
+
+[part=icon]+[part=title],
+slot[name=icon]+[part=title] {
+    margin-top: 1.5rem;
+}
+
+slot[name=body]::slotted([slot=body]) {
+    padding: 2rem !important;
 }
 
 [part=foot] {
