@@ -125,4 +125,8 @@ export class InputElement extends ControlElement {
         });
     }
 
+    onRemoved() {
+        this.off({ id: NAME });
+    }
+
 }

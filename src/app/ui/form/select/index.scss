@@ -40,9 +40,12 @@
 [part=body] {
     font-weight: 500;
     flex-wrap: wrap;
+    flex: 1 1 auto;
+    width: auto;
+    margin: #{-$xs};
 
     &:empty[placeholder] {
-        margin: 0!important;
+        margin: 0 !important;
 
         &:before {
             content: attr(placeholder);
@@ -53,14 +56,6 @@
     &:empty[label]:not([placeholder]):before {
         content: attr(label);
         color: transparent;
-    }
-}
-
-:host([multiple]) {
-    [part=body] {
-        flex: 1 1 auto;
-        width: auto;
-        margin: #{-$xs};
     }
 }
 
@@ -123,4 +118,10 @@ m-button[part=close] {
 
 m-chip {
     flex: 0 0 auto;
+}
+
+:host(:not([multiple]):not([searchable])){
+    [part=search] {
+        cursor: pointer;
+    }
 }

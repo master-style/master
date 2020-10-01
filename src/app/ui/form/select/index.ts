@@ -42,28 +42,24 @@ export class SelectElement extends ControlElement {
             'div', {
                 part: 'body',
                 placeholder: this.placeholder,
-                label: this.label, // for default select width
-                $text: this.value,
-                $if: !this.multiple
-            },
-            'div', {
-                $if: this.multiple,
-                part: 'body',
-                placeholder: this.placeholder,
-                label: this.label, // for default select width
+                label: this.label.length > this.placeholder.length
+                    ? this.label
+                    : this.placeholder, // for default select width
             }, [
                 'input', {
-                    $if: this.searchable && !this.readOnly,
+                    $if: this.multiple && this.searchable && !this.readOnly || !this.multiple,
                     part: 'search',
                     type: 'search',
+                    spellcheck: 'false',
                     disabled: this.disabled,
+                    readonly: this.readOnly || !this.searchable || this.popup?.hidden,
                     value: this.keyword,
                     placeholder: this.placeholder,
                     $created: (element: HTMLInputElement) => {
-                        console.log('input');
                         this.search = element
                             .on('input', (event: any) => {
-                                this.popup.search(event.target.value);
+                                if (this.searchable)
+                                    this.popup.search(event.target.value);
                             }, { passive: true, id: NAME });
                     },
                     $removed: () => this.search = null
@@ -240,6 +236,9 @@ export class SelectElement extends ControlElement {
             });
             ControlElement.updateValue(select, value);
             select.body.value = value;
+            if (!select.multiple) {
+                select.search.value = value || '';
+            }
             select.changeEmitter(value);
         },
         reflect: false
@@ -251,6 +250,19 @@ export class SelectElement extends ControlElement {
 
     onAdded() {
         this.uid = uid++;
+        this
+            .on('focusin', () => {
+                this.focused = true;
+            }, { passive: true, id: NAME })
+            .on('focusout', () => {
+                console.log(this.popup?.hidden);
+                if (!this.popup?.hidden) return;
+                this.focused = false;
+            }, { passive: true, id: NAME });
+    }
+
+    onRemoved() {
+        this.off({ id: NAME });
     }
 
 }

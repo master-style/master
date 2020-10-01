@@ -106,9 +106,7 @@ export class SelectPopupElement extends ToggleableElement {
     }
 
     onOpen() {
-        this.select.toggleAttribute('focused', true);
         this.content.renderOnScroll();
-        if (this.select.search) this.select.search.focus();
     }
 
     onOpened() {
@@ -129,10 +127,12 @@ export class SelectPopupElement extends ToggleableElement {
         if (this.select.search) {
             this.select.search.value = this.select.keyword = '';
         }
-        this.select.focus();
         document.body.off({ id: this });
         document.documentElement.css('overflow', '');
-        this.select.toggleAttribute('focused', false);
+        this.select.focused = false;
+        if (!this.select.multiple) {
+            this.select.search.value = this.select.value || '';
+        }
     }
 
     onClosed() {

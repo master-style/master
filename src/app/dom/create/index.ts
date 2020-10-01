@@ -165,7 +165,7 @@ class MasterTemplate {
                                 }
                             }
                             if (
-                                eachNode.$html !== undefined &&
+                                '$html' in eachNode &&
                                 eachNode.$html !== eachOldNode.$html
                             ) {
                                 element.innerHTML = eachNode.$html;
@@ -173,7 +173,7 @@ class MasterTemplate {
                                     eachOldNode.children = null;
                                 }
                             } else if (
-                                eachNode.$text !== undefined &&
+                                '$text' in eachNode &&
                                 eachNode.$text !== eachOldNode.$text
                             ) {
                                 element.textContent = eachNode.$text;
@@ -199,12 +199,12 @@ class MasterTemplate {
                             if (css) {
                                 element.css(css);
                             }
-                            if (eachNode.$html !== undefined) {
+                            if ('$html' in eachNode) {
                                 element.innerHTML = eachNode.$html;
                                 if (eachOldNode) {
                                     eachOldNode.children = null;
                                 }
-                            } else if (eachNode.$text !== undefined) {
+                            } else if ('$text' in eachNode) {
                                 element.textContent = eachNode.$text;
                             }
                             if (eachNode.children) {
@@ -257,9 +257,9 @@ class MasterTemplate {
                     if (created) created(element, eachNode);
                     const updated = eachNode.$updated;
                     if (updated) updated(element, eachNode);
-                    if (eachNode.$html !== undefined) {
+                    if ('$html' in eachNode) {
                         element.innerHTML = eachNode.$html;
-                    } else if (eachNode.$text !== undefined) {
+                    } else if ('$text' in eachNode) {
                         element.textContent = eachNode.$text;
                     }
                     const attr = eachNode.attr;
