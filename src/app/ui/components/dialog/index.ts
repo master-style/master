@@ -25,6 +25,7 @@ export class DialogElement extends ModalElement {
 
     slotTokens = () => [
         'm-icon', {
+            class: 'animated',
             $if: this.type,
             part: 'icon',
             name: TYPE_ICON[this.type]
@@ -34,10 +35,16 @@ export class DialogElement extends ModalElement {
             name: 'icon'
         },
         'h2', {
+            $if: this.title,
             $text: this.title
         },
         'p', {
+            $if: this.text,
             $text: this.text
+        },
+        'div', {
+            $if: this.content,
+            $text: this.content
         },
         'div', {
             part: 'foot'
@@ -59,6 +66,9 @@ export class DialogElement extends ModalElement {
 
     @Attr({ reflect: false, observe: false })
     text: string = 'The user has been created by Aron.';
+
+    @Attr({ reflect: false, observe: false })
+    content: string;
 
     @Attr({ reflect: false, observe: false })
     type: string = 'success';

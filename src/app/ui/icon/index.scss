@@ -147,6 +147,22 @@ g {
     }
 }
 
+:host([name=check].animated),
+:host([name=cross].animated) {
+    stroke-dasharray: 100%;
+    stroke-dashoffset: 100%;
+    will-change: stroke-dashoffset;
+    animation: draw .3s ease forwards;
+    opacity: 0;
+}
+
+@keyframes draw {
+    to {
+        opacity: 1;
+        stroke-dashoffset: 0%;
+    }
+}
+
 :host([name=check]) {
     path {
         stroke-width: inherit;

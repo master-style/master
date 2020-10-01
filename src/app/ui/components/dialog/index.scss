@@ -12,12 +12,6 @@ slot[name=icon]::slotted(*),
 }
 
 [part=icon] {
-    stroke-dasharray: 100%;
-    stroke-dashoffset: 100%;
-    will-change: stroke-dashoffset;
-    animation: draw .3s ease forwards;
-    opacity: 0;
-
     &[name=check] {
         color: var(--green);
     }
@@ -28,16 +22,9 @@ slot[name=icon]::slotted(*),
     }
 }
 
-[part=icon] + h2,
-slot[name=icon] + h2 {
+[part=icon]+h2,
+slot[name=icon]+h2 {
     margin-top: 1.5rem;
-}
-
-@keyframes draw {
-    to {
-        opacity: 1;
-        stroke-dashoffset: 0%;
-    }
 }
 
 h2 {
