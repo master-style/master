@@ -116,7 +116,7 @@ g {
     }
 }
 
-:host([name=close]),
+:host([name=cross]),
 :host([name=menu]) {
 
     .l1 {
@@ -133,7 +133,7 @@ g {
 }
 
 :host([name=menu][active]),
-:host([name=close]) {
+:host([name=cross]) {
     .l1 {
         transform: rotate(-45deg);
     }

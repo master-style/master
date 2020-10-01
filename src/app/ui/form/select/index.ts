@@ -83,7 +83,7 @@ export class SelectElement extends ControlElement {
                             }, { passive: true, id: NAME });
                         }
                     }, [
-                        'm-icon', { name: 'close' }
+                        'm-icon', { name: 'cross' }
                     ]
                 ]
             ]),

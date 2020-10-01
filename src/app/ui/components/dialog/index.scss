@@ -4,9 +4,16 @@
     --max-width: var(--wrap-xxs);
 }
 
-[part=icon] {
+[part=head] {
     display: flex;
     margin: 2.5rem auto 0 auto;
+
+    +h2 {
+        margin-top: 1rem;
+    }
+}
+
+[part=icon] {
     font-size: 4rem;
     border-radius: 50%;
     stroke-dasharray: 100%;
@@ -19,13 +26,9 @@
         color: var(--green);
     }
 
-    &[name=close] {
+    &[name=cross] {
         color: var(--red);
         transform: rotate(90deg);
-    }
-
-    +h2 {
-        margin-top: 1rem;
     }
 }
 

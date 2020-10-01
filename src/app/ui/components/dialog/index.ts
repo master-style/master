@@ -4,11 +4,6 @@ import css from './index.scss';
 
 const NAME = 'dialog';
 
-const TYPE_ICON = {
-    success: 'check',
-    error: 'close'
-};
-
 @Element({
     tag: 'm-' + NAME,
     css
@@ -16,10 +11,15 @@ const TYPE_ICON = {
 export class DialogElement extends ModalElement {
 
     contentTemplate = () => [
-        'm-icon', {
-            $if: this.type,
-            name: TYPE_ICON[this.type], part: 'icon'
-        },
+        'div', {
+            $if: this.icon,
+            part: 'head'
+        }, [
+            'm-icon', {
+                $if: this.icon,
+                name: this.icon, part: 'icon'
+            }
+        ],
         'h2', { $text: this.title },
         'p', { $text: this.text },
         'div', { part: 'foot' }, [
@@ -42,7 +42,7 @@ export class DialogElement extends ModalElement {
     text: string = 'The user has been created by Aron.';
 
     @Attr({ reflect: false, observe: false })
-    type: string = 'error';
+    icon: string = '<i class="i-package">';
 
     @Attr()
     placement: string = 'center';
