@@ -47,9 +47,6 @@ export class ControlElement extends HTMLElement {
     @Attr({ observe: false, render: false })
     dirty: boolean;
 
-    @Attr({ observe: false })
-    focused: boolean = false;
-
     validate() {
         this.valid = this.validity.valid;
         this.invalid = !this.validity.valid;

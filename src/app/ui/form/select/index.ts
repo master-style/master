@@ -109,6 +109,9 @@ export class SelectElement extends ControlElement {
     @Attr({ key: 'tabindex' })
     tabIndex = 0;
 
+    @Attr({ observe: false })
+    focused: boolean = false;
+
     @Event()
     changeEmitter: EventEmitter;
 
