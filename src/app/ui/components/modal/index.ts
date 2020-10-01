@@ -1,4 +1,4 @@
-import { Element, Attr, ToggleableElement } from '@element';
+import { Element, Attr, ToggleableElement, attrEnabled } from '@element';
 import css from './index.scss';
 
 const NAME = 'modal';
@@ -16,7 +16,7 @@ export class ModalElement extends ToggleableElement {
 
     template = $(() => [
         'm-overlay', {
-            $if: this.overlay,
+            $if: attrEnabled(this.overlay),
             $created: (element: HTMLElement) => this.overlayElement = element,
         },
         'div', {
@@ -77,7 +77,7 @@ export class ModalElement extends ToggleableElement {
     @Attr({
         reflect: false,
         update(modal: ModalElement, value: string, oldValue: string) {
-            if (oldValue === 'close') {
+            if (oldValue === 'close' || oldValue === 'none') {
                 modal.overlayElement.off({ id: 'modal' });
             }
             if (value === 'close') {
@@ -225,7 +225,7 @@ export class ModalElement extends ToggleableElement {
             overlayKeyframes.reverse();
         }
 
-        if (this.overlay) {
+        if (attrEnabled(this.overlay)) {
             this.animations.push(
                 this.overlayElement.animate(overlayKeyframes, options)
             );

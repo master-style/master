@@ -12,7 +12,7 @@
     <img src="assets/images/logo.svg" width="70">
 </div>
 
-<m-button class="fixed left top square" (click)="visibleSide = !visibleSide">
+<m-button class="fixed left top square" toggle-modal="#app-side">
     <i class="i-menu"></i>
 </m-button>
 
@@ -70,8 +70,8 @@
     </article>
 </main>
 
-<aside id="app-side" part="app-side" class="br f:theme++" style="padding-top: 3rem" [ngClass]="{'hidden': !visibleSide}">
-    <m-content scroll-y class="h:full">
+<m-modal id="app-side" part="app-side" placement="left" overlay="none">
+    <m-content part="body" scroll-y class="h:full br f:theme++" style="--content-offset-top: 3rem">
         <m-list style="padding-top: .5rem">
             <ng-container *ngFor="let eachRoute of routes">
                 <ng-container [ngTemplateOutlet]="routeGroup"
@@ -80,7 +80,7 @@
             </ng-container>
         </m-list>
     </m-content>
-</aside>
+</m-modal>
 
 <ng-template #routeGroup let-route="route" let-size="size">
     <label *ngIf="!route?.component && !route?.children"

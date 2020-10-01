@@ -65,3 +65,7 @@ export function Attr(options?: AttrOptions) {
         return descriptor;
     };
 }
+
+export function attrEnabled(value: any) {
+    return value && value !== 'none';
+}
