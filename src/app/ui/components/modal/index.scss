@@ -5,6 +5,7 @@
     --p: var(--modal-p, #{$md});
     --r: var(--modal-r, #{$sm});
     --max-width: var(--modal-max-width, --wrap-xs);
+    --max-height: var(--modal-max-height, 100%);
     position: fixed;
     z-index: $z-overlay;
     left: 0px;
@@ -42,7 +43,7 @@
 :host([placement=left]) {
     --p: 0px;
     --r: 0px;
-    width: fit-content;
+    max-width: var(--max-width);
     right: auto;
 
     [part=root] {
@@ -56,7 +57,7 @@
 :host([placement=right]) {
     --p: 0px;
     --r: 0px;
-    width: fit-content;
+    max-width: var(--max-width);
     right: 0;
     left: auto;
 
@@ -68,7 +69,7 @@
 
 :host([placement=top]) {
     --p: 0px;
-    height: fit-content;
+    max-height: var(--max-height);
     bottom: auto;
 
     [part=root] {
@@ -82,7 +83,7 @@
 
 :host([placement=bottom]) {
     --p: 0px;
-    height: fit-content;
+    max-height: var(--max-height);
     top: auto;
     bottom: 0;
 
@@ -127,6 +128,7 @@
 
 [part=root] {
     max-width: var(--max-width);
+    max-height: var(--max-height);
     position: relative;
     contain: style;
     display: flex;
@@ -134,7 +136,6 @@
     margin: auto;
     flex-direction: column;
     width: 100%;
-    max-height: 100%;
     border-radius: var(--r);
     overflow: hidden;
     background-color: var(--theme);
