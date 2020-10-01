@@ -97,6 +97,7 @@ export class ModalElement extends ToggleableElement {
         let keyframes: any;
 
         let content;
+        let pushing;
 
         const root = this.root;
 
@@ -195,12 +196,12 @@ export class ModalElement extends ToggleableElement {
                     if (this.hidden)
                         pushingKeyframes.reverse();
 
-                    const pushing = document.querySelector(this.pushing);
+                    pushing = document.querySelector(this.pushing);
                     if (pushing) {
+                        pushing.toggleAttribute('hidden', false);
                         this.animations.push(
                             pushing.animate(pushingKeyframes, {
-                                ...options,
-                                fill: 'forwards'
+                                ...options
                             })
                         );
                     }
@@ -234,11 +235,15 @@ export class ModalElement extends ToggleableElement {
         this.animations.push(this.animation);
         return new Promise((finish) => {
             this.animation.onfinish = () => {
-                if (this.hidden && this.trigger && this.hideTrigger) {
+                const hidden = this.hidden;
+                if (hidden && this.trigger && this.hideTrigger) {
                     this.trigger.toggleClass('invisible', false);
                 }
-                if (content && !this.hidden) {
+                if (content && !hidden) {
                     content.enable();
+                }
+                if (pushing) {
+                    pushing.toggleAttribute('hidden', !hidden);
                 }
                 finish();
             };

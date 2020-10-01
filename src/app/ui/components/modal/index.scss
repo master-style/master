@@ -16,7 +16,7 @@
     justify-content: center;
     flex-direction: column;
     flex-wrap: nowrap;
-    contain: strict;
+    contain: style;
     padding: var(--p) // &.long {
     //     padding-top: 0;
     //     padding-bottom: 0;
@@ -42,6 +42,8 @@
 :host([placement=left]) {
     --p: 0px;
     --r: 0px;
+    width: fit-content;
+    right: auto;
 
     [part=root] {
         margin-left: 0;
@@ -54,6 +56,9 @@
 :host([placement=right]) {
     --p: 0px;
     --r: 0px;
+    width: fit-content;
+    right: 0;
+    left: auto;
 
     [part=root] {
         margin-right: 0;
@@ -63,6 +68,8 @@
 
 :host([placement=top]) {
     --p: 0px;
+    height: fit-content;
+    bottom: auto;
 
     [part=root] {
         margin-top: 0;
@@ -75,6 +82,9 @@
 
 :host([placement=bottom]) {
     --p: 0px;
+    height: fit-content;
+    top: auto;
+    bottom: 0;
 
     [part=root] {
         margin-bottom: 0;
@@ -86,27 +96,13 @@
 
 :host([changing]) {
     [part=root] {
-        will-change: height, opacity, box-shadow;
+        will-change: height, opacity;
     }
 
     ::slotted([part=head]) {
         z-index: $z-overlay;
     }
 }
-
-:host([opened]:not([changing])) {
-    [part=root] {
-        transition: .3s box-shadow linear;
-        box-shadow:
-            0 0.8px 1.1px rgba(0, 0, 0, 0.034),
-            0 2px 2.6px rgba(0, 0, 0, 0.048),
-            0 3.8px 4.9px rgba(0, 0, 0, 0.06),
-            0 6.7px 8.7px rgba(0, 0, 0, 0.072),
-            0 12.5px 16.3px rgba(0, 0, 0, 0.086),
-            0 30px 39px rgba(0, 0, 0, 0.12);
-    }
-}
-
 
 :host(.full) {
     --r: 0px;

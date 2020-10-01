@@ -17,13 +17,11 @@
 
     &[name=check] {
         color: var(--green);
-        filter: drop-shadow(0px 4px 8px rgba($green, .5));
     }
 
     &[name=close] {
         color: var(--red);
         transform: rotate(90deg);
-        filter: drop-shadow(0px 4px 8px rgba($red, .5));
     }
 
     +h2 {

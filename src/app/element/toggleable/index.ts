@@ -107,10 +107,14 @@ export class ToggleableElement extends HTMLElement {
                     easing: this.easing,
                     duration: this.duration
                 });
-                const completed = this.hidden ? this['onClosed'] : this['onOpened'];
+                const hidden = this.hidden;
+                const completed = hidden ? this['onClosed'] : this['onOpened'];
                 if (completed) completed.call(this);
                 this.toggleAttribute('changing', false);
                 this.animation = null;
+                this.animations.forEach((eachAnimation) => {
+                    console.log(eachAnimation.cancel());
+                })
                 this.animations = [];
             }
         }
