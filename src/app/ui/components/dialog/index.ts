@@ -7,7 +7,7 @@ const NAME = 'dialog';
 const TYPE_ICON = {
     success: 'check',
     error: 'close'
-}
+};
 
 @Element({
     tag: 'm-' + NAME,
@@ -15,7 +15,7 @@ const TYPE_ICON = {
 })
 export class DialogElement extends ModalElement {
 
-    rootTemplate = () => [
+    contentTemplate = () => [
         'm-icon', {
             $if: this.type,
             name: TYPE_ICON[this.type], part: 'icon'
