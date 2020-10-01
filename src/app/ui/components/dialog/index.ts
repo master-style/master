@@ -23,8 +23,12 @@ export class DialogElement extends ModalElement {
         'h2', { $text: this.title },
         'p', { $text: this.text },
         'div', { part: 'foot' }, [
-            'm-button', { part: 'cancel', $text: 'CANCEL' },
-            'm-button', { part: 'confirm', $text: 'OK' }
+            'm-button', {
+                $text: 'CANCEL'
+            },
+            'm-button', {
+                $text: 'OK'
+            }
         ]
     ]
 

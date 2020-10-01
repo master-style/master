@@ -90,9 +90,7 @@ export class ToggleableElement extends HTMLElement {
                 .forEach((eachToggle: Element) => {
                     if (this.matches(eachToggle.getAttribute(toggleAttrKey))) {
                         eachToggle.toggleAttribute('aria-expanded', !this.hidden);
-                        const icon = eachToggle
-                            .children
-                            .filter((eachChild) => eachChild.matches('m-icon'))[0];
+                        const icon = eachToggle.querySelector('.toggled');
                         if (icon) icon.toggleAttribute('active', !this.hidden);
                     }
                 });
