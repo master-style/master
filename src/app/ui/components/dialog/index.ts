@@ -1,9 +1,15 @@
-import { Element, Attr } from '@element';
+import { Element, Attr, Prop } from '@element';
 import { ModalElement } from '../modal';
 import css from './index.scss';
-import { extend } from '@utils/extend';
 
 const NAME = 'dialog';
+const parserObject = (dialog: DialogElement, value, oldValue) => {
+    if (oldValue) {
+        return Object.assign(oldValue, value);
+    } else {
+        return value;
+    }
+};
 
 enum TYPE_ICON {
     success = 'check',
@@ -18,11 +24,12 @@ export class DialogElement extends ModalElement {
 
     template = $(() => [
         'div', {
-            slot: 'icon',
             $if: this.icon,
+            slot: 'icon',
             $html: this.icon
         },
         'article', {
+            $if: this.body,
             slot: 'body',
             class: 'prose',
             $html: this.body
@@ -58,64 +65,74 @@ export class DialogElement extends ModalElement {
             part: 'foot'
         }, [
             'm-button', {
-                $if: !this.buttons.cancel.hidden,
-                $text: this.buttons.cancel.text
+                $if: !this.cancelButton.hidden,
+                $text: this.cancelButton.text,
+                $on: {
+                    click: () => this.cancel()
+                },
+                busy: this.cancelButton.busy
             },
             'm-button', {
-                $if: !this.buttons.reject.hidden,
-                $text: this.buttons.reject.text
+                $if: !this.rejectButton.hidden,
+                $text: this.rejectButton.text,
+                $on: {
+                    click: () => this.reject()
+                },
+                busy: this.cancelButton.busy
             },
             'm-button', {
-                $if: !this.buttons.accept.hidden,
-                $text: this.buttons.accept.text
+                $if: !this.acceptButton.hidden,
+                $text: this.acceptButton.text,
+                $on: {
+                    click: () => this.accept()
+                },
+                busy: this.cancelButton.busy
             }
         ]
     ]
 
-    duration: number = 300;
+    _duration: number = 300;
+    _placement: string = 'center';
 
-    placement: string = 'center';
+    onConfirm: () => Promise<any> | boolean;
+    onReject: () => Promise<any> | boolean;
+    onCancel: () => Promise<any> | boolean;
 
+    @Attr({ observe: false, render: false })
     role = 'dialog';
 
+    @Prop()
     title: string;
 
+    @Prop()
     text: string;
 
-    confirmText: string;
+    @Prop({ parse: parserObject })
+    acceptButton = {
+        hidden: false,
+        text: 'ok',
+        busy: false
+    };
 
-    cancelText: string;
+    @Prop({ parse: parserObject })
+    rejectButton = {
+        hidden: true,
+        text: 'deny',
+        busy: false
+    };
+
+    @Prop({ parse: parserObject })
+    cancelButton = {
+        hidden: true,
+        text: 'cancel',
+        busy: false
+    };
 
     body: string;
 
     type: string;
 
     icon: string;
-
-    @Attr({
-        parse(dialog: DialogElement, value, oldValue) {
-            console.time('t1');
-            extend({}, oldValue, value)
-            console.timeEnd('t1');
-            return extend({}, oldValue, value);
-        },
-        reflect: false,
-        observe: false
-    })
-    buttons = {
-        accept: {
-            hidden: false,
-            text: 'submit'
-        },
-        reject: {
-            hidden: true,
-            text: 'deny'
-        },
-        cancel: {
-            hidden: true,
-            text: 'cancel'
-        }
-    };
 
     accept() {
 
@@ -125,9 +142,9 @@ export class DialogElement extends ModalElement {
 
     }
 
-    onConfirm: () => Promise<any> | boolean;
-    onReject: () => Promise<any> | boolean;
-    onCancel: () => Promise<any> | boolean;
+    cancel() {
+
+    }
 
 }
 
@@ -161,12 +178,8 @@ $.dialog({
     cancelButton: {
         text: 'cancel'
     },
-    onAccept() {
-
-    },
-    onReject() {
-
-    },
+    onAccept() { },
+    onReject() { },
     async onCancel() {
         return await true;
     }

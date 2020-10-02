@@ -2,7 +2,7 @@ window.on = document.on = Element.prototype.on = function (
     typeSet: string,
     factorSelector,
     handle,
-    option?: Master.ListenerOption
+    option?: ListenerOptions
 ) {
     const target = this;
     if (typeof factorSelector === 'function') {

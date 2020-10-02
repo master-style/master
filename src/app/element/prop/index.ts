@@ -45,7 +45,3 @@ export function Prop(options?: PropertyOptions) {
         return descriptor;
     };
 }
-
-export function attrEnabled(value: any) {
-    return value && value !== 'none';
-}

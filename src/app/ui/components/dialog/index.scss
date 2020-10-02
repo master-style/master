@@ -60,7 +60,7 @@ slot[name=body]::slotted([slot=body]) {
         border-top: 1px solid var(--b-fadest);
 
         &:not(:first-child) {
-            border-right: 1px solid var(--b-fadest);
+            border-left: 1px solid var(--b-fadest);
         }
     }
 }
