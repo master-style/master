@@ -64,33 +64,9 @@ export class DialogElement extends ModalElement {
         'div', {
             part: 'foot'
         }, [
-            'm-button', {
-                $if: !this.cancelButton.hidden,
-                $text: this.cancelButton.text,
-                $on: {
-                    click: () => this.cancel()
-                },
-                busy: this.cancelButton.busy,
-                disabled: this.cancelButton.disabled
-            },
-            'm-button', {
-                $if: !this.rejectButton.hidden,
-                $text: this.rejectButton.text,
-                $on: {
-                    click: () => this.reject()
-                },
-                busy: this.rejectButton.busy,
-                disabled: this.rejectButton.disabled
-            },
-            'm-button', {
-                $if: !this.acceptButton.hidden,
-                $text: this.acceptButton.text,
-                $on: {
-                    click: () => this.accept()
-                },
-                busy: this.acceptButton.busy,
-                disabled: this.acceptButton.disabled
-            }
+            'm-button', this.cancelButton,
+            'm-button', this.rejectButton,
+            'm-button', this.acceptButton
         ]
     ]
 
@@ -113,24 +89,33 @@ export class DialogElement extends ModalElement {
 
     @Prop({ parse: parserObject })
     acceptButton = {
-        hidden: false,
-        text: 'ok',
+        $if: true,
+        $text: 'ok',
+        $on: {
+            click: () => this.accept()
+        },
         busy: false,
         disabled: false
     };
 
     @Prop({ parse: parserObject })
     rejectButton = {
-        hidden: true,
-        text: 'deny',
+        $if: false,
+        $text: 'deny',
+        $on: {
+            click: () => this.reject()
+        },
         busy: false,
         disabled: false
     };
 
     @Prop({ parse: parserObject })
     cancelButton = {
-        hidden: true,
-        text: 'cancel',
+        $if: false,
+        $text: 'cancel',
+        $on: {
+            click: () => this.cancel()
+        },
         busy: false,
         disabled: false
     };

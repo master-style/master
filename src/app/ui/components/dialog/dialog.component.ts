@@ -22,15 +22,15 @@ export class DialogComponent implements OnInit {
             text: 'The user has been created by Aron.',
             type: 'success',
             acceptButton: {
-                hidden: false,
-                text: 'ok',
+                $text: 'accept',
             },
             rejectButton: {
-                hidden: false,
-                text: 'deny',
+                $if: false,
+                $text: 'deny',
             },
             cancelButton: {
-                text: 'cancel'
+                $if: true,
+                $text: 'cancel'
             },
             onAccept() {
                 return obs.toPromise();
