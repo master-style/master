@@ -106,6 +106,9 @@ export class ToggleableElement extends HTMLElement {
                 duration: this.duration
             });
             const hidden = this.hidden;
+            if (hidden) {
+                this.toggleAttribute('hidden', true);
+            }
             const completed = hidden ? this['onClosed'] : this['onOpened'];
             if (completed) completed.call(this);
             this.toggleAttribute('changing', false);
@@ -130,7 +133,6 @@ export class ToggleableElement extends HTMLElement {
             return;
         }
         this['_hidden'] = true;
-        this.toggleAttribute('hidden', true);
         const onClose = this['onClose'];
         if (onClose) onClose.call(this);
         await this.prepare();
