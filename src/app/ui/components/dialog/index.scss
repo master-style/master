@@ -35,16 +35,12 @@ slot[name=icon]::slotted(*),
     }
 }
 
-[part=controls] {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    box-sizing: border-box;
+slot[name=controls]::slotted([slot=controls]) {
     padding: 2rem;
+}
 
-    >*:not(:first-child) {
-        margin-top: 1rem;
-    }
+slot[name=controls]:not(:first-child)::slotted([slot=controls]) {
+    padding-top: 0;
 }
 
 [part=text] {

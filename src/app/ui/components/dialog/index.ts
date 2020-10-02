@@ -33,7 +33,11 @@ export class DialogElement extends ModalElement {
             slot: 'body',
             class: 'prose',
             $html: this.body ? (this.bodyOnBusy || this.body) : this.body
-        }
+        },
+        'div', {
+            slot: 'controls',
+            class: 'y',
+        }, this.controls
     ]);
 
     slotTokens = () => [
@@ -62,8 +66,9 @@ export class DialogElement extends ModalElement {
             $if: this.body,
             $text: this.busy ? (this.bodyOnBusy || this.body) : this.body
         },
-        'div', { part: 'controls' },
-        this.controls,
+        'slot', {
+            name: 'controls'
+        },
         'div', {
             part: 'foot'
         }, [

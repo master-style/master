@@ -45,6 +45,13 @@
     --label-f-size: .9375rem;
 }
 
+:host(.outlined),
+:host(.underlined) {
+    --b-color: var(--b-fadest);
+    --b-color-active: var(--b-fade);
+    backdrop-filter: none;
+}
+
 @media (any-hover: hover) {
     :host(:not([disabled]):not([readonly]):hover) {
         fieldset {
@@ -111,7 +118,7 @@
 :host(.outlined[label]:not([label=""])) {
     [part=label] {
         padding: 0 var(--label-px);
-        letter-spacing: normal;
+        letter-spacing: inherit;
         contain: strict;
     }
 }
