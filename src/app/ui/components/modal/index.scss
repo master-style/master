@@ -36,10 +36,6 @@
     // }
 }
 
-:host([changing]) {
-    display: flex !important;
-}
-
 :host([placement=left]) {
     --p: 0px;
     --r: 0px;

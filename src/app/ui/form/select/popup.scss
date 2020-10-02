@@ -39,10 +39,6 @@
     }
 }
 
-:host([changing]) {
-    display: flex !important;
-}
-
 [part=search-info] {
     font-size: var(--f-xxs);
     padding: .5rem;

@@ -6,22 +6,17 @@
     --offset-left: var(--content-offset-left, 0px);
     --offset-right: var(--content-offset-right, 0px);
     --bar-p: var(--content-bar-p, 4px);
-    --display: var(--content-display, block);
     position: relative;
     contain: style;
     width: 100%;
     height: 100%;
-    display: var(--display);
+    display: block;
     flex-direction: column;
     -webkit-user-drag: none;
     -webkit-touch-callout: none;
     -ms-overflow-style: none;
     user-select: none;
     box-sizing: border-box;
-}
-
-:host([changing]) {
-    display: var(--display) !important;
 }
 
 :host([changing]) {
