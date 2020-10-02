@@ -21,6 +21,14 @@ export class DialogComponent implements OnInit {
             title: 'Created',
             text: 'The user has been created by Aron.',
             type: 'success',
+            async onAccept() {
+                await obs.toPromise();
+                return false;
+            },
+            onReject() { },
+            async onCancel() {
+                return await true;
+            },
             acceptButton: {
                 $text: 'accept',
             },
@@ -32,14 +40,20 @@ export class DialogComponent implements OnInit {
                 $if: true,
                 $text: 'cancel'
             },
-            async onAccept() {
-                await obs.toPromise();
-                return false;
-            },
-            onReject() { },
-            async onCancel() {
-                return await true;
-            }
+            controls: [
+                'm-input', {
+                    class: 'outlined',
+                    type: 'email',
+                    placeholder: 'username',
+                    label: 'username'
+                },
+                'm-input', {
+                    class: 'outlined',
+                    type: 'password',
+                    placeholder: 'password',
+                    label: 'password'
+                },
+            ]
         });
 
     }

@@ -1,4 +1,4 @@
-import { Element, Attr, Prop } from '@element';
+import { Element, Attr, Prop, ControlElement } from '@element';
 import { ModalElement } from '../modal';
 import css from './index.scss';
 
@@ -62,6 +62,8 @@ export class DialogElement extends ModalElement {
             $if: this.body,
             $text: this.busy ? (this.bodyOnBusy || this.body) : this.body
         },
+        'div', { part: 'controls' },
+        this.controls,
         'div', {
             part: 'foot'
         }, [
@@ -78,6 +80,9 @@ export class DialogElement extends ModalElement {
     onAccept: () => Promise<boolean> | boolean;
     onReject: () => Promise<boolean> | boolean;
     onCancel: () => Promise<boolean> | boolean;
+
+    @Prop()
+    controls: any[] = [];
 
     @Attr({ observe: false, render: false })
     role = 'dialog';

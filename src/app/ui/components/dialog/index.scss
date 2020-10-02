@@ -30,8 +30,20 @@ slot[name=icon]::slotted(*),
 
     ~[part=text],
     ~slot[name=body]::slotted([slot=body]) {
-        margin-top: -1.5rem!important;
-        padding-top: 0!important;
+        margin-top: -1.5rem !important;
+        padding-top: 0 !important;
+    }
+}
+
+[part=controls] {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 2rem;
+
+    >*:not(:first-child) {
+        margin-top: 1rem;
     }
 }
 
