@@ -24,7 +24,7 @@ export function Attr(options?: AttrOptions) {
             set(value: any, settedAttr?: boolean) {
                 const oldValue = this[_propKey];
                 if (parse) {
-                    value = parse(this, value);
+                    value = parse(this, value, oldValue);
                 }
                 if (value === oldValue) return;
                 this[_propKey] = value;

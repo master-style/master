@@ -1,6 +1,7 @@
 import { Element, Attr } from '@element';
 import { ModalElement } from '../modal';
 import css from './index.scss';
+import { extend } from '@utils/extend';
 
 const NAME = 'dialog';
 
@@ -57,37 +58,76 @@ export class DialogElement extends ModalElement {
             part: 'foot'
         }, [
             'm-button', {
-                $text: 'CANCEL'
+                $if: !this.buttons.cancel.hidden,
+                $text: this.buttons.cancel.text
             },
             'm-button', {
-                $text: 'OK'
+                $if: !this.buttons.reject.hidden,
+                $text: this.buttons.reject.text
+            },
+            'm-button', {
+                $if: !this.buttons.accept.hidden,
+                $text: this.buttons.accept.text
             }
         ]
     ]
 
-    @Attr()
     duration: number = 300;
 
-    @Attr({ reflect: false, observe: false })
-    title: string;
-
-    @Attr({ reflect: false, observe: false })
-    text: string;
-
-    @Attr({ reflect: false, observe: false })
-    body: string;
-
-    @Attr({ reflect: false, observe: false })
-    type: string;
-
-    @Attr({ reflect: false, observe: false })
-    icon: string;
-
-    @Attr()
     placement: string = 'center';
 
-    @Attr({ render: false, observe: false })
     role = 'dialog';
+
+    title: string;
+
+    text: string;
+
+    confirmText: string;
+
+    cancelText: string;
+
+    body: string;
+
+    type: string;
+
+    icon: string;
+
+    @Attr({
+        parse(dialog: DialogElement, value, oldValue) {
+            console.time('t1');
+            extend({}, oldValue, value)
+            console.timeEnd('t1');
+            return extend({}, oldValue, value);
+        },
+        reflect: false,
+        observe: false
+    })
+    buttons = {
+        accept: {
+            hidden: false,
+            text: 'submit'
+        },
+        reject: {
+            hidden: true,
+            text: 'deny'
+        },
+        cancel: {
+            hidden: true,
+            text: 'cancel'
+        }
+    };
+
+    accept() {
+
+    }
+
+    reject() {
+
+    }
+
+    onConfirm: () => Promise<any> | boolean;
+    onReject: () => Promise<any> | boolean;
+    onCancel: () => Promise<any> | boolean;
 
 }
 
@@ -104,26 +144,23 @@ $.dialog = (options) => {
     return _dialog;
 };
 
-const dialog = $.dialog({
+$.dialog({
     title: 'Created',
     text: 'The user has been created by Aron.',
     type: 'success',
     buttons: {
-        confirm: {
-            $text: 'ok',
-            $on: {
-                click: () => {
-
-                }
-            }
-        },
-        cancel: {
-            $text: 'cancel',
-            $on: {
-                click: () => {
-                    dialog.close();
-                }
-            }
+        accept: {
+            text: 'submit',
+            textOnBusy: 'loading'
         }
+    },
+    onAccept() {
+
+    },
+    onReject() {
+
+    },
+    async onCancel() {
+        return await true;
     }
 });

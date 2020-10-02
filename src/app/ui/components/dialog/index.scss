@@ -53,13 +53,13 @@ slot[name=body]::slotted([slot=body]) {
 
 [part=foot] {
     display: flex;
-    border-top: 1px solid var(--b-fadest);
 
     m-button {
         flex: 1 1 0;
         border-radius: 0;
+        border-top: 1px solid var(--b-fadest);
 
-        &:first-child {
+        &:not(:first-child) {
             border-right: 1px solid var(--b-fadest);
         }
     }

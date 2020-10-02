@@ -1,4 +1,4 @@
-interface AttrOptions {
+interface AttributeOptions {
     key?: string;
     observe?: boolean;
     reflect?: boolean;
@@ -9,5 +9,5 @@ interface AttrOptions {
     render?: boolean;
     type?: string;
     update?: (element: any, value: any, oldValue?: any) => void;
-    parse?: (element: any, value: any) => any;
+    parse?: (element: any, value: any, oldValue?: any) => any;
 }
