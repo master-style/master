@@ -135,15 +135,15 @@ export class DialogElement extends ModalElement {
     icon: string;
 
     accept() {
-
+        console.log('accept');
     }
 
     reject() {
-
+        console.log('reject');
     }
 
     cancel() {
-
+        console.log('cancel');
     }
 
 }

@@ -14,6 +14,7 @@ declare global {
         children?: TemplateNode[];
         element?: any;
         attr?: any;
+        $on?: any;
         $html?: string;
         $text?: string;
         $if?: boolean;

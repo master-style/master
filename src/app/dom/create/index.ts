@@ -165,16 +165,14 @@ class MasterTemplate {
                                 }
                             }
                             if (
-                                '$html' in eachNode &&
-                                eachNode.$html !== eachOldNode.$html
+                                '$html' in eachNode && eachNode.$html !== eachOldNode.$html
                             ) {
                                 element.innerHTML = eachNode.$html;
                                 if (eachOldNode) {
                                     eachOldNode.children = null;
                                 }
                             } else if (
-                                '$text' in eachNode &&
-                                eachNode.$text !== eachOldNode.$text
+                                '$text' in eachNode && eachNode.$text !== eachOldNode.$text
                             ) {
                                 element.textContent = eachNode.$text;
                             }
@@ -191,14 +189,28 @@ class MasterTemplate {
                                 element = document.createElement(eachNode.tag);
                             }
                             eachNode.element = element;
+
                             const attr = eachNode.attr;
                             if (attr) {
                                 element.attr(attr);
                             }
+
                             const css = eachNode.$css;
                             if (css) {
                                 element.css(css);
                             }
+
+                            if ('$on' in eachNode) {
+                                for (const eachEventType in eachNode.$on) {
+                                    const eachHandle = eachNode.$on[eachEventType];
+                                    if (eachHandle) {
+                                        element.on(eachEventType, eachHandle, {
+                                            passive: true
+                                        });
+                                    }
+                                }
+                            }
+
                             if ('$html' in eachNode) {
                                 element.innerHTML = eachNode.$html;
                                 if (eachOldNode) {
@@ -207,6 +219,7 @@ class MasterTemplate {
                             } else if ('$text' in eachNode) {
                                 element.textContent = eachNode.$text;
                             }
+
                             if (eachNode.children) {
                                 renderNodes(eachNode.children, eachOldNode?.children, element);
                             }
@@ -257,6 +270,16 @@ class MasterTemplate {
                     if (created) created(element, eachNode);
                     const updated = eachNode.$updated;
                     if (updated) updated(element, eachNode);
+                    if ('$on' in eachNode) {
+                        for (const eachEventType in eachNode.$on) {
+                            const eachHandle = eachNode.$on[eachEventType];
+                            if (eachHandle) {
+                                element.on(eachEventType, eachHandle, {
+                                    passive: true
+                                });
+                            }
+                        }
+                    }
                     if ('$html' in eachNode) {
                         element.innerHTML = eachNode.$html;
                     } else if ('$text' in eachNode) {
