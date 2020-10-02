@@ -5,7 +5,7 @@ import css from './index.scss';
 const NAME = 'dialog';
 const parserObject = (dialog: DialogElement, value, oldValue) => {
     if (oldValue) {
-        return Object.assign(oldValue, value);
+        return Object.assign({}, oldValue, value);
     } else {
         return value;
     }
@@ -70,7 +70,8 @@ export class DialogElement extends ModalElement {
                 $on: {
                     click: () => this.cancel()
                 },
-                busy: this.cancelButton.busy
+                busy: this.cancelButton.busy,
+                disabled: this.cancelButton.disabled
             },
             'm-button', {
                 $if: !this.rejectButton.hidden,
@@ -78,7 +79,8 @@ export class DialogElement extends ModalElement {
                 $on: {
                     click: () => this.reject()
                 },
-                busy: this.cancelButton.busy
+                busy: this.rejectButton.busy,
+                disabled: this.rejectButton.disabled
             },
             'm-button', {
                 $if: !this.acceptButton.hidden,
@@ -86,7 +88,8 @@ export class DialogElement extends ModalElement {
                 $on: {
                     click: () => this.accept()
                 },
-                busy: this.cancelButton.busy
+                busy: this.acceptButton.busy,
+                disabled: this.acceptButton.disabled
             }
         ]
     ]
@@ -95,9 +98,9 @@ export class DialogElement extends ModalElement {
     _duration: number = 300;
     _placement: string = 'center';
 
-    onConfirm: () => Promise<any> | boolean;
-    onReject: () => Promise<any> | boolean;
-    onCancel: () => Promise<any> | boolean;
+    onAccept: () => Promise<boolean> | boolean;
+    onReject: () => Promise<boolean> | boolean;
+    onCancel: () => Promise<boolean> | boolean;
 
     @Attr({ observe: false, render: false })
     role = 'dialog';
@@ -112,40 +115,66 @@ export class DialogElement extends ModalElement {
     acceptButton = {
         hidden: false,
         text: 'ok',
-        busy: false
+        busy: false,
+        disabled: false
     };
 
     @Prop({ parse: parserObject })
     rejectButton = {
         hidden: true,
         text: 'deny',
-        busy: false
+        busy: false,
+        disabled: false
     };
 
     @Prop({ parse: parserObject })
     cancelButton = {
         hidden: true,
         text: 'cancel',
-        busy: false
+        busy: false,
+        disabled: false
     };
 
     body: string;
     type: string;
     icon: string;
 
-    accept() {
-        console.log('accept');
-        this.close();
+    @Prop()
+    busy: boolean = false;
+
+    lastAction: string;
+
+    private async handleCallback(action: string) {
+        let whether = true;
+        this.lastAction = action;
+        const onAction = this['on' + action.charAt(0).toUpperCase() + action.slice(1)];
+        if (onAction) {
+            const result = onAction();
+            if (result instanceof Promise) {
+                const actionButton = this[action + 'Button'];
+                this.busy = actionButton.busy = true;
+                whether = await result;
+                this.busy = actionButton.busy = false;
+            } else {
+                whether = result;
+            }
+        }
+        if (whether) {
+            this.close();
+        }
+        return whether;
     }
 
-    reject() {
-        console.log('reject');
-        this.close();
+    async accept() {
+        await this.handleCallback('accept');
     }
 
-    cancel() {
-        console.log('cancel');
-        this.close();
+    async reject() {
+        await this.handleCallback('reject');
+    }
+
+    async cancel() {
+        await this.handleCallback('cancel');
     }
 
     onClosed() {
@@ -164,29 +193,6 @@ $.dialog = (options) => {
     }
     document.body.appendChild(eachDialog);
     eachDialog.open();
+    console.log(eachDialog.acceptButton);
     return eachDialog;
 };
-
-$.dialog({
-    title: 'Created',
-    text: 'The user has been created by Aron.',
-    type: 'success',
-    acceptButton: {
-        hidden: false,
-        text: 'ok',
-        busy: true
-    },
-    rejectButton: {
-        hidden: false,
-        text: 'deny',
-        busy: true
-    },
-    cancelButton: {
-        text: 'cancel'
-    },
-    onAccept() { },
-    onReject() { },
-    async onCancel() {
-        return await true;
-    }
-});

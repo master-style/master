@@ -193,7 +193,7 @@
     }
 }
 
-:host([close-button="close"]) {
+:host([close-button="cross"]) {
     [part=close] {
         right: .5rem;
         left: auto;
