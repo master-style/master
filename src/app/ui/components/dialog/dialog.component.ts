@@ -32,8 +32,9 @@ export class DialogComponent implements OnInit {
                 $if: true,
                 $text: 'cancel'
             },
-            onAccept() {
-                return obs.toPromise();
+            async onAccept() {
+                await obs.toPromise();
+                return false;
             },
             onReject() { },
             async onCancel() {
