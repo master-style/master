@@ -91,6 +91,7 @@ export class DialogElement extends ModalElement {
         ]
     ]
 
+    _hidden: boolean = true;
     _duration: number = 300;
     _placement: string = 'center';
 
@@ -156,13 +157,14 @@ export class DialogElement extends ModalElement {
 const DIALOG_ELEMENT = document.createElement('m-dialog');
 
 $.dialog = (options) => {
-    const _dialog = (DIALOG_ELEMENT.cloneNode() as DialogElement);
+    const eachDialog = (DIALOG_ELEMENT.cloneNode() as DialogElement);
     for (const eachPropKey in options) {
         const eachPropValue = options[eachPropKey];
-        _dialog[eachPropKey] = eachPropValue;
+        eachDialog[eachPropKey] = eachPropValue;
     }
-    document.body.appendChild(_dialog);
-    return _dialog;
+    document.body.appendChild(eachDialog);
+    eachDialog.open();
+    return eachDialog;
 };
 
 $.dialog({
