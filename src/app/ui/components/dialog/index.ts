@@ -153,7 +153,11 @@ export class DialogElement extends ModalElement {
             if (result instanceof Promise) {
                 const actionButton = this[action + 'Button'];
                 this.busy = actionButton.busy = true;
-                whether = await result;
+                try {
+                    whether = await result;
+                } catch {
+                    whether = false;
+                }
                 this.busy = actionButton.busy = false;
             } else {
                 whether = result;
