@@ -129,21 +129,26 @@ export class DialogElement extends ModalElement {
     };
 
     body: string;
-
     type: string;
-
     icon: string;
 
     accept() {
         console.log('accept');
+        this.close();
     }
 
     reject() {
         console.log('reject');
+        this.close();
     }
 
     cancel() {
         console.log('cancel');
+        this.close();
+    }
+
+    onClosed() {
+        this.remove();
     }
 
 }
@@ -155,7 +160,6 @@ $.dialog = (options) => {
     for (const eachPropKey in options) {
         const eachPropValue = options[eachPropKey];
         _dialog[eachPropKey] = eachPropValue;
-        console.log(_dialog[eachPropKey]);
     }
     document.body.appendChild(_dialog);
     return _dialog;
