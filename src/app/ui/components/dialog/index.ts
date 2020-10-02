@@ -26,13 +26,13 @@ export class DialogElement extends ModalElement {
         'div', {
             $if: this.icon,
             slot: 'icon',
-            $html: this.icon
+            $html: this.icon ? (this.iconOnBusy || this.icon) : this.icon
         },
         'article', {
             $if: this.body,
             slot: 'body',
             class: 'prose',
-            $html: this.body
+            $html: this.body ? (this.bodyOnBusy || this.body) : this.body
         }
     ]);
 
@@ -50,16 +50,17 @@ export class DialogElement extends ModalElement {
         'h2', {
             $if: this.title,
             part: 'title',
-            $text: this.title
+            $text: this.busy ? (this.titleOnBusy || this.title) : this.title
         },
         'p', {
             $if: this.text,
             part: 'text',
-            $text: this.text
+            $text: this.busy ? (this.textOnBusy || this.text) : this.text
         },
         'slot', {
             name: 'body',
-            $if: this.body
+            $if: this.body,
+            $text: this.busy ? (this.bodyOnBusy || this.body) : this.body
         },
         'div', {
             part: 'foot'
@@ -85,7 +86,13 @@ export class DialogElement extends ModalElement {
     title: string;
 
     @Prop()
+    titleOnBusy: string;
+
+    @Prop()
     text: string;
+
+    @Prop()
+    textOnBusy: string;
 
     @Prop({ parse: parserObject })
     acceptButton = {
@@ -120,9 +127,23 @@ export class DialogElement extends ModalElement {
         disabled: false
     };
 
+    @Prop()
     body: string;
+
+    @Prop()
+    bodyOnBusy: string;
+
+    @Prop()
     type: string;
+
+    @Prop()
+    typeOnBusy: string;
+
+    @Prop()
     icon: string;
+
+    @Prop()
+    iconOnBusy: string;
 
     @Prop()
     busy: boolean = false;
@@ -134,7 +155,7 @@ export class DialogElement extends ModalElement {
         this.lastAction = action;
         const onAction = this['on' + action.charAt(0).toUpperCase() + action.slice(1)];
         if (onAction) {
-            const result = onAction();
+            const result = onAction(this);
             if (result instanceof Promise) {
                 const actionButton = this[action + 'Button'];
                 this.busy = actionButton.busy = true;
