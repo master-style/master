@@ -33,11 +33,7 @@ export class DialogElement extends ModalElement {
             slot: 'body',
             class: 'prose',
             $html: this.body ? (this.bodyOnBusy || this.body) : this.body
-        },
-        'div', {
-            slot: 'controls',
-            class: 'y',
-        }, this.controls
+        }
     ]);
 
     slotTokens = () => [
@@ -66,16 +62,21 @@ export class DialogElement extends ModalElement {
             $if: this.body,
             $text: this.busy ? (this.bodyOnBusy || this.body) : this.body
         },
-        'slot', {
-            name: 'controls'
-        },
-        'div', {
-            part: 'foot'
+        'form', {
+            part: 'form'
         }, [
-            'm-button', this.cancelButton,
-            'm-button', this.rejectButton,
-            'm-button', this.acceptButton
-        ]
+            'div', {
+                part: 'controls',
+                class: 'y',
+            }, this.controls,
+            'div', {
+                part: 'foot'
+            }, [
+                'm-button', this.cancelButton,
+                'm-button', this.rejectButton,
+                'm-button', this.acceptButton
+            ]
+        ],
     ]
 
     _hidden: boolean = true;
@@ -133,6 +134,7 @@ export class DialogElement extends ModalElement {
         $on: {
             click: () => this.cancel()
         },
+        style: '--button-f-color: var(--f-fade)',
         busy: false,
         disabled: false
     };

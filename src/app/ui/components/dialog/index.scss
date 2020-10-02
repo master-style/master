@@ -35,12 +35,24 @@ slot[name=icon]::slotted(*),
     }
 }
 
-slot[name=controls]::slotted([slot=controls]) {
-    padding: 2rem;
+[part=form]:not(:first-child) {
+    margin-top: -2rem;
 }
 
-slot[name=controls]:not(:first-child)::slotted([slot=controls]) {
-    padding-top: 0;
+[part=controls] {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    margin: -.5rem;
+}
+
+[part=controls] {
+    m-input,
+    m-button,
+    m-textarea,
+    m-select {
+        margin: .5rem;
+    }
 }
 
 [part=text] {
