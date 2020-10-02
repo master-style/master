@@ -1,9 +1,9 @@
 interface Element {
-    off(typeSet: string, factor: string, handle: Function, option?: Master.ListenerOption): this;
-    off(typeSet: string, handle: Function, option?: Master.ListenerOption): this;
-    off(typeSet: string, factor: string, option?: Master.ListenerOption): this;
-    off(typeSet: string, option?: Master.ListenerOption): this;
-    off(option: Master.ListenerOption): this;
+    off(typeSet: string, factor: string, handle: Function, option?: ListenerOptions): this;
+    off(typeSet: string, handle: Function, option?: ListenerOptions): this;
+    off(typeSet: string, factor: string, option?: ListenerOptions): this;
+    off(typeSet: string, option?: ListenerOptions): this;
+    off(option: ListenerOptions): this;
     off(handle: Function): this;
     off(): this;
 }
