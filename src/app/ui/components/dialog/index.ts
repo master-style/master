@@ -148,11 +148,18 @@ $.dialog({
     title: 'Created',
     text: 'The user has been created by Aron.',
     type: 'success',
-    buttons: {
-        accept: {
-            text: 'submit',
-            textOnBusy: 'loading'
-        }
+    acceptButton: {
+        hidden: false,
+        text: 'ok',
+        busy: true
+    },
+    rejectButton: {
+        hidden: false,
+        text: 'deny',
+        busy: true
+    },
+    cancelButton: {
+        text: 'cancel'
     },
     onAccept() {
 
