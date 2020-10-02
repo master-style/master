@@ -7,7 +7,7 @@ const DEFAULT_ATTR_OPTION = {
     render: true
 };
 
-export function Attr(options?: AttrOptions) {
+export function Attr(options?: AttributeOptions) {
     options = { ...DEFAULT_ATTR_OPTION, ...options };
     return (target, propKey: string): any => {
         options.type = Reflect.getMetadata('design:type', target, propKey).name;
@@ -45,8 +45,8 @@ export function Attr(options?: AttrOptions) {
                 }
             }
         };
-        options.setProp = descriptor.set;
-        options['constructor'] = constructor.name;
+        options.set = descriptor.set;
+
         if (options.observe) {
             if (!constructor.observedAttributes) {
                 constructor.observedAttributes = [];
@@ -54,13 +54,13 @@ export function Attr(options?: AttrOptions) {
             constructor.observedAttributes.push(attrKey);
         }
 
-        if (!constructor.allAttrOptions) {
-            constructor.allAttrOptions = {};
+        if (!constructor.attrsOptions) {
+            constructor.attrsOptions = {};
         } else {
             // 必須 assign，否則會污染到繼承的父元素
-            constructor.allAttrOptions = Object.assign({}, constructor.allAttrOptions);
+            constructor.attrsOptions = Object.assign({}, constructor.attrsOptions);
         }
-        constructor.allAttrOptions[attrKey] = options;
+        constructor.attrsOptions[attrKey] = options;
 
         return descriptor;
     };

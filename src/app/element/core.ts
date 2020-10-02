@@ -10,27 +10,38 @@ export function Element(options: ElementOptions) {
         const name = constructor.name.charAt(0).toLowerCase() + constructor.name.slice(1);
         constructor['elementName'] = camelToKebabCase(name.split('Element')[0]);
         const prototype = constructor.prototype;
-        const allAttrOptions = constructor.allAttrOptions;
+        const attrsOptions = constructor.attrsOptions;
+        const propsOptions = constructor.propsOptions;
         const onAdded = prototype.onAdded;
         const onRemoved = prototype.onRemoved;
         const onAttrChanged = prototype.onAttrChanged;
         prototype.attributeChangedCallback = function (attrKey, oldValue, value) {
             if (value === oldValue) return;
-            const eachAttrOptions = allAttrOptions[attrKey];
+            const eachAttrOptions = attrsOptions[attrKey];
             const type = eachAttrOptions.type;
             value = parseAttrValue(value, type);
             oldValue = parseAttrValue(oldValue, type);
-            eachAttrOptions.setProp.call(this, value, true);
+            eachAttrOptions.set.call(this, value, true);
             if (onAttrChanged) onAttrChanged.call(this, attrKey, value, oldValue);
         };
         prototype.connectedCallback = function () {
             this.ready = false; // prevent rendering many times
             this.initial = false;
-            if (allAttrOptions) {
+            if (propsOptions) {
+                for (const eachPropKey in constructor.propsOptions) {
+                    const eachPropOption: AttributeOptions = propsOptions[eachPropKey];
+                    const eachPropValue = this['_' + eachPropKey];
+                    const eachUpdate = eachPropOption.update;
+                    if (eachUpdate) {
+                        eachUpdate(this, eachPropValue);
+                    }
+                }
+            }
+            if (attrsOptions) {
                 // 取得當前 attr 與 prop 比對，避免重複設置相同 attr
                 const attributes = this.attributes;
-                for (const eachAttrKey in allAttrOptions) {
-                    const eachAttrOptions: AttrOptions = allAttrOptions[eachAttrKey];
+                for (const eachAttrKey in attrsOptions) {
+                    const eachAttrOptions: AttributeOptions = attrsOptions[eachAttrKey];
                     const eachpropKey = eachAttrOptions.propKey;
                     const eachPropValue = this['_' + eachpropKey];
                     const eachAttr = attributes[eachAttrKey];
@@ -62,7 +73,7 @@ export function Element(options: ElementOptions) {
             if (options.shadow && !this.shadowRoot) {
                 // https://www.npmjs.com/package/construct-style-sheets-polyfill
                 const shadowRoot = this.attachShadow({ mode: 'open' });
-                if (options.css && shadowRoot['adoptedStyleSheets']) {
+                if (options.css && shadowRoot.adoptedStyleSheets) {
                     const styleSheet = new CSSStyleSheet();
                     styleSheet['replaceSync'](options.css);
                     shadowRoot.adoptedStyleSheets = [styleSheet];
@@ -74,14 +85,14 @@ export function Element(options: ElementOptions) {
             }
             if (this.render) this.render();
             this.initial = true;
-            if (allAttrOptions) {
-                for (const eachAttrKey in constructor.allAttrOptions) {
-                    const eachAttrOptions: AttrOptions = allAttrOptions[eachAttrKey];
+            if (attrsOptions) {
+                for (const eachAttrKey in constructor.attrsOptions) {
+                    const eachAttrOptions: AttributeOptions = attrsOptions[eachAttrKey];
                     const eachPropKey = eachAttrOptions.propKey;
                     const eachPropValue = this['_' + eachPropKey];
-                    const eachUpdater = eachAttrOptions.update;
-                    if (eachUpdater) {
-                        eachUpdater(this, eachPropValue);
+                    const eachUpdate = eachAttrOptions.update;
+                    if (eachUpdate) {
+                        eachUpdate(this, eachPropValue);
                     }
                 }
             }
