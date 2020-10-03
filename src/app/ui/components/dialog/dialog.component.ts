@@ -55,6 +55,7 @@ export class DialogComponent implements OnInit {
                         type: 'email',
                         placeholder: 'e.g username@domain.com',
                         label: 'username',
+                        'prompt-invalid': 'wrong email format',
                         required: true
                     },
                     'm-input', {
@@ -62,6 +63,7 @@ export class DialogComponent implements OnInit {
                         name: 'password',
                         type: 'password',
                         placeholder: 'password',
+                        'prompt-invalid': '',
                         label: 'password',
                         required: true
                     },
