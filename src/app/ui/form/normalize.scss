@@ -32,21 +32,16 @@ textarea {
     -webkit-text-fill-color: var(--f-blue);
 }
 
-::slotted(::-webkit-inner-spin-button),
-::slotted(::-webkit-outer-spin-button),
 ::-webkit-inner-spin-button,
 ::-webkit-outer-spin-button {
     display: none;
 }
 
-::slotted(::-webkit-search-cancel-button),
-::slotted(::-webkit-search-decoration),
 ::-webkit-search-cancel-button,
 ::-webkit-search-decoration {
     -webkit-appearance: none;
 }
 
-::slotted(::-webkit-file-upload-button),
 ::-webkit-file-upload-button {
     -webkit-appearance: button;
     /* 1 */
@@ -54,14 +49,12 @@ textarea {
     /* 2 */
 }
 
-::slotted(::placeholder),
 ::placeholder {
     opacity: 1; // fixed safari default opacity
     color: var(--f-fadest);
     -webkit-text-fill-color: var(--f-fadest); // fix safari opacity problem
 }
 
-::slotted(:-moz-read-only),
 :-moz-read-only {
     cursor: default;
     caret-color: transparent;

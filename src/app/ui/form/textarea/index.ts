@@ -92,9 +92,12 @@ export class TextareaElement extends ControlElement {
 
         this.body.on('input', (event: any) => {
             this['value'] = event.target.value;
-        }, {
-            id: NAME,
-            passive: true
-        });
+            if (!this.dirty) {
+                this.dirty = true;
+            }
+        }, { id: NAME, passive: true })
+            .on('focusout', () => {
+                this.touched = true;
+            }, { id: NAME, passive: true, once: true });
     }
 }

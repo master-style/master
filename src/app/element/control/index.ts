@@ -45,7 +45,10 @@ export class ControlElement extends HTMLElement {
     invalid: boolean;
 
     @Attr({ observe: false, render: false })
-    dirty: boolean;
+    dirty: boolean = false;
+
+    @Attr({ observe: false, render: false })
+    touched: boolean = false;
 
     validate() {
         this.valid = this.validity.valid;

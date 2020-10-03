@@ -117,12 +117,16 @@ export class InputElement extends ControlElement {
                 passive: true
             });
 
-        this.body.on('input', (event: any) => {
-            this['value'] = event.target.value;
-        }, {
-            id: NAME,
-            passive: true
-        });
+        this.body
+            .on('input', (event: any) => {
+                this['value'] = event.target.value;
+                if (!this.dirty) {
+                    this.dirty = true;
+                }
+            }, { id: NAME, passive: true })
+            .on('focusout', () => {
+                this.touched = true;
+            }, { id: NAME, passive: true, once: true });
     }
 
     onRemoved() {

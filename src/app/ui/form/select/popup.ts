@@ -71,6 +71,9 @@ export class SelectPopupElement extends ToggleableElement {
                                     this.close();
                                     node.$data.selected = check.checked;
                                 }
+                                if (!this.select.dirty) {
+                                    this.select.dirty = true;
+                                }
                             }, { passive: true, id: this })
                             .on('click', () => {
                                 if (!this.multiple && check.checked) {

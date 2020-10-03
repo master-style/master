@@ -259,7 +259,10 @@ export class SelectElement extends ControlElement {
             }, { passive: true, id: NAME })
             .on('focusout', () => {
                 console.log(this.popup?.hidden);
-                if (!this.popup?.hidden) return;
+                if (!this.touched) {
+                    this.touched = true;
+                }
+                if (this.popup?.hidden === false) return;
                 this.focused = false;
             }, { passive: true, id: NAME });
     }
