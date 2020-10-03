@@ -1,4 +1,4 @@
-<nav part="app-head" class="bb" [ngClass]="{'hidden': scrollDirection === 'down'}">
+<nav class="app-head bb" [ngClass]="{'hidden': scrollDirection === 'down'}">
     <div class="x f:xs show@md" id="nowTime"></div>
     <div class="x y:no ml:auto w:auto">
         <m-button class="x square" (click)="toggleTheme(!isDark)">
@@ -8,7 +8,7 @@
     </div>
 </nav>
 
-<div part="app-logo" class="x fixed left top bg:theme" style="width: 200px">
+<div class="app-logo x fixed left top bg:theme" style="width: 200px">
     <img src="assets/images/logo.svg" width="70">
 </div>
 
@@ -16,7 +16,7 @@
     <m-icon name="menu" class="toggled"></m-icon>
 </m-button>
 
-<main part="app-body" style="padding-top: 3rem">
+<main class="app-body" style="padding-top: 3rem">
     <article class="prose" style="margin-bottom: 3rem">
         <!-- skeleton -->
         <nav aria-label="breadcrumb" *ngIf="navigating">
@@ -70,8 +70,8 @@
     </article>
 </main>
 
-<m-modal id="app-side" part="app-side" placement="left" overlay="none">
-    <m-content part="body" scroll-y class="h:full br f:theme++" style="--content-offset-top: 3rem">
+<m-modal id="app-side" placement="left" overlay="none" class="w:auto z:abs">
+    <m-content part="body" scroll-y class="app-side rel h:full br f:theme++" style="--content-offset-top: 3rem">
         <m-list style="padding-top: .5rem">
             <ng-container *ngFor="let eachRoute of routes">
                 <ng-container [ngTemplateOutlet]="routeGroup"

@@ -53,19 +53,19 @@
 }
 
 @include below(sm) {
-    [part="app-logo"] {
+    .app-logo {
         right: 0 !important;
         margin: auto;
     }
 }
 
 html.dark {
-    [part="app-logo"] {
+    .app-logo {
         filter: none;
     }
 }
 
-[part="app-logo"] {
+.app-logo {
     img {
         filter: invert(1);
     }

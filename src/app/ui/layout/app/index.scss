@@ -1,4 +1,4 @@
-[part=app-load] {
+.app-load {
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -11,8 +11,8 @@
     contain: strict;
 }
 
-[part=app-head],
-[part=app-side] {
+.app-head,
+.app-side {
     position: fixed;
     top: 0;
     display: flex;
@@ -20,35 +20,35 @@
     // contain: content;
 }
 
-[part=app-side],
-[part=app-head],
-[part=app-foot] {
+.app-side,
+.app-head,
+.app-foot {
     width: 100%;
     background-color: var(--theme);
     @include bgBlur(var(--theme-rgb), .9);
 }
 
-[part=app-head] {
+.app-head {
     z-index: $z-fixed;
     min-height: 3rem;
     align-items: center;
 }
 
-[part=app-foot] {
+.app-foot {
     bottom: 0;
     min-height: 3.75rem;
     border-top: 1px solid var(--b-fadest);
     z-index: $z-fixed;
 }
 
-[part=app-foot],
-[part=app-side] {
+.app-foot,
+.app-side {
     @supports(padding-bottom: env(safe-area-inset-bottom)) {
         padding-bottom: unquote('env(safe-area-inset-bottom)!important')
     }
 }
 
-[part="app-logo"] {
+.app-logo {
     z-index: $z-overlay;
     min-height: 3rem;
     display: flex;
@@ -60,13 +60,13 @@
     }
 }
 
-[part=app-side] {
+.app-side {
     z-index: $z-abs;
     flex-direction: column;
     width: 200px;
     height: 100vh;
 }
 
-[part=app-body] {
+.app-body {
     // min-width: 0; // 不可移除，很重要。flex item 最小寬度預設為內容的最小寬度，故需要設為 0 以防止溢出
 }
