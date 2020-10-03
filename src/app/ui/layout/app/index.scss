@@ -54,6 +54,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    img {
+        background-color: none;
+    }
 }
 
 [part=app-side] {
