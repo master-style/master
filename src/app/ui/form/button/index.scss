@@ -10,6 +10,7 @@
     --b-color: var(--button-b-color, transparent);
     --b-color-active: var(--button-b-color-active, transparent);
     --bg-color: var(--button-bg-color, transparent);
+    --bg-color-hover: var(--button-bg-color-hover, var(--bg-color));
     display: inline-flex;
     font-size: var(--f-size);
     color: var(--f-color);
@@ -95,6 +96,7 @@
 }
 
 ::slotted([part=head].abs) {
+    position: absolute;
     left: 0;
     margin-left: calc(var(--px) - .3rem);
 }
@@ -105,6 +107,7 @@
 }
 
 ::slotted([part=foot].abs) {
+    position: absolute;
     right: 0;
     margin-right: calc(var(--px) - .3rem);
 }

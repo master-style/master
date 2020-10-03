@@ -63,9 +63,15 @@ export class DialogElement extends ModalElement {
             $text: this.busy ? (this.bodyOnBusy || this.body) : this.body
         },
         'form', {
-            part: 'form'
+            part: 'form',
+            $created: (element) => this.form = element
+                .on('submit', (event) => {
+                    console.log(event);
+                    event.preventDefault();
+                })
         }, [
             'div', {
+                $if: this.controls.length,
                 part: 'controls',
                 class: 'y',
             }, this.controls,
@@ -82,6 +88,7 @@ export class DialogElement extends ModalElement {
     _hidden: boolean = true;
     _duration: number = 300;
     _placement: string = 'center';
+    form: HTMLFormElement;
 
     onAccept: () => Promise<boolean> | boolean;
     onReject: () => Promise<boolean> | boolean;
@@ -162,12 +169,29 @@ export class DialogElement extends ModalElement {
 
     lastAction: string;
 
-    private async handleCallback(action: string) {
+    private get data() {
+        const value = {};
+        let valid = true;
+        this.form
+            .querySelectorAll('m-input,m-select,m-textarea,m-check')
+            .map((eachControl: any) => {
+                if (eachControl.name) {
+                    value[eachControl.name] = eachControl.value;
+                    valid = valid && eachControl.valid;
+                }
+            });
+        return {
+            value,
+            valid
+        };
+    }
+
+    private async handleAction(action: string) {
         let whether = true;
         this.lastAction = action;
         const onAction = this['on' + action.charAt(0).toUpperCase() + action.slice(1)];
         if (onAction) {
-            const result = onAction(this);
+            const result = onAction(this.data, this);
             if (result instanceof Promise) {
                 const actionButton = this[action + 'Button'];
                 this.busy = actionButton.busy = true;
@@ -188,15 +212,15 @@ export class DialogElement extends ModalElement {
     }
 
     async accept() {
-        await this.handleCallback('accept');
+        await this.handleAction('accept');
     }
 
     async reject() {
-        await this.handleCallback('reject');
+        await this.handleAction('reject');
     }
 
     async cancel() {
-        await this.handleCallback('cancel');
+        await this.handleAction('cancel');
     }
 
     onClosed() {

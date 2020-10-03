@@ -274,7 +274,9 @@ class MasterTemplate {
                         for (const eachEventType in eachNode.$on) {
                             const eachHandle = eachNode.$on[eachEventType];
                             if (eachHandle) {
-                                element.on(eachEventType, eachHandle, {
+                                element.on(eachEventType, (event) => {
+                                    eachHandle(event, element);
+                                }, {
                                     passive: true
                                 });
                             }
