@@ -61,12 +61,15 @@
 
 html.dark {
     .app-logo {
-        filter: none;
+        img {
+            filter: none;
+        }
     }
 }
 
 .app-logo {
     img {
+        background-color: transparent;
         filter: invert(1);
     }
 }
