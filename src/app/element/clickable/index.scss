@@ -30,6 +30,7 @@
     box-sizing: border-box;
     transition: box-shadow ease-out .15s;
     will-change: transform;
+    backdrop-filter: blur(var(--blur));
 
     &[disabled] {
         // cursor: no-drop !important;

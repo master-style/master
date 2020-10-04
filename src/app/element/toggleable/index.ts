@@ -24,6 +24,9 @@ export class ToggleableElement extends HTMLElement {
     @Attr({ reflect: false })
     easing = 'cubic-bezier(.25,.8,.25,1)';
 
+    @Attr({ render: false, reflect: false })
+    backOn: string;
+
     @Attr({
         reflect: false,
         update(togglable: ToggleableElement, value: any, oldValue: any) {
@@ -132,10 +135,16 @@ export class ToggleableElement extends HTMLElement {
         if (this.hidden) {
             return;
         }
+        if (this.backOn === 'close') {
+            history.back();
+        }
         this['_hidden'] = true;
         const onClose = this['onClose'];
         if (onClose) onClose.call(this);
         await this.prepare();
+        if (this.backOn === 'closed') {
+            history.back();
+        }
     }
 
     async toggle(whether?: boolean) {

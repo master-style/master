@@ -12,9 +12,9 @@
 }
 
 .app-head,
-.app-side {
+.app-side,
+.app-foot {
     position: fixed;
-    top: 0;
     display: flex;
     flex: 0 0 auto;
     // contain: content;
@@ -29,6 +29,7 @@
 }
 
 .app-head {
+    top: 0;
     z-index: $z-fixed;
     min-height: 3rem;
     align-items: center;
@@ -61,12 +62,13 @@
 }
 
 .app-side {
+    top: 0;
     z-index: $z-abs;
     flex-direction: column;
     width: 200px;
     height: 100vh;
 }
 
-.app-body {
+// .app-body {
     // min-width: 0; // 不可移除，很重要。flex item 最小寬度預設為內容的最小寬度，故需要設為 0 以防止溢出
-}
+// }

@@ -229,8 +229,21 @@
     }
 }
 
-.theme {
+.object {
     --bg-color: var(--bg-object);
+    --bg-color-head: var(--theme-fade);
+    --bg-color-hover: var(--theme-fade);
+    --blur: 35px;
+
+    &.outlined {
+        --bg-color-hover: var(--theme-fader);
+        --b-color: var(--b-fader);
+        --b-color-active: var(--b-fade);
+    }
+}
+
+.theme {
+    --bg-color: var(--theme);
     --bg-color-head: var(--theme-fade);
     --bg-color-hover: var(--theme-fade);
 
