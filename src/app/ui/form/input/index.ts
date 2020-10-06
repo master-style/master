@@ -1,4 +1,5 @@
 import { Element, Attr, Prop, ControlElement } from '@element';
+import { ButtonElement } from '../button';
 import css from './index.scss';
 
 const NAME = 'input';
@@ -36,10 +37,31 @@ export class InputElement extends ControlElement {
             $if: this.type === 'file',
             part: 'body',
             placeholder: this.placeholder,
-            $text: this.files && this.files[0]?.name,
             label: this.label?.length > this.placeholder?.length
                 ? this.label
                 : this.placeholder, // for default select width
+        }, () => {
+            if (!this.files) return;
+            return [...Array.from(this.files).map((eachFile: File) => [
+                'm-chip', {
+                    $if: this.multiple,
+                    class: 'sm',
+                    $html: eachFile.name
+                }, [
+                    'm-button', {
+                        $if: !this.readOnly && !this.disabled,
+                        part: 'close',
+                        $created: (element: ButtonElement) => {
+                            element.on('click', (event) => {
+                                event.stopPropagation();
+                                console.log('to remove');
+                            }, { passive: true, id: NAME });
+                        }
+                    }, [
+                        'm-icon', { name: 'cross' }
+                    ]
+                ]
+            ])];
         },
         'fieldset', [
             'legend', [

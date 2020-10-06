@@ -88,7 +88,9 @@ class MasterTemplate {
                         if (!eachNode.children) eachNode.children = [];
                         generate(token, eachNode.children);
                     } else if (tokenType === 'function' && whether) {
-                        const children = token().reduce((acc, eachToken) => {
+                        let children = token();
+                        if (!children) continue;
+                        children = children.reduce((acc, eachToken) => {
                             return acc.concat(eachToken);
                         }, []);
                         if (!eachNode.children) eachNode.children = [];

@@ -1,5 +1,6 @@
 @import '../field.shadow';
 @import '../prompt.shadow';
+@import '../output.shadow';
 
 :host {
     --f-size: var(--input-f-size, var(--f-sm));
@@ -29,22 +30,6 @@
 
 :host([type=file]) {
     cursor: copy;
-
-    [part=body] {
-        &:empty[placeholder] {
-            margin: 0 !important;
-
-            &:before {
-                content: attr(placeholder);
-                color: var(--f-fadest);
-            }
-        }
-
-        &:empty[label]:not([placeholder]):before {
-            content: attr(label);
-            color: transparent;
-        }
-    }
 
     ::slotted([part=body]) {
         position: absolute;

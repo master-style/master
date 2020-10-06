@@ -1,5 +1,6 @@
 @import '../field.shadow';
 @import '../prompt.shadow';
+@import '../output.shadow';
 
 :host {
     --f-size: var(--select-f-size, var(--f-sm));
@@ -37,27 +38,6 @@
     box-sizing: border-box;
 }
 
-[part=body] {
-    flex-wrap: wrap;
-    flex: 1 1 auto;
-    width: auto;
-    margin: #{-$xs};
-
-    &:empty[placeholder] {
-        margin: 0 !important;
-
-        &:before {
-            content: attr(placeholder);
-            color: var(--f-fadest);
-        }
-    }
-
-    &:empty[label]:not([placeholder]):before {
-        content: attr(label);
-        color: transparent;
-    }
-}
-
 :host([readonly]) {
     cursor: text;
 }
@@ -91,32 +71,12 @@ m-icon[part=icon] {
     margin-left: calc(var(--px) / -2)
 }
 
-m-chip {
-    --chip-bg-color: var(--theme-fader);
-    --chip-b-color: transparent;
-    margin: $xxs;
-}
-
-m-button[part=close] {
-    --button-bg-color-hover: var(--bg-object-hover);
-    --button-bg-color: transparent;
-    --button-f-color: var(--f-fader);
-
-    m-icon {
-        --icon-stroke-width: 3px;
-    }
-}
-
 @media (any-hover: hover) {
     :host(:not([disabled]):not([readonly]):hover) {
         m-icon[part=icon] {
             color: var(--f-fade);
         }
     }
-}
-
-m-chip {
-    flex: 0 0 auto;
 }
 
 :host(:not([multiple]):not([searchable])){
