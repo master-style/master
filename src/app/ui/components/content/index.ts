@@ -289,9 +289,9 @@ export class ContentElement extends ToggleableElement {
                     morePosition = this.#lastMorePosition + (maxPosition - this.#lastMorePosition) / 2;
                 }
 
-                console.log(scrollPosition, maxPosition, morePosition);
-
                 if (
+                    scrollPosition < wrapSize * 2 / 3
+                    && this.#lastMorePosition === -1 ||
                     scrollPosition >= morePosition
                     && morePosition > this.#lastMorePosition
                 ) {
