@@ -144,6 +144,7 @@ export class ContentElement extends ToggleableElement {
                     }
                     this.scrolling = false;
                     this.#time.X = this.#time.Y = 0;
+                    this.template.render(this.shadowRoot);
                 }, 100);
             }, {
                 id: NAME,
@@ -288,10 +289,13 @@ export class ContentElement extends ToggleableElement {
                     morePosition = this.#lastMorePosition + (maxPosition - this.#lastMorePosition) / 2;
                 }
 
+                console.log(scrollPosition, maxPosition, morePosition);
+
                 if (
                     scrollPosition >= morePosition
                     && morePosition > this.#lastMorePosition
                 ) {
+                    console.log('fuck');
                     this.#lastMorePosition = morePosition;
                     this.moreEmitter();
                 }
