@@ -57,6 +57,7 @@ import { CheckComponent } from './form/check/check.component';
 
 import { FormModule } from './form/form.module';
 import { ValidationComponent } from './form/validation/validation.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -102,6 +103,7 @@ import { ValidationComponent } from './form/validation/validation.component';
     imports: [
         SharedModule,
         UiRoutingModule,
+        FormsModule,
         FormModule
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

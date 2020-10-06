@@ -109,7 +109,7 @@ export class SelectPopupElement extends ToggleableElement {
     }
 
     onOpen() {
-        this.content.renderOnScroll();
+        this.content.renderScroll();
         if (this.select.search) {
             this.select.search.readOnly = false;
             this.select.search.focus();

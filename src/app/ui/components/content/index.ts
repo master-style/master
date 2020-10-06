@@ -1,4 +1,4 @@
-import { Element, Attr, ToggleableElement } from '@element';
+import { Element, Attr, Event, ToggleableElement } from '@element';
 import { debounce } from 'lodash-es';
 import css from './index.scss';
 import isNum from '@utils/is-num';
@@ -34,6 +34,7 @@ export class ContentElement extends ToggleableElement {
     #animationFrame: any;
     #enabled: boolean;
     #thumb: any = {};
+    #lastMorePosition: number = 0;
 
     template = $(() => [
         'div', {
@@ -72,8 +73,17 @@ export class ContentElement extends ToggleableElement {
     maxX: number;
     maxY: number;
 
+    @Event({ bubbles: false })
+    moreEmitter: EventEmitter;
+
+    @Event({ bubbles: false })
+    changeEmitter: EventEmitter;
+
     @Attr({ reflect: false, render: false })
     duration: number = 300;
+
+    @Attr({ reflect: false, render: false })
+    emit: boolean = false;
 
     @Attr()
     center: boolean = true;
@@ -110,7 +120,7 @@ export class ContentElement extends ToggleableElement {
 
     render() {
         this.template.render(this.shadowRoot);
-        this.renderOnScroll();
+        this.renderScroll();
         (this.scrollX || this.scrollY) ? this.enable() : this.disable();
     }
 
@@ -120,28 +130,35 @@ export class ContentElement extends ToggleableElement {
         this.scrolling = false;
         this.wrap
             .on('scroll', (event: any) => {
-                if (!this.renderOnScroll()) return;
+                if (!this.renderScroll()) return;
                 if (!this.scrolling) {
                     this.scrolling = true;
                     this.template.render(this.shadowRoot);
                 }
-                if (this.#scrollEndTimeout) this.#scrollEndTimeout = clearTimeout(this.#scrollEndTimeout);
+                if (this.#scrollEndTimeout) {
+                    this.#scrollEndTimeout = clearTimeout(this.#scrollEndTimeout);
+                }
                 this.#scrollEndTimeout = setTimeout(() => {
-                    this.stop();
+                    if (this.#animationFrame) {
+                        this.#animationFrame = cancelAnimationFrame(this.#animationFrame)
+                    }
+                    this.scrolling = false;
+                    this.#time.X = this.#time.Y = 0;
                 }, 100);
             }, {
-                id: 'scroll',
+                id: NAME,
                 passive: true
             })
             .on('slotchange', (event) => {
-                this.renderOnScroll();
+                this.renderScroll();
+                this.changeEmitter();
             }, {
-                id: 'scroll',
+                id: NAME,
                 passive: true
             });
 
         window.on('resize', debounce(() => {
-            this.renderOnScroll();
+            this.renderScroll();
         }, 70), {
             id: this
         });
@@ -207,7 +224,9 @@ export class ContentElement extends ToggleableElement {
         }
 
         if (this.scrolling) {
-            if (this.#animationFrame) this.#animationFrame = cancelAnimationFrame(this.#animationFrame);
+            if (this.#animationFrame) {
+                this.#animationFrame = cancelAnimationFrame(this.#animationFrame);
+            }
             this.#time.X = this.#time.Y = 0;
         }
 
@@ -237,7 +256,7 @@ export class ContentElement extends ToggleableElement {
         }
     }
 
-    renderOnScroll() {
+    renderScroll() {
         const render = (dir: string) => {
             if (this['scroll' + dir]) {
                 const
@@ -261,6 +280,20 @@ export class ContentElement extends ToggleableElement {
                                 '';
                     // tslint:disable-next-line: deprecation
                     this.wrap.style.webkitMaskImage = this.wrap.style.maskImage = maskImage;
+                }
+
+                const morePosition = maxPosition * 2 / 3;
+                const newMorePosition = morePosition + (maxPosition - morePosition) * 2 / 3;
+
+                if (
+                    maxPosition !== 0
+                    && scrollPosition !== 0
+                    && scrollPosition > newMorePosition
+                    && morePosition > this.#lastMorePosition
+                ) {
+                    console.log(scrollPosition, maxPosition, morePosition, this.#lastMorePosition)
+                    this.#lastMorePosition = morePosition;
+                    this.moreEmitter();
                 }
 
                 if (this['reach' + dir] !== reach) this['reach' + dir] = reach;
@@ -294,14 +327,16 @@ export class ContentElement extends ToggleableElement {
 
     // stop current animation
     stop() {
-        if (this.#animationFrame) this.#animationFrame = cancelAnimationFrame(this.#animationFrame);
+        if (this.#animationFrame) {
+            this.#animationFrame = cancelAnimationFrame(this.#animationFrame)
+        }
         this.scrolling = false;
         this.#time.X = this.#time.Y = 0;
         this.render();
     }
 
     protected onOpened() {
-        this.renderOnScroll();
+        this.renderScroll();
     }
 
     protected toggling(

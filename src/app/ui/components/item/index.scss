@@ -20,7 +20,7 @@
 
 [part=root] {
     padding-left: var(--px);
-    line-height: 1.2;
+    line-height: 1.3;
 }
 
 [part=body] {
@@ -39,15 +39,20 @@
     }
 }
 
-:host(.lined:not(:last-of-type)) {
+:host(.lined) {
     [part=root] {
         border-bottom: 1px solid var(--b-fadest);
     }
 }
 
-:host(.indent-lined:not(:last-of-type)) {
+:host(.indent-lined) {
     [part=lower] {
         border-bottom: 1px solid var(--b-fadest);
+    }
+
+    [part=body] {
+        padding-top: calc(var(--py) + 1px);
+        padding-bottom: calc(var(--py) - 1px);
     }
 }
 

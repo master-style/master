@@ -4,7 +4,7 @@ input,
 textarea {
     cursor: text;
     border: 0;
-    font-weight: 500;
+    font-weight: inherit;
     color: var(--f-theme);
     -webkit-appearance: none;
     white-space: nowrap;

@@ -4,6 +4,7 @@ export function Event(options?: EventOptions) {
         const name = propKey.split('Emitter')[0];
         const event = new CustomEvent(name, options);
         const emitter = function (data: any) {
+            if (!this.emit || !this.ready) return;
             (event as any).data = data;
             this.dispatchEvent(event);
             return event;
