@@ -4,12 +4,6 @@ const NAME = 'control';
 
 export class ControlElement extends HTMLElement {
 
-    static updateValue(control: any, value: any) {
-        control.empty = value === null || value === undefined || value === '';
-        control.body.value = value ?? null;
-        control.validate();
-    }
-
     validity: ValidityState;
 
     body: any;

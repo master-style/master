@@ -1,4 +1,4 @@
-import { Element, Attr, ControlElement } from '@element';
+import { Element, Attr, Prop, ControlElement } from '@element';
 import css from './index.scss';
 
 const NAME = 'input';
@@ -17,6 +17,8 @@ export class InputElement extends ControlElement {
             placeholder: this.placeholder,
             disabled: this.disabled,
             required: this.required,
+            multiple: this.multiple,
+            accept: this.accept,
             readonly: this.readOnly,
             pattern: this.pattern,
             autocomplete: this.autocomplete,
@@ -43,6 +45,28 @@ export class InputElement extends ControlElement {
         }
     ]);
 
+    @Prop({
+        render: false,
+        update(input: InputElement, value) {
+            if (input.type === 'file' && value) {
+                console.log(value[0].name);
+                input.value = value[0].name;
+            }
+            // function readURL(input) {
+            //     if (input.files && input.files[0]) {
+            //         var reader = new FileReader();
+
+            //         reader.onload = function (e) {
+            //             $('#blah').attr('src', e.target.result);
+            //         }
+
+            //         reader.readAsDataURL(input.files[0]); // convert to base64 string
+            //     }
+            // }
+        }
+    })
+    files: FileList;
+
     @Attr({ observe: false, render: false })
     empty: boolean;
 
@@ -53,12 +77,33 @@ export class InputElement extends ControlElement {
     readOnly: boolean;
 
     @Attr()
+    accept: string;
+
+    @Attr()
     placeholder: string;
 
     @Attr()
     label: string;
 
-    @Attr()
+    @Attr({ observe: false, render: false })
+    dragging: boolean = false;
+
+    @Attr({
+        update(input: InputElement, value, oldValue) {
+            if (value === 'file') {
+                input
+                    .on('dragenter', () => {
+                        input.dragging = true;
+                    }, { id: NAME + '.file', passive: true })
+                    .on('dragleave drop', () => {
+                        input.dragging = false;
+                    }, { id: NAME + '.file', passive: true })
+            }
+            if (oldValue === 'file') {
+                input.off({ id: NAME + '.file' });
+            }
+        }
+    })
     type: string;
 
     @Attr({ render: false })
@@ -75,11 +120,20 @@ export class InputElement extends ControlElement {
             }
             return value;
         },
-        update: ControlElement.updateValue,
+        update(input: InputElement, value: any) {
+            input.empty = value === null || value === undefined || value === '';
+            if (input.type !== 'file') {
+                input.body.value = value ?? null;
+            }
+            input.validate();
+        },
         render: false,
         reflect: false
     })
     value: any;
+
+    @Attr()
+    multiple: boolean;
 
     @Attr()
     autocomplete: string;
@@ -119,7 +173,11 @@ export class InputElement extends ControlElement {
 
         this.body
             .on('input', (event: any) => {
-                this['value'] = event.target.value;
+                if (this.type === 'file') {
+                    this.files = this.body.files;
+                } else {
+                    this.value = event.target.value;
+                }
                 if (!this.dirty) {
                     this.dirty = true;
                 }

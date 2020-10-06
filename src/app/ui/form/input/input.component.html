@@ -181,6 +181,17 @@
 <doc-prop [name]="'type'" [types]="['date', 'email', 'number', 'password', 'search', 'tel', 'text', 'time', 'url']"
           [description]="'The type of control to display. The default type is text.'" [default]="'text'">
 </doc-prop>
+<div class="demo">
+    <div class="demo-body">
+        <m-input type="file"
+                 class="outlined"
+                 placeholder="Drop files here or click to upload."
+                 
+                 accept="image/*"
+                 label="file">
+        </m-input>
+    </div>
+</div>
 
 <doc-prop [name]="'inputmode'"
           [types]="['decimal', 'email', 'none', 'numeric', 'search', 'tel', 'text', 'url']"

@@ -26,3 +26,37 @@
         -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 1) var(--px), rgba(0, 0, 0, 1) calc(100% - var(--px)), rgba(0, 0, 0, 0) 100%)
     }
 }
+
+:host([type=file]) {
+    cursor: copy;
+
+    ::slotted([part=body]) {
+        height: 0;
+        opacity: 0;
+        cursor: copy !important;
+    }
+}
+
+:host([type=file][placeholder]) {
+    &:before {
+        content: attr(placeholder);
+        position: absolute;
+        left: var(--px);
+        top: var(--py);
+        color: var(--f-fadest);
+        font-size: inherit;
+        letter-spacing: inherit;
+        font-weight: inherit;
+    }
+}
+
+:host([dragging]) {
+    ::slotted([part=body]) {
+        cursor: grab !important;
+    }
+
+    fieldset {
+        --b-width: 2px;
+        border-color: var(--b-color-active);
+    }
+}

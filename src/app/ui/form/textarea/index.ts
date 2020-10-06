@@ -65,7 +65,11 @@ export class TextareaElement extends ControlElement {
     @Attr({
         reflect: false,
         render: false,
-        update: ControlElement.updateValue
+        update(textarea: TextareaElement, value: any) {
+            textarea.empty = value === null || value === undefined || value === '';
+            textarea.body.value = value ?? null;
+            textarea.validate();
+        },
     })
     value: any;
 
@@ -91,7 +95,7 @@ export class TextareaElement extends ControlElement {
             });
 
         this.body.on('input', (event: any) => {
-            this['value'] = event.target.value;
+            this.value = event.target.value;
             if (!this.dirty) {
                 this.dirty = true;
             }

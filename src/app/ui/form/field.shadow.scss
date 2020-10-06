@@ -81,7 +81,7 @@
     }
 }
 
-:host([label][empty]:not([busy]):not([expanded]):not([focused]):not(:focus-within):not(:active):not([readonly]):not([disabled])) {
+:host([label][empty]:not([busy]):not([expanded]):not([focused]):not(:focus-within):not(:active):not([readonly]):not([disabled]):not([type=file])) {
 
     ::slotted([part=head]),
     ::slotted([part=foot]),

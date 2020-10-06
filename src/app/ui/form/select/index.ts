@@ -237,8 +237,9 @@ export class SelectElement extends ControlElement {
                     eachOption.selected = true;
                 }
             });
-            ControlElement.updateValue(select, value);
+            select.empty = value === null || value === undefined || value === '';
             select.body.value = value;
+            select.validate();
             if (!select.multiple) {
                 select.search.value = value || '';
             }
