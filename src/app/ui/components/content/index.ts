@@ -34,7 +34,7 @@ export class ContentElement extends ToggleableElement {
     #animationFrame: any;
     #enabled: boolean;
     #thumb: any = {};
-    #lastMorePosition: number = 0;
+    #lastMorePosition: number = -1;
 
     template = $(() => [
         'div', {
@@ -282,16 +282,16 @@ export class ContentElement extends ToggleableElement {
                     this.wrap.style.webkitMaskImage = this.wrap.style.maskImage = maskImage;
                 }
 
-                const morePosition = maxPosition * 2 / 3;
-                const newMorePosition = morePosition + (maxPosition - morePosition) * 2 / 3;
+                let morePosition = maxPosition * 2 / 3;
+
+                if (this.#lastMorePosition > 0) {
+                    morePosition = this.#lastMorePosition + (maxPosition - this.#lastMorePosition) / 2;
+                }
 
                 if (
-                    maxPosition !== 0
-                    && scrollPosition !== 0
-                    && scrollPosition > newMorePosition
+                    scrollPosition >= morePosition
                     && morePosition > this.#lastMorePosition
                 ) {
-                    console.log(scrollPosition, maxPosition, morePosition, this.#lastMorePosition)
                     this.#lastMorePosition = morePosition;
                     this.moreEmitter();
                 }
