@@ -32,6 +32,15 @@ export class InputElement extends ControlElement {
 
     template = $(() => [
         'slot',
+        'div', {
+            $if: this.type === 'file',
+            part: 'body',
+            placeholder: this.placeholder,
+            $text: this.files && this.files[0]?.name,
+            label: this.label?.length > this.placeholder?.length
+                ? this.label
+                : this.placeholder, // for default select width
+        },
         'fieldset', [
             'legend', [
                 'span', { part: 'label', $text: this.label }
@@ -46,10 +55,9 @@ export class InputElement extends ControlElement {
     ]);
 
     @Prop({
-        render: false,
         update(input: InputElement, value) {
-            if (input.type === 'file' && value) {
-                console.log(value[0].name);
+            console.log(value);
+            if (input.type === 'file' && value?.length) {
                 input.value = value[0].name;
             }
             // function readURL(input) {
@@ -173,7 +181,7 @@ export class InputElement extends ControlElement {
 
         this.body
             .on('input', (event: any) => {
-                if (this.type === 'file') {
+                if (this.type === 'file' && this.body.files.length) {
                     this.files = this.body.files;
                 } else {
                     this.value = event.target.value;

@@ -30,23 +30,29 @@
 :host([type=file]) {
     cursor: copy;
 
-    ::slotted([part=body]) {
-        height: 0;
-        opacity: 0;
-        cursor: copy !important;
-    }
-}
+    [part=body] {
+        &:empty[placeholder] {
+            margin: 0 !important;
 
-:host([type=file][placeholder]) {
-    &:before {
-        content: attr(placeholder);
+            &:before {
+                content: attr(placeholder);
+                color: var(--f-fadest);
+            }
+        }
+
+        &:empty[label]:not([placeholder]):before {
+            content: attr(label);
+            color: transparent;
+        }
+    }
+
+    ::slotted([part=body]) {
         position: absolute;
-        left: var(--px);
-        top: var(--py);
-        color: var(--f-fadest);
-        font-size: inherit;
-        letter-spacing: inherit;
-        font-weight: inherit;
+        z-index: 2;
+        opacity: 0;
+        height: 100%;
+        width: 100%;
+        cursor: copy !important;
     }
 }
 

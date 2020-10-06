@@ -42,7 +42,7 @@ export class SelectElement extends ControlElement {
             'div', {
                 part: 'body',
                 placeholder: this.placeholder,
-                label: this.label.length > this.placeholder.length
+                label: this.label?.length > this.placeholder?.length
                     ? this.label
                     : this.placeholder, // for default select width
             }, [
