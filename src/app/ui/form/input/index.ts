@@ -40,14 +40,21 @@ export class InputElement extends ControlElement {
             label: this.label?.length > this.placeholder?.length
                 ? this.label
                 : this.placeholder, // for default select width
-        }, () => {
-            if (!this.files) return;
-            return [...Array.from(this.files).map((eachFile: File) => [
+        }, () => this.files.map((eachFile: File) => {
+            const eachFileNameSplits = eachFile.name.split('.');
+            const ext = eachFileNameSplits.pop();
+            return [
                 'm-chip', {
                     $if: this.multiple,
-                    class: 'sm',
-                    $html: eachFile.name
+                    class: 'sm'
                 }, [
+                    'div', {
+                        part: 'head',
+                        $text: ext
+                    },
+                    'span', {
+                        $text: eachFileNameSplits.join()
+                    },
                     'm-button', {
                         $if: !this.readOnly && !this.disabled,
                         part: 'close',
@@ -61,8 +68,9 @@ export class InputElement extends ControlElement {
                         'm-icon', { name: 'cross' }
                     ]
                 ]
-            ])];
-        },
+            ]
+        })
+        ,
         'fieldset', [
             'legend', [
                 'span', { part: 'label', $text: this.label }
@@ -78,9 +86,8 @@ export class InputElement extends ControlElement {
 
     @Prop({
         update(input: InputElement, value) {
-            console.log(value);
-            if (input.type === 'file' && value?.length) {
-                input.value = value[0].name;
+            if (input.type === 'file') {
+                input.empty = !value.length;
             }
             // function readURL(input) {
             //     if (input.files && input.files[0]) {
@@ -95,7 +102,7 @@ export class InputElement extends ControlElement {
             // }
         }
     })
-    files: FileList;
+    files: File[] = [];
 
     @Attr({ observe: false, render: false })
     empty: boolean;
@@ -152,9 +159,7 @@ export class InputElement extends ControlElement {
         },
         update(input: InputElement, value: any) {
             input.empty = value === null || value === undefined || value === '';
-            if (input.type !== 'file') {
-                input.body.value = value ?? null;
-            }
+            input.body.value = value ?? null;
             input.validate();
         },
         render: false,
@@ -204,7 +209,7 @@ export class InputElement extends ControlElement {
         this.body
             .on('input', (event: any) => {
                 if (this.type === 'file' && this.body.files.length) {
-                    this.files = this.body.files;
+                    this.files = this.files.concat(Array.from(this.body.files));
                 } else {
                     this.value = event.target.value;
                 }

@@ -20,6 +20,7 @@
 }
 
 m-chip {
+    --chip-bg-color-head: var(--theme-fade);
     --chip-bg-color: var(--theme-fader);
     --chip-b-color: transparent;
     flex: 0 0 auto;
