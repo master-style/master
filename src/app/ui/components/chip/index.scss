@@ -53,7 +53,7 @@
 
     ::slotted([part=head]) {
         font-size: .625rem;
-        padding: 0 $xxs;
+        padding: 0 .25rem;
     }
 
     ::slotted([part=close]) {
