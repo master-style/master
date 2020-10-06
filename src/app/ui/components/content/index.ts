@@ -295,7 +295,6 @@ export class ContentElement extends ToggleableElement {
                     scrollPosition >= morePosition
                     && morePosition > this.#lastMorePosition
                 ) {
-                    console.log('fuck');
                     this.#lastMorePosition = morePosition;
                     this.moreEmitter();
                 }
