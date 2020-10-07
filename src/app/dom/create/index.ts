@@ -117,7 +117,7 @@ class MasterTemplate {
                     removeNodes(eachOldNodes, true);
                 } else {
                     // tslint:disable-next-line: prefer-for-of
-                    if (eachOldNodes && eachOldNodes[eachNodes.length]) {
+                    if (eachOldNodes && eachOldNodes.length > eachNodes.length) {
                         removeNodes(eachOldNodes.splice(eachNodes.length), true);
                     }
 
