@@ -165,6 +165,20 @@ class MasterTemplate {
                                     }
                                 }
                             }
+                            if ('$on' in eachNode) {
+                                if (eachOldNode.$on) {
+                                    for (const eachEventType in eachOldNode.$on) {
+                                        const eachHandle = eachOldNode.$on[eachEventType];
+                                        element.off(eachHandle);
+                                    }
+                                }
+                                for (const eachEventType in eachNode.$on) {
+                                    const eachHandle = eachNode.$on[eachEventType];
+                                    element.on(eachEventType, eachHandle, {
+                                        passive: true
+                                    });
+                                }
+                            }
                             if (
                                 '$html' in eachNode && eachNode.$html !== eachOldNode.$html
                             ) {

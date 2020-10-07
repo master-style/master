@@ -43,7 +43,6 @@ export class InputElement extends ControlElement {
         }, () => this.files.map((eachFile: File) => {
             const eachFileNameSplits = eachFile.name.split('.');
             const ext = eachFileNameSplits.pop();
-            console.log(this.files, this.files.length);
             return [
                 'div', {
                     part: 'output'
@@ -72,13 +71,17 @@ export class InputElement extends ControlElement {
                         'm-button', {
                             $if: !this.readOnly && !this.disabled,
                             part: 'close',
-                            $created: (element: ButtonElement) => {
-                                element.on('click', (event) => {
+                            $on: {
+                                click: (event) => {
                                     event.stopPropagation();
-                                    this.files.splice(this.files.indexOf(eachFile), 1);
-                                    console.log( this.files);
+                                    console.log(this.files.length, (eachFile.size / (1024 * 1024)).toFixed(2) + 'MB');
+                                    this.files = this.files.filter((file) => {
+                                        console.log(eachFile, file, eachFile === file);
+                                        return eachFile !== file;
+                                    });
+                                    console.log(this.files.length);
                                     this.render();
-                                }, { passive: true, id: NAME });
+                                }
                             }
                         }, [
                             'm-icon', { name: 'cross' }
