@@ -12,6 +12,7 @@
     --label-px: var(--input-label-px, .25rem);
     --label-f-size: var(--input-label-f-size, var(--f-xxs));
     --label-f-color: var(--input-label-f-color, var(--f-theme-fader));
+    --image-size: var(--input-image-size, 10rem);
 }
 
 :host(.outlined) {
@@ -51,4 +52,44 @@
         --b-width: 2px;
         border-color: var(--b-color-active);
     }
+}
+
+[part=image] {
+    width: var(--image-size);
+    height: var(--image-size);
+    object-fit: cover;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background-color: rgba(var(--bg-skeleton-rgb), .05);
+}
+
+:host([interface=image]) {
+    [part=body] {
+        min-height: var(--image-size);
+        min-width: var(--image-size);
+    }
+
+    [part=output] {
+        display: flex;
+        flex-direction: column;
+        margin: .25rem;
+    }
+
+    m-chip {
+        border-radius: 0;
+        border-bottom-left-radius: 3px;
+        border-bottom-right-radius: 3px;
+        width: var(--image-size);
+        margin: 0;
+
+        m-button[part=close] {
+            margin-left: auto;
+        }
+    }
+}
+
+[part=filename] {
+    overflow: hidden;
+    flex: 1 1 auto;
+    text-overflow: ellipsis;
 }

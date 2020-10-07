@@ -5,6 +5,7 @@
     --bg-color: var(--chip-bg-color);
     --bg-color-head: var(--chip-bg-color-head);
     --bg-color-hover: var(--chip-bg-color-hover);
+    --f-color: var(--chip-f-color, var(--f-theme));
     --b-color-active: var(--chip-b-color-active);
     --b-color: var(--chip-b-color);
     --bg-disabled: var(--chip-bg-disabled);
@@ -15,7 +16,6 @@
     --mx: calc(var(--p) - var(--px));
     display: inline-flex;
     border-radius: $xs;
-
 }
 
 [part=root] {
@@ -26,7 +26,7 @@
     vertical-align: middle;
     line-height: 1.2;
     height: var(--size);
-    color: var(--f-theme);
+    color: var(--f-color);
     background-color: var(--bg-color);
     border: 1px solid var(--b-color);
     user-select: none;
@@ -35,21 +35,13 @@
 }
 
 :host(.rounded) {
-
-    ::slotted([part=head]),
-    ::slotted([part=foot]) {
-        border-radius: 50%;
-    }
-
-    ::slotted([part=close]) {
-        border-radius: 50%;
-    }
+    --chip-radius: 50%;
 }
 
 :host(.sm) {
-    --size: 1.5rem;
-    --px: .4375rem;
-    --f-size: var(--f-xxs);
+    --chip-size: 1.5rem;
+    --chip-px: .4375rem;
+    --chip-f-size: var(--f-xxs);
 
     ::slotted([part=head]) {
         font-size: .625rem;

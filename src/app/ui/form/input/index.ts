@@ -44,29 +44,44 @@ export class InputElement extends ControlElement {
             const eachFileNameSplits = eachFile.name.split('.');
             const ext = eachFileNameSplits.pop();
             return [
-                'm-chip', {
-                    $if: this.multiple,
-                    class: 'sm'
+                'div', {
+                    part: 'output'
                 }, [
-                    'div', {
-                        part: 'head',
-                        $text: ext
+                    'img', {
+                        $if: this.interface === 'image',
+                        part: 'image',
+                        src: URL.createObjectURL(eachFile)
                     },
-                    'span', {
-                        $text: eachFileNameSplits.join()
-                    },
-                    'm-button', {
-                        $if: !this.readOnly && !this.disabled,
-                        part: 'close',
-                        $created: (element: ButtonElement) => {
-                            element.on('click', (event) => {
-                                event.stopPropagation();
-                                this.files.splice(this.files.indexOf(eachFile), 1);
-                                this.render();
-                            }, { passive: true, id: NAME });
-                        }
+                    'm-chip', {
+                        $if: this.multiple,
+                        class: 'sm'
                     }, [
-                        'm-icon', { name: 'cross' }
+                        'div', {
+                            part: 'head',
+                            $text: ext
+                        },
+                        'span', {
+                            part: 'filename',
+                            $text: eachFileNameSplits.join()
+                        },
+                        'div', {
+                            part: 'foot',
+                            $text: (eachFile.size / (1024 * 1024)).toFixed(2) + 'MB'
+                        },
+                        'm-button', {
+                            $if: !this.readOnly && !this.disabled,
+                            part: 'close',
+                            $created: (element: ButtonElement) => {
+                                element.on('click', (event) => {
+                                    event.stopPropagation();
+                                    this.files.splice(this.files.indexOf(eachFile), 1);
+                                    console.log( this.files);
+                                    this.render();
+                                }, { passive: true, id: NAME });
+                            }
+                        }, [
+                            'm-icon', { name: 'cross' }
+                        ]
                     ]
                 ]
             ]
@@ -97,6 +112,9 @@ export class InputElement extends ControlElement {
     readOnly: boolean;
 
     @Attr()
+    interface: string;
+
+    @Attr()
     accept: string;
 
     @Attr()
@@ -120,7 +138,6 @@ export class InputElement extends ControlElement {
                         event.preventDefault();
                         event.stopPropagation();
                         input.dragging = true;
-                        console.log(event);
                     }, { id: NAME + '.file' })
                     .on('dragover', (event) => {
                         event.preventDefault();
@@ -203,9 +220,12 @@ export class InputElement extends ControlElement {
 
     private addFiles(fileList: FileList) {
         if (!fileList.length) return;
-        this.files = this.files.concat(Array.from(fileList));
+        // tslint:disable-next-line: prefer-for-of
+        for (let i = 0; i < fileList.length; i++) {
+            const eachFile = fileList[i];
+            this.files.push(eachFile);
+        }
         this.value = this.files;
-        console.log(this.value);
         this.render();
     }
 
@@ -225,6 +245,7 @@ export class InputElement extends ControlElement {
             .on('input', (event: any) => {
                 if (this.type === 'file') {
                     this.addFiles(this.body.files);
+                    console.log(this.body.files);
                 } else {
                     this.value = event.target.value;
                 }
