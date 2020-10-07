@@ -118,8 +118,7 @@ class MasterTemplate {
                 } else {
                     // tslint:disable-next-line: prefer-for-of
                     if (eachOldNodes && eachOldNodes[eachNodes.length]) {
-                        eachOldNodes.splice(eachNodes.length)
-                            .forEach((targetOldNode) => removeNode(targetOldNode));
+                        removeNodes(eachOldNodes.splice(eachNodes.length), true);
                     }
 
                     for (let i = 0; i < eachNodes.length; i++) {

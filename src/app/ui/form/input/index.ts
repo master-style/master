@@ -43,6 +43,7 @@ export class InputElement extends ControlElement {
         }, () => this.files.map((eachFile: File) => {
             const eachFileNameSplits = eachFile.name.split('.');
             const ext = eachFileNameSplits.pop();
+            console.log(this.files, this.files.length);
             return [
                 'div', {
                     part: 'output'
@@ -84,7 +85,7 @@ export class InputElement extends ControlElement {
                         ]
                     ]
                 ]
-            ]
+            ];
         })
         ,
         'fieldset', [
