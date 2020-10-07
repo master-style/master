@@ -43,6 +43,7 @@ export class InputElement extends ControlElement {
         }, () => this.files.map((eachFile: File) => {
             const eachFileNameSplits = eachFile.name.split('.');
             const ext = eachFileNameSplits.pop();
+            console.log(URL.createObjectURL(eachFile));
             return [
                 'div', {
                     part: 'output'
@@ -74,12 +75,7 @@ export class InputElement extends ControlElement {
                             $on: {
                                 click: (event) => {
                                     event.stopPropagation();
-                                    console.log(this.files.length, (eachFile.size / (1024 * 1024)).toFixed(2) + 'MB');
-                                    this.files = this.files.filter((file) => {
-                                        console.log(eachFile, file, eachFile === file);
-                                        return eachFile !== file;
-                                    });
-                                    console.log(this.files.length);
+                                    this.files.splice(this.files.indexOf(eachFile), 1);
                                     this.render();
                                 }
                             }
