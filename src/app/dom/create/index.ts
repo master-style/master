@@ -1,4 +1,5 @@
 const fragment = document.createDocumentFragment();
+const div = document.createElement('div');
 
 window.Master = function (selector: any, attr?: { [key: string]: any }, ...children: (Element | string)[]) {
     if (typeof selector === 'function') {
@@ -201,7 +202,9 @@ class MasterTemplate {
                             if (eachNode.$namespace) {
                                 element = document.createElementNS(eachNode.$namespace, eachNode.tag);
                             } else {
-                                element = document.createElement(eachNode.tag);
+                                element = eachNode.tag === 'div'
+                                    ? div.cloneNode()
+                                    : document.createElement(eachNode.tag);
                             }
                             eachNode.element = element;
 
@@ -278,7 +281,9 @@ class MasterTemplate {
                     if (eachNode.$namespace) {
                         element = document.createElementNS(eachNode.$namespace, eachNode.tag);
                     } else {
-                        element = document.createElement(eachNode.tag);
+                        element = eachNode.tag === 'div'
+                            ? div.cloneNode()
+                            : document.createElement(eachNode.tag);
                     }
                     eachNode.element = element;
                     const created = eachNode.$created;
