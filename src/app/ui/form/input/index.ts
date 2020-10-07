@@ -43,7 +43,7 @@ export class InputElement extends ControlElement {
         }, () => this.files.map((eachFile: File) => {
             const eachFileNameSplits = eachFile.name.split('.');
             const ext = eachFileNameSplits.pop();
-            console.log(URL.createObjectURL(eachFile));
+            const src = URL.createObjectURL(eachFile);
             return [
                 'div', {
                     part: 'output'
@@ -51,7 +51,8 @@ export class InputElement extends ControlElement {
                     'img', {
                         $if: this.interface === 'image',
                         part: 'image',
-                        src: URL.createObjectURL(eachFile)
+                        src,
+                        $removed: () => URL.revokeObjectURL(src)
                     },
                     'm-chip', {
                         $if: this.multiple,
@@ -75,7 +76,7 @@ export class InputElement extends ControlElement {
                             $on: {
                                 click: (event) => {
                                     event.stopPropagation();
-                                    this.files.splice(this.files.indexOf(eachFile), 1);
+                                    this.value.splice(this.value.indexOf(eachFile), 1);
                                     this.render();
                                 }
                             }
@@ -180,6 +181,7 @@ export class InputElement extends ControlElement {
         update(input: InputElement, value: any) {
             if (input.type === 'file') {
                 input.empty = !value?.length || !value;
+                input.render();
             } else {
                 input.empty = value === null || value === undefined || value === '';
                 input.body.value = value ?? null;
@@ -220,13 +222,7 @@ export class InputElement extends ControlElement {
 
     private addFiles(fileList: FileList) {
         if (!fileList.length) return;
-        // tslint:disable-next-line: prefer-for-of
-        for (let i = 0; i < fileList.length; i++) {
-            const eachFile = fileList[i];
-            this.files.push(eachFile);
-        }
-        this.value = this.files;
-        this.render();
+        this.value = this.files = this.files.concat(Array.from(fileList));
     }
 
     onAdded() {
@@ -245,7 +241,6 @@ export class InputElement extends ControlElement {
             .on('input', (event: any) => {
                 if (this.type === 'file') {
                     this.addFiles(this.body.files);
-                    console.log(this.body.files);
                 } else {
                     this.value = event.target.value;
                 }
