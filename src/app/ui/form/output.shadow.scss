@@ -2,7 +2,7 @@
     flex-wrap: wrap;
     flex: 1 1 auto;
     width: auto;
-    margin: #{-$xs};
+    margin: -.3125rem;
 
     &:empty[placeholder] {
         margin: 0 !important;
@@ -24,7 +24,7 @@ m-chip {
     --chip-bg-color: var(--theme-fader);
     --chip-b-color: transparent;
     flex: 0 0 auto;
-    margin: $xxs;
+    margin: .125rem;
 }
 
 m-button[part=close] {

@@ -33,6 +33,7 @@
 
     ::slotted([part=body]) {
         position: absolute;
+        pointer-events: none;
         z-index: 2;
         opacity: 0;
         height: 100%;

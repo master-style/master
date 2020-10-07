@@ -61,7 +61,8 @@ export class InputElement extends ControlElement {
                         $created: (element: ButtonElement) => {
                             element.on('click', (event) => {
                                 event.stopPropagation();
-                                console.log('to remove');
+                                this.files.splice(this.files.indexOf(eachFile), 1);
+                                this.render();
                             }, { passive: true, id: NAME });
                         }
                     }, [
@@ -84,24 +85,6 @@ export class InputElement extends ControlElement {
         }
     ]);
 
-    @Prop({
-        update(input: InputElement, value) {
-            if (input.type === 'file') {
-                input.empty = !value.length;
-            }
-            // function readURL(input) {
-            //     if (input.files && input.files[0]) {
-            //         var reader = new FileReader();
-
-            //         reader.onload = function (e) {
-            //             $('#blah').attr('src', e.target.result);
-            //         }
-
-            //         reader.readAsDataURL(input.files[0]); // convert to base64 string
-            //     }
-            // }
-        }
-    })
     files: File[] = [];
 
     @Attr({ observe: false, render: false })
@@ -129,12 +112,32 @@ export class InputElement extends ControlElement {
         update(input: InputElement, value, oldValue) {
             if (value === 'file') {
                 input
-                    .on('dragenter', () => {
+                    .on('click', (event) => {
+                        input.body.focus();
+                        input.body.click();
+                    }, { id: NAME + '.file', passive: true })
+                    .on('dragenter', (event) => {
+                        event.preventDefault();
+                        event.stopPropagation();
                         input.dragging = true;
-                    }, { id: NAME + '.file', passive: true })
-                    .on('dragleave drop', () => {
+                        console.log(event);
+                    }, { id: NAME + '.file' })
+                    .on('dragover', (event) => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }, { id: NAME + '.file' })
+                    .on('dragleave dragend', (event) => {
+                        event.preventDefault();
                         input.dragging = false;
-                    }, { id: NAME + '.file', passive: true })
+                    }, { id: NAME + '.file' })
+                    .on('drop', (event: any) => {
+                        input.dragging = false;
+                        event.preventDefault();
+                        const files = event.dataTransfer.files;
+                        if (files) {
+                            input.addFiles(files);
+                        }
+                    }, { id: NAME + '.file' });
             }
             if (oldValue === 'file') {
                 input.off({ id: NAME + '.file' });
@@ -158,9 +161,13 @@ export class InputElement extends ControlElement {
             return value;
         },
         update(input: InputElement, value: any) {
-            input.empty = value === null || value === undefined || value === '';
-            input.body.value = value ?? null;
-            input.validate();
+            if (input.type === 'file') {
+                input.empty = !value?.length || !value;
+            } else {
+                input.empty = value === null || value === undefined || value === '';
+                input.body.value = value ?? null;
+                input.validate();
+            }
         },
         render: false,
         reflect: false
@@ -194,6 +201,14 @@ export class InputElement extends ControlElement {
     @Attr()
     step: number;
 
+    private addFiles(fileList: FileList) {
+        if (!fileList.length) return;
+        this.files = this.files.concat(Array.from(fileList));
+        this.value = this.files;
+        console.log(this.value);
+        this.render();
+    }
+
     onAdded() {
         this.validate();
 
@@ -208,8 +223,8 @@ export class InputElement extends ControlElement {
 
         this.body
             .on('input', (event: any) => {
-                if (this.type === 'file' && this.body.files.length) {
-                    this.files = this.files.concat(Array.from(this.body.files));
+                if (this.type === 'file') {
+                    this.addFiles(this.body.files);
                 } else {
                     this.value = event.target.value;
                 }
