@@ -58,8 +58,6 @@
     width: var(--image-size);
     height: var(--image-size);
     object-fit: cover;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
     background-color: rgba(var(--bg-skeleton-rgb), .05);
 }
 
@@ -73,12 +71,12 @@
         display: flex;
         flex-direction: column;
         margin: .25rem;
+        border-radius: 3px;
+        overflow: hidden;
     }
 
     m-chip {
         border-radius: 0;
-        border-bottom-left-radius: 3px;
-        border-bottom-right-radius: 3px;
         width: var(--image-size);
         margin: 0;
 

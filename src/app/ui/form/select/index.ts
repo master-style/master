@@ -74,13 +74,13 @@ export class SelectElement extends ControlElement {
                     'm-button', {
                         $if: !this.readOnly && !this.disabled,
                         part: 'close',
-                        $created: (element: ButtonElement) => {
-                            element.on('click', (event) => {
+                        $on: {
+                            click: (event) => {
                                 event.stopPropagation();
                                 eachOption.selected = false;
                                 this.popup.render();
                                 this.popup.updatePosition();
-                            }, { passive: true, id: NAME });
+                            }
                         }
                     }, [
                         'm-icon', { name: 'cross' }
