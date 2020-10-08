@@ -5,7 +5,6 @@ import './popup';
 
 import { OptionElement } from '../option';
 import { SelectPopupElement } from './popup';
-import { ButtonElement } from '../button';
 
 let uid = 0;
 
@@ -87,22 +86,34 @@ export class SelectElement extends ControlElement {
                     ]
                 ]
             ]),
-            'm-icon', {
-                $if: this.busy,
-                name: 'spinner',
-                part: 'spinner'
-            },
-            'm-icon', {
-                $if: !this.readOnly,
-                name: this.multiple ? 'caret' : 'unfold',
-                part: 'icon'
-            },
             'fieldset', [
                 'legend', [
                     'span', { part: 'label', $text: this.label }
                 ]
             ],
-            'label', { $text: this.label }
+            'label', { $text: this.label },
+            'div', { part: 'foot' }, [
+                'm-icon', {
+                    $if: this.busy,
+                    name: 'spinner',
+                    part: 'spinner'
+                },
+                'm-button', {
+                    $if: !this.readOnly && !this.disabled && !this.empty,
+                    class: 'round',
+                    name: 'cross',
+                    part: 'clear'
+                }, [
+                    'm-icon', {
+                        name: 'cross'
+                    }
+                ],
+                'm-icon', {
+                    $if: !this.readOnly,
+                    name: this.multiple ? 'caret' : 'unfold',
+                    part: 'icon'
+                },
+            ],
         ]
     ]);
 

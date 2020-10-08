@@ -67,7 +67,7 @@
 m-icon[part=icon] {
     --f-color: var(--f-fadest);
     font-size: var(--f-size);
-    padding-right: calc(var(--px) / 2);
+    padding-right: calc(var(--px) / 1.5);
     margin-left: calc(var(--px) / -2)
 }
 

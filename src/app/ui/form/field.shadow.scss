@@ -310,3 +310,20 @@ m-icon {
     }
 
 }
+
+[part=clear] {
+    --button-f-color: var(--f-fadest);
+    --button-f-size: var(--f-xxs);
+    --button-size: 1.25rem;
+    --icon-stroke-width: 3px;
+    border-radius: 50%;
+    + [part=icon] {
+        margin-left: .25rem;
+    }
+}
+
+[part=foot] {
+    display: flex;
+    align-items: center;
+    height: var(--size);
+}
