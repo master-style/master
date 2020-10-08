@@ -237,7 +237,7 @@ export class SelectElement extends ControlElement {
                     eachOption.selected = true;
                 }
             });
-            select.empty = value === null || value === undefined || value === '';
+            select.empty = value === null || value === undefined || value === '' || !value?.length;
             select.body.value = value;
             select.validate();
             if (!select.multiple) {
