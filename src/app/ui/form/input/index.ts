@@ -68,7 +68,7 @@ export class InputElement extends ControlElement {
                         },
                         'div', {
                             part: 'foot',
-                            $text: (eachFile.size / (1024 * 1024)).toFixed(2) + 'MB'
+                            $text: (eachFile.size / 1024).toFixed(0) + 'KB'
                         },
                         'm-button', {
                             $if: !this.readOnly && !this.disabled,
