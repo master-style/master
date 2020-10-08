@@ -63,8 +63,13 @@
 
 :host([interface=image]) {
     [part=body] {
-        min-height: var(--image-size);
-        min-width: var(--image-size);
+        &:before {
+            display: flex;
+            justify-content: center;
+            min-height: var(--image-size);
+            min-width: var(--image-size);
+            align-items: center;
+        }
     }
 
     [part=output] {

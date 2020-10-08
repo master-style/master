@@ -44,6 +44,7 @@ export class InputElement extends ControlElement {
             const eachFileNameSplits = eachFile.name.split('.');
             const ext = eachFileNameSplits.pop();
             const src = URL.createObjectURL(eachFile);
+            console.log(eachFile);
             return [
                 'div', {
                     part: 'output'
@@ -55,7 +56,6 @@ export class InputElement extends ControlElement {
                         $removed: () => URL.revokeObjectURL(src)
                     },
                     'm-chip', {
-                        $if: this.multiple,
                         class: 'sm'
                     }, [
                         'div', {
@@ -100,6 +100,8 @@ export class InputElement extends ControlElement {
             part: 'spinner'
         }
     ]);
+
+    #files = [];
 
     files: File[] = [];
 
@@ -222,7 +224,11 @@ export class InputElement extends ControlElement {
 
     private addFiles(fileList: FileList) {
         if (!fileList.length) return;
-        this.value = this.files = this.files.concat(Array.from(fileList));
+        this.value
+            = this.files
+            = this.multiple
+                ? this.files.concat(Array.from(fileList))
+                : Array.from(fileList);
     }
 
     onAdded() {

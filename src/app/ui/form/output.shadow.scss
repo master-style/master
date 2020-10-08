@@ -10,8 +10,6 @@
         &:before {
             content: attr(placeholder);
             color: var(--f-fadest);
-            width: 100%;
-            text-align: center;
         }
     }
 
