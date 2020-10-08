@@ -41,6 +41,12 @@
         width: 100%;
         cursor: copy !important;
     }
+
+    ::slotted(img) {
+        width: var(--image-size);
+        height: var(--image-size);
+        object-fit: cover;
+    }
 }
 
 :host([dragging]) {

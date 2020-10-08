@@ -178,7 +178,8 @@
 </doc-prop>
 
 <h2 id="property">{{ 'property' | translate }}</h2>
-<doc-prop [name]="'type'" [types]="['date', 'email', 'number', 'password', 'search', 'tel', 'text', 'time', 'url']"
+<doc-prop [name]="'type'"
+          [types]="['date', 'email', 'file', 'number', 'password', 'search', 'tel', 'text', 'time', 'url']"
           [description]="'The type of control to display. The default type is text.'" [default]="'text'">
 </doc-prop>
 <div class="demo">
@@ -201,6 +202,7 @@
                          accept="image/*"
                          label="file"
                          required>
+                    <img src="https://storage.googleapis.com/shoplay/83e08ae3-af12-47bf-a846-ceb134793c26.webp" alt="">
                 </m-input>
             </div>
         </div>
