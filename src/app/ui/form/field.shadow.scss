@@ -312,6 +312,7 @@ m-icon {
 }
 
 [part=clear] {
+    --button-bg-color-hover: var(--theme-fade);
     --button-f-color: var(--f-fadest);
     --button-f-size: var(--f-xxs);
     --button-size: 1.25rem;
@@ -326,4 +327,5 @@ m-icon {
     display: flex;
     align-items: center;
     height: var(--size);
+    padding-right: calc(var(--px) / 1.5);
 }

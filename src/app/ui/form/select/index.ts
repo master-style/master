@@ -98,16 +98,6 @@ export class SelectElement extends ControlElement {
                     name: 'spinner',
                     part: 'spinner'
                 },
-                'm-button', {
-                    $if: !this.readOnly && !this.disabled && !this.empty,
-                    class: 'round',
-                    name: 'cross',
-                    part: 'clear'
-                }, [
-                    'm-icon', {
-                        name: 'cross'
-                    }
-                ],
                 'm-icon', {
                     $if: !this.readOnly,
                     name: this.multiple ? 'caret' : 'unfold',

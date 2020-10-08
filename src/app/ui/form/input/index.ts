@@ -94,18 +94,35 @@ export class InputElement extends ControlElement {
             ]
         ],
         'label', { $text: this.label },
-        'm-icon', {
-            $if: this.busy,
-            name: 'spinner',
-            part: 'spinner'
-        }
+        'div', { part: 'foot' }, [
+            'm-icon', {
+                $if: this.busy,
+                name: 'spinner',
+                part: 'spinner'
+            },
+            'm-button', {
+                $if: this.clearable && !this.readOnly && !this.disabled && !this.empty,
+                class: 'round',
+                name: 'cross',
+                part: 'clear',
+                $on: {
+                    click: () => {
+                        this.value = null;
+                    }
+                }
+            }, [
+                'm-icon', {
+                    name: 'cross'
+                }
+            ]
+        ],
     ]);
 
     #files = [];
 
     files: File[] = [];
 
-    @Attr({ observe: false, render: false })
+    @Attr({ observe: false })
     empty: boolean;
 
     @Attr({ observe: false, render: false })
@@ -221,6 +238,9 @@ export class InputElement extends ControlElement {
 
     @Attr()
     step: number;
+
+    @Attr()
+    clearable: boolean = false;
 
     private addFiles(fileList: FileList) {
         if (!fileList.length) return;
