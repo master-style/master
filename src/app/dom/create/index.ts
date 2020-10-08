@@ -124,20 +124,17 @@ class MasterTemplate {
 
                     for (let i = 0; i < eachNodes.length; i++) {
                         const eachNode = eachNodes[i];
-                        let eachOldNode = eachOldNodes && eachOldNodes[i];
+                        const eachOldNode = eachOldNodes && eachOldNodes[i];
                         const existing = !!eachOldNode?.element;
                         const same = eachNode.tag === eachOldNode?.tag;
                         const hasIf = eachNode.hasOwnProperty('$if');
                         const whether = hasIf && eachNode.$if || !hasIf;
 
                         if (
-                            // old: true ; now: false
                             existing && !whether ||
                             existing && whether && !same
                         ) {
                             removeNode(eachOldNode);
-                            // 不要 remove 掉, 要保留陣列佔位供下一次快取判斷
-                            eachOldNode = null;
                         }
 
                         if (!whether) continue;
