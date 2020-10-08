@@ -94,7 +94,11 @@ export class InputElement extends ControlElement {
             ]
         ],
         'label', { $text: this.label },
-        'div', { part: 'foot' }, [
+        'div', {
+            $if: this.busy
+                || this.clearable && !this.readOnly && !this.disabled && !this.empty,
+            part: 'foot'
+        }, [
             'm-icon', {
                 $if: this.busy,
                 name: 'spinner',
