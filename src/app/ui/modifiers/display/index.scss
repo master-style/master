@@ -30,6 +30,18 @@
     display: none !important;
 }
 
+@media (prefers-color-scheme: light) {
+    .show\@dark {
+        display: none !important;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .show\@light {
+        display: none !important;
+    }
+}
+
 // min
 @include above(sm) {
     .hide\@sm {

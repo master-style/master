@@ -36,10 +36,6 @@ body {
     letter-spacing: 0.4px;
     line-height: 1.2;
     color: var(--f-theme);
-
-    @media (any-pointer: coarse) {
-        letter-spacing: 0px;
-    }
 }
 
 body {
@@ -102,7 +98,6 @@ form {
 }
 
 * {
-    letter-spacing: 0.4px;
     border-width: 0;
     box-sizing: border-box;
     background-origin: border-box;
