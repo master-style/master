@@ -70,17 +70,17 @@
 
 .bg\:theme {
     background-color: var(--theme) !important;
-    @include bgBlur(var(--theme-rgb), .9);
+    @include bgBlur(var(--theme-rgb), .8);
 }
 
 .bg\:theme\+ {
     background-color: var(--theme-fade) !important;
-    @include bgBlur(var(--theme-fade-rgb), .9);
+    @include bgBlur(var(--theme-fade-rgb), .8);
 }
 
 .bg\:theme\+\+ {
     background-color: var(--theme-fader) !important;
-    @include bgBlur(var(--theme-fader-rgb), .9);
+    @include bgBlur(var(--theme-fader-rgb), .8);
 }
 
 // .gt\:white {

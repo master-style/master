@@ -1,4 +1,7 @@
 import { Element, Attr, ToggleableElement, attrEnabled } from '@element';
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
+import { ContentElement } from '../content';
+
 import css from './index.scss';
 
 const NAME = 'modal';
@@ -99,7 +102,7 @@ export class ModalElement extends ToggleableElement {
     ) {
         let keyframes: any;
 
-        let content;
+        const content: ContentElement = this.querySelector('m-content');
         let pushing;
 
         const root = this.root;
@@ -109,8 +112,6 @@ export class ModalElement extends ToggleableElement {
             if (!this.hidden && this.hideTrigger) {
                 this.trigger.toggleClass('invisible', true);
             }
-
-            content = this.querySelector('m-content');
 
             if (content) {
                 content.disable();
@@ -242,8 +243,13 @@ export class ModalElement extends ToggleableElement {
                 if (hidden && this.trigger && this.hideTrigger) {
                     this.trigger.toggleClass('invisible', false);
                 }
-                if (content && !hidden) {
-                    content.enable();
+                if (content) {
+                    if (hidden) {
+                        enableBodyScroll(content.root);
+                    } else {
+                        disableBodyScroll(content.root);
+                        content.enable();
+                    }
                 }
                 finish();
             };

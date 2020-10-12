@@ -1,5 +1,6 @@
 import { Element, Attr, Event, ToggleableElement } from '@element';
 import { debounce } from 'lodash-es';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import css from './index.scss';
 import isNum from '@utils/is-num';
 
@@ -39,9 +40,7 @@ export class ContentElement extends ToggleableElement {
     template = $(() => [
         'div', {
             part: 'root',
-            $created: (element: HTMLElement) => {
-                this.wrap = element;
-            }
+            $created: (element: HTMLElement) => this.root = element
         }, [
             'slot'
         ],
@@ -67,7 +66,7 @@ export class ContentElement extends ToggleableElement {
         ]
     ]);
 
-    wrap: HTMLElement;
+    root: HTMLElement;
     scrolling = false;
 
     maxX: number;
@@ -128,7 +127,7 @@ export class ContentElement extends ToggleableElement {
         if (this.#enabled) return;
         this.#enabled = true;
         this.scrolling = false;
-        this.wrap
+        this.root
             .on('scroll', (event: any) => {
                 if (!this.renderScroll()) return;
                 if (!this.scrolling) {
@@ -168,7 +167,7 @@ export class ContentElement extends ToggleableElement {
     disable() {
         if (!this.#enabled) return;
         this.#enabled = false;
-        this.wrap.off({ id: 'scroll' });
+        this.root.off({ id: 'scroll' });
         window.off({ id: this });
     }
 
@@ -189,7 +188,7 @@ export class ContentElement extends ToggleableElement {
                     if (this.center) {
                         const
                             elementSize = element[CLIENT_SIZE_KEY[dir]],
-                            offsetSize = this.wrap[OFFSET_SIZE_KEY[dir]],
+                            offsetSize = this.root[OFFSET_SIZE_KEY[dir]],
                             centerOffset = (offsetSize - elementSize) / 2;
                         if (to[dir] < centerOffset) {
                             to[dir] = 0;
@@ -212,7 +211,7 @@ export class ContentElement extends ToggleableElement {
                     } else if (to[dir] < 0) {
                         to[dir] = 0;
                     }
-                    const current = this.wrap[SCROLL_POSITION_KEY[dir]];
+                    const current = this.root[SCROLL_POSITION_KEY[dir]];
                     if (to[dir] === current) return to[dir] = null;
                 };
             if (this.scrollX) calc('X');
@@ -232,8 +231,8 @@ export class ContentElement extends ToggleableElement {
         }
 
         if (duration === 0) {
-            if (this.scrollX && isNum(to.X)) this.wrap.scrollLeft = to.X;
-            if (this.scrollY && isNum(to.Y)) this.wrap.scrollTop = to.Y;
+            if (this.scrollX && isNum(to.X)) this.root.scrollLeft = to.X;
+            if (this.scrollY && isNum(to.Y)) this.root.scrollTop = to.Y;
         } else {
             duration = duration || this.duration;
             this.scrolling = true;
@@ -245,15 +244,15 @@ export class ContentElement extends ToggleableElement {
                         return Math.round(b + c * t);
                     })(this.#time[dir], currentValue, toValue - currentValue, duration);
                 if (currentValue !== Math.round(toValue)) {
-                    this.wrap[SCROLL_POSITION_KEY[dir]] = newValue;
+                    this.root[SCROLL_POSITION_KEY[dir]] = newValue;
                     this.#animationFrame = requestAnimationFrame(() => scroll(dir, newValue, toValue));
                 } else {
                     this.scrolling = false;
                     if (complete) complete();
                 }
             };
-            if (this.scrollX && isNum(to.X)) scroll('X', this.wrap[SCROLL_POSITION_KEY.X], to.X);
-            if (this.scrollY && isNum(to.Y)) scroll('Y', this.wrap[SCROLL_POSITION_KEY.Y], to.Y);
+            if (this.scrollX && isNum(to.X)) scroll('X', this.root[SCROLL_POSITION_KEY.X], to.X);
+            if (this.scrollY && isNum(to.Y)) scroll('Y', this.root[SCROLL_POSITION_KEY.Y], to.Y);
         }
     }
 
@@ -261,12 +260,12 @@ export class ContentElement extends ToggleableElement {
         const render = (dir: string) => {
             if (this['scroll' + dir]) {
                 const
-                    scrollSize = this.#scrollSize[dir] = this.wrap[SCROLL_SIZE_KEY[dir]],
+                    scrollSize = this.#scrollSize[dir] = this.root[SCROLL_SIZE_KEY[dir]],
                     size = this[CLIENT_SIZE_KEY[dir]],
                     // tslint:disable-next-line: radix
-                    wrapSize = this.wrap[CLIENT_SIZE_KEY[dir]],
-                    scrollPosition = this.wrap[SCROLL_POSITION_KEY[dir]],
-                    maxPosition = this['max' + dir] = scrollSize - wrapSize < 0 ? 0 : (scrollSize - wrapSize),
+                    rootSize = this.root[CLIENT_SIZE_KEY[dir]],
+                    scrollPosition = this.root[SCROLL_POSITION_KEY[dir]],
+                    maxPosition = this['max' + dir] = scrollSize - rootSize < 0 ? 0 : (scrollSize - rootSize),
                     reach = scrollPosition <= 0 ? -1 : scrollPosition >= maxPosition ? 1 : 0;
                 if (this.guide) {
                     const
@@ -280,7 +279,7 @@ export class ContentElement extends ToggleableElement {
                                 `linear-gradient(to ${dir === 'X' ? 'right' : 'bottom'},rgba(0,0,0,0) 0px,rgba(0,0,0,1) ${startGuide}px,rgba(0,0,0,1) ${endGuide}px,rgba(0,0,0,0) ${size}px)` :
                                 '';
                     // tslint:disable-next-line: deprecation
-                    this.wrap.style.webkitMaskImage = this.wrap.style.maskImage = maskImage;
+                    this.root.style.webkitMaskImage = this.root.style.maskImage = maskImage;
                 }
 
                 let morePosition = maxPosition * 2 / 3;
@@ -290,7 +289,7 @@ export class ContentElement extends ToggleableElement {
                 }
 
                 if (
-                    scrollPosition < wrapSize * 2 / 3
+                    scrollPosition < rootSize * 2 / 3
                     && this.#lastMorePosition === -1 ||
                     scrollPosition >= morePosition
                     && morePosition > this.#lastMorePosition

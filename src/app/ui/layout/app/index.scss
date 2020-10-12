@@ -25,7 +25,7 @@
 .app-foot {
     width: 100%;
     background-color: var(--theme);
-    @include bgBlur(var(--theme-rgb), .9);
+    @include bgBlur(var(--theme-rgb), .8);
 }
 
 .app-head {
@@ -33,6 +33,10 @@
     z-index: $z-fixed;
     min-height: 3rem;
     align-items: center;
+
+    @supports(padding-bottom: env(safe-area-inset-top)) {
+        padding-top: unquote('env(safe-area-inset-top)')
+    }
 }
 
 .app-foot {
@@ -45,7 +49,7 @@
 .app-foot,
 .app-side {
     @supports(padding-bottom: env(safe-area-inset-bottom)) {
-        padding-bottom: unquote('env(safe-area-inset-bottom)!important')
+        padding-bottom: unquote('env(safe-area-inset-bottom)')
     }
 }
 
@@ -69,6 +73,9 @@
     height: 100vh;
 }
 
-// .app-body {
-    // min-width: 0; // 不可移除，很重要。flex item 最小寬度預設為內容的最小寬度，故需要設為 0 以防止溢出
-// }
+.app-body {
+    overflow: hidden;
+    min-width: 0; // 不可移除，很重要。flex item 最小寬度預設為內容的最小寬度，故需要設為 0 以防止溢出
+    padding-top: calc(3rem + env(safe-area-inset-top));
+    padding-bottom: calc(3rem + env(safe-area-inset-bottom));
+}

@@ -104,7 +104,7 @@
 :host(.full) {
     --r: 0px;
     --p: 0px;
-    width: 100%!important;
+    width: 100% !important;
 
     [part=root] {
         height: 100%;
@@ -140,6 +140,7 @@
 }
 
 ::slotted([part=body]) {
+    --content-offset-top: var(3rem + env(safe-area-inset-top));
     display: block;
     width: 100%;
     min-height: 0;
@@ -148,7 +149,7 @@
 
 ::slotted([part=head]),
 ::slotted([part=foot]) {
-    @include bgBlur(var(--theme-rgb), .9);
+    @include bgBlur(var(--theme-rgb), .8);
     position: absolute;
     display: flex;
     align-items: center;
@@ -166,6 +167,10 @@
     text-align-last: center;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
+
+    @supports(padding-bottom: env(safe-area-inset-top)) {
+        padding-top: unquote('env(safe-area-inset-top)!important')
+    }
 }
 
 ::slotted([part=foot]) {

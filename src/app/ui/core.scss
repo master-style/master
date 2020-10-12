@@ -1,10 +1,4 @@
-html {
-    height: 100%;
-    overflow-y: overlay;
-    overflow-x: hidden;
-}
-
-body {
+:root {
     --f-sans-serif: Roboto, PingFang TC, -apple-system, Noto Sans, Helvetica Neue, Microsoft JhengHei, sans-serif;
     --x12: 100%;
     --x11: 91.666666%;
@@ -26,20 +20,21 @@ body {
     --f-lg: 1.563rem; // 25px
     --f-xl: 2rem; // 32px
     --f-xxl: 2.5rem; // 40px
+}
 
+body {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+    max-height: 100%;
     width: 100%;
-    contain: style;
-    width: 100%;
+    max-width: 100%;
     will-change: scroll-position;
     margin: 0;
     padding: 0;
     letter-spacing: 0.4px;
     line-height: 1.2;
     color: var(--f-theme);
-}
-
-body {
-    overflow: visible;
     background-color: var(--theme);
     -webkit-user-drag: none;
     touch-action: manipulation;

@@ -34,8 +34,12 @@
     align-items: center;
 }
 
+slot {
+    border-radius: inherit;
+}
+
 :host(.rounded) {
-    --chip-radius: 50%;
+    border-radius: inherit;
 }
 
 :host(.sm) {
@@ -82,7 +86,7 @@
 
 ::slotted([part=head]),
 ::slotted([part=foot]) {
-    border-radius: $xxs;
+    border-radius: inherit;
     height: calc(var(--size) - var(--p) * 2);
 }
 
