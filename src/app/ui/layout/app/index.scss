@@ -24,8 +24,8 @@
 .app-head,
 .app-foot {
     width: 100%;
-    background-color: var(--theme);
-    @include bgBlur(var(--theme-rgb), .8);
+    background-color: var(--bg-raise);
+    @include bgBlur(var(--bg-raise-rgb), .8);
 }
 
 .app-head {

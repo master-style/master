@@ -134,7 +134,7 @@
     width: 100%;
     border-radius: var(--r);
     overflow: hidden;
-    background-color: var(--theme);
+    background-color: var(--bg-body);
     mask-image: radial-gradient(circle, black, black);
     -webkit-mask-image: -webkit-radial-gradient(circle, black, black);
 }
@@ -149,7 +149,7 @@
 
 ::slotted([part=head]),
 ::slotted([part=foot]) {
-    @include bgBlur(var(--theme-rgb), .8);
+    @include bgBlur(var(--bg-raise-rgb), .8);
     position: absolute;
     display: flex;
     align-items: center;

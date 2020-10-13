@@ -34,6 +34,10 @@
     --theme-fader: rgb(var(--theme-fader-rgb));
     --bg-object-rgb: var(--theme-rgb);
     --bg-object: var(--theme);
+    --bg-body-rgb: var(--theme-fader-rgb);
+    --bg-body: rgb(var(--bg-body-rgb));
+    --bg-raise-rgb: var(--theme-rgb);
+    --bg-raise: rgb(var(--bg-raise-rgb));
     --f-theme: #1e1e23;
     --f-theme-fade: #3a3a44;
     --f-theme-fader: #565665;
@@ -59,11 +63,9 @@
         --theme-fade-rgb: 36, 36, 36;
         --theme-fader-rgb: 49, 49, 50;
         --bg-skeleton-rgb: 255, 255, 255;
-        --theme: rgb(var(--theme-rgb));
-        --theme-fade: rgb(var(--theme-fade-rgb));
-        --theme-fader: rgb(var(--theme-fader-rgb));
         --bg-object-rgb: var(--theme-fader-rgb);
-        --bg-object: var(--theme-fader);
+        --bg-body-rgb: var(--theme-rgb);
+        --bg-raise-rgb: var(--theme-fade-rgb);
         --f-blue: var(--blue);
         --f-red: var(--red);
         --f-green: var(--green);
@@ -76,9 +78,6 @@
         --f-fader: #77777a;
         --f-fadest: #57575a;
         --b-fade-rgb: 255, 255, 255;
-        --b-fade: rgba(var(--b-fade-rgb), .16);
-        --b-fader: rgba(var(--b-fade-rgb), .12);
-        --b-fadest: rgba(var(--b-fade-rgb), .08);
         --bg-object-hover: rgba(255, 255, 255, .05);
         --switch-button-color: var(--f-fadest);
     }
