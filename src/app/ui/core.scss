@@ -97,7 +97,7 @@ form {
     box-sizing: border-box;
     background-origin: border-box;
     -webkit-tap-highlight-color: transparent;
-    text-rendering: 100%;
+    text-rendering: optimizelegibility;
 }
 
 ::selection {
