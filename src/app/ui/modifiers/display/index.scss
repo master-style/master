@@ -30,14 +30,14 @@
     display: none !important;
 }
 
-@media (prefers-color-scheme: light) {
-    .show\@dark {
+:root.dark {
+    .show\@light {
         display: none !important;
     }
 }
 
-@media (prefers-color-scheme: dark) {
-    .show\@light {
+:root:not(.dark) {
+    .show\@dark {
         display: none !important;
     }
 }
