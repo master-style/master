@@ -352,6 +352,7 @@ export class ContentElement extends ToggleableElement {
         if (this.collapseY || this.collapseX && this.collapseY) {
             startKeyframe.height = 0 + PX;
             endKeyframe.height = this.offsetHeight + PX;
+            console.log(endKeyframe.height );
         }
 
         if (this.collapseX || this.collapseX && this.collapseY) {
