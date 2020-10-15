@@ -1,6 +1,5 @@
 import { Element, Attr, Event, ToggleableElement } from '@element';
 import { debounce } from 'lodash-es';
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import css from './index.scss';
 import isNum from '@utils/is-num';
 
@@ -72,11 +71,20 @@ export class ContentElement extends ToggleableElement {
     maxX: number;
     maxY: number;
 
-    @Event({ bubbles: false })
+    @Event()
     moreEmitter: EventEmitter;
 
-    @Event({ bubbles: false })
+    @Event()
     changeEmitter: EventEmitter;
+
+    @Event()
+    scrollEmitter: EventEmitter;
+
+    @Event()
+    scrollStartEmitter: EventEmitter;
+
+    @Event()
+    scrollEndEmitter: EventEmitter;
 
     @Attr({ reflect: false, render: false })
     duration: number = 300;
@@ -133,17 +141,20 @@ export class ContentElement extends ToggleableElement {
                 if (!this.scrolling) {
                     this.scrolling = true;
                     this.template.render(this.shadowRoot);
+                    this.scrollStartEmitter();
                 }
+                this.scrollEmitter();
                 if (this.#scrollEndTimeout) {
                     this.#scrollEndTimeout = clearTimeout(this.#scrollEndTimeout);
                 }
                 this.#scrollEndTimeout = setTimeout(() => {
                     if (this.#animationFrame) {
-                        this.#animationFrame = cancelAnimationFrame(this.#animationFrame)
+                        this.#animationFrame = cancelAnimationFrame(this.#animationFrame);
                     }
                     this.scrolling = false;
                     this.#time.X = this.#time.Y = 0;
                     this.template.render(this.shadowRoot);
+                    this.scrollEndEmitter();
                 }, 100);
             }, {
                 id: NAME,
@@ -352,7 +363,6 @@ export class ContentElement extends ToggleableElement {
         if (this.collapseY || this.collapseX && this.collapseY) {
             startKeyframe.height = 0 + PX;
             endKeyframe.height = this.offsetHeight + PX;
-            console.log(endKeyframe.height );
         }
 
         if (this.collapseX || this.collapseX && this.collapseY) {

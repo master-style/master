@@ -35,4 +35,9 @@ export class ContentComponent implements OnInit {
             });
     }
 
+    scroll(event: CustomEvent) {
+        const content: any = event.target;
+        console.log(content.reachX, content.reachY);
+    }
+
 }
