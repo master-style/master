@@ -1,4 +1,4 @@
-<nav class="app-head bb" [ngClass]="{'hidden': scrollDirection === 'down'}">
+<nav class="app-head bb bg:theme" [ngClass]="{'hidden': scrollDirection === 'down'}">
     <div class="x f:xs show@md" id="nowTime"></div>
     <div class="x y:no ml:auto w:auto">
         <m-button class="x square" (click)="toggleTheme(!isDark)">
@@ -71,7 +71,7 @@
 </main>
 
 <m-modal id="app-side" placement="left" overlay="none" class="w:auto z:abs">
-    <m-content part="body" scroll-y class="app-side rel h:full br f:theme++" style="--content-offset-top: 3rem">
+    <m-content part="body" scroll-y class="app-side rel h:full br f:theme++ bg:body" style="--content-offset-top: 3rem">
         <m-list style="padding-top: .5rem">
             <ng-container *ngFor="let eachRoute of routes">
                 <ng-container [ngTemplateOutlet]="routeGroup"
@@ -91,7 +91,7 @@
     <div>
         <m-item [routerLink]="route?.paths ? route?.paths : ''"
                 *ngIf="route?.component || route?.children"
-                class="bg:theme {{size}}"
+                class="bg:body {{size}}"
                 [attr.toggle-content]="'#' + route.path + '-menu'"
                 [ngClass]="{'sticky z:abs': route?.children}"
                 type="button">

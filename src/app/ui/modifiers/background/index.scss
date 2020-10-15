@@ -83,6 +83,11 @@
     @include bgBlur(var(--theme-fader-rgb), .8);
 }
 
+.bg\:raise {
+    background-color: var(--bg-raise) !important;
+    @include bgBlur(var(--bg-raise-rgb), .8);
+}
+
 .bg\:body {
     background-color: var(--bg-body) !important;
 }

@@ -1,5 +1,6 @@
 :root {
-    --f-sans-serif: Roboto, PingFang TC, -apple-system, Noto Sans, Helvetica Neue, Microsoft JhengHei, sans-serif;
+    --f-family: Roboto;
+    --f-family-base: var(--f-family), PingFang TC, -apple-system, Noto Sans, Helvetica Neue, Microsoft JhengHei, sans-serif;
     --x12: 100%;
     --x11: 91.666666%;
     --x10: 83.333333%;
@@ -50,7 +51,7 @@ body {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -webkit-overflow-scrolling: touch;
-    font-family: var(--f-sans-serif);
+    font-family: var(--f-family-base);
 
     @media (pointer:none),
     (pointer:coarse) {
