@@ -82,7 +82,7 @@ export class TextareaElement extends ControlElement {
     @Attr()
     rows: number = 1;
 
-    onAdded() {
+    onConnected() {
         this.validate();
 
         this

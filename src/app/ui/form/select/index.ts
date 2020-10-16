@@ -253,7 +253,7 @@ export class SelectElement extends ControlElement {
     @Attr()
     autocomplete: string;
 
-    onAdded() {
+    onConnected() {
         this.uid = uid++;
         this
             .on('focusin', () => {
@@ -269,7 +269,7 @@ export class SelectElement extends ControlElement {
             }, { passive: true, id: NAME });
     }
 
-    onRemoved() {
+    onDisconnected() {
         this.off({ id: NAME });
     }
 

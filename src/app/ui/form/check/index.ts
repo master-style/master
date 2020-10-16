@@ -125,7 +125,7 @@ export class CheckElement extends ControlElement {
     })
     value: any;
 
-    onAdded() {
+    onConnected() {
         this.validate();
 
         this.body
@@ -136,7 +136,7 @@ export class CheckElement extends ControlElement {
         connectedChecks.add(this);
     }
 
-    onRemoved() {
+    onDisconnected() {
         connectedChecks.delete(this);
         this.off({ id: NAME });
     }

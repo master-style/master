@@ -255,7 +255,7 @@ export class InputElement extends ControlElement {
                 : Array.from(fileList);
     }
 
-    onAdded() {
+    onConnected() {
         this.validate();
 
         this
@@ -283,7 +283,7 @@ export class InputElement extends ControlElement {
             }, { id: NAME, passive: true, once: true });
     }
 
-    onRemoved() {
+    onDisconnected() {
         this.off({ id: NAME });
     }
 

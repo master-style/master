@@ -44,12 +44,12 @@ export class OptionElement extends HTMLElement {
 
     select: SelectElement;
 
-    onAdded() {
+    onConnected() {
         this.select = (this.parentElement as any);
         this.select.options.add(this);
     }
 
-    onRemoved() {
+    onDisconnected() {
         this.select.options.remove(this);
     }
 }

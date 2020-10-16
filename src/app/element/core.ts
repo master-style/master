@@ -1,5 +1,7 @@
 import camelToKebabCase from '@utils/camel-to-kebab-case';
 
+const readyEvent = new CustomEvent('ready');
+
 const DEFAULT_ELEMENT_OPTION = {
     shadow: true
 };
@@ -12,8 +14,8 @@ export function Element(options: ElementOptions) {
         const prototype = constructor.prototype;
         const attrsOptions = constructor.attrsOptions;
         const propsOptions = constructor.propsOptions;
-        const onAdded = prototype.onAdded;
-        const onRemoved = prototype.onRemoved;
+        const onConnected = prototype.onConnected;
+        const onDisconnected = prototype.onDisconnected;
         const onAttrChanged = prototype.onAttrChanged;
         prototype.attributeChangedCallback = function (attrKey, oldValue, value) {
             if (value === oldValue) return;
@@ -97,12 +99,13 @@ export function Element(options: ElementOptions) {
                 }
             }
             this.ready = true;
-            if (onAdded) onAdded.call(this);
+            if (this.emit) this.dispatchEvent(readyEvent);
+            if (onConnected) onConnected.call(this);
         };
 
         prototype.disconnectedCallback = function () {
             if (this.removeRender) this.removeRender();
-            if (onRemoved) onRemoved.call(this);
+            if (onDisconnected) onDisconnected.call(this);
         };
 
         window.customElements.define(options.tag, constructor);

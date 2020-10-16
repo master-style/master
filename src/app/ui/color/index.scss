@@ -33,7 +33,7 @@
     --theme-fade: rgb(var(--theme-fade-rgb));
     --theme-fader: rgb(var(--theme-fader-rgb));
     --bg-object-rgb: var(--theme-rgb);
-    --bg-object: var(--theme);
+    --bg-object: rgb(var(--bg-object-rgb));
     --bg-body-rgb: var(--theme-fader-rgb);
     --bg-body: rgb(var(--bg-body-rgb));
     --bg-raise-rgb: var(--theme-rgb);
@@ -80,16 +80,6 @@
         --b-fade-rgb: 255, 255, 255;
         --bg-object-hover: rgba(255, 255, 255, .05);
         --switch-button-color: var(--f-fadest);
-    }
-}
-
-@supports (backdrop-filter: none) or (-webkit-backdrop-filter: none) {
-    :root {
-        --bg-object: rgba(var(--bg-object-rgb), .7)
-    }
-
-    :root.dark {
-        --bg-object: rgba(var(--bg-object-rgb), .7)
     }
 }
 

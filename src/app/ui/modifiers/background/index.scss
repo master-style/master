@@ -1,9 +1,3 @@
-.bg\:object {
-    background-color: var(--bg-object);
-    backdrop-filter: blur(35px);
-    -webkit-backdrop-filter: blur(35px);
-}
-
 .bg\:transparent {
     background: none !important;
 }
@@ -91,6 +85,11 @@
 .bg\:body {
     background-color: var(--bg-body) !important;
 }
+
+.bg\:object {
+    background-color: var(--bg-object) !important;
+}
+
 
 // .gt\:white {
 //     background-image: linear-gradient(to top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);

@@ -14,6 +14,7 @@ const
     LEFT_KEY = 'Left',
     TOP_KEY = 'Top',
     SIZE_KEY = { X: 'width', Y: 'height' },
+    POSITION_KEY = { X: 'x', Y: 'y' },
     SCROLL_SIZE_KEY = { X: SCROLL_KEY + WIDTH_KEY, Y: SCROLL_KEY + HEIGHT_KEY },
     SCROLL_POSITION_KEY = { X: SCROLL_KEY + LEFT_KEY, Y: SCROLL_KEY + TOP_KEY },
     OFFSET_POSITION_KEY = { X: OFFSET_KEY + LEFT_KEY, Y: OFFSET_KEY + TOP_KEY },
@@ -70,6 +71,9 @@ export class ContentElement extends ToggleableElement {
 
     maxX: number;
     maxY: number;
+
+    x = 0;
+    y = 0;
 
     @Event()
     moreEmitter: EventEmitter;
@@ -222,7 +226,7 @@ export class ContentElement extends ToggleableElement {
                     } else if (to[dir] < 0) {
                         to[dir] = 0;
                     }
-                    const current = this.root[SCROLL_POSITION_KEY[dir]];
+                    const current = this[POSITION_KEY[dir]] = this.root[SCROLL_POSITION_KEY[dir]];
                     if (to[dir] === current) return to[dir] = null;
                 };
             if (this.scrollX) calc('X');
@@ -242,8 +246,8 @@ export class ContentElement extends ToggleableElement {
         }
 
         if (duration === 0) {
-            if (this.scrollX && isNum(to.X)) this.root.scrollLeft = to.X;
-            if (this.scrollY && isNum(to.Y)) this.root.scrollTop = to.Y;
+            if (this.scrollX && isNum(to.X)) this.x = this.root.scrollLeft = to.X;
+            if (this.scrollY && isNum(to.Y)) this.y = this.root.scrollTop = to.Y;
         } else {
             duration = duration || this.duration;
             this.scrolling = true;
@@ -255,15 +259,15 @@ export class ContentElement extends ToggleableElement {
                         return Math.round(b + c * t);
                     })(this.#time[dir], currentValue, toValue - currentValue, duration);
                 if (currentValue !== Math.round(toValue)) {
-                    this.root[SCROLL_POSITION_KEY[dir]] = newValue;
+                    this[POSITION_KEY[dir]] = this.root[SCROLL_POSITION_KEY[dir]] = newValue;
                     this.#animationFrame = requestAnimationFrame(() => scroll(dir, newValue, toValue));
                 } else {
                     this.scrolling = false;
                     if (complete) complete();
                 }
             };
-            if (this.scrollX && isNum(to.X)) scroll('X', this.root[SCROLL_POSITION_KEY.X], to.X);
-            if (this.scrollY && isNum(to.Y)) scroll('Y', this.root[SCROLL_POSITION_KEY.Y], to.Y);
+            if (this.scrollX && isNum(to.X)) scroll('X', this.x = this.root[SCROLL_POSITION_KEY.X], to.X);
+            if (this.scrollY && isNum(to.Y)) scroll('Y', this.y = this.root[SCROLL_POSITION_KEY.Y], to.Y);
         }
     }
 
@@ -275,7 +279,7 @@ export class ContentElement extends ToggleableElement {
                     size = this[CLIENT_SIZE_KEY[dir]],
                     // tslint:disable-next-line: radix
                     rootSize = this.root[CLIENT_SIZE_KEY[dir]],
-                    scrollPosition = this.root[SCROLL_POSITION_KEY[dir]],
+                    scrollPosition = this[POSITION_KEY[dir]] = this.root[SCROLL_POSITION_KEY[dir]],
                     maxPosition = this['max' + dir] = scrollSize - rootSize < 0 ? 0 : (scrollSize - rootSize),
                     reach = scrollPosition <= 0 ? -1 : scrollPosition >= maxPosition ? 1 : 0;
                 if (this.guide) {
@@ -388,7 +392,7 @@ export class ContentElement extends ToggleableElement {
         });
     }
 
-    onRemoved() {
+    onDisconnected() {
         this.disable();
     }
 
