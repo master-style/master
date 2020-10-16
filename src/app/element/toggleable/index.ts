@@ -1,4 +1,5 @@
 import { Attr } from '../attr';
+import { Event } from '../event';
 
 const liveTriggers = {};
 
@@ -23,9 +24,6 @@ export class ToggleableElement extends HTMLElement {
 
     @Attr({ reflect: false })
     easing = 'cubic-bezier(.25,.8,.25,1)';
-
-    @Attr({ render: false, reflect: false })
-    backOn: string;
 
     @Attr({
         reflect: false,
@@ -82,6 +80,23 @@ export class ToggleableElement extends HTMLElement {
     })
     triggerEvent: string = 'click';
 
+    @Attr({ reflect: false, render: false })
+    emit: boolean = false;
+
+    @Event()
+    openEmitter: EventEmitter;
+
+    @Event()
+    closeEmitter: EventEmitter;
+
+    @Event()
+    openedEmitter: EventEmitter;
+
+    @Event()
+    closedEmitter: EventEmitter;
+
+    changing: Promise<void>;
+
     protected animations: Animation[] = [];
     protected animation: Animation;
 
@@ -128,23 +143,21 @@ export class ToggleableElement extends HTMLElement {
         this.toggleAttribute('hidden', false);
         const onOpen = this['onOpen'];
         if (onOpen) onOpen.call(this);
-        await this.prepare();
+        this.openEmitter();
+        await (this.changing = this.prepare());
+        this.openedEmitter();
     }
 
     async close() {
         if (this.hidden) {
             return;
         }
-        if (this.backOn === 'close') {
-            history.back();
-        }
         this['_hidden'] = true;
         const onClose = this['onClose'];
         if (onClose) onClose.call(this);
-        await this.prepare();
-        if (this.backOn === 'closed') {
-            history.back();
-        }
+        this.closeEmitter();
+        await (this.changing = this.prepare());
+        this.closedEmitter();
     }
 
     async toggle(whether?: boolean) {
