@@ -36,7 +36,7 @@ export class DialogElement extends ModalElement {
         }
     ]);
 
-    slotTokens = () => [
+    contentTokens = () => [
         'm-icon', {
             class: 'animated',
             $if: this.type,

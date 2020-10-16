@@ -15,8 +15,17 @@ export class ModalElement extends ToggleableElement {
 
     private trigger: HTMLElement;
 
-    contentTokens;
-    slotTokens: any = () => ['slot'];
+    contentTokens: any = () => [
+        'slot', { name: 'head' },
+        'm-content', {
+            'scroll-y': true,
+            part: 'body',
+            $created: (element: ContentElement) => this.content = element
+        }, [
+            'slot'
+        ],
+        'slot', { name: 'foot' }
+    ];
 
     shadowTemplate = $(() => [
         'm-overlay', {
@@ -26,7 +35,7 @@ export class ModalElement extends ToggleableElement {
         'div', {
             part: 'root',
             $created: (element: HTMLElement) => this.root = element
-        }, this.slotTokens().concat([
+        }, this.contentTokens().concat([
             'm-button', {
                 part: 'close',
                 class: 'round xs',
@@ -51,6 +60,7 @@ export class ModalElement extends ToggleableElement {
 
     root: any;
     origin: any;
+    content: ContentElement;
 
     @Attr()
     placement: string;
@@ -102,7 +112,6 @@ export class ModalElement extends ToggleableElement {
     ) {
         let keyframes: any;
 
-        const content: ContentElement = this.querySelector('m-content');
         let pushing;
 
         const root = this.root;
@@ -113,10 +122,8 @@ export class ModalElement extends ToggleableElement {
                 this.trigger.toggleClass('invisible', true);
             }
 
-            if (content) {
-                content.disable();
-                content.to({ x: 0, y: 0 }, this.duration);
-            }
+            this.content.disable();
+            this.content.to({ x: 0, y: 0 }, this.duration);
 
             const
                 triggerRect = this.trigger.getBoundingClientRect(),
@@ -243,13 +250,11 @@ export class ModalElement extends ToggleableElement {
                 if (hidden && this.trigger && this.hideTrigger) {
                     this.trigger.toggleClass('invisible', false);
                 }
-                if (content) {
-                    if (hidden) {
-                        enableBodyScroll(content.root);
-                    } else {
-                        disableBodyScroll(content.root);
-                        content.enable();
-                    }
+                if (hidden) {
+                    enableBodyScroll(this.content.root);
+                } else {
+                    disableBodyScroll(this.content.root);
+                    this.content.enable();
                 }
                 finish();
             };

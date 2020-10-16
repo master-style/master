@@ -6,6 +6,8 @@
     --r: var(--modal-r, #{$sm});
     --max-width: var(--modal-max-width, --wrap-xs);
     --max-height: var(--modal-max-height, 100%);
+    --content-offset-top: var(--modal-offset-top, var(3rem + env(safe-area-inset-top)));
+    --content-offset-bottom: var(--modal-offset-bottom);
     position: fixed;
     z-index: $z-overlay;
     left: 0px;
@@ -140,10 +142,10 @@
     -webkit-mask-image: -webkit-radial-gradient(circle, black, black);
 }
 
-::slotted([part=body]) {
-    --content-offset-top: var(3rem + env(safe-area-inset-top));
+[part=body] {
     display: block;
     width: 100%;
+    height: 100%;
     min-height: 0;
     flex: 0 0 auto;
 }
