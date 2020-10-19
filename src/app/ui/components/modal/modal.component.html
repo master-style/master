@@ -35,14 +35,14 @@
 
 <m-modal id="modal-drawer"
          overlay="close"
-         placement="left"
+         placement="right"
          pushing="#app-side"
          close-button="chevron"
-         style="--modal-offset-top: 3rem; --modal-offset-bottom: 3rem"
+         style="--modal-offset-top: 3rem; --modal-offset-bottom: 3rem; --modal-max-width: 400px"
          hidden>
-    <div part="head">
+    <m-header slot="head">
         title
-    </div>
+    </m-header>
     <figure class="embedded by:1x1">
         <img src="https://photo.eyescream.com.tw/photo/photo/ow/11030250-B51-06.jpg" alt="">
     </figure>
@@ -66,9 +66,7 @@
         <p>內文</p>
         <p>內文</p>
     </article>
-    <div part="foot">
-        title
-    </div>
+    <m-footer>title</m-footer>
 </m-modal>
 
 <div class="demo">
