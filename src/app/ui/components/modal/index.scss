@@ -143,6 +143,7 @@
 [part=body] {
     --content-offset-top: var(--modal-offset-top, var(3rem + env(safe-area-inset-top)));
     --content-offset-bottom: var(--modal-offset-bottom);
+    display: flex;
     height: 100%;
     min-height: 0;
     flex: 0 0 auto;
@@ -150,36 +151,21 @@
 
 ::slotted(m-header),
 ::slotted(m-footer) {
-    @include bgBlur(var(--bg-raise-rgb), .8);
     position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     z-index: $z-overlay;
-    width: 100%;
     flex: 0 0 auto;
-    min-height: 3rem;
 }
 
 ::slotted(m-header) {
     padding: 0 $sm;
-    top: 0;
-    text-align: center;
-    text-align-last: center;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-
-    @supports(padding-bottom: env(safe-area-inset-top)) {
-        padding-top: unquote('env(safe-area-inset-top)!important')
-    }
 }
 
-::slotted(m-footer) {
-    width: 100%;
-    bottom: 0;
-    border-top-right-radius: 0;
-    border-top-left-radius: 0;
-}
+// ::slotted(m-footer) {
+//     width: 100%;
+//     bottom: 0;
+//     border-top-right-radius: 0;
+//     border-top-left-radius: 0;
+// }
 
 [part=close] {
     --button-bg-color: transparent;

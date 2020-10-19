@@ -8,3 +8,4 @@ import './modal';
 import './overlay';
 import './breadcrumb';
 import './dialog';
+import './header';

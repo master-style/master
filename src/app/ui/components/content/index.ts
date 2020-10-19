@@ -38,12 +38,10 @@ export class ContentElement extends ToggleableElement {
     #lastMorePosition: number = -1;
 
     template = $(() => [
-        'div', {
+        'slot', {
             part: 'root',
             $created: (element: HTMLElement) => this.root = element
-        }, [
-            'slot'
-        ],
+        },
         'm-bar', {
             part: 'x',
             hidden: !this.scrolling,

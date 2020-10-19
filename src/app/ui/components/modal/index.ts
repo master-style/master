@@ -15,18 +15,6 @@ export class ModalElement extends ToggleableElement {
 
     private trigger: HTMLElement;
 
-    contentTokens: any = () => [
-        'slot', { name: 'head' },
-        'm-content', {
-            'scroll-y': true,
-            part: 'body',
-            $created: (element: ContentElement) => this.content = element
-        }, [
-            'slot'
-        ],
-        'slot', { name: 'foot' }
-    ];
-
     shadowTemplate = $(() => [
         'm-overlay', {
             $if: attrEnabled(this.overlay),
@@ -35,7 +23,8 @@ export class ModalElement extends ToggleableElement {
         'div', {
             part: 'root',
             $created: (element: HTMLElement) => this.root = element
-        }, this.contentTokens().concat([
+        }, [
+            'slot', { part: 'body' },
             'm-button', {
                 part: 'close',
                 class: 'round xs',
@@ -44,7 +33,7 @@ export class ModalElement extends ToggleableElement {
             }, [
                 'm-icon', { name: this.closeButton, direction: 'left' }
             ]
-        ])
+        ]
     ]);
 
     template: MasterTemplate;
@@ -60,7 +49,6 @@ export class ModalElement extends ToggleableElement {
 
     root: any;
     origin: any;
-    content: ContentElement;
 
     @Attr()
     placement: string;
@@ -111,7 +99,7 @@ export class ModalElement extends ToggleableElement {
         options: KeyframeEffectOptions
     ) {
         let keyframes: any;
-
+        let content: ContentElement;
         let pushing;
 
         const root = this.root;
@@ -122,8 +110,13 @@ export class ModalElement extends ToggleableElement {
                 this.trigger.toggleClass('invisible', true);
             }
 
-            this.content.disable();
-            this.content.to({ x: 0, y: 0 }, this.duration);
+            content = this.children
+                .filter((eachElement) => eachElement.matches('m-content'))[0] as ContentElement;
+
+            if (content) {
+                content.disable();
+                content.to({ x: 0, y: 0 }, this.duration);
+            }
 
             const
                 triggerRect = this.trigger.getBoundingClientRect(),
@@ -250,11 +243,13 @@ export class ModalElement extends ToggleableElement {
                 if (hidden && this.trigger && this.hideTrigger) {
                     this.trigger.toggleClass('invisible', false);
                 }
-                if (hidden) {
-                    enableBodyScroll(this.content.root);
-                } else {
-                    disableBodyScroll(this.content.root);
-                    this.content.enable();
+                if (content) {
+                    if (hidden) {
+                        enableBodyScroll(content.root);
+                    } else {
+                        disableBodyScroll(content.root);
+                        content.enable();
+                    }
                 }
                 finish();
             };

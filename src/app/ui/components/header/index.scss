@@ -1,0 +1,20 @@
+@import '../../variables';
+@import '../../mixins';
+
+:host {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 3rem;
+    top: 0;
+    text-align: center;
+    text-align-last: center;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    @include bgBlur(var(--bg-raise-rgb), .8);
+
+    @supports(padding-bottom: env(safe-area-inset-top)) {
+        padding-top: unquote('env(safe-area-inset-top)!important')
+    }
+}
