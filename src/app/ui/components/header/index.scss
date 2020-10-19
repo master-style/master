@@ -2,9 +2,6 @@
 @import '../../mixins';
 
 :host {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 100%;
     min-height: 3rem;
     top: 0;
@@ -17,4 +14,29 @@
     @supports(padding-bottom: env(safe-area-inset-top)) {
         padding-top: unquote('env(safe-area-inset-top)!important')
     }
+}
+
+:host,
+slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+[part=root] {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-height: inherit;
+}
+
+slot {
+    display: block;
+    min-width: 3rem;
+}
+
+::slotted(h2) {
+    font-size: var(--f-sm) !important;
+    margin: 0!important;
 }

@@ -11,7 +11,11 @@ const NAME = 'header';
 export class HeaderElement extends HTMLElement {
 
     template: MasterTemplate = $(() => [
-        'slot'
+        'div', { part: 'root' }, [
+            'slot', { name: 'start' },
+            'slot',
+            'slot', { name: 'end' }
+        ]
     ]);
 
     render() {
