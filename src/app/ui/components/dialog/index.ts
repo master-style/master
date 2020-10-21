@@ -22,7 +22,7 @@ enum TYPE_ICON {
 })
 export class DialogElement extends ModalElement {
 
-    template = $(() => [
+    lightTemplate = $(() => [
         'div', {
             $if: this.icon,
             slot: 'icon',

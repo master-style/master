@@ -1,6 +1,7 @@
 import { Element, Attr, ToggleableElement, attrEnabled } from '@element';
-import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { ContentElement } from '../content';
+import { HeaderElement } from '../header';
 
 import css from './index.scss';
 
@@ -15,16 +16,22 @@ export class ModalElement extends ToggleableElement {
 
     private trigger: HTMLElement;
 
-    shadowTemplate = $(() => [
+    contentTokens: any = () => [
+        'slot', {
+            $created: (element: HTMLElement) => this.wrap = element
+        }
+    ]
+
+    template = $(() => [
         'm-overlay', {
             $if: attrEnabled(this.overlay),
-            $created: (element: HTMLElement) => this.overlayElement = element,
+            $created: (element: HTMLElement) => this.overlayElement = element
         },
         'div', {
             part: 'root',
             $created: (element: HTMLElement) => this.root = element
         }, [
-            'slot', { part: 'body' },
+            ...this.contentTokens(),
             'm-button', {
                 part: 'close',
                 class: 'round xs',
@@ -36,18 +43,21 @@ export class ModalElement extends ToggleableElement {
         ]
     ]);
 
-    template: MasterTemplate;
+    lightTemplate: MasterTemplate;
 
     render() {
-        this.shadowTemplate.render(this.shadowRoot);
-        if (this.template) this.template.render(this);
+        this.template.render(this.shadowRoot);
+        if (this.lightTemplate) this.lightTemplate.render(this);
     }
 
     removeRender() {
-        this.shadowTemplate.remove();
+        this.template.remove();
     }
 
     root: any;
+    wrap: any;
+    header: HeaderElement;
+    // footer: FooterElement;
     origin: any;
 
     @Attr()

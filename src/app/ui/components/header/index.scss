@@ -10,7 +10,9 @@
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
     @include bgBlur(var(--bg-raise-rgb), .8);
+}
 
+:host([sticky]) {
     @supports(padding-bottom: env(safe-area-inset-top)) {
         padding-top: unquote('env(safe-area-inset-top)!important')
     }
@@ -38,5 +40,5 @@ slot {
 
 ::slotted(h2) {
     font-size: var(--f-sm) !important;
-    margin: 0!important;
+    margin: 0 !important;
 }
