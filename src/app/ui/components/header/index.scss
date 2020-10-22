@@ -12,17 +12,17 @@
     @include bgBlur(var(--bg-raise-rgb), .8);
 }
 
-:host([sticky]) {
-    @supports(padding-bottom: env(safe-area-inset-top)) {
-        padding-top: unquote('env(safe-area-inset-top)!important')
-    }
-}
-
 :host,
 slot {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+:host(.safe) {
+    [part=root] {
+        padding-top: unquote('env(safe-area-inset-top)');
+    }
 }
 
 [part=root] {

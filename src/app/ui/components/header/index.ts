@@ -10,9 +10,6 @@ const NAME = 'header';
 })
 export class HeaderElement extends HTMLElement {
 
-    // todo:
-    // - 用 min 來計算 safe-area-inset-top 與 scroll-top
-
     template: MasterTemplate = $(() => [
         'div', { part: 'root' }, [
             'slot', { name: 'start' },
@@ -20,13 +17,6 @@ export class HeaderElement extends HTMLElement {
             'slot', { name: 'end' }
         ]
     ]);
-
-    onConnected() {
-        const parent: any = this.parentElement;
-        if (parent.tagName === 'M-MODAL') {
-            parent.header = this;
-        }
-    }
 
     render() {
         this.template.render(this.shadowRoot);
