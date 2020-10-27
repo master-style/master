@@ -38,7 +38,7 @@ $spacings: (xxs: $xxs,
                 }
 
                 @else {
-                    $size: #{\:}$size
+                    $size: #{\:}+$size
                 }
 
                 .#{$abbrev}#{$size}#{$infix} {
@@ -67,41 +67,34 @@ $spacings: (xxs: $xxs,
             }
         }
 
-        // Negative margins (e.g., where `.mb-n1` is negative version of `.mb-1`)
         @each $size,
         $length in $spacings {
 
             @if $size !=no {
 
-                @if $size==md {
-                    $size: ''
-                }
+                $size: #{\:-}+$size;
 
-                @else {
-                    $size: #{\:}$size
-                }
-
-                .\-m#{$size}#{$infix} {
+                .m#{$size}#{$infix} {
                     margin: -$length !important;
                 }
 
-                .\-mt#{$size}#{$infix},
-                .\-my#{$size}#{$infix} {
+                .mt#{$size}#{$infix},
+                .my#{$size}#{$infix} {
                     margin-top: -$length !important;
                 }
 
-                .\-mr#{$size}#{$infix},
-                .\-mx#{$size}#{$infix} {
+                .mr#{$size}#{$infix},
+                .mx#{$size}#{$infix} {
                     margin-right: -$length !important;
                 }
 
-                .\-mb#{$size}#{$infix},
-                .\-my#{$size}#{$infix} {
+                .mb#{$size}#{$infix},
+                .my#{$size}#{$infix} {
                     margin-bottom: -$length !important;
                 }
 
-                .\-ml#{$size}#{$infix},
-                .\-mx#{$size}#{$infix} {
+                .ml#{$size}#{$infix},
+                .mx#{$size}#{$infix} {
                     margin-left: -$length !important;
                 }
             }
@@ -131,17 +124,5 @@ $spacings: (xxs: $xxs,
         .mx\:auto#{$infix} {
             margin-left: auto !important;
         }
-    }
-}
-
-.pb\:safe {
-    @supports(padding-bottom: env(safe-area-inset-bottom)) {
-        padding-bottom: env(safe-area-inset-bottom) !important;
-    }
-}
-
-.pt\:safe {
-    @supports(padding-bottom: env(safe-area-inset-top)) {
-        padding-bottom: env(safe-area-inset-top) !important;
     }
 }
