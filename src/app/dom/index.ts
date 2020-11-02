@@ -3,4 +3,6 @@ import './manipulations';
 import './traversings';
 import './create';
 
-if (!window['$']) window['$'] = Master;
+if (!window['$']) {
+    window['$'] = window['Master'];
+}
