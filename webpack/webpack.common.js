@@ -18,6 +18,8 @@ const entryGlob = [
     '!./src/assets/**/*'
 ];
 
+console.log(Path.join(process.cwd(), './webpack/.babelrc'));
+
 module.exports = {
     config: (env) => {
         return merge(config, env);
@@ -47,13 +49,14 @@ module.exports = {
                             {
                                 loader: 'babel-loader',
                                 options: {
-                                    babelrc: './babelrc'
+                                    babelrc: true,
+                                    configFile: Path.join(process.cwd(), './webpack/.babelrc')
                                 }
                             }
                         ]
                     },
                     {
-                        test: /\index.(sass|scss|css)$/,
+                        test: /index\.(sass|scss|css)$/,
                         use: [
                             {
                                 loader: MiniCssExtractPlugin.loader,

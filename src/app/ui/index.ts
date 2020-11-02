@@ -1,3 +1,3 @@
-import './icon';
-import './form';
-import './components';
+export * from './icon';
+export * from './form';
+export * from './components';
