@@ -1,5 +1,5 @@
 import { Element, Attr } from '../../../element';
-import css from './index.scss';
+import css from './skeleton.scss';
 
 const NAME = 'skeleton';
 

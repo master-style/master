@@ -1,6 +1,6 @@
 import { Element, Attr, Event, ControlElement } from '../../../element';
 
-import css from './index.scss';
+import css from './select.scss';
 import './popup';
 
 import { OptionElement } from '../option';

@@ -1,7 +1,7 @@
 import { Element, Attr } from '../../../element';
 import { SelectElement } from '../select';
 
-import css from './index.scss';
+import css from './option.scss';
 
 const NAME = 'option';
 

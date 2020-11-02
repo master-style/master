@@ -1,5 +1,5 @@
 import { Element } from '../../../element';
-import css from './index.scss';
+import css from './list.scss';
 
 const NAME = 'list';
 

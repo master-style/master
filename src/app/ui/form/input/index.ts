@@ -1,6 +1,5 @@
 import { Element, Attr, Prop, ControlElement } from '../../../element';
-import { ButtonElement } from '../button';
-import css from './index.scss';
+import css from './input.scss';
 
 const NAME = 'input';
 

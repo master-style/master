@@ -1,5 +1,5 @@
-import { Element, Attr, ClickableElement } from '../../../element';
-import css from './index.scss';
+import { Element, ClickableElement } from '../../../element';
+import css from './button.scss';
 
 const NAME = 'button';
 

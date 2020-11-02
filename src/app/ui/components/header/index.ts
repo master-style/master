@@ -1,6 +1,6 @@
 import { Element } from '../../../element';
 
-import css from './index.scss';
+import css from './header.scss';
 
 const NAME = 'header';
 

@@ -1,6 +1,6 @@
 import { Element, Attr, Prop, ControlElement } from '../../../element';
 import { ModalElement } from '../modal';
-import css from './index.scss';
+import css from './dialog.scss';
 
 const NAME = 'dialog';
 const parserObject = (dialog: DialogElement, value, oldValue) => {

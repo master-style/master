@@ -1,6 +1,6 @@
 import { Element, Attr, ControlElement } from '../../../element';
 
-import css from './index.scss';
+import css from './textarea.scss';
 
 const NAME = 'textarea';
 

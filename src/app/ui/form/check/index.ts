@@ -1,5 +1,5 @@
 import { Element, Attr, ControlElement } from '../../../element';
-import css from './index.scss';
+import css from './check.scss';
 
 const connectedChecks = new Set();
 
