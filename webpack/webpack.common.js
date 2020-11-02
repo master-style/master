@@ -3,31 +3,15 @@ const
     config = {
         extractCss: false, // true: bundle in js, false: export css file
         hash: true, // hash file name
-        // https://github.com/jantimon/html-webpack-plugin#options
-        template: {
-            base: '/',
-            favicon: 'src/assets/images/favicon.png',
-            meta: {
-                viewport: 'initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no, shrink-to-fit=no, viewport-fit=cover'
-            }
-        }
     }
     /* ================================================================= **/;
 
 const
     Path = require('path'),
-    merge = require('webpack-merge'),
+    glob = require('globby'),
+    merge = require('webpack-merge');
     // fs = require('fs'),
     // ejs = require('ejs'),
-    renameIndexWithDirname = (pathStr) => {
-        const parsePath = Path.parse(Path.relative('src', pathStr));
-        if (parsePath.dir !== '' && parsePath.name === 'index') {
-            return parsePath.dir + parsePath.ext;
-        } else {
-            return pathStr.split('src/')[1]
-        }
-    },
-    glob = require('globby');
 
 // webpack
 const
@@ -36,26 +20,22 @@ const
     MiniCssExtractPlugin = require('mini-css-extract-plugin'),
     SriPlugin = require('webpack-subresource-integrity')
 
+    console.log(glob.sync([
+        '../src/**/index.{ts,js}',
+        '!../src/assets/**/*'
+    ]))
+
+
 module.exports = {
     config: (env) => {
         return merge(config, env);
     },
     merge: (webpackEnvConfig, env) => {
-        // const templates = glob.sync([
-        //     './src/**/index.html',
-        //     '!./src/core/index.html',
-        //     '!./src/assets/**/*'
-        // ]);
         const webpackConfig = merge({
             entry: glob.sync([
-                // './src/polyfill.ts',
-                './src/**/index.{ts,js}',
-                '!./src/assets/**/*'
-            ]).reduce((entry, path) => {
-                const parsePath = Path.parse(renameIndexWithDirname(path));
-                entry[Path.join(parsePath.dir, parsePath.name)] = path
-                return entry;
-            }, {}),
+                '../src/**/index.{ts,js}',
+                '!../src/assets/**/*'
+            ]),
             resolve: {
                 extensions: ['.js', '.ts']
             },
