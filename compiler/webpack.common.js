@@ -16,6 +16,9 @@ module.exports = {
     },
     merge: (envWebpack, env) => {
         const webpack = merge({
+            resolve: {
+                extensions: ['.js', '.ts', '.scss']
+            },
             module: {
                 rules: [
                     {

@@ -18,7 +18,7 @@ const entryGlob = [
     Path.join(__dirname, '!./node_modules/**/*')
 ];
 
-console.log(Path.join(__dirname, './node_modules'));
+console.log(__dirname);
 
 module.exports = common.merge({
     entry: () => new Promise((resolve) => resolve(glob.sync(entryGlob).reduce((entrypoint, path) => {
@@ -26,6 +26,7 @@ module.exports = common.merge({
         entrypoint[Path.join(__dirname, 'dist', parsePath.dir, parsePath.name)] = path;
         return entrypoint;
     }, {}))),
+    context: __dirname,
     mode: 'production',
     plugins: [
         new CleanWebpackPlugin()
