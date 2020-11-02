@@ -6,19 +6,9 @@ const
     /* ================================================================= **/;
 
 const
-    Path = require('path'),
     merge = require('webpack-merge'),
-    glob = require('globby'),
     MiniCssExtractPlugin = require('mini-css-extract-plugin'),
     Webpack = require('webpack');
-
-const entryGlob = [
-    './src/**/*/index.{ts,js}',
-    './src/**/*/index.{scss,css}',
-    '!./src/assets/**/*'
-];
-
-console.log(Path.join(process.cwd(), './webpack/.babelrc'));
 
 module.exports = {
     config: (env) => {
@@ -26,17 +16,6 @@ module.exports = {
     },
     merge: (envWebpack, env) => {
         const webpack = merge({
-            entry: () => new Promise((resolve) => resolve(glob.sync(entryGlob).reduce((entrypoint, path) => {
-                const relativePath = Path.relative('src', path);
-                const parsePath = Path.parse(relativePath);
-                entrypoint[Path.join(parsePath.dir, parsePath.name)] = relativePath;
-                return entrypoint;
-            }, {}))),
-            context: Path.resolve('src'),
-            resolve: {
-                extensions: ['.js', '.ts', '.scss'],
-                modules: [Path.resolve('src'), 'node_modules']
-            },
             module: {
                 rules: [
                     {
@@ -49,8 +28,7 @@ module.exports = {
                             {
                                 loader: 'babel-loader',
                                 options: {
-                                    babelrc: true,
-                                    configFile: Path.join(process.cwd(), './webpack/.babelrc')
+                                    babelrc: true
                                 }
                             }
                         ]
@@ -90,16 +68,8 @@ module.exports = {
                 filename: env.hash ? '[name].[hash].js' : '[name].js'
             },
             optimization: {
-                runtimeChunk: 'single',
-                splitChunks: {
-                    cacheGroups: {
-                        vendor: {
-                            test: /[\\/]node_modules[\\/]/,
-                            name: 'vendor',
-                            chunks: 'all',
-                        },
-                    },
-                }
+                runtimeChunk: false,
+                splitChunks: false
             },
             plugins: [
                 new Webpack.ProgressPlugin(),
