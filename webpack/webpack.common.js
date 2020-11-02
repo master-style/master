@@ -8,20 +8,11 @@ const
 const
     Path = require('path'),
     merge = require('webpack-merge'),
-    renameIndexWithDirname = (relativePathStr) => {
-        const parsePath = Path.parse(relativePathStr);
-        if (parsePath.dir !== '' && parsePath.name === 'index') {
-            return parsePath.dir + parsePath.ext;
-        } else {
-            return relativePathStr
-        }
-    },
     glob = require('globby');
 
 // webpack
 const
-    Webpack = require('webpack'),
-    MiniCssExtractPlugin = require('mini-css-extract-plugin');
+    Webpack = require('webpack');
 
 const entryGlob = [
     // './src/polyfill.ts',
@@ -39,7 +30,6 @@ module.exports = {
             entry: () => new Promise((resolve) => resolve(glob.sync(entryGlob).reduce((entrypoint, path) => {
                 const relativePath = Path.relative('src', path);
                 const parsePath = Path.parse(relativePath);
-                console.log(parsePath.dir, parsePath.name);
                 entrypoint[Path.join(parsePath.dir, parsePath.name)] = relativePath;
                 return entrypoint;
             }, {}))),
