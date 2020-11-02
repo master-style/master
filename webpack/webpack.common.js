@@ -17,8 +17,8 @@ const
 const
     Path = require('path'),
     merge = require('webpack-merge'),
-    fs = require('fs'),
-    ejs = require('ejs'),
+    // fs = require('fs'),
+    // ejs = require('ejs'),
     renameIndexWithDirname = (pathStr) => {
         const parsePath = Path.parse(Path.relative('src', pathStr));
         if (parsePath.dir !== '' && parsePath.name === 'index') {
@@ -32,7 +32,7 @@ const
 // webpack
 const
     webpack = require('webpack'),
-    HtmlWebpackPlugin = require('html-webpack-plugin'),
+    // HtmlWebpackPlugin = require('html-webpack-plugin'),
     MiniCssExtractPlugin = require('mini-css-extract-plugin'),
     SriPlugin = require('webpack-subresource-integrity')
 
@@ -41,14 +41,14 @@ module.exports = {
         return merge(config, env);
     },
     merge: (webpackEnvConfig, env) => {
-        const templates = glob.sync([
-            './src/**/index.html',
-            '!./src/core/index.html',
-            '!./src/assets/**/*'
-        ]);
+        // const templates = glob.sync([
+        //     './src/**/index.html',
+        //     '!./src/core/index.html',
+        //     '!./src/assets/**/*'
+        // ]);
         const webpackConfig = merge({
             entry: glob.sync([
-                './src/polyfill.ts',
+                // './src/polyfill.ts',
                 './src/**/index.{ts,js}',
                 '!./src/assets/**/*'
             ]).reduce((entry, path) => {
@@ -133,25 +133,25 @@ module.exports = {
                 }
             },
             plugins: [
-                ...templates.map((eachPathStr) => {
-                    const parsePath = Path.parse(renameIndexWithDirname(eachPathStr));
-                    return new HtmlWebpackPlugin(merge({
-                        chunks: ['core', 'polyfill', Path.join(parsePath.dir, parsePath.name)],
-                        templateContent: ({ htmlWebpackPlugin }) => {
-                            return ejs.render(
-                                fs.readFileSync('src/core/index.html', 'utf8'),
-                                {
-                                    htmlWebpackPlugin,
-                                    templateContent: fs.readFileSync(eachPathStr, 'utf-8')
-                                },
-                                {
-                                    views: ['src']
-                                }
-                            );
-                        },
-                        filename: Path.join(parsePath.dir, parsePath.base)
-                    }, env.template));
-                }),
+                // ...templates.map((eachPathStr) => {
+                //     const parsePath = Path.parse(renameIndexWithDirname(eachPathStr));
+                //     return new HtmlWebpackPlugin(merge({
+                //         chunks: ['core', 'polyfill', Path.join(parsePath.dir, parsePath.name)],
+                //         templateContent: ({ htmlWebpackPlugin }) => {
+                //             return ejs.render(
+                //                 fs.readFileSync('src/core/index.html', 'utf8'),
+                //                 {
+                //                     htmlWebpackPlugin,
+                //                     templateContent: fs.readFileSync(eachPathStr, 'utf-8')
+                //                 },
+                //                 {
+                //                     views: ['src']
+                //                 }
+                //             );
+                //         },
+                //         filename: Path.join(parsePath.dir, parsePath.base)
+                //     }, env.template));
+                // }),
                 new webpack.ProgressPlugin()
             ]
         }, webpackEnvConfig);
