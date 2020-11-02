@@ -8,10 +8,8 @@ const
 const
     Path = require('path'),
     merge = require('webpack-merge'),
-    glob = require('globby');
-
-// webpack
-const
+    glob = require('globby'),
+    MiniCssExtractPlugin = require('mini-css-extract-plugin'),
     Webpack = require('webpack');
 
 const entryGlob = [
@@ -55,6 +53,14 @@ module.exports = {
                         ]
                     },
                     {
+                        test: /\index.(sass|scss|css)$/,
+                        use: [
+                            {
+                                loader: MiniCssExtractPlugin.loader,
+                            }
+                        ]
+                    },
+                    {
                         test: /\.(sass|scss|css)$/,
                         use: [
                             { loader: 'css-loader' },
@@ -93,7 +99,11 @@ module.exports = {
                 }
             },
             plugins: [
-                new Webpack.ProgressPlugin()
+                new Webpack.ProgressPlugin(),
+                new MiniCssExtractPlugin({
+                    filename: env.hash ? '[name].[hash].css' : '[name].css',
+                    chunkFilename: env.hash ? '[name].[hash].css' : '[name].css'
+                })
             ]
         }, envWebpack);
 

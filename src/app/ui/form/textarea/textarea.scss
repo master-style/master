@@ -1,5 +1,5 @@
-@import '../field.shadow';
-@import '../prompt.shadow';
+@import '../field';
+@import '../prompt';
 
 :host {
     --f-size: var(--textarea-f-size, var(--f-sm));
