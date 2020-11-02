@@ -26,7 +26,8 @@ module.exports = env => {
             return entrypoint;
         }, {}))),
         output: {
-            path: Path.join(__dirname, 'dist', env.PACKAGE)
+            libraryTarget: 'umd',
+            path: Path.resolve('dist', env.PACKAGE)
         },
         mode: 'production',
         plugins: [
