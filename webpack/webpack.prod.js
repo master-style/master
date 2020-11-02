@@ -1,33 +1,25 @@
 const
-    merge = require('webpack-merge'),
-    COMMON = require('./webpack.common.js');
-    TerserWebpackPlugin = require('terser-webpack-plugin'),
+    common = require('./webpack.common.js'),
+    /** Prod Quick Config =============================================== */
+    config = common.config({
+        extractCss: true,
+        // https://github.com/jantimon/html-webpack-plugin#options
+        template: {}
+    })
+    /* ================================================================= **/;
+
+const
     { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
-module.exports = merge(COMMON.WEBPACK_CONFIG, {
+/* Getting github or gitlab project name to set base href */
+// config.template.base = `/${require('git-repo-name').sync()}/`;
+
+module.exports = common.merge({
     mode: 'production',
-    optimization: {
-        minimizer: [
-            new TerserWebpackPlugin({
-                cache: true,
-                extractComments: false,
-                parallel: true,
-                exclude: /\.min.js/,
-                // terserOptions: optimizer.script.uglify
-            })
-        ],
-        runtimeChunk: 'single',
-        splitChunks: {
-            cacheGroups: {
-                vendor: {
-                    test: /[\\/]node_modules[\\/]/,
-                    name: 'vendor',
-                    chunks: 'all',
-                },
-            },
-        }
+    output: {
+        crossOriginLoading: 'anonymous'
     },
     plugins: [
-        new CleanWebpackPlugin(),
+        new CleanWebpackPlugin()
     ]
-});
+}, config);
