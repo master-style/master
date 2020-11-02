@@ -51,7 +51,7 @@ const
     CopyPlugin = require('copy-webpack-plugin');
 
 const entryGlob = [
-    './src/polyfill.ts',
+    // './src/polyfill.ts',
     './src/**/index.{ts,js}',
     './src/index.{ts,js}',
     '!./src/assets/**/*'
@@ -66,6 +66,7 @@ module.exports = {
             entry: () => new Promise((resolve) => resolve(glob.sync(entryGlob).reduce((entrypoint, path) => {
                 const relativePath = Path.relative('src', path);
                 const parsePath = Path.parse(renameIndexWithDirname(relativePath));
+                console.log(parsePath.dir, parsePath.name);
                 entrypoint[Path.join(parsePath.dir, parsePath.name)] = relativePath;
                 return entrypoint;
             }, {}))),
@@ -86,34 +87,41 @@ module.exports = {
                             {
                                 loader: 'babel-loader',
                                 options: {
-                                    babelrc: true
+                                    babelrc: './babelrc'
                                 }
                             }
                         ]
                     },
-                    {
-                        test: /\.html$/,
-                        loader: 'html-loader',
-                        options: {
-                            preprocessor: (content, loaderContext) => {
-                                return ejs.render(
-                                    content, {},
-                                    {
-                                        views: ['src'],
-                                        includer: (originalPath, parsedPath) => {
-                                            loaderContext.addDependency(parsedPath)
-                                        }
-                                    }
-                                )
-                            },
-                        }
-                    },
+                    // {
+                    //     test: /\.html$/,
+                    //     loader: 'html-loader',
+                    //     options: {
+                    //         preprocessor: (content, loaderContext) => {
+                    //             return ejs.render(
+                    //                 content, {},
+                    //                 {
+                    //                     views: ['src'],
+                    //                     includer: (originalPath, parsedPath) => {
+                    //                         loaderContext.addDependency(parsedPath)
+                    //                     }
+                    //                 }
+                    //             )
+                    //         },
+                    //     }
+                    // },
                     {
                         test: /\.(sass|scss|css)$/,
                         use: [
                             { loader: env.extractCss ? MiniCssExtractPlugin.loader : 'style-loader', },
                             { loader: 'css-loader' },
-                            { loader: 'postcss-loader' },
+                            {
+                                loader: 'postcss-loader',
+                                options: {
+                                    postcssOptions: {
+                                        config: 'postcss.config.js',
+                                    },
+                                }
+                            },
                             {
                                 loader: 'sass-loader',
                                 options: {
@@ -123,36 +131,36 @@ module.exports = {
                                 }
                             }]
                     },
-                    {
-                        test: /\.(png|jpe?g|gif|svg)$/,
-                        use: [
-                            {
-                                loader: 'url-loader',
-                                options: {
-                                    limit: false,
-                                    name: '[name].[ext]',
-                                    outputPath: 'assets/images',
-                                    publicPath: '/assets/images'
-                                }
-                            },
-                            {
-                                loader: 'image-webpack-loader'
-                            }
-                        ],
-                    },
-                    {
-                        test: /\.(woff|woff2|eot|ttf|otf)$/,
-                        use: [
-                            {
-                                loader: 'url-loader',
-                                options: {
-                                    limit: false,
-                                    name: '[name].[ext]',
-                                    outputPath: 'assets/fonts'
-                                }
-                            }
-                        ]
-                    },
+                    // {
+                    //     test: /\.(png|jpe?g|gif|svg)$/,
+                    //     use: [
+                    //         {
+                    //             loader: 'url-loader',
+                    //             options: {
+                    //                 limit: false,
+                    //                 name: '[name].[ext]',
+                    //                 outputPath: 'assets/images',
+                    //                 publicPath: '/assets/images'
+                    //             }
+                    //         },
+                    //         {
+                    //             loader: 'image-webpack-loader'
+                    //         }
+                    //     ],
+                    // },
+                    // {
+                    //     test: /\.(woff|woff2|eot|ttf|otf)$/,
+                    //     use: [
+                    //         {
+                    //             loader: 'url-loader',
+                    //             options: {
+                    //                 limit: false,
+                    //                 name: '[name].[ext]',
+                    //                 outputPath: 'assets/fonts'
+                    //             }
+                    //         }
+                    //     ]
+                    // },
                 ]
             },
             output: {
@@ -172,60 +180,60 @@ module.exports = {
             },
             plugins: [
                 new Webpack.ProgressPlugin(),
-                new CopyPlugin(env.copy),
-                new class {
-                    apply(compiler) {
-                        compiler.hooks.compilation.tap('PreprocessTemplate', compilation => {
-                            HtmlWebpackPlugin
-                                .getHooks(compilation)
-                                .alterAssetTags
-                                .tapAsync('PreprocessTemplate', (template, done) => {
-                                    template.assetTags.scripts.forEach((scriptTag) => {
-                                        template.assetTags.meta.push({
-                                            tagName: 'link',
-                                            attributes: {
-                                                href: scriptTag.attributes.src,
-                                                rel: 'preload',
-                                                as: 'script'
-                                            }
-                                        })
-                                    })
-                                    template.assetTags.styles.forEach((styleTag) => {
-                                        template.assetTags.meta.push({
-                                            tagName: 'link',
-                                            attributes: {
-                                                href: styleTag.attributes.href,
-                                                rel: 'preload',
-                                                as: 'style'
-                                            }
-                                        })
-                                    })
-                                    done();
-                                });
-                        });
-                    }
-                }
+                // new CopyPlugin(env.copy),
+                // new class {
+                //     apply(compiler) {
+                //         compiler.hooks.compilation.tap('PreprocessTemplate', compilation => {
+                //             HtmlWebpackPlugin
+                //                 .getHooks(compilation)
+                //                 .alterAssetTags
+                //                 .tapAsync('PreprocessTemplate', (template, done) => {
+                //                     template.assetTags.scripts.forEach((scriptTag) => {
+                //                         template.assetTags.meta.push({
+                //                             tagName: 'link',
+                //                             attributes: {
+                //                                 href: scriptTag.attributes.src,
+                //                                 rel: 'preload',
+                //                                 as: 'script'
+                //                             }
+                //                         })
+                //                     })
+                //                     template.assetTags.styles.forEach((styleTag) => {
+                //                         template.assetTags.meta.push({
+                //                             tagName: 'link',
+                //                             attributes: {
+                //                                 href: styleTag.attributes.href,
+                //                                 rel: 'preload',
+                //                                 as: 'style'
+                //                             }
+                //                         })
+                //                     })
+                //                     done();
+                //                 });
+                //         });
+                //     }
+                // }
             ]
         }, envWebpack);
 
-        glob.sync([
-            './src/index.html',
-            './src/**/*/index.html',
-            '!./src/assets/**/*'
-        ]).forEach((templateSrcPath) => {
-            const relativePath = Path.relative('src', templateSrcPath);
-            const templatePath = renameIndexWithDirname(relativePath);
-            const parsePath = Path.parse(templatePath);
-            const currentChunk = Path.join(parsePath.dir, parsePath.name);
-            const chunks = ['core', 'polyfill', 'vendor', 'runtime', currentChunk];
-            webpack.plugins.push(
-                new HtmlWebpackPlugin(merge({
-                    chunks,
-                    template: relativePath,
-                    filename: templatePath
-                }, env.template))
-            )
-        })
+        // glob.sync([
+        //     './src/index.html',
+        //     './src/**/*/index.html',
+        //     '!./src/assets/**/*'
+        // ]).forEach((templateSrcPath) => {
+        //     const relativePath = Path.relative('src', templateSrcPath);
+        //     const templatePath = renameIndexWithDirname(relativePath);
+        //     const parsePath = Path.parse(templatePath);
+        //     const currentChunk = Path.join(parsePath.dir, parsePath.name);
+        //     const chunks = ['core', 'polyfill', 'vendor', 'runtime', currentChunk];
+        //     webpack.plugins.push(
+        //         new HtmlWebpackPlugin(merge({
+        //             chunks,
+        //             template: relativePath,
+        //             filename: templatePath
+        //         }, env.template))
+        //     )
+        // })
 
         if (env.extractCss) {
             webpack.plugins.push(new MiniCssExtractPlugin({

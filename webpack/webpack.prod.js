@@ -2,7 +2,8 @@ const
     common = require('./webpack.common.js'),
     /** Prod Quick Config =============================================== */
     config = common.config({
-        extractCss: true,
+        hash: false,
+        extractCss: false,
         // https://github.com/jantimon/html-webpack-plugin#options
         template: {}
     })
