@@ -1,7 +1,7 @@
-import { Element, Attr, Event, ToggleableElement } from '@element';
+import { Element, Attr, Event, ToggleableElement } from '../../../element';
 import { debounce } from 'lodash-es';
 import css from './index.scss';
-import isNum from '@utils/is-num';
+import isNum from '../../../utils/is-num';
 
 const NAME = 'content';
 const PX = 'px';

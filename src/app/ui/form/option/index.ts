@@ -1,4 +1,4 @@
-import { Element, Attr } from '@element';
+import { Element, Attr } from '../../../element';
 import { SelectElement } from '../select';
 
 import css from './index.scss';

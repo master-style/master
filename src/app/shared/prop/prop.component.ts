@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
-import camelToKebabCase from '@utils/camel-to-kebab-case';
+import camelToKebabCase from '../../utils/camel-to-kebab-case';
 
 @Component({
     selector: 'doc-prop',

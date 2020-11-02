@@ -15,9 +15,9 @@ figure.embedded {
         padding-bottom: 56.25%;
     }
 
-    img,
-    video,
-    iframe {
+    >img,
+    >video,
+    >iframe {
         position: absolute;
         width: 100%;
         height: 100%;
@@ -28,7 +28,7 @@ figure.embedded {
         border: 0;
     }
 
-    figcaption {
+    >figcaption {
         font-size: var(--f-xs);
         color: var(--f-theme);
         text-align: center;

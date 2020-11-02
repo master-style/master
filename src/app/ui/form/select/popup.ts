@@ -1,12 +1,12 @@
-import { Element, Attr, ToggleableElement } from '@element';
+import { Element, Attr, ToggleableElement } from '../../../element';
 import { OptionElement } from '../option';
-import { isClickedOutside } from '@utils/is-clicked-outside';
+import { isClickedOutside } from '../../../utils/is-clicked-outside';
 
 import css from './popup.scss';
 
-import { ContentElement } from '@ui/components/content';
-import { SelectElement } from '.';
-import { ItemElement } from '@ui/components/item';
+import { ContentElement } from '../../../ui/components/content';
+import { SelectElement } from './';
+import { ItemElement } from '../../../ui/components/item';
 import { CheckElement } from '../check';
 
 const NAME = 'select-popup';

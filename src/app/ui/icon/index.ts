@@ -1,4 +1,4 @@
-import { Element, Attr } from '@element';
+import { Element, Attr } from '../../element';
 import css from './index.scss';
 
 const NAME = 'icon';

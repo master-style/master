@@ -1,4 +1,4 @@
-import { Element, Attr, ToggleableElement, attrEnabled } from '@element';
+import { Element, Attr, ToggleableElement, attrEnabled } from '../../../element';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { ContentElement } from '../content';
 import { HeaderElement } from '../header';

@@ -1,4 +1,4 @@
-import { Element, Attr, Event, ControlElement } from '@element';
+import { Element, Attr, Event, ControlElement } from '../../../element';
 
 import css from './index.scss';
 import './popup';

@@ -1,4 +1,4 @@
-import { Element, ClickableElement } from '@element';
+import { Element, ClickableElement } from '../../../element';
 import css from './index.scss';
 
 const NAME = 'item';

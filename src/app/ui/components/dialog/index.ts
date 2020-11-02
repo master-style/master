@@ -1,4 +1,4 @@
-import { Element, Attr, Prop, ControlElement } from '@element';
+import { Element, Attr, Prop, ControlElement } from '../../../element';
 import { ModalElement } from '../modal';
 import css from './index.scss';
 

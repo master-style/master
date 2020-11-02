@@ -1,4 +1,4 @@
-import camelToKebabCase from '@utils/camel-to-kebab-case';
+import camelToKebabCase from '../utils/camel-to-kebab-case';
 
 const readyEvent = new CustomEvent('ready');
 

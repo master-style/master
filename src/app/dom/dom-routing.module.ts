@@ -13,7 +13,7 @@ import { FilterComponent } from './traversings/filter/filter.component';
 import { ForEachComponent } from './traversings/for-each/for-each.component';
 import { IndexOfComponent } from './traversings/index-of/index-of.component';
 import { HtmlComponent } from './manipulations/html/html.component';
-import { RouteResolver } from '@shared/route.resolver';
+import { RouteResolver } from '../shared/route.resolver';
 
 export const domRoutes: Routes = [
     { path: 'DOM' },
