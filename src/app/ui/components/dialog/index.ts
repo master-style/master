@@ -1,4 +1,4 @@
-import { Element, Attr, Prop, ControlElement } from '../../../element';
+import { Element, Attr, Prop } from '../../../element';
 import { ModalElement } from '../modal';
 import css from './dialog.scss';
 
@@ -231,7 +231,7 @@ export class DialogElement extends ModalElement {
 
 const DIALOG_ELEMENT = document.createElement('m-dialog');
 
-$.dialog = (options) => {
+window['$'].dialog = (options) => {
     const eachDialog = (DIALOG_ELEMENT.cloneNode() as DialogElement);
     for (const eachPropKey in options) {
         const eachPropValue = options[eachPropKey];

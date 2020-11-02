@@ -15,7 +15,7 @@ module.exports = env => {
 
     const entryGlob = [
         Path.join('../src/app', env.PACKAGE, '**/index.{ts,js}'),
-        Path.join('../src/app', env.PACKAGE, '**/index.{scss,css}'),
+        // Path.join('../src/app', env.PACKAGE, '**/index.{scss,css}'),
         Path.join('!../src/app', env.PACKAGE, 'node_modules/**')
     ];
 
@@ -26,8 +26,8 @@ module.exports = env => {
             return entrypoint;
         }, {}))),
         output: {
-            // libraryTarget: 'umd',
-            // library: 'Master',
+            libraryTarget: 'window',
+            library: '$',
             path: Path.resolve('dist', env.PACKAGE)
         },
         mode: 'production',
