@@ -15,9 +15,8 @@ const
     Webpack = require('webpack');
 
 const entryGlob = [
-    // './src/polyfill.ts',
-    './src/**/index.{ts,js}',
-    './src/index.{ts,js}',
+    './src/**/*/index.{ts,js}',
+    './src/**/*/index.{scss,css}',
     '!./src/assets/**/*'
 ];
 

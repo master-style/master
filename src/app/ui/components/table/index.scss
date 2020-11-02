@@ -1,3 +1,6 @@
+@import '../../variables.scss';
+@import '../../mixins.scss';
+
 m-table {
     contain: style;
     border-radius: $xs;
@@ -91,6 +94,7 @@ m-table {
         }
 
         &.neat {
+
             th,
             td {
 

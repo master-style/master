@@ -1,3 +1,5 @@
+@import '../variables.scss';
+
 @function breakpoint-next($names, $breakpoints: $breakpoints, $breakpoint-names: map-keys($breakpoints)) {
     $n: index($breakpoint-names, $names);
     @return if($n !=null and $n < length($breakpoint-names), nth($breakpoint-names, $n + 1), null);
