@@ -1,12 +1,7 @@
 const
     common = require('./webpack.common.js'),
     /** Dev Quick Config ================================================= */
-    config = common.config({
-        // https://github.com/jantimon/html-webpack-plugin#options
-        template: {
-            
-        }
-    })
+    config = common.config()
     /* ================================================================= **/;
 
 module.exports = common.merge({

@@ -2,10 +2,7 @@ const
     common = require('./webpack.common.js'),
     /** Prod Quick Config =============================================== */
     config = common.config({
-        hash: false,
-        extractCss: false,
-        // https://github.com/jantimon/html-webpack-plugin#options
-        template: {}
+        hash: false
     })
     /* ================================================================= **/;
 
@@ -17,9 +14,6 @@ const
 
 module.exports = common.merge({
     mode: 'production',
-    output: {
-        crossOriginLoading: 'anonymous'
-    },
     plugins: [
         new CleanWebpackPlugin()
     ]
