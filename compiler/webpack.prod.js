@@ -21,12 +21,12 @@ module.exports = env => {
 
     return common.merge({
         entry: () => new Promise((resolve) => resolve(glob.sync(entryGlob).reduce((entrypoint, path) => {
-            const parsePath = Path.parse(Path.relative('../src/app', path));
+            const parsePath = Path.parse(Path.relative(Path.join('../src/app', env.PACKAGE), path));
             entrypoint[Path.join(parsePath.dir, parsePath.name)] = path;
             return entrypoint;
         }, {}))),
         output: {
-            path: Path.join(__dirname, 'dist')
+            path: Path.join(__dirname, 'dist', env.PACKAGE)
         },
         mode: 'production',
         plugins: [
