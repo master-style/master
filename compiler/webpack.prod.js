@@ -27,6 +27,7 @@ module.exports = env => {
         }, {}))),
         output: {
             libraryTarget: 'umd',
+            library: 'Master',
             path: Path.resolve('dist', env.PACKAGE)
         },
         mode: 'production',
