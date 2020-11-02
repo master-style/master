@@ -6,7 +6,7 @@ const
     /* ================================================================= **/;
 
 const
-    merge = require('webpack-merge'),
+    { merge } = require('webpack-merge'),
     MiniCssExtractPlugin = require('mini-css-extract-plugin'),
     Webpack = require('webpack');
 
