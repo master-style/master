@@ -18,12 +18,10 @@ const entryGlob = [
     Path.join(__dirname, '!./node_modules/**/*')
 ];
 
-console.log(__dirname);
-
 module.exports = common.merge({
     entry: () => new Promise((resolve) => resolve(glob.sync(entryGlob).reduce((entrypoint, path) => {
         const parsePath = Path.parse(Path.relative(__dirname, path));
-        entrypoint[Path.join(__dirname, 'dist', parsePath.dir, parsePath.name)] = path;
+        entrypoint[Path.join('dist', parsePath.dir, parsePath.name)] = path;
         return entrypoint;
     }, {}))),
     context: __dirname,
