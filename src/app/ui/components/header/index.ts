@@ -10,7 +10,7 @@ const NAME = 'header';
 })
 export class HeaderElement extends HTMLElement {
 
-    template: MasterTemplate = $(() => [
+    template: Template = $(() => [
         'div', { part: 'root' }, [
             'slot', { name: 'start' },
             'slot',

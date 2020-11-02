@@ -3,7 +3,7 @@ const div = document.createElement('div');
 
 window.Master = function (selector: any, attr?: { [key: string]: any }, ...children: (Element | string)[]) {
     if (typeof selector === 'function') {
-        return new MasterTemplate(selector);
+        return new Template(selector);
     } else if (attr) {
         const element: Element = document.createElement(selector, attr && attr.is ? { is: attr.is } : undefined);
         if (Object.keys(attr).length) element.attr(attr);
@@ -55,7 +55,7 @@ const removeNodes = (eachNodes, isRoot?: boolean) => {
         });
 };
 
-class MasterTemplate {
+class Template {
 
     constructor(
         private template: () => any[]

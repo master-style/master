@@ -43,7 +43,7 @@ export class ModalElement extends ToggleableElement {
         ]
     ]);
 
-    lightTemplate: MasterTemplate;
+    lightTemplate: Template;
 
     render() {
         this.template.render(this.shadowRoot);
