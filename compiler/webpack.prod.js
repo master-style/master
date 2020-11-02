@@ -26,8 +26,8 @@ module.exports = env => {
             return entrypoint;
         }, {}))),
         output: {
-            libraryTarget: 'commonjs',
-            library: 'Master',
+            // libraryTarget: 'umd',
+            // library: 'Master',
             path: Path.resolve('dist', env.PACKAGE)
         },
         mode: 'production',
