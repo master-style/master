@@ -14,9 +14,9 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = env => {
 
     const entryGlob = [
-        Path.join('../src/app', env.PACKAGE, './**/*/index.{ts,js}'),
-        Path.join('../src/app', env.PACKAGE, './**/*/index.{scss,css}'),
-        Path.join('!../src/app', env.PACKAGE, './node_modules/**/*')
+        Path.join('../src/app', env.PACKAGE, '**/index.{ts,js}'),
+        Path.join('../src/app', env.PACKAGE, '**/index.{scss,css}'),
+        Path.join('!../src/app', env.PACKAGE, 'node_modules/**')
     ];
 
     return common.merge({

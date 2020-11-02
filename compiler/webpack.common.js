@@ -6,6 +6,7 @@ const
     /* ================================================================= **/;
 
 const
+    Path = require('path'),
     { merge } = require('webpack-merge'),
     MiniCssExtractPlugin = require('mini-css-extract-plugin'),
     Webpack = require('webpack');
@@ -17,7 +18,8 @@ module.exports = {
     merge: (envWebpack, env) => {
         const webpack = merge({
             resolve: {
-                extensions: ['.js', '.ts', '.scss']
+                extensions: ['.js', '.ts', '.scss'],
+                modules: [Path.resolve('../src'), 'node_modules']
             },
             module: {
                 rules: [
