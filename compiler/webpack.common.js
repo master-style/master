@@ -74,7 +74,7 @@ module.exports = {
             },
             plugins: [
                 new Webpack.ProgressPlugin(),
-                new FixStyleOnlyEntriesPlugin(),
+                // new FixStyleOnlyEntriesPlugin(),
                 new MiniCssExtractPlugin({
                     filename: env.hash ? '[name].[hash].css' : '[name].css',
                     chunkFilename: env.hash ? '[name].[hash].css' : '[name].css'
