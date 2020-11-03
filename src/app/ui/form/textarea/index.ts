@@ -10,7 +10,7 @@ const NAME = 'textarea';
 })
 export class TextareaElement extends ControlElement {
 
-    controlTemplate = $(() => [
+    controlTemplate = window['Master'](() => [
         'textarea', {
             part: 'body',
             name: this.name,
@@ -26,7 +26,7 @@ export class TextareaElement extends ControlElement {
         }
     ]);
 
-    template = $(() => [
+    template = window['Master'](() => [
         'slot',
         'fieldset', [
             'legend', [

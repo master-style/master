@@ -16,7 +16,7 @@ const NAME = 'select';
 })
 export class SelectElement extends ControlElement {
 
-    controlTemplate = $(() => [
+    controlTemplate = window['Master'](() => [
         'input', {
             part: 'output',
             $created: (element: HTMLInputElement) => {
@@ -26,7 +26,7 @@ export class SelectElement extends ControlElement {
         }
     ]);
 
-    template = $(() => [
+    template = window['Master'](() => [
         'slot', {
             $created: (element: HTMLSlotElement) => {
                 element.on('slotchange', (event) => {

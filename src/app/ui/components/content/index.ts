@@ -37,7 +37,7 @@ export class ContentElement extends ToggleableElement {
     #thumb: any = {};
     #lastMorePosition: number = -1;
 
-    template = $(() => [
+    template = window['Master'](() => [
         'slot', {
             part: 'root',
             $created: (element: HTMLElement) => this.root = element

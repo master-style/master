@@ -8,7 +8,7 @@ const NAME = 'overlay';
     css
 })
 export class SkeletonOverlay extends HTMLElement {
-    template = $(() => ['slot']);
+    template = window['Master'](() => ['slot']);
 
     render() {
         this.template.render(this.shadowRoot);

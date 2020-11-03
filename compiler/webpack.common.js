@@ -5,11 +5,11 @@ const
     }
     /* ================================================================= **/;
 
-const
-    Path = require('path'),
-    { merge } = require('webpack-merge'),
-    MiniCssExtractPlugin = require('mini-css-extract-plugin'),
-    Webpack = require('webpack');
+const Path = require('path');
+const { merge } = require('webpack-merge');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
+const Webpack = require('webpack');
 
 module.exports = {
     config: (env) => {
@@ -72,16 +72,13 @@ module.exports = {
             output: {
                 filename: env.hash ? '[name].[hash].js' : '[name].js'
             },
-            optimization: {
-                runtimeChunk: false,
-                splitChunks: false
-            },
             plugins: [
                 new Webpack.ProgressPlugin(),
+                new FixStyleOnlyEntriesPlugin(),
                 new MiniCssExtractPlugin({
                     filename: env.hash ? '[name].[hash].css' : '[name].css',
                     chunkFilename: env.hash ? '[name].[hash].css' : '[name].css'
-                })
+                }),
             ]
         }, envWebpack);
 

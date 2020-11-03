@@ -9,7 +9,7 @@ const NAME = 'input';
 })
 export class InputElement extends ControlElement {
 
-    controlTemplate = $(() => [
+    controlTemplate = window['Master'](() => [
         'input', {
             part: 'body',
             type: this.type,
@@ -30,7 +30,7 @@ export class InputElement extends ControlElement {
         }
     ]);
 
-    template = $(() => [
+    template = window['Master'](() => [
         'slot',
         'div', {
             $if: this.type === 'file',

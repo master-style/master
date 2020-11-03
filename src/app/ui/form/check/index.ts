@@ -13,7 +13,7 @@ const NAME = 'check';
 })
 export class CheckElement extends ControlElement {
 
-    controlTemplate = $(() => [
+    controlTemplate = window['Master'](() => [
         'input', {
             part: 'body',
             type: this.type,
@@ -27,7 +27,7 @@ export class CheckElement extends ControlElement {
         }
     ]);
 
-    template = $(() => [
+    template = window['Master'](() => [
         'svg', {
             part: this.interface,
             viewBox: '0 0 20 20',

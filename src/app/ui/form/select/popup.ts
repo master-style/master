@@ -32,7 +32,7 @@ export class SelectPopupElement extends ToggleableElement {
 
     #offsetTop = 0;
 
-    template = $(() => [
+    template = window['Master'](() => [
         'm-content', {
             'scroll-y': true,
             guide: true,

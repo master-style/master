@@ -19,7 +19,7 @@ export class CreateComponent implements OnInit {
 
     if = false;
 
-    template = $(() => {
+    template = window['Master'](() => {
         return [
             'div', { class: 'shine', $text: '1', $if: this.if },
             'div', { class: 'shine', $text: this.times, name: this.times, disabled: true },

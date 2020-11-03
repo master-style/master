@@ -9,7 +9,7 @@ const NAME = 'skeleton';
 })
 export class SkeletonElement extends HTMLElement {
 
-    template = $(() => {
+    template = window['Master'](() => {
         this.css('width', this.width);
         return [
             'div', {

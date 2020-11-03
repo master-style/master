@@ -1,3 +1,4 @@
-export * from './icon';
+import './index.scss';
+
 export * from './form';
 export * from './components';

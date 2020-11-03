@@ -22,12 +22,13 @@ module.exports = env => {
     return common.merge({
         entry: () => new Promise((resolve) => resolve(glob.sync(entryGlob).reduce((entrypoint, path) => {
             const parsePath = Path.parse(Path.relative(Path.join('../src/app', env.PACKAGE), path));
-            entrypoint[Path.join(parsePath.dir, parsePath.name)] = path;
+            const filename = Path.join(parsePath.dir, parsePath.name);
+            entrypoint[filename] = [path];
             return entrypoint;
         }, {}))),
         output: {
-            libraryTarget: 'window',
-            library: '$',
+            libraryTarget: 'umd',
+            library: 'Master',
             path: Path.resolve('dist', env.PACKAGE)
         },
         mode: 'production',

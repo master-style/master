@@ -8,7 +8,7 @@ const NAME = 'list';
     css
 })
 export class ListElement extends HTMLElement {
-    template = $(() => [
+    template = window['Master'](() => [
         'slot'
     ]);
 

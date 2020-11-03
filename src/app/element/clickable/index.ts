@@ -6,7 +6,7 @@ export class ClickableElement extends HTMLElement {
 
     slotTemplate: (elementToken | (() => elementToken[]))[];
 
-    template = $(() => {
+    template = window['Master'](() => {
         const tag = ((this.href || this.type === 'anchor') && !this.disabled)
             ? 'a'
             : (this.type || this.disabled) ? 'button' : null;
