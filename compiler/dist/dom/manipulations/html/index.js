@@ -1,0 +1,1 @@
+window.$=(()=>{var r={24:()=>{Element.prototype.html=function(r){return this.innerHTML=r,this}}},t={};return function e(n){if(t[n])return t[n].exports;var o=t[n]={exports:{}};return r[n](o,o.exports,e),o.exports}(24)})();
