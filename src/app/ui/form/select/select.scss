@@ -48,10 +48,15 @@
     order: 1;
     flex: 1 1 auto;
     width: 0;
-    min-width: 7rem;
     padding: 0;
     margin: .28125rem .375rem;
     word-break: keep-all;
+}
+
+:host([searchable]) {
+    [part=search] {
+        min-width: 5em;
+    }
 }
 
 :host(.underlined) {
@@ -77,7 +82,7 @@ m-icon[part=icon] {
     }
 }
 
-:host(:not([multiple]):not([searchable])){
+:host(:not([multiple]):not([searchable])) {
     [part=search] {
         cursor: pointer;
     }
