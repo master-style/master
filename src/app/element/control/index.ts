@@ -8,8 +8,8 @@ export class ControlElement extends HTMLElement {
 
     body: any;
 
-    @Attr({ observe: false, render: false })
-    emit: boolean = true;
+    @Attr({ render: false })
+    emit: boolean;
 
     @Attr()
     busy: boolean;
