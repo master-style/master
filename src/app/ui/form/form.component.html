@@ -36,6 +36,10 @@
                     <m-option *ngFor="let city of ['taoyuan']"
                               [value]="city">{{city}}</m-option>
                 </m-select>
+                <m-select>
+                    <m-option value="zhTW" selected>繁體</m-option>
+                    <m-option value="en">EN</m-option>
+                </m-select>
             </div>
             <div class="x" *ngFor="let theme of ['dark', 'light']">
                 <m-check type="radio"

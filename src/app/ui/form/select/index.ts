@@ -130,9 +130,8 @@ export class SelectElement extends ControlElement {
     #options: OptionElement[] = [];
 
     options = {
-        get: () => {
-            return this.#options;
-        },
+        selected: () => this.#selectedOptions,
+        get: () => this.#options,
         set: (options: OptionElement[]) => {
             this.#options = options;
             this.composeValue();
@@ -174,10 +173,11 @@ export class SelectElement extends ControlElement {
 
     private toggleListener() {
         if (this.readOnly || this.disabled) {
-            this.root.off({ passive: true, id: NAME });
+            this.off({ passive: true, id: NAME });
         } else {
-            this.root.on('click', () => {
+            this.on('click focusin', () => {
                 if (this.disabled || this.popup && !this.popup.hidden) return;
+                console.log(this.readOnly || !this.searchable);
                 this.popup = $('m-select-popup', {
                     multiple: this.multiple,
                     hidden: true
@@ -230,19 +230,21 @@ export class SelectElement extends ControlElement {
     @Attr({
         update(select: SelectElement, value: any) {
             const isArray = Array.isArray(value);
+            let selectedOption: OptionElement;
             select.options.get().forEach((eachOption) => {
                 if (
                     isArray && value.indexOf(eachOption.value) !== -1
                     || value === eachOption.value
                 ) {
                     eachOption.selected = true;
+                    selectedOption = eachOption;
                 }
             });
             select.empty = value === null || value === undefined || value === '' || !value?.length;
             select.body.value = value;
             select.validate();
             if (!select.multiple) {
-                select.search.value = value || '';
+                select.search.value = selectedOption?.textContent.trim() || '';
             }
             select.changeEmitter(value);
         },

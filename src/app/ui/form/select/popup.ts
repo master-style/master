@@ -111,7 +111,7 @@ export class SelectPopupElement extends ToggleableElement {
     onOpen() {
         this.content.renderScroll();
         if (this.select.search) {
-            this.select.search.readOnly = false;
+            // this.select.search.readOnly = false;
             this.select.search.focus();
         }
     }
@@ -138,14 +138,15 @@ export class SelectPopupElement extends ToggleableElement {
         document.documentElement.css('overflow', '');
         this.select.focused = false;
         if (!this.select.multiple) {
-            this.select.search.value = this.select.value || '';
+            const selectedOption = this.select.options.selected()[0];
+            this.select.search.value = selectedOption?.textContent.trim() || '';
         }
     }
 
     onClosed() {
-        if (this.select.search) {
-            this.select.search.readOnly = true;
-        }
+        // if (this.select.search) {
+        //     this.select.search.readOnly = true;
+        // }
         this.#foundCount = 0;
         this.#keyword = '';
         this.toggleAttribute('searching', false);

@@ -2,7 +2,8 @@
     "scripts": {
         "start": "npm install && npm run serve",
         "serve": "webpack-dev-server --config webpack.dev.js",
-        "build": "webpack --config webpack.prod.js"
+        "build": "webpack --config webpack.prod.js",
+        "build:ui": "webpack --config webpack.prod.js --env PACKAGE=ui"
     },
     "devDependencies": {
         "@babel/core": "^7.9.6",
