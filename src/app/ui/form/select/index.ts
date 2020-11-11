@@ -49,7 +49,7 @@ export class SelectElement extends ControlElement {
                     $if: this.multiple && this.searchable && !this.readOnly || !this.multiple,
                     part: 'search',
                     type: 'search',
-                    contenteditable: !this.readOnly && this.searchable,
+                    contenteditable: !this.readOnly && this.searchable && !this.disabled,
                     spellcheck: 'false',
                     disabled: this.disabled,
                     placeholder: this.placeholder,
@@ -236,8 +236,19 @@ export class SelectElement extends ControlElement {
     }
 
     @Attr({
-        update(select: SelectElement, value: any) {
+        update(select: SelectElement, value: any, oldValue: any) {
             const isArray = Array.isArray(value);
+            const oldIsArray = Array.isArray(oldValue);
+            let equal = true;
+            if (isArray && oldIsArray) {
+                for (let i = 0; i < value.length; ++i) {
+                    if (value[i] !== oldValue[i]) {
+                        equal = false;
+                        break;
+                    }
+                }
+                if (equal) return;
+            }
             select.options.get().forEach((eachOption) => {
                 if (
                     isArray && value.indexOf(eachOption.value) !== -1

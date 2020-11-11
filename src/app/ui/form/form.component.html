@@ -21,6 +21,7 @@
             </div>
             <div class="x:6">
                 <m-select name="city"
+                          #test
                           label="city"
                           required
                           placeholder="current location"
@@ -36,6 +37,7 @@
                     <m-option *ngFor="let city of ['taoyuan']"
                               [value]="city">{{city}}</m-option>
                 </m-select>
+                {{ test.value }}
             </div>
             <div class="x" *ngFor="let theme of ['dark', 'light']">
                 <m-check type="radio"

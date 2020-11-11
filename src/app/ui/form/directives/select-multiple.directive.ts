@@ -19,11 +19,11 @@ export class SelectMultipleControlValueAccessor implements ControlValueAccessor 
 
     constructor(
         private el: ElementRef
-    ) { 
+    ) {
         console.log(el);
     }
 
-    onChange = (value: any) => {}
+    onChange = (value: any) => { }
 
     onTouched = () => { };
 
@@ -45,7 +45,7 @@ export class SelectMultipleControlValueAccessor implements ControlValueAccessor 
 
 // tslint:disable-next-line: max-classes-per-file
 @Directive({ selector: 'm-option' })
-export class ɵNgSelectMultipleOption {
+export class OptionControlValueAccessor {
 
     constructor(
         private el: ElementRef,
@@ -58,5 +58,3 @@ export class ɵNgSelectMultipleOption {
         this.el.nativeElement.value = value;
     }
 }
-
-export { ɵNgSelectMultipleOption as NgSelectMultipleOption };

@@ -3,7 +3,7 @@ import { RadioControlValueAccessor, RadioControlRegistry } from './directives/ra
 import { CheckboxRequiredValidator, CheckboxControlValueAccessor } from './directives/checkbox.directive';
 import { DefaultValueAccessor } from './directives/control.directive';
 import { NumberValueAccessor } from './directives/number.directive';
-import { NgSelectMultipleOption, SelectMultipleControlValueAccessor } from './directives/select-multiple.directive';
+import { OptionControlValueAccessor, SelectMultipleControlValueAccessor } from './directives/select-multiple.directive';
 import { SelectControlValueAccessor } from './directives/select.directive';
 
 const SHARED_DIRECTIVES: any[] = [
@@ -12,7 +12,7 @@ const SHARED_DIRECTIVES: any[] = [
     CheckboxRequiredValidator,
     DefaultValueAccessor,
     NumberValueAccessor,
-    NgSelectMultipleOption,
+    OptionControlValueAccessor,
     SelectControlValueAccessor,
     SelectMultipleControlValueAccessor
 ];
