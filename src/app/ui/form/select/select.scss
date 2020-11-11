@@ -47,15 +47,14 @@
     display: inline-flex;
     order: 1;
     flex: 1 1 auto;
-    width: 0;
     padding: 0;
     margin: .28125rem .375rem;
-    word-break: keep-all;
-}
+    white-space: nowrap;
+    outline: none;
 
-:host([searchable]) {
-    [part=search] {
-        min-width: 5em;
+    &[placeholder]:empty:before {
+        content: attr(placeholder);
+        color: var(--f-fadest);
     }
 }
 

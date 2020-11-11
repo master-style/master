@@ -132,14 +132,14 @@ export class SelectPopupElement extends ToggleableElement {
 
     onClose() {
         if (this.select.search) {
-            this.select.search.value = this.select.keyword = '';
+            this.select.search.textContent = this.select.keyword = '';
         }
         document.body.off({ id: this });
         document.documentElement.css('overflow', '');
         this.select.focused = false;
         if (!this.select.multiple) {
             const selectedOption = this.select.options.selected()[0];
-            this.select.search.value = selectedOption?.textContent.trim() || '';
+            this.select.search.textContent = selectedOption?.textContent.trim() || '';
         }
     }
 

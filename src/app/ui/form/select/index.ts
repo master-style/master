@@ -45,20 +45,20 @@ export class SelectElement extends ControlElement {
                     ? this.label
                     : this.placeholder, // for default select width
             }, [
-                'input', {
+                'span', {
                     $if: this.multiple && this.searchable && !this.readOnly || !this.multiple,
                     part: 'search',
                     type: 'search',
+                    contenteditable: !this.readOnly && this.searchable,
                     spellcheck: 'false',
                     disabled: this.disabled,
-                    readonly: this.readOnly || !this.searchable,
-                    value: this.keyword,
                     placeholder: this.placeholder,
+                    $text: this.keyword,
                     $created: (element: HTMLInputElement) => {
                         this.search = element
-                            .on('input', (event: any) => {
+                            .on('input', () => {
                                 if (this.searchable)
-                                    this.popup.search(event.target.value);
+                                    this.popup.search(this.search.textContent);
                             }, { passive: true, id: NAME });
                     },
                     $removed: () => this.search = null
@@ -231,7 +231,7 @@ export class SelectElement extends ControlElement {
 
     output() {
         if (!this.multiple) {
-            this.search.value = this.#selectedOptions[0]?.textContent.trim() || '';
+            this.search.textContent = this.#selectedOptions[0]?.textContent.trim() || '';
         }
     }
 
