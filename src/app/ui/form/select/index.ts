@@ -1,4 +1,4 @@
-import { Element, Attr, Event, ControlElement } from '../../../element';
+import { Element, Attr, Event, ControlElement, Prop } from '../../../element';
 
 import css from './select.scss';
 import './popup';
@@ -162,6 +162,8 @@ export class SelectElement extends ControlElement {
                 .find((eachOption: OptionElement) => eachOption.selected);
             if (selectedOption) this.#selectedOptions = [selectedOption];
             this.value = selectedOption?.value;
+            // 強制 output，暫時解決 "m-option 元素無法取得 textContent 內容" 不明問題
+            this.output();
         }
         if (this.popup) {
             if (!this.popup.hidden) {
@@ -227,25 +229,27 @@ export class SelectElement extends ControlElement {
     @Attr()
     searchable: boolean;
 
+    output() {
+        if (!this.multiple) {
+            this.search.value = this.#selectedOptions[0]?.textContent.trim() || '';
+        }
+    }
+
     @Attr({
         update(select: SelectElement, value: any) {
             const isArray = Array.isArray(value);
-            let selectedOption: OptionElement;
             select.options.get().forEach((eachOption) => {
                 if (
                     isArray && value.indexOf(eachOption.value) !== -1
                     || value === eachOption.value
                 ) {
                     eachOption.selected = true;
-                    selectedOption = eachOption;
                 }
             });
             select.empty = value === null || value === undefined || value === '' || !value?.length;
             select.body.value = value;
             select.validate();
-            if (!select.multiple) {
-                select.search.value = selectedOption?.textContent.trim() || '';
-            }
+            select.output();
             select.changeEmitter(value);
         },
         reflect: false

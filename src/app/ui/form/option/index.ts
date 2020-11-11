@@ -52,4 +52,5 @@ export class OptionElement extends HTMLElement {
     onDisconnected() {
         this.select.options.remove(this);
     }
+
 }
