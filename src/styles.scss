@@ -9,10 +9,6 @@
 @import './app/ui/mixins';
 @import './app/shared/feather-icon';
 
-:root {
-    --bg-body-rgb: var(--theme);
-}
-
 // 測試
 .shine {
     animation: shine .5s linear;
