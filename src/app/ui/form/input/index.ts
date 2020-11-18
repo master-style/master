@@ -1,7 +1,8 @@
-import { Element, Attr, Prop, ControlElement } from '../../../element';
+import { Element, Attr, Prop, ControlElement, Event } from '../../../element';
 import css from './input.scss';
 
 const NAME = 'input';
+const changeEvent = new window.Event('change', { 'bubbles': true, 'cancelable': false });
 
 @Element({
     tag: 'm-' + NAME,
@@ -174,7 +175,10 @@ export class InputElement extends ControlElement {
                         event.preventDefault();
                         const files = event.dataTransfer.files;
                         if (files) {
+                            console.log(files);
                             input.addFiles(files);
+                            console.log(input.body);
+                            input.body.dispatchEvent(changeEvent);
                         }
                     }, { id: NAME + '.file' });
             }

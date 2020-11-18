@@ -201,6 +201,8 @@
                          interface="image"
                          accept="image/*"
                          label="file"
+                         #input
+                         (change)="upload($event, input)"
                          required>
                 </m-input>
             </div>

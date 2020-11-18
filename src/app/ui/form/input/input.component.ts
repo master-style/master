@@ -13,4 +13,8 @@ export class InputComponent implements OnInit {
 
     ngOnInit(): void { }
 
+    upload(event, input) {
+        console.log('upload', event, input.files);
+    }
+
 }
