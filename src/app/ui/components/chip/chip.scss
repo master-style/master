@@ -8,6 +8,7 @@
     --f-color: var(--chip-f-color, var(--f-theme));
     --b-color-active: var(--chip-b-color-active);
     --b-color: var(--chip-b-color);
+    --b-size: var(--chip-b-size, 0px);
     --bg-disabled: var(--chip-bg-disabled);
     --size: var(--chip-size, 2rem);
     --p: var(--chip-p, .25rem);
@@ -28,7 +29,6 @@
     height: var(--size);
     color: var(--f-color);
     background-color: var(--bg-color);
-    border: 1px solid var(--b-color);
     user-select: none;
     contain: style;
     align-items: center;
@@ -36,6 +36,12 @@
 
 slot {
     border-radius: inherit;
+}
+
+:host(.outlined) {
+    ::slotted([part=head]) {
+        margin-left: calc(var(--mx) - 1px);
+    }
 }
 
 :host(.rounded) {
@@ -56,14 +62,6 @@ slot {
         --size: .875rem;
         font-size: .625rem;
         margin-right: -.125rem;
-    }
-}
-
-:host(.outlined) {
-    background-color: transparent;
-
-    ::slotted([part=head]) {
-        margin-left: calc(var(--mx) - 1px);
     }
 }
 

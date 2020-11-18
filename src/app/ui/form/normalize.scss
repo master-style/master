@@ -14,11 +14,11 @@ textarea {
     line-height: inherit;
     letter-spacing: inherit;
     -webkit-text-fill-color: unset; // fix safari opacity problem
-    user-select: text;
-    -webkit-user-select: text;
     outline: none;
     background-color: transparent;
     -webkit-user-drag: none;
+    user-select: text;
+    -webkit-user-select: text;
     touch-action: manipulation;
     -webkit-touch-action: manipulation;
     -webkit-touch-callout: none;
