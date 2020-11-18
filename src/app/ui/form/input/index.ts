@@ -43,7 +43,6 @@ export class InputElement extends ControlElement {
             const eachFileNameSplits = eachFile.name.split('.');
             const ext = eachFileNameSplits.pop();
             const src = URL.createObjectURL(eachFile);
-            console.log(eachFile);
             return [
                 'div', {
                     part: 'output'
