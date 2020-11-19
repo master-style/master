@@ -1,5 +1,6 @@
 @import '../../variables';
 @import '../../../element/clickable';
+@import '../../color/color.scss';
 
 :host {
     --bg-color: var(--chip-bg-color);
@@ -10,13 +11,14 @@
     --b-color: var(--chip-b-color);
     --b-size: var(--chip-b-size, 0px);
     --bg-disabled: var(--chip-bg-disabled);
+    --radius: var(--chip-radius, #{$xs});
     --size: var(--chip-size, 2rem);
     --p: var(--chip-p, .25rem);
     --px: var(--chip-px, .625rem);
     --f-size: var(--chip-f-size, .8125rem);
     --mx: calc(var(--p) - var(--px));
     display: inline-flex;
-    border-radius: $xs;
+    border-radius: var(--radius);
 }
 
 [part=root] {
@@ -46,6 +48,10 @@ slot {
 
 :host(.rounded) {
     border-radius: inherit;
+
+    ::slotted([part=close]) {
+        border-radius: 50%;
+    }
 }
 
 :host(.sm) {
@@ -69,7 +75,7 @@ slot {
     --button-size: 1.125rem;
     --button-px: 0px;
     --button-f-size: var(--f-xxs);
-    border-radius: $xxs;
+    border-radius: calc(var(--radius) / 2);
     margin-right: -.1875rem;
     margin-left: .375rem;
 }
@@ -84,7 +90,7 @@ slot {
 
 ::slotted([part=head]),
 ::slotted([part=foot]) {
-    border-radius: inherit;
+    border-radius: calc(var(--radius) / 2);
     height: calc(var(--size) - var(--p) * 2);
 }
 

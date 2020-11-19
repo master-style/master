@@ -1,5 +1,6 @@
 @import '../../variables';
 @import '../../../element/clickable';
+@import '../../color/color.scss';
 
 :host {
     --px: var(--button-px, #{$md});
