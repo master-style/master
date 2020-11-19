@@ -68,10 +68,6 @@
     height: var(--size);
 }
 
-:host(.square) {
-    border-radius: 0;
-}
-
 :host(.outlined) {
     ::slotted([part=foot]) {
         color: var(--f-fader);

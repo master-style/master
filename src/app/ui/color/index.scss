@@ -107,7 +107,7 @@
     &.outlined {
         --bg-color-head: var(--blue-fader);
         --bg-color-hover: var(--blue-fader);
-        --b-color: var(--b-fadest);
+        --b-color: var(--b-fader);
         --b-color-active: var(--blue-fade);
     }
 }
@@ -134,7 +134,7 @@
     &.outlined {
         --bg-color-head: var(--green-fader);
         --bg-color-hover: var(--green-fader);
-        --b-color: var(--b-fadest);
+        --b-color: var(--b-fader);
         --b-color-active: var(--green-fade);
     }
 }
@@ -161,7 +161,7 @@
     &.outlined {
         --bg-color-head: var(--red-fader);
         --bg-color-hover: var(--red-fader);
-        --b-color: var(--b-fadest);
+        --b-color: var(--b-fader);
         --b-color-active: var(--red-fade);
     }
 }
@@ -188,7 +188,7 @@
     &.outlined {
         --bg-color-head: var(--purple-fader);
         --bg-color-hover: var(--purple-fader);
-        --b-color: var(--b-fadest);
+        --b-color: var(--b-fader);
         --b-color-active: var(--purple-fade);
     }
 }
@@ -215,7 +215,7 @@
     &.outlined {
         --bg-color-head: var(--yellow-fader);
         --bg-color-hover: var(--yellow-fader);
-        --b-color: var(--b-fadest);
+        --b-color: var(--b-fader);
         --b-color-active: var(--yellow-fade);
     }
 }
@@ -253,7 +253,7 @@
     &.outlined {
         --bg-color-head: var(--theme-fader);
         --bg-color-hover: var(--theme-fade);
-        --b-color: var(--b-fadest);
+        --b-color: var(--b-fader);
         --b-color-active: var(--b-fade);
     }
 }

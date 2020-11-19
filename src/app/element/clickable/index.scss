@@ -43,6 +43,11 @@
     }
 }
 
+:host(.outlined){
+    --b-color: var(--b-fader);
+    --b-color-active: var(--b-fade);
+}
+
 ::slotted([part=body]) {
     display: flex;
     flex: 1 1 auto;

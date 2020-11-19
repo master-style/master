@@ -24,6 +24,7 @@ export class ModalElement extends ToggleableElement {
 
     template = window['Master'](() => [
         'm-overlay', {
+            part: 'overlay',
             $if: attrEnabled(this.overlay),
             $created: (element: HTMLElement) => this.overlayElement = element
         },

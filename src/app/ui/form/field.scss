@@ -47,7 +47,7 @@
 
 :host(.outlined),
 :host(.underlined) {
-    --b-color: var(--b-fadest);
+    --b-color: var(--b-fader);
     --b-color-active: var(--b-fade);
     backdrop-filter: none;
 }

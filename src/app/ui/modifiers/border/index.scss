@@ -90,10 +90,8 @@
     border-color: var(--b-fadest) !important;
 }
 
-.outlined,
-.underlined {
-    --b-size: 1px;
-    --b-color: var(--b-fadest);
-    --b-color-active: var(--b-fade);
-    backdrop-filter: none;
-}
+// .outlined,
+// .underlined {
+//     --b-size: 1px;
+//     backdrop-filter: none;
+// }
