@@ -56,6 +56,7 @@ import { SelectComponent } from './form/select/select.component';
 import { InputComponent } from './form/input/input.component';
 import { CheckComponent } from './form/check/check.component';
 import { ButtonComponent } from './form/button/button.component';
+import { EditorComponent } from './editor/editor.component';
 
 export const uiRoutes: Routes = [
     { path: 'ui' },
@@ -89,6 +90,7 @@ export const uiRoutes: Routes = [
             { path: 'skeleton', component: SkeletonComponent, resolve: { route: RouteResolver } },
         ]
     },
+    { path: 'editor', data: { icon: 'edit' }, component: EditorComponent, resolve: { route: RouteResolver } },
     {
         path: 'form', data: { icon: 'sliders' }, resolve: { route: RouteResolver }, children: [
             { path: 'overview', component: FormComponent, resolve: { route: RouteResolver } },

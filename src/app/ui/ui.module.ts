@@ -60,6 +60,7 @@ import { ValidationComponent } from './form/validation/validation.component';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { EditorComponent } from './editor/editor.component';
 
 @NgModule({
     declarations: [
@@ -102,7 +103,8 @@ import { FooterComponent } from './components/footer/footer.component';
         FormComponent,
         ValidationComponent,
         HeaderComponent,
-        FooterComponent
+        FooterComponent,
+        EditorComponent
     ],
     imports: [
         SharedModule,

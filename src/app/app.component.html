@@ -32,7 +32,7 @@
                 {{ eachRoute?.routeConfig?.path || 'home' | translate }}
             </m-breadcrumb>
         </nav>
-        <h1 class="mt:sm">
+        <h1 class="mt:sm c:top">
             <ng-container *ngIf="navigating">
                 <m-skeleton class="animated" width="20%"></m-skeleton>
             </ng-container>
@@ -40,6 +40,10 @@
                 {{ appService?.currentRoute?.routeConfig?.path | translate }}
             </ng-container>
         </h1>
+        <h5 class="t:uppercase f:fade f:xs"
+              style="letter-spacing: 3px; margin-top: .25rem">
+            {{ appService?.currentRoute?.routeConfig?.path }}
+        </h5>
         <m-skeleton *ngIf="navigating" width="7.5rem" style="height: 24px; margin: .6rem 0">
         </m-skeleton>
         <div class="y:no my" *ngIf="!navigating">

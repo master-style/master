@@ -92,5 +92,6 @@
     "interface": "介面",
     "validation": "驗證",
     "prompt": "提示",
-    "dialog": "對話"
+    "dialog": "對話",
+    "editor": "編輯器"
 }
