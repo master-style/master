@@ -66,11 +66,6 @@ body {
     }
 }
 
-i {
-    line-height: 1;
-    vertical-align: middle;
-}
-
 m-option,
 [hidden] {
     display: none !important;
@@ -106,7 +101,6 @@ form {
 }
 
 * {
-    border-width: 0;
     box-sizing: border-box;
     background-origin: border-box;
     -webkit-tap-highlight-color: transparent;

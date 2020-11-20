@@ -17,27 +17,6 @@ const NAME = 'editor';
 export class EditorElement extends HTMLElement {
 
     template = window['Master'](() => [
-        'div', {
-            contenteditable: true,
-            part: 'content',
-            $created: (element: HTMLElement) => {
-                this.content = element;
-                this.content.on('input', ({ target: { firstChild } }: any) => {
-                    if (firstChild && firstChild.nodeType === 3) {
-                        exec(formatBlock, '<div>');
-                    }
-                    else if (this.content.innerHTML === '<br>') {
-                        this.content.innerHTML = '';
-                    }
-                }, { id: NAME, passive: true });
-
-                this.content.on('keydown', (event: any) => {
-                    if (event.key === 'Enter' && queryCommandValue(formatBlock) === 'blockquote') {
-                        setTimeout(() => exec(formatBlock, 'div'), 0)
-                    }
-                }, { id: NAME, passive: true })
-            }
-        },
         'div', { part: 'toolbar' },
         () => {
             let actionTokens = [];
@@ -45,7 +24,7 @@ export class EditorElement extends HTMLElement {
                 const eachAction = this.actions[actionKey];
                 actionTokens = actionTokens.concat([
                     'm-button', {
-                        class: 'theme',
+                        class: 'theme square',
                         $html: eachAction.icon,
                         title: eachAction.title,
                         $created: (element) => {
@@ -55,8 +34,8 @@ export class EditorElement extends HTMLElement {
                             }, { id: NAME, passive: true });
 
                             if (eachAction.state) {
-                                const handler = () => element.classList[eachAction.state() ? 'add' : 'remove']('selected');
-                                this.content.on('keyup mouseup', handler, { id: NAME, passive: true });
+                                const handler = () => element.toggleAttribute('active', eachAction.state());
+                                this.on('keyup mouseup', handler, { id: NAME, passive: true });
                                 element.on('click', handler, { id: NAME, passive: true });
                             }
                         }
@@ -65,17 +44,14 @@ export class EditorElement extends HTMLElement {
             }
             console.log(actionTokens);
             return actionTokens;
-        }
+        },
+        'm-content', { part: 'content' }, [
+            'slot'
+        ]
     ]);
-
-    content;
 
     @Attr()
     disabled: boolean;
-
-    get value() {
-        return this.content.innerHTML;
-    }
 
     actions = {
         bold: {
@@ -164,11 +140,28 @@ export class EditorElement extends HTMLElement {
         this.template.render(this.shadowRoot);
     }
 
-    styleWithCSS = true;
+    // styleWithCSS = false;
 
     onConnected() {
-        this.content.innerHTML = this.innerHTML;
-        if (this.styleWithCSS) exec('styleWithCSS');
+
+        this.contentEditable = 'true';
+
+        this.on('input', ({ target: { firstChild } }: any) => {
+            if (firstChild && firstChild.nodeType === 3) {
+                exec(formatBlock, '<div>');
+            }
+            else if (this.innerHTML === '<br>') {
+                this.innerHTML = '';
+            }
+        }, { id: NAME, passive: true });
+
+        this.on('keydown', (event: any) => {
+            if (event.key === 'Enter' && queryCommandValue(formatBlock) === 'blockquote') {
+                setTimeout(() => exec(formatBlock, 'div'), 0);
+            }
+        }, { id: NAME, passive: true });
+
+        // if (this.styleWithCSS) exec('styleWithCSS');
 
         exec(defaultParagraphSeparatorString, 'div');
     }

@@ -1,4 +1,27 @@
+@import '../variables';
+
 :host {
     display: block;
     width: 100%;
+    outline: none;
+}
+
+[part=toolbar] {
+    m-button[active] {
+        --button-f-color: var(--f-blue);
+    }
+}
+
+:host(.outlined) {
+    border-radius: $xs;
+    border: 1px solid var(--b-fader);
+
+    [part=toolbar] {
+        padding: $xs;
+        border-bottom: 1px solid var(--b-fader);
+    }
+
+    [part=content] {
+        padding: $md;
+    }
 }
