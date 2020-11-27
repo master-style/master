@@ -9,3 +9,4 @@ export * from './overlay';
 export * from './breadcrumb';
 export * from './dialog';
 export * from './header';
+export * from './footer';

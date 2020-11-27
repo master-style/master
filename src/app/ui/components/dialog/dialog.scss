@@ -33,9 +33,13 @@ slot[name=icon]::slotted(*),
         margin-top: -1.5rem !important;
         padding-top: 0 !important;
     }
+
+    +[part=form] {
+        margin-top: -2.5rem;
+    }
 }
 
-[part=form]:not(:first-child) {
+[part=form]:not(:first-of-type) {
     margin-top: -2rem;
 }
 
@@ -47,6 +51,7 @@ slot[name=icon]::slotted(*),
 }
 
 [part=controls] {
+
     m-input,
     m-button,
     m-textarea,
@@ -60,6 +65,7 @@ slot[name=icon]::slotted(*),
     margin: 2rem;
     color: var(--f-theme-fader);
     font-size: var(--f-sm);
+    line-height: 1.4;
 }
 
 [part=icon]+[part=title],

@@ -6,8 +6,9 @@
 }
 
 :host {
-    --position: var(--chip-position, relative);
-    --size: var(--chip-size, 1.5rem);
+    --position: var(--check-position, relative);
+    --size: var(--check-size, 1.5rem);
+    --bg-color: var(--check-bg-color, var(--b-fadest));
     position: var(--position);
     display: inline-flex;
     align-items: center;
@@ -38,7 +39,7 @@
     margin: 0;
     padding: 0;
     -webkit-appearance: none;
-    cursor: pointer!important;
+    cursor: pointer !important;
 }
 
 :host([type=radio]) {
@@ -108,7 +109,7 @@
 
 :host([checked]) {
     [part=check] {
-        background-color: var(--b-fadest);
+        background-color: var(--bg-color);
         border-color: transparent;
     }
 

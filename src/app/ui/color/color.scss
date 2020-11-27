@@ -182,11 +182,7 @@
     --f-theme: #fff;
 }
 
-:host(.brand[disabled]),
-:host(.blue[disabled]),
-:host(.red[disabled]),
-:host(.green[disabled]),
-:host(.purple[disabled]),
-:host(.yellow[disabled]) {
-    --bg-color: var(--theme-fader);
+:host([disabled]) {
+    --bg-color: transparent;
+    --b-color: transparent;
 }

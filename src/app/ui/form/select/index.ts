@@ -271,6 +271,7 @@ export class SelectElement extends ControlElement {
     autocomplete: string;
 
     onConnected() {
+        this.validate();
         this.uid = uid++;
         this
             .on('focusin', () => {

@@ -1,4 +1,5 @@
 import { Attr } from '../attr';
+import { ControlElement } from '../control';
 
 type elementToken = string | { [key: string]: any };
 
@@ -55,6 +56,10 @@ export class ClickableElement extends HTMLElement {
             if (value === 'submit') {
                 clickable.on('click', (event) => {
                     const form = clickable.closest('form');
+                    form.querySelectorAll('m-input,m-textarea,m-select,m-check')
+                        .forEach((eachElement: ControlElement) => {
+                            eachElement.dirty = true;
+                        });
                     if (form) {
                         if (!form.checkValidity()) return;
                         if (form.requestSubmit) {

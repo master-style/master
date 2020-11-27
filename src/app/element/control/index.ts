@@ -1,6 +1,5 @@
 import { Attr } from '../attr';
-
-const NAME = 'control';
+import { capitalize } from '../../utils/capitalize';
 
 export class ControlElement extends HTMLElement {
 
@@ -23,14 +22,38 @@ export class ControlElement extends HTMLElement {
     @Attr()
     required: boolean;
 
-    @Attr()
-    promptValid: string;
+    @Attr({ reflect: false, update: (control: ControlElement) => control.validate() })
+    whenBadInput: string;
 
-    @Attr()
-    promptWarning: string;
+    @Attr({ reflect: false, update: (control: ControlElement) => control.validate() })
+    whenCustomError: string;
 
-    @Attr()
-    promptInvalid: string;
+    @Attr({ reflect: false, update: (control: ControlElement) => control.validate() })
+    whenPatternMismatch: string;
+
+    @Attr({ reflect: false, update: (control: ControlElement) => control.validate() })
+    whenRangeOverflow: string;
+
+    @Attr({ reflect: false, update: (control: ControlElement) => control.validate() })
+    whenRangeUnderflow: string;
+
+    @Attr({ reflect: false, update: (control: ControlElement) => control.validate() })
+    whenStepMismatch: string;
+
+    @Attr({ reflect: false, update: (control: ControlElement) => control.validate() })
+    whenTooLong: string;
+
+    @Attr({ reflect: false, update: (control: ControlElement) => control.validate() })
+    whenTypeMismatch: string;
+
+    @Attr({ reflect: false, update: (control: ControlElement) => control.validate() })
+    whenValueMissing: string;
+
+    @Attr({ reflect: false, update: (control: ControlElement) => control.validate() })
+    whenValid: string;
+
+    @Attr({ observe: false, render: false })
+    prompt: string;
 
     @Attr({ observe: false, render: false })
     valid: boolean;
@@ -48,8 +71,25 @@ export class ControlElement extends HTMLElement {
     touched: boolean = false;
 
     validate() {
+
+        if (!this['ready']) {
+            return;
+        }
+
         this.valid = this.validity.valid;
         this.invalid = !this.validity.valid;
+
+        for (const key in this.validity) {
+            const eachWhether = this.validity[key];
+            const eachPrompt = this['when' + capitalize(key)];
+            if (eachWhether && eachPrompt) {
+                console.log(this, this.prompt, key, eachWhether);
+                this.prompt = eachPrompt;
+                return;
+            }
+        }
+
+        this.prompt = '';
     }
 
     render() {

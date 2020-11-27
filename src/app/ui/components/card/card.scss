@@ -4,7 +4,9 @@
 :host {
     --bg-color: var(--card-bg-color, var(--bg-object));
     --bg-color-hover: var(--card-bg-color-hover);
-    --b-color-active: var(--card-b-color-active);
+    --b-width: var(--card-b-width, 0px);
+    --b-color: var(--card-b-color, var(--b-fader));
+    --b-color-active: var(--card-b-color-active, var(--b-fade));
     --bg-disabled: var(--card-bg-disabled, var(--bg-color));
     --foot-px: var(--card-foot-px, 1rem);
     --foot-py: var(--card-foot-py, .8rem);

@@ -15,9 +15,8 @@
     <m-input class="outlined"
              type="url"
              label="url"
-             prompt-valid="The url is valid."
-             value="http://master.style"
-             dirty>
+             when-valid="The url is valid."
+             value="http://master.style">
     </m-input>
 </template>
 
@@ -28,7 +27,8 @@
     <m-input class="outlined"
              type="email"
              label="email"
-             prompt-invalid="Error email format."
+             when-type-mismatch="Error email format."
+             when-valid="valid email"
              value="username@"
              dirty>
         <div part="foot" class="f:sm">
@@ -44,7 +44,7 @@
     <m-input class="outlined"
              type="password"
              label="password"
-             prompt-warning="Password is too weak."
+             when-warning="Password is too weak."
              value="123456"
              autocomplete="off"
              warning

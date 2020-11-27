@@ -9,7 +9,7 @@
     --f-color: var(--chip-f-color, var(--f-theme));
     --b-color-active: var(--chip-b-color-active);
     --b-color: var(--chip-b-color);
-    --b-size: var(--chip-b-size, 0px);
+    --b-width: var(--chip-b-width, 0px);
     --bg-disabled: var(--chip-bg-disabled);
     --radius: var(--chip-radius, #{$xs});
     --size: var(--chip-size, 2rem);
@@ -49,6 +49,8 @@ slot {
 :host(.rounded) {
     border-radius: inherit;
 
+    ::slotted([part=head]),
+    ::slotted([part=foot]),
     ::slotted([part=close]) {
         border-radius: 50%;
     }

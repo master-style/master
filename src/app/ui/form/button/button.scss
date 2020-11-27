@@ -8,8 +8,9 @@
     --size: var(--button-size, 3rem);
     --f-size: var(--button-f-size, #{var(--f-sm)});
     --f-color: var(--button-f-color, var(--f-theme));
-    --b-color: var(--button-b-color, transparent);
-    --b-color-active: var(--button-b-color-active, transparent);
+    --b-width: var(--button-b-width, 0px);
+    --b-color: var(--button-b-color, var(--b-fader));
+    --b-color-active: var(--button-b-color-active, var(--b-fade));
     --bg-color: var(--button-bg-color, transparent);
     --bg-color-hover: var(--button-bg-color-hover, var(--bg-color));
     display: inline-flex;

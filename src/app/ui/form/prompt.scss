@@ -1,7 +1,37 @@
 @import '../variables';
 
-:host {
+:host([prompt][valid][dirty]),
+:host([prompt][valid][touched]),
+:host([prompt][class*=-valid][class*=-dirty]),
+:host([prompt][class*=-valid][class*=-touched]) {
+    --prompt-bg-color: var(--green-fader);
+    --prompt-f-color: var(--green);
+    --label-f-color: var(--green);
+}
+
+// :host([when-warning][warning][dirty]),
+// :host([when-warning][warning][class*=-dirty]) {
+//     --prompt-bg-color: var(--yellow-fader) !important;
+//     --prompt-f-color: var(--f-yellow) !important;
+//     --label-f-color: var(--f-yellow) !important;
+// }
+
+:host([prompt][invalid][dirty]),
+:host([prompt][invalid][touched]),
+:host([prompt][class*=-invalid][class*=-dirty]),
+:host([prompt][class*=-invalid][class*=-touched]) {
+    --prompt-bg-color: var(--red-fader) !important;
+    --prompt-f-color: var(--f-red) !important;
+    --label-f-color: var(--f-red) !important;
+    --b-color: var(--red) !important;
+}
+
+:host([prompt]:not([prompt=""])[dirty]),
+:host([prompt]:not([prompt=""])[touched]),
+:host([prompt]:not([prompt=""])[class*=-dirty]),
+:host([prompt]:not([prompt=""])[class*=-touched]) {
     &:after {
+        content: attr(prompt);
         position: absolute;
         z-index: 1000;
         bottom: -.1875rem;
@@ -16,48 +46,5 @@
         text-align: right;
         line-height: 1.2;
         padding: .1875rem .375rem .125rem .375rem;
-    }
-}
-
-:host([prompt-valid][valid][dirty]),
-:host([prompt-valid][class*=-valid][class*=-dirty]) {
-    --prompt-bg-color: var(--green-fader);
-    --prompt-f-color: var(--green);
-    --label-f-color: var(--green);
-}
-
-:host([prompt-valid]:not([prompt-valid=''])[valid][dirty]),
-:host([prompt-valid]:not([prompt-valid=''])[class*=-valid][class*=-dirty]) {
-    &:after {
-        content: attr(prompt-valid);
-    }
-}
-
-:host([prompt-warning][warning][dirty]),
-:host([prompt-warning][warning][class*=-dirty]) {
-    --prompt-bg-color: var(--yellow-fader) !important;
-    --prompt-f-color: var(--f-yellow) !important;
-    --label-f-color: var(--f-yellow) !important;
-}
-
-:host([prompt-warning]:not([prompt-warning=""])[dirty]),
-:host([prompt-warning]:not([prompt-warning=""])[class*=-dirty]) {
-    &:after {
-        content: attr(prompt-warning) !important;
-    }
-}
-
-:host([prompt-invalid][invalid][dirty]),
-:host([prompt-invalid][class*=-invalid][class*=-dirty]) {
-    --prompt-bg-color: var(--red-fader) !important;
-    --prompt-f-color: var(--f-red) !important;
-    --label-f-color: var(--f-red) !important;
-    --b-color: var(--red) !important;
-}
-
-:host([prompt-invalid]:not([prompt-invalid=""])[invalid][dirty]),
-:host([prompt-invalid]:not([prompt-invalid=""])[class*=-invalid][class*=-dirty]) {
-    &:after {
-        content: attr(prompt-invalid) !important;
     }
 }

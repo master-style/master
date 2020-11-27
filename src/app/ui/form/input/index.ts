@@ -157,30 +157,28 @@ export class InputElement extends ControlElement {
                         input.body.focus();
                         input.body.click();
                     }, { id: NAME + '.file', passive: true })
-                    .on('dragenter', (event) => {
-                        event.preventDefault();
-                        event.stopPropagation();
-                        input.dragging = true;
-                    }, { id: NAME + '.file' })
-                    .on('dragover', (event) => {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }, { id: NAME + '.file' })
-                    .on('dragleave dragend', (event) => {
-                        event.preventDefault();
-                        input.dragging = false;
-                    }, { id: NAME + '.file' })
-                    .on('drop', (event: any) => {
-                        input.dragging = false;
-                        event.preventDefault();
-                        const files = event.dataTransfer.files;
-                        if (files) {
-                            console.log(files);
-                            input.addFiles(files);
-                            console.log(input.body);
-                            input.body.dispatchEvent(changeEvent);
-                        }
-                    }, { id: NAME + '.file' });
+                // 拖拉檔案 accept 格式檢查待解決
+                // .on('dragenter', (event) => {
+                //     event.preventDefault();
+                //     event.stopPropagation();
+                //     input.dragging = true;
+                // }, { id: NAME + '.file' })
+                // .on('dragover', (event) => {
+                //     event.preventDefault();
+                //     event.stopPropagation();
+                // }, { id: NAME + '.file' })
+                // .on('dragleave dragend', (event) => {
+                //     event.preventDefault();
+                //     input.dragging = false;
+                // }, { id: NAME + '.file' })
+                // .on('drop', (event: any) => {
+                //     input.dragging = false;
+                //     event.preventDefault();
+                //     if (input.body.files.length) {
+                //         input.addFiles(input.body.files);
+                //         input.body.dispatchEvent(changeEvent);
+                //     }
+                // }, { id: NAME + '.file' });
             }
             if (oldValue === 'file') {
                 input.off({ id: NAME + '.file' });
@@ -250,11 +248,10 @@ export class InputElement extends ControlElement {
 
     private addFiles(fileList: FileList) {
         if (!fileList.length) return;
+        const files = Array.from(fileList);
         this.value
             = this.files
-            = this.multiple
-                ? this.files.concat(Array.from(fileList))
-                : Array.from(fileList);
+            = this.multiple ? this.files.concat(files) : files;
     }
 
     onConnected() {
