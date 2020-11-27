@@ -9,6 +9,7 @@
     --position: var(--check-position, relative);
     --size: var(--check-size, 1.5rem);
     --bg-color: var(--check-bg-color, var(--b-fadest));
+    --color: var(--check-color, var(--f-theme));
     position: var(--position);
     display: inline-flex;
     align-items: center;
@@ -80,7 +81,7 @@
 }
 
 [part=check-icon] {
-    stroke: var(--f-theme);
+    stroke: var(--color);
     stroke-dasharray: 65%;
     stroke-dashoffset: 65%;
     will-change: stroke-dashoffset;
@@ -124,7 +125,7 @@
 
 // switch
 :host([interface=switch]) {
-    --bg-color: #56dd6a;
+    --bg-color: var(--check-bg-color, #56dd6a);
 }
 
 [part=switch] {
