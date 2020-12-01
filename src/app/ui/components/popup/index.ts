@@ -29,6 +29,9 @@ export class PopupElement extends TargetElement {
     distance = 8;
 
     @Attr({ reflect: false })
+    boundaryPadding = 10;
+
+    @Attr({ reflect: false })
     placement: Placement = 'bottom';
 
     @Attr({ reflect: false })
@@ -77,6 +80,18 @@ export class PopupElement extends TargetElement {
                             options: {
                                 offset: [this.offset, this.distance],
                             },
+                        },
+                        {
+                            name: 'flip',
+                            options: {
+                                flipVariations: false,
+                            },
+                        },
+                        {
+                            name: 'preventOverflow',
+                            options: {
+                                padding: this.boundaryPadding,
+                            }
                         },
                     ],
                     onFirstUpdate: resolve

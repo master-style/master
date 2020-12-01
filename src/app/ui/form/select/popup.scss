@@ -12,7 +12,8 @@
     will-change: transform, opacity;
     max-height: 240px;
     overflow: visible;
-    background-color: var(--bg-object);
+
+    background-color: rgba(var(--bg-object-rgb), .8);
     backdrop-filter: blur(35px);
     -webkit-backdrop-filter: blur(35px);
 

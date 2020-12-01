@@ -1,14 +1,36 @@
 @import '../../variables';
 
+:host {
+    z-index: $z-top;
+}
+
 [part=root] {
-    border: 1px solid var(--b-fadest);
-    background-color: var(--bg-object);
     border-radius: $xs;
     padding: $xs 0;
-    box-shadow: 0 0.5px 0.8px rgba(0, 0, 0, 0.017),
-        0 1.3px 1.9px rgba(0, 0, 0, 0.024),
-        0 2.4px 3.6px rgba(0, 0, 0, 0.03),
-        0 4.2px 6.5px rgba(0, 0, 0, 0.036),
-        0 7.9px 12.1px rgba(0, 0, 0, 0.043),
-        0 19px 29px rgba(0, 0, 0, 0.06);
+
+    background-color: rgba(var(--bg-object-rgb), .8);
+    backdrop-filter: blur(35px);
+    -webkit-backdrop-filter: blur(35px);
+
+    // fix safari ui
+    &:after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        border: 1px solid var(--b-fadest);
+        box-sizing: border-box;
+        content: '';
+
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        box-shadow: 0 0.5px 0.8px rgba(0, 0, 0, 0.017),
+            0 1.3px 1.9px rgba(0, 0, 0, 0.024),
+            0 2.4px 3.6px rgba(0, 0, 0, 0.03),
+            0 4.2px 6.5px rgba(0, 0, 0, 0.036),
+            0 7.9px 12.1px rgba(0, 0, 0, 0.043),
+            0 19px 29px rgba(0, 0, 0, 0.06);
+    }
 }
