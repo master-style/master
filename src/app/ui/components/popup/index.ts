@@ -1,6 +1,6 @@
 import { Element, TargetElement, Attr } from '../../../element';
 import { createPopper, Placement } from '@popperjs/core';
-import { isInteractOutside } from '../../../utils/is-clicked-outside';
+import { isInteractOutside } from '../../../utils/is-interact-outside';
 
 import css from './popup.scss';
 
@@ -32,6 +32,9 @@ export class PopupElement extends TargetElement {
     @Attr({ reflect: false })
     placement: Placement = 'bottom';
 
+    @Attr({ reflect: false })
+    bridgeTrigger: boolean;
+
     template = window['Master'](() => [
         'div', {
             part: 'root',
@@ -40,6 +43,27 @@ export class PopupElement extends TargetElement {
             'slot'
         ]
     ]);
+
+    protected handleTrigger(event, whether) {
+        if (!whether) {
+            if (
+                !isInteractOutside(this.trigger, event) ||
+                !isInteractOutside(this.root, event, this.distance)
+            ) {
+                return false;
+            }
+        }
+    }
+
+    private determineClose = (event: any) => {
+        console.log(isInteractOutside(this.trigger, event), isInteractOutside(this.root, event, this.distance))
+        if (
+            isInteractOutside(this.trigger, event) &&
+            isInteractOutside(this.root, event, this.distance)
+        ) {
+            this.close();
+        }
+    }
 
     onOpen() {
         return new Promise((resolve) => {
@@ -57,26 +81,32 @@ export class PopupElement extends TargetElement {
                     onFirstUpdate: resolve
                 });
             }
-
-            document.body
-                .on('click', (event: any) => {
-                    if (
-                        event.target === this ||
-                        this.root.contains(event.target)
-                    ) return;
-                    console.log('click');
-                    if (isInteractOutside(this.root, event, this.distance)) {
-                        this.close();
-                    }
-                }, { passive: true, id: [this, NAME, 'outside'] });
         });
     }
 
-    onClose() {
-        document.body.off({ id: [this, NAME, 'outside'] });
+    onOpened() {
+
+        const typeSets = this.triggerEvent.split(',');
+
+        if (this.bridgeTrigger) {
+            if (typeSets.length > 1 && typeSets[1].indexOf('mouseout') !== -1) {
+                document.body
+                    .on('mousemove', this.determineClose, { passive: true });
+            }
+
+            if (
+                typeSets.length === 1 && typeSets[0].indexOf('click') !== -1 ||
+                typeSets[1]?.indexOf('click') !== -1
+            ) {
+                document.body
+                    .on('click', this.determineClose, { passive: true });
+            }
+        }
+
     }
 
     onClosed() {
+        document.body.off(this.determineClose);
         if (this.popper) {
             this.popper = this.popper.destroy();
         }

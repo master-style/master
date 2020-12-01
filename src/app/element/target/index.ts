@@ -1,3 +1,4 @@
+import { split } from 'lodash-es';
 import { Attr } from '../attr';
 import { Event } from '../event';
 
@@ -32,29 +33,49 @@ export class TargetElement extends HTMLElement {
             }
             if (value) {
                 const toggleAttrKey = 'toggle-' + name;
-                document.body.on(value, '[' + toggleAttrKey + ']', function (event) {
-                    const trigger = this;
-                    if (this.disabled) return;
-                    const targets = $(trigger.getAttribute(toggleAttrKey));
-                    targets.forEach((eachTarget: TargetElement) => {
-                        if (eachTarget !== eachTarget) {
+                const typeSets = value.split(',');
+                const handleTrigger = target['handleTrigger'];
+
+                // open
+                document.body
+                    .on(typeSets.join(' '), '[' + toggleAttrKey + ']', function (event) {
+                        const trigger = this;
+                        if (this.disabled) {
                             return;
                         }
+                        const targetSelector = trigger.getAttribute(toggleAttrKey);
+                        if (!target.matches(targetSelector)) {
+                            return;
+                        }
+                        const eventType = event.type;
                         let whether: boolean;
-                        if (
-                            'checked' in trigger
-                            && (event.type === 'input' || event.type === 'change')
-                        ) {
-                            whether = !!trigger.checked;
+                        if (typeSets.length > 1) {
+                            whether = target.hidden;
+                            if (
+                                whether && typeSets[0].split(' ').indexOf(eventType) === -1
+                                || !whether && typeSets[1].split(' ').indexOf(eventType) === -1
+                            ) {
+                                return;
+                            }
+                            if (handleTrigger && handleTrigger.call(target, event, whether) === false) {
+                                return;
+                            }
                         } else {
-                            whether = eachTarget.hidden;
+                            if (
+                                'checked' in trigger
+                                && (eventType === 'input' || eventType === 'change')
+                            ) {
+                                whether = !!trigger.checked;
+                            } else {
+                                whether = target.hidden;
+                            }
                         }
-                        if (whether && !eachTarget.animation) {
-                            eachTarget['trigger'] = trigger;
+                        if (whether && !target.animation) {
+                            target['trigger'] = trigger;
                         }
-                        eachTarget.toggle(whether);
-                    });
-                }, { passive: true, id: [target, name] });
+                        target.toggle(whether);
+                    }, { passive: true, id: [target, name] });
+
             }
         }
     })

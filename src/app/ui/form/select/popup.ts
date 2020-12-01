@@ -1,6 +1,6 @@
 import { Element, Attr, TargetElement } from '../../../element';
 import { OptionElement } from '../option';
-import { isInteractOutside } from '../../../utils/is-clicked-outside';
+import { isInteractOutside } from '../../../utils/is-interact-outside';
 
 import css from './popup.scss';
 
