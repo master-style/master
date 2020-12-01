@@ -27,17 +27,17 @@ export class TargetElement extends HTMLElement {
 
     @Attr({
         reflect: false,
-        update(togglable: TargetElement, value: any, oldValue: any) {
+        update(target: TargetElement, value: any, oldValue: any) {
             if (
                 !value && oldValue ||
                 value && oldValue
             ) {
                 if (!oldValue) return;
-                oldValue += '.' + togglable.constructor['elementName'];
+                oldValue += '.' + target.constructor['elementName'];
                 const liveTargets = liveTriggers[oldValue];
                 if (liveTargets) {
                     if (liveTargets.length) {
-                        liveTargets.splice(liveTargets.indexOf(togglable), 1);
+                        liveTargets.splice(liveTargets.indexOf(target), 1);
                     } else {
                         document.body.off(oldValue);
                         delete liveTargets[oldValue];
@@ -45,14 +45,14 @@ export class TargetElement extends HTMLElement {
                 }
             }
             if (value) {
-                const name = togglable.constructor['elementName'];
+                const name = target.constructor['elementName'];
                 const toggleAttrKey = 'toggle-' + name;
                 value += '.' + name;
                 let liveTargets = liveTriggers[value];
                 if (liveTargets) {
-                    liveTargets.push(togglable);
+                    liveTargets.push(target);
                 } else {
-                    liveTriggers[value] = liveTargets = [togglable];
+                    liveTriggers[value] = liveTargets = [target];
                     document.body.on(value, '[' + toggleAttrKey + ']', function (event) {
                         const trigger = this;
                         if (this.disabled) return;
@@ -73,7 +73,7 @@ export class TargetElement extends HTMLElement {
                             }
                             eachTarget.toggle(whether);
                         });
-                    }, { passive: true });
+                    }, { passive: true, id: target });
                 }
             }
         }
@@ -167,6 +167,10 @@ export class TargetElement extends HTMLElement {
     async toggle(whether?: boolean) {
         whether = typeof whether === 'boolean' ? whether : this.hidden;
         await (whether ? this.open() : this.close());
+    }
+
+    onDisconnected() {
+        document.body.off({ id: this });
     }
 
 }

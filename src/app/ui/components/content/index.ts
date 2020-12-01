@@ -391,6 +391,7 @@ export class ContentElement extends TargetElement {
     }
 
     onDisconnected() {
+        document.body.off({ id: this });
         this.disable();
     }
 
