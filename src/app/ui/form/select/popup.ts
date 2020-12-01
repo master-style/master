@@ -1,6 +1,6 @@
-import { Element, Attr, ToggleableElement } from '../../../element';
+import { Element, Attr, TargetElement } from '../../../element';
 import { OptionElement } from '../option';
-import { isClickedOutside } from '../../../utils/is-clicked-outside';
+import { isInteractOutside } from '../../../utils/is-clicked-outside';
 
 import css from './popup.scss';
 
@@ -15,7 +15,7 @@ const NAME = 'select-popup';
     tag: 'm-' + NAME,
     css
 })
-export class SelectPopupElement extends ToggleableElement {
+export class SelectPopupElement extends TargetElement {
 
     items: ItemElement[] = [];
 
@@ -124,7 +124,7 @@ export class SelectPopupElement extends ToggleableElement {
                     clickEvent.target === this ||
                     this.select.contains(clickEvent.target)
                 ) return;
-                if (isClickedOutside(this, clickEvent, this.senseEdge)) {
+                if (isInteractOutside(this, clickEvent, this.senseEdge)) {
                     this.close();
                 }
             }, { passive: true, id: this });

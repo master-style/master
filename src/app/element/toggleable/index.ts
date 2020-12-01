@@ -3,10 +3,10 @@ import { Event } from '../event';
 
 const liveTriggers = {};
 
-export class ToggleableElement extends HTMLElement {
+export class TargetElement extends HTMLElement {
 
     @Attr({
-        update(toggleable: ToggleableElement, value: boolean) {
+        update(toggleable: TargetElement, value: boolean) {
             if (toggleable['ready']) {
                 const start = toggleable[value ? 'onClose' : 'onOpen'];
                 if (start) start();
@@ -27,7 +27,7 @@ export class ToggleableElement extends HTMLElement {
 
     @Attr({
         reflect: false,
-        update(togglable: ToggleableElement, value: any, oldValue: any) {
+        update(togglable: TargetElement, value: any, oldValue: any) {
             if (
                 !value && oldValue ||
                 value && oldValue
@@ -57,7 +57,7 @@ export class ToggleableElement extends HTMLElement {
                         const trigger = this;
                         if (this.disabled) return;
                         const targets = $(trigger.getAttribute(toggleAttrKey));
-                        targets.forEach((eachTarget: ToggleableElement) => {
+                        targets.forEach((eachTarget: TargetElement) => {
                             if (liveTargets.indexOf(eachTarget) === -1) return;
                             let whether: boolean;
                             if (
@@ -142,7 +142,9 @@ export class ToggleableElement extends HTMLElement {
         this['_hidden'] = false;
         this.toggleAttribute('hidden', false);
         const onOpen = this['onOpen'];
-        if (onOpen) onOpen.call(this);
+        if (onOpen) {
+            await onOpen.call(this);
+        }
         this.openEmitter();
         await (this.changing = this.prepare());
         this.openedEmitter();
@@ -154,7 +156,9 @@ export class ToggleableElement extends HTMLElement {
         }
         this['_hidden'] = true;
         const onClose = this['onClose'];
-        if (onClose) onClose.call(this);
+        if (onClose) {
+            await onClose.call(this);
+        }
         this.closeEmitter();
         await (this.changing = this.prepare());
         this.closedEmitter();

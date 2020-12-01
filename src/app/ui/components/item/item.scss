@@ -39,13 +39,13 @@
     }
 }
 
-:host(.lined) {
+:host(.lined:not(:last-of-type)) {
     [part=root] {
         border-bottom: 1px solid var(--b-fadest);
     }
 }
 
-:host(.indent-lined) {
+:host(.indent-lined:not(:last-of-type)) {
     [part=lower] {
         border-bottom: 1px solid var(--b-fadest);
     }

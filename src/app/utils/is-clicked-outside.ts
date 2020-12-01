@@ -1,5 +1,5 @@
 
-export function isClickedOutside(
+export function isInteractOutside(
     target: Element,
     event: any,
     senseEdge: number = 0

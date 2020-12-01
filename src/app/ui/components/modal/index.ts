@@ -1,4 +1,4 @@
-import { Element, Attr, ToggleableElement, attrEnabled } from '../../../element';
+import { Element, Attr, TargetElement, attrEnabled } from '../../../element';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { ContentElement } from '../content';
 import { HeaderElement } from '../header';
@@ -12,7 +12,7 @@ const PX = 'px';
     tag: 'm-' + NAME,
     css
 })
-export class ModalElement extends ToggleableElement {
+export class ModalElement extends TargetElement {
 
     private trigger: HTMLElement;
 
@@ -113,8 +113,6 @@ export class ModalElement extends ToggleableElement {
         let content: ContentElement;
         let pushing;
 
-        const root = this.root;
-
         if (this.placement === 'origin' && this.trigger) {
 
             if (!this.hidden && this.hideTrigger) {
@@ -180,25 +178,25 @@ export class ModalElement extends ToggleableElement {
                         dir = 'X';
                         offset = '100%';
                         if (this.pushing)
-                            pushingOffset = -root.offsetWidth / 3;
+                            pushingOffset = -this.root.offsetWidth / 3;
                         break;
                     case 'left':
                         dir = 'X';
                         offset = '-100%';
                         if (this.pushing)
-                            pushingOffset = root.offsetWidth / 3;
+                            pushingOffset = this.root.offsetWidth / 3;
                         break;
                     case 'bottom':
                         dir = 'Y';
                         offset = '100%';
                         if (this.pushing)
-                            pushingOffset = -root.offsetHeight / 3;
+                            pushingOffset = -this.root.offsetHeight / 3;
                         break;
                     case 'top':
                         dir = 'Y';
                         offset = '-100%';
                         if (this.pushing)
-                            pushingOffset = root.offsetHeight / 3;
+                            pushingOffset = this.root.offsetHeight / 3;
                         break;
                 }
 

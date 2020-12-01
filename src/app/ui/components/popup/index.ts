@@ -1,5 +1,6 @@
-import { Element, ToggleableElement } from '../../../element';
+import { Element, TargetElement, Attr } from '../../../element';
 import { createPopper } from '@popperjs/core';
+import { isInteractOutside } from '../../../utils/is-clicked-outside';
 
 import css from './popup.scss';
 
@@ -9,9 +10,24 @@ const NAME = 'popup';
     tag: 'm-' + NAME,
     css
 })
-export class PopupElement extends ToggleableElement {
+export class PopupElement extends TargetElement {
+
+    /**
+     * default
+     */
+    _fade = true;
+    _hidden = true;
+    _duration = 300;
+
     root;
     trigger: HTMLElement;
+    popper;
+
+    @Attr({ reflect: false })
+    offset = 0;
+
+    @Attr({ reflect: false })
+    distance = 8;
 
     template = window['Master'](() => [
         'div', {
@@ -23,15 +39,100 @@ export class PopupElement extends ToggleableElement {
     ]);
 
     onOpen() {
-        createPopper(this.trigger, this, {
-            modifiers: [
-                {
-                    name: 'offset',
-                    options: {
-                        offset: [0, 8],
-                    },
-                },
-            ],
+        return new Promise((resolve) => {
+            if (!this.popper) {
+                this.popper = createPopper(this.trigger, this, {
+                    modifiers: [
+                        {
+                            name: 'offset',
+                            options: {
+                                offset: [this.offset, this.distance],
+                            },
+                        },
+                    ],
+                    onFirstUpdate: resolve
+                });
+            }
+
+            document.body
+                .on('click', async (event: any) => {
+                    if (
+                        event.target === this ||
+                        this.root.contains(event.target)
+                    ) return;
+                    if (isInteractOutside(this.root, event, this.distance)) {
+                        this.close();
+                    }
+                }, { passive: true, id: this });
+        });
+    }
+
+    onClose() {
+        document.body.off({ id: this });
+    }
+
+    onClosed() {
+        if (this.popper) {
+            this.popper = this.popper.destroy();
+        }
+    }
+
+    protected toggling(
+        options: KeyframeEffectOptions
+    ) {
+        let keyframes: any;
+
+        let scale = '';
+        let translate = '';
+        let transformOrigin = '';
+
+        switch (this.popper.state.placement.split('-')[0]) {
+            case 'top':
+                scale = 'Y(.9)';
+                translate = 'Y(' + this.distance + 'px)';
+                transformOrigin = 'center bottom';
+                break;
+            case 'bottom':
+                scale = 'Y(.9)';
+                translate = 'Y(-' + this.distance + 'px)';
+                transformOrigin = 'top center';
+                break;
+            case 'left':
+                scale = 'X(.9)';
+                translate = 'X(' + this.distance + 'px)';
+                transformOrigin = 'right center';
+                break;
+            case 'right':
+                scale = 'X(.9)';
+                translate = 'X(-' + this.distance + 'px)';
+                transformOrigin = 'left center';
+                break;
+        }
+
+        keyframes = [
+            {
+                transformOrigin,
+                transform: 'translate' + translate + ' scale' + scale,
+                opacity: this.fade ? 0 : 1
+            },
+            {
+                transformOrigin,
+                transform: 'translate(0,0) scaleY(1)',
+                opacity: 1
+            }
+        ];
+
+        if (this.hidden) {
+            keyframes.reverse();
+        }
+
+        this.animation = this.root.animate(keyframes, options);
+        this.animations.push(this.animation);
+        return new Promise((finish) => {
+            this.animation.onfinish = () => {
+                const hidden = this.hidden;
+                finish();
+            };
         });
     }
 

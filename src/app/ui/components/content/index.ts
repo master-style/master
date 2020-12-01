@@ -1,4 +1,4 @@
-import { Element, Attr, Event, ToggleableElement } from '../../../element';
+import { Element, Attr, Event, TargetElement } from '../../../element';
 import { debounce } from 'lodash-es';
 import css from './content.scss';
 import isNum from '../../../utils/is-num';
@@ -25,7 +25,7 @@ const
     tag: 'm-' + NAME,
     css
 })
-export class ContentElement extends ToggleableElement {
+export class ContentElement extends TargetElement {
 
     #time: any = {};
     #thumbSize: any = {};
