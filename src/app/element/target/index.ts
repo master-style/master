@@ -28,53 +28,36 @@ export class TargetElement extends HTMLElement {
     @Attr({
         reflect: false,
         update(target: TargetElement, value: any, oldValue: any) {
-            if (
-                !value && oldValue ||
-                value && oldValue
-            ) {
-                if (!oldValue) return;
-                oldValue += '.' + target.constructor['elementName'];
-                const liveTargets = liveTriggers[oldValue];
-                if (liveTargets) {
-                    if (liveTargets.length) {
-                        liveTargets.splice(liveTargets.indexOf(target), 1);
-                    } else {
-                        document.body.off(oldValue);
-                        delete liveTargets[oldValue];
-                    }
-                }
+            const name = target.constructor['elementName'];
+            if (oldValue) {
+                document.body.off({ id: this });
             }
+            console.log('fuck');
             if (value) {
-                const name = target.constructor['elementName'];
                 const toggleAttrKey = 'toggle-' + name;
-                value += '.' + name;
-                let liveTargets = liveTriggers[value];
-                if (liveTargets) {
-                    liveTargets.push(target);
-                } else {
-                    liveTriggers[value] = liveTargets = [target];
-                    document.body.on(value, '[' + toggleAttrKey + ']', function (event) {
-                        const trigger = this;
-                        if (this.disabled) return;
-                        const targets = $(trigger.getAttribute(toggleAttrKey));
-                        targets.forEach((eachTarget: TargetElement) => {
-                            if (liveTargets.indexOf(eachTarget) === -1) return;
-                            let whether: boolean;
-                            if (
-                                'checked' in trigger
-                                && (event.type === 'input' || event.type === 'change')
-                            ) {
-                                whether = !!trigger.checked;
-                            } else {
-                                whether = eachTarget.hidden;
-                            }
-                            if (whether && !eachTarget.animation) {
-                                eachTarget['trigger'] = trigger;
-                            }
-                            eachTarget.toggle(whether);
-                        });
-                    }, { passive: true, id: target });
-                }
+                document.body.on(value, '[' + toggleAttrKey + ']', function (event) {
+                    const trigger = this;
+                    if (this.disabled) return;
+                    const targets = $(trigger.getAttribute(toggleAttrKey));
+                    targets.forEach((eachTarget: TargetElement) => {
+                        if (eachTarget !== eachTarget) {
+                            return;
+                        }
+                        let whether: boolean;
+                        if (
+                            'checked' in trigger
+                            && (event.type === 'input' || event.type === 'change')
+                        ) {
+                            whether = !!trigger.checked;
+                        } else {
+                            whether = eachTarget.hidden;
+                        }
+                        if (whether && !eachTarget.animation) {
+                            eachTarget['trigger'] = trigger;
+                        }
+                        eachTarget.toggle(whether);
+                    });
+                }, { passive: true, id: target });
             }
         }
     })
