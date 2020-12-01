@@ -68,12 +68,12 @@ export class PopupElement extends TargetElement {
                     if (isInteractOutside(this.root, event, this.distance)) {
                         this.close();
                     }
-                }, { passive: true, id: [this, NAME] });
+                }, { passive: true, id: [this, NAME, 'outside'] });
         });
     }
 
     onClose() {
-        document.body.off({ id: [this, NAME] });
+        document.body.off({ id: [this, NAME, 'outside'] });
     }
 
     onClosed() {
