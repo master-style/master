@@ -54,22 +54,22 @@ export class ToggleableElement extends HTMLElement {
                 } else {
                     liveTriggers[value] = liveTargets = [togglable];
                     document.body.on(value, '[' + toggleAttrKey + ']', function (event) {
-                        const toggle = this;
+                        const trigger = this;
                         if (this.disabled) return;
-                        const targets = $(toggle.getAttribute(toggleAttrKey));
+                        const targets = $(trigger.getAttribute(toggleAttrKey));
                         targets.forEach((eachTarget: ToggleableElement) => {
                             if (liveTargets.indexOf(eachTarget) === -1) return;
                             let whether: boolean;
                             if (
-                                'checked' in toggle
+                                'checked' in trigger
                                 && (event.type === 'input' || event.type === 'change')
                             ) {
-                                whether = !!toggle.checked;
+                                whether = !!trigger.checked;
                             } else {
                                 whether = eachTarget.hidden;
                             }
                             if (whether && !eachTarget.animation) {
-                                eachTarget['trigger'] = toggle;
+                                eachTarget['trigger'] = trigger;
                             }
                             eachTarget.toggle(whether);
                         });

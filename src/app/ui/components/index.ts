@@ -1,3 +1,4 @@
+export * from './popup';
 export * from './skeleton';
 export * from './chip';
 export * from './card';
