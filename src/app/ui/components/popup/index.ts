@@ -56,7 +56,9 @@ export class PopupElement extends TargetElement {
     }
 
     private determineClose = (event: any) => {
-        console.log(isInteractOutside(this.trigger, event), isInteractOutside(this.root, event, this.distance))
+        if (this.animation) {
+            return;
+        }
         if (
             isInteractOutside(this.trigger, event) &&
             isInteractOutside(this.root, event, this.distance)
