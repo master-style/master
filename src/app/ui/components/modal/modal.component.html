@@ -1,5 +1,17 @@
 <p>modal works!</p>
 
+<m-modal placement="bottom"
+         overlay="close"
+         class="right"
+         style="--modal-max-width: var(--wrap-xxs)">
+    <m-header class="px bb">
+        測試
+    </m-header>
+    <m-content scroll-y style="--content-offset-bottom: 4rem; --content-offset-top: 3rem">
+        test
+    </m-content>
+</m-modal>
+
 <m-modal id="modal"
          overlay="close"
          placement="origin"
@@ -38,6 +50,7 @@
          overlay="close"
          placement="right"
          pushing="#app-side"
+         hidden
          close-button="chevron">
     <m-header>
         <span slot="start">1</span>
