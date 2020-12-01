@@ -9,8 +9,8 @@ const DEFAULT_ELEMENT_OPTION = {
 export function Element(options: ElementOptions) {
     options = { ...DEFAULT_ELEMENT_OPTION, ...options };
     return function (constructor: any) {
-        const name = constructor.name.charAt(0).toLowerCase() + constructor.name.slice(1);
-        constructor['elementName'] = camelToKebabCase(name.split('Element')[0]);
+        constructor['elementName'] = options.tag.replace('m-', '');
+        console.log(constructor['elementName']);
         const prototype = constructor.prototype;
         const attrsOptions = constructor.attrsOptions;
         const propsOptions = constructor.propsOptions;

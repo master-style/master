@@ -1,4 +1,3 @@
-import { split } from 'lodash-es';
 import { Attr } from '../attr';
 import { Event } from '../event';
 
@@ -31,6 +30,7 @@ export class TargetElement extends HTMLElement {
             if (oldValue) {
                 document.body.off({ id: [target, name] });
             }
+
             if (value) {
                 const toggleAttrKey = 'toggle-' + name;
                 const typeSets = value.split(',');

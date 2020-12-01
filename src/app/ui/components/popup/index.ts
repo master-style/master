@@ -16,7 +16,6 @@ export class PopupElement extends TargetElement {
      * default
      */
     _fade = true;
-    _hidden = true;
     _duration = 300;
 
     root;
