@@ -35,7 +35,7 @@
 
 :host([type=button]) {
     ::slotted(m-check) {
-        --chip-position: static;
+        --check-position: static;
     }
 }
 

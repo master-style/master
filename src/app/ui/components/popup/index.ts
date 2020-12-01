@@ -1,5 +1,5 @@
 import { Element, TargetElement, Attr } from '../../../element';
-import { createPopper } from '@popperjs/core';
+import { createPopper, Placement } from '@popperjs/core';
 import { isInteractOutside } from '../../../utils/is-clicked-outside';
 
 import css from './popup.scss';
@@ -29,6 +29,9 @@ export class PopupElement extends TargetElement {
     @Attr({ reflect: false })
     distance = 8;
 
+    @Attr({ reflect: false })
+    placement: Placement = 'bottom';
+
     template = window['Master'](() => [
         'div', {
             part: 'root',
@@ -42,6 +45,7 @@ export class PopupElement extends TargetElement {
         return new Promise((resolve) => {
             if (!this.popper) {
                 this.popper = createPopper(this.trigger, this, {
+                    placement: this.placement,
                     modifiers: [
                         {
                             name: 'offset',
@@ -129,10 +133,7 @@ export class PopupElement extends TargetElement {
         this.animation = this.root.animate(keyframes, options);
         this.animations.push(this.animation);
         return new Promise((finish) => {
-            this.animation.onfinish = () => {
-                const hidden = this.hidden;
-                finish();
-            };
+            this.animation.onfinish = finish;
         });
     }
 
