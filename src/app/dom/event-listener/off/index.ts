@@ -35,12 +35,18 @@ window.off = document.off = Element.prototype.off = function (
                         if (namespaces.length)
                             remove = remove && listener.typeSet.has(namespaces, '.');
                         if (
-                            option &&
-                            option.id &&
-                            listener.option &&
-                            listener.option.id
-                        )
-                            remove = remove && option.id === listener.option.id;
+                            option && option.id
+                            && listener.option && listener.option.id
+                        ) {
+                            let matched = true;
+                            for (let index = 0; index < option.id.length; index++) {
+                                if (option.id[index] !== listener.option.id[index]) {
+                                    matched = false;
+                                    break;
+                                }
+                            }
+                            remove = remove && matched;
+                        }
                     } else if (namespaces.length) {
                         remove = listener.typeSet.has(namespaces, '.')
                     } else {

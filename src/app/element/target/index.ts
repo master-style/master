@@ -32,7 +32,6 @@ export class TargetElement extends HTMLElement {
             if (oldValue) {
                 document.body.off({ id: this });
             }
-            console.log('fuck');
             if (value) {
                 const toggleAttrKey = 'toggle-' + name;
                 document.body.on(value, '[' + toggleAttrKey + ']', function (event) {
