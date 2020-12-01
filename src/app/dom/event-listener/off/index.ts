@@ -34,10 +34,7 @@ window.off = document.off = Element.prototype.off = function (
                         remove = type === listener.type;
                         if (namespaces.length)
                             remove = remove && listener.typeSet.has(namespaces, '.');
-                        if (
-                            option && option.id
-                            && listener.option && listener.option.id
-                        ) {
+                        if (option?.id && listener.option?.id) {
                             let matched = true;
                             for (let index = 0; index < option.id.length; index++) {
                                 if (option.id[index] !== listener.option.id[index]) {
@@ -73,9 +70,19 @@ window.off = document.off = Element.prototype.off = function (
             option = typeSet;
             for (let listenerIndex = listeners.length - 1; listenerIndex >= 0; listenerIndex--) {
                 const listener = listeners[listenerIndex];
-                if (listener.option && listener.option.id === option.id) {
-                    target.removeEventListener(listener.type, listener.listen, listener.option || false);
-                    listeners.splice(listenerIndex, 1);
+
+                if (option?.id && listener.option?.id) {
+                    let matched = true;
+                    for (let index = 0; index < option.id.length; index++) {
+                        if (option.id[index] !== listener.option.id[index]) {
+                            matched = false;
+                            break;
+                        }
+                    }
+                    if (matched) {
+                        target.removeEventListener(listener.type, listener.listen, listener.option || false);
+                        listeners.splice(listenerIndex, 1);
+                    }
                 }
             }
         }

@@ -90,7 +90,7 @@ export class TextareaElement extends ControlElement {
                 if (event.target === this.body) return;
                 this.body.focus();
             }, {
-                id: NAME,
+                id: [NAME],
                 passive: true
             });
 
@@ -99,9 +99,9 @@ export class TextareaElement extends ControlElement {
             if (!this.dirty) {
                 this.dirty = true;
             }
-        }, { id: NAME, passive: true })
+        }, { id: [NAME], passive: true })
             .on('focusout', () => {
                 this.touched = true;
-            }, { id: NAME, passive: true, once: true });
+            }, { id: [NAME], passive: true, once: true });
     }
 }

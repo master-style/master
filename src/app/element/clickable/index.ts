@@ -68,12 +68,12 @@ export class ClickableElement extends HTMLElement {
                             form.submit();
                         }
                     }
-                }, { id: clickable, passive: true });
+                }, { id: [clickable], passive: true });
             } else if (
                 value !== 'submit'
                 || oldValue === 'submit'
             ) {
-                clickable.off({ id: clickable });
+                clickable.off({ id: [clickable] });
             }
         }
     })

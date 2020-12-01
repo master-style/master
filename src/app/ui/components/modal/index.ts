@@ -76,11 +76,11 @@ export class ModalElement extends TargetElement {
                 value && oldValue ||
                 !value && oldValue
             ) {
-                modal.closeElement.off({ id: 'modal' });
+                modal.closeElement.off({ id: [NAME] });
             }
             if (value) {
                 modal.closeElement
-                    .on('click', () => modal.close(), { passive: true, id: 'modal' });
+                    .on('click', () => modal.close(), { passive: true, id: [NAME] });
             }
         }
     })
@@ -93,11 +93,11 @@ export class ModalElement extends TargetElement {
         reflect: false,
         update(modal: ModalElement, value: string, oldValue: string) {
             if (oldValue === 'close' || oldValue === 'none') {
-                modal.overlayElement.off({ id: 'modal' });
+                modal.overlayElement.off({ id: [NAME] });
             }
             if (value === 'close') {
                 modal.overlayElement
-                    .on('click', () => modal.close(), { passive: true, id: 'modal' });
+                    .on('click', () => modal.close(), { passive: true, id: [NAME] });
             }
         }
     })

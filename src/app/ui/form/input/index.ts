@@ -156,21 +156,21 @@ export class InputElement extends ControlElement {
                     .on('click', (event) => {
                         input.body.focus();
                         input.body.click();
-                    }, { id: NAME + '.file', passive: true })
+                    }, { id: [NAME] + '.file', passive: true })
                 // 拖拉檔案 accept 格式檢查待解決
                 // .on('dragenter', (event) => {
                 //     event.preventDefault();
                 //     event.stopPropagation();
                 //     input.dragging = true;
-                // }, { id: NAME + '.file' })
+                // }, { id: [NAME] + '.file' })
                 // .on('dragover', (event) => {
                 //     event.preventDefault();
                 //     event.stopPropagation();
-                // }, { id: NAME + '.file' })
+                // }, { id: [NAME] + '.file' })
                 // .on('dragleave dragend', (event) => {
                 //     event.preventDefault();
                 //     input.dragging = false;
-                // }, { id: NAME + '.file' })
+                // }, { id: [NAME] + '.file' })
                 // .on('drop', (event: any) => {
                 //     input.dragging = false;
                 //     event.preventDefault();
@@ -178,10 +178,10 @@ export class InputElement extends ControlElement {
                 //         input.addFiles(input.body.files);
                 //         input.body.dispatchEvent(changeEvent);
                 //     }
-                // }, { id: NAME + '.file' });
+                // }, { id: [NAME] + '.file' });
             }
             if (oldValue === 'file') {
-                input.off({ id: NAME + '.file' });
+                input.off({ id: [NAME] + '.file' });
             }
         }
     })
@@ -262,7 +262,7 @@ export class InputElement extends ControlElement {
                 if (event.target === this.body) return;
                 this.body.focus();
             }, {
-                id: NAME,
+                id: [NAME],
                 passive: true
             });
 
@@ -276,14 +276,14 @@ export class InputElement extends ControlElement {
                 if (!this.dirty) {
                     this.dirty = true;
                 }
-            }, { id: NAME, passive: true })
+            }, { id: [NAME], passive: true })
             .on('focusout', () => {
                 this.touched = true;
-            }, { id: NAME, passive: true, once: true });
+            }, { id: [NAME], passive: true, once: true });
     }
 
     onDisconnected() {
-        this.off({ id: NAME });
+        this.off({ id: [NAME] });
     }
 
 }

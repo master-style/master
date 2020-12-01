@@ -1,8 +1,6 @@
 import { Attr } from '../attr';
 import { Event } from '../event';
 
-const liveTriggers = {};
-
 export class TargetElement extends HTMLElement {
 
     @Attr({
@@ -30,7 +28,7 @@ export class TargetElement extends HTMLElement {
         update(target: TargetElement, value: any, oldValue: any) {
             const name = target.constructor['elementName'];
             if (oldValue) {
-                document.body.off({ id: this });
+                document.body.off({ id: [target, name] });
             }
             if (value) {
                 const toggleAttrKey = 'toggle-' + name;
@@ -56,7 +54,7 @@ export class TargetElement extends HTMLElement {
                         }
                         eachTarget.toggle(whether);
                     });
-                }, { passive: true, id: target });
+                }, { passive: true, id: [target, name] });
             }
         }
     })
@@ -152,7 +150,7 @@ export class TargetElement extends HTMLElement {
     }
 
     onDisconnected() {
-        document.body.off({ id: this });
+        document.body.off({ id: [this, this.constructor['elementName']] });
     }
 
 }

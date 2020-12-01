@@ -131,14 +131,14 @@ export class CheckElement extends ControlElement {
         this.body
             .on('input', (event: any) => {
                 this.checked = event.target.checked;
-            }, { id: NAME, passive: true });
+            }, { id: [NAME], passive: true });
 
         connectedChecks.add(this);
     }
 
     onDisconnected() {
         connectedChecks.delete(this);
-        this.off({ id: NAME });
+        this.off({ id: [NAME] });
     }
 
 }

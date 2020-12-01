@@ -31,12 +31,12 @@ export class EditorElement extends HTMLElement {
                             element.on('click', () => {
                                 eachAction.result();
                                 this.focus();
-                            }, { id: NAME, passive: true });
+                            }, { id: [NAME], passive: true });
 
                             if (eachAction.state) {
                                 const handler = () => element.toggleAttribute('active', eachAction.state());
-                                this.on('keyup mouseup', handler, { id: NAME, passive: true });
-                                element.on('click', handler, { id: NAME, passive: true });
+                                this.on('keyup mouseup', handler, { id: [NAME], passive: true });
+                                element.on('click', handler, { id: [NAME], passive: true });
                             }
                         }
                     }
@@ -153,13 +153,13 @@ export class EditorElement extends HTMLElement {
             else if (this.innerHTML === '<br>') {
                 this.innerHTML = '';
             }
-        }, { id: NAME, passive: true });
+        }, { id: [NAME], passive: true });
 
         this.on('keydown', (event: any) => {
             if (event.key === 'Enter' && queryCommandValue(formatBlock) === 'blockquote') {
                 setTimeout(() => exec(formatBlock, 'div'), 0);
             }
-        }, { id: NAME, passive: true });
+        }, { id: [NAME], passive: true });
 
         // if (this.styleWithCSS) exec('styleWithCSS');
 

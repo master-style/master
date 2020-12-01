@@ -59,20 +59,21 @@ export class PopupElement extends TargetElement {
             }
 
             document.body
-                .on('click', async (event: any) => {
+                .on('click', (event: any) => {
                     if (
                         event.target === this ||
                         this.root.contains(event.target)
                     ) return;
+                    console.log('click');
                     if (isInteractOutside(this.root, event, this.distance)) {
                         this.close();
                     }
-                }, { passive: true, id: this });
+                }, { passive: true, id: [this, NAME] });
         });
     }
 
     onClose() {
-        document.body.off({ id: this });
+        document.body.off({ id: [this, NAME] });
     }
 
     onClosed() {

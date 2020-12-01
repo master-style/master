@@ -159,29 +159,29 @@ export class ContentElement extends TargetElement {
                     this.scrollEndEmitter();
                 }, 100);
             }, {
-                id: NAME,
+                id: [NAME],
                 passive: true
             })
             .on('slotchange', (event) => {
                 this.renderScroll();
                 this.changeEmitter();
             }, {
-                id: NAME,
+                id: [NAME],
                 passive: true
             });
 
         window.on('resize', debounce(() => {
             this.renderScroll();
         }, 70), {
-            id: this
+            id: [this, NAME]
         });
     }
 
     disable() {
         if (!this.#enabled) return;
         this.#enabled = false;
-        this.root.off({ id: 'scroll' });
-        window.off({ id: this });
+        this.root.off({ id: ['scroll'] });
+        window.off({ id: [this, NAME] });
     }
 
     get scrollable(): boolean {
@@ -391,7 +391,7 @@ export class ContentElement extends TargetElement {
     }
 
     onDisconnected() {
-        document.body.off({ id: this });
+        document.body.off({ id: [this, NAME] });
         this.disable();
     }
 

@@ -74,12 +74,12 @@ export class SelectPopupElement extends TargetElement {
                                 if (!this.select.dirty) {
                                     this.select.dirty = true;
                                 }
-                            }, { passive: true, id: this })
+                            }, { passive: true })
                             .on('click', () => {
                                 if (!this.multiple && check.checked) {
                                     this.close();
                                 }
-                            }, { passive: true, id: this });
+                            }, { passive: true });
                     }
                 }
             ]
@@ -127,14 +127,14 @@ export class SelectPopupElement extends TargetElement {
                 if (isInteractOutside(this, clickEvent, this.senseEdge)) {
                     this.close();
                 }
-            }, { passive: true, id: this });
+            }, { passive: true, id: [this, NAME] });
     }
 
     onClose() {
         if (this.select.search) {
             this.select.search.textContent = this.select.keyword = '';
         }
-        document.body.off({ id: this });
+        document.body.off({ id: [this, NAME] });
         document.documentElement.css('overflow', '');
         this.select.focused = false;
         if (!this.select.multiple) {

@@ -31,7 +31,7 @@ export class SelectElement extends ControlElement {
             $created: (element: HTMLSlotElement) => {
                 element.on('slotchange', (event) => {
                     this.composeValue();
-                }, { passive: true, id: NAME });
+                }, { passive: true, id: [NAME] });
             }
         },
         'div', {
@@ -59,7 +59,7 @@ export class SelectElement extends ControlElement {
                             .on('input', () => {
                                 if (this.searchable)
                                     this.popup.search(this.search.textContent);
-                            }, { passive: true, id: NAME });
+                            }, { passive: true, id: [NAME] });
                     },
                     $removed: () => this.search = null
                 }
@@ -175,7 +175,7 @@ export class SelectElement extends ControlElement {
 
     private toggleListener() {
         if (this.readOnly || this.disabled) {
-            this.off({ passive: true, id: NAME });
+            this.off({ passive: true, id: [NAME] });
         } else {
             this.on('click focusin', () => {
                 if (this.disabled || this.popup && !this.popup.hidden) return;
@@ -187,7 +187,7 @@ export class SelectElement extends ControlElement {
                 this.popup.select = this;
                 document.body.append(this.popup);
                 this.popup.open();
-            }, { passive: true, id: NAME });
+            }, { passive: true, id: [NAME] });
         }
     }
 
@@ -276,7 +276,7 @@ export class SelectElement extends ControlElement {
         this
             .on('focusin', () => {
                 this.focused = true;
-            }, { passive: true, id: NAME })
+            }, { passive: true, id: [NAME] })
             .on('focusout', () => {
                 console.log(this.popup?.hidden);
                 if (!this.touched) {
@@ -284,11 +284,11 @@ export class SelectElement extends ControlElement {
                 }
                 if (this.popup?.hidden === false) return;
                 this.focused = false;
-            }, { passive: true, id: NAME });
+            }, { passive: true, id: [NAME] });
     }
 
     onDisconnected() {
-        this.off({ id: NAME });
+        this.off({ id: [NAME] });
     }
 
 }
