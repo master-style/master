@@ -2,6 +2,8 @@ import { Element, TargetElement, Attr } from '../../../element';
 import { createPopper, Placement } from '@popperjs/core';
 import { isInteractOutside } from '../../../utils/is-interact-outside';
 
+declare const ResizeObserver: any;
+
 import css from './popup.scss';
 
 const NAME = 'popup';
@@ -21,6 +23,7 @@ export class PopupElement extends TargetElement {
     root;
     trigger: HTMLElement;
     popper;
+    resizeObserver;
 
     @Attr({ reflect: false })
     offset = 0;
@@ -35,7 +38,7 @@ export class PopupElement extends TargetElement {
     placement: Placement = 'bottom';
 
     @Attr({ reflect: false })
-    bridgeTrigger: boolean;
+    closeOn: string;
 
     template = window['Master'](() => [
         'div', {
@@ -70,8 +73,8 @@ export class PopupElement extends TargetElement {
     }
 
     onOpen() {
-        return new Promise((resolve) => {
-            if (!this.popper) {
+        if (!this.popper) {
+            return new Promise((resolve) => {
                 this.popper = createPopper(this.trigger, this, {
                     placement: this.placement,
                     modifiers: [
@@ -96,35 +99,40 @@ export class PopupElement extends TargetElement {
                     ],
                     onFirstUpdate: resolve
                 });
-            }
-        });
+            });
+        }
     }
 
     onOpened() {
+        if (this.popper) {
 
-        const typeSets = this.triggerEvent.split(',');
-
-        if (this.bridgeTrigger) {
-            if (typeSets.length > 1 && typeSets[1].indexOf('mouseout') !== -1) {
+            if (this.closeOn.indexOf('mouseout') !== -1) {
                 document.body
                     .on('mousemove', this.determineClose, { passive: true });
             }
 
-            if (
-                typeSets.length === 1 && typeSets[0].indexOf('click') !== -1 ||
-                typeSets[1]?.indexOf('click') !== -1
-            ) {
+            if (this.closeOn.indexOf('click:outside') !== -1) {
                 document.body
                     .on('click', this.determineClose, { passive: true });
             }
-        }
 
+            if (!this.resizeObserver) {
+                this.resizeObserver = new ResizeObserver(() => this.popper.update());
+                this.resizeObserver.observe(this.root);
+            }
+        }
+    }
+
+    onClose() {
+        if (this.resizeObserver) {
+            this.resizeObserver = this.resizeObserver.unobserve(this.root);
+        }
     }
 
     onClosed() {
-        document.body.off(this.determineClose);
         if (this.popper) {
             this.popper = this.popper.destroy();
+            document.body.off(this.determineClose);
         }
     }
 

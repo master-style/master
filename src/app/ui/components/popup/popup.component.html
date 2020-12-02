@@ -5,10 +5,9 @@
 </m-button>
 
 <m-popup id="popup"
-         trigger-event="mouseover,mouseout"
-         bridge-trigger
-         hidden
-         placement="bottom-start">
+         trigger-event="mouseover click,mouseout click"
+         close-on="mouseout click:outside"
+         hidden>
     <m-item class="sm indent-lined">
         <img slot="head" src="assets/images/ios-icons/airplane.svg">
         Airplane Mode

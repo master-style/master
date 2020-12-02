@@ -10,7 +10,6 @@ export function Element(options: ElementOptions) {
     options = { ...DEFAULT_ELEMENT_OPTION, ...options };
     return function (constructor: any) {
         constructor['elementName'] = options.tag.replace('m-', '');
-        console.log(constructor['elementName']);
         const prototype = constructor.prototype;
         const attrsOptions = constructor.attrsOptions;
         const propsOptions = constructor.propsOptions;
