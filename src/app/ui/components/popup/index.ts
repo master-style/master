@@ -106,12 +106,12 @@ export class PopupElement extends TargetElement {
     onOpened() {
         if (this.popper) {
 
-            if (this.closeOn.indexOf('mouseout') !== -1) {
+            if (this.closeOn?.indexOf('mouseout') !== -1) {
                 document.body
                     .on('mousemove', this.determineClose, { passive: true });
             }
 
-            if (this.closeOn.indexOf('click:outside') !== -1) {
+            if (this.closeOn?.indexOf('click:outside') !== -1) {
                 document.body
                     .on('click', this.determineClose, { passive: true });
             }
