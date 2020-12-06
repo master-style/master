@@ -1,4 +1,5 @@
 @import '../variables';
+@import '../mixins';
 
 :host {
     display: block;
@@ -7,9 +8,23 @@
 }
 
 [part=toolbar] {
+    position: sticky;
+    display: flex;
+    flex-wrap: wrap;
+    top: 0;
+    border-bottom: 1px solid var(--b-fader);
+    @include bgBlur(var(--bg-theme-rgb), .8);
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    z-index: $z-up;
+
     m-button[active] {
         --button-f-color: var(--f-blue);
     }
+}
+
+[part="content"] {
+    padding: $md 0;
 }
 
 :host(.outlined) {
@@ -18,7 +33,6 @@
 
     [part=toolbar] {
         padding: $xs;
-        border-bottom: 1px solid var(--b-fader);
     }
 
     [part=content] {

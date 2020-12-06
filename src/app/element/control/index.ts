@@ -84,7 +84,7 @@ export class ControlElement extends HTMLElement {
             const eachWhether = this.validity[key];
             const eachPrompt = this['when' + capitalize(key)];
             if (eachPrompt) {
-                hasPrompt = hasPrompt || eachPrompt;
+                hasPrompt = true;
             }
             if (eachWhether && eachPrompt) {
                 console.log(this, this.prompt, key, eachWhether);

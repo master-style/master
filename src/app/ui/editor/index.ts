@@ -24,7 +24,7 @@ export class EditorElement extends HTMLElement {
                 const eachAction = this.actions[actionKey];
                 actionTokens = actionTokens.concat([
                     'm-button', {
-                        class: 'theme square',
+                        class: 'theme square sm',
                         $html: eachAction.icon,
                         title: eachAction.title,
                         $created: (element) => {
@@ -42,7 +42,6 @@ export class EditorElement extends HTMLElement {
                     }
                 ]);
             }
-            console.log(actionTokens);
             return actionTokens;
         },
         'm-content', { part: 'content' }, [
@@ -146,12 +145,15 @@ export class EditorElement extends HTMLElement {
 
         this.contentEditable = 'true';
 
-        this.on('input', ({ target: { firstChild } }: any) => {
-            if (firstChild && firstChild.nodeType === 3) {
+        if (!this.innerHTML) {
+            this.innerHTML = '<p><br></p>';
+        }
+
+        this.on('input', (event: any) => {
+            if (event.target.firstChild && event.target.firstChild.nodeType === 3) {
                 exec(formatBlock, '<div>');
-            }
-            else if (this.innerHTML === '<br>') {
-                this.innerHTML = '';
+            } else if (!this.innerHTML) {
+                this.innerHTML = '<p><br></p>';
             }
         }, { id: [NAME], passive: true });
 
