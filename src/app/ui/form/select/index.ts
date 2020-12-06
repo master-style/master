@@ -113,7 +113,7 @@ export class SelectElement extends ControlElement {
     @Attr({ observe: false })
     focused: boolean = false;
 
-    @Event()
+    @Event({ force: true })
     changeEmitter: EventEmitter;
 
     uid: number;
@@ -138,7 +138,6 @@ export class SelectElement extends ControlElement {
         },
         add: (option: OptionElement) => {
             this.#options.push(option);
-            this.composeValue();
         },
         remove: (option: OptionElement) => {
             this.#options.splice(this.#options.indexOf(option), 1);
@@ -240,7 +239,7 @@ export class SelectElement extends ControlElement {
             const isArray = Array.isArray(value);
             const oldIsArray = Array.isArray(oldValue);
             let equal = true;
-            if (isArray && oldIsArray) {
+            if (isArray && oldIsArray && value.length === oldValue.length) {
                 for (let i = 0; i < value.length; ++i) {
                     if (value[i] !== oldValue[i]) {
                         equal = false;
@@ -249,6 +248,7 @@ export class SelectElement extends ControlElement {
                 }
                 if (equal) return;
             }
+            console.log(value, oldValue);
             select.options.get().forEach((eachOption) => {
                 if (
                     isArray && value.indexOf(eachOption.value) !== -1

@@ -118,7 +118,7 @@ class Template {
                     removeNodes(eachOldNodes, true);
                 } else {
                     // tslint:disable-next-line: prefer-for-of
-                    if (eachOldNodes && eachOldNodes.length > eachNodes.length) {
+                    if (eachOldNodes?.length > eachNodes.length) {
                         removeNodes(eachOldNodes.splice(eachNodes.length), true);
                     }
 
@@ -143,6 +143,7 @@ class Template {
                             const element = eachNode.element = eachOldNode?.element;
                             const attr = eachNode.attr;
                             const oldAttr = eachOldNode?.attr;
+
                             if (attr) {
                                 for (const eachAttrKey in attr) {
                                     const value = attr[eachAttrKey];
@@ -205,6 +206,10 @@ class Template {
                             }
                             eachNode.element = element;
 
+                            if (eachOldNode?.children) {
+                                eachOldNode.children = [];
+                            }
+
                             const attr = eachNode.attr;
                             if (attr) {
                                 element.attr(attr);
@@ -228,9 +233,6 @@ class Template {
 
                             if ('$html' in eachNode) {
                                 element.innerHTML = eachNode.$html;
-                                if (eachOldNode) {
-                                    eachOldNode.children = null;
-                                }
                             } else if ('$text' in eachNode) {
                                 element.textContent = eachNode.$text;
                             }

@@ -13,6 +13,8 @@ export class FormComponent implements OnInit {
 
     options = [];
 
+    cities = ['taipei', 'hualien'];
+
     ngOnInit(): void {
         let i = 0;
         this.timer = setInterval(() => {

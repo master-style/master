@@ -78,10 +78,14 @@ export class ControlElement extends HTMLElement {
 
         this.valid = this.validity.valid;
         this.invalid = !this.validity.valid;
+        let hasPrompt = false;
 
         for (const key in this.validity) {
             const eachWhether = this.validity[key];
             const eachPrompt = this['when' + capitalize(key)];
+            if (eachPrompt) {
+                hasPrompt = hasPrompt || eachPrompt;
+            }
             if (eachWhether && eachPrompt) {
                 console.log(this, this.prompt, key, eachWhether);
                 this.prompt = eachPrompt;
@@ -89,7 +93,9 @@ export class ControlElement extends HTMLElement {
             }
         }
 
-        this.prompt = '';
+        if (!hasPrompt) {
+            this.toggleAttribute('prompt', false);
+        }
     }
 
     render() {

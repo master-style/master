@@ -6,4 +6,5 @@ interface EventOptions {
     bubbles?: boolean;
     cancelable?: boolean;
     composed?: boolean;
+    force?: boolean;
 }

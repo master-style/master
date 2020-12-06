@@ -8,8 +8,9 @@
                           (change)="masterChange($event)"
                           multiple
                           searchable
+                          #multipleSelect
                           placeholder="search ..."
-                          [ngModel]="['taipei']"
+                          [(ngModel)]="cities"
                           class="outlined">
                     <m-option *ngFor="let city of ['taichung', 'kaosiung', 'taipei', 'hualien', 'taoyuan']"
                               [value]="city">
@@ -18,6 +19,7 @@
                               [value]="option">
                         <span slot="head">🍉</span>{{option}}</m-option>
                 </m-select>
+                {{ multipleSelect.value | json }}
             </div>
             <div class="x:6">
                 <m-select name="city"
