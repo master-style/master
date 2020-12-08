@@ -78,22 +78,25 @@ export class ControlElement extends HTMLElement {
 
         this.valid = this.validity.valid;
         this.invalid = !this.validity.valid;
-        let hasPrompt = false;
+        let prompt;
 
         for (const key in this.validity) {
             const eachWhether = this.validity[key];
             const eachPrompt = this['when' + capitalize(key)];
-            if (eachPrompt) {
-                hasPrompt = true;
-            }
-            if (eachWhether && eachPrompt) {
-                console.log(this, this.prompt, key, eachWhether);
-                this.prompt = eachPrompt;
-                return;
+
+            if (eachPrompt !== undefined) {
+                if (eachWhether) {
+                    prompt = eachPrompt;
+                    break;
+                } else {
+                    prompt = '';
+                }
             }
         }
 
-        if (!hasPrompt) {
+        if (prompt !== undefined) {
+            this.prompt = prompt;
+        } else {
             this.toggleAttribute('prompt', false);
         }
     }
