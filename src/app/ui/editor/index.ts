@@ -87,6 +87,11 @@ export class EditorElement extends HTMLElement {
             title: 'Heading 2',
             result: () => exec(formatBlock, '<h2>')
         },
+        heading3: {
+            icon: '<b>H<sub>3</sub></b>',
+            title: 'Heading 3',
+            result: () => exec(formatBlock, '<h3>')
+        },
         paragraph: {
             icon: '&#182;',
             title: 'Paragraph',

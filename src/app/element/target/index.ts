@@ -138,7 +138,7 @@ export class TargetElement extends HTMLElement {
 
     async open() {
         if (!this.hidden) {
-            return;
+            return false;
         }
         this['_hidden'] = false;
         this.toggleAttribute('hidden', false);
@@ -149,11 +149,12 @@ export class TargetElement extends HTMLElement {
         this.openEmitter();
         await (this.changing = this.prepare());
         this.openedEmitter();
+        return true;
     }
 
     async close() {
         if (this.hidden) {
-            return;
+            return false;
         }
         this['_hidden'] = true;
         const onClose = this['onClose'];
@@ -163,6 +164,7 @@ export class TargetElement extends HTMLElement {
         this.closeEmitter();
         await (this.changing = this.prepare());
         this.closedEmitter();
+        return true;
     }
 
     async toggle(whether?: boolean) {

@@ -1,4 +1,4 @@
-import { Element, Attr, TargetElement, attrEnabled } from '../../../element';
+import { Element, Attr, TargetElement, attrEnabled, Event } from '../../../element';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { ContentElement } from '../content';
 import { HeaderElement } from '../header';
@@ -15,6 +15,9 @@ const PX = 'px';
 export class ModalElement extends TargetElement {
 
     private trigger: HTMLElement;
+
+    @Event()
+    closedByClickEmitter: EventEmitter;
 
     contentTokens: any = () => [
         'slot', {
@@ -80,7 +83,11 @@ export class ModalElement extends TargetElement {
             }
             if (value) {
                 modal.closeElement
-                    .on('click', () => modal.close(), { passive: true, id: [NAME] });
+                    .on('click', async () => {
+                        if (await modal.close() !== false) {
+                            modal.closedByClickEmitter(modal.closeElement);
+                        }
+                    }, { passive: true, id: [NAME] });
             }
         }
     })
@@ -97,7 +104,11 @@ export class ModalElement extends TargetElement {
             }
             if (value === 'close') {
                 modal.overlayElement
-                    .on('click', () => modal.close(), { passive: true, id: [NAME] });
+                    .on('click', async () => {
+                        if (await modal.close()) {
+                            modal.closedByClickEmitter(modal.overlayElement);
+                        }
+                    }, { passive: true, id: [NAME] });
             }
         }
     })

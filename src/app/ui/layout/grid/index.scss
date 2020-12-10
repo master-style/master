@@ -10,6 +10,8 @@
     margin: calc(var(--gap) * -.5);
 
     >.x,
+    >[class^=x\@],
+    >[class*=' x\@'],
     >[class^=x\:],
     >[class*=' x\:'] {
         margin: calc(var(--gap) / 2);
@@ -49,6 +51,8 @@
 
 }
 
+[class^=x\@],
+[class*=' x\@'],
 [class^=x\:],
 [class*=' x\:'] {
     --x: var(--x12);
