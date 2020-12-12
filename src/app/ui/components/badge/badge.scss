@@ -3,6 +3,7 @@
 
 :host {
     --f-color: var(--badge-f-color, var(--f-theme));
+    --f-size: var(--badge-f-size, var(--f-xxs));
     --bg-color: var(--badge-bg-color);
     --b-color-active: var(--badge-b-color-active);
     --b-color: var(--badge-b-color);
@@ -13,7 +14,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: var(--f-xxs);
+    font-size: var(--f-size);
     font-weight: 500;
     margin: $xxs;
     padding: 0 .25rem;
@@ -28,8 +29,9 @@
 }
 
 :host(.sm) {
-    height: 1rem;
-    min-width: 1rem;
+    --badge-f-size: .625rem;
+    height: .875rem;
+    min-width: .875rem;
 }
 
 :host(.lg) {
