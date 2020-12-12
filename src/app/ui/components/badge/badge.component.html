@@ -1,27 +1,197 @@
 <div class="demo">
     <div class="demo-body">
-        <div class="y:sm">
-            <div class="x">
-                <a is="m-button" class="round">
-                    <i class="i-shopping-cart f:md rel">
-                        <m-badge class="sm edge top right blue">5</m-badge>
-                    </i>
-                </a>
-            </div>
-            <div class="x">
-                <a is="m-button" class="round">
-                    <i class="i-clipboard f:md rel">
-                        <m-badge class="sm edge bottom right green">5</m-badge>
-                    </i>
-                </a>
-            </div>
-            <div class="x">
-                <a is="m-button" class="round">
-                    <i class="i-bell f:md rel">
-                        <m-badge class="sm edge top right red">5</m-badge>
-                    </i>
-                </a>
-            </div>
+        <div class="y c:center">
+            <m-button class="round">
+                <span class="rel">
+                    📨
+                    <m-badge class="sm edge bottom left red">5</m-badge>
+                </span>
+            </m-button>
+            <m-button class="round">
+                <span class="rel">
+                    🎁
+                    <m-badge class="sm edge top right blue">5</m-badge>
+                </span>
+            </m-button>
+            <m-button class="round">
+                <span class="rel">
+                    🧾
+                    <m-badge class="sm edge bottom right green">5</m-badge>
+                </span>
+            </m-button>
         </div>
     </div>
 </div>
+
+<h2 id="structure">{{ 'structure' | translate }}</h2>
+<template [codeLang]="'html'">
+    <m-badge>5</m-badge>
+</template>
+
+<h2 id="example">{{ 'example' | translate }}</h2>
+<div class="y">
+    <div class="x:6@sm c:row c:middle">
+        <template [codeLang]="'html'" [codeDemo]=true>
+            <m-badge class="red">1</m-badge>
+        </template>
+    </div>
+    <div class="x:6@sm c:row">
+        <template [codeLang]="'html'" [codeDemo]=true>
+            <m-button class="round">
+                <span class="rel">
+                    📦
+                    <m-badge class="sm edge top right blue">5</m-badge>
+                </span>
+            </m-button>
+        </template>
+    </div>
+</div>
+
+<h2 id="color">{{ 'color' | translate }}</h2>
+<div class="y:sm">
+    <ng-container *ngFor="let eachDepth of ['', '+']">
+        <div class="x:12" *ngFor="let eachStyle of styles">
+            <template [codeLang]="'html'" [codeDemo]=true>
+                <div class="y:sm c:center">
+                    <m-badge class="x {{ eachColor + eachDepth }} {{ eachStyle }}"
+                             *ngFor="let eachColor of colors; index as index"
+                             (click)="currentColor = eachColor">
+                        {{ index }}
+                    </m-badge>
+                </div>
+            </template>
+        </div>
+    </ng-container>
+</div>
+
+<h2 id="size">{{ 'size' | translate }}</h2>
+<m-table class="sm neat axis:x">
+    <table>
+        <thead>
+            <tr>
+                <th class="fit t:left bg:theme sticky">class</th>
+                <th class="fit t:left bg:theme sticky t-wrap:no">height</th>
+                <th class="fit t:left bg:theme sticky t-wrap:no">min-width</th>
+                <th class="t:left bg:theme sticky">description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <code class="f:purple">sm</code>
+                </td>
+                <td><code>1rem</code></td>
+                <td><code>1rem</code></td>
+                <td><b>小</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <code class="default">∅</code>
+                </td>
+                <td><code>1.25rem</code></td>
+                <td><code>1.25rem</code></td>
+                <td><b>適中</b>，預設</td>
+            </tr>
+            <tr>
+                <td>
+                    <code class="f:purple">lg</code>
+                </td>
+                <td><code>1.5rem</code></td>
+                <td><code>1.5rem</code></td>
+                <td><b>大</b></td>
+            </tr>
+        </tbody>
+    </table>
+</m-table>
+<template [codeLang]="'html'" [codeDemo]=true>
+    <div class="y c:center">
+        <m-badge class="x sm theme outlined">
+            1
+        </m-badge>
+        <m-badge class="x theme outlined">
+            1
+        </m-badge>
+        <m-badge class="x lg theme outlined">
+            1
+        </m-badge>
+    </div>
+</template>
+
+<h2 id="shape">{{ 'position' | translate }}</h2>
+<m-table class="sm neat axis:x">
+    <table>
+        <thead>
+            <tr>
+                <th class="fit t:left bg:theme sticky">class</th>
+                <th class="t:left bg:theme sticky">description</th>
+                <th class="fit bg:theme sticky"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <code class="f:purple">edge top left</code>
+                </td>
+                <td>對齊近代 <code>position: relative</code> 父元素的 <b>左上</b> 邊緣</td>
+                <td class="t:right">
+                    <m-chip class="sm theme+" href="modifiers">
+                        {{ 'modifiers' | translate }}
+                    </m-chip>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code class="f:purple">edge top right</code>
+                </td>
+                <td>對齊近代 <code>position: relative</code> 父元素的 <b>右上</b> 邊緣</td>
+                <td class="t:right">
+                    <m-chip class="sm theme+" href="modifiers">
+                        {{ 'modifiers' | translate }}
+                    </m-chip>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code class="f:purple">edge bottom left</code>
+                </td>
+                <td>對齊近代 <code>position: relative</code> 父元素的 <b>左下</b> 邊緣</td>
+                <td class="t:right">
+                    <m-chip class="sm theme+" href="modifiers">
+                        {{ 'modifiers' | translate }}
+                    </m-chip>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code class="f:purple">edge bottom right</code>
+                </td>
+                <td>對齊近代 <code>position: relative</code> 父元素的 <b>右下</b> 邊緣</td>
+                <td class="t:right">
+                    <m-chip class="sm theme+" href="modifiers">
+                        {{ 'modifiers' | translate }}
+                    </m-chip>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</m-table>
+<template [codeLang]="'html'" [codeDemo]=true>
+    <div class="y:lg c:center">
+        <span class="x rel">
+            <i class="i-square f:md"></i>
+            <m-badge class="sm edge top left blue">1</m-badge>
+        </span>
+        <span class="x rel">
+            <i class="i-square f:md"></i>
+            <m-badge class="sm edge top right blue">1</m-badge>
+        </span>
+        <span class="x rel">
+            <i class="i-square f:md"></i>
+            <m-badge class="sm edge bottom left blue">1</m-badge>
+        </span>
+        <span class="x rel">
+            <i class="i-square f:md"></i>
+            <m-badge class="sm edge bottom right blue">1</m-badge>
+        </span>
+    </div>
+</template>

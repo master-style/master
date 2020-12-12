@@ -14,6 +14,7 @@ article {
 
         p {
             margin-top: 0;
+
             a {
                 text-decoration: underline;
                 font-weight: 500;
@@ -32,6 +33,7 @@ article {
             padding-left: 2.2rem;
 
             >li {
+                position: relative;
                 padding-bottom: .2rem;
 
                 &:before {
@@ -158,14 +160,14 @@ article {
             }
         }
 
-        m-table,
-        m-info,
-        ol,
-        ul,
-        q,
-        blockquote,
+        m-table:not(:last-child),
+        m-info:not(:last-child),
+        ol:not(:last-child),
+        ul:not(:last-child),
+        q:not(:last-child),
+        blockquote:not(:last-child),
         hr,
-        p {
+        p:not(:last-child) {
             margin-bottom: 2rem;
         }
 

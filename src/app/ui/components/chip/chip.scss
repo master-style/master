@@ -3,10 +3,11 @@
 @import '../../color/color.scss';
 
 :host {
+    --f-size: var(--chip-f-size, .8125rem);
+    --f-color: var(--chip-f-color, var(--f-theme));
     --bg-color: var(--chip-bg-color);
     --bg-color-head: var(--chip-bg-color-head);
     --bg-color-hover: var(--chip-bg-color-hover);
-    --f-color: var(--chip-f-color, var(--f-theme));
     --b-color-active: var(--chip-b-color-active);
     --b-color: var(--chip-b-color);
     --b-width: var(--chip-b-width, 0px);
@@ -15,7 +16,6 @@
     --size: var(--chip-size, 2rem);
     --p: var(--chip-p, .25rem);
     --px: var(--chip-px, .625rem);
-    --f-size: var(--chip-f-size, .8125rem);
     --mx: calc(var(--p) - var(--px));
     display: inline-flex;
     border-radius: var(--radius);

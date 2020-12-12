@@ -9,5 +9,6 @@ export * from './modal';
 export * from './overlay';
 export * from './breadcrumb';
 export * from './dialog';
+export * from './badge';
 export * from './header';
 export * from './footer';
