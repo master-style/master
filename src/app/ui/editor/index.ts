@@ -16,6 +16,8 @@ const NAME = 'editor';
 })
 export class EditorElement extends HTMLElement {
 
+    #view = '';
+
     template = window['Master'](() => [
         'div', { part: 'toolbar' },
         () => {
@@ -112,11 +114,6 @@ export class EditorElement extends HTMLElement {
             title: 'Unordered List',
             result: () => exec('insertUnorderedList')
         },
-        code: {
-            icon: '&lt;/&gt;',
-            title: 'Code',
-            result: () => exec(formatBlock, '<pre>')
-        },
         line: {
             icon: '&#8213;',
             title: 'Horizontal Line',
@@ -137,6 +134,19 @@ export class EditorElement extends HTMLElement {
                 const url = window.prompt('Enter the image URL')
                 if (url) exec('insertImage', url)
             }
+        },
+        html: {
+            icon: '&lt;/&gt;',
+            title: 'Code',
+            result: () => {
+                if (this.#view) {
+                    this.innerHTML = this.textContent;
+                    this.#view = '';
+                } else {
+                    this.textContent = this.innerHTML.replace(/<? _[\S]*?="[\s\S]*?"/g, '');
+                    this.#view = 'code';
+                }
+            }
         }
     };
 
@@ -155,9 +165,10 @@ export class EditorElement extends HTMLElement {
         }
 
         this.on('input', (event: any) => {
-            if (event.target.firstChild && event.target.firstChild.nodeType === 3) {
-                exec(formatBlock, '<div>');
-            } else if (!this.innerHTML) {
+            // if (event.target.firstChild && event.target.firstChild.nodeType === 3) {
+            //     exec(formatBlock, '<div>');
+            // } else
+            if (!this.innerHTML) {
                 this.innerHTML = '<p><br></p>';
             }
         }, { id: [NAME], passive: true });
