@@ -16,7 +16,8 @@ const NAME = 'editor';
 })
 export class EditorElement extends HTMLElement {
 
-    #view = '';
+    @Prop()
+    private view;
 
     template = window['Master'](() => [
         'div', { part: 'toolbar' },
@@ -29,6 +30,7 @@ export class EditorElement extends HTMLElement {
                         class: 'theme square sm',
                         $html: eachAction.icon,
                         title: eachAction.title,
+                        disabled: this.view === 'code' && eachAction.title !== 'Code',
                         $created: (element) => {
                             element.on('click', () => {
                                 eachAction.result();
@@ -47,9 +49,22 @@ export class EditorElement extends HTMLElement {
             return actionTokens;
         },
         'm-content', { part: 'content' }, [
-            'slot'
+            'slot',
+            'div', {
+                part: 'code',
+                spellcheck: 'false',
+                contentEditable: true,
+                $if: this.view === 'code',
+                $created: (element) => {
+                    this.codeWrap = element;
+                    this.codeWrap.textContent = this.innerHTML.replace(/<? _[\S]*?="[\s\S]*?"/g, '');
+                    this.innerHTML = '';
+                }
+            }
         ]
     ]);
+
+    codeWrap: HTMLElement;
 
     @Attr()
     disabled: boolean;
@@ -139,12 +154,11 @@ export class EditorElement extends HTMLElement {
             icon: '&lt;/&gt;',
             title: 'Code',
             result: () => {
-                if (this.#view) {
-                    this.innerHTML = this.textContent;
-                    this.#view = '';
+                if (this.view) {
+                    this.innerHTML = this.codeWrap.textContent;
+                    this.view = '';
                 } else {
-                    this.textContent = this.innerHTML.replace(/<? _[\S]*?="[\s\S]*?"/g, '');
-                    this.#view = 'code';
+                    this.view = 'code';
                 }
             }
         }
@@ -153,6 +167,12 @@ export class EditorElement extends HTMLElement {
     render() {
         this.template.render(this.shadowRoot);
     }
+
+    get value() {
+        return (this.view
+            ? this.codeWrap.textContent
+            : this.innerHTML).replace(/<? _[\S]*?="[\s\S]*?"/g, '');
+    };
 
     // styleWithCSS = false;
 
@@ -165,11 +185,11 @@ export class EditorElement extends HTMLElement {
         }
 
         this.on('input', (event: any) => {
-            // if (event.target.firstChild && event.target.firstChild.nodeType === 3) {
-            //     exec(formatBlock, '<div>');
-            // } else
-            if (!this.innerHTML) {
-                this.innerHTML = '<p><br></p>';
+            if (!this.view) {
+                const html = this.innerHTML;
+                if (!html) {
+                    this.innerHTML = '<p><br></p>';
+                }
             }
         }, { id: [NAME], passive: true });
 

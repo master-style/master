@@ -1,5 +1,6 @@
 @import '../variables';
 @import '../mixins';
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
 :host {
     display: block;
@@ -38,4 +39,11 @@
     [part=content] {
         padding: $md;
     }
+}
+
+[part="code"] {
+    outline: none;
+    font-size: .875rem;
+    line-height: 1.5;
+    font-family: 'Roboto Mono', monospace;
 }
