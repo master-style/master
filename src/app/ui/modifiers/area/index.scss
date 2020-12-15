@@ -43,6 +43,10 @@
     width: auto !important;
 }
 
+.w\:fit {
+    width: fit-content !important;
+}
+
 // height
 .h\:xxs {
     height: 1rem !important;
@@ -86,4 +90,8 @@
 
 .h\:auto {
     height: auto !important;
+}
+
+.h\:fit {
+    height: fit-content !important;
 }
