@@ -37,7 +37,7 @@ export class SelectPopupElement extends TargetElement {
             'scroll-y': true,
             guide: true,
             $created: (element: ContentElement) => this.content = element
-        }, () => this.select.options.get().map((eachOption: OptionElement) => [
+        }, () => Array.from(this.select.options).map((eachOption: OptionElement) => [
             'm-item', {
                 class: 'xs',
                 type: 'button',
@@ -71,6 +71,7 @@ export class SelectPopupElement extends TargetElement {
                                     this.close();
                                     node.$data.selected = check.checked;
                                 }
+                                this.select.changeEmitter(this.select.value);
                                 if (!this.select.dirty) {
                                     this.select.dirty = true;
                                 }
@@ -138,7 +139,7 @@ export class SelectPopupElement extends TargetElement {
         document.documentElement.css('overflow', '');
         this.select.focused = false;
         if (!this.select.multiple) {
-            const selectedOption = this.select.options.selected()[0];
+            const selectedOption = this.select.selectedOptions.values().next().value;
             this.select.search.textContent = selectedOption?.textContent.trim() || '';
         }
     }

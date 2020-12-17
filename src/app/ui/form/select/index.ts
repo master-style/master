@@ -27,13 +27,7 @@ export class SelectElement extends ControlElement {
     ]);
 
     template = window['Master'](() => [
-        'slot', {
-            $created: (element: HTMLSlotElement) => {
-                element.on('slotchange', (event) => {
-                    this.composeValue();
-                }, { passive: true, id: [NAME] });
-            }
-        },
+        'slot',
         'div', {
             part: 'root',
             $created: (element: HTMLDivElement) => this.root = element
@@ -63,29 +57,30 @@ export class SelectElement extends ControlElement {
                     },
                     $removed: () => this.search = null
                 }
-            ], () => this.#selectedOptions.map((eachOption: OptionElement) => [
-                'm-chip', {
-                    $if: this.multiple,
-                    class: 'sm',
-                    $html: eachOption.innerHTML
-                        .replace('slot', 'part')
-                }, [
-                    'm-button', {
-                        $if: !this.readOnly && !this.disabled,
-                        part: 'close',
-                        $on: {
-                            click: (event) => {
-                                event.stopPropagation();
-                                eachOption.selected = false;
-                                this.popup.render();
-                                this.popup.updatePosition();
-                            }
-                        }
+            ], () => Array.from(this.selectedOptions)
+                .map((eachOption: OptionElement) => [
+                    'm-chip', {
+                        $if: this.multiple,
+                        class: 'sm',
+                        $html: eachOption.innerHTML
+                            .replace('slot', 'part')
                     }, [
-                        'm-icon', { name: 'cross' }
+                        'm-button', {
+                            $if: !this.readOnly && !this.disabled,
+                            part: 'close',
+                            $on: {
+                                click: (event) => {
+                                    event.stopPropagation();
+                                    eachOption.selected = false;
+                                    this.popup.render();
+                                    this.popup.updatePosition();
+                                }
+                            }
+                        }, [
+                            'm-icon', { name: 'cross' }
+                        ]
                     ]
-                ]
-            ]),
+                ]),
             'fieldset', [
                 'legend', [
                     'span', { part: 'label', $text: this.label }
@@ -125,44 +120,30 @@ export class SelectElement extends ControlElement {
 
     keyword: string;
 
-    #selectedOptions: OptionElement[] = [];
+    options: Set<OptionElement> = new Set();
+    selectedOptions: Set<OptionElement> = new Set();
 
-    #options: OptionElement[] = [];
-
-    options = {
-        selected: () => this.#selectedOptions,
-        get: () => this.#options,
-        set: (options: OptionElement[]) => {
-            this.#options = options;
-            this.composeValue();
-        },
-        add: (option: OptionElement) => {
-            this.#options.push(option);
-        },
-        remove: (option: OptionElement) => {
-            this.#options.splice(this.#options.indexOf(option), 1);
-            this.composeValue();
-        },
-        clear: () => {
-            this.#options = [];
-            this.composeValue();
-        }
-    };
+    selectOptionByValue(value) {
+        this.options.forEach((eachOption) => {
+            if (this.multiple) {
+                if (value && value.indexOf(eachOption.value) !== -1) {
+                    eachOption.selected = true;
+                }
+            } else {
+                if (value === eachOption.value) {
+                    eachOption.selected = true;
+                }
+            }
+        });
+    }
 
     composeValue() {
+        const selectedOptions = Array.from(this.selectedOptions);
         if (this.multiple) {
-            // value and oldValue always not be same
-            this.#selectedOptions = this.#options
-                .filter((eachOption: OptionElement) => eachOption.selected);
-            this.value = this.#selectedOptions
+            this.value = selectedOptions
                 .map((eachOption: OptionElement) => eachOption.value);
         } else {
-            const selectedOption = this.#options
-                .find((eachOption: OptionElement) => eachOption.selected);
-            if (selectedOption) this.#selectedOptions = [selectedOption];
-            this.value = selectedOption?.value;
-            // 強制 output，暫時解決 "m-option 元素無法取得 textContent 內容" 不明問題
-            this.output();
+            this.value = selectedOptions[0]?.value;
         }
         if (this.popup) {
             if (!this.popup.hidden) {
@@ -178,7 +159,6 @@ export class SelectElement extends ControlElement {
         } else {
             this.on('click focusin', () => {
                 if (this.disabled || this.popup && !this.popup.hidden) return;
-                console.log(this.readOnly || !this.searchable);
                 this.popup = $('m-select-popup', {
                     multiple: this.multiple,
                     hidden: true
@@ -230,7 +210,8 @@ export class SelectElement extends ControlElement {
 
     output() {
         if (!this.multiple) {
-            this.search.textContent = this.#selectedOptions[0]?.textContent.trim() || '';
+            this.search.textContent = this.selectedOptions.values().next().value
+                ?.textContent.trim() || '';
         }
     }
 
@@ -248,20 +229,12 @@ export class SelectElement extends ControlElement {
                 }
                 if (equal) return;
             }
-            console.log(value, oldValue);
-            select.options.get().forEach((eachOption) => {
-                if (
-                    isArray && value.indexOf(eachOption.value) !== -1
-                    || value === eachOption.value
-                ) {
-                    eachOption.selected = true;
-                }
-            });
+            select.selectOptionByValue(value);
             select.empty = value === null || value === undefined || value === '' || !value?.length;
             select.body.value = value;
             select.validate();
             select.output();
-            select.changeEmitter(value);
+            console.log(value, select.selectedOptions);
         },
         reflect: false
     })
@@ -278,7 +251,6 @@ export class SelectElement extends ControlElement {
                 this.focused = true;
             }, { passive: true, id: [NAME] })
             .on('focusout', () => {
-                console.log(this.popup?.hidden);
                 if (!this.touched) {
                     this.touched = true;
                 }

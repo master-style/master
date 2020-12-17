@@ -19,14 +19,11 @@ export class SelectMultipleControlValueAccessor implements ControlValueAccessor 
 
     constructor(
         private el: ElementRef
-    ) {
-        console.log(el);
-    }
+    ) {}
 
-    onChange = (value: any) => { }
+    onChange = (value: any) => {}
 
     onTouched = () => { };
-
 
     writeValue(value: any): void {
         this.el.nativeElement.value = value;

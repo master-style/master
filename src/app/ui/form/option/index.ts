@@ -15,24 +15,36 @@ export class OptionElement extends HTMLElement {
     disabled: boolean;
 
     @Attr({
-        update(option: OptionElement) {
-            const select = (option.parentElement as SelectElement);
-            if (!select.multiple && option.selected) {
-                select.options.get().forEach((eachOption) => {
-                    if (option !== eachOption)
-                        eachOption.selected = false;
-                });
+        update(option: OptionElement, value) {
+            if (option['ready']) {
+                const select = (option.parentElement as SelectElement);
+                if (!select.multiple && value) {
+                    select.options.forEach((eachOption) => {
+                        if (option !== eachOption)
+                            eachOption.selected = false;
+                    });
+                    select.selectedOptions.clear();
+                }
+                if (value) {
+                    console.log(option.textContent);
+                    select.selectedOptions.add(option);
+                } else {
+                    select.selectedOptions.delete(option);
+                }
+                select.composeValue();
             }
-            select.composeValue();
         },
         reflect: false
     })
-    selected: boolean = false;
+    selected: boolean;
 
     @Attr({
         update(option: OptionElement, value) {
-            const select = (option.parentElement as SelectElement);
-            select.composeValue();
+            if (option['ready']) {
+                const select = (option.parentElement as SelectElement);
+                select.selectOptionByValue(select.value);
+                select.composeValue();
+            }
             option.empty = value === null || value === undefined || value === '';
         },
         reflect: false
@@ -47,10 +59,12 @@ export class OptionElement extends HTMLElement {
     onConnected() {
         this.select = (this.parentElement as any);
         this.select.options.add(this);
+        this.select.selectOptionByValue(this.select.value);
+        this.select.composeValue();
     }
 
     onDisconnected() {
-        this.select.options.remove(this);
+        this.select.options.delete(this);
     }
 
 }
