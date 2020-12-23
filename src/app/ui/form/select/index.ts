@@ -214,7 +214,6 @@ export class SelectElement extends ControlElement {
                 .filter((eachElement) => !eachElement.slot)
                 .map((eachElement) => eachElement.textContent)
                 .join(' ');
-            console.log(optionText)
             this.search.textContent = optionText || '';
         }
     }

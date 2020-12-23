@@ -16,25 +16,23 @@ export class OptionElement extends HTMLElement {
 
     @Attr({
         update(option: OptionElement, value) {
-            if (option['ready']) {
-                const select = (option.parentElement as SelectElement);
+            const select = (option.parentElement as SelectElement);
 
-                if (!select.multiple && value) {
-                    select.options.forEach((eachOption) => {
-                        if (option !== eachOption)
-                            eachOption.selected = false;
-                    });
-                    select.selectedOptions.clear();
-                }
-
-                if (value) {
-                    select.selectedOptions.add(option);
-                } else {
-                    select.selectedOptions.delete(option);
-                }
-
-                select.composeValue();
+            if (!select.multiple && value) {
+                select.selectedOptions.forEach((eachOption) => {
+                    if (option !== eachOption)
+                        eachOption.selected = false;
+                });
+                select.selectedOptions.clear();
             }
+
+            if (value) {
+                select.selectedOptions.add(option);
+            } else {
+                select.selectedOptions.delete(option);
+            }
+
+            select.composeValue();
         },
         reflect: false
     })
@@ -42,11 +40,8 @@ export class OptionElement extends HTMLElement {
 
     @Attr({
         update(option: OptionElement, value) {
-            if (option['ready']) {
-                const select = (option.parentElement as SelectElement);
-                select.selectOptionByValue(select.value);
-                select.composeValue();
-            }
+            const select = (option.parentElement as SelectElement);
+            select.composeValue();
             option.empty = value === null || value === undefined || value === '';
         },
         reflect: false
@@ -61,8 +56,6 @@ export class OptionElement extends HTMLElement {
     onConnected() {
         this.select = (this.parentElement as any);
         this.select.options.add(this);
-        this.select.selectOptionByValue(this.select.value);
-        this.select.composeValue();
     }
 
     onDisconnected() {
