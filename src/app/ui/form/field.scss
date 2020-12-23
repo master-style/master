@@ -156,7 +156,7 @@
     ::slotted([part=head]),
     ::slotted([part=foot]),
     ::slotted([part=body]),
-    m-icon,
+    [part=icon],
     [part=body] {
         padding-top: calc(var(--py) + .125rem);
         padding-bottom: calc(var(--py) - .125rem);
@@ -220,7 +220,7 @@ legend {
 ::slotted([part=head]),
 ::slotted([part=foot]),
 ::slotted([part=body]),
-m-icon,
+[part=icon],
 [part=body] {
     box-sizing: border-box;
     padding-top: var(--py);
@@ -245,7 +245,7 @@ m-icon,
 
 ::slotted([part=head]),
 ::slotted([part=foot]),
-m-icon {
+[part=icon] {
     display: flex;
     user-select: none;
     white-space: nowrap;
