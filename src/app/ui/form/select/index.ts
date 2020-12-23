@@ -1,10 +1,10 @@
 import { Element, Attr, Event, ControlElement, Prop } from '../../../element';
 
 import css from './select.scss';
-import './popup';
+import './select-popup';
 
 import { OptionElement } from '../option';
-import { SelectPopupElement } from './popup';
+import { SelectPopupElement } from './select-popup';
 
 let uid = 0;
 
@@ -33,16 +33,11 @@ export class SelectElement extends ControlElement {
             $created: (element: HTMLDivElement) => this.root = element
         }, [
             'div', {
-                part: 'body',
-                placeholder: this.placeholder,
-                label: this.label?.length > this.placeholder?.length
-                    ? this.label
-                    : this.placeholder, // for default select width
+                part: 'body'
             }, [
                 'span', {
                     $if: this.multiple && this.searchable && !this.readOnly || !this.multiple,
                     part: 'search',
-                    type: 'search',
                     contenteditable: !this.readOnly && this.searchable && !this.disabled,
                     spellcheck: 'false',
                     disabled: this.disabled,

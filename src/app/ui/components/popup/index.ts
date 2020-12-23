@@ -41,6 +41,8 @@ export class PopupElement extends TargetElement {
     @Attr({ reflect: false })
     closeOn = 'click:outside';
 
+    contentTokens: any = () => [];
+
     template = window['Master'](() => [
         'm-content', {
             'scroll-y': true,
@@ -54,7 +56,8 @@ export class PopupElement extends TargetElement {
                         onSlotChange.call(this, event);
                     }
                 })
-            }
+            },
+            ...this.contentTokens()
         ]
     ]);
 

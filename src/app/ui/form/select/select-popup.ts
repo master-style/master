@@ -1,11 +1,11 @@
 import { Element, Attr } from '../../../element';
 import { OptionElement } from '../option';
 
-import css from './popup.scss';
+import css from './select-popup.scss';
 
-import { ContentElement } from '../../../ui/components/content';
-import { SelectElement } from './';
-import { ItemElement } from '../../../ui/components/item';
+import { ContentElement } from '../../components/content';
+import { SelectElement } from '.';
+import { ItemElement } from '../../components/item';
 import { CheckElement } from '../check';
 import { PopupElement } from '../../components';
 
@@ -29,6 +29,15 @@ export class SelectPopupElement extends PopupElement {
     content: ContentElement;
     select: SelectElement;
 
+    contentTokens: any = () => [
+        'div', {
+            $if: this.#keyword && this.#foundCount === 0,
+            part: 'search-info',
+            $text: 'Not Found'
+        }
+    ];
+
+
     lightTemplate = window['Master'](() => [
         ...[].concat(...Array.from(this.select.options)
             .map((eachOption: OptionElement) => [
@@ -50,6 +59,7 @@ export class SelectPopupElement extends PopupElement {
                         slot: 'foot',
                         name: '!option' + this.select.uid,
                         class: 'sm',
+                        style: 'margin-left: 1rem',
                         checked: eachOption.selected,
                         $data: eachOption,
                         type: this.multiple ? 'checkbox' : 'radio',
@@ -78,12 +88,7 @@ export class SelectPopupElement extends PopupElement {
                     }
                 ]
             ])
-        ),
-        'div', {
-            $if: this.#keyword && this.#foundCount === 0,
-            part: 'search-info',
-            $text: 'Not Found'
-        }
+        )
     ]);
 
     #foundCount: number = 0;
