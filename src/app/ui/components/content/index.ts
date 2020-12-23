@@ -42,6 +42,9 @@ export class ContentElement extends TargetElement {
             part: 'root',
             $created: (element: HTMLElement) => this.root = element
         },
+        'slot', {
+            name: 'part'
+        },
         'm-bar', {
             part: 'x',
             hidden: !this.scrolling,

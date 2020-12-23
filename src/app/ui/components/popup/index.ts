@@ -1,5 +1,5 @@
 import { Element, TargetElement, Attr } from '../../../element';
-import { createPopper, Placement } from '@popperjs/core';
+import { createPopper, Placement, arrow } from '@popperjs/core';
 import { isInteractOutside } from '../../../utils/is-interact-outside';
 
 declare const ResizeObserver: any;
@@ -30,7 +30,7 @@ export class PopupElement extends TargetElement {
     offset = 0;
 
     @Attr({ reflect: false })
-    distance = 8;
+    distance = 10;
 
     @Attr({ reflect: false })
     boundaryPadding = 10;
@@ -40,6 +40,8 @@ export class PopupElement extends TargetElement {
 
     @Attr({ reflect: false })
     closeOn = 'click:outside';
+
+    arrow: SVGElement;
 
     contentTokens: any = () => [];
 
@@ -57,7 +59,20 @@ export class PopupElement extends TargetElement {
                     }
                 })
             },
-            ...this.contentTokens()
+            ...this.contentTokens(),
+            'div', {
+                slot: 'part',
+                part: 'arrow',
+                $created: (element: SVGAElement) => this.arrow = element
+            }, [
+                'svg', {
+                    part: 'arrow-icon',
+                    height: 10,
+                    viewBox: '0 0 64 20',
+                    $namespace: 'http://www.w3.org/2000/svg',
+                    $html: '<g transform="matrix(1.04009,0,0,1.45139,-1.26297,-65.9145)"><path d="M1.214,59.185C1.214,59.185 12.868,59.992 21.5,51.55C29.887,43.347 33.898,43.308 42.5,51.55C51.352,60.031 62.747,59.185 62.747,59.185L1.214,59.185Z"></path></g>'
+                }
+            ]
         ]
     ]);
 
@@ -101,6 +116,12 @@ export class PopupElement extends TargetElement {
                     placement: this.placement,
                     modifiers: [
                         {
+                            name: 'arrow',
+                            options: {
+                                element: this.arrow,
+                            },
+                        },
+                        {
                             name: 'offset',
                             options: {
                                 offset: [this.offset, this.distance],
@@ -117,7 +138,7 @@ export class PopupElement extends TargetElement {
                             options: {
                                 padding: this.boundaryPadding,
                             }
-                        },
+                        }
                     ],
                     onFirstUpdate: resolve
                 });
@@ -175,22 +196,18 @@ export class PopupElement extends TargetElement {
         switch (this.popper.state.placement.split('-')[0]) {
             case 'top':
                 scale = 'Y(.9)';
-                translate = 'Y(' + this.distance + 'px)';
                 transformOrigin = 'center bottom';
                 break;
             case 'bottom':
                 scale = 'Y(.9)';
-                translate = 'Y(-' + this.distance + 'px)';
                 transformOrigin = 'top center';
                 break;
             case 'left':
                 scale = 'X(.9)';
-                translate = 'X(' + this.distance + 'px)';
                 transformOrigin = 'right center';
                 break;
             case 'right':
                 scale = 'X(.9)';
-                translate = 'X(-' + this.distance + 'px)';
                 transformOrigin = 'left center';
                 break;
         }
@@ -198,12 +215,12 @@ export class PopupElement extends TargetElement {
         keyframes = [
             {
                 transformOrigin,
-                transform: 'translate' + translate + ' scale' + scale,
+                transform: 'scale' + scale,
                 opacity: this.fade ? 0 : 1
             },
             {
                 transformOrigin,
-                transform: 'translate(0,0) scaleY(1)',
+                transform: 'scaleY(1)',
                 opacity: 1
             }
         ];
