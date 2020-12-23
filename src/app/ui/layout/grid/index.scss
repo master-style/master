@@ -153,43 +153,6 @@
 
 .y\:no {
     --gap: 0px;
-
-    &:not(.c\:row) {
-
-        >.x,
-        >[class^=x\:],
-        >[class*=' x\:'] {
-
-            &:not(:last-of-type) {
-                border-top-right-radius: 0 !important;
-                border-bottom-right-radius: 0 !important;
-            }
-
-            &:not(:first-of-type) {
-                border-top-left-radius: 0 !important;
-                border-bottom-left-radius: 0 !important;
-                border-left: 0px !important;
-            }
-        }
-    }
-
-    &.c\:row {
-
-        >.x,
-        >[class^=x\:],
-        >[class*=' x\:'] {
-            &:not(:last-of-type) {
-                border-bottom-left-radius: 0 !important;
-                border-bottom-right-radius: 0 !important;
-            }
-
-            &:not(:first-of-type) {
-                border-top-left-radius: 0 !important;
-                border-top-right-radius: 0 !important;
-                border-top: 0px !important;
-            }
-        }
-    }
 }
 
 [class^='right\:'],

@@ -1,6 +1,5 @@
-import { Element, Attr, TargetElement } from '../../../element';
+import { Element, Attr } from '../../../element';
 import { OptionElement } from '../option';
-import { isInteractOutside } from '../../../utils/is-interact-outside';
 
 import css from './popup.scss';
 
@@ -8,6 +7,7 @@ import { ContentElement } from '../../../ui/components/content';
 import { SelectElement } from './';
 import { ItemElement } from '../../../ui/components/item';
 import { CheckElement } from '../check';
+import { PopupElement } from '../../components';
 
 const NAME = 'select-popup';
 
@@ -15,82 +15,75 @@ const NAME = 'select-popup';
     tag: 'm-' + NAME,
     css
 })
-export class SelectPopupElement extends TargetElement {
+export class SelectPopupElement extends PopupElement {
+
+    _duration = 300;
+    _triggerEvent = null;
+    _placement = 'bottom-start';
 
     items: ItemElement[] = [];
 
     @Attr()
     multiple: boolean = false;
 
-    duration = 300;
-    triggerEvent = null;
-
     content: ContentElement;
     select: SelectElement;
 
-    senseEdge = 5;
-
-    #offsetTop = 0;
-
-    template = window['Master'](() => [
-        'm-content', {
-            'scroll-y': true,
-            guide: true,
-            $created: (element: ContentElement) => this.content = element
-        }, () => Array.from(this.select.options).map((eachOption: OptionElement) => [
-            'm-item', {
-                class: 'xs',
-                type: 'button',
-                empty: eachOption.empty,
-                selected: eachOption.selected,
-                $data: eachOption,
-                $html: eachOption.innerHTML,
-                $created: (item: ItemElement) => {
-                    this.items.push(item);
-                },
-                $removed: (item: ItemElement) => {
-                    this.items.splice(this.items.indexOf(item), 1);
-                }
-            }, [
-                'm-check', {
-                    slot: 'foot',
-                    name: '!option' + this.select.uid,
-                    class: 'sm',
-                    checked: eachOption.selected,
+    lightTemplate = window['Master'](() => [
+        ...[].concat(...Array.from(this.select.options)
+            .map((eachOption: OptionElement) => [
+                'm-item', {
+                    class: 'xs',
+                    type: 'button',
+                    empty: eachOption.empty,
+                    selected: eachOption.selected,
                     $data: eachOption,
-                    type: this.multiple ? 'checkbox' : 'radio',
-                    $created: (check: CheckElement, node: TemplateNode) => {
-                        check
-                            .on('change', () => {
-                                if (this.multiple) {
-                                    node.$data.selected = check.checked;
-                                    if (this.select.search) this.select.search.focus();
-                                    this.updatePosition();
-                                    this.render();
-                                } else {
-                                    this.close();
-                                    node.$data.selected = check.checked;
-                                }
-                                this.select.changeEmitter(this.select.value);
-                                if (!this.select.dirty) {
-                                    this.select.dirty = true;
-                                }
-                            }, { passive: true })
-                            .on('click', () => {
-                                if (!this.multiple && check.checked) {
-                                    this.close();
-                                }
-                            }, { passive: true });
+                    $html: eachOption.innerHTML,
+                    $created: (item: ItemElement) => {
+                        this.items.push(item);
+                    },
+                    $removed: (item: ItemElement) => {
+                        this.items.splice(this.items.indexOf(item), 1);
                     }
-                }
-            ]
-        ]), [
-            'div', {
-                $if: this.#keyword && this.#foundCount === 0,
-                part: 'search-info',
-                $text: 'Not Found'
-            }
-        ]
+                }, [
+                    'm-check', {
+                        slot: 'foot',
+                        name: '!option' + this.select.uid,
+                        class: 'sm',
+                        checked: eachOption.selected,
+                        $data: eachOption,
+                        type: this.multiple ? 'checkbox' : 'radio',
+                        $created: (check: CheckElement, node: TemplateNode) => {
+                            check
+                                .on('change', () => {
+                                    if (this.multiple) {
+                                        node.$data.selected = check.checked;
+                                        if (this.select.search) this.select.search.focus();
+                                        this.render();
+                                    } else {
+                                        this.close();
+                                        node.$data.selected = check.checked;
+                                    }
+                                    this.select.changeEmitter(this.select.value);
+                                    if (!this.select.dirty) {
+                                        this.select.dirty = true;
+                                    }
+                                }, { passive: true })
+                                .on('click', () => {
+                                    if (!this.multiple && check.checked) {
+                                        this.close();
+                                    }
+                                }, { passive: true });
+                        }
+                    }
+                ]
+            ])
+        ),
+        'div', {
+            $if: this.#keyword && this.#foundCount === 0,
+            part: 'search-info',
+            $text: 'Not Found'
+        }
     ]);
 
     #foundCount: number = 0;
@@ -109,7 +102,12 @@ export class SelectPopupElement extends TargetElement {
         this.render();
     }
 
-    onOpen() {
+    onSlotChange() {
+        this.lightTemplate.render(this);
+    }
+
+    async onOpen() {
+        super.onOpen();
         this.content.renderScroll();
         if (this.select.search) {
             // this.select.search.readOnly = false;
@@ -117,26 +115,11 @@ export class SelectPopupElement extends TargetElement {
         }
     }
 
-    onOpened() {
-        document.documentElement.css('overflow', 'hidden');
-        document.body
-            .on('click', async (clickEvent: any) => {
-                if (
-                    clickEvent.target === this ||
-                    this.select.contains(clickEvent.target)
-                ) return;
-                if (isInteractOutside(this, clickEvent, this.senseEdge)) {
-                    this.close();
-                }
-            }, { passive: true, id: [this, NAME] });
-    }
-
     onClose() {
+        super.onClose();
         if (this.select.search) {
             this.select.search.textContent = this.select.keyword = '';
         }
-        document.body.off({ id: [this, NAME] });
-        document.documentElement.css('overflow', '');
         this.select.focused = false;
         if (!this.select.multiple) {
             const selectedOption = this.select.selectedOptions.values().next().value;
@@ -145,6 +128,7 @@ export class SelectPopupElement extends TargetElement {
     }
 
     onClosed() {
+        super.onClosed();
         // if (this.select.search) {
         //     this.select.search.readOnly = true;
         // }
@@ -154,124 +138,13 @@ export class SelectPopupElement extends TargetElement {
         this.remove();
     }
 
-    updatePosition() {
-        let top = 0;
-        let left = 0;
-        let diffTop = 0;
-        let origin = 0;
-
-        const
-            rect = this.getBoundingClientRect(),
-            selectRect = this.select.getBoundingClientRect(),
-            windowHeight = window.innerHeight,
-            windowWidth = window.innerWidth;
-
-        if (this.multiple || this.select.searchable) {
-            top = selectRect.top + selectRect.height + 5;
-            left = selectRect.left;
-        } else {
-            const itemNodes = this.template.nodes[0].children;
-            let originItemNode: TemplateNode;
-
-            if (this.multiple) {
-                // value and oldValue always not be same
-                originItemNode = itemNodes
-                    .filter((eachItemNode) => eachItemNode.$data.selected)[0];
-            } else {
-                originItemNode = itemNodes
-                    .find((eachItemNode) => eachItemNode.$data.selected);
-            }
-
-            let originItemRect = { top: 0, height: 0 };
-            let originItem: ItemElement;
-
-            if (originItemNode && !originItemNode.$data.hidden) {
-                originItem = originItemNode.element;
-                this.content.to(originItem, 0);
-                originItemRect = originItem.getBoundingClientRect();
-            }
-            diffTop = (originItem ? selectRect.height / 2 : 0) - originItemRect.height / 2;
-            const
-                offsetTop = selectRect.top - originItemRect.top + diffTop;
-            if (!originItem) this.#offsetTop = 0;
-            this.#offsetTop += offsetTop;
-
-            top = this.#offsetTop;
-            left = selectRect.left;
-            origin = selectRect.top - this.#offsetTop + 3 * diffTop;
-        }
-
-        // exceed Y
-        let exceedY = 0;
-        if (top <= 5) {
-            exceedY = top - 5;
-            top = 5;
-        } else if (top + rect.height >= windowHeight - 5) {
-            exceedY = top + rect.height - windowHeight + 5;
-            top = windowHeight - rect.height - 5;
-        }
-
-        // exceed X
-        if (left <= 5) {
-            left = 5;
-        } else if (left + rect.width >= windowWidth - 5) {
-            left = windowWidth - rect.width - 5;
-        }
-
-        this.css({
-            top,
-            left,
-            minWidth: selectRect.width,
-            transformOrigin: '0 ' + (origin + exceedY) + 'px'
-        });
-    }
-
-    protected toggling(
-        options: KeyframeEffectOptions
-    ) {
-
-        const keyframes: any = [
-            {
-                transform: 'scaleY(.9)',
-                opacity: 0
-            },
-            {
-                transform: 'scaleY(1)',
-                opacity: 1
-            }
-        ];
-
-        if (!this.hidden) {
-            // prepare to open
-            this.updatePosition();
-        } else {
-            keyframes.reverse();
-        }
-
-        this.animation = this.animate(keyframes, options);
-        this.animations.push(this.animation);
-        return new Promise((finish) => {
-            this.animation.onfinish = () => {
-                if (this.hidden) {
-                    this.#offsetTop = 0;
-                    this.css({
-                        top: '',
-                        left: '',
-                        minWidth: '',
-                        transformOrigin: ''
-                    });
-                }
-                finish();
-            };
-        });
-    }
-
     render() {
-        this.template.render(this.shadowRoot);
+        super.render();
+        this.lightTemplate.render(this);
     }
 
     removeRender() {
-        this.template.remove();
+        this.lightTemplate.remove();
     }
 
 }

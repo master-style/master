@@ -73,7 +73,6 @@ export class SelectElement extends ControlElement {
                                     event.stopPropagation();
                                     eachOption.selected = false;
                                     this.popup.render();
-                                    this.popup.updatePosition();
                                 }
                             }
                         }, [
@@ -148,7 +147,6 @@ export class SelectElement extends ControlElement {
         if (this.popup) {
             if (!this.popup.hidden) {
                 this.popup.render();
-                this.popup.updatePosition();
             }
         }
     }
@@ -165,6 +163,7 @@ export class SelectElement extends ControlElement {
                 });
                 this.popup.select = this;
                 document.body.append(this.popup);
+                this.popup.trigger = this;
                 this.popup.open();
             }, { passive: true, id: [NAME] });
         }

@@ -108,7 +108,9 @@ export class TargetElement extends HTMLElement {
             $('[' + toggleAttrKey + ']')
                 .forEach((eachToggle: Element) => {
                     if (this.matches(eachToggle.getAttribute(toggleAttrKey))) {
-                        eachToggle.toggleAttribute('aria-expanded', !this.hidden);
+                        const hidden = this.hidden;
+                        eachToggle.toggleAttribute('aria-expanded', !hidden);
+                        eachToggle.toggleAttribute('active', !hidden);
                         const icon = eachToggle.querySelector('.toggled');
                         if (icon) icon.toggleAttribute('active', !this.hidden);
                     }
@@ -128,11 +130,11 @@ export class TargetElement extends HTMLElement {
             if (hidden) {
                 this.toggleAttribute('hidden', true);
             }
-            const completed = hidden ? this['onClosed'] : this['onOpened'];
-            if (completed) completed.call(this);
             this.toggleAttribute('changing', false);
             this.animation = null;
             this.animations = [];
+            const completed = hidden ? this['onClosed'] : this['onOpened'];
+            if (completed) completed.call(this);
         }
     }
 

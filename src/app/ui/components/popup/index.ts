@@ -5,6 +5,7 @@ import { isInteractOutside } from '../../../utils/is-interact-outside';
 declare const ResizeObserver: any;
 
 import css from './popup.scss';
+import { ContentElement } from '../content';
 
 const NAME = 'popup';
 
@@ -20,10 +21,10 @@ export class PopupElement extends TargetElement {
     _fade = true;
     _duration = 300;
 
-    root;
+    content: ContentElement;
     trigger: HTMLElement;
     popper;
-    resizeObserver;
+    #resizeObserver;
 
     @Attr({ reflect: false })
     offset = 0;
@@ -38,14 +39,22 @@ export class PopupElement extends TargetElement {
     placement: Placement = 'bottom';
 
     @Attr({ reflect: false })
-    closeOn: string;
+    closeOn = 'click:outside';
 
     template = window['Master'](() => [
-        'div', {
-            part: 'root',
-            $created: (element: HTMLElement) => this.root = element
+        'm-content', {
+            'scroll-y': true,
+            part: 'content',
+            $created: (element: ContentElement) => this.content = element
         }, [
-            'slot'
+            'slot', {
+                $created: (element: HTMLSlotElement) => element.on('slotchange', (event) => {
+                    const onSlotChange = this['onSlotChange'];
+                    if (onSlotChange) {
+                        onSlotChange.call(this, event);
+                    }
+                })
+            }
         ]
     ]);
 
@@ -53,7 +62,7 @@ export class PopupElement extends TargetElement {
         if (!whether) {
             if (
                 !isInteractOutside(this.trigger, event) ||
-                !isInteractOutside(this.root, event, this.distance)
+                !isInteractOutside(this.content, event, this.distance)
             ) {
                 return false;
             }
@@ -66,15 +75,25 @@ export class PopupElement extends TargetElement {
         }
         if (
             isInteractOutside(this.trigger, event) &&
-            isInteractOutside(this.root, event, this.distance)
+            isInteractOutside(this.content, event, this.distance)
         ) {
             this.close();
         }
     }
 
-    onOpen() {
+    updateMaxHeight() {
+        const refRect = this.trigger.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        const bottomDistance = windowHeight - (refRect.y + refRect.height);
+        const topDistance = refRect.y;
+        this.css('maxHeight', (topDistance < bottomDistance ? bottomDistance : topDistance) - this.distance - 10);
+    }
+
+    async onOpen() {
+        this.updateMaxHeight();
+
         if (!this.popper) {
-            return new Promise((resolve) => {
+            await new Promise((resolve) => {
                 this.popper = createPopper(this.trigger, this, {
                     placement: this.placement,
                     modifiers: [
@@ -105,27 +124,32 @@ export class PopupElement extends TargetElement {
 
     onOpened() {
         if (this.popper) {
-
-            if (this.closeOn?.indexOf('mouseout') !== -1) {
+            if (this.closeOn && this.closeOn.indexOf('mouseout') !== -1) {
                 document.body
                     .on('mousemove', this.determineClose, { passive: true });
             }
 
-            if (this.closeOn?.indexOf('click:outside') !== -1) {
+            if (this.closeOn && this.closeOn.indexOf('click:outside') !== -1) {
                 document.body
                     .on('click', this.determineClose, { passive: true });
             }
 
-            if (!this.resizeObserver) {
-                this.resizeObserver = new ResizeObserver(() => this.popper.update());
-                this.resizeObserver.observe(this.root);
+            if (!this.#resizeObserver) {
+                this.#resizeObserver = new ResizeObserver(() => {
+                    this.updateMaxHeight();
+                    this.popper.update();
+                });
+                this.#resizeObserver.observe(this.content);
+                this.#resizeObserver.observe(this.trigger);
             }
         }
     }
 
     onClose() {
-        if (this.resizeObserver) {
-            this.resizeObserver = this.resizeObserver.unobserve(this.root);
+        if (this.#resizeObserver) {
+            this.#resizeObserver.unobserve(this.content);
+            this.#resizeObserver.unobserve(this.trigger);
+            this.#resizeObserver = null;
         }
     }
 
@@ -185,7 +209,7 @@ export class PopupElement extends TargetElement {
             keyframes.reverse();
         }
 
-        this.animation = this.root.animate(keyframes, options);
+        this.animation = this.content.animate(keyframes, options);
         this.animations.push(this.animation);
         return new Promise((finish) => {
             this.animation.onfinish = finish;
