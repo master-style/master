@@ -18,6 +18,7 @@ export class OptionElement extends HTMLElement {
         update(option: OptionElement, value) {
             if (option['ready']) {
                 const select = (option.parentElement as SelectElement);
+
                 if (!select.multiple && value) {
                     select.options.forEach((eachOption) => {
                         if (option !== eachOption)
@@ -25,12 +26,13 @@ export class OptionElement extends HTMLElement {
                     });
                     select.selectedOptions.clear();
                 }
+
                 if (value) {
-                    console.log(option.textContent);
                     select.selectedOptions.add(option);
                 } else {
                     select.selectedOptions.delete(option);
                 }
+
                 select.composeValue();
             }
         },

@@ -121,10 +121,7 @@ export class SelectPopupElement extends PopupElement {
             this.select.search.textContent = this.select.keyword = '';
         }
         this.select.focused = false;
-        if (!this.select.multiple) {
-            const selectedOption = this.select.selectedOptions.values().next().value;
-            this.select.search.textContent = selectedOption?.textContent.trim() || '';
-        }
+        this.select.output();
     }
 
     onClosed() {

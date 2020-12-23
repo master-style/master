@@ -209,8 +209,13 @@ export class SelectElement extends ControlElement {
 
     output() {
         if (!this.multiple) {
-            this.search.textContent = this.selectedOptions.values().next().value
-                ?.textContent.trim() || '';
+            const option = this.selectedOptions.values().next().value;
+            const optionText = option?.childNodes
+                .filter((eachElement) => !eachElement.slot)
+                .map((eachElement) => eachElement.textContent)
+                .join(' ');
+            console.log(optionText)
+            this.search.textContent = optionText || '';
         }
     }
 
@@ -233,7 +238,6 @@ export class SelectElement extends ControlElement {
             select.body.value = value;
             select.validate();
             select.output();
-            console.log(value, select.selectedOptions);
         },
         reflect: false
     })

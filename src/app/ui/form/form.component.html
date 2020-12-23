@@ -1,6 +1,30 @@
 <div class="demo mb:no">
     <form class="demo-body" #form="ngForm">
         <div class="y">
+            <div class="x:12">
+                {{ multipleSelect.value | json }}
+            </div>
+            <div class="x:6">
+                <m-select name="city-multiple-underlined"
+                          label="city"
+                          required
+                          (change)="masterChange($event)"
+                          multiple
+                          searchable
+                          #multipleSelect
+                          placeholder="search ..."
+                          [(ngModel)]="cities"
+                          class="underlined">
+                    <m-option *ngFor="let city of ['taichung', 'kaosiung', 'taipei', 'hualien', 'taoyuan']"
+                              [value]="city">
+                        <span slot="head">🍉</span>{{city}}
+                    </m-option>
+                    <m-option *ngFor="let option of options"
+                              [value]="option">
+                        <span slot="head">🍉</span>{{option}}
+                    </m-option>
+                </m-select>
+            </div>
             <div class="x:6">
                 <m-select name="city-multiple"
                           label="city"
@@ -14,12 +38,16 @@
                           class="outlined">
                     <m-option *ngFor="let city of ['taichung', 'kaosiung', 'taipei', 'hualien', 'taoyuan']"
                               [value]="city">
-                        <span slot="head">🍉</span>{{city}}</m-option>
+                        <span slot="head">🍉</span>{{city}}
+                    </m-option>
                     <m-option *ngFor="let option of options"
                               [value]="option">
-                        <span slot="head">🍉</span>{{option}}</m-option>
+                        <span slot="head">🍉</span>{{option}}
+                    </m-option>
                 </m-select>
-                {{ multipleSelect.value | json }}
+            </div>
+            <div class="x:12">
+                {{ test.value }}
             </div>
             <div class="x:6">
                 <m-select name="city"
@@ -34,12 +62,27 @@
                     <m-option>current</m-option>
                     <m-option *ngFor="let city of ['taichung', 'kaosiung', 'taipei', 'hualien']"
                               [value]="city">
+                        <span slot="head">🍉</span>
                         {{city}}
                     </m-option>
-                    <m-option *ngFor="let city of ['taoyuan']"
-                              [value]="city">{{city}}</m-option>
                 </m-select>
-                {{ test.value }}
+            </div>
+            <div class="x:6">
+                <m-select name="city-underlined"
+                          #test
+                          label="city"
+                          required
+                          placeholder="current location"
+                          searchable
+                          (change)="masterChange($event)"
+                          ngModel="hualien"
+                          class="underlined">
+                    <m-option>current</m-option>
+                    <m-option *ngFor="let city of ['taichung', 'kaosiung', 'taipei', 'hualien']"
+                              [value]="city">
+                        {{city}}
+                    </m-option>
+                </m-select>
             </div>
             <div class="x" *ngFor="let theme of ['dark', 'light']">
                 <m-check type="radio"
