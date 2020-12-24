@@ -102,6 +102,9 @@ export class SelectElement extends ControlElement {
     @Attr({ observe: false })
     focused: boolean = false;
 
+    @Attr()
+    addable: boolean;
+
     @Event({ force: true })
     changeEmitter: EventEmitter;
 
@@ -154,7 +157,8 @@ export class SelectElement extends ControlElement {
                 if (this.disabled || this.popup && !this.popup.hidden) return;
                 this.popup = $('m-select-popup', {
                     multiple: this.multiple,
-                    hidden: true
+                    hidden: true,
+                    'min-width': 'trigger'
                 });
                 this.popup.select = this;
                 document.body.append(this.popup);

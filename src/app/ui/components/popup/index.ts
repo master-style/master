@@ -41,6 +41,9 @@ export class PopupElement extends TargetElement {
     @Attr({ reflect: false })
     closeOn = 'click:outside';
 
+    @Attr({ reflect: false })
+    minWidth: string;
+
     activeChildPopups = new Set;
 
     // arrow: SVGElement;
@@ -102,27 +105,32 @@ export class PopupElement extends TargetElement {
         }
     }
 
-    updateMaxHeight() {
+    updateSize() {
         const refRect = this.trigger.getBoundingClientRect();
         const windowHeight = window.innerHeight;
         const bottomDistance = windowHeight - (refRect.y + refRect.height);
         const topDistance = refRect.y;
         this.css('maxHeight', (topDistance < bottomDistance ? bottomDistance : topDistance) - this.distance - 10);
+        if (this.minWidth === 'trigger') {
+            this.css('minWidth', refRect.width);
+        }
     }
 
     async onOpen() {
-
         const activate = (parent: PopupElement) => {
+            if (!parent) {
+                return;
+            }
             if (parent.tagName === 'M-POPUP') {
                 parent.activeChildPopups.add(this);
             } else if (parent !== document.body) {
-                activate(parent.parentElement as PopupElement);
+                activate(parent.parentNode as PopupElement);
             }
         };
 
-        activate(this.trigger.parentElement as PopupElement);
+        activate(this.trigger.parentNode as PopupElement);
 
-        this.updateMaxHeight();
+        this.updateSize();
 
         if (!this.popper) {
             await new Promise((resolve) => {
@@ -174,7 +182,7 @@ export class PopupElement extends TargetElement {
 
             if (!this.#resizeObserver) {
                 this.#resizeObserver = new ResizeObserver(() => {
-                    this.updateMaxHeight();
+                    this.updateSize();
                     this.popper.update();
                 });
                 this.#resizeObserver.observe(this.content);
@@ -184,15 +192,18 @@ export class PopupElement extends TargetElement {
     }
 
     onClose() {
-        const activate = (parent: PopupElement) => {
+        const deactivate = (parent: PopupElement) => {
+            if (!parent) {
+                return;
+            }
             if (parent.tagName === 'M-POPUP') {
                 parent.activeChildPopups.delete(this);
             } else if (parent !== document.body) {
-                activate(parent.parentElement as PopupElement);
+                deactivate(parent.parentNode as PopupElement);
             }
         };
 
-        activate(this.trigger.parentElement as PopupElement);
+        deactivate(this.trigger.parentNode as PopupElement);
 
         if (this.#resizeObserver) {
             this.#resizeObserver.unobserve(this.content);

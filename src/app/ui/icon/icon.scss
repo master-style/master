@@ -147,6 +147,18 @@ g {
     }
 }
 
+:host([name=add]) {
+    .l1 {
+        transform: rotate(0deg);
+        transform-origin: center;
+    }
+
+    .l2 {
+        transform: rotate(90deg);
+        transform-origin: center;
+    }
+}
+
 :host([name=check].animated),
 :host([name=cross].animated) {
     stroke-dasharray: 100%;

@@ -27,7 +27,7 @@ export class EditorElement extends HTMLElement {
                 const eachAction = this.actions[actionKey];
                 actionTokens = actionTokens.concat([
                     'm-button', {
-                        class: 'theme square sm',
+                        class: 'square sm',
                         $html: eachAction.icon,
                         title: eachAction.title,
                         disabled: this.view === 'code' && eachAction.title !== 'Code',

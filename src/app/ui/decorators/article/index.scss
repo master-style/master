@@ -229,6 +229,10 @@ article {
             margin-top: $md;
         }
 
+        img {
+            max-width: 100%;
+        }
+
         @include below(sm) {
             h1 {
                 font-size: var(--f-xl);

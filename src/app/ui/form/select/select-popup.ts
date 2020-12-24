@@ -34,7 +34,18 @@ export class SelectPopupElement extends PopupElement {
             $if: this.#keyword && this.#foundCount === 0,
             part: 'search-info',
             $text: 'Not Found'
-        }
+        },
+        'm-item', {
+            class: 'xs',
+            type: 'button',
+            $if: this.#keyword && this.#foundCount === 0,
+            $text: this.#keyword
+        }, [
+            'm-icon', {
+                name: 'add',
+                slot: 'head'
+            }
+        ]
     ];
 
 

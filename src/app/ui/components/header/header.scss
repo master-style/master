@@ -32,8 +32,8 @@ slot {
     width: 100%;
 }
 
-slot {
-    display: block;
+slot[name=end],
+slot[name=start] {
     min-width: 3rem;
 }
 

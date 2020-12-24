@@ -14,7 +14,7 @@
     flex-wrap: wrap;
     top: 0;
     border-bottom: 1px solid var(--b-fader);
-    @include bgBlur(var(--bg-theme-rgb), .8);
+    @include bgBlur(var(--theme-rgb), .8);
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
     z-index: $z-up;
