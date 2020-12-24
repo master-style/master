@@ -15,12 +15,12 @@
 }
 
 [part=root] {
-    display: inherit;
+    display: flex;
     contain: style;
     font: inherit;
     flex-wrap: inherit;
     flex-direction: inherit;
-    align-items: inherit;
+    align-items: center;
     justify-content: inherit;
     letter-spacing: inherit;
     line-height: inherit;
@@ -42,6 +42,7 @@
     flex: 1 1 auto;
     width: auto;
     margin: -.28125rem 0;
+    padding-right: 0;
 
     &:empty[placeholder] {
         margin: 0 !important;
@@ -56,6 +57,10 @@
         content: attr(label);
         color: transparent;
     }
+}
+
+[part=foot] {
+    margin-left: .375rem;
 }
 
 m-chip {
@@ -121,12 +126,6 @@ m-button[part=close] {
         }
     }
 
-}
-
-:host(.underlined) {
-    [part=foot] {
-        margin-left: .375rem;
-    }
 }
 
 ::slotted([part=output]) {

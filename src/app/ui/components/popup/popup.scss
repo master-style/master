@@ -20,6 +20,7 @@
         pointer-events: none;
         box-sizing: border-box;
         content: '';
+        border: 1px solid var(--b-fadest);
 
         display: block;
         width: 100%;
@@ -35,28 +36,28 @@
     }
 }
 
-[part=arrow] {
-    display: inline-flex;
-    z-index: $z-up;
-}
+// [part=arrow] {
+//     display: inline-flex;
+//     z-index: $z-up;
+// }
 
-:host([data-popper-placement^="top"]) {
+// :host([data-popper-placement^="top"]) {
 
-    [part=arrow-icon] {
-        transform: rotate(180deg);
-    }
-}
+//     [part=arrow-icon] {
+//         transform: rotate(180deg);
+//     }
+// }
 
-:host([data-popper-placement^="bottom"]) {
-    [part=arrow] {
-        top: 0;
-    }
+// :host([data-popper-placement^="bottom"]) {
+//     [part=arrow] {
+//         top: 0;
+//     }
 
-    [part=arrow-icon] {
-        transform: translateY(-100%);
-    }
-}
+//     [part=arrow-icon] {
+//         transform: translateY(-100%);
+//     }
+// }
 
-[part=arrow-icon] {
-    fill: rgba(var(--bg-object-rgb), .8);
-}
+// [part=arrow-icon] {
+//     fill: rgba(var(--bg-object-rgb), .8);
+// }

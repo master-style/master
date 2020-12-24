@@ -1,5 +1,5 @@
 import { Element, TargetElement, Attr } from '../../../element';
-import { createPopper, Placement, arrow } from '@popperjs/core';
+import { createPopper, Placement } from '@popperjs/core';
 import { isInteractOutside } from '../../../utils/is-interact-outside';
 
 declare const ResizeObserver: any;
@@ -41,13 +41,14 @@ export class PopupElement extends TargetElement {
     @Attr({ reflect: false })
     closeOn = 'click:outside';
 
-    arrow: SVGElement;
+    // arrow: SVGElement;
 
     contentTokens: any = () => [];
 
     template = window['Master'](() => [
         'm-content', {
             'scroll-y': true,
+            guide: true,
             part: 'content',
             $created: (element: ContentElement) => this.content = element
         }, [
@@ -60,19 +61,19 @@ export class PopupElement extends TargetElement {
                 })
             },
             ...this.contentTokens(),
-            'div', {
-                slot: 'part',
-                part: 'arrow',
-                $created: (element: SVGAElement) => this.arrow = element
-            }, [
-                'svg', {
-                    part: 'arrow-icon',
-                    height: 10,
-                    viewBox: '0 0 64 20',
-                    $namespace: 'http://www.w3.org/2000/svg',
-                    $html: '<g transform="matrix(1.04009,0,0,1.45139,-1.26297,-65.9145)"><path d="M1.214,59.185C1.214,59.185 12.868,59.992 21.5,51.55C29.887,43.347 33.898,43.308 42.5,51.55C51.352,60.031 62.747,59.185 62.747,59.185L1.214,59.185Z"></path></g>'
-                }
-            ]
+            // 'div', {
+            //     slot: 'part',
+            //     part: 'arrow',
+            //     $created: (element: SVGAElement) => this.arrow = element
+            // }, [
+            //     'svg', {
+            //         part: 'arrow-icon',
+            //         height: 10,
+            //         viewBox: '0 0 64 20',
+            //         $namespace: 'http://www.w3.org/2000/svg',
+            //         $html: '<g transform="matrix(1.04009,0,0,1.45139,-1.26297,-65.9145)"><path d="M1.214,59.185C1.214,59.185 12.868,59.992 21.5,51.55C29.887,43.347 33.898,43.308 42.5,51.55C51.352,60.031 62.747,59.185 62.747,59.185L1.214,59.185Z"></path></g>'
+            //     }
+            // ]
         ]
     ]);
 
@@ -115,12 +116,12 @@ export class PopupElement extends TargetElement {
                 this.popper = createPopper(this.trigger, this, {
                     placement: this.placement,
                     modifiers: [
-                        {
-                            name: 'arrow',
-                            options: {
-                                element: this.arrow,
-                            },
-                        },
+                        // {
+                        //     name: 'arrow',
+                        //     options: {
+                        //         element: this.arrow,
+                        //     },
+                        // },
                         {
                             name: 'offset',
                             options: {
