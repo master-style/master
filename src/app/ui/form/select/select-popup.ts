@@ -118,19 +118,21 @@ export class SelectPopupElement extends PopupElement {
 
     search(keyword: string) {
         this.#keyword = keyword;
-        this.toggleAttribute('searching', !!keyword);
         this.#foundCount = 0;
         this.#matchKeyword = false;
-        this.items.forEach((eachItem: ItemElement) => {
-            const text = eachItem.textContent;
-            const found = text.indexOf(keyword) !== -1;
-            if (found) this.#foundCount++;
-            if (text === keyword) {
-                this.#matchKeyword = true;
-            }
-            eachItem
-                .toggleAttribute('found', found);
-        });
+        this.toggleAttribute('searching', !!keyword);
+        if (keyword) {
+            this.items.forEach((eachItem: ItemElement) => {
+                const text = eachItem.textContent;
+                const found = text.indexOf(keyword) !== -1;
+                if (found) this.#foundCount++;
+                if (text === keyword) {
+                    this.#matchKeyword = true;
+                }
+                eachItem
+                    .toggleAttribute('found', found);
+            });
+        }
         this.render();
     }
 
@@ -165,6 +167,7 @@ export class SelectPopupElement extends PopupElement {
         this.#keyword = '';
         this.toggleAttribute('searching', false);
         this.remove();
+        this.select.popup = null;
     }
 
     render() {

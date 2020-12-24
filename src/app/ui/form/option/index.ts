@@ -56,10 +56,16 @@ export class OptionElement extends HTMLElement {
     onConnected() {
         this.select = (this.parentElement as any);
         this.select.options.add(this);
+        if (this.select.popup) {
+            this.select.popup.render();
+        }
     }
 
     onDisconnected() {
         this.select.options.delete(this);
+        if (this.select.popup) {
+            this.select.popup.render();
+        }
     }
 
 }

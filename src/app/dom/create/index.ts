@@ -40,16 +40,12 @@ const removeNode = (node) => {
 };
 
 const removeNodes = (eachNodes, isRoot?: boolean) => {
+    if (!eachNodes) return;
     eachNodes
         .forEach((eachNode) => {
-            const element = eachNode.element;
-            if (element) {
-                // 父層被移除，後代也將一併被移除，無須再執行後代的 .remove()
-                if (isRoot) element.remove();
-                const removed = eachNode.$removed;
-                if (removed) removed(element, eachNode);
-            }
-            if (eachNode.children) {
+            if (isRoot) {
+                removeNode(eachNode);
+            } else if (eachNode.children) {
                 removeNodes(eachNode.children);
             }
         });
@@ -114,15 +110,15 @@ class Template {
 
         if (this.nodes.length && this.container === container) {
             (function renderNodes(eachNodes, eachOldNodes, parent) {
-                if (!eachNodes.length && eachOldNodes.length) {
+                if (!eachNodes?.length && eachOldNodes?.length) {
                     removeNodes(eachOldNodes, true);
                 } else {
                     // tslint:disable-next-line: prefer-for-of
-                    if (eachOldNodes?.length > eachNodes.length) {
-                        removeNodes(eachOldNodes.splice(eachNodes.length), true);
+                    if (eachOldNodes?.length > eachNodes?.length) {
+                        removeNodes(eachOldNodes.splice(eachNodes?.length), true);
                     }
 
-                    for (let i = 0; i < eachNodes.length; i++) {
+                    for (let i = 0; i < eachNodes?.length; i++) {
                         const eachNode = eachNodes[i];
                         const eachOldNode = eachOldNodes && eachOldNodes[i];
                         const existing = !!eachOldNode?.element;
@@ -155,6 +151,7 @@ class Template {
                             }
                             const css = eachNode.$css;
                             const oldCss = eachOldNode?.$css;
+
                             if (css) {
                                 for (const eachPropKey in css) {
                                     const value = css[eachPropKey];
@@ -182,20 +179,20 @@ class Template {
                                 '$html' in eachNode && eachNode.$html !== eachOldNode.$html
                             ) {
                                 element.innerHTML = eachNode.$html;
-                                if (eachOldNode) {
-                                    eachOldNode.children = null;
+                                if (eachOldNode?.children) {
+                                    eachOldNode.children = [];
                                 }
                             } else if (
                                 '$text' in eachNode && eachNode.$text !== eachOldNode.$text
                             ) {
                                 element.textContent = eachNode.$text;
-                                if (eachOldNode) {
-                                    eachOldNode.children = null;
+                                if (eachOldNode?.children) {
+                                    eachOldNode.children = [];
                                 }
                             }
-                            if (eachNode.children) {
-                                renderNodes(eachNode.children, eachOldNode?.children, element);
-                            }
+
+                            renderNodes(eachNode?.children, eachOldNode?.children, element);
+
                             const updated = eachNode.$updated;
                             if (updated) updated(element, eachNode);
                         } else {
@@ -208,10 +205,6 @@ class Template {
                                     : document.createElement(eachNode.tag);
                             }
                             eachNode.element = element;
-
-                            if (eachOldNode?.children) {
-                                eachOldNode.children = [];
-                            }
 
                             const attr = eachNode.attr;
                             if (attr) {
@@ -240,9 +233,11 @@ class Template {
                                 element.textContent = eachNode.$text;
                             }
 
-                            if (eachNode.children) {
-                                renderNodes(eachNode.children, eachOldNode?.children, element);
+                            if (eachOldNode?.children) {
+                                eachOldNode.children = [];
                             }
+
+                            renderNodes(eachNode?.children, eachOldNode?.children, element);
 
                             const created = eachNode.$created;
                             if (created) created(element, eachNode);
