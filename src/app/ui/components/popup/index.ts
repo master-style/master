@@ -30,7 +30,7 @@ export class PopupElement extends TargetElement {
     offset = 0;
 
     @Attr({ reflect: false })
-    distance = 10;
+    distance = 8;
 
     @Attr({ reflect: false })
     boundaryPadding = 10;
@@ -40,6 +40,8 @@ export class PopupElement extends TargetElement {
 
     @Attr({ reflect: false })
     closeOn = 'click:outside';
+
+    activeChildPopups = new Set;
 
     // arrow: SVGElement;
 
@@ -89,7 +91,7 @@ export class PopupElement extends TargetElement {
     }
 
     private determineClose = (event: any) => {
-        if (this.animation) {
+        if (this.animation || this.activeChildPopups.size) {
             return;
         }
         if (
@@ -109,6 +111,17 @@ export class PopupElement extends TargetElement {
     }
 
     async onOpen() {
+
+        const activate = (parent: PopupElement) => {
+            if (parent.tagName === 'M-POPUP') {
+                parent.activeChildPopups.add(this);
+            } else if (parent !== document.body) {
+                activate(parent.parentElement as PopupElement);
+            }
+        };
+
+        activate(this.trigger.parentElement as PopupElement);
+
         this.updateMaxHeight();
 
         if (!this.popper) {
@@ -171,6 +184,16 @@ export class PopupElement extends TargetElement {
     }
 
     onClose() {
+        const activate = (parent: PopupElement) => {
+            if (parent.tagName === 'M-POPUP') {
+                parent.activeChildPopups.delete(this);
+            } else if (parent !== document.body) {
+                activate(parent.parentElement as PopupElement);
+            }
+        };
+
+        activate(this.trigger.parentElement as PopupElement);
+
         if (this.#resizeObserver) {
             this.#resizeObserver.unobserve(this.content);
             this.#resizeObserver.unobserve(this.trigger);
