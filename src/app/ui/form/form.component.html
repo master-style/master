@@ -54,6 +54,8 @@
                           #test
                           label="city"
                           required
+                          addable
+                          (add)="addOption($event)"
                           placeholder="current location"
                           searchable
                           (change)="masterChange($event)"

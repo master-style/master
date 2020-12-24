@@ -31,17 +31,26 @@ export class SelectPopupElement extends PopupElement {
 
     contentTokens: any = () => [
         'div', {
-            $if: this.#keyword && this.#foundCount === 0,
+            $if: this.#keyword && this.#foundCount === 0 && !this.select.addable,
             part: 'search-info',
             $text: 'Not Found'
         },
         'm-item', {
             class: 'xs',
             type: 'button',
-            $if: this.#keyword && this.#foundCount === 0,
-            $text: this.#keyword
+            style: '--f-size: var(--f-sm); --py: 0.375rem;',
+            $if: this.#keyword && !this.#matchKeyword && this.select.addable,
+            $text: this.#keyword,
+            $on: {
+                click: () => {
+                    this.select.addEmitter({
+                        value: this.#keyword
+                    });
+                }
+            }
         }, [
             'm-icon', {
+                style: 'color: var(--f-fade)',
                 name: 'add',
                 slot: 'head'
             }
@@ -55,6 +64,7 @@ export class SelectPopupElement extends PopupElement {
                 'm-item', {
                     class: 'xs',
                     type: 'button',
+                    style: '--f-size: var(--f-sm); --py: 0.375rem;',
                     empty: eachOption.empty,
                     selected: eachOption.selected,
                     $data: eachOption,
@@ -104,14 +114,20 @@ export class SelectPopupElement extends PopupElement {
 
     #foundCount: number = 0;
     #keyword: string;
+    #matchKeyword = false;
 
     search(keyword: string) {
         this.#keyword = keyword;
         this.toggleAttribute('searching', !!keyword);
         this.#foundCount = 0;
+        this.#matchKeyword = false;
         this.items.forEach((eachItem: ItemElement) => {
-            const found = eachItem.textContent.indexOf(keyword) !== -1;
+            const text = eachItem.textContent;
+            const found = text.indexOf(keyword) !== -1;
             if (found) this.#foundCount++;
+            if (text === keyword) {
+                this.#matchKeyword = true;
+            }
             eachItem
                 .toggleAttribute('found', found);
         });

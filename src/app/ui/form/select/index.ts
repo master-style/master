@@ -96,6 +96,12 @@ export class SelectElement extends ControlElement {
         ]
     ]);
 
+    @Event({ force: true })
+    addEmitter: EventEmitter;
+
+    @Event({ force: true })
+    changeEmitter: EventEmitter;
+
     @Attr({ key: 'tabindex' })
     tabIndex = 0;
 
@@ -104,9 +110,6 @@ export class SelectElement extends ControlElement {
 
     @Attr()
     addable: boolean;
-
-    @Event({ force: true })
-    changeEmitter: EventEmitter;
 
     uid: number;
 

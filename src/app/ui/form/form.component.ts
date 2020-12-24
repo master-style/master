@@ -29,6 +29,10 @@ export class FormComponent implements OnInit {
         console.log('submit', form);
     }
 
+    addOption(event) {
+        console.log(event.data);
+    }
+
     masterChange(event) {
         // console.log(event, event.target.value);
     }

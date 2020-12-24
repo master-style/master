@@ -21,10 +21,6 @@
     max-height: inherit;
 }
 
-::slotted(m-item) {
-    --f-size: var(--f-sm);
-}
-
 ::slotted(m-item[selected]) {
     font-weight: 600;
 }

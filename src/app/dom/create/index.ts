@@ -189,6 +189,9 @@ class Template {
                                 '$text' in eachNode && eachNode.$text !== eachOldNode.$text
                             ) {
                                 element.textContent = eachNode.$text;
+                                if (eachOldNode) {
+                                    eachOldNode.children = null;
+                                }
                             }
                             if (eachNode.children) {
                                 renderNodes(eachNode.children, eachOldNode?.children, element);
