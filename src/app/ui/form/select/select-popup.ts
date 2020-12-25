@@ -117,15 +117,20 @@ export class SelectPopupElement extends PopupElement {
     #matchKeyword = false;
 
     search(keyword: string) {
-        this.#keyword = keyword;
+        this.#keyword = keyword = keyword.trim();
         this.#foundCount = 0;
         this.#matchKeyword = false;
         this.toggleAttribute('searching', !!keyword);
         if (keyword) {
             this.items.forEach((eachItem: ItemElement) => {
-                const text = eachItem.textContent;
+                const text = eachItem?.childNodes
+                    .filter((eachElement) => !eachElement.slot)
+                    .map((eachElement) => eachElement.textContent)
+                    .join(' ')
+                    .trim();
                 const found = text.indexOf(keyword) !== -1;
                 if (found) this.#foundCount++;
+                console.log(text, keyword, text.length, keyword.length);
                 if (text === keyword) {
                     this.#matchKeyword = true;
                 }
@@ -133,6 +138,7 @@ export class SelectPopupElement extends PopupElement {
                     .toggleAttribute('found', found);
             });
         }
+        console.log(this.#matchKeyword);
         this.render();
     }
 

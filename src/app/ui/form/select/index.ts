@@ -238,7 +238,8 @@ export class SelectElement extends ControlElement {
             const optionText = option?.childNodes
                 .filter((eachElement) => !eachElement.slot)
                 .map((eachElement) => eachElement.textContent)
-                .join(' ');
+                .join(' ')
+                .trim();
             this.search.textContent = optionText || '';
         }
     }

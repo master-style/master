@@ -18,4 +18,6 @@ export class ItemElement extends ClickableElement {
         ]
     ];
 
+    body: HTMLSlotElement;
+
 }
