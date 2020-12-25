@@ -131,6 +131,23 @@ export class SelectElement extends ControlElement {
     search: HTMLInputElement;
     searchInfo: HTMLElement;
 
+    mutationObserver = new MutationObserver((mutations) => {
+        let textChanged = false;
+        mutations.forEach((eachMutationRecord) => {
+            if (eachMutationRecord.type === 'characterData') {
+                textChanged = true;
+                console.log('textChanged');
+            }
+        })
+
+        if (textChanged) {
+            this.render();
+            if (this.popup) {
+                this.popup.render();
+            }
+        }
+    });
+
     keyword: string;
 
     options: Set<OptionElement> = new Set();
@@ -180,7 +197,7 @@ export class SelectElement extends ControlElement {
             this.off({ passive: true, id: [NAME] });
         } else {
             this.on('click focusin', () => {
-                if (this.disabled || this.popup && !this.popup.hidden) return;
+                if (this.disabled || this.popup) return;
                 this.popup = $('m-select-popup', {
                     multiple: this.multiple,
                     hidden: true,
@@ -190,6 +207,7 @@ export class SelectElement extends ControlElement {
                 document.body.append(this.popup);
                 this.popup.trigger = this;
                 this.popup.open();
+                console.log('open');
             }, { passive: true, id: [NAME] });
         }
     }
@@ -284,10 +302,17 @@ export class SelectElement extends ControlElement {
                 if (this.popup?.hidden === false) return;
                 this.focused = false;
             }, { passive: true, id: [NAME] });
+
+        this.mutationObserver.observe(this, {
+            characterData: true,
+            childList: true,
+            subtree: true
+        })
     }
 
     onDisconnected() {
         this.off({ id: [NAME] });
+        this.mutationObserver.disconnect();
     }
 
 }

@@ -24,6 +24,14 @@ const updateSelected = (option: OptionElement, value) => {
 })
 export class OptionElement extends HTMLElement {
 
+    template = window['Master'](() => [
+        'slot', {
+            $created: (slot: HTMLSlotElement) => slot.on('slotchange', (event) => {
+                console.log(event);
+            }, { passive: true })
+        },
+    ]);
+
     @Attr()
     disabled: boolean;
 
@@ -58,5 +66,9 @@ export class OptionElement extends HTMLElement {
     }
 
     onDisconnected() { }
+
+    render() {
+        this.template.render(this.shadowRoot);
+    }
 
 }
