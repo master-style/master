@@ -5,6 +5,19 @@ import css from './option.scss';
 
 const NAME = 'option';
 
+const updateSelected = (option: OptionElement, value) => {
+    const select = (option.parentElement as SelectElement);
+
+    if (!select.multiple && value) {
+        select.options.forEach((eachOption) => {
+            if (option !== eachOption)
+                eachOption.selected = false;
+        });
+    }
+
+    select.composeValue();
+};
+
 @Element({
     tag: 'm-' + NAME,
     css
@@ -16,23 +29,9 @@ export class OptionElement extends HTMLElement {
 
     @Attr({
         update(option: OptionElement, value) {
-            const select = (option.parentElement as SelectElement);
-
-            if (!select.multiple && value) {
-                select.selectedOptions.forEach((eachOption) => {
-                    if (option !== eachOption)
-                        eachOption.selected = false;
-                });
-                select.selectedOptions.clear();
+            if (option['ready']) {
+                updateSelected(option, value);
             }
-
-            if (value) {
-                select.selectedOptions.add(option);
-            } else {
-                select.selectedOptions.delete(option);
-            }
-
-            select.composeValue();
         },
         reflect: false
     })
@@ -55,17 +54,9 @@ export class OptionElement extends HTMLElement {
 
     onConnected() {
         this.select = (this.parentElement as any);
-        this.select.options.add(this);
-        if (this.select.popup) {
-            this.select.popup.render();
-        }
+        updateSelected(this, this.selected);
     }
 
-    onDisconnected() {
-        this.select.options.delete(this);
-        if (this.select.popup) {
-            this.select.popup.render();
-        }
-    }
+    onDisconnected() { }
 
 }

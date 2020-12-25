@@ -28,12 +28,18 @@ export class SelectElement extends ControlElement {
 
     template = window['Master'](() => [
         'slot', {
-            title: 'test',
-            $on: {
-                slotchange: (event) => {
-                    console.log(event);
+            $created: (slot: HTMLSlotElement) => slot.on('slotchange', () => {
+                this.options = new Set(
+                    this.children
+                        .filter((eachChild) => eachChild.tagName === 'M-OPTION') as OptionElement[]
+                );
+
+                this.selectOptionByValue(this.value);
+
+                if (this.popup) {
+                    this.popup.render();
                 }
-            }
+            }, { passive: true })
         },
         'div', {
             part: 'root',
@@ -59,7 +65,7 @@ export class SelectElement extends ControlElement {
                     },
                     $removed: () => this.search = null
                 }
-            ], () => Array.from(this.selectedOptions)
+            ], () => this.selectedOptions
                 .map((eachOption: OptionElement) => [
                     'm-chip', {
                         $if: this.multiple,
@@ -128,7 +134,16 @@ export class SelectElement extends ControlElement {
     keyword: string;
 
     options: Set<OptionElement> = new Set();
-    selectedOptions: Set<OptionElement> = new Set();
+
+    get selectedOptions(): OptionElement[] {
+        const selectedOptions = [];
+        this.options.forEach((eachOption) => {
+            if (eachOption.selected) {
+                selectedOptions.push(eachOption);
+            };
+        });
+        return selectedOptions;
+    }
 
     selectOptionByValue(value) {
         this.options.forEach((eachOption) => {
@@ -142,10 +157,11 @@ export class SelectElement extends ControlElement {
                 }
             }
         });
+        this.output();
     }
 
     composeValue() {
-        const selectedOptions = Array.from(this.selectedOptions);
+        const selectedOptions = this.selectedOptions;
         if (this.multiple) {
             this.value = selectedOptions
                 .map((eachOption: OptionElement) => eachOption.value);
@@ -218,7 +234,7 @@ export class SelectElement extends ControlElement {
 
     output() {
         if (!this.multiple) {
-            const option = this.selectedOptions.values().next().value;
+            const option = this.selectedOptions[0];
             const optionText = option?.childNodes
                 .filter((eachElement) => !eachElement.slot)
                 .map((eachElement) => eachElement.textContent)
@@ -241,11 +257,10 @@ export class SelectElement extends ControlElement {
                 }
                 if (equal) return;
             }
-            select.selectOptionByValue(value);
             select.empty = value === null || value === undefined || value === '' || !value?.length;
             select.body.value = value;
             select.validate();
-            select.output();
+            select.selectOptionByValue(value);
         },
         reflect: false
     })
