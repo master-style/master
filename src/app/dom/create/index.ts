@@ -39,15 +39,11 @@ const removeNode = (node) => {
     if (removed) removed(node.element, node);
 };
 
-const removeNodes = (eachNodes, isRoot?: boolean) => {
+const removeNodes = (eachNodes) => {
     if (!eachNodes) return;
     eachNodes
         .forEach((eachNode) => {
-            if (isRoot) {
-                removeNode(eachNode);
-            } else if (eachNode.children) {
-                removeNodes(eachNode.children);
-            }
+            removeNode(eachNode);
         });
 };
 
@@ -111,11 +107,12 @@ class Template {
         if (this.nodes.length && this.container === container) {
             (function renderNodes(eachNodes, eachOldNodes, parent) {
                 if (!eachNodes?.length && eachOldNodes?.length) {
-                    removeNodes(eachOldNodes, true);
+                    removeNodes(eachOldNodes);
                 } else {
+
                     // tslint:disable-next-line: prefer-for-of
                     if (eachOldNodes?.length > eachNodes?.length) {
-                        removeNodes(eachOldNodes.splice(eachNodes?.length), true);
+                        removeNodes(eachOldNodes.splice(eachNodes?.length));
                     }
 
                     for (let i = 0; i < eachNodes?.length; i++) {
@@ -136,6 +133,7 @@ class Template {
                         if (!whether) continue;
 
                         if (existing && same) {
+
                             const element = eachNode.element = eachOldNode?.element;
                             const attr = eachNode.attr;
                             const oldAttr = eachOldNode?.attr;
@@ -149,32 +147,30 @@ class Template {
                                     }
                                 }
                             }
+
                             const css = eachNode.$css;
                             const oldCss = eachOldNode?.$css;
 
-                            if (css) {
-                                for (const eachPropKey in css) {
-                                    const value = css[eachPropKey];
-                                    const oldValue = oldCss[eachPropKey];
-                                    if (value !== oldValue) {
-                                        element.css(eachPropKey, value);
-                                    }
+                            for (const eachPropKey in css) {
+                                const value = css[eachPropKey];
+                                const oldValue = oldCss[eachPropKey];
+                                if (value !== oldValue) {
+                                    element.css(eachPropKey, value);
                                 }
                             }
-                            if ('$on' in eachNode) {
-                                if (eachOldNode.$on) {
-                                    for (const eachEventType in eachOldNode.$on) {
-                                        const eachHandle = eachOldNode.$on[eachEventType];
-                                        element.off(eachHandle);
-                                    }
-                                }
-                                for (const eachEventType in eachNode.$on) {
-                                    const eachHandle = eachNode.$on[eachEventType];
-                                    element.on(eachEventType, eachHandle, {
-                                        passive: true
-                                    });
-                                }
+
+                            for (const eachEventType in eachOldNode?.$on) {
+                                const eachHandle = eachOldNode.$on[eachEventType];
+                                element.off(eachHandle);
                             }
+
+                            for (const eachEventType in eachNode?.$on) {
+                                const eachHandle = eachNode.$on[eachEventType];
+                                element.on(eachEventType, eachHandle, {
+                                    passive: true
+                                });
+                            }
+
                             if (
                                 '$html' in eachNode && eachNode.$html !== eachOldNode.$html
                             ) {
@@ -216,14 +212,12 @@ class Template {
                                 element.css(css);
                             }
 
-                            if ('$on' in eachNode) {
-                                for (const eachEventType in eachNode.$on) {
-                                    const eachHandle = eachNode.$on[eachEventType];
-                                    if (eachHandle) {
-                                        element.on(eachEventType, eachHandle, {
-                                            passive: true
-                                        });
-                                    }
+                            for (const eachEventType in eachNode?.$on) {
+                                const eachHandle = eachNode.$on[eachEventType];
+                                if (eachHandle) {
+                                    element.on(eachEventType, eachHandle, {
+                                        passive: true
+                                    });
                                 }
                             }
 
@@ -287,18 +281,14 @@ class Template {
                     if (created) created(element, eachNode);
                     const updated = eachNode.$updated;
                     if (updated) updated(element, eachNode);
-                    if ('$on' in eachNode) {
-                        for (const eachEventType in eachNode.$on) {
-                            const eachHandle = eachNode.$on[eachEventType];
-                            if (eachHandle) {
-                                element.on(eachEventType, (event) => {
-                                    eachHandle(event, element);
-                                }, {
-                                    passive: true
-                                });
-                            }
-                        }
+
+                    for (const eachEventType in eachNode.$on) {
+                        const eachHandle = eachNode.$on[eachEventType];
+                        element.on(eachEventType, eachHandle, {
+                            passive: true
+                        });
                     }
+
                     if ('$html' in eachNode) {
                         element.innerHTML = eachNode.$html;
                     } else if ('$text' in eachNode) {
@@ -312,6 +302,7 @@ class Template {
                     if (css) {
                         element.css(css);
                     }
+
                     if (eachNode.children) {
                         create(eachNode.children, element);
                     }
@@ -325,7 +316,7 @@ class Template {
     remove() {
         if (this.nodes.length) {
             this.container = null;
-            removeNodes(this.nodes, true);
+            removeNodes(this.nodes);
             this.nodes = [];
         }
         return this;

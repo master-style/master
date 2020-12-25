@@ -27,7 +27,14 @@ export class SelectElement extends ControlElement {
     ]);
 
     template = window['Master'](() => [
-        'slot',
+        'slot', {
+            title: 'test',
+            $on: {
+                slotchange: (event) => {
+                    console.log(event);
+                }
+            }
+        },
         'div', {
             part: 'root',
             $created: (element: HTMLDivElement) => this.root = element

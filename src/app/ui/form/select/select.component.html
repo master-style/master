@@ -1,1 +1,16 @@
-<p>select works!</p>
+<m-select name="city"
+          #test
+          label="city"
+          required
+          addable
+          placeholder="current location"
+          searchable
+          ngModel="taipei"
+          class="outlined">
+    <m-option>current</m-option>
+    <m-option *ngFor="let city of ['taichung', 'kaosiung', 'taipei', 'hualien']"
+              [value]="city">
+        <span slot="head">🍉</span>
+        {{city}}
+    </m-option>
+</m-select>
