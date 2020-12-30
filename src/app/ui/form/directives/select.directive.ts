@@ -18,9 +18,7 @@ export class SelectControlValueAccessor implements ControlValueAccessor {
 
     constructor(
         private el: ElementRef
-    ) {
-        console.log(el);
-    }
+    ) {}
 
     onChange = (value: any) => {}
 

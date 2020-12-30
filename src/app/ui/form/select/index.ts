@@ -136,12 +136,12 @@ export class SelectElement extends ControlElement {
         mutations.forEach((eachMutationRecord) => {
             if (eachMutationRecord.type === 'characterData') {
                 textChanged = true;
-                console.log('textChanged');
             }
         })
 
         if (textChanged) {
             this.render();
+            this.output();
             if (this.popup) {
                 this.popup.render();
             }
@@ -207,7 +207,6 @@ export class SelectElement extends ControlElement {
                 document.body.append(this.popup);
                 this.popup.trigger = this;
                 this.popup.open();
-                console.log('open');
             }, { passive: true, id: [NAME] });
         }
     }

@@ -5,7 +5,7 @@
 [class^=y\:],
 [class*=' y\:'] {
     --gap: #{$md};
-    display: inline-flex;
+    display: flex; // 不可使用 inline-flex 會有空白問題
     flex-wrap: wrap;
     margin: calc(var(--gap) * -.5);
 

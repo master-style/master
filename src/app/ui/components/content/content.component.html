@@ -1,7 +1,7 @@
 <div class="mobile">
     <div class="mobile-wrap">
         <m-content (more)="more()" (scroll)="scroll($event)" emit scroll-y guide class="h:full" style="--content-offset-top: 1.8rem; --content-offset-bottom: 1.8rem;">
-            <m-item class="lined c:middle" *ngFor="let item of items" style="--px: 1rem">
+            <m-item class="lined c:middle" draggable="true" *ngFor="let item of items" style="--px: 1rem">
                 <article part="body" class="short">
                     <h4 *ngIf="item.created_at">{{ item.created_at | date:'medium' }}</h4>
                     <h2 class="t-line:3">{{ item.alt_description }}</h2>

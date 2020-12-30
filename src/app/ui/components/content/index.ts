@@ -106,10 +106,18 @@ export class ContentElement extends TargetElement {
     @Attr({ reflect: false })
     guideSize: number = 48;
 
-    @Attr()
+    @Attr({
+        update(content) {
+            (content.scrollX || content.scrollY) ? content.enable() : content.disable();
+        }
+    })
     scrollY: boolean;
 
-    @Attr()
+    @Attr({
+        update(content) {
+            (content.scrollX || content.scrollY) ? content.enable() : content.disable();
+        }
+    })
     scrollX: boolean;
 
     @Attr()
@@ -133,7 +141,6 @@ export class ContentElement extends TargetElement {
     render() {
         this.template.render(this.shadowRoot);
         this.renderScroll();
-        (this.scrollX || this.scrollY) ? this.enable() : this.disable();
     }
 
     enable() {
@@ -270,6 +277,11 @@ export class ContentElement extends TargetElement {
             if (this.scrollX && isNum(to.X)) scroll('X', this.x = this.root[SCROLL_POSITION_KEY.X], to.X);
             if (this.scrollY && isNum(to.Y)) scroll('Y', this.y = this.root[SCROLL_POSITION_KEY.Y], to.Y);
         }
+    }
+
+    reset() {
+        this.to({ y: 0 }, 0);
+        this.#lastMorePosition = -1;
     }
 
     renderScroll() {
