@@ -271,8 +271,8 @@ export class SelectElement extends ControlElement {
         if (!this.multiple) {
             const option = this.selectedOptions[0];
             const optionText = option?.childNodes
-                .filter((eachElement) => !eachElement.slot)
-                .map((eachElement) => eachElement.textContent)
+                .filter((eachNode) => !eachNode.slot && eachNode.nodeName !== '#comment')
+                .map((eachNode) => eachNode.textContent)
                 .join(' ')
                 .trim();
             this.search.textContent = optionText || '';
