@@ -31,6 +31,9 @@ module.exports = env => {
             library: 'Master',
             path: Path.resolve('dist', env.PACKAGE)
         },
+        optimization: {
+            minimize: false
+        },
         mode: 'production',
         plugins: [
             new CleanWebpackPlugin()

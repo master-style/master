@@ -46,6 +46,21 @@
                     </m-option>
                 </m-select>
             </div>
+            <div class="x:6">
+                <m-select name="city-entities"
+                          label="city"
+                          required
+                          searchable
+                          binding="id"
+                          placeholder="search ..."
+                          [(ngModel)]="cityEntities"
+                          class="outlined">
+                    <m-option *ngFor="let city of [{ id: 'taipei' }, { id: 'hualien' }]"
+                              [value]="city">
+                        <span slot="head">🍉</span>{{ city.id }}
+                    </m-option>
+                </m-select>
+            </div>
             <div class="x:12">
                 {{ test.value }}
             </div>

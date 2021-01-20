@@ -5,17 +5,27 @@ import css from './option.scss';
 
 const NAME = 'option';
 
-const updateSelected = (option: OptionElement, value) => {
+const updateSelected = (option: OptionElement, selected: boolean) => {
     const select = (option.parentElement as SelectElement);
 
-    if (!select.multiple && value) {
+    if (select.updating) {
+        return;
+    };
+
+    // updating 防止循環更新
+    select.updating = true;
+
+    if (!select.multiple && selected) {
         select.options.forEach((eachOption) => {
-            if (option !== eachOption)
+            if (option !== eachOption) {
                 eachOption.selected = false;
+            }
         });
     }
 
     select.composeValue();
+
+    select.updating = false;
 };
 
 @Element({
@@ -24,12 +34,15 @@ const updateSelected = (option: OptionElement, value) => {
 })
 export class OptionElement extends HTMLElement {
 
+    updating: boolean;
+
     @Attr()
     disabled: boolean;
 
     @Attr({
         update(option: OptionElement, value) {
-            if (option['ready']) {
+            const select = (option.parentElement as SelectElement);
+            if (option['ready'] && !select.updating) {
                 updateSelected(option, value);
             }
         },
@@ -39,8 +52,10 @@ export class OptionElement extends HTMLElement {
 
     @Attr({
         update(option: OptionElement, value) {
-            const select = (option.parentElement as SelectElement);
-            select.composeValue();
+            if (option['ready']) {
+                const select = (option.parentElement as SelectElement);
+                select.composeValue();
+            }
             option.empty = value === null || value === undefined || value === '';
         },
         reflect: false

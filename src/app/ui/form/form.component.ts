@@ -15,6 +15,8 @@ export class FormComponent implements OnInit {
 
     cities = ['taipei', 'hualien'];
 
+    cityEntities = { id: 'taipei' }
+
     ngOnInit(): void {
         let i = 0;
         this.timer = setInterval(() => {

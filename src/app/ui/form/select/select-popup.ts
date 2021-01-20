@@ -92,8 +92,8 @@ export class SelectPopupElement extends PopupElement {
                                         if (this.select.search) this.select.search.focus();
                                         this.render();
                                     } else {
-                                        this.close();
                                         node.$data.selected = check.checked;
+                                        this.close();
                                     }
                                     this.select.changeEmitter(this.select.value);
                                     if (!this.select.dirty) {
@@ -130,7 +130,6 @@ export class SelectPopupElement extends PopupElement {
                     .trim();
                 const found = text.indexOf(keyword) !== -1;
                 if (found) this.#foundCount++;
-                console.log(text, keyword, text.length, keyword.length);
                 if (text === keyword) {
                     this.#matchKeyword = true;
                 }
@@ -138,7 +137,6 @@ export class SelectPopupElement extends PopupElement {
                     .toggleAttribute('found', found);
             });
         }
-        console.log(this.#matchKeyword);
         this.render();
     }
 

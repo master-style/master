@@ -5,6 +5,7 @@ import './select-popup';
 
 import { OptionElement } from '../option';
 import { SelectPopupElement } from './select-popup';
+import { each } from 'lodash-es';
 
 let uid = 0;
 
@@ -29,6 +30,7 @@ export class SelectElement extends ControlElement {
     template = window['Master'](() => [
         'slot', {
             $created: (slot: HTMLSlotElement) => slot.on('slotchange', () => {
+
                 this.options = new Set(
                     this.children
                         .filter((eachChild) => eachChild.tagName === 'M-OPTION') as OptionElement[]
@@ -130,6 +132,7 @@ export class SelectElement extends ControlElement {
     popup: SelectPopupElement;
     search: HTMLInputElement;
     searchInfo: HTMLElement;
+    updating: boolean;
 
     mutationObserver = new MutationObserver((mutations) => {
         let textChanged = false;
@@ -165,11 +168,22 @@ export class SelectElement extends ControlElement {
     selectOptionByValue(value) {
         this.options.forEach((eachOption) => {
             if (this.multiple) {
-                if (value && value.indexOf(eachOption.value) !== -1) {
+                if (!Array.isArray(value)) return;
+                // value = [x,x];
+                if (
+                    this.binding
+                        ? value.find((eachEntity) => eachEntity[this.binding] === eachOption.value[this.binding])
+                        : value.indexOf(eachOption.value) !== -1
+                ) {
                     eachOption.selected = true;
                 }
             } else {
-                if (value === eachOption.value) {
+                // value = x
+                if (
+                    this.binding
+                        ? value[this.binding] === eachOption.value[this.binding]
+                        : value === eachOption.value
+                ) {
                     eachOption.selected = true;
                 }
             }
@@ -185,6 +199,7 @@ export class SelectElement extends ControlElement {
         } else {
             this.value = selectedOptions[0]?.value;
         }
+
         if (this.popup) {
             if (!this.popup.hidden) {
                 this.popup.render();
@@ -216,6 +231,9 @@ export class SelectElement extends ControlElement {
 
     @Attr({ observe: false, render: false })
     role: string = 'listbox';
+
+    @Attr()
+    binding: string;
 
     @Attr({
         key: 'readonly',
@@ -268,14 +286,21 @@ export class SelectElement extends ControlElement {
             let equal = true;
             if (isArray && oldIsArray && value.length === oldValue.length) {
                 for (let i = 0; i < value.length; ++i) {
-                    if (value[i] !== oldValue[i]) {
+                    const each = value[i];
+                    const eachOld = oldValue[i];
+                    if (
+                        each !== eachOld ||
+                            select.binding
+                            ? each[select.binding] !== eachOld[select.binding]
+                            : each !== eachOld
+                    ) {
                         equal = false;
                         break;
                     }
                 }
                 if (equal) return;
             }
-            select.empty = value === null || value === undefined || value === '' || !value?.length;
+            select.empty = value === null || value === undefined || value === '' || isArray && !value.length;
             select.body.value = value;
             select.validate();
             select.selectOptionByValue(value);
