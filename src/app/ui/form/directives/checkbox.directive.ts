@@ -50,7 +50,7 @@ export const CHECKBOX_REQUIRED_VALIDATOR: StaticProvider = {
  */
 @Directive({
     selector:
-        'm-check[type=checkbox][formControlName],m-check[type=checkbox][formControl],m-check[type=checkbox][ngModel],m-switch[type=checkbox][formControlName],m-switch[type=checkbox][formControl],m-switch[type=checkbox][ngModel]',
+        'm-check:not([type=radio])[formControlName],m-check:not([type=radio])[formControl],m-check:not([type=radio])[ngModel]',
     host: { '(change)': 'onChange($event.target.checked)', '(blur)': 'onTouched()' },
     providers: [CHECKBOX_VALUE_ACCESSOR]
 })
@@ -75,6 +75,7 @@ export class CheckboxControlValueAccessor implements ControlValueAccessor {
      */
     writeValue(value: any): void {
         this._renderer.setProperty(this._elementRef.nativeElement, 'checked', value);
+        this._renderer.setProperty(this._elementRef.nativeElement, 'value', value);
     }
 
     /**
@@ -105,7 +106,7 @@ export class CheckboxControlValueAccessor implements ControlValueAccessor {
 // tslint:disable-next-line: max-classes-per-file
 @Directive({
     selector:
-        'm-check[type=checkbox][required][formControlName],m-check[type=checkbox][required][formControl],m-check[type=checkbox][required][ngModel]',
+        'm-check:not([type=radio])[required][formControlName],m-check:not([type=radio])[required][formControl],m-check:not([type=radio])[required][ngModel]',
     providers: [CHECKBOX_REQUIRED_VALIDATOR],
     host: { '[attr.required]': 'required ? "" : null' }
 })

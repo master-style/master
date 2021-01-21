@@ -18,7 +18,8 @@ export const SELECT_MULTIPLE_VALUE_ACCESSOR: StaticProvider = {
 export class SelectMultipleControlValueAccessor implements ControlValueAccessor {
 
     constructor(
-        private el: ElementRef
+        private el: ElementRef,
+        private _renderer: Renderer2
     ) {}
 
     onChange = (value: any) => {}
@@ -26,7 +27,7 @@ export class SelectMultipleControlValueAccessor implements ControlValueAccessor 
     onTouched = () => { };
 
     writeValue(value: any): void {
-        this.el.nativeElement.value = value;
+        this._renderer.setProperty(this.el.nativeElement, 'value', value);
     }
 
     registerOnChange(fn): void {
@@ -46,12 +47,13 @@ export class OptionControlValueAccessor {
 
     constructor(
         private el: ElementRef,
+        private _renderer: Renderer2,
         @Optional() @Host() private _select: SelectMultipleControlValueAccessor
     ) {
     }
 
     @Input('value')
     set value(value: any) {
-        this.el.nativeElement.value = value;
+        this._renderer.setProperty(this.el.nativeElement, 'value', value);
     }
 }
