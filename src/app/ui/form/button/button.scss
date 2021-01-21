@@ -76,6 +76,20 @@
     }
 }
 
+:host(.inline) {
+    --f-size: inherit;
+    line-height: inherit;
+
+    [part=root] {
+        display: flex;
+        padding: 0;
+        min-width: unset;
+        min-height: unset;
+        height: auto;
+        width: auto;
+    }
+}
+
 [part=root] {
     padding: var(--py) var(--px);
     min-width: var(--size);
