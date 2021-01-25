@@ -35,7 +35,7 @@ export class ContentElement extends TargetElement {
     #animationFrame: any;
     #enabled: boolean;
     #thumb: any = {};
-    #lastMorePosition: number = -1;
+    #lastMorePosition: number = 0;
 
     template = window['Master'](() => [
         'slot', {
@@ -138,6 +138,8 @@ export class ContentElement extends TargetElement {
     @Attr()
     collapseY: boolean = false;
 
+    #mutationObserver;
+
     render() {
         this.template.render(this.shadowRoot);
         this.renderScroll();
@@ -180,6 +182,16 @@ export class ContentElement extends TargetElement {
                 passive: true
             });
 
+        this.#mutationObserver = new MutationObserver(debounce(() => {
+            this.renderScroll();
+        }, 70));
+
+        this.#mutationObserver.observe(this, {
+            characterData: true,
+            childList: true,
+            subtree: true
+        })
+
         window.on('resize', debounce(() => {
             this.renderScroll();
         }, 70), {
@@ -192,10 +204,11 @@ export class ContentElement extends TargetElement {
         this.#enabled = false;
         this.root.off({ id: ['scroll'] });
         window.off({ id: [this, NAME] });
+        this.#mutationObserver.disconnect();
     }
 
     get scrollable(): boolean {
-        return this.scrolling || !!(this.maxX || this.maxY);
+        return !!(this.scrollX && this.maxX || this.scrollY && this.maxY);
     }
 
     to(point: any, duration?: any, complete?: any) {
@@ -279,78 +292,77 @@ export class ContentElement extends TargetElement {
         }
     }
 
-    reset() {
-        this.to({ y: 0 }, 0);
-        this.#lastMorePosition = -1;
-    }
-
     renderScroll() {
         const render = (dir: string) => {
-            if (this['scroll' + dir]) {
-                const
-                    scrollSize = this.#scrollSize[dir] = this.root[SCROLL_SIZE_KEY[dir]],
-                    size = this[CLIENT_SIZE_KEY[dir]],
-                    // tslint:disable-next-line: radix
-                    rootSize = this.root[CLIENT_SIZE_KEY[dir]],
-                    scrollPosition = this[POSITION_KEY[dir]] = this.root[SCROLL_POSITION_KEY[dir]],
-                    maxPosition = this['max' + dir] = scrollSize - rootSize < 0 ? 0 : (scrollSize - rootSize),
-                    reach = scrollPosition <= 0 ? -1 : scrollPosition >= maxPosition ? 1 : 0;
-                if (this.guide) {
-                    const
-                        guideSize = this.guideSize,
-                        startGuide = (scrollPosition < guideSize) ? scrollPosition : guideSize,
-                        endGuide = (scrollPosition > maxPosition - guideSize) ?
-                            (size + scrollPosition - maxPosition) :
-                            (size - guideSize),
-                        maskImage =
-                            this.scrollable ?
-                                `linear-gradient(to ${dir === 'X' ? 'right' : 'bottom'},rgba(0,0,0,0) 0px,rgba(0,0,0,1) ${startGuide}px,rgba(0,0,0,1) ${endGuide}px,rgba(0,0,0,0) ${size}px)` :
-                                '';
-                    // tslint:disable-next-line: deprecation
-                    this.root.style.webkitMaskImage = this.root.style.maskImage = maskImage;
-                }
-
-                let morePosition = maxPosition * 2 / 3;
-
-                if (this.#lastMorePosition > 0) {
-                    morePosition = this.#lastMorePosition + (maxPosition - this.#lastMorePosition) / 2;
-                }
-
-                if (
-                    scrollPosition < rootSize * 2 / 3
-                    && this.#lastMorePosition === -1 ||
-                    scrollPosition >= morePosition
-                    && morePosition > this.#lastMorePosition
-                ) {
-                    this.#lastMorePosition = morePosition;
-                    this.moreEmitter();
-                }
-
-                if (this['reach' + dir] !== reach) this['reach' + dir] = reach;
-
-                const thumb = this.#thumb[dir];
-
-                if (thumb) {
-                    const
-                        barPosition = scrollPosition < 0 ? 0 : (scrollPosition > maxPosition ? maxPosition : scrollPosition);
-                    const
-                        barStyles = window.getComputedStyle(this.#bar[dir]),
-                        // tslint:disable-next-line: radix
-                        padding = parseInt(barStyles['padding']),
-                        // tslint:disable-next-line: radix
-                        barSize = parseInt(barStyles[SIZE_KEY[dir]]) - padding * 2,
-                        thumbSize = barSize / (maxPosition + barSize) * barSize;
-                    thumb.style.transform =
-                        'translate' + dir + '(' + barPosition / (maxPosition + barSize) * barSize + 'px)';
-                    if (this.#thumbSize[dir] !== thumbSize) {
-                        this.#thumbSize[dir] = thumbSize;
-                        thumb.style[SIZE_KEY[dir]] = thumbSize + 'px';
-                    }
-                }
-                return scrollPosition !== maxPosition;
-            } else {
+            if (!this['scroll' + dir]) {
                 return false;
             }
+
+            const
+                scrollSize = this.#scrollSize[dir] = this.root[SCROLL_SIZE_KEY[dir]],
+                size = this[CLIENT_SIZE_KEY[dir]],
+                // tslint:disable-next-line: radix
+                rootSize = this.root[CLIENT_SIZE_KEY[dir]],
+                scrollPosition = this[POSITION_KEY[dir]] = this.root[SCROLL_POSITION_KEY[dir]],
+                maxPosition = this['max' + dir] = scrollSize - rootSize < 0 ? 0 : (scrollSize - rootSize),
+                reach = scrollPosition <= 0 ? -1 : scrollPosition >= maxPosition ? 1 : 0;
+            if (this.guide) {
+                const
+                    guideSize = this.guideSize,
+                    startGuide = (scrollPosition < guideSize) ? scrollPosition : guideSize,
+                    endGuide = (scrollPosition > maxPosition - guideSize) ?
+                        (size + scrollPosition - maxPosition) :
+                        (size - guideSize),
+                    maskImage =
+                        this.scrollable ?
+                            `linear-gradient(to ${dir === 'X' ? 'right' : 'bottom'},rgba(0,0,0,0) 0px,rgba(0,0,0,1) ${startGuide}px,rgba(0,0,0,1) ${endGuide}px,rgba(0,0,0,0) ${size}px)` :
+                            '';
+                // tslint:disable-next-line: deprecation
+                this.root.style.webkitMaskImage = this.root.style.maskImage = maskImage;
+            }
+
+            if (!this.scrollable) {
+                this.to({ x: 0, y: 0 });
+                this.#lastMorePosition = 0;
+            }
+
+            let morePosition = maxPosition * 2 / 3;
+
+            if (this.#lastMorePosition > 0) {
+                morePosition = this.#lastMorePosition + (maxPosition - this.#lastMorePosition) / 2;
+            }
+
+            if (
+                maxPosition === 0 ||
+                scrollPosition >= morePosition
+                && morePosition > this.#lastMorePosition
+            ) {
+                this.#lastMorePosition = morePosition;
+                this.moreEmitter();
+            }
+
+            if (this['reach' + dir] !== reach) this['reach' + dir] = reach;
+
+            const thumb = this.#thumb[dir];
+
+            if (thumb) {
+                const
+                    barPosition = scrollPosition < 0 ? 0 : (scrollPosition > maxPosition ? maxPosition : scrollPosition);
+                const
+                    barStyles = window.getComputedStyle(this.#bar[dir]),
+                    // tslint:disable-next-line: radix
+                    padding = parseInt(barStyles['padding']),
+                    // tslint:disable-next-line: radix
+                    barSize = parseInt(barStyles[SIZE_KEY[dir]]) - padding * 2,
+                    thumbSize = barSize / (maxPosition + barSize) * barSize;
+                thumb.style.transform =
+                    'translate' + dir + '(' + barPosition / (maxPosition + barSize) * barSize + 'px)';
+                if (this.#thumbSize[dir] !== thumbSize) {
+                    this.#thumbSize[dir] = thumbSize;
+                    thumb.style[SIZE_KEY[dir]] = thumbSize + 'px';
+                }
+            }
+            return scrollPosition !== maxPosition;
         };
         return render('X') || render('Y');
     }
