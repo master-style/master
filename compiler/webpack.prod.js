@@ -1,7 +1,6 @@
 const Path = require('path');
 const glob = require('globby');
-const DeclarationBundlerPlugin = require('declaration-bundler-webpack-plugin');
-
+const TsDeclarationWebpackPlugin = require('ts-declaration-webpack-plugin');
 
 const
     common = require('./webpack.common.js'),
@@ -39,10 +38,7 @@ module.exports = env => {
         mode: 'production',
         plugins: [
             new CleanWebpackPlugin(),
-            new DeclarationBundlerPlugin({
-                moduleName: '@shoplay',
-                out: './@types'
-            })
+            new TsDeclarationWebpackPlugin()
         ]
     }, config);
 }
