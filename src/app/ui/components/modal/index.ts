@@ -257,7 +257,7 @@ export class ModalElement extends TargetElement {
 
         this.animation = this.root.animate(keyframes, options);
         this.animations.push(this.animation);
-        return new Promise((finish) => {
+        return new Promise<void>((finish) => {
             this.animation.onfinish = () => {
                 const hidden = this.hidden;
                 if (hidden && this.trigger && this.hideTrigger) {

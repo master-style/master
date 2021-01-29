@@ -24,7 +24,15 @@ module.exports = {
             module: {
                 rules: [
                     {
-                        test: /\.ts$/, loader: 'ts-loader'
+                        test: /\.ts$/,
+                        use: [
+                            {
+                                loader: 'ts-loader',
+                                options: {
+                                    declaration: true
+                                }
+                            }
+                        ]
                     },
                     {
                         test: /\.m?js$/,
