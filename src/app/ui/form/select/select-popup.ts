@@ -126,7 +126,7 @@ export class SelectPopupElement extends PopupElement {
                 const text = eachItem?.childNodes
                     .filter((eachElement) => !eachElement.slot)
                     .map((eachElement) => eachElement.textContent)
-                    .join(' ')
+                    .join('')
                     .trim();
                 const found = text.indexOf(keyword) !== -1;
                 if (found) this.#foundCount++;
