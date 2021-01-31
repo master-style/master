@@ -18,6 +18,7 @@ export function Attr(options?: AttributeOptions) {
         const update = options.update;
         const parse = options.parse;
         const descriptor = {
+            enumerable: false,
             get() {
                 return this[_propKey];
             },

@@ -64,7 +64,7 @@ export const COMPOSITION_BUFFER_MODE = new InjectionToken<boolean>('CompositionE
  */
 @Directive({
     selector:
-        'm-input:not([type=checkbox]):not([type=number])[formControlName],m-textarea[formControlName],m-input:not([type=checkbox]):not([type=number])[formControl],m-textarea[formControl],m-input:not([type=checkbox]):not([type=number])[ngModel],m-textarea[ngModel]',
+        'm-input:not([type=number])[formControlName],m-textarea[formControlName],m-input:not([type=number])[formControl],m-textarea[formControl],m-input:not([type=number])[ngModel],m-textarea[ngModel]',
     // TODO: vsavkin replace the above selector with the one below it once
     // https://github.com/angular/angular/issues/3011 is implemented
     // selector: '[ngModel],[formControl],[formControlName]',

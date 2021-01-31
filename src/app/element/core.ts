@@ -9,6 +9,7 @@ const DEFAULT_ELEMENT_OPTION = {
 export function Element(options: ElementOptions) {
     options = { ...DEFAULT_ELEMENT_OPTION, ...options };
     return function (constructor: any) {
+
         constructor['elementName'] = options.tag.replace('m-', '');
         const prototype = constructor.prototype;
         const attrsOptions = constructor.attrsOptions;
@@ -16,6 +17,7 @@ export function Element(options: ElementOptions) {
         const onConnected = prototype.onConnected;
         const onDisconnected = prototype.onDisconnected;
         const onAttrChanged = prototype.onAttrChanged;
+
         prototype.attributeChangedCallback = function (attrKey, oldValue, value) {
             if (value === oldValue) return;
             const eachAttrOptions = attrsOptions[attrKey];
