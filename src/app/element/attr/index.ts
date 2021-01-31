@@ -17,6 +17,7 @@ export function Attr(options?: AttributeOptions) {
         const constructor = target.constructor;
         const update = options.update;
         const parse = options.parse;
+        const onRender = options.onRender;
         const descriptor = {
             enumerable: false,
             get() {
@@ -30,9 +31,7 @@ export function Attr(options?: AttributeOptions) {
                 if (value === oldValue) return;
                 this[_propKey] = value;
                 if (this.initial) {
-                    if (update) {
-                        update(this, value, oldValue);
-                    }
+                    update?.(this, value, oldValue);
                     if (options.reflect && !settedAttr) {
                         if (options.type === 'Boolean') {
                             this.toggleAttribute(attrKey, !!value);
@@ -42,6 +41,7 @@ export function Attr(options?: AttributeOptions) {
                     }
                     if (options.render && this.render) {
                         this.render();
+                        onRender?.(this)
                     }
                 }
             }

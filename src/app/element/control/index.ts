@@ -49,7 +49,7 @@ export class ControlElement extends HTMLElement {
     @Attr({ reflect: false, update: (control: ControlElement) => control.validate() })
     whenValid: string;
 
-    @Attr({ update: (control: ControlElement) => control.validate() })
+    @Attr({ onRender: (control: ControlElement) => control.validate() })
     required: boolean;
 
     @Attr({ observe: false, render: false })
