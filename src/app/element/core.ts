@@ -27,6 +27,7 @@ export function Element(options: ElementOptions) {
             eachAttrOptions.set.call(this, value, true);
             if (onAttrChanged) onAttrChanged.call(this, attrKey, value, oldValue);
         };
+
         prototype.connectedCallback = function () {
             this.ready = false; // prevent rendering many times
             this.initial = false;

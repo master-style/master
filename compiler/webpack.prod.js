@@ -1,6 +1,5 @@
 const Path = require('path');
 const glob = require('globby');
-const TsDeclarationWebpackPlugin = require('ts-declaration-webpack-plugin');
 
 const
     common = require('./webpack.common.js'),
@@ -37,8 +36,7 @@ module.exports = env => {
         // },
         mode: 'production',
         plugins: [
-            new CleanWebpackPlugin(),
-            new TsDeclarationWebpackPlugin()
+            new CleanWebpackPlugin()
         ]
     }, config);
 }

@@ -1,9 +1,9 @@
 @import '../variables';
 
-:host([prompt][valid][dirty]),
-:host([prompt][valid][touched]),
-:host([prompt][class*=-valid][class*=-dirty]),
-:host([prompt][class*=-valid][class*=-touched]) {
+:host([when-valid][valid][dirty]),
+:host([when-valid][valid][touched]),
+:host([when-valid][class*=-valid][class*=-dirty]),
+:host([when-valid][class*=-valid][class*=-touched]) {
     --prompt-bg-color: var(--green-fader);
     --prompt-f-color: var(--green);
     --label-f-color: var(--green);
