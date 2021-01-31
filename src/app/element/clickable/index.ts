@@ -56,12 +56,26 @@ export class ClickableElement extends HTMLElement {
             if (value === 'submit') {
                 clickable.on('click', (event) => {
                     const form = clickable.closest('form');
+                    let valid = true;
+                    let firstInvalidControl;
                     form.querySelectorAll('m-input,m-textarea,m-select,m-check')
-                        .forEach((eachElement: ControlElement) => {
-                            eachElement.dirty = true;
+                        .forEach((eachControl: ControlElement) => {
+                            eachControl.dirty = true;
+                            if (eachControl.invalid) {
+                                if (!firstInvalidControl) {
+                                    firstInvalidControl = eachControl;
+                                }
+                                valid = false;
+                            }
                         });
+
+                    if (firstInvalidControl) {
+                        firstInvalidControl
+                            .scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+
                     if (form) {
-                        if (!form.checkValidity()) return;
+                        if (!valid) return;
                         if (form.requestSubmit) {
                             form.requestSubmit();
                         } else {
