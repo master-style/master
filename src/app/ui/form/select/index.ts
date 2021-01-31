@@ -236,7 +236,6 @@ export class SelectElement extends ControlElement {
     binding: string;
 
     @Attr({
-        key: 'readonly',
         update: (select: SelectElement) => select.toggleListener()
     })
     readOnly: boolean = false;

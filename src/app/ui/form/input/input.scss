@@ -22,7 +22,7 @@
     }
 }
 
-:host(:focus-within:not([readonly]):not([disabled])) {
+:host(:focus-within:not([read-only]):not([disabled])) {
     ::slotted([part=body]) {
         -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 1) var(--px), rgba(0, 0, 0, 1) calc(100% - var(--px)), rgba(0, 0, 0, 0) 100%)
     }

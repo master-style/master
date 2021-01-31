@@ -20,7 +20,7 @@ export class InputElement extends ControlElement {
             required: this.required,
             multiple: this.multiple,
             accept: this.accept,
-            readonly: this.readOnly,
+            readonly: this.readOnly && !this.keepValidity,
             pattern: this.pattern,
             autocomplete: this.autocomplete,
             autofocus: this.autofocus,
@@ -123,6 +123,8 @@ export class InputElement extends ControlElement {
 
     #files = [];
 
+    savedTabIndex: number;
+
     files: File[] = [];
 
     @Attr({ observe: false })
@@ -131,7 +133,23 @@ export class InputElement extends ControlElement {
     @Attr({ observe: false, render: false })
     role: string = 'textbox';
 
-    @Attr({ key: 'readonly' })
+    @Attr()
+    keepValidity: boolean;
+
+    @Attr({
+        update(input: InputElement, value) {
+            const tabIndex = input.tabIndex;
+
+            if (value) {
+                input.savedTabIndex = tabIndex;
+                input.tabIndex = -1;
+            }
+            if (!value && input.savedTabIndex !== undefined) {
+                input.tabIndex = input.savedTabIndex;
+                input.savedTabIndex = undefined;
+            }
+        }
+    })
     readOnly: boolean;
 
     @Attr()
@@ -259,7 +277,7 @@ export class InputElement extends ControlElement {
 
         this
             .on('click', (event: any) => {
-                if (event.target === this.body) return;
+                if (event.target === this.body || this.keepValidity && this.readOnly) return;
                 this.body.focus();
             }, {
                 id: [NAME],

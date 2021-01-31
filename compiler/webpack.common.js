@@ -8,7 +8,6 @@ const
 const Path = require('path');
 const { merge } = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 const Webpack = require('webpack');
 
 module.exports = {

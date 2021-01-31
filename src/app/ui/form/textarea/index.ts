@@ -41,13 +41,31 @@ export class TextareaElement extends ControlElement {
         }
     ]);
 
+    savedTabIndex: number;
+
     @Attr({ observe: false, render: false })
     empty: boolean;
 
     @Attr({ observe: false, render: false })
     role: string = 'textbox';
 
-    @Attr({ key: 'readonly' })
+    @Attr()
+    keepValidity: boolean;
+
+    @Attr({
+        update(input: TextareaElement, value) {
+            const tabIndex = input.tabIndex;
+
+            if (value) {
+                input.savedTabIndex = tabIndex;
+                input.tabIndex = -1;
+            }
+            if (!value && input.savedTabIndex !== undefined) {
+                input.tabIndex = input.savedTabIndex;
+                input.savedTabIndex = undefined;
+            }
+        }
+    })
     readOnly: boolean;
 
     @Attr()

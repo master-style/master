@@ -82,7 +82,7 @@ m-button[part=close] {
     }
 }
 
-:host([readonly]) {
+:host([read-only]) {
     cursor: text;
 }
 
@@ -138,7 +138,7 @@ m-icon[part=icon] {
 }
 
 @media (any-hover: hover) {
-    :host(:not([disabled]):not([readonly]):hover) {
+    :host(:not([disabled]):not([read-only]):hover) {
         m-icon[part=icon] {
             color: var(--f-fade);
         }

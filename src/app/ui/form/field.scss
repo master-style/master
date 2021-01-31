@@ -53,22 +53,26 @@
 }
 
 @media (any-hover: hover) {
-    :host(:not([disabled]):not([readonly]):hover) {
+    :host(:not([disabled]):not([read-only]):hover) {
         fieldset {
             border-color: var(--b-color-active);
         }
     }
 }
 
-:host([readonly]:not(.output)) {
+:host([read-only]:not(.output)) {
     fieldset {
         border-style: dashed;
     }
 }
 
-:host(:active:not([readonly]):not([disabled])),
-:host(:focus-within:not([readonly]):not([disabled])),
-:host([focused]:not([readonly]):not([disabled])) {
+:host([keep-validity][read-only]) {
+    pointer-events: none;
+}
+
+:host(:active:not([read-only]):not([disabled])),
+:host(:focus-within:not([read-only]):not([disabled])),
+:host([focused]:not([read-only]):not([disabled])) {
 
     fieldset {
         --b-width: 2px;
@@ -81,7 +85,7 @@
     }
 }
 
-:host([label][empty]:not([busy]):not([expanded]):not([focused]):not(:focus-within):not(:active):not([readonly]):not([disabled]):not([type=file])) {
+:host([label][empty]:not([busy]):not([expanded]):not([focused]):not(:focus-within):not(:active):not([read-only]):not([disabled]):not([type=file])) {
 
     ::slotted([part=head]),
     ::slotted([part=foot]),
@@ -135,9 +139,9 @@
 }
 
 // outlined
-:host(.outlined[label]:active:not([readonly]):not([disabled])),
-:host(.outlined[label]:focus-within:not([readonly]):not([disabled])),
-:host(.outlined[label][focused]:not([readonly]):not([disabled])) {
+:host(.outlined[label]:active:not([read-only]):not([disabled])),
+:host(.outlined[label]:focus-within:not([read-only]):not([disabled])),
+:host(.outlined[label][focused]:not([read-only]):not([disabled])) {
     legend {
         transition:
             max-width .2s ease-in;
