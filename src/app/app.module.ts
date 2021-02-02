@@ -9,6 +9,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SharedModule } from './shared/shared.module';
 
+import { DisplayModule } from './ui/modifiers/display/display.module';
+
 @NgModule({
     declarations: [
         AppComponent
@@ -24,7 +26,8 @@ import { SharedModule } from './shared/shared.module';
                 deps: [HttpClient]
             }
         }),
-        SharedModule
+        SharedModule,
+        DisplayModule
     ],
     providers: [
         RouteResolver

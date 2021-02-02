@@ -107,10 +107,10 @@ import { EditorComponent } from './editor/editor.component';
         EditorComponent,
     ],
     imports: [
-        SharedModule,
         UiRoutingModule,
         FormsModule,
-        FormModule
+        FormModule,
+        SharedModule
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
