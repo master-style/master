@@ -7,6 +7,7 @@ import { RouteResolver } from './shared/route.resolver';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
     declarations: [
@@ -23,6 +24,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
                 deps: [HttpClient]
             }
         }),
+        SharedModule
     ],
     providers: [
         RouteResolver

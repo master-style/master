@@ -5,13 +5,15 @@ import { TranslateModule } from '@ngx-translate/core';
 import { PropComponent } from './prop/prop.component';
 import { HyperlinkComponent } from './hyperlink/hyperlink.component';
 import { ControlPropComponent } from './control-prop/control-prop.component';
+import { DisplayDirective } from '../ui/modifiers/display/display.directive';
 
 @NgModule({
     declarations: [
         CodeDirective,
         PropComponent,
         HyperlinkComponent,
-        ControlPropComponent
+        ControlPropComponent,
+        DisplayDirective
     ],
     imports: [
         CommonModule,
@@ -23,7 +25,8 @@ import { ControlPropComponent } from './control-prop/control-prop.component';
         TranslateModule,
         PropComponent,
         HyperlinkComponent,
-        ControlPropComponent
+        ControlPropComponent,
+        DisplayDirective
     ],
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA

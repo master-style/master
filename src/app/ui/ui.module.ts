@@ -104,7 +104,7 @@ import { EditorComponent } from './editor/editor.component';
         ValidationComponent,
         HeaderComponent,
         FooterComponent,
-        EditorComponent
+        EditorComponent,
     ],
     imports: [
         SharedModule,
