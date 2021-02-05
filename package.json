@@ -26,7 +26,10 @@
         "lodash-es": "^4.17.15",
         "rxjs": "~6.5.5",
         "tslib": "^2.0.0",
-        "zone.js": "~0.10.3"
+        "zone.js": "~0.10.3",
+        "@popperjs/core": "^2.5.4",
+        "body-scroll-lock": "^3.1.5",
+        "reflect-metadata": "^0.1.13"
     },
     "devDependencies": {
         "@angular-devkit/build-angular": "~0.1101.0",
