@@ -1,2 +1,2 @@
-import './create';
+import './template';
 import './event-listener';

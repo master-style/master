@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CreateComponent } from './create/create.component';
 import { ClassComponent } from './manipulations/class/class.component';
 import { AttrComponent } from './manipulations/attr/attr.component';
 import { CssComponent } from './manipulations/css/css.component';
@@ -14,6 +13,7 @@ import { ForEachComponent } from './traversings/for-each/for-each.component';
 import { IndexOfComponent } from './traversings/index-of/index-of.component';
 import { HtmlComponent } from './manipulations/html/html.component';
 import { RouteResolver } from '../shared/route.resolver';
+import { TemplateComponent } from './template/template.component';
 
 export const domRoutes: Routes = [
     { path: 'DOM' },
@@ -23,7 +23,7 @@ export const domRoutes: Routes = [
             { path: 'coding-style', component: CodingStyleComponent, resolve: { route: RouteResolver } }
         ]
     },
-    { path: 'create', component: CreateComponent, resolve: { route: RouteResolver } },
+    { path: 'template', component: TemplateComponent, resolve: { route: RouteResolver } },
     {
         path: 'event-listener', children: [
             { path: 'on', component: OnComponent, resolve: { route: RouteResolver } },

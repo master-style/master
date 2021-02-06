@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'doc-create',
-    templateUrl: './create.component.html',
-    styleUrls: ['./create.component.scss']
+    selector: 'doc-template',
+    templateUrl: './template.component.html',
+    styleUrls: ['./template.component.scss']
 })
-export class CreateComponent implements OnInit {
+export class TemplateComponent implements OnInit {
 
     constructor() { }
 
