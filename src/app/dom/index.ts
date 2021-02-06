@@ -1,10 +1,7 @@
-import '../template';
-import './event-listener';
-import './manipulations';
 import './traversings';
 
 import { on, off } from './event-listener';
-import { attr, toggleAttr, css, addClass, rmClass, html } from './manipulations';
+import { attr, toggleAttr, css, addClass, toggleClass, rmClass, html } from './manipulations';
 
 const fragment = document.createDocumentFragment();
 
@@ -15,11 +12,11 @@ function $(
 ) {
     const isSelector = typeof elementOrSelector === 'string';
     let element;
-    if (isSelector) {
+    if (isSelector && !attrOptions) {
         element = document.querySelector(elementOrSelector as string);
     } else if (isSelector && attrOptions) {
         element = document.createElement(elementOrSelector as string, attrOptions && attrOptions.is ? { is: attrOptions.is } : undefined);
-        if (Object.keys(attrOptions).length) element.attr(attrOptions);
+        if (Object.keys(attrOptions).length) attr.call(element, attrOptions);
         if (children.length) {
             if (children.length > 1) {
                 const eachFragment = fragment.cloneNode();
@@ -57,6 +54,7 @@ function $(
             toggleAttr,
             addClass,
             rmClass,
+            toggleClass,
             html
         });
     }

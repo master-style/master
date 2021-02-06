@@ -102,7 +102,7 @@ export class AppComponent implements OnInit {
 
     toggleTheme(isDark) {
         this.isDark = isDark;
-        document.documentElement.toggleClass('dark', isDark);
+        $(document.documentElement).toggleClass('dark', isDark);
         localStorage.isDark = isDark;
     }
 

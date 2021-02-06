@@ -109,7 +109,7 @@ export class TargetElement extends MasterElement {
         if (this.triggerEvent) {
             const name = this.constructor['elementName'];
             const toggleAttrKey = 'toggle-' + name;
-            $('[' + toggleAttrKey + ']')
+            document.querySelectorAll('[' + toggleAttrKey + ']')
                 .forEach((eachToggle: Element) => {
                     if (this.matches(eachToggle.getAttribute(toggleAttrKey))) {
                         const hidden = this.hidden;

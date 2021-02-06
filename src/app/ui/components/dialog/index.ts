@@ -232,7 +232,11 @@ export class DialogElement extends ModalElement {
 
 const DIALOG_ELEMENT = document.createElement('m-dialog');
 
-window['$'].dialog = (options) => {
+if (!(window as any).MasterUI) {
+    (window as any).MasterUI = {};
+}
+
+(window as any).MasterUI.dialog = (options) => {
     const eachDialog = (DIALOG_ELEMENT.cloneNode() as DialogElement);
     for (const eachPropKey in options) {
         const eachPropValue = options[eachPropKey];

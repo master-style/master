@@ -1,5 +1,5 @@
 import { toggleAttr, attr } from './attr';
-import { addClass, rmClass } from './class';
+import { addClass, rmClass, toggleClass } from './class';
 import { css } from './css';
 import { html } from './html';
 
@@ -8,6 +8,7 @@ export {
     attr,
     addClass,
     rmClass,
+    toggleClass,
     css,
     html
 }
