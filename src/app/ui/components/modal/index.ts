@@ -2,6 +2,7 @@ import { Element, Attr, TargetElement, attrEnabled, Event } from '../../../eleme
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { ContentElement } from '../content';
 import { HeaderElement } from '../header';
+import Template from '@master/template';
 
 import css from './modal.scss';
 
@@ -25,7 +26,7 @@ export class ModalElement extends TargetElement {
         }
     ]
 
-    template = window['Master'](() => [
+    template = new Template(() => [
         'm-overlay', {
             part: 'overlay',
             $if: attrEnabled(this.overlay),

@@ -16,7 +16,12 @@
         "lib": [
             "es2018",
             "dom"
-        ]
+        ],
+        "paths": {
+            "@master/template": [
+                "src/app/template/index.ts"
+            ],
+        }
     },
     "include": [
         "src/**/*.d.ts"

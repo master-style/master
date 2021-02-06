@@ -13,7 +13,6 @@ import { ForEachComponent } from './traversings/for-each/for-each.component';
 import { IndexOfComponent } from './traversings/index-of/index-of.component';
 import { HtmlComponent } from './manipulations/html/html.component';
 import { RouteResolver } from '../shared/route.resolver';
-import { TemplateComponent } from './template/template.component';
 
 export const domRoutes: Routes = [
     { path: 'DOM' },
@@ -23,7 +22,6 @@ export const domRoutes: Routes = [
             { path: 'coding-style', component: CodingStyleComponent, resolve: { route: RouteResolver } }
         ]
     },
-    { path: 'template', component: TemplateComponent, resolve: { route: RouteResolver } },
     {
         path: 'event-listener', children: [
             { path: 'on', component: OnComponent, resolve: { route: RouteResolver } },

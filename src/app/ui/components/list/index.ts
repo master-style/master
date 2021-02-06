@@ -1,5 +1,6 @@
 import { Element } from '../../../element';
 import css from './list.scss';
+import Template from '@master/template';
 
 const NAME = 'list';
 
@@ -8,7 +9,7 @@ const NAME = 'list';
     css
 })
 export class ListElement extends HTMLElement {
-    template = window['Master'](() => [
+    template = new Template(() => [
         'slot'
     ]);
 

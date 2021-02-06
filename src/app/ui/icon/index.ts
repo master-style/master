@@ -1,5 +1,6 @@
 import { Element, Attr } from '../../element';
 import css from './icon.scss';
+import Template from '@master/template';
 
 const NAME = 'icon';
 const ICON = {
@@ -19,7 +20,7 @@ const ICON = {
 })
 export class IconElement extends HTMLElement {
 
-    template = window['Master'](() => [
+    template = new Template(() => [
         'div', { part: 'root' }, [
             'svg', { viewBox: '0 0 24 24', $namespace: 'http://www.w3.org/2000/svg', $html: ICON[this.name] }
         ]

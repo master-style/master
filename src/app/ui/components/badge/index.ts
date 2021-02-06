@@ -1,5 +1,6 @@
 import { Element } from '../../../element';
 import css from './badge.scss';
+import Template from '@master/template';
 
 const NAME = 'badge';
 
@@ -8,7 +9,7 @@ const NAME = 'badge';
     css
 })
 export class BadgeElement extends HTMLElement {
-    template = window['Master'](() => [
+    template = new Template(() => [
         'slot'
     ]);
 

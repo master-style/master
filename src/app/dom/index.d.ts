@@ -1,2 +1,2 @@
-import './template';
+import '../template';
 import './event-listener';

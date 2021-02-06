@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import Template from '@master/template';
 
 @Component({
     selector: 'doc-template',
@@ -19,7 +20,7 @@ export class TemplateComponent implements OnInit {
 
     if = false;
 
-    template = window['Master'](() => {
+    template = new Template(() => {
         return [
             'div', { class: 'shine', $text: '1', $if: this.if },
             'div', { class: 'shine', $text: this.times, name: this.times, disabled: true },

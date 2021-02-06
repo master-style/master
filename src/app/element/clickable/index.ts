@@ -1,5 +1,6 @@
 import { Attr } from '../attr';
 import { ControlElement } from '../control';
+import Template from '@master/template';
 
 type elementToken = string | { [key: string]: any };
 
@@ -7,7 +8,7 @@ export class ClickableElement extends HTMLElement {
 
     slotTemplate: (elementToken | (() => elementToken[]))[];
 
-    template = window['Master'](() => {
+    template = new Template(() => {
         const tag = ((this.href || this.type === 'anchor') && !this.disabled)
             ? 'a'
             : (this.type || this.disabled) ? 'button' : null;

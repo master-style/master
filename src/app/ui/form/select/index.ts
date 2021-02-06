@@ -1,4 +1,5 @@
 import { Element, Attr, Event, ControlElement, Prop } from '../../../element';
+import Template from '@master/template';
 
 import css from './select.scss';
 import './select-popup';
@@ -17,7 +18,7 @@ const NAME = 'select';
 })
 export class SelectElement extends ControlElement {
 
-    controlTemplate = window['Master'](() => [
+    controlTemplate = new Template(() => [
         'input', {
             part: 'output',
             $created: (element: HTMLInputElement) => {
@@ -27,7 +28,7 @@ export class SelectElement extends ControlElement {
         }
     ]);
 
-    template = window['Master'](() => [
+    template = new Template(() => [
         'slot', {
             $created: (slot: HTMLSlotElement) => slot.on('slotchange', () => {
 

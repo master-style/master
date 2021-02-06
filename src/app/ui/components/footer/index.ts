@@ -1,4 +1,5 @@
 import { Element } from '../../../element';
+import Template from '@master/template';
 
 import css from './footer.scss';
 
@@ -10,7 +11,7 @@ const NAME = 'footer';
 })
 export class FooterElement extends HTMLElement {
 
-    template: Template = window['Master'](() => [
+    template: Template = new Template(() => [
         'div', { part: 'root' }, [
             'slot', { name: 'start' },
             'slot',

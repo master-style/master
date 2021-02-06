@@ -1,6 +1,7 @@
 import { Element, Attr, Prop } from '../../../element';
 import { ModalElement } from '../modal';
 import css from './dialog.scss';
+import Template from '@master/template';
 
 const NAME = 'dialog';
 const parserObject = (dialog: DialogElement, value, oldValue) => {
@@ -22,7 +23,7 @@ enum TYPE_ICON {
 })
 export class DialogElement extends ModalElement {
 
-    lightTemplate = window['Master'](() => [
+    lightTemplate = new Template(() => [
         'div', {
             $if: this.icon,
             slot: 'icon',

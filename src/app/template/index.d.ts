@@ -2,12 +2,6 @@
 export { }
 
 declare global {
-    interface Master {
-        <T extends Element>(selector: string, attributes: { [key: string]: any }, ...children: (Element | string)[]): T;
-        (selector: string): NodeList;
-        (template: () => Array<any>): Template;
-    }
-
     interface TemplateNode {
         tag: string;
         attributes?: { [key: string]: any };

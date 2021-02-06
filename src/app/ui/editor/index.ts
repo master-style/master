@@ -1,5 +1,6 @@
 import { Element, Attr, Prop } from '../../element';
 import css from './editor.scss';
+import Template from '@master/template';
 
 const defaultParagraphSeparatorString = 'defaultParagraphSeparator'
 const formatBlock = 'formatBlock'
@@ -19,7 +20,7 @@ export class EditorElement extends HTMLElement {
     @Prop()
     private view;
 
-    template = window['Master'](() => [
+    template = new Template(() => [
         'div', { part: 'toolbar' },
         () => {
             let actionTokens = [];

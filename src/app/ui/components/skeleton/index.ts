@@ -1,5 +1,6 @@
 import { Element, Attr } from '../../../element';
 import css from './skeleton.scss';
+import Template from '@master/template';
 
 const NAME = 'skeleton';
 
@@ -9,7 +10,7 @@ const NAME = 'skeleton';
 })
 export class SkeletonElement extends HTMLElement {
 
-    template = window['Master'](() => {
+    template = new Template(() => {
         this.css('width', this.width);
         return [
             'div', {

@@ -1,53 +1,5 @@
-const fragment = document.createDocumentFragment();
-const div = document.createElement('div');
 
-window.Master = function (selector: any, attr?: { [key: string]: any }, ...children: (Element | string)[]) {
-    if (typeof selector === 'function') {
-        return new Template(selector);
-    } else if (attr) {
-        const element: Element = document.createElement(selector, attr && attr.is ? { is: attr.is } : undefined);
-        if (Object.keys(attr).length) element.attr(attr);
-        if (children.length) {
-            if (children.length > 1) {
-                const eachFragment = fragment.cloneNode();
-                for (const eachChild of children) {
-                    eachFragment.appendChild(
-                        typeof eachChild === 'string' ?
-                            document.createTextNode(eachChild as any) :
-                            eachChild
-                    );
-                }
-                element.appendChild(eachFragment);
-            } else {
-                element.appendChild(
-                    typeof children[0] === 'string' ?
-                        document.createTextNode(children[0] as any) :
-                        children[0]
-                );
-            }
-        }
-        return (element as any);
-    } else {
-        return document.querySelectorAll(selector);
-    }
-};
-
-const removeNode = (node) => {
-    if (!node?.element) return;
-    node.element.remove();
-    const removed = node.$removed;
-    if (removed) removed(node.element, node);
-};
-
-const removeNodes = (eachNodes) => {
-    if (!eachNodes) return;
-    eachNodes
-        .forEach((eachNode) => {
-            removeNode(eachNode);
-        });
-};
-
-class Template {
+export default class Template {
 
     constructor(
         private template: () => any[]
@@ -322,3 +274,21 @@ class Template {
         return this;
     }
 }
+
+const fragment = document.createDocumentFragment();
+const div = document.createElement('div');
+
+const removeNode = (node) => {
+    if (!node?.element) return;
+    node.element.remove();
+    const removed = node.$removed;
+    if (removed) removed(node.element, node);
+};
+
+const removeNodes = (eachNodes) => {
+    if (!eachNodes) return;
+    eachNodes
+        .forEach((eachNode) => {
+            removeNode(eachNode);
+        });
+};

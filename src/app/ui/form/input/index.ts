@@ -1,5 +1,6 @@
 import { Element, Attr, Prop, ControlElement, Event } from '../../../element';
 import css from './input.scss';
+import Template from '@master/template';
 
 const NAME = 'input';
 const changeEvent = new window.Event('change', { 'bubbles': true, 'cancelable': false });
@@ -10,7 +11,7 @@ const changeEvent = new window.Event('change', { 'bubbles': true, 'cancelable': 
 })
 export class InputElement extends ControlElement {
 
-    controlTemplate = window['Master'](() => [
+    controlTemplate = new Template(() => [
         'input', {
             part: 'body',
             type: this.type,
@@ -31,7 +32,7 @@ export class InputElement extends ControlElement {
         }
     ]);
 
-    template = window['Master'](() => [
+    template = new Template(() => [
         'slot',
         'div', {
             $if: this.type === 'file',

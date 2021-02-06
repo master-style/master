@@ -2,6 +2,7 @@ import { Element, Attr, Event, TargetElement } from '../../../element';
 import { debounce } from 'lodash-es';
 import css from './content.scss';
 import isNum from '../../../utils/is-num';
+import Template from '@master/template';
 
 const NAME = 'content';
 const PX = 'px';
@@ -37,7 +38,7 @@ export class ContentElement extends TargetElement {
     #thumb: any = {};
     #lastMorePosition: number = 0;
 
-    template = window['Master'](() => [
+    template = new Template(() => [
         'slot', {
             part: 'root',
             $created: (element: HTMLElement) => this.root = element

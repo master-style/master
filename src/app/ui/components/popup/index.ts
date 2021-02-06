@@ -1,6 +1,7 @@
 import { Element, TargetElement, Attr } from '../../../element';
 import { createPopper, Placement } from '@popperjs/core';
 import { isInteractOutside } from '../../../utils/is-interact-outside';
+import Template from '@master/template';
 
 declare const ResizeObserver: any;
 
@@ -50,7 +51,7 @@ export class PopupElement extends TargetElement {
 
     contentTokens: any = () => [];
 
-    template = window['Master'](() => [
+    template = new Template(() => [
         'm-content', {
             'scroll-y': true,
             guide: true,

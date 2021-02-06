@@ -1,5 +1,6 @@
 import { Element, Attr, ControlElement } from '../../../element';
 import css from './check.scss';
+import Template from '@master/template';
 
 const connectedChecks = new Set();
 
@@ -13,7 +14,7 @@ const NAME = 'check';
 })
 export class CheckElement extends ControlElement {
 
-    controlTemplate = window['Master'](() => [
+    controlTemplate = new Template(() => [
         'input', {
             part: 'body',
             type: this.type,
@@ -27,7 +28,7 @@ export class CheckElement extends ControlElement {
         }
     ]);
 
-    template = window['Master'](() => [
+    template = new Template(() => [
         'svg', {
             part: this.interface,
             viewBox: '0 0 20 20',

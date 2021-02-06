@@ -1,4 +1,5 @@
 import { Element, Attr, ControlElement } from '../../../element';
+import Template from '@master/template';
 
 import css from './textarea.scss';
 
@@ -10,7 +11,7 @@ const NAME = 'textarea';
 })
 export class TextareaElement extends ControlElement {
 
-    controlTemplate = window['Master'](() => [
+    controlTemplate = new Template(() => [
         'textarea', {
             part: 'body',
             name: this.name,
@@ -26,7 +27,7 @@ export class TextareaElement extends ControlElement {
         }
     ]);
 
-    template = window['Master'](() => [
+    template = new Template(() => [
         'slot',
         'fieldset', [
             'legend', [

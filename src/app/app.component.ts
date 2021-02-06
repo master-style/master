@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { uiRoutes } from './ui/ui-routing.module';
 import { domRoutes } from './dom/dom-routing.module';
+import { templateRoutes } from './template/template.routing.module';
 import { AppService } from './app.service';
 import { elementRoutes } from './element/element-routing.module';
 import { throttle } from 'lodash-es';
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit {
         this.routes.push(
             ...this.resolvePaths(['ui'], uiRoutes),
             ...this.resolvePaths(['dom'], domRoutes),
+            ...this.resolvePaths(['template'], templateRoutes),
             ...this.resolvePaths(['element'], elementRoutes)
         );
 

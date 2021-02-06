@@ -1,5 +1,6 @@
 import { Element, Attr } from '../../../element';
 import { OptionElement } from '../option';
+import Template from '@master/template';
 
 import css from './select-popup.scss';
 
@@ -58,7 +59,7 @@ export class SelectPopupElement extends PopupElement {
     ];
 
 
-    lightTemplate = window['Master'](() => [
+    lightTemplate = new Template(() => [
         ...[].concat(...Array.from(this.select.options)
             .map((eachOption: OptionElement) => [
                 'm-item', {
