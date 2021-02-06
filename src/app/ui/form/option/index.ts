@@ -42,7 +42,7 @@ export class OptionElement extends MasterElement {
     @Attr({
         update(option: OptionElement, value) {
             const select = (option.parentElement as SelectElement);
-            if (option['ready'] && !select.updating) {
+            if (option.ready && !select.updating) {
                 updateSelected(option, value);
             }
         },
@@ -52,7 +52,7 @@ export class OptionElement extends MasterElement {
 
     @Attr({
         update(option: OptionElement, value) {
-            if (option['ready']) {
+            if (option.ready) {
                 const select = (option.parentElement as SelectElement);
                 select.composeValue();
             }

@@ -9,7 +9,7 @@ export class TargetElement extends MasterElement {
 
     @Attr({
         update(toggleable: TargetElement, value: boolean) {
-            if (toggleable['ready']) {
+            if (toggleable.ready) {
                 const start = toggleable[value ? 'onClose' : 'onOpen'];
                 if (start) start();
                 toggleable.prepare();

@@ -73,7 +73,7 @@ export class ControlElement extends MasterElement {
 
     validate() {
 
-        if (!this['ready']) {
+        if (!this.ready) {
             return;
         }
 
