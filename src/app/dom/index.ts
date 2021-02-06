@@ -1,7 +1,7 @@
 import './traversings';
 
 import { on, off } from './event-listener';
-import { attr, toggleAttr, css, addClass, toggleClass, rmClass, html } from './manipulations';
+import { attr, toggleAttr, css, addClass, toggleClass, rmClass } from './manipulations';
 
 const fragment = document.createDocumentFragment();
 
@@ -17,6 +17,9 @@ function $(
     } else if (isSelector && attrOptions) {
         element = document.createElement(elementOrSelector as string, attrOptions && attrOptions.is ? { is: attrOptions.is } : undefined);
         if (Object.keys(attrOptions).length) attr.call(element, attrOptions);
+        if (attrOptions.html) {
+            element.innerHTML = attrOptions.html;
+        }
         if (children.length) {
             if (children.length > 1) {
                 const eachFragment = fragment.cloneNode();
@@ -54,8 +57,7 @@ function $(
             toggleAttr,
             addClass,
             rmClass,
-            toggleClass,
-            html
+            toggleClass
         });
     }
 
@@ -63,5 +65,5 @@ function $(
 }
 
 export {
-    $, on, off, attr, toggleAttr, css, addClass, rmClass, html
+    $, on, off, attr, toggleAttr, css, addClass, rmClass
 }

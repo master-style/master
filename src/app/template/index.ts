@@ -147,11 +147,11 @@ export default class Template {
                         } else {
                             let element;
                             if (eachNode.$namespace) {
-                                element = document.createElementNS(eachNode.$namespace, eachNode.tag);
+                                element = $(document.createElementNS(eachNode.$namespace, eachNode.tag));
                             } else {
-                                element = eachNode.tag === 'div'
+                                element = $(eachNode.tag === 'div'
                                     ? div.cloneNode()
-                                    : document.createElement(eachNode.tag);
+                                    : document.createElement(eachNode.tag));
                             }
                             eachNode.element = element;
 

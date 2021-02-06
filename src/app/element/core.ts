@@ -1,6 +1,6 @@
 import camelToKebabCase from '../utils/camel-to-kebab-case';
 
-import { on, off, attr, toggleAttr, css, addClass, rmClass, html } from '@master/dom';
+import { on, off, attr, toggleAttr, css, addClass, rmClass } from '@master/dom';
 
 const readyEvent = new CustomEvent('ready');
 
@@ -124,7 +124,6 @@ export class MasterElement extends HTMLElement {
     css = css;
     addClass = addClass;
     rmClass = rmClass;
-    html = html;
 }
 
 const parseAttrValue = (value: any, type: string) => {

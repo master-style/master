@@ -132,7 +132,10 @@ export class CodeDirective {
         } else {
             const codeWrapElement =
                 $('div', { class: 'code-wrap' },
-                    $('code', { class: 'language-' + this.codeLang }).html(code)
+                    $('code', {
+                        class: 'language-' + this.codeLang,
+                        html: code
+                    })
                 );
             this.preElement = $('pre', {},
                 $('div', { class: 'code-language' }, this.codeLang),
@@ -143,8 +146,10 @@ export class CodeDirective {
                 $('div', { class: 'code-function c:right', style: 'margin-top: .25rem' });
             if (this.codeDemo) {
                 this.collapseButton =
-                    $('m-button', { class: 'round xs f:fade++' })
-                        .html('<i class="i-code">')
+                    $('m-button', {
+                        class: 'round xs f:fade++',
+                        html: '<i class="i-code">'
+                    })
                         .on('click', () => {
                             $(this.demoElement).toggleAttr('collapsed');
                         });
@@ -153,8 +158,10 @@ export class CodeDirective {
 
             if (this.codeCopy) {
                 this.copyButton =
-                    $('m-button', { class: 'round xs f:fade++' })
-                        .html('<i class="i-copy">')
+                    $('m-button', {
+                        class: 'round xs f:fade++',
+                        html: '<i class="i-copy">'
+                    })
                         .on('click', (e) => {
                             // Select some text (you could also create a range)
                             $(this.preElement).css('display', 'block');
