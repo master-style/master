@@ -1,9 +1,7 @@
 import isObjLike from '../../../utils/is-obj-like';
 import parseAttrValue from '../../../utils/parse-attr-value';
 
-const ElementPrototype = Element.prototype;
-
-ElementPrototype.attr = function (param?: any, value?: any): any {
+export function attr(param?: any, value?: any): any {
     const element = this;
     if (value !== undefined) {
         const attrKey = param;
@@ -37,7 +35,7 @@ ElementPrototype.attr = function (param?: any, value?: any): any {
     }
 };
 
-ElementPrototype.toggleAttr = function (param: any, state?: boolean): Element {
+export function toggleAttr(param: any, state?: boolean): Element {
     const element = this;
     if (isObjLike(param)) {
         // tslint:disable-next-line: forin

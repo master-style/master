@@ -4,7 +4,7 @@ import isObjLike from '../../../utils/is-obj-like';
 import isNum from '../../../utils/is-num';
 import isAutoPx from '../../../utils/is-auto-px';
 
-Element.prototype.css = function (param?: any, value?: any) {
+export function css(param?: any, value?: any) {
     const element = this;
     if (value !== undefined) {
         if (param[0] === '-') {
