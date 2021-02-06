@@ -145,25 +145,16 @@ export default class Template {
                             const updated = eachNode.$updated;
                             if (updated) updated(element, eachNode);
                         } else {
-                            let element;
-                            if (eachNode.$namespace) {
-                                element = $(document.createElementNS(eachNode.$namespace, eachNode.tag));
-                            } else {
-                                element = $(eachNode.tag === 'div'
-                                    ? div.cloneNode()
-                                    : document.createElement(eachNode.tag));
-                            }
-                            eachNode.element = element;
+                            const element = eachNode.element = $(
+                                eachNode.$namespace
+                                    ? document.createElementNS(eachNode.$namespace, eachNode.tag)
+                                    : eachNode.tag === 'div'
+                                        ? div.cloneNode()
+                                        : document.createElement(eachNode.tag)
+                            );
 
-                            const attr = eachNode.attr;
-                            if (attr) {
-                                element.attr(attr);
-                            }
-
-                            const css = eachNode.$css;
-                            if (css) {
-                                element.css(css);
-                            }
+                            eachNode.attr && element.attr(eachNode.attr);
+                            eachNode.$css && element.css(eachNode.$css);
 
                             for (const eachEventType in eachNode?.$on) {
                                 const eachHandle = eachNode.$on[eachEventType];
@@ -186,10 +177,8 @@ export default class Template {
 
                             renderNodes(eachNode?.children, eachOldNode?.children, element);
 
-                            const created = eachNode.$created;
-                            if (created) created(element, eachNode);
-                            const updated = eachNode.$updated;
-                            if (updated) updated(element, eachNode);
+                            eachNode.$created?.(element, eachNode);
+                            eachNode.$updated?.(element, eachNode);
 
                             if (i === 0) {
                                 parent.appendChild(element);
@@ -219,21 +208,19 @@ export default class Template {
             (function create(eachNodes, parent) {
                 const eachFragment = fragment.cloneNode();
                 eachNodes.forEach((eachNode) => {
-                    const hasIf = eachNode.hasOwnProperty('$if');
-                    if (hasIf && !eachNode.$if) return;
-                    let element;
-                    if (eachNode.$namespace) {
-                        element = $(document.createElementNS(eachNode.$namespace, eachNode.tag));
-                    } else {
-                        element = $(eachNode.tag === 'div'
-                            ? div.cloneNode()
-                            : document.createElement(eachNode.tag));
-                    }
-                    eachNode.element = element;
-                    const created = eachNode.$created;
-                    if (created) created(element, eachNode);
-                    const updated = eachNode.$updated;
-                    if (updated) updated(element, eachNode);
+
+                    if (eachNode.hasOwnProperty('$if') && !eachNode.$if) return;
+
+                    const element = eachNode.element = $(
+                        eachNode.$namespace
+                            ? document.createElementNS(eachNode.$namespace, eachNode.tag)
+                            : eachNode.tag === 'div'
+                                ? div.cloneNode()
+                                : document.createElement(eachNode.tag)
+                    )
+
+                    eachNode.$created?.(element, eachNode);
+                    eachNode.$updated?.(element, eachNode);
 
                     for (const eachEventType in eachNode.$on) {
                         const eachHandle = eachNode.$on[eachEventType];
@@ -247,18 +234,15 @@ export default class Template {
                     } else if ('$text' in eachNode) {
                         element.textContent = eachNode.$text;
                     }
-                    const attr = eachNode.attr;
-                    if (attr) {
-                        element.attr(attr);
-                    }
-                    const css = eachNode.$css;
-                    if (css) {
-                        element.css(css);
-                    }
 
-                    if (eachNode.children) {
-                        create(eachNode.children, element);
-                    }
+                    const attr = eachNode.attr;
+                    const css = eachNode.$css;
+
+                    attr && element.attr(attr);
+                    css && element.css(css);
+
+                    eachNode.children && create(eachNode.children, element);
+
                     eachFragment.appendChild(element);
                 });
                 parent.appendChild(eachFragment);
