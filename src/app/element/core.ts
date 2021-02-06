@@ -32,8 +32,6 @@ export function Element(options: ElementOptions) {
         };
 
         prototype.connectedCallback = function () {
-            this.ready = false; // prevent rendering many times
-            this.initial = false;
             if (propsOptions) {
                 for (const eachPropKey in constructor.propsOptions) {
                     const eachPropOption: AttributeOptions = propsOptions[eachPropKey];
@@ -109,6 +107,8 @@ export function Element(options: ElementOptions) {
         };
 
         prototype.disconnectedCallback = function () {
+            this.ready = false;
+            this.initial = false;
             if (this.removeRender) this.removeRender();
             if (onDisconnected) onDisconnected.call(this);
         };
@@ -133,6 +133,10 @@ export class MasterElement extends HTMLElement {
     css = css;
     addClass = addClass;
     rmClass = rmClass;
+
+    onConnected() { };
+    onDisconnected() { };
+    onAttrChanged() { };
 }
 
 const parseAttrValue = (value: any, type: string) => {
