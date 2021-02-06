@@ -1,4 +1,6 @@
-export default function on (
+import off from '../off';
+
+export default function on(
     target,
     typeSet: string,
     factorSelector,
@@ -27,7 +29,7 @@ export default function on (
                 return;
             }
         }
-        if (option && option.once) target.off(typeSet, factorSelector, handle, option);
+        if (option && option.once) off.call(target, typeSet, factorSelector, handle, option);
         let detail = event.detail;
         detail = Array.isArray(detail) ? detail : [detail];
         if (handle) handle.call($thisArg, event, ...detail);

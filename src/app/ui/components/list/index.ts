@@ -1,6 +1,6 @@
-import { Element } from '../../../element';
-import css from './list.scss';
+import { Element, MasterElement } from '@master/element';
 import Template from '@master/template';
+import css from './list.scss';
 
 const NAME = 'list';
 
@@ -8,7 +8,7 @@ const NAME = 'list';
     tag: 'm-' + NAME,
     css
 })
-export class ListElement extends HTMLElement {
+export class ListElement extends MasterElement {
     template = new Template(() => [
         'slot'
     ]);

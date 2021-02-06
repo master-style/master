@@ -1,7 +1,8 @@
 import { Attr } from '../attr';
 import { capitalize } from '../../utils/capitalize';
+import { MasterElement } from '../core';
 
-export class ControlElement extends HTMLElement {
+export class ControlElement extends MasterElement {
 
     validity: ValidityState;
 

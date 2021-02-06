@@ -1,10 +1,11 @@
 import { Attr } from '../attr';
 import { ControlElement } from '../control';
 import Template from '@master/template';
+import { MasterElement } from '../core';
 
 type elementToken = string | { [key: string]: any };
 
-export class ClickableElement extends HTMLElement {
+export class ClickableElement extends MasterElement {
 
     slotTemplate: (elementToken | (() => elementToken[]))[];
 

@@ -1,4 +1,4 @@
-import { Element } from '../../../element';
+import { Element, MasterElement } from '@master/element';
 import Template from '@master/template';
 
 import css from './header.scss';
@@ -9,7 +9,7 @@ const NAME = 'header';
     tag: 'm-' + NAME,
     css
 })
-export class HeaderElement extends HTMLElement {
+export class HeaderElement extends MasterElement {
 
     template: Template = new Template(() => [
         'div', { part: 'root' }, [

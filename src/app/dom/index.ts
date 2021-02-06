@@ -8,7 +8,7 @@ import { attr, toggleAttr, css, addClass, rmClass, html } from './manipulations'
 
 const fragment = document.createDocumentFragment();
 
-export default function $<T extends Element>(
+function $<T extends Element>(
     elementOrSelector: T | string,
     attrOptions?: { [key: string]: any },
     ...children: (Element | string)[]
@@ -42,14 +42,21 @@ export default function $<T extends Element>(
     } else {
         element = elementOrSelector;
     }
-    return new class {
-        on = on;
-        off = off;
-        css = css;
-        attr = attr;
-        toggleAttr = toggleAttr;
-        addClass = addClass;
-        rmClass = rmClass;
-        html = html;
-    }
+
+    Object.assign(element, {
+        on,
+        off,
+        css,
+        attr,
+        toggleAttr,
+        addClass,
+        rmClass,
+        html
+    });
+
+    return element;
+}
+
+export {
+    $, on, off, attr, toggleAttr, css, addClass, rmClass, html
 }

@@ -1,4 +1,4 @@
-import { Element, Attr } from '../../../element';
+import { Element, MasterElement, Attr } from '@master/element';
 import { SelectElement } from '../select';
 
 import css from './option.scss';
@@ -32,7 +32,7 @@ const updateSelected = (option: OptionElement, selected: boolean) => {
     tag: 'm-' + NAME,
     css
 })
-export class OptionElement extends HTMLElement {
+export class OptionElement extends MasterElement {
 
     updating: boolean;
 

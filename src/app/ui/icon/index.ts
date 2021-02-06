@@ -1,4 +1,4 @@
-import { Element, Attr } from '../../element';
+import { Element, MasterElement, Attr } from '@master/element';
 import css from './icon.scss';
 import Template from '@master/template';
 
@@ -18,7 +18,7 @@ const ICON = {
     tag: 'm-' + NAME,
     css
 })
-export class IconElement extends HTMLElement {
+export class IconElement extends MasterElement {
 
     template = new Template(() => [
         'div', { part: 'root' }, [

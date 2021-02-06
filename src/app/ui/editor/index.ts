@@ -1,4 +1,5 @@
-import { Element, Attr, Prop } from '../../element';
+import { Element, MasterElement, Attr, Prop } from '@master/element';
+
 import css from './editor.scss';
 import Template from '@master/template';
 
@@ -15,7 +16,7 @@ const NAME = 'editor';
     tag: 'm-' + NAME,
     css
 })
-export class EditorElement extends HTMLElement {
+export class EditorElement extends MasterElement {
 
     @Prop()
     private view;

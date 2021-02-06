@@ -1,7 +1,8 @@
 import { Attr } from '../attr';
 import { Event } from '../event';
+import { MasterElement } from '../core';
 
-export class TargetElement extends HTMLElement {
+export class TargetElement extends MasterElement {
 
     @Attr({
         update(toggleable: TargetElement, value: boolean) {

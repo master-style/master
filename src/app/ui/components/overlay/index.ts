@@ -1,6 +1,6 @@
-import { Element } from '../../../element';
-import css from './overlay.scss';
+import { Element, MasterElement } from '@master/element';
 import Template from '@master/template';
+import css from './overlay.scss';
 
 const NAME = 'overlay';
 
@@ -8,7 +8,7 @@ const NAME = 'overlay';
     tag: 'm-' + NAME,
     css
 })
-export class SkeletonOverlay extends HTMLElement {
+export class SkeletonOverlay extends MasterElement {
     template = new Template(() => ['slot']);
 
     render() {

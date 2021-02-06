@@ -1,6 +1,6 @@
-import { Element, Attr } from '../../../element';
-import css from './skeleton.scss';
+import { Element, MasterElement } from '@master/element';
 import Template from '@master/template';
+import css from './skeleton.scss';
 
 const NAME = 'skeleton';
 
@@ -8,7 +8,7 @@ const NAME = 'skeleton';
     tag: 'm-' + NAME,
     css
 })
-export class SkeletonElement extends HTMLElement {
+export class SkeletonElement extends MasterElement {
 
     template = new Template(() => {
         this.css('width', this.width);
