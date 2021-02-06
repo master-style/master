@@ -1,4 +1,5 @@
 import { Directive, ElementRef, Input } from '@angular/core';
+import { $ } from '../dom';
 
 declare const Prism: any;
 declare const prettier: any;
@@ -145,7 +146,7 @@ export class CodeDirective {
                     $('m-button', { class: 'round xs f:fade++' })
                         .html('<i class="i-code">')
                         .on('click', () => {
-                            this.demoElement.toggleAttr('collapsed');
+                            $(this.demoElement).toggleAttr('collapsed');
                         });
                 this.functionElement.append(this.collapseButton);
             }
@@ -156,7 +157,7 @@ export class CodeDirective {
                         .html('<i class="i-copy">')
                         .on('click', (e) => {
                             // Select some text (you could also create a range)
-                            this.preElement.css('display', 'block');
+                            $(this.preElement).css('display', 'block');
                             const range = document.createRange();
                             range.selectNode(codeWrapElement);
                             const selection = window.getSelection();
@@ -166,7 +167,7 @@ export class CodeDirective {
                             if (document.execCommand('copy')) {
                                 console.log('copied');
                             }
-                            this.preElement.css('display', null);
+                            $(this.preElement).css('display', null);
                         });
 
                 this.functionElement.append(this.copyButton);
@@ -177,7 +178,7 @@ export class CodeDirective {
         if (this.codeCollapsed === undefined)
             this.codeCollapsed = this.codeDemo ?? false;
         if (this.demoElement)
-            this.demoElement.toggleAttr('collapsed', this.codeCollapsed);
+            $(this.demoElement).toggleAttr('collapsed', this.codeCollapsed);
 
     }
 

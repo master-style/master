@@ -1,4 +1,4 @@
-import { Element, MasterElement } from '@master/element';
+import { Element, MasterElement, Attr } from '@master/element';
 import Template from '@master/template';
 import css from './skeleton.scss';
 

@@ -1,3 +1,4 @@
+import { $ } from "@master/dom";
 
 export default class Template {
 
@@ -222,11 +223,11 @@ export default class Template {
                     if (hasIf && !eachNode.$if) return;
                     let element;
                     if (eachNode.$namespace) {
-                        element = document.createElementNS(eachNode.$namespace, eachNode.tag);
+                        element = $(document.createElementNS(eachNode.$namespace, eachNode.tag));
                     } else {
-                        element = eachNode.tag === 'div'
+                        element = $(eachNode.tag === 'div'
                             ? div.cloneNode()
-                            : document.createElement(eachNode.tag);
+                            : document.createElement(eachNode.tag));
                     }
                     eachNode.element = element;
                     const created = eachNode.$created;

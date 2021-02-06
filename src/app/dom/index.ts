@@ -8,8 +8,8 @@ import { attr, toggleAttr, css, addClass, rmClass, html } from './manipulations'
 
 const fragment = document.createDocumentFragment();
 
-function $<T extends Element>(
-    elementOrSelector: T | string,
+function $(
+    elementOrSelector: Element | Node | Window | string,
     attrOptions?: { [key: string]: any },
     ...children: (Element | string)[]
 ) {
@@ -43,16 +43,23 @@ function $<T extends Element>(
         element = elementOrSelector;
     }
 
-    Object.assign(element, {
-        on,
-        off,
-        css,
-        attr,
-        toggleAttr,
-        addClass,
-        rmClass,
-        html
-    });
+    if (element === window) {
+        Object.assign(element, {
+            on,
+            off
+        });
+    } else {
+        Object.assign(element, {
+            on,
+            off,
+            css,
+            attr,
+            toggleAttr,
+            addClass,
+            rmClass,
+            html
+        });
+    }
 
     return element;
 }

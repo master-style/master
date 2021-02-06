@@ -7,7 +7,9 @@ declare const ResizeObserver: any;
 
 import css from './popup.scss';
 import { ContentElement } from '../content';
+import { $ } from '@master/dom';
 
+const $body = $(document.body);
 const NAME = 'popup';
 
 @Element({
@@ -59,7 +61,7 @@ export class PopupElement extends TargetElement {
             $created: (element: ContentElement) => this.content = element
         }, [
             'slot', {
-                $created: (element: HTMLSlotElement) => element.on('slotchange', (event) => {
+                $created: (element) => element.on('slotchange', (event) => {
                     const onSlotChange = this['onSlotChange'];
                     if (onSlotChange) {
                         onSlotChange.call(this, event);
@@ -124,7 +126,7 @@ export class PopupElement extends TargetElement {
             }
             if (parent.tagName === 'M-POPUP') {
                 parent.activeChildPopups.add(this);
-            } else if (parent !== document.body) {
+            } else if (parent !== $body) {
                 activate(parent.parentNode as PopupElement);
             }
         };
@@ -172,12 +174,12 @@ export class PopupElement extends TargetElement {
     onOpened() {
         if (this.popper) {
             if (this.closeOn && this.closeOn.indexOf('mouseout') !== -1) {
-                document.body
+                $body
                     .on('mousemove', this.determineClose, { passive: true });
             }
 
             if (this.closeOn && this.closeOn.indexOf('click:outside') !== -1) {
-                document.body
+                $body
                     .on('click', this.determineClose, { passive: true });
             }
 
@@ -199,7 +201,7 @@ export class PopupElement extends TargetElement {
             }
             if (parent.tagName === 'M-POPUP') {
                 parent.activeChildPopups.delete(this);
-            } else if (parent !== document.body) {
+            } else if (parent !== $body) {
                 deactivate(parent.parentNode as PopupElement);
             }
         };
@@ -216,7 +218,7 @@ export class PopupElement extends TargetElement {
     onClosed() {
         if (this.popper) {
             this.popper = this.popper.destroy();
-            document.body.off(this.determineClose);
+            $($body).off(this.determineClose);
         }
     }
 

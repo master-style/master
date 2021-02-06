@@ -1,4 +1,4 @@
-import { Element, Attr, TargetElement, attrEnabled, Event } from '../../../element';
+import { Element, MasterElement, Attr, TargetElement, attrEnabled, Event } from '@master/element';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { ContentElement } from '../content';
 import { HeaderElement } from '../header';
@@ -30,18 +30,18 @@ export class ModalElement extends TargetElement {
         'm-overlay', {
             part: 'overlay',
             $if: attrEnabled(this.overlay),
-            $created: (element: HTMLElement) => this.overlayElement = element
+            $created: (element: MasterElement) => this.overlayElement = element
         },
         'div', {
             part: 'root',
-            $created: (element: HTMLElement) => this.root = element
+            $created: (element: MasterElement) => this.root = element
         }, [
             ...this.contentTokens(),
             'm-button', {
                 part: 'close',
                 class: 'round xs',
                 $if: this.closeButton,
-                $created: (element: HTMLElement) => this.closeElement = element,
+                $created: (element: MasterElement) => this.closeElement = element,
             }, [
                 'm-icon', { name: this.closeButton, direction: 'left' }
             ]
@@ -115,8 +115,8 @@ export class ModalElement extends TargetElement {
     })
     overlay: string = 'static';
 
-    overlayElement: HTMLElement;
-    closeElement: HTMLElement;
+    overlayElement: MasterElement;
+    closeElement: MasterElement;
 
     protected toggling(
         options: KeyframeEffectOptions

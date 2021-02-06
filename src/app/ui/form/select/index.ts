@@ -1,4 +1,5 @@
-import { Element, Attr, Event, ControlElement, Prop } from '../../../element';
+import { Element, Attr, Event, ControlElement } from '../../../element';
+import { $ } from '@master/dom';
 import Template from '@master/template';
 
 import css from './select.scss';
@@ -6,7 +7,6 @@ import './select-popup';
 
 import { OptionElement } from '../option';
 import { SelectPopupElement } from './select-popup';
-import { each } from 'lodash-es';
 
 let uid = 0;
 
@@ -30,7 +30,7 @@ export class SelectElement extends ControlElement {
 
     template = new Template(() => [
         'slot', {
-            $created: (slot: HTMLSlotElement) => slot.on('slotchange', () => {
+            $created: (slot) => slot.on('slotchange', () => {
 
                 this.options = new Set(
                     this.children
@@ -59,7 +59,7 @@ export class SelectElement extends ControlElement {
                     disabled: this.disabled,
                     placeholder: this.placeholder,
                     $text: this.keyword,
-                    $created: (element: HTMLInputElement) => {
+                    $created: (element) => {
                         this.search = element
                             .on('input', () => {
                                 if (this.searchable)

@@ -1,11 +1,14 @@
-import { Element, Attr, Event, TargetElement } from '../../../element';
+import { Element, MasterElement, Attr, Event, TargetElement } from '@master/element';
+import Template from '@master/template';
+import { $ } from '@master/dom';
 import { debounce } from 'lodash-es';
 import css from './content.scss';
 import isNum from '../../../utils/is-num';
-import Template from '@master/template';
 
 const NAME = 'content';
 const PX = 'px';
+const $window = $(window);
+const $body = $(document.body)
 
 const
     SCROLL_KEY = 'scroll',
@@ -41,7 +44,7 @@ export class ContentElement extends TargetElement {
     template = new Template(() => [
         'slot', {
             part: 'root',
-            $created: (element: HTMLElement) => this.root = element
+            $created: (element: MasterElement) => this.root = element
         },
         'slot', {
             name: 'part'
@@ -50,25 +53,25 @@ export class ContentElement extends TargetElement {
             part: 'x',
             hidden: !this.scrolling,
             $if: this.scrollX,
-            $created: (element: HTMLElement) => this.#bar.X = element
+            $created: (element: MasterElement) => this.#bar.X = element
         }, [
             'm-thumb', {
-                $created: (element: HTMLElement) => this.#thumb.X = element
+                $created: (element: MasterElement) => this.#thumb.X = element
             }
         ],
         'm-bar', {
             part: 'y',
             hidden: !this.scrolling,
             $if: this.scrollY,
-            $created: (element: HTMLElement) => this.#bar.Y = element
+            $created: (element: MasterElement) => this.#bar.Y = element
         }, [
             'm-thumb', {
-                $created: (element: HTMLElement) => this.#thumb.Y = element
+                $created: (element: MasterElement) => this.#thumb.Y = element
             }
         ]
     ]);
 
-    root: HTMLElement;
+    root: MasterElement;
     scrolling = false;
 
     maxX: number;
@@ -193,7 +196,7 @@ export class ContentElement extends TargetElement {
             subtree: true
         })
 
-        window.on('resize', debounce(() => {
+        $window.on('resize', debounce(() => {
             this.renderScroll();
         }, 70), {
             id: [this, NAME]
@@ -204,7 +207,7 @@ export class ContentElement extends TargetElement {
         if (!this.#enabled) return;
         this.#enabled = false;
         this.root.off({ id: ['scroll'] });
-        window.off({ id: [this, NAME] });
+        $window.off({ id: [this, NAME] });
         this.#mutationObserver.disconnect();
     }
 
@@ -350,7 +353,7 @@ export class ContentElement extends TargetElement {
                 const
                     barPosition = scrollPosition < 0 ? 0 : (scrollPosition > maxPosition ? maxPosition : scrollPosition);
                 const
-                    barStyles = window.getComputedStyle(this.#bar[dir]),
+                    barStyles = $window.getComputedStyle(this.#bar[dir]),
                     // tslint:disable-next-line: radix
                     padding = parseInt(barStyles['padding']),
                     // tslint:disable-next-line: radix
@@ -419,7 +422,7 @@ export class ContentElement extends TargetElement {
     }
 
     onDisconnected() {
-        document.body.off({ id: [this, NAME] });
+        $body.off({ id: [this, NAME] });
         this.disable();
     }
 

@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { elementRoutes } from './element/element-routing.module';
 import { throttle } from 'lodash-es';
 import { NavigationStart, NavigationEnd, Router, RouterEvent } from '@angular/router';
+import { $ } from './dom';
 
 @Component({
     selector: 'doc-root',
@@ -44,7 +45,7 @@ export class AppComponent implements OnInit {
     ngOnInit(): void {
         setTimeout(() => {
             let lastScrollTop = 0;
-            window.on('scroll', throttle(() => {
+            $(window).on('scroll', throttle(() => {
                 let st = window.pageYOffset || document.documentElement.scrollTop;
                 if (st > lastScrollTop) {
                     // downscroll code

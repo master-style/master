@@ -1,6 +1,9 @@
 import { Attr } from '../attr';
 import { Event } from '../event';
 import { MasterElement } from '../core';
+import { $ } from '@master/dom';
+
+const $body = $(document.body);
 
 export class TargetElement extends MasterElement {
 
@@ -29,7 +32,7 @@ export class TargetElement extends MasterElement {
         update(target: TargetElement, value: any, oldValue: any) {
             const name = target.constructor['elementName'];
             if (oldValue) {
-                document.body.off({ id: [target, name] });
+                $body.off({ id: [target, name] });
             }
 
             if (value) {
@@ -38,7 +41,7 @@ export class TargetElement extends MasterElement {
                 const handleTrigger = target['handleTrigger'];
 
                 // open
-                document.body
+                $body
                     .on(typeSets.join(' '), '[' + toggleAttrKey + ']', function (event) {
                         const trigger = this;
                         if (this.disabled) {
@@ -176,7 +179,7 @@ export class TargetElement extends MasterElement {
     }
 
     onDisconnected() {
-        document.body.off({ id: [this, this.constructor['elementName']] });
+        $body.off({ id: [this, this.constructor['elementName']] });
     }
 
 }
