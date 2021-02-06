@@ -6,20 +6,24 @@ import { attr, toggleAttr, css, addClass, toggleClass, rmClass } from './manipul
 const fragment = document.createDocumentFragment();
 
 function $(
-    elementOrSelector: Element | Node | Window | string,
+    elementOrTagName: Element | Node | Window | string,
     attrOptions?: { [key: string]: any },
     ...children: (Element | string)[]
 ) {
-    const isSelector = typeof elementOrSelector === 'string';
-    let element;
-    if (isSelector && !attrOptions) {
-        element = document.querySelector(elementOrSelector as string);
-    } else if (isSelector && attrOptions) {
-        element = document.createElement(elementOrSelector as string, attrOptions && attrOptions.is ? { is: attrOptions.is } : undefined);
-        if (Object.keys(attrOptions).length) attr.call(element, attrOptions);
-        if (attrOptions.html) {
-            element.innerHTML = attrOptions.html;
+    let target;
+
+    if (typeof elementOrTagName === 'string') {
+
+        target = document.createElement(elementOrTagName as string, attrOptions && attrOptions.is ? { is: attrOptions.is } : undefined);
+
+        if (attrOptions && Object.keys(attrOptions).length) {
+            attr.call(target, attrOptions)
         }
+
+        if (attrOptions?.html) {
+            target.innerHTML = attrOptions.html;
+        }
+
         if (children.length) {
             if (children.length > 1) {
                 const eachFragment = fragment.cloneNode();
@@ -30,9 +34,9 @@ function $(
                             eachChild
                     );
                 }
-                element.appendChild(eachFragment);
+                target.appendChild(eachFragment);
             } else {
-                element.appendChild(
+                target.appendChild(
                     typeof children[0] === 'string' ?
                         document.createTextNode(children[0] as any) :
                         children[0]
@@ -40,16 +44,16 @@ function $(
             }
         }
     } else {
-        element = elementOrSelector;
+        target = elementOrTagName;
     }
 
-    if (element === window) {
-        Object.assign(element, {
+    if (target === window) {
+        Object.assign(target, {
             on,
             off
         });
     } else {
-        Object.assign(element, {
+        Object.assign(target, {
             on,
             off,
             css,
@@ -61,7 +65,7 @@ function $(
         });
     }
 
-    return element;
+    return target;
 }
 
 export {

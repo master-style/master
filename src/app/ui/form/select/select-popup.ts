@@ -124,9 +124,8 @@ export class SelectPopupElement extends PopupElement {
         this.toggleAttribute('searching', !!keyword);
         if (keyword) {
             this.items.forEach((eachItem: ItemElement) => {
-                const text = eachItem?.childNodes
-                    .filter((eachElement) => !eachElement.slot)
-                    .map((eachElement) => eachElement.textContent)
+                const text = Array.from(eachItem.childNodes)
+                    .map((eachNode) => eachNode.textContent)
                     .join('')
                     .trim();
                 const found = text.indexOf(keyword) !== -1;

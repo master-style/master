@@ -131,7 +131,7 @@ export class ModalElement extends TargetElement {
                 this.trigger.toggleClass('invisible', true);
             }
 
-            content = this.children
+            content = Array.from(this.children)
                 .filter((eachElement) => eachElement.matches('m-content'))[0] as ContentElement;
 
             if (content) {

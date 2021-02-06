@@ -8,7 +8,7 @@ import isNum from '../../../utils/is-num';
 const NAME = 'content';
 const PX = 'px';
 const $window = $(window);
-const $body = $(document.body)
+const $body = $(document.body);
 
 const
     SCROLL_KEY = 'scroll',

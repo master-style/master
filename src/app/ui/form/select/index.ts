@@ -31,9 +31,8 @@ export class SelectElement extends ControlElement {
     template = new Template(() => [
         'slot', {
             $created: (slot) => slot.on('slotchange', () => {
-
                 this.options = new Set(
-                    this.children
+                    Array.from(this.children)
                         .filter((eachChild) => eachChild.tagName === 'M-OPTION') as OptionElement[]
                 );
 
@@ -270,11 +269,14 @@ export class SelectElement extends ControlElement {
     output() {
         if (!this.multiple) {
             const option = this.selectedOptions[0];
-            const optionText = option?.childNodes
-                .filter((eachNode) => !eachNode.slot && eachNode.nodeName !== '#comment')
-                .map((eachNode) => eachNode.textContent)
-                .join(' ')
-                .trim();
+            const optionText =
+                option
+                    ? Array.from(option.childNodes)
+                        .filter((eachNode: any) => !eachNode.slot && eachNode.nodeName !== '#comment')
+                        .map((eachNode) => eachNode.textContent)
+                        .join(' ')
+                        .trim()
+                    : '';
             this.search.textContent = optionText || '';
         }
     }
