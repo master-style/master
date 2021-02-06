@@ -75,15 +75,6 @@ export class CheckElement extends ControlElement {
     required: boolean;
 
     @Attr()
-    promptValid: string;
-
-    @Attr()
-    promptInvalid: string;
-
-    @Attr()
-    promptWarning: string;
-
-    @Attr()
     autocomplete: string;
 
     @Attr()
