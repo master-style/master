@@ -173,8 +173,11 @@ export class DialogElement extends ModalElement {
     private get data() {
         const value = {};
         let valid = true;
-        this.form
-            .querySelectorAll('m-input,m-select,m-textarea,m-check')
+        Array.from(
+            this.form
+                .querySelectorAll('m-input,m-select,m-textarea,m-check')
+
+        )
             .map((eachControl: any) => {
                 if (eachControl.name) {
                     value[eachControl.name] = eachControl.value;

@@ -84,15 +84,16 @@ export class CodeDirective {
         const element = this.elementRef.nativeElement;
         const isTemplateTag = element.tagName === 'TEMPLATE';
         const isCodeTag = element.tagName === 'CODE';
-        const targetElements = this.selector ?
-            element.querySelectorAll(this.selector) : element.children;
+        const targetElements = Array.from(this.selector
+            ? element.querySelectorAll(this.selector)
+            : element.children);
         let code: string;
 
         switch (this.codeLang) {
             case 'html':
                 code =
                     $('div', {}, ...targetElements
-                        .map((eachNode) => eachNode.cloneNode(true)))
+                        .map((eachNode: any) => eachNode.cloneNode(true)))
                         .innerHTML
                         .replace(/<?_[\S]*?="[\s\S]*?"/g, '')
                         .replace(/<!--bindings[^>]*-->/g, '')

@@ -58,7 +58,6 @@ export class SelectPopupElement extends PopupElement {
         ]
     ];
 
-
     lightTemplate = new Template(() => [
         ...[].concat(...Array.from(this.select.options)
             .map((eachOption: OptionElement) => [

@@ -34,12 +34,8 @@ export function Prop(options?: PropertyOptions) {
             }
         };
 
-        if (!constructor.propsOptions) {
-            constructor.propsOptions = {};
-        } else {
-            // 必須 assign，否則會污染到繼承的父元素
-            constructor.propsOptions = Object.assign({}, constructor.propsOptions);
-        }
+        // 必須 assign，否則會污染到繼承的父元素
+        constructor.propsOptions = Object.assign({}, constructor.propsOptions);
         constructor.propsOptions[key] = options;
 
         return descriptor;

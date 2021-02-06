@@ -22,8 +22,9 @@ export function Element(options: ElementOptions) {
 
         prototype.attributeChangedCallback = function (attrKey, oldValue, value) {
             if (value === oldValue) return;
+            console.log(attrKey, attrsOptions[attrKey]);
             const eachAttrOptions = attrsOptions[attrKey];
-            const type = eachAttrOptions.type;
+            const type = eachAttrOptions?.type;
             value = parseAttrValue(value, type);
             oldValue = parseAttrValue(oldValue, type);
             eachAttrOptions.set.call(this, value, true);
@@ -117,6 +118,14 @@ export function Element(options: ElementOptions) {
 }
 
 export class MasterElement extends HTMLElement {
+
+    readonly ready = false;
+    readonly initial = false;
+
+    static observedAttributes = [];
+    static attrOptions = {};
+    static propsOptions = {};
+
     on = on;
     off = off;
     attr = attr;

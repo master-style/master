@@ -46,21 +46,11 @@ export function Attr(options?: AttributeOptions) {
                 }
             }
         };
+
         options.set = descriptor.set;
-
-        if (options.observe) {
-            if (!constructor.observedAttributes) {
-                constructor.observedAttributes = [];
-            }
-            constructor.observedAttributes.push(attrKey);
-        }
-
-        if (!constructor.attrsOptions) {
-            constructor.attrsOptions = {};
-        } else {
-            // 必須 assign，否則會污染到繼承的父元素
-            constructor.attrsOptions = Object.assign({}, constructor.attrsOptions);
-        }
+        options.observe && constructor.observedAttributes.push(attrKey);
+        // 必須 assign，否則會污染到繼承的父元素
+        constructor.attrsOptions = Object.assign({}, constructor.attrsOptions);
         constructor.attrsOptions[attrKey] = options;
 
         return descriptor;
