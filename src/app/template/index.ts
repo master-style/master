@@ -89,9 +89,17 @@ export default class Template {
 
                             const element = eachNode.element = eachOldNode?.element;
                             const attr = eachNode.attr;
-                            const oldAttr = eachOldNode?.attr;
+                            const css = eachNode.$css;
+                            const oldCss = eachOldNode?.$css;
+                            const html = eachNode.$html;
+                            const oldHtml = eachOldNode?.$html;
+                            const htmlUpdated = '$html' in eachNode && html !== oldHtml;
+                            const text = eachNode.$text;
+                            const oldText = eachOldNode?.$text;
+                            const textUpdated = '$text' in eachNode && text !== oldText;
 
                             if (attr) {
+                                const oldAttr = eachOldNode?.attr;
                                 for (const eachAttrKey in attr) {
                                     const value = attr[eachAttrKey];
                                     const oldValue = oldAttr[eachAttrKey];
@@ -100,9 +108,6 @@ export default class Template {
                                     }
                                 }
                             }
-
-                            const css = eachNode.$css;
-                            const oldCss = eachOldNode?.$css;
 
                             for (const eachPropKey in css) {
                                 const value = css[eachPropKey];
@@ -124,26 +129,21 @@ export default class Template {
                                 });
                             }
 
+                            if (htmlUpdated) {
+                                element.innerHTML = html;
+                            } else if (textUpdated) {
+                                element.textContent = text;
+                            }
+
                             if (
-                                '$html' in eachNode && eachNode.$html !== eachOldNode.$html
+                                (htmlUpdated || textUpdated) && eachOldNode?.children
                             ) {
-                                element.innerHTML = eachNode.$html;
-                                if (eachOldNode?.children) {
-                                    eachOldNode.children = [];
-                                }
-                            } else if (
-                                '$text' in eachNode && eachNode.$text !== eachOldNode.$text
-                            ) {
-                                element.textContent = eachNode.$text;
-                                if (eachOldNode?.children) {
-                                    eachOldNode.children = [];
-                                }
+                                eachOldNode.children = [];
                             }
 
                             renderNodes(eachNode?.children, eachOldNode?.children, element);
 
-                            const updated = eachNode.$updated;
-                            if (updated) updated(element, eachNode);
+                            eachNode.$updated?.(element, eachNode);
                         } else {
                             const element = eachNode.element = $(
                                 eachNode.$namespace
@@ -266,8 +266,7 @@ const div = document.createElement('div');
 const removeNode = (node) => {
     if (!node?.element) return;
     node.element.remove();
-    const removed = node.$removed;
-    if (removed) removed(node.element, node);
+    node.$removed?.(node.element, node);
 };
 
 const removeNodes = (eachNodes) => {
