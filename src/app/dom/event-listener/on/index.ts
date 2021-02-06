@@ -1,12 +1,12 @@
 import off from '../off';
 
 export default function on(
-    target,
     typeSet: string,
     factorSelector,
     handle,
     option?: ListenerOptions
 ) {
+    const target = this;
     if (typeof factorSelector === 'function') {
         option = handle;
         handle = factorSelector;

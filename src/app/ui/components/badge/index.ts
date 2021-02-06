@@ -1,6 +1,6 @@
 import { Element, MasterElement } from '@master/element';
-import css from './badge.scss';
 import Template from '@master/template';
+import css from './badge.scss';
 
 const NAME = 'badge';
 

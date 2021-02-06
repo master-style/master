@@ -1,11 +1,11 @@
 export default function off(
-    target,
     typeSet?: any,
     factorSelector?,
     handle?,
     option?: ListenerOptions
 ) {
     const
+        target = this,
         listeners = target.listeners;
     if (!listeners) return target;
     if (typeSet) {
