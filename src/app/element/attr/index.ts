@@ -48,7 +48,10 @@ export function Attr(options?: AttributeOptions) {
         };
 
         options.set = descriptor.set;
-        options.observe && constructor.observedAttributes.push(attrKey);
+        if (options.observe) {
+            constructor.observedAttributes = Object.assign([], constructor.observedAttributes);
+            constructor.observedAttributes.push(attrKey);
+        };
         // 必須 assign，否則會污染到繼承的父元素
         constructor.attrsOptions = Object.assign({}, constructor.attrsOptions);
         constructor.attrsOptions[attrKey] = options;

@@ -1,8 +1,6 @@
 import { Element, MasterElement, Attr } from '@master/element';
 import { SelectElement } from '../select';
 
-import css from './option.scss';
-
 const NAME = 'option';
 
 const updateSelected = (option: OptionElement, selected: boolean) => {
@@ -31,7 +29,7 @@ const updateSelected = (option: OptionElement, selected: boolean) => {
 @Element('m-' + NAME)
 export class OptionElement extends MasterElement {
 
-    static css = css;
+    static shadow = false;
 
     updating: boolean;
 

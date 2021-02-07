@@ -42,17 +42,6 @@ export class MasterElement extends HTMLElement {
     render() { };
     removeRender() { };
 
-    attributeChangedCallback(attrKey, oldValue, value) {
-        if (value === oldValue) return;
-        const eachAttrOptions = this.constructor['attrsOptions'][attrKey];
-        console.log(attrKey, this.constructor['attrsOptions'][attrKey]);
-        const type = eachAttrOptions?.type;
-        value = parseAttrValue(value, type);
-        oldValue = parseAttrValue(oldValue, type);
-        eachAttrOptions.set.call(this, value, true);
-        this.onAttrChanged(attrKey, value, oldValue);
-    };
-
     connectedCallback() {
         const attrsOptions = this.constructor['attrsOptions'];
         const propsOptions = this.constructor['propsOptions'];
@@ -134,6 +123,16 @@ export class MasterElement extends HTMLElement {
         })
         this.emit && this.dispatchEvent(readyEvent);
         this.onConnected();
+    };
+
+    attributeChangedCallback(attrKey, oldValue, value) {
+        if (value === oldValue) return;
+        const eachAttrOptions = this.constructor['attrsOptions'][attrKey];
+        const type = eachAttrOptions?.type;
+        value = parseAttrValue(value, type);
+        oldValue = parseAttrValue(oldValue, type);
+        eachAttrOptions.set.call(this, value, true);
+        this.onAttrChanged(attrKey, value, oldValue);
     };
 
     disconnectedCallback() {
