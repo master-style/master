@@ -24,7 +24,6 @@ export class OptionElement extends MasterElement {
                     return;
                 };
 
-                // updating 防止循環更新
                 select.updating = true;
 
                 if (!select.multiple && selected) {
@@ -45,7 +44,7 @@ export class OptionElement extends MasterElement {
 
     @Attr({
         update(option: OptionElement, value) {
-            // 被選取的項目值變動時 select 值重組
+            // compose value when selected option value changed
             if (option.ready && option.selected) {
                 const select = (option.parentElement as SelectElement);
                 select.composeValue();
@@ -64,7 +63,7 @@ export class OptionElement extends MasterElement {
     onConnected() {
         this.select = (this.parentElement as any);
 
-        // 當 select 值與 option 值匹配時，selected 目標 option
+        // select the option when value is included in the select value
         if (!this.selected) {
             this.select.selectOptionByValue(this.select.value);
         }
