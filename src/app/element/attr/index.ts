@@ -7,6 +7,19 @@ const DEFAULT_ATTR_OPTION = {
     render: true
 };
 
+export interface AttributeOptions {
+    key?: string;
+    observe?: boolean;
+    reflect?: boolean;
+    propKey?: string;
+    set?: Function;
+    render?: boolean;
+    type?: string;
+    update?: (element: any, value: any, oldValue?: any) => void;
+    parse?: (element: any, value: any, oldValue?: any) => any;
+    onRender?: (element: any) => any;
+}
+
 export function Attr(options?: AttributeOptions) {
     options = { ...DEFAULT_ATTR_OPTION, ...options };
     return (target, propKey: string): any => {

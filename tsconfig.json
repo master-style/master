@@ -21,9 +21,6 @@
             "@master/template": [
                 "src/app/template/index.ts"
             ],
-            "@master/dom": [
-                "src/app/dom/index.ts"
-            ],
             "@master/element": [
                 "src/app/element/index.ts"
             ],

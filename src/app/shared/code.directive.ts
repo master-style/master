@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Input } from '@angular/core';
-import { $ } from '../dom';
+import { $ } from '@master/dom';
 
 declare const Prism: any;
 declare const prettier: any;

@@ -1,5 +1,5 @@
-import { on, off, attr, toggleAttr, css, addClass, rmClass } from '@master/dom';
-import { toggleClass } from '../dom/manipulations';
+import { on, off, attr, toggleAttr, css, addClass, rmClass, toggleClass } from '@master/dom';
+import { AttributeOptions } from './attr';
 
 const readyEvent = new CustomEvent('ready');
 

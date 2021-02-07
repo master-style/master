@@ -1,5 +1,10 @@
 
-export function Event(options?: EventOptions) {
+export function Event(options?: {
+    bubbles?: boolean;
+    cancelable?: boolean;
+    composed?: boolean;
+    force?: boolean;
+}) {
     return (target, propKey: string): any => {
         const name = propKey.split('Emitter')[0];
         const event = new CustomEvent(name, options);
@@ -16,3 +21,8 @@ export function Event(options?: EventOptions) {
         };
     }
 }
+
+export interface EventEmitter {
+    (data?: any): CustomEvent<any>;
+}
+
