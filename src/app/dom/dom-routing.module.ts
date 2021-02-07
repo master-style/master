@@ -8,9 +8,6 @@ import { InstallationComponent } from './guideline/installation/installation.com
 import { CodingStyleComponent } from './guideline/coding-style/coding-style.component';
 import { OnComponent } from './event-listener/on/on.component';
 import { OffComponent } from './event-listener/off/off.component';
-import { FilterComponent } from './traversings/filter/filter.component';
-import { ForEachComponent } from './traversings/for-each/for-each.component';
-import { IndexOfComponent } from './traversings/index-of/index-of.component';
 import { HtmlComponent } from './manipulations/html/html.component';
 import { RouteResolver } from '../shared/route.resolver';
 
@@ -34,13 +31,6 @@ export const domRoutes: Routes = [
             { path: 'class', component: ClassComponent, resolve: { route: RouteResolver } },
             { path: 'css', component: CssComponent, resolve: { route: RouteResolver } },
             { path: 'html', component: HtmlComponent, resolve: { route: RouteResolver } }
-        ]
-    },
-    {
-        path: 'traversings', children: [
-            { path: 'filter', component: FilterComponent, resolve: { route: RouteResolver } },
-            { path: 'for-each', component: ForEachComponent, resolve: { route: RouteResolver } },
-            { path: 'index-of', component: IndexOfComponent, resolve: { route: RouteResolver } }
         ]
     }
 ];

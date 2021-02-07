@@ -27,6 +27,9 @@
             "@master/element": [
                 "src/app/element/index.ts"
             ],
+            "@master/ui": [
+                "src/app/ui/index.ts"
+            ]
         }
     },
     "include": [

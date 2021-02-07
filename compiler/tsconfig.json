@@ -1,23 +1,18 @@
 {
     "compilerOptions": {
+        "baseUrl": "../",
         "sourceMap": true,
         "declaration": false,
-        "skipLibCheck": true,
-        "moduleResolution": "node",
+        "downlevelIteration": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "removeComments": true,
-        "target": "es5",
-        "typeRoots": [
-            "node_modules/@types"
-        ],
+        "moduleResolution": "node",
+        "importHelpers": true,
+        "target": "es2015",
+        "module": "es2020",
         "lib": [
-            "es2016",
-            "es5",
+            "es2018",
             "dom"
-        ],
-        "types": [
-            "node"
         ],
         "paths": {
             "@master/template": [
@@ -29,13 +24,12 @@
             "@master/element": [
                 "../src/app/element/index.ts"
             ],
+            "@master/ui": [
+                "../src/app/ui/index.ts"
+            ]
         }
     },
-    "exclude": [
-        "node_modules",
-        "**/*.spec.ts"
-    ],
     "include": [
-        "../src/**/*"
+        "../src/**/*.ts"
     ]
 }
