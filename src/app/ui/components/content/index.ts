@@ -5,6 +5,8 @@ import { debounce } from 'lodash-es';
 import css from './content.scss';
 import isNum from '../../../utils/is-num';
 
+declare const ResizeObserver: any
+
 const NAME = 'content';
 const PX = 'px';
 const $window = $(window);
@@ -141,7 +143,7 @@ export class ContentElement extends TargetElement {
     @Attr()
     collapseY: boolean = false;
 
-    #mutationObserver;
+    #resizeObserver;
 
     render() {
         this.template.render(this.shadowRoot);
@@ -185,15 +187,10 @@ export class ContentElement extends TargetElement {
                 passive: true
             });
 
-        this.#mutationObserver = new MutationObserver(debounce(() => {
+        this.#resizeObserver = new ResizeObserver(() => {
             this.renderScroll();
-        }, 70));
-
-        this.#mutationObserver.observe(this, {
-            characterData: true,
-            childList: true,
-            subtree: true
-        })
+        });
+        this.#resizeObserver.observe(this);
 
         $window.on('resize', debounce(() => {
             this.renderScroll();
@@ -207,7 +204,7 @@ export class ContentElement extends TargetElement {
         this.#enabled = false;
         this.root.off({ id: ['scroll'] });
         $window.off({ id: [this, NAME] });
-        this.#mutationObserver.disconnect();
+        this.#resizeObserver.unobserve(this);
     }
 
     get scrollable(): boolean {
@@ -309,6 +306,7 @@ export class ContentElement extends TargetElement {
                 scrollPosition = this[POSITION_KEY[dir]] = this.root[SCROLL_POSITION_KEY[dir]],
                 maxPosition = this['max' + dir] = scrollSize - rootSize < 0 ? 0 : (scrollSize - rootSize),
                 reach = scrollPosition <= 0 ? -1 : scrollPosition >= maxPosition ? 1 : 0;
+
             if (this.guide) {
                 const
                     guideSize = this.guideSize,
