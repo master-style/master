@@ -8,14 +8,14 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = env => {
     const entryGlob = [
-        path.join('../src/app', env.PACKAGE, '**/index.{ts,js}'),
+        path.join('../src/app', env.PACKAGE || '', '**/index.{ts,js}'),
         // path.join('../src/app', env.PACKAGE, '**/index.{scss,css}'),
-        path.join('!../src/app', env.PACKAGE, 'node_modules/**')
+        path.join('!../src/app', env.PACKAGE || '', 'node_modules/**')
     ];
 
     return {
         entry: () => new Promise((resolve) => resolve(glob.sync(entryGlob).reduce((entrypoint, eachPath) => {
-            const parsePath = path.parse(path.relative(path.join('../src/app', env.PACKAGE), eachPath));
+            const parsePath = path.parse(path.relative(path.join('../src/app', env.PACKAGE || ''), eachPath));
             const filename = path.join(parsePath.dir, parsePath.name);
             entrypoint[filename] = [eachPath];
             return entrypoint;
@@ -37,7 +37,7 @@ module.exports = env => {
                     test: /\.ts$/,
                     loader: 'ts-loader',
                     options: {
-                        configFile: path.resolve('tsconfig.json')
+                        configFile: path.resolve('../', 'tsconfig.app.json')
                     }
                 },
                 {
@@ -86,7 +86,7 @@ module.exports = env => {
         output: {
             libraryTarget: 'umd',
             library: 'Master',
-            path: path.resolve('dist', env.PACKAGE)
+            path: path.resolve('dist', env.PACKAGE || '')
         },
         plugins: [
             new CleanWebpackPlugin(),

@@ -3,7 +3,8 @@
         "start": "npm install && npm run build",
         "build": "webpack",
         "build:ui": "webpack --env PACKAGE=ui",
-        "build:dom": "webpacs --env PACKAGE=dom"
+        "build:dom": "webpack --env PACKAGE=dom",
+        "build:element": "webpack --env PACKAGE=element"
     },
     "devDependencies": {
         "@babel/core": "^7.12.10",

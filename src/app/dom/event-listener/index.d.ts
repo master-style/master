@@ -1,7 +1,6 @@
 
-export { }
-
 declare global {
+
     interface ListenerOptions {
         capture?: boolean;
         once?: boolean;
@@ -10,3 +9,6 @@ declare global {
     }
 
 }
+
+import './off';
+import './on';

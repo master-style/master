@@ -1,6 +1,5 @@
-import camelToKebabCase from '../utils/camel-to-kebab-case';
-
 import { on, off, attr, toggleAttr, css, addClass, rmClass } from '@master/dom';
+import { toggleClass } from '../dom/manipulations';
 
 const readyEvent = new CustomEvent('ready');
 
@@ -23,11 +22,7 @@ export class MasterElement extends HTMLElement {
     static shadow = true;
 
     emit = false;
-
-    constructor() {
-        super();
-    }
-
+    
     on = on;
     off = off;
     attr = attr;
@@ -35,6 +30,7 @@ export class MasterElement extends HTMLElement {
     css = css;
     addClass = addClass;
     rmClass = rmClass;
+    toggleClass = toggleClass;
 
     onConnected() { };
     onDisconnected() { };

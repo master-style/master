@@ -14,7 +14,7 @@ const PX = 'px';
 export class ModalElement extends TargetElement {
     static css = css;
 
-    private trigger: HTMLElement;
+    private trigger: MasterElement;
 
     @Event()
     closedByClickEmitter: EventEmitter;

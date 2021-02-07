@@ -1,3 +1,4 @@
+
 import { $ } from "@master/dom";
 
 export default class Template {

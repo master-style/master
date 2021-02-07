@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "baseUrl": "../",
+        "outDir": "./out-tsc/app",
         "sourceMap": true,
         "declaration": false,
         "downlevelIteration": true,
@@ -8,11 +9,16 @@
         "experimentalDecorators": true,
         "moduleResolution": "node",
         "importHelpers": true,
-        "target": "es2015",
+        "removeComments": true,
+        "target": "es6",
         "module": "es2020",
         "lib": [
-            "es2018",
+            "es2016",
+            "es5",
             "dom"
+        ],
+        "types": [
+            "node"
         ],
         "paths": {
             "@master/template": [
@@ -27,9 +33,13 @@
             "@master/ui": [
                 "../src/app/ui/index.ts"
             ]
-        }
+        },
     },
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts"
+    ],
     "include": [
-        "../src/**/*.ts"
+        "src/**/*.ts"
     ]
 }

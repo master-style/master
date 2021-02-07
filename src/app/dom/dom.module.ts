@@ -8,7 +8,6 @@ import { AttrComponent } from './manipulations/attr/attr.component';
 import { CssComponent } from './manipulations/css/css.component';
 import { OnComponent } from './event-listener/on/on.component';
 import { OffComponent } from './event-listener/off/off.component';
-import { HtmlComponent } from './manipulations/html/html.component';
 
 @NgModule({
     declarations: [
@@ -16,8 +15,7 @@ import { HtmlComponent } from './manipulations/html/html.component';
         AttrComponent,
         CssComponent,
         OnComponent,
-        OffComponent,
-        HtmlComponent
+        OffComponent
     ],
     imports: [
         CommonModule,
