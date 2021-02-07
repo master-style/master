@@ -54,7 +54,7 @@ export class ModalElement extends TargetElement {
         if (this.lightTemplate) this.lightTemplate.render(this);
     }
 
-    removeRender() {
+    onDisconnected() {
         this.template.remove();
     }
 

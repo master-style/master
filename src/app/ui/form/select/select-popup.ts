@@ -177,7 +177,7 @@ export class SelectPopupElement extends PopupElement {
         this.lightTemplate.render(this);
     }
 
-    removeRender() {
+    onDisconnected() {
         this.lightTemplate.remove();
     }
 
