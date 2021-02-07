@@ -1,6 +1,6 @@
-import { Element, TargetElement, Attr } from '../../../element';
+import { Element, TargetElement, Attr } from '@master/element';
 import { createPopper, Placement } from '@popperjs/core';
-import { isInteractOutside } from '../../../utils/is-interact-outside';
+import { isInteractOutside } from '../../utils/is-interact-outside';
 import { Template } from '@master/template';
 
 declare const ResizeObserver: any;

@@ -1,6 +1,5 @@
-import { Attr } from '../attr';
+import { MasterElement, Attr } from '@master/element';
 import { capitalize } from '../../utils/capitalize';
-import { MasterElement } from '../core';
 
 const WHEN_ATTR_OPTIONS = { reflect: false, update: (control: ControlElement) => control.validate() };
 

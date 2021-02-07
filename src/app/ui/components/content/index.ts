@@ -3,7 +3,7 @@ import { Template } from '@master/template';
 import { $ } from '@master/dom';
 import { debounce } from 'lodash-es';
 import css from './content.scss';
-import isNum from '../../../utils/is-num';
+import isNum from '../../utils/is-num';
 
 declare const ResizeObserver: any
 
