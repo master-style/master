@@ -2,6 +2,8 @@ import { Attr } from '../attr';
 import { capitalize } from '../../utils/capitalize';
 import { MasterElement } from '../core';
 
+const WHEN_ATTR_OPTIONS = { reflect: false, update: (control: ControlElement) => control.validate() };
+
 export class ControlElement extends MasterElement {
 
     validity: ValidityState;
@@ -20,34 +22,34 @@ export class ControlElement extends MasterElement {
     @Attr()
     disabled: boolean;
 
-    @Attr({ reflect: false, update: (control: ControlElement) => control.validate() })
+    @Attr(WHEN_ATTR_OPTIONS)
     whenBadInput: string;
 
-    @Attr({ reflect: false, update: (control: ControlElement) => control.validate() })
+    @Attr(WHEN_ATTR_OPTIONS)
     whenCustomError: string;
 
-    @Attr({ reflect: false, update: (control: ControlElement) => control.validate() })
+    @Attr(WHEN_ATTR_OPTIONS)
     whenPatternMismatch: string;
 
-    @Attr({ reflect: false, update: (control: ControlElement) => control.validate() })
+    @Attr(WHEN_ATTR_OPTIONS)
     whenRangeOverflow: string;
 
-    @Attr({ reflect: false, update: (control: ControlElement) => control.validate() })
+    @Attr(WHEN_ATTR_OPTIONS)
     whenRangeUnderflow: string;
 
-    @Attr({ reflect: false, update: (control: ControlElement) => control.validate() })
+    @Attr(WHEN_ATTR_OPTIONS)
     whenStepMismatch: string;
 
-    @Attr({ reflect: false, update: (control: ControlElement) => control.validate() })
+    @Attr(WHEN_ATTR_OPTIONS)
     whenTooLong: string;
 
-    @Attr({ reflect: false, update: (control: ControlElement) => control.validate() })
+    @Attr(WHEN_ATTR_OPTIONS)
     whenTypeMismatch: string;
 
-    @Attr({ reflect: false, update: (control: ControlElement) => control.validate() })
+    @Attr(WHEN_ATTR_OPTIONS)
     whenValueMissing: string;
 
-    @Attr({ reflect: false, update: (control: ControlElement) => control.validate() })
+    @Attr(WHEN_ATTR_OPTIONS)
     whenValid: string;
 
     @Attr({ onRender: (control: ControlElement) => control.validate() })
