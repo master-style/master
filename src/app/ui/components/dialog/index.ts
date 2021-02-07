@@ -1,7 +1,7 @@
 import { Element, Attr, Prop } from '../../../element';
 import { ModalElement } from '../modal';
 import css from './dialog.scss';
-import Template from '@master/template';
+import { Template } from '@master/template';
 
 const NAME = 'dialog';
 const parserObject = (dialog: DialogElement, value, oldValue) => {

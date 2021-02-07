@@ -1,6 +1,6 @@
 import { Element, Attr, Prop, ControlElement, Event } from '../../../element';
 import css from './input.scss';
-import Template from '@master/template';
+import { Template } from '@master/template';
 
 const NAME = 'input';
 const changeEvent = new window.Event('change', { 'bubbles': true, 'cancelable': false });

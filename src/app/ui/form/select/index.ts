@@ -1,6 +1,6 @@
-import { Element, Attr, Event, ControlElement } from '../../../element';
+import { Element, Attr, Event, ControlElement, EventEmitter } from '../../../element';
 import { $ } from '@master/dom';
-import Template from '@master/template';
+import { Template } from '@master/template';
 
 import css from './select.scss';
 import './select-popup';

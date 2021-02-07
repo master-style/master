@@ -1,5 +1,5 @@
 import { Element, Attr, ControlElement } from '../../../element';
-import Template from '@master/template';
+import { Template } from '@master/template';
 
 import css from './textarea.scss';
 

@@ -1,5 +1,5 @@
 import { Element, MasterElement, Attr } from '@master/element';
-import Template from '@master/template';
+import { Template } from '@master/template';
 import css from './skeleton.scss';
 
 const NAME = 'skeleton';

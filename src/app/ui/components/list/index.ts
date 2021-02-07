@@ -1,5 +1,5 @@
 import { Element, MasterElement } from '@master/element';
-import Template from '@master/template';
+import { Template } from '@master/template';
 import css from './list.scss';
 
 const NAME = 'list';

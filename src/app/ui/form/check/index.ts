@@ -1,6 +1,6 @@
 import { Element, Attr, ControlElement } from '../../../element';
 import css from './check.scss';
-import Template from '@master/template';
+import { Template } from '@master/template';
 
 const connectedChecks = new Set();
 

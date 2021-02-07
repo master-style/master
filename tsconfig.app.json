@@ -3,7 +3,10 @@
     "extends": "./tsconfig.json",
     "compilerOptions": {
         "outDir": "./out-tsc/app",
-        "emitDecoratorMetadata": true
+        "emitDecoratorMetadata": true,
+        "typeRoots": [
+            "./node_modules/@master"
+        ]
     },
     "files": [
         "src/main.ts",

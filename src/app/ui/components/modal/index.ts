@@ -1,8 +1,8 @@
-import { Element, MasterElement, Attr, TargetElement, attrEnabled, Event } from '@master/element';
+import { Element, MasterElement, Attr, TargetElement, attrEnabled, Event, EventEmitter } from '@master/element';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { ContentElement } from '../content';
 import { HeaderElement } from '../header';
-import Template from '@master/template';
+import { Template } from '@master/template';
 
 import css from './modal.scss';
 

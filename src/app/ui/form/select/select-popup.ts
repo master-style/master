@@ -1,6 +1,6 @@
 import { Element, Attr } from '../../../element';
 import { OptionElement } from '../option';
-import Template from '@master/template';
+import { Template, TemplateNode } from '@master/template';
 
 import css from './select-popup.scss';
 

@@ -1,5 +1,5 @@
-import { Element, MasterElement, Attr, Event, TargetElement } from '@master/element';
-import Template from '@master/template';
+import { Element, MasterElement, Attr, Event, TargetElement, EventEmitter } from '@master/element';
+import { Template } from '@master/template';
 import { $ } from '@master/dom';
 import { debounce } from 'lodash-es';
 import css from './content.scss';

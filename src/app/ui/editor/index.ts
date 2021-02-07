@@ -1,7 +1,7 @@
 import { Element, MasterElement, Attr, Prop } from '@master/element';
 
 import css from './editor.scss';
-import Template from '@master/template';
+import { Template } from '@master/template';
 
 const defaultParagraphSeparatorString = 'defaultParagraphSeparator'
 const formatBlock = 'formatBlock'

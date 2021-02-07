@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import Template from '@master/template';
+import { Template } from '@master/template';
 
 @Component({
     selector: 'doc-template',

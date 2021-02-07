@@ -4,6 +4,13 @@ const DEFAULT_ATTR_OPTION = {
     render: true
 };
 
+export interface PropertyOptions {
+    render?: boolean;
+    type?: string;
+    update?: (element: any, value: any, oldValue?: any) => void;
+    parse?: (element: any, value: any, oldValue?: any) => any;
+}
+
 export function Prop(options?: PropertyOptions) {
     options = { ...DEFAULT_ATTR_OPTION, ...options };
     return (target, key: string): any => {

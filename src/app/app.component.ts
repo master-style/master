@@ -7,8 +7,6 @@ import { throttle } from 'lodash-es';
 import { NavigationStart, NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { $ } from '@master/dom';
 
-console.log($)
-
 @Component({
     selector: 'doc-root',
     templateUrl: './app.component.html',
