@@ -12,11 +12,11 @@ let uid = 0;
 
 const NAME = 'select';
 
-@Element({
-    tag: 'm-' + NAME,
-    css
-})
+
+@Element('m-' + NAME)
 export class SelectElement extends ControlElement {
+
+    static css = css;
 
     controlTemplate = new Template(() => [
         'input', {

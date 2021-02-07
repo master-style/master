@@ -4,11 +4,10 @@ import css from './overlay.scss';
 
 const NAME = 'overlay';
 
-@Element({
-    tag: 'm-' + NAME,
-    css
-})
+@Element('m-' + NAME)
 export class SkeletonOverlay extends MasterElement {
+    static css = css;
+    
     template = new Template(() => ['slot']);
 
     render() {

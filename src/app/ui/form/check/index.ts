@@ -8,11 +8,11 @@ const nameMap = {};
 
 const NAME = 'check';
 
-@Element({
-    tag: 'm-' + NAME,
-    css
-})
+
+@Element('m-' + NAME)
 export class CheckElement extends ControlElement {
+
+    static css = css;
 
     controlTemplate = new Template(() => [
         'input', {

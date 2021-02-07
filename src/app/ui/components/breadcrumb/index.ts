@@ -3,11 +3,10 @@ import css from './breadcrumb.scss';
 
 const NAME = 'breadcrumb';
 
-@Element({
-    tag: 'm-' + NAME,
-    css
-})
+
+@Element('m-' + NAME)
 export class BreadcrumbElement extends ClickableElement {
+    static css = css;
 
     slotTemplate = [
         'slot', { name: 'head' },

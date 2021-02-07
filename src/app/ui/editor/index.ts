@@ -12,11 +12,11 @@ export const exec = (command, value = null) => document.execCommand(command, fal
 
 const NAME = 'editor';
 
-@Element({
-    tag: 'm-' + NAME,
-    css
-})
+
+@Element('m-' + NAME)
 export class EditorElement extends MasterElement {
+
+    static css = css;
 
     @Prop()
     private view;

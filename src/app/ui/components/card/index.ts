@@ -3,8 +3,7 @@ import css from './card.scss';
 
 const NAME = 'card';
 
-@Element({
-    tag: 'm-' + NAME,
-    css
-})
-export class CardElement extends ClickableElement {}
+@Element('m-' + NAME)
+export class CardElement extends ClickableElement {
+    static css = css;
+}

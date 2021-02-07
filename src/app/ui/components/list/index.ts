@@ -4,11 +4,11 @@ import css from './list.scss';
 
 const NAME = 'list';
 
-@Element({
-    tag: 'm-' + NAME,
-    css
-})
+
+@Element('m-' + NAME)
 export class ListElement extends MasterElement {
+    static css = css;
+    
     template = new Template(() => [
         'slot'
     ]);

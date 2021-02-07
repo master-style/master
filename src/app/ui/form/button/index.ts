@@ -3,11 +3,10 @@ import css from './button.scss';
 
 const NAME = 'button';
 
-@Element({
-    tag: 'm-' + NAME,
-    css
-})
+@Element('m-' + NAME)
 export class ButtonElement extends ClickableElement {
+
+    static css = css;
 
     _type: string = 'button';
 }

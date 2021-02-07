@@ -12,12 +12,10 @@ import { $ } from '@master/dom';
 const $body = $(document.body);
 const NAME = 'popup';
 
-@Element({
-    tag: 'm-' + NAME,
-    css
-})
-export class PopupElement extends TargetElement {
 
+@Element('m-' + NAME)
+export class PopupElement extends TargetElement {
+    static css = css;
     /**
      * default
      */

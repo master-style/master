@@ -4,11 +4,10 @@ import css from './skeleton.scss';
 
 const NAME = 'skeleton';
 
-@Element({
-    tag: 'm-' + NAME,
-    css
-})
+
+@Element('m-' + NAME)
 export class SkeletonElement extends MasterElement {
+    static css = css;
 
     template = new Template(() => {
         this.css('width', this.width);

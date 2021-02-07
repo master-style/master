@@ -5,11 +5,9 @@ import css from './footer.scss';
 
 const NAME = 'footer';
 
-@Element({
-    tag: 'm-' + NAME,
-    css
-})
+@Element('m-' + NAME)
 export class FooterElement extends MasterElement {
+    static css = css;
 
     template: Template = new Template(() => [
         'div', { part: 'root' }, [

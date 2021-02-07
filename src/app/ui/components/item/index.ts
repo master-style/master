@@ -3,11 +3,10 @@ import css from './item.scss';
 
 const NAME = 'item';
 
-@Element({
-    tag: 'm-' + NAME,
-    css
-})
+
+@Element('m-' + NAME)
 export class ItemElement extends ClickableElement {
+    static css = css;
 
     slotTemplate = [
         'slot', { name: 'head' },

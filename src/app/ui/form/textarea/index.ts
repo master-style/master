@@ -5,11 +5,9 @@ import css from './textarea.scss';
 
 const NAME = 'textarea';
 
-@Element({
-    tag: 'm-' + NAME,
-    css
-})
+@Element('m-' + NAME)
 export class TextareaElement extends ControlElement {
+    static css = css;
 
     controlTemplate = new Template(() => [
         'textarea', {

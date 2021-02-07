@@ -14,11 +14,9 @@ const ICON = {
     unfold: '<path d="M4.847,5.874a1.089,1.089,0,0,0,1.445,0L10.772,1.9A1.086,1.086,0,0,0,10.049,0H1.09A1.086,1.086,0,0,0,.367,1.9Z" transform="translate(6.518 14.609)"/><path d="M4.847,5.874a1.089,1.089,0,0,0,1.445,0L10.772,1.9A1.086,1.086,0,0,0,10.049,0H1.09A1.086,1.086,0,0,0,.367,1.9Z" transform="translate(17.657 9.648) rotate(180)"/>'
 };
 
-@Element({
-    tag: 'm-' + NAME,
-    css
-})
+@Element('m-' + NAME)
 export class IconElement extends MasterElement {
+    static css = css;
 
     template = new Template(() => [
         'div', { part: 'root' }, [

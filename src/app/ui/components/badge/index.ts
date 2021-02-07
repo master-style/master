@@ -4,11 +4,10 @@ import css from './badge.scss';
 
 const NAME = 'badge';
 
-@Element({
-    tag: 'm-' + NAME,
-    css
-})
+@Element('m-' + NAME)
 export class BadgeElement extends MasterElement {
+    static css = css;
+
     template = new Template(() => [
         'slot'
     ]);

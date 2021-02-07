@@ -5,11 +5,11 @@ import Template from '@master/template';
 const NAME = 'input';
 const changeEvent = new window.Event('change', { 'bubbles': true, 'cancelable': false });
 
-@Element({
-    tag: 'm-' + NAME,
-    css
-})
+
+@Element('m-' + NAME)
 export class InputElement extends ControlElement {
+
+    static css = css;
 
     controlTemplate = new Template(() => [
         'input', {

@@ -9,11 +9,10 @@ import css from './modal.scss';
 const NAME = 'modal';
 const PX = 'px';
 
-@Element({
-    tag: 'm-' + NAME,
-    css
-})
+
+@Element('m-' + NAME)
 export class ModalElement extends TargetElement {
+    static css = css;
 
     private trigger: HTMLElement;
 

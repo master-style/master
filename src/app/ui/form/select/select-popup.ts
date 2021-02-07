@@ -12,11 +12,10 @@ import { PopupElement } from '../../components';
 
 const NAME = 'select-popup';
 
-@Element({
-    tag: 'm-' + NAME,
-    css
-})
+@Element('m-' + NAME)
 export class SelectPopupElement extends PopupElement {
+
+    static css = css;
 
     _duration = 300;
     _triggerEvent = null;

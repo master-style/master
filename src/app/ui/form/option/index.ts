@@ -28,11 +28,10 @@ const updateSelected = (option: OptionElement, selected: boolean) => {
     select.updating = false;
 };
 
-@Element({
-    tag: 'm-' + NAME,
-    css
-})
+@Element('m-' + NAME)
 export class OptionElement extends MasterElement {
+
+    static css = css;
 
     updating: boolean;
 

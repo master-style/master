@@ -17,11 +17,10 @@ enum TYPE_ICON {
     error = 'cross'
 }
 
-@Element({
-    tag: 'm-' + NAME,
-    css
-})
+
+@Element('m-' + NAME)
 export class DialogElement extends ModalElement {
+    static css = css;
 
     lightTemplate = new Template(() => [
         'div', {

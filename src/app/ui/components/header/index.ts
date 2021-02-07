@@ -5,11 +5,10 @@ import css from './header.scss';
 
 const NAME = 'header';
 
-@Element({
-    tag: 'm-' + NAME,
-    css
-})
+
+@Element('m-' + NAME)
 export class HeaderElement extends MasterElement {
+    static css = css;
 
     template: Template = new Template(() => [
         'div', { part: 'root' }, [
