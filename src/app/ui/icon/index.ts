@@ -1,6 +1,6 @@
 import { Element, MasterElement, Attr } from '@master/element';
-import css from './icon.scss';
 import Template from '@master/template';
+import css from './icon.scss';
 
 const NAME = 'icon';
 const ICON = {
