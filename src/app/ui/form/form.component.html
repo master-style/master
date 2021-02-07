@@ -15,7 +15,7 @@
                           placeholder="search ..."
                           [(ngModel)]="cities"
                           class="underlined">
-                    <m-option *ngFor="let city of ['taichung', 'kaosiung', 'taipei', 'hualien', 'taoyuan']"
+                    <m-option *ngFor="let city of optionalCities"
                               [value]="city">
                         <span slot="head">🍉</span>{{city}}
                     </m-option>
@@ -24,6 +24,7 @@
                         <span slot="head">🍉</span>{{option}}
                     </m-option>
                 </m-select>
+                {{ cities | json }}
             </div>
             <div class="x:6">
                 <m-select name="city-multiple"

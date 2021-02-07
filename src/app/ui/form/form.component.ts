@@ -17,12 +17,18 @@ export class FormComponent implements OnInit {
 
     cityEntities = { id: 'taipei' }
 
+    optionalCities;
+
     ngOnInit(): void {
         let i = 0;
         this.timer = setInterval(() => {
             if (i > 5) return;
             i++;
             this.options.unshift(new Date().getTime());
+        }, 1000);
+
+        setTimeout(() => {
+            this.optionalCities = ['taichung', 'kaosiung', 'taipei', 'hualien', 'taoyuan']
         }, 1000);
     }
 
