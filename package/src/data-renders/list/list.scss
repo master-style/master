@@ -1,0 +1,38 @@
+@import '../../variables';
+
+:host {
+    contain: style;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.dark {
+    m-list {
+        [is=m-check]~i {
+            --checked: #fff;
+        }
+    }
+}
+
+::slotted(header) {
+    font-size: var(--f-md);
+    color: var(--f-theme);
+    line-height: 100%;
+    font-weight: 500;
+    padding: $md 1rem $sm 1rem;
+}
+
+::slotted(label) {
+    line-height: 100%;
+    font-weight: 500;
+    padding: $md 1rem $sm 1rem;
+    font-size: var(--f-xxs);
+    color: var(--f-fader);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+::slotted(label:first-child) {
+    padding-top: $sm;
+}

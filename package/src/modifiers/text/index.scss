@@ -1,0 +1,195 @@
+@import '../../variables.scss';
+@import '../../mixins.scss';
+
+.t\:hide {
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+}
+
+// decoration
+.t\:deleted {
+    text-decoration: line-through !important;
+}
+
+.t\:underline {
+    text-decoration: underline !important;
+}
+
+.t-decoration\:no {
+    text-decoration: none !important;
+}
+
+// transform
+.t\:lowercase {
+    text-transform: lowercase !important;
+}
+
+.t\:uppercase {
+    text-transform: uppercase !important;
+}
+
+.t\:capitalize {
+    text-transform: capitalize !important;
+}
+
+// text line
+[class*="t-line\:"] {
+    overflow: hidden;
+    display: -webkit-box;
+    max-width: 100%;
+    word-wrap: normal;
+    text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+}
+
+.t-line\:1 {
+    -webkit-line-clamp: 1 !important;
+}
+
+.t-line\:2 {
+    -webkit-line-clamp: 2 !important;
+}
+
+.t-line\:3 {
+    -webkit-line-clamp: 3 !important;
+}
+
+.t-line\:4 {
+    -webkit-line-clamp: 4 !important;
+}
+
+.t-wrap {
+    white-space: preWrap !important;
+}
+
+.t-wrap\:no {
+    white-space: nowrap !important;
+}
+
+// alignment
+.t\:justify {
+    text-align: justify !important;
+    text-justify: inter-ideograph !important;
+    text-align-last: justify !important;
+}
+
+.t\:left {
+    text-align: left !important;
+    text-align-last: left !important;
+}
+
+.t\:right {
+    text-align: right !important;
+    text-align-last: right !important;
+}
+
+.t\:center {
+    text-align: center !important;
+    text-align-last: center !important;
+}
+
+// size
+.t\:xxs {
+    font-size: var(--f-xxs) !important;
+    line-height: 1.15;
+}
+
+.t\:xs {
+    font-size: var(--f-xs) !important;
+    line-height: 1.15;
+}
+
+.t\:sm {
+    font-size: var(--f-sm) !important;
+    line-height: 1.15;
+}
+
+.t\:md {
+    font-size: var(--f-md) !important;
+    line-height: 1.3;
+}
+
+.t\:lg {
+    font-size: var(--f-lg) !important;
+    line-height: 1.15;
+}
+
+.t\:xl {
+    font-size: var(--f-xl) !important;
+    line-height: 1.2;
+}
+
+.t\:xxl {
+    font-size: var(--f-xxl) !important;
+    line-height: 1.15;
+}
+
+@include above(sm) {
+    .t\:left\@sm {
+        text-align: left !important;
+        text-align-last: left !important;
+    }
+
+    .t\:right\@sm {
+        text-align: right !important;
+        text-align-last: right !important;
+    }
+
+    .t\:center\@sm {
+        text-align: center !important;
+        text-align-last: center !important;
+    }
+}
+
+@include above(md) {
+    .t\:left\@md {
+        text-align: left !important;
+        text-align-last: left !important;
+    }
+
+    .t\:right\@md {
+        text-align: right !important;
+        text-align-last: right !important;
+    }
+
+    .t\:center\@md {
+        text-align: center !important;
+        text-align-last: center !important;
+    }
+}
+
+@include above(lg) {
+    .t\:left\@lg {
+        text-align: left !important;
+        text-align-last: left !important;
+    }
+
+    .t\:right\@lg {
+        text-align: right !important;
+        text-align-last: right !important;
+    }
+
+    .t\:center\@lg {
+        text-align: center !important;
+        text-align-last: center !important;
+    }
+}
+
+@include above(xl) {
+    .t\:left\@xl {
+        text-align: left !important;
+        text-align-last: left !important;
+    }
+
+    .t\:right\@xl {
+        text-align: right !important;
+        text-align-last: right !important;
+    }
+
+    .t\:center\@xl {
+        text-align: center !important;
+        text-align-last: center !important;
+    }
+}

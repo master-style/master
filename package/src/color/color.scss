@@ -1,0 +1,188 @@
+:host(.blue) {
+    --bg-color: var(--blue);
+    --bg-color-hover: var(--f-blue);
+}
+
+:host(.blue.outlined) {
+    --f-theme: var(--f-blue);
+    --bg-color-head: var(--blue-fader);
+    --bg-color-hover: var(--blue-fader);
+    --b-color: var(--blue);
+    --b-color-active: var(--blue);
+}
+
+:host(.blue\+) {
+    --bg-color-head: var(--blue-fade);
+    --bg-color: var(--blue-fader);
+    --bg-color-hover: var(--blue-fade);
+    --f-theme: var(--f-blue);
+}
+
+:host(.blue\+.outlined) {
+    --bg-color-head: var(--blue-fader);
+    --bg-color-hover: var(--blue-fader);
+    --b-color: var(--b-fader);
+    --b-color-active: var(--blue-fade);
+}
+
+:host(.green) {
+    --bg-color: var(--green);
+    --bg-color-hover: var(--f-green);
+}
+
+:host(.green.outlined) {
+    --f-theme: var(--f-green);
+    --bg-color-head: var(--green-fader);
+    --bg-color-hover: var(--green-fader);
+    --b-color: var(--green);
+    --b-color-active: var(--green);
+}
+
+:host(.green\+) {
+    --bg-color-head: var(--green-fade);
+    --bg-color: var(--green-fader);
+    --bg-color-hover: var(--green-fade);
+    --f-theme: var(--f-green);
+}
+
+:host(.green\+.outlined) {
+    --bg-color-head: var(--green-fader);
+    --bg-color-hover: var(--green-fader);
+    --b-color: var(--b-fader);
+    --b-color-active: var(--green-fade);
+}
+
+:host(.red) {
+    --bg-color: var(--red);
+    --bg-color-hover: var(--f-red);
+}
+
+:host(.red.outlined) {
+    --f-theme: var(--f-red);
+    --bg-color-head: var(--red-fader);
+    --bg-color-hover: var(--red-fader);
+    --b-color: var(--red);
+    --b-color-active: var(--red);
+}
+
+:host(.red\+) {
+    --bg-color-head: var(--red-fade);
+    --bg-color: var(--red-fader);
+    --bg-color-hover: var(--red-fade);
+    --f-theme: var(--f-red);
+}
+
+:host(.red\+.outlined) {
+    --bg-color-head: var(--red-fader);
+    --bg-color-hover: var(--red-fader);
+    --b-color: var(--b-fader);
+    --b-color-active: var(--red-fade);
+}
+
+
+:host(.purple) {
+    --bg-color: var(--purple);
+    --bg-color-hover: var(--f-purple);
+}
+
+:host(.purple.outlined) {
+    --f-theme: var(--f-purple);
+    --bg-color-head: var(--purple-fader);
+    --bg-color-hover: var(--purple-fader);
+    --b-color: var(--purple);
+    --b-color-active: var(--purple);
+}
+
+:host(.purple\+) {
+    --bg-color-head: var(--purple-fade);
+    --bg-color: var(--purple-fader);
+    --bg-color-hover: var(--purple-fade);
+    --f-theme: var(--f-purple);
+}
+
+:host(.purple\+.outlined) {
+    --bg-color-head: var(--purple-fader);
+    --bg-color-hover: var(--purple-fader);
+    --b-color: var(--b-fader);
+    --b-color-active: var(--purple-fade);
+}
+
+:host(.yellow) {
+    --bg-color: var(--yellow);
+    --bg-color-hover: var(--f-yellow);
+}
+
+:host(.yellow.outlined) {
+    --f-theme: var(--f-yellow);
+    --bg-color-head: var(--yellow-fader);
+    --bg-color-hover: var(--yellow-fader);
+    --b-color: var(--yellow);
+    --b-color-active: var(--yellow);
+}
+
+:host(.yellow\+) {
+    --bg-color-head: var(--yellow-fade);
+    --bg-color: var(--yellow-fader);
+    --bg-color-hover: var(--yellow-fade);
+    --f-theme: var(--f-yellow);
+}
+
+:host(.yellow\+.outlined) {
+    --bg-color-head: var(--yellow-fader);
+    --bg-color-hover: var(--yellow-fader);
+    --b-color: var(--b-fader);
+    --b-color-active: var(--yellow-fade);
+}
+
+:host(.object) {
+    --bg-color: var(--bg-object);
+    --bg-color-head: var(--theme-fade);
+    --bg-color-hover: var(--theme-fade);
+    --blur: 35px;
+}
+
+:host(.object.outlined) {
+    --bg-color-hover: var(--theme-fader);
+    --b-color: var(--b-fader);
+    --b-color-active: var(--b-fade);
+}
+
+:host(.theme) {
+    --bg-color: var(--theme);
+    --bg-color-head: var(--theme-fade);
+    --bg-color-hover: var(--theme-fade);
+}
+
+:host(.theme.outlined) {
+    --bg-color-hover: var(--theme-fader);
+    --b-color: var(--b-fader);
+    --b-color-active: var(--b-fade);
+}
+
+:host(.theme\+) {
+    --bg-color-head: var(--theme);
+    --bg-color: var(--theme-fade);
+    --bg-color-hover: var(--theme-fader);
+}
+
+:host(.theme\+.outlined) {
+    --bg-color-head: var(--theme-fader);
+    --bg-color-hover: var(--theme-fade);
+    --b-color: var(--b-fader);
+    --b-color-active: var(--b-fade);
+}
+
+:host(.brand),
+:host(.blue),
+:host(.red),
+:host(.green),
+:host(.purple),
+:host(.yellow) {
+    --bg-color-head: rgba(0, 0, 0, .1);
+    --f-theme: #fff;
+}
+
+:host([disabled]) {
+    --bg-color: transparent;
+    --b-color: transparent;
+}

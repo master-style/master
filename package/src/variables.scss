@@ -1,0 +1,18 @@
+
+@import './breakpoint/variable';
+@import './modifiers/shadow/variable';
+@import './modifiers/z-index/variable';
+
+$blue: #377dff;
+$red: rgb(245, 80, 120);
+$green: rgb(55, 185, 100);
+$yellow:rgb(255, 170, 50);
+$purple: rgb(130, 130, 255);
+
+$xxs: 0.125rem; // 2px
+$xs: 0.3125rem; // 5px
+$sm: 0.625rem; // 10px
+$md: 1.25rem; // 20px
+$lg: 1.875rem; // 30px
+$xl: 3.125rem; // 50px
+$xxl: 6.25rem; // 100px

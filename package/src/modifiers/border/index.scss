@@ -1,0 +1,98 @@
+// border
+.b\:no {
+    border: 0 !important;
+}
+
+.b\:dashed {
+    border-width: 0;
+    border-style: dashed !important;
+}
+
+.b {
+    border: 1px solid var(--b-fadest);
+}
+
+.bt {
+    border-top: 1px solid var(--b-fadest);
+}
+
+.bb {
+    border-bottom: 1px solid var(--b-fadest);
+}
+
+.by {
+    border-top: 1px solid var(--b-fadest);
+    border-bottom: 1px solid var(--b-fadest);
+}
+
+.bx {
+    border-left: 1px solid var(--b-fadest);
+    border-right: 1px solid var(--b-fadest);
+}
+
+.bl {
+    border-left: 1px solid var(--b-fadest);
+}
+
+.br {
+    border-right: 1px solid var(--b-fadest);
+}
+
+
+.bt\:no {
+    border-top: 0 !important;
+}
+
+.bb\:no {
+    border-bottom: 0 !important;
+}
+
+.bl\:no {
+    border-left: 0 !important;
+}
+
+.br\:no {
+    border-right: 0 !important;
+}
+
+.b\:transparent {
+    border-color: transparent !important;
+}
+
+.b\:1 {
+    border-width: 1px !important;
+}
+
+.b\:2 {
+    border-width: 2px !important;
+}
+
+.b\:3 {
+    border-width: 3px !important;
+}
+
+.b\:4 {
+    border-width: 4px !important;
+}
+
+.b\:5 {
+    border-width: 5px !important;
+}
+
+.b\:fade {
+    border-color: var(--b-fade) !important;
+}
+
+.b\:fade\+ {
+    border-color: var(--b-fader) !important;
+}
+
+.b\:fade\+\+ {
+    border-color: var(--b-fadest) !important;
+}
+
+// .outlined,
+// .underlined {
+//     --b-width: 1px;
+//     backdrop-filter: none;
+// }

@@ -1,0 +1,131 @@
+@import '../variables.scss';
+@import '../mixins.scss';
+
+@import './alignment';
+@import './area';
+@import './background';
+@import './border';
+@import './display';
+@import './font';
+@import './hover';
+@import './position';
+@import './radius';
+@import './scale';
+@import './shadow';
+@import './text';
+@import './visibility';
+@import './wrap';
+@import './z-index';
+
+$spacings: (xxs: $xxs,
+    xs: $xs,
+    sm: $sm,
+    md: $md,
+    lg: $lg,
+    xl: $xl,
+    xxl: $xxl,
+    no: 0);
+
+@each $breakpoint in map-keys($breakpoints) {
+    @include above($breakpoint) {
+        $infix: breakpoint-suffix($breakpoint, $breakpoints);
+
+        @each $prop,
+        $abbrev in (margin: m, padding: p) {
+
+            @each $size,
+            $length in $spacings {
+
+                @if $size==md {
+                    $size: ''
+                }
+
+                @else {
+                    $size: #{\:}+$size
+                }
+
+                .#{$abbrev}#{$size}#{$infix} {
+                    #{$prop}: $length !important;
+                }
+
+                .#{$abbrev}t#{$size}#{$infix},
+                .#{$abbrev}y#{$size}#{$infix} {
+                    #{$prop}-top: $length !important;
+                }
+
+                .#{$abbrev}r#{$size}#{$infix},
+                .#{$abbrev}x#{$size}#{$infix} {
+                    #{$prop}-right: $length !important;
+                }
+
+                .#{$abbrev}b#{$size}#{$infix},
+                .#{$abbrev}y#{$size}#{$infix} {
+                    #{$prop}-bottom: $length !important;
+                }
+
+                .#{$abbrev}l#{$size}#{$infix},
+                .#{$abbrev}x#{$size}#{$infix} {
+                    #{$prop}-left: $length !important;
+                }
+            }
+        }
+
+        @each $size,
+        $length in $spacings {
+
+            @if $size !=no {
+
+                $size: #{\:-}+$size;
+
+                .m#{$size}#{$infix} {
+                    margin: -$length !important;
+                }
+
+                .mt#{$size}#{$infix},
+                .my#{$size}#{$infix} {
+                    margin-top: -$length !important;
+                }
+
+                .mr#{$size}#{$infix},
+                .mx#{$size}#{$infix} {
+                    margin-right: -$length !important;
+                }
+
+                .mb#{$size}#{$infix},
+                .my#{$size}#{$infix} {
+                    margin-bottom: -$length !important;
+                }
+
+                .ml#{$size}#{$infix},
+                .mx#{$size}#{$infix} {
+                    margin-left: -$length !important;
+                }
+            }
+        }
+
+        // Some special margin utils
+        .m\:auto#{$infix} {
+            margin: auto !important;
+        }
+
+        .mt\:auto#{$infix},
+        .my\:auto#{$infix} {
+            margin-top: auto !important;
+        }
+
+        .mr\:auto#{$infix},
+        .mx\:auto#{$infix} {
+            margin-right: auto !important;
+        }
+
+        .mb\:auto#{$infix},
+        .my\:auto#{$infix} {
+            margin-bottom: auto !important;
+        }
+
+        .ml\:auto#{$infix},
+        .mx\:auto#{$infix} {
+            margin-left: auto !important;
+        }
+    }
+}

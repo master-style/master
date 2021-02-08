@@ -1,0 +1,47 @@
+:root {
+    --wrap-xxs: 400px;
+    --wrap-xs: 700px;
+    --wrap-sm: 840px;
+    --wrap-md: 1024px;
+    --wrap-lg: 1140px;
+    --wrap-xl: 1280px;
+    --wrap-xxl: 1440px;
+}
+
+.wrap\:xxl {
+    max-width: var(--wrap-xxl) !important;
+}
+
+.wrap\:xl {
+    max-width: var(--wrap-xl) !important;
+}
+
+.wrap\:lg {
+    max-width: var(--wrap-lg) !important;
+}
+
+.wrap {
+    max-width: var(--wrap-md) !important;
+}
+
+.wrap\:sm {
+    max-width: var(--wrap-sm) !important;
+}
+
+.wrap\:xs {
+    max-width: var(--wrap-xs) !important;
+}
+
+.wrap\:xxs {
+    max-width: var(--wrap-xxs) !important;
+}
+
+.wrap,
+[class^="wrap\:"],
+[class*=" wrap\:"] {
+    contain: style;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    // @include clearfix();
+}

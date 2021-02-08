@@ -1,0 +1,71 @@
+@import '../../variables.scss';
+
+[class^="r\:"],
+[class*=" r\:"] {
+
+    /* for IOS safari */
+    @supports (-webkit-overflow-scrolling: touch) {
+        mask-image: radial-gradient(circle, black, black);
+        -webkit-mask-image: -webkit-radial-gradient(circle, black, black);
+    }
+}
+
+.rounded {
+    border-radius: 10000000000000000000rem !important;
+}
+
+.round {
+    border-radius: 50% !important;
+}
+
+.r\:no {
+    border-radius: 0 !important;
+}
+
+.r\:xxs {
+    border-radius: $xxs !important;
+}
+
+.r\:xs {
+    border-radius: $xs !important;
+}
+
+.r\:sm {
+    border-radius: $sm !important;
+}
+
+.r {
+    border-radius: $md !important;
+}
+
+.r\:lg {
+    border-radius: $lg !important;
+}
+
+.r\:xl {
+    border-radius: $xl !important;
+}
+
+.r\:xxl {
+    border-radius: $xxl !important;
+}
+
+.rt\:no {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+
+.rb\:no {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.rl\:no {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+.rr\:no {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}

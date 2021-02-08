@@ -1,0 +1,5 @@
+@mixin sticky($property) {
+    position: sticky#{$property};
+    position: -webkit-sticky#{$property};
+    z-index: $z-sticky;
+}

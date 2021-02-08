@@ -1,0 +1,37 @@
+figure.embedded {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    margin: 0;
+    background-color: rgba(var(--bg-skeleton-rgb), .05);
+    contain: content;
+
+    &:after {
+        contain: strict;
+        content: '';
+        display: inline-table;
+        vertical-align: middle; // fix pixel error problem
+        padding-bottom: 56.25%;
+    }
+
+    >img,
+    >video,
+    >iframe {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        left: 0;
+        top: 0;
+        border: 0;
+    }
+
+    >figcaption {
+        font-size: var(--f-xs);
+        color: var(--f-theme);
+        text-align: center;
+        font-style: italic;
+    }
+}

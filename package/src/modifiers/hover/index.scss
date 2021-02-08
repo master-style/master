@@ -1,0 +1,242 @@
+[class*="\@hover"] {
+    transform: translateZ(0);
+    transition-delay: 50ms; // improve interactions performance and experience
+    transition-duration: 0.5s;
+    transition-timing-function: ease;
+    transition-property: none;
+}
+
+.\@hover {
+    &:hover {
+
+        // overlay
+        &.show\@hover,
+        .show\@hover {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        // float
+        &.float\@hover,
+        .float\@hover {
+            transform: translate(0px, -3px);
+        }
+
+        // zoom
+        &.zoom\@hover,
+        .zoom\@hover {
+            transform: scale(1.1, 1.1);
+        }
+
+        &.blur\@hover,
+        .blur\@hover {
+            filter: blur(3px);
+        }
+
+        // shadow
+        &.shadow\@hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05), 0 3px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        // flip X
+        .flip\@hover {
+            opacity: 0;
+            transform: rotateY(180deg);
+
+            +.flip\@hover {
+                opacity: 1 !important;
+                transform: rotateY(0deg);
+            }
+        }
+
+        // flip Y
+        .flip\@hover.vertical {
+            transform: rotateX(180deg);
+
+            +.flip\@hover {
+                transform: rotateX(0deg);
+            }
+        }
+    }
+}
+
+.flip\@hover {
+
+    // flip X
+    .flip\@hover {
+        opacity: 0;
+        transform: rotateY(180deg);
+
+        +.flip\@hover {
+            opacity: 1 !important;
+            transform: rotateY(0deg);
+        }
+    }
+
+    // flip Y
+    .flip\@hover.vertical {
+        transform: rotateX(180deg);
+
+        +.flip {
+            transform: rotateX(0deg);
+        }
+    }
+}
+
+.show\@hover {
+    opacity: 0;
+    pointer-events: none;
+    will-change: opacity;
+    transition-property: opacity;
+}
+
+.float\@hover,
+.zoom\@hover {
+    will-change: transform;
+    transition-property: transform;
+}
+
+.shadow\@hover {
+    will-change: box-shadow;
+    transition-property: box-shadow; // cubic-bezier(.25, .8, .25, 1)
+}
+
+.blur\@hover {
+    will-change: filter;
+    transition-property: filter;
+}
+
+.flip\@hover {
+    display: block;
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition-property: transform, opacity;
+    pointer-events: none;
+
+    &.vertical {
+        transform: rotateX(-180deg);
+    }
+
+    +.flip\@hover {
+        position: absolute;
+        opacity: 0;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        pointer-events: auto;
+        transform: rotateY(-180deg);
+    }
+}
+
+.light\@hover {
+    &:not([disabled]):hover {
+        background-color: var(--theme) !important;
+    }
+}
+
+.light\+\@hover {
+    &:not([disabled]):hover {
+        background-color: var(--theme-fade) !important;
+    }
+}
+
+.light\+\+\@hover {
+    &:not([disabled]):hover {
+        background-color: var(--theme-fader) !important;
+    }
+}
+
+.blue\@hover {
+    &:not([disabled]):hover {
+        background-color: var(--blue) !important;
+        color: #fff !important;
+    }
+}
+
+.blue\+\@hover {
+    &:not([disabled]):hover {
+        background-color: var(--blue-fade) !important;
+    }
+}
+
+.blue\+\+\@hover {
+    &:not([disabled]):hover {
+        background-color: var(--blue-fader) !important;
+    }
+}
+
+.red\@hover {
+    &:not([disabled]):hover {
+        background-color: var(--red) !important;
+        color: #fff !important;
+    }
+}
+
+.red\+\@hover {
+    &:not([disabled]):hover {
+        background-color: var(--red-fade) !important;
+    }
+}
+
+.red\+\+\@hover {
+    &:not([disabled]):hover {
+        background-color: var(--red-fader) !important;
+    }
+}
+
+.green\@hover {
+    &:not([disabled]):hover {
+        background-color: var(--green) !important;
+        color: #fff !important;
+    }
+}
+
+.green\+\@hover {
+    &:not([disabled]):hover {
+        background-color: var(--green-fade) !important;
+    }
+}
+
+.green\+\+\@hover {
+    &:not([disabled]):hover {
+        background-color: var(--green-fader) !important;
+    }
+}
+
+.purple\@hover {
+    &:not([disabled]):hover {
+        background-color: var(--purple) !important;
+        color: #fff !important;
+    }
+}
+
+.purple\+\@hover {
+    &:not([disabled]):hover {
+        background-color: var(--purple-fade) !important;
+    }
+}
+
+.purple\+\+\@hover {
+    &:not([disabled]):hover {
+        background-color: var(--purple-fader) !important;
+    }
+}
+
+.yellow\@hover {
+    &:not([disabled]):hover {
+        background-color: var(--yellow) !important;
+        color: #fff !important;
+    }
+}
+
+.yellow\+\@hover {
+    &:not([disabled]):hover {
+        background-color: var(--yellow-fade) !important;
+    }
+}
+
+.yellow\+\+\@hover {
+    &:not([disabled]):hover {
+        background-color: var(--yellow-fader) !important;
+    }
+}

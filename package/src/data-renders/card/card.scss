@@ -1,0 +1,104 @@
+@import '../../variables';
+@import '../../shared/clickable';
+
+:host {
+    --bg-color: var(--card-bg-color, var(--bg-object));
+    --bg-color-hover: var(--card-bg-color-hover);
+    --b-width: var(--card-b-width, 0px);
+    --b-color: var(--card-b-color, var(--b-fader));
+    --b-color-active: var(--card-b-color-active, var(--b-fade));
+    --bg-disabled: var(--card-bg-disabled, var(--bg-color));
+    --foot-px: var(--card-foot-px, 1rem);
+    --foot-py: var(--card-foot-py, .8rem);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    border-radius: $xs;
+}
+
+:host(.raised) {
+    border: 0;
+    box-shadow:
+        0 0.5px 0.9px rgba(0, 0, 0, 0.025),
+        0 1.3px 2.2px rgba(0, 0, 0, 0.035),
+        0 2.7px 4.4px rgba(0, 0, 0, 0.045),
+        0 5.5px 9.1px rgba(0, 0, 0, 0.055),
+        0 15px 25px rgba(0, 0, 0, 0.08);
+}
+
+:host([disabled]) {
+    box-shadow: none;
+
+    ::slotted(*) {
+        pointer-events: none !important;
+    }
+
+    ::slotted([part=body]),
+    ::slotted([part=head]),
+    ::slotted([part=foot]) {
+        opacity: .5;
+    }
+}
+
+::slotted([part=head]) {
+    position: relative;
+    grid-area: head;
+    border: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+    margin: 0 !important; // !important: conflict article.embedded
+
+    ::slotted(m-skeleton) {
+        height: 100%
+    }
+}
+
+::slotted([part=body]) {
+    display: block;
+    grid-area: body;
+    padding: 1rem;
+    width: 100%;
+    flex-direction: column;
+}
+
+::slotted([part=foot]) {
+    flex-wrap: wrap;
+    padding: var(--foot-py) var(--foot-px);
+    grid-area: foot;
+    clear: both;
+    line-height: 0;
+}
+
+::slotted(m-button[part=foot]) {
+    padding: 0;
+    border-radius: 0;
+    flex: 1 1 auto;
+    --px: 1.1rem;
+    --py: 0;
+    --size: 2.5rem;
+    --f-size: .9125rem;
+}
+
+:host(.body\/foot\+head) {
+    [part=root] {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: 1fr auto;
+        grid-template-areas:
+            "body head"
+            "foot head"
+    }
+}
+
+:host(.head\+body\/foot) {
+    [part=root] {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-template-rows: 1fr auto;
+        grid-template-areas:
+            "head body"
+            "head foot"
+    }
+}

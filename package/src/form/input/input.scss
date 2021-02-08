@@ -1,0 +1,103 @@
+@import '../field';
+@import '../prompt';
+
+:host {
+    --f-size: var(--input-f-size, var(--f-sm));
+    --b-width: var(--input-b-width, 1px);
+    --b-color: var(--input-b-color, transparent);
+    --py: var(--input-py, .90625rem);
+    --px: var(--input-px, 1rem);
+    --size: var(--input-size, 3rem);
+    --label-px: var(--input-label-px, .25rem);
+    --label-f-size: var(--input-label-f-size, var(--f-xxs));
+    --label-f-color: var(--input-label-f-color, var(--f-theme-fader));
+    --image-size: var(--input-image-size, 10rem);
+}
+
+:host(.outlined) {
+    ::slotted([part=body]) {
+        padding-left: 0;
+        padding-right: 0;
+        text-indent: var(--px);
+    }
+}
+
+:host(:focus-within:not([read-only]):not([disabled])) {
+    ::slotted([part=body]) {
+        -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 1) var(--px), rgba(0, 0, 0, 1) calc(100% - var(--px)), rgba(0, 0, 0, 0) 100%)
+    }
+}
+
+:host([type=file]) {
+    cursor: copy;
+
+    ::slotted([part=body]) {
+        position: absolute;
+        pointer-events: none;
+        z-index: 2;
+        opacity: 0;
+        height: 100%;
+        width: 100%;
+        cursor: copy !important;
+    }
+
+    ::slotted(img) {
+        width: var(--image-size);
+        height: var(--image-size);
+        object-fit: cover;
+    }
+}
+
+:host([dragging]) {
+    ::slotted([part=body]) {
+        cursor: grab !important;
+    }
+
+    fieldset {
+        --b-width: 2px;
+        border-color: var(--b-color-active);
+    }
+}
+
+[part=image] {
+    width: var(--image-size);
+    height: var(--image-size);
+    object-fit: cover;
+    background-color: rgba(var(--bg-skeleton-rgb), .05);
+}
+
+:host([interface=image]) {
+    [part=body] {
+        &:before {
+            display: flex;
+            justify-content: center;
+            min-height: var(--image-size);
+            min-width: var(--image-size);
+            align-items: center;
+        }
+    }
+
+    [part=output] {
+        display: flex;
+        flex-direction: column;
+        margin: .25rem;
+        border-radius: 3px;
+        overflow: hidden;
+    }
+
+    m-chip {
+        border-radius: 0;
+        width: var(--image-size);
+        margin: 0;
+
+        m-button[part=close] {
+            margin-left: auto;
+        }
+    }
+}
+
+[part=filename] {
+    overflow: hidden;
+    flex: 1 1 auto;
+    text-overflow: ellipsis;
+}

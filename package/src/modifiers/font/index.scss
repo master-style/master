@@ -1,0 +1,139 @@
+.f\:inherit {
+    font: inherit !important;
+}
+
+// style
+.f\:italic {
+    font-style: italic !important;
+}
+
+// color
+.f\:white {
+    color: #fff !important;
+}
+
+.f\:fade {
+    color: var(--f-fade) !important;
+}
+
+.f\:fade\+ {
+    color: var(--f-fader) !important;
+}
+
+.f\:fade\+\+ {
+    color: var(--f-fadest) !important;
+}
+
+.f\:blue {
+    color: var(--f-blue) !important;
+}
+
+.f\:red {
+    color: var(--f-red) !important;
+}
+
+.f\:green {
+    color: var(--f-green) !important;
+}
+
+.f\:purple {
+    color: var(--f-purple) !important;
+}
+
+.f\:yellow {
+    color: var(--f-yellow) !important;
+}
+
+.f\:theme {
+    color: var(--f-theme) !important;
+}
+
+.f\:theme\+ {
+    color: var(--f-theme-fade) !important;
+}
+
+.f\:theme\+\+ {
+    color: var(--f-theme-fader) !important;
+}
+
+// size
+.f\:xxxs {
+    font-size: var(--f-xxxs) !important;
+}
+
+.f\:xxs {
+    font-size: var(--f-xxs) !important;
+}
+
+.f\:xs {
+    font-size: var(--f-xs) !important;
+}
+
+.f\:sm {
+    font-size: var(--f-sm) !important;
+}
+
+.f\:md {
+    font-size: var(--f-md) !important;
+}
+
+.f\:lg {
+    font-size: var(--f-lg) !important;
+}
+
+.f\:xl {
+    font-size: var(--f-xl) !important;
+}
+
+.f\:xxl {
+    font-size: var(--f-xxl) !important;
+}
+
+.f\:extra {
+    font-size: 3.2rem !important;
+}
+
+// weight
+.f\:100 {
+    font-weight: 100 !important;
+}
+
+.f\:200 {
+    font-weight: 200 !important;
+}
+
+.f\:300 {
+    font-weight: 300 !important;
+}
+
+.f\:400 {
+    font-weight: 400 !important;
+}
+
+.f\:500 {
+    font-weight: 500 !important;
+}
+
+.f\:600 {
+    font-weight: 600 !important;
+}
+
+.f\:700 {
+    font-weight: 700 !important;
+}
+
+.f\:800 {
+    font-weight: 800 !important;
+}
+
+.f\:900 {
+    font-weight: 900 !important;
+}
+
+.f\:bold {
+    font-weight: bold !important;
+}
+
+.f\:bolder {
+    font-weight: bolder !important;
+}
