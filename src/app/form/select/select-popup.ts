@@ -6,7 +6,7 @@ import css from './select-popup.scss';
 
 import { ContentElement } from '../../interactors/content';
 import { SelectElement } from '.';
-import { ItemElement } from '../../data-render/item';
+import { ItemElement } from '../../data-renders/item';
 import { CheckElement } from '../check';
 import { PopupElement } from '../../interactors/popup';
 

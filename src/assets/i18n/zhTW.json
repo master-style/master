@@ -93,5 +93,10 @@
     "validation": "驗證",
     "prompt": "提示",
     "dialog": "對話",
-    "editor": "編輯器"
+    "editor": "編輯器",
+    "layout": "佈局",
+    "overview": "概覽",
+    "navigators": "導航器",
+    "indicators": "指示器",
+    "interactors": "交互器"
 }

@@ -5,18 +5,18 @@ import { Routes, RouterModule } from '@angular/router';
 import { IconComponent } from './icon/icon.component';
 import { ColorComponent } from './color/color.component';
 import { BreakpointComponent } from './breakpoint/breakpoint.component';
-import { BadgeComponent } from './data-render/badge/badge.component';
-import { CardComponent } from './data-render/card/card.component';
-import { ChatsComponent } from './data-render/chats/chats.component';
-import { ChipComponent } from './data-render/chip/chip.component';
-import { FlowsComponent } from './data-render/flows/flows.component';
-import { InfoComponent } from './data-render/info/info.component';
-import { ListComponent } from './data-render/list/list.component';
+import { BadgeComponent } from './data-renders/badge/badge.component';
+import { CardComponent } from './data-renders/card/card.component';
+import { ChatsComponent } from './data-renders/chats/chats.component';
+import { ChipComponent } from './data-renders/chip/chip.component';
+import { FlowsComponent } from './data-renders/flows/flows.component';
+import { InfoComponent } from './data-renders/info/info.component';
+import { ListComponent } from './data-renders/list/list.component';
 import { ModalComponent } from './interactors/modal/modal.component';
 import { PopupComponent } from './interactors/popup/popup.component';
 import { ProgressComponent } from './indicators/progress/progress.component';
-import { RibbonComponent } from './data-render/ribbon/ribbon.component';
-import { TableComponent } from './data-render/table/table.component';
+import { RibbonComponent } from './data-renders/ribbon/ribbon.component';
+import { TableComponent } from './data-renders/table/table.component';
 import { TabsComponent } from './navigators/tabs/tabs.component';
 import { BreadcrumbComponent } from './navigators/breadcrumb/breadcrumb.component';
 import { DisplayComponent } from './modifiers/display/display.component';
@@ -40,7 +40,7 @@ import { ZIndexComponent } from './modifiers/z-index/z-index.component';
 import { FigureComponent } from './decorators/figure/figure.component';
 import { DialogComponent } from './interactors/dialog/dialog.component';
 import { RouteResolver } from './shared/route.resolver';
-import { ItemComponent } from './data-render/item/item.component';
+import { ItemComponent } from './data-renders/item/item.component';
 import { SkeletonComponent } from './indicators/skeleton/skeleton.component';
 import { ContentComponent } from './interactors/content/content.component';
 import { FormComponent } from './form/form.component';
@@ -77,15 +77,6 @@ export const routes: Routes =  [
         ]
     },
     {
-        path: 'layout', data: { icon: 'grid' }, resolve: { route: RouteResolver }, children: [
-            { path: 'app', component: AppComponent, resolve: { route: RouteResolver } },
-            { path: 'footer', component: FooterComponent, resolve: { route: RouteResolver } },
-            { path: 'grid', component: GridComponent, resolve: { route: RouteResolver } },
-            { path: 'header', component: HeaderComponent, resolve: { route: RouteResolver } },
-            { path: 'overlay', component: OverlayComponent, resolve: { route: RouteResolver } },
-        ]
-    },
-    {
         path: 'navigators', data: { icon: 'navigation' }, resolve: { route: RouteResolver }, children: [
             { path: 'breadcrumb', component: BreadcrumbComponent, resolve: { route: RouteResolver } },
             { path: 'tabs', component: TabsComponent, resolve: { route: RouteResolver } },
@@ -117,6 +108,15 @@ export const routes: Routes =  [
             { path: 'check', component: CheckComponent, resolve: { route: RouteResolver } },
             { path: 'editor', component: EditorComponent, resolve: { route: RouteResolver } },
             { path: 'icon', data: { icon: 'image' }, component: IconComponent, resolve: { route: RouteResolver } },
+        ]
+    },
+    {
+        path: 'layout', data: { icon: 'grid' }, resolve: { route: RouteResolver }, children: [
+            { path: 'app', component: AppComponent, resolve: { route: RouteResolver } },
+            { path: 'footer', component: FooterComponent, resolve: { route: RouteResolver } },
+            { path: 'grid', component: GridComponent, resolve: { route: RouteResolver } },
+            { path: 'header', component: HeaderComponent, resolve: { route: RouteResolver } },
+            { path: 'overlay', component: OverlayComponent, resolve: { route: RouteResolver } },
         ]
     },
     // { path: 'utilities' },
