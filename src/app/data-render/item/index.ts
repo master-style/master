@@ -1,5 +1,5 @@
 import { Element } from '@master/element';
-import { ClickableElement } from '../../../shared/clickable';
+import { ClickableElement } from '../../shared/clickable';
 import css from './item.scss';
 
 const NAME = 'item';

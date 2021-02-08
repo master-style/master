@@ -1,7 +1,7 @@
 import { Element, MasterElement, Attr, attrEnabled, Event, EventEmitter } from '@master/element';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { ContentElement } from '../content';
-import { HeaderElement } from '../header';
+import { HeaderElement } from '../../layout/header';
 import { TargetElement } from '../../shared/target';
 import { Template } from '@master/template';
 

@@ -1,12 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import './app/ui';
+@import './app';
 
 @import './app/shared/code-demo';
 @import './app/shared/code-highlight';
 
-@import './app/ui/variables';
-@import './app/ui/mixins';
+@import './app/variables';
+@import './app/mixins';
 @import './app/shared/feather-icon';
 
 // 測試

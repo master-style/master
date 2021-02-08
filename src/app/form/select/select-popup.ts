@@ -4,11 +4,11 @@ import { Template, TemplateNode } from '@master/template';
 
 import css from './select-popup.scss';
 
-import { ContentElement } from '../../components/content';
+import { ContentElement } from '../../interactors/content';
 import { SelectElement } from '.';
-import { ItemElement } from '../../components/item';
+import { ItemElement } from '../../data-render/item';
 import { CheckElement } from '../check';
-import { PopupElement } from '../../components';
+import { PopupElement } from '../../interactors/popup';
 
 const NAME = 'select-popup';
 

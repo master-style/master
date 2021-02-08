@@ -1,6 +1,6 @@
 @import '../../variables';
 @import '../../mixins';
-@import '../../components/popup/popup.scss';
+@import '../../interactors/popup/popup.scss';
 
 :host([searching]) {
     ::slotted(m-item:not([found])) {

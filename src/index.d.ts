@@ -1,2 +1,1 @@
-import './app/element';
-import './app/ui';
+import './app';

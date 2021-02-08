@@ -11,7 +11,7 @@ import { $ } from '@master/dom';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-    routes = this.resolvePaths([''], routes),;
+    routes = this.resolvePaths([''], routes);
     navigating = false;
     constructor(
         public appService: AppService,

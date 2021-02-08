@@ -61,7 +61,7 @@ import { OverlayComponent } from './layout/overlay/overlay.component';
 export const routes: Routes =  [
     { path: 'overview', data: { icon: 'grid' }, component: OverviewComponent, resolve: { route: RouteResolver } },
     // { path: 'animation', data: { icon: 'activity' }, component: AnimationComponent, resolve: { route: RouteResolver } },
-    { path: 'components' },
+    // { path: 'components' },
     {
         path: 'data-render', data: { icon: 'eye' }, resolve: { route: RouteResolver }, children: [
             { path: 'badge', component: BadgeComponent, resolve: { route: RouteResolver } },
@@ -109,7 +109,7 @@ export const routes: Routes =  [
         path: 'form', data: { icon: 'sliders' }, resolve: { route: RouteResolver }, children: [
             { path: 'overview', component: FormComponent, resolve: { route: RouteResolver } },
             { path: 'validation', component: ValidationComponent, resolve: { route: RouteResolver } },
-            { path: 'control' },
+            // { path: 'control' },
             { path: 'button', component: ButtonComponent, data: { compositions: ['HTML', 'CSS', 'JS'] }, resolve: { route: RouteResolver } },
             { path: 'select', component: SelectComponent, resolve: { route: RouteResolver } },
             { path: 'input', component: InputComponent, resolve: { route: RouteResolver } },
@@ -119,7 +119,7 @@ export const routes: Routes =  [
             { path: 'icon', data: { icon: 'image' }, component: IconComponent, resolve: { route: RouteResolver } },
         ]
     },
-    { path: 'utilities' },
+    // { path: 'utilities' },
     {
         path: 'modifiers', data: { icon: 'scissors' }, children: [
             // { path: '', component: , resolve: { route: RouteResolver }, data: { compositions: ['CSS'] } },
@@ -148,7 +148,7 @@ export const routes: Routes =  [
             { path: 'figure', component: FigureComponent, resolve: { route: RouteResolver } },
         ]
     },
-    { path: 'specification' },
+    // { path: 'specification' },
     { path: 'breakpoint', data: { icon: 'git-commit' }, component: BreakpointComponent, resolve: { route: RouteResolver } },
     { path: 'color', data: { icon: 'droplet' }, component: ColorComponent, resolve: { route: RouteResolver } },
 ];

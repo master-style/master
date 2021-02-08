@@ -13,20 +13,20 @@ import { DisplayModule } from './modifiers/display/display.module';
 import { IconComponent } from './icon/icon.component';
 import { ColorComponent } from './color/color.component';
 import { BreakpointComponent } from './breakpoint/breakpoint.component';
-import { BadgeComponent } from './components/badge/badge.component';
-import { CardComponent } from './components/card/card.component';
-import { ChatsComponent } from './components/chats/chats.component';
-import { ChipComponent } from './components/chip/chip.component';
-import { CollapseComponent } from './components/collapse/collapse.component';
-import { FlowsComponent } from './components/flows/flows.component';
-import { InfoComponent } from './components/info/info.component';
-import { ListComponent } from './components/list/list.component';
-import { ModalComponent } from './components/modal/modal.component';
-import { PopupComponent } from './components/popup/popup.component';
-import { ProgressComponent } from './components/progress/progress.component';
-import { RibbonComponent } from './components/ribbon/ribbon.component';
-import { TableComponent } from './components/table/table.component';
-import { TabsComponent } from './components/tabs/tabs.component';
+import { BadgeComponent } from './data-render/badge/badge.component';
+import { CardComponent } from './data-render/card/card.component';
+import { ChatsComponent } from './data-render/chats/chats.component';
+import { ChipComponent } from './data-render/chip/chip.component';
+import { CollapseComponent } from './interactors/collapse/collapse.component';
+import { FlowsComponent } from './data-render/flows/flows.component';
+import { InfoComponent } from './data-render/info/info.component';
+import { ListComponent } from './data-render/list/list.component';
+import { ModalComponent } from './interactors/modal/modal.component';
+import { PopupComponent } from './interactors/popup/popup.component';
+import { ProgressComponent } from './indicators/progress/progress.component';
+import { RibbonComponent } from './data-render/ribbon/ribbon.component';
+import { TableComponent } from './data-render/table/table.component';
+import { TabsComponent } from './navigators/tabs/tabs.component';
 import { InstallationComponent } from './guideline/installation/installation.component';
 import { DisplayComponent } from './modifiers/display/display.component';
 import { VisibilityComponent } from './modifiers/visibility/visibility.component';
@@ -46,16 +46,16 @@ import { ScaleComponent } from './modifiers/scale/scale.component';
 import { ShadowComponent } from './modifiers/shadow/shadow.component';
 import { TextComponent } from './modifiers/text/text.component';
 import { ZIndexComponent } from './modifiers/z-index/z-index.component';
-import { DialogComponent } from './components/dialog/dialog.component';
-import { RippleComponent } from './interactions/ripple/ripple.component';
-import { LoadingComponent } from './interactions/loading/loading.component';
+import { DialogComponent } from './interactors/dialog/dialog.component';
+import { RippleComponent } from './indicators/ripple/ripple.component';
+import { LoadingComponent } from './indicators/loading/loading.component';
 import { AnimationComponent } from './animation/animation.component';
 import { FigureComponent } from './decorators/figure/figure.component';
-import { ItemComponent } from './components/item/item.component';
-import { SkeletonComponent } from './components/skeleton/skeleton.component';
-import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
-import { ContentComponent } from './components/content/content.component';
-import { OverlayComponent } from './components/overlay/overlay.component';
+import { ItemComponent } from './data-render/item/item.component';
+import { SkeletonComponent } from './indicators/skeleton/skeleton.component';
+import { BreadcrumbComponent } from './navigators/breadcrumb/breadcrumb.component';
+import { ContentComponent } from './interactors/content/content.component';
+import { OverlayComponent } from './layout/overlay/overlay.component';
 
 import { FormComponent } from './form/form.component';
 import { ButtonComponent } from './form/button/button.component';
@@ -64,12 +64,14 @@ import { SelectComponent } from './form/select/select.component';
 import { TextareaComponent } from './form/textarea/textarea.component';
 import { CheckComponent } from './form/check/check.component';
 
-import { FormModule } from './form/form.module';
 import { ValidationComponent } from './form/validation/validation.component';
-import { FormsModule } from '@angular/forms';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './layout/header/header.component';
+import { FooterComponent } from './layout/footer/footer.component';
 import { EditorComponent } from './editor/editor.component';
+
+import { FormModule } from './form/form.module';
+import { FormsModule } from '@angular/forms';
+import { OverviewComponent } from './overview/overview.component';
 
 @NgModule({
     declarations: [
@@ -130,8 +132,11 @@ import { EditorComponent } from './editor/editor.component';
         HeaderComponent,
         FooterComponent,
         EditorComponent,
+        OverviewComponent,
     ],
     imports: [
+        FormModule,
+        FormsModule,
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
