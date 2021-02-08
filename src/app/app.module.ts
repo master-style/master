@@ -9,11 +9,127 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SharedModule } from './shared/shared.module';
 
-import { DisplayModule } from './ui/modifiers/display/display.module';
+import { DisplayModule } from './modifiers/display/display.module';
+import { IconComponent } from './icon/icon.component';
+import { ColorComponent } from './color/color.component';
+import { BreakpointComponent } from './breakpoint/breakpoint.component';
+import { BadgeComponent } from './components/badge/badge.component';
+import { CardComponent } from './components/card/card.component';
+import { ChatsComponent } from './components/chats/chats.component';
+import { ChipComponent } from './components/chip/chip.component';
+import { CollapseComponent } from './components/collapse/collapse.component';
+import { FlowsComponent } from './components/flows/flows.component';
+import { InfoComponent } from './components/info/info.component';
+import { ListComponent } from './components/list/list.component';
+import { ModalComponent } from './components/modal/modal.component';
+import { PopupComponent } from './components/popup/popup.component';
+import { ProgressComponent } from './components/progress/progress.component';
+import { RibbonComponent } from './components/ribbon/ribbon.component';
+import { TableComponent } from './components/table/table.component';
+import { TabsComponent } from './components/tabs/tabs.component';
+import { InstallationComponent } from './guideline/installation/installation.component';
+import { DisplayComponent } from './modifiers/display/display.component';
+import { VisibilityComponent } from './modifiers/visibility/visibility.component';
+import { ArticleComponent } from './decorators/article/article.component';
+import { AlignmentComponent } from './modifiers/alignment/alignment.component';
+import { PositionComponent } from './modifiers/position/position.component';
+import { WrapComponent } from './modifiers/wrap/wrap.component';
+import { AreaComponent } from './modifiers/area/area.component';
+import { BackgroundComponent } from './modifiers/background/background.component';
+import { BorderComponent } from './modifiers/border/border.component';
+import { FontComponent } from './modifiers/font/font.component';
+import { HoverComponent } from './modifiers/hover/hover.component';
+import { MarginComponent } from './modifiers/margin/margin.component';
+import { PaddingComponent } from './modifiers/padding/padding.component';
+import { RadiusComponent } from './modifiers/radius/radius.component';
+import { ScaleComponent } from './modifiers/scale/scale.component';
+import { ShadowComponent } from './modifiers/shadow/shadow.component';
+import { TextComponent } from './modifiers/text/text.component';
+import { ZIndexComponent } from './modifiers/z-index/z-index.component';
+import { DialogComponent } from './components/dialog/dialog.component';
+import { RippleComponent } from './interactions/ripple/ripple.component';
+import { LoadingComponent } from './interactions/loading/loading.component';
+import { AnimationComponent } from './animation/animation.component';
+import { FigureComponent } from './decorators/figure/figure.component';
+import { ItemComponent } from './components/item/item.component';
+import { SkeletonComponent } from './components/skeleton/skeleton.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { ContentComponent } from './components/content/content.component';
+import { OverlayComponent } from './components/overlay/overlay.component';
+
+import { FormComponent } from './form/form.component';
+import { ButtonComponent } from './form/button/button.component';
+import { InputComponent } from './form/input/input.component';
+import { SelectComponent } from './form/select/select.component';
+import { TextareaComponent } from './form/textarea/textarea.component';
+import { CheckComponent } from './form/check/check.component';
+
+import { FormModule } from './form/form.module';
+import { ValidationComponent } from './form/validation/validation.component';
+import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { EditorComponent } from './editor/editor.component';
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        IconComponent,
+        ColorComponent,
+        BreakpointComponent,
+        BadgeComponent,
+        CardComponent,
+        ChatsComponent,
+        ChipComponent,
+        CollapseComponent,
+        FlowsComponent,
+        InfoComponent,
+        ListComponent,
+        ModalComponent,
+        PopupComponent,
+        ProgressComponent,
+        RibbonComponent,
+        TableComponent,
+        TabsComponent,
+        InstallationComponent,
+        DisplayComponent,
+        VisibilityComponent, 
+        ArticleComponent, 
+        AlignmentComponent, 
+        PositionComponent, 
+        WrapComponent,
+        AreaComponent, 
+        BackgroundComponent, 
+        BorderComponent, 
+        FontComponent, 
+        HoverComponent, 
+        MarginComponent, 
+        PaddingComponent, 
+        RadiusComponent, 
+        ScaleComponent, 
+        ShadowComponent, 
+        TextComponent, 
+        ZIndexComponent,
+        DialogComponent,
+        RippleComponent,
+        LoadingComponent,
+        AnimationComponent,
+        FigureComponent,
+        ItemComponent,
+        SkeletonComponent,
+        BreadcrumbComponent,
+        ContentComponent,
+        OverlayComponent,
+        ButtonComponent,
+        InputComponent,
+        SelectComponent,
+        TextareaComponent,
+        CheckComponent,
+        FormComponent,
+        ValidationComponent,
+        HeaderComponent,
+        FooterComponent,
+        EditorComponent,
     ],
     imports: [
         BrowserModule,

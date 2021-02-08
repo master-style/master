@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { uiRoutes } from './ui/ui-routing.module';
-import { templateRoutes } from './template/template.routing.module';
+import { routes } from './app-routing.module';
 import { AppService } from './app.service';
 import { throttle } from 'lodash-es';
 import { NavigationStart, NavigationEnd, Router, RouterEvent } from '@angular/router';
@@ -12,17 +11,12 @@ import { $ } from '@master/dom';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-    routes = [];
+    routes = this.resolvePaths([''], routes),;
     navigating = false;
     constructor(
         public appService: AppService,
         private router: Router
     ) {
-        this.routes.push(
-            ...this.resolvePaths(['ui'], uiRoutes),
-            ...this.resolvePaths(['template'], templateRoutes)
-        );
-
         router.events.subscribe((event: RouterEvent) => {
             if (event instanceof NavigationStart) {
                 this.navigating = true;
