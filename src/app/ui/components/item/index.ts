@@ -1,8 +1,8 @@
-import { Element, ClickableElement } from '../../../element';
+import { Element } from '@master/element';
+import { ClickableElement } from '../../shared/clickable';
 import css from './item.scss';
 
 const NAME = 'item';
-
 
 @Element('m-' + NAME)
 export class ItemElement extends ClickableElement {

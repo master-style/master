@@ -1,4 +1,4 @@
-import { Element, Attr } from '../../../element';
+import { Element, Attr } from '@master/element';
 import { OptionElement } from '../option';
 import { Template, TemplateNode } from '@master/template';
 

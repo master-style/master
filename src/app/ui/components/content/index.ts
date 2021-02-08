@@ -1,9 +1,10 @@
-import { Element, MasterElement, Attr, Event, TargetElement, EventEmitter } from '@master/element';
+import { Element, MasterElement, Attr, Event, EventEmitter } from '@master/element';
 import { Template } from '@master/template';
 import { $ } from '@master/dom';
 import { debounce } from 'lodash-es';
 import css from './content.scss';
 import isNum from '../../utils/is-num';
+import { TargetElement } from '../../shared/target';
 
 declare const ResizeObserver: any
 

@@ -1,4 +1,4 @@
-import { Element, TargetElement, Attr } from '@master/element';
+import { Element, Attr } from '@master/element';
 import { createPopper, Placement } from '@popperjs/core';
 import { isInteractOutside } from '../../utils/is-interact-outside';
 import { Template } from '@master/template';
@@ -8,6 +8,7 @@ declare const ResizeObserver: any;
 import css from './popup.scss';
 import { ContentElement } from '../content';
 import { $ } from '@master/dom';
+import { TargetElement } from '../../shared/target';
 
 const $body = $(document.body);
 const NAME = 'popup';

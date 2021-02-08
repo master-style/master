@@ -1,5 +1,5 @@
 @import '../../variables';
-@import '../../../element/clickable';
+@import '../../shared/clickable';
 
 :host {
     --bg-color: var(--item-bg-color);

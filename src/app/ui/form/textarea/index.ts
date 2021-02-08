@@ -1,5 +1,6 @@
-import { Element, Attr, ControlElement } from '../../../element';
+import { Element, Attr } from '@master/element';
 import { Template } from '@master/template';
+import { ControlElement } from '../../shared/control';
 
 import css from './textarea.scss';
 

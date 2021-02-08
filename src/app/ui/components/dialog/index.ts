@@ -1,4 +1,4 @@
-import { Element, Attr, Prop } from '../../../element';
+import { Element, Attr, Prop } from '@master/element';
 import { ModalElement } from '../modal';
 import css from './dialog.scss';
 import { Template } from '@master/template';

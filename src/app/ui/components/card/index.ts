@@ -1,4 +1,5 @@
-import { Element, ClickableElement } from '../../../element';
+import { Element } from '@master/element';
+import { ClickableElement } from '../../shared/clickable';
 import css from './card.scss';
 
 const NAME = 'card';
