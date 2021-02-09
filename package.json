@@ -2,12 +2,15 @@
     "name": "master",
     "version": "0.0.0",
     "scripts": {
+        "start": "npm i && cd package && npm i && cd ../ && npm run serve",
         "serve": "ng serve --host 0.0.0.0 --disableHostCheck --port 4220",
-        "start": "ng serve",
-        "build": "ng build --prod",
+        "build": "ng build",
         "test": "ng test",
         "lint": "ng lint",
-        "e2e": "ng e2e"
+        "e2e": "ng e2e",
+        "pack": "cd package && npm i && cd compiler && webpack",
+        "publish": "cd package && npm publish --access public",
+        "release": "npm run pack && npm run publish"
     },
     "resolutions": {
         "webpack": "5.4.0"

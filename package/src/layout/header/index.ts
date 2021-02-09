@@ -1,5 +1,5 @@
 import { Element, MasterElement } from '@master/element';
-import { Template } from '../content/node_modules/@master/template';
+import { Template } from '@master/template';
 
 import css from './header.scss';
 

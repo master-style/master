@@ -3,7 +3,7 @@ import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { ContentElement } from '../../layout/content';
 import { HeaderElement } from '../../layout/header';
 import { TargetElement } from '../../shared/target';
-import { Template } from '../../layout/content/node_modules/@master/template';
+import { Template } from '@master/template';
 
 import css from './modal.scss';
 
