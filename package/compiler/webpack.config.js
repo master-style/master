@@ -4,6 +4,7 @@ const Webpack = require('webpack');
 const glob = require('globby');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = env => {
     const entryGlob = [
