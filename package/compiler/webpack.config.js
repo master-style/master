@@ -5,6 +5,7 @@ const glob = require('globby');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const package = require('../package.json');
 
 module.exports = env => {
     const entryGlob = [
@@ -25,6 +26,7 @@ module.exports = env => {
             extensions: ['.js', '.ts'],
             modules: [path.resolve('../src'), path.resolve('../node_modules')]
         },
+        externals: Object.keys(package.dependencies),
         module: {
             rules: [
                 {
