@@ -1,0 +1,38 @@
+version: 2
+
+jobs:
+  release-package:
+    docker:
+      - image: 'circleci/node:latest'
+    steps:
+      - checkout
+      - run:
+          name: install
+          command: cd package && npm i
+      - run:
+          name: build
+          command: cd package && npx webpack-cli
+      - run:
+          name: release
+          command: cd package && npm run semantic-release || true
+  deploy-document:
+    docker:
+      - image: 'circleci/node:12.16'
+    steps:
+      - checkout
+      - run:
+          name: install
+          command: npm i
+      - run:
+          name: build
+          command: npm run build
+      - run:
+          name: firebase deploy
+          command: npx firebase-tools deploy --token $FIREBASE_TOKEN
+
+workflows:
+  version: 2
+  release_and_deploy:
+    jobs:
+      - release-package
+      - deploy-document
