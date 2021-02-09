@@ -34,5 +34,6 @@ workflows:
   version: 2
   release_and_deploy:
     jobs:
-      - release-package
+      - release-package:
+          context: Master
       - deploy-document
