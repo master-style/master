@@ -4,7 +4,7 @@ import { Template, TemplateNode } from '@master/template';
 
 import css from './select-popup.scss';
 
-import { ContentElement } from '../../interactors/content';
+import { ContentElement } from '../../layout/content';
 import { SelectElement } from '.';
 import { ItemElement } from '../../data-renders/item';
 import { CheckElement } from '../check';

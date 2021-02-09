@@ -6,7 +6,7 @@ import { Template } from '@master/template';
 declare const ResizeObserver: any;
 
 import css from './popup.scss';
-import { ContentElement } from '../content';
+import { ContentElement } from '../../layout/content';
 import { $ } from '@master/dom';
 import { TargetElement } from '../../shared/target';
 

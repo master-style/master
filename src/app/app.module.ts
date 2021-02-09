@@ -54,7 +54,7 @@ import { FigureComponent } from './decorators/figure/figure.component';
 import { ItemComponent } from './data-renders/item/item.component';
 import { SkeletonComponent } from './indicators/skeleton/skeleton.component';
 import { BreadcrumbComponent } from './navigators/breadcrumb/breadcrumb.component';
-import { ContentComponent } from './interactors/content/content.component';
+import { ContentComponent } from './layout/content/content.component';
 import { OverlayComponent } from './layout/overlay/overlay.component';
 
 import { FormComponent } from './form/form.component';

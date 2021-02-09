@@ -1,9 +1,9 @@
 import { Element, MasterElement, Attr, attrEnabled, Event, EventEmitter } from '@master/element';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
-import { ContentElement } from '../content';
+import { ContentElement } from '../../layout/content';
 import { HeaderElement } from '../../layout/header';
 import { TargetElement } from '../../shared/target';
-import { Template } from '@master/template';
+import { Template } from '../../layout/content/node_modules/@master/template';
 
 import css from './modal.scss';
 

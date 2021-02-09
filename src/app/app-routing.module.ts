@@ -42,7 +42,7 @@ import { DialogComponent } from './interactors/dialog/dialog.component';
 import { RouteResolver } from './shared/route.resolver';
 import { ItemComponent } from './data-renders/item/item.component';
 import { SkeletonComponent } from './indicators/skeleton/skeleton.component';
-import { ContentComponent } from './interactors/content/content.component';
+import { ContentComponent } from './layout/content/content.component';
 import { FormComponent } from './form/form.component';
 import { ValidationComponent } from './form/validation/validation.component';
 import { TextareaComponent } from './form/textarea/textarea.component';
@@ -84,7 +84,6 @@ export const routes: Routes =  [
     },
     {
         path: 'interactors', data: { icon: 'shuffle' }, resolve: { route: RouteResolver }, children: [
-            { path: 'content', component: ContentComponent, resolve: { route: RouteResolver } },
             { path: 'dialog', component: DialogComponent, resolve: { route: RouteResolver } },
             { path: 'modal', component: ModalComponent, resolve: { route: RouteResolver } },
             { path: 'popup', component: PopupComponent, resolve: { route: RouteResolver } },
@@ -113,10 +112,12 @@ export const routes: Routes =  [
     {
         path: 'layout', data: { icon: 'grid' }, resolve: { route: RouteResolver }, children: [
             { path: 'app', component: AppComponent, resolve: { route: RouteResolver } },
-            { path: 'footer', component: FooterComponent, resolve: { route: RouteResolver } },
             { path: 'grid', component: GridComponent, resolve: { route: RouteResolver } },
-            { path: 'header', component: HeaderComponent, resolve: { route: RouteResolver } },
             { path: 'overlay', component: OverlayComponent, resolve: { route: RouteResolver } },
+            // 元件
+            { path: 'header', component: HeaderComponent, resolve: { route: RouteResolver } },
+            { path: 'content', component: ContentComponent, resolve: { route: RouteResolver } },
+            { path: 'footer', component: FooterComponent, resolve: { route: RouteResolver } },
         ]
     },
     // { path: 'utilities' },
