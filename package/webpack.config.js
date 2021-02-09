@@ -8,7 +8,8 @@ const package = require('./package.json');
 
 module.exports = env => {
     const entryGlob = [
-        'src/**/index.{ts,js}'
+        path.join('../src/**/index.{ts,js}'),
+        path.join('../src/**/index.{sass,scss,css}')
     ];
     
     return {
@@ -57,7 +58,11 @@ module.exports = env => {
             new BundleAnalyzerPlugin({
                 analyzerMode: 'static',
                 openAnalyzer: false
-            })
+            }),
+            new MiniCssExtractPlugin({
+                filename: '[name].css',
+                chunkFilename: '[name].css'
+            }),
         ]
     }
 }
