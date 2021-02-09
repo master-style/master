@@ -8,7 +8,7 @@
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
-        "pack": "cd package && npm i && cd compiler && webpack",
+        "pack": "cd package && npm i && webpack",
         "publish": "cd package && npm publish --access public",
         "release": "npm run pack && npm run publish"
     },
