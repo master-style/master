@@ -1,32 +1,20 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
-    "compileOnSave": false,
     "compilerOptions": {
-        "baseUrl": "./",
-        "outDir": "./dist/out-tsc",
+        "outDir": "./dist",
         "sourceMap": true,
-        "declaration": false,
-        "downlevelIteration": true,
-        "emitDecoratorMetadata": true,
+        "declaration": true,
         "experimentalDecorators": true,
         "moduleResolution": "node",
-        "importHelpers": true,
+        "esModuleInterop": true,
         "target": "es2015",
         "module": "es2020",
         "lib": [
             "es2018",
             "dom"
-        ],
-        "paths": {
-            "@master/template": [
-                "src/app/template/index.ts"
-            ],
-            "@master/ui": [
-                "src/app/ui/index.ts"
-            ]
-        }
+        ]
     },
     "include": [
-        "src/**/*.ts"
+        "src/**/*index.ts",
+        "src/**/*.d.ts"
     ]
 }
