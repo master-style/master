@@ -1,7 +1,7 @@
 import { MasterElement, Attr } from '@master/element';
 import { capitalize } from '../../utils/capitalize';
 
-const WHEN_ATTR_OPTIONS = { reflect: false, update: (control: ControlElement) => control.validate() };
+const WHEN_ATTR_OPTIONS = { reflect: false, onUpdate: (control: ControlElement) => control.validate() };
 
 export class ControlElement extends MasterElement {
 

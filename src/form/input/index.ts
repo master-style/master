@@ -139,7 +139,7 @@ export class InputElement extends ControlElement {
     keepValidity: boolean;
 
     @Attr({
-        update(input: InputElement, value) {
+        onUpdate(input: InputElement, value) {
             const tabIndex = input.tabIndex;
 
             if (value) {
@@ -170,7 +170,7 @@ export class InputElement extends ControlElement {
     dragging: boolean = false;
 
     @Attr({
-        update(input: InputElement, value, oldValue) {
+        onUpdate(input: InputElement, value, oldValue) {
             if (value === 'file') {
                 input
                     .on('click', (event) => {
@@ -221,7 +221,7 @@ export class InputElement extends ControlElement {
             }
             return value;
         },
-        update(input: InputElement, value: any) {
+        onUpdate(input: InputElement, value: any) {
             if (input.type === 'file') {
                 input.empty = !value?.length || !value;
                 input.render();

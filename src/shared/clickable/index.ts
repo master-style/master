@@ -54,7 +54,7 @@ export class ClickableElement extends MasterElement {
     });
 
     @Attr({
-        update(clickable: ClickableElement, value: string, oldValue: string) {
+        onUpdate(clickable: ClickableElement, value: string, oldValue: string) {
             if (value === 'submit') {
                 clickable.on('click', (event) => {
                     const form = clickable.closest('form');

@@ -7,7 +7,7 @@ const $body = $(document.body);
 export class TargetElement extends MasterElement {
 
     @Attr({
-        update(toggleable: TargetElement, value: boolean) {
+        onUpdate(toggleable: TargetElement, value: boolean) {
             if (toggleable.ready) {
                 const start = toggleable[value ? 'onClose' : 'onOpen'];
                 if (start) start();
@@ -28,7 +28,7 @@ export class TargetElement extends MasterElement {
 
     @Attr({
         reflect: false,
-        update(target: TargetElement, value: any, oldValue: any) {
+        onUpdate(target: TargetElement, value: any, oldValue: any) {
             const name = target.constructor['elementName'];
             if (oldValue) {
                 $body.off({ id: [target, name] });

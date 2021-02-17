@@ -14,7 +14,7 @@ export class OptionElement extends MasterElement {
     disabled: boolean;
 
     @Attr({
-        update(option: OptionElement, selected) {
+        onUpdate(option: OptionElement, selected) {
             const select = (option.parentElement as SelectElement);
             if (option.ready && !select.updating) {
                 const select = (option.parentElement as SelectElement);
@@ -43,7 +43,7 @@ export class OptionElement extends MasterElement {
     selected: boolean;
 
     @Attr({
-        update(option: OptionElement, value) {
+        onUpdate(option: OptionElement, value) {
             // compose value when selected option value changed
             if (option.ready && option.selected) {
                 const select = (option.parentElement as SelectElement);

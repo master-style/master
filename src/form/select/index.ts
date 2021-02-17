@@ -238,12 +238,12 @@ export class SelectElement extends ControlElement {
     binding: string;
 
     @Attr({
-        update: (select: SelectElement) => select.toggleListener()
+        onUpdate: (select: SelectElement) => select.toggleListener()
     })
     readOnly: boolean = false;
 
     @Attr({
-        update: (select: SelectElement) => select.toggleListener()
+        onUpdate: (select: SelectElement) => select.toggleListener()
     })
     disabled: boolean = false;
 
@@ -254,7 +254,7 @@ export class SelectElement extends ControlElement {
     label: string;
 
     @Attr({
-        update(select: SelectElement, value) {
+        onUpdate(select: SelectElement, value) {
             if (select.popup) {
                 select.popup.multiple = value;
             }
@@ -284,7 +284,7 @@ export class SelectElement extends ControlElement {
     }
 
     @Attr({
-        update(select: SelectElement, value: any, oldValue: any) {
+        onUpdate(select: SelectElement, value: any, oldValue: any) {
             const isArray = Array.isArray(value);
             const oldIsArray = Array.isArray(oldValue);
             let equal = true;

@@ -75,7 +75,7 @@ export class ModalElement extends TargetElement {
     closeOnScroll: boolean;
 
     @Attr({
-        update(modal: ModalElement, value, oldValue) {
+        onUpdate(modal: ModalElement, value, oldValue) {
             if (
                 value && oldValue ||
                 !value && oldValue
@@ -99,7 +99,7 @@ export class ModalElement extends TargetElement {
 
     @Attr({
         reflect: false,
-        update(modal: ModalElement, value: string, oldValue: string) {
+        onUpdate(modal: ModalElement, value: string, oldValue: string) {
             if (oldValue === 'close' || oldValue === 'none') {
                 modal.overlayElement.off({ id: [NAME] });
             }

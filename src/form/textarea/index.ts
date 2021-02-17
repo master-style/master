@@ -53,7 +53,7 @@ export class TextareaElement extends ControlElement {
     keepValidity: boolean;
 
     @Attr({
-        update(input: TextareaElement, value) {
+        onUpdate(input: TextareaElement, value) {
             const tabIndex = input.tabIndex;
 
             if (value) {
@@ -83,7 +83,7 @@ export class TextareaElement extends ControlElement {
     @Attr({
         reflect: false,
         render: false,
-        update(textarea: TextareaElement, value: any) {
+        onUpdate(textarea: TextareaElement, value: any) {
             textarea.empty = value === null || value === undefined || value === '';
             textarea.body.value = value ?? null;
             textarea.validate();

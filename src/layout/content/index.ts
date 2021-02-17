@@ -113,14 +113,14 @@ export class ContentElement extends TargetElement {
     guideSize: number = 48;
 
     @Attr({
-        update(content) {
+        onUpdate(content) {
             (content.scrollX || content.scrollY) ? content.enable() : content.disable();
         }
     })
     scrollY: boolean;
 
     @Attr({
-        update(content) {
+        onUpdate(content) {
             (content.scrollX || content.scrollY) ? content.enable() : content.disable();
         }
     })

@@ -47,7 +47,7 @@ export class CheckElement extends ControlElement {
     role: string;
 
     @Attr({
-        update(check: CheckElement, value, oldValue) {
+        onUpdate(check: CheckElement, value, oldValue) {
             if (value) {
                 let checks = nameMap[value];
                 if (!checks) checks = nameMap[value] = [];
@@ -63,7 +63,7 @@ export class CheckElement extends ControlElement {
     name: string;
 
     @Attr({
-        update(check: CheckElement, value) {
+        onUpdate(check: CheckElement, value) {
             const parent: any = check.parentElement;
             if (parent.tagName === 'M-ITEM') {
                 parent.disabled = value;
@@ -82,14 +82,14 @@ export class CheckElement extends ControlElement {
     interface: string = 'check';
 
     @Attr({
-        update(check: CheckElement, value: any, oldValue: any) {
+        onUpdate(check: CheckElement, value: any, oldValue: any) {
             check.role = value;
         }
     })
     type: string = 'checkbox';
 
     @Attr({
-        update(check: CheckElement, value: any, oldValue: any) {
+        onUpdate(check: CheckElement, value: any, oldValue: any) {
 
             check.body.checked = value;
             check.toggleAttribute('aria-checked', !!value);
@@ -111,7 +111,7 @@ export class CheckElement extends ControlElement {
     @Attr({
         reflect: false,
         render: false,
-        update(check: CheckElement, value: any, oldValue: any) {
+        onUpdate(check: CheckElement, value: any, oldValue: any) {
             if (value === oldValue) return;
             check.body.value = value ?? null;
         }
