@@ -185,7 +185,7 @@ export class PopupElement extends TargetElement {
             if (!this.#resizeObserver) {
                 this.#resizeObserver = new ResizeObserver(() => {
                     this.updateSize();
-                    this.popper.onUpdate();
+                    this.popper.update();
                 });
                 this.#resizeObserver.observe(this.content);
                 this.#resizeObserver.observe(this.trigger);

@@ -41,8 +41,7 @@
         "@master/element": "~1.0.0",
         "@master/template": "~1.0.0",
         "@popperjs/core": "^2.5.4",
-        "body-scroll-lock": "^3.1.5",
-        "lodash-es": "^4.17.15"
+        "body-scroll-lock": "^3.1.5"
     },
     "devDependencies": {
         "@babel/core": "^7.12.10",
