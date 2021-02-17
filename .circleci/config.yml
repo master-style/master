@@ -1,20 +1,20 @@
 version: 2
 
 jobs:
-  release-package:
+  pack & release:
     docker:
       - image: 'circleci/node:latest'
     steps:
       - checkout
       - run:
           name: install
-          command: cd package && npm i
+          command: npm i
       - run:
           name: build
-          command: cd package && npx webpack-cli
+          command: npx webpack
       - run:
-          name: release
-          command: cd package && npm run semantic-release || true
+          name: semantic release
+          command: npm run semantic-release || true
   deploy-document:
     docker:
       - image: 'circleci/node:12.16'
@@ -32,8 +32,8 @@ jobs:
 
 workflows:
   version: 2
-  release_and_deploy:
+  package & deploy:
     jobs:
-      - release-package:
+      - pack & release:
           context: Master
       - deploy-document
