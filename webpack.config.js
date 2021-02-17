@@ -9,8 +9,8 @@ const package = require('./package.json');
 
 module.exports = env => {
     const entryGlob = [
-        path.join('../src/**/index.{ts,js}'),
-        path.join('../src/**/index.{sass,scss,css}')
+        path.join('src/**/index.{ts,js}'),
+        path.join('src/**/index.{sass,scss,css}')
     ];
 
     return {

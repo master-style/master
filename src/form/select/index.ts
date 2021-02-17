@@ -238,12 +238,12 @@ export class SelectElement extends ControlElement {
     binding: string;
 
     @Attr({
-        onUpdate: (select: SelectElement) => select.toggleListener()
+        onUpdate(this: SelectElement) { this.toggleListener() }
     })
     readOnly: boolean = false;
 
     @Attr({
-        onUpdate: (select: SelectElement) => select.toggleListener()
+        onUpdate(this: SelectElement) { this.toggleListener() }
     })
     disabled: boolean = false;
 
