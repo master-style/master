@@ -2,22 +2,24 @@
 const path = require('path');
 const Webpack = require('webpack');
 const glob = require('globby');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const package = require('./package.json');
 
 module.exports = env => {
     const entryGlob = [
-        path.join('src/**/index.{ts,js}'),
-        path.join('src/**/index.{sass,scss,css}')
+        path.join('src/**/index.{ts,js,sass,scss,css}')
     ];
 
     return {
         entry: glob.sync(entryGlob).reduce((entrypoint, eachPath) => {
             const parsePath = path.parse(path.relative(path.join('./src'), eachPath));
             const filename = path.join(parsePath.dir, parsePath.name);
-            entrypoint[filename] = [path.resolve(eachPath)];
+            if (entrypoint[filename]) {
+                entrypoint[filename].push(path.resolve(eachPath))
+            } else {
+                entrypoint[filename] = [path.resolve(eachPath)];
+            }
             return entrypoint;
         }, {}),
         externals: Object.keys(package.dependencies),
@@ -80,10 +82,10 @@ module.exports = env => {
         },
         output: {
             path: path.resolve('./dist'),
+            clean: true,
             libraryTarget: 'umd'
         },
         plugins: [
-            new CleanWebpackPlugin(),
             new Webpack.ProgressPlugin(),
             new BundleAnalyzerPlugin({
                 analyzerMode: 'static',
