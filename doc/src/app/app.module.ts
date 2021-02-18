@@ -148,7 +148,9 @@ import { OverviewComponent } from './overview/overview.component';
             }
         }),
         SharedModule,
-        DisplayModule
+        DisplayModule.forRoot({
+            debounceWait: 100
+        })
     ],
     providers: [
         RouteResolver

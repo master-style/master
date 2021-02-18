@@ -1,6 +1,7 @@
 import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 
 import debounce from 'lodash-es/debounce';
+import { DisplayService } from './display.service';
 
 @Directive({
     selector: '[show],[hide]'
@@ -15,14 +16,15 @@ export class DisplayDirective {
 
     constructor(
         private viewContainerRef: ViewContainerRef,
-        private templateRef: TemplateRef<any>
-    ) { }
+        private templateRef: TemplateRef<any>,
+        private displayService: DisplayService
+    ) {
+        console.log(this.displayService);
+        this.resize = debounce(() => this.update(), this.displayService.options.debounceWait);
+    }
 
     ngOnInit(): void {
-        this.resize = debounce(this.update, 100);
-        //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-        //Add 'implements OnInit' to the class.
-        window.addEventListener('resize', debounce(() => this.resize(), 100), { passive: true })
+        window.addEventListener('resize', this.resize, { passive: true })
     }
 
     ngOnDestroy(): void {
@@ -36,42 +38,12 @@ export class DisplayDirective {
 
         let display = true;
 
-        const above = (size) => {
-            display = display && width >= size;
+        if (this.show) {
+            display = display && width >= this.displayService.options.breakpoints[this.show];
         }
 
-        const below = (size) => {
-            display = display && width - 0.2 < size;
-        }
-
-        switch (this.show) {
-            case 'sm':
-                above(600);
-                break;
-            case 'md':
-                above(1024);
-                break;
-            case 'lg':
-                above(1440);
-                break;
-            case 'xl':
-                above(1920);
-                break;
-        }
-
-        switch (this.hide) {
-            case 'sm':
-                below(600);
-                break;
-            case 'md':
-                below(1024);
-                break;
-            case 'lg':
-                below(1440);
-                break;
-            case 'xl':
-                below(1920);
-                break;
+        if (this.hide) {
+            display = display && width - 0.2 < this.displayService.options.breakpoints[this.hide];
         }
 
         if (display && !this.display) {
@@ -87,7 +59,7 @@ export class DisplayDirective {
         console.log('updated display', this.display)
     }
 
-    ngOnChanges(changes): void {
+    ngOnChanges(): void {
         this.update();
     }
 }
