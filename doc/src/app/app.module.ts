@@ -9,7 +9,6 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SharedModule } from './shared/shared.module';
 
-import { DisplayModule } from './modifiers/display/display.module';
 import { IconComponent } from './icon/icon.component';
 import { ColorComponent } from './color/color.component';
 import { BreakpointComponent } from './breakpoint/breakpoint.component';
@@ -69,7 +68,6 @@ import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { EditorComponent } from './editor/editor.component';
 
-import { FormModule } from './form/form.module';
 import { FormsModule } from '@angular/forms';
 import { OverviewComponent } from './overview/overview.component';
 
@@ -135,7 +133,6 @@ import { OverviewComponent } from './overview/overview.component';
         OverviewComponent,
     ],
     imports: [
-        FormModule,
         FormsModule,
         BrowserModule,
         AppRoutingModule,
@@ -147,10 +144,7 @@ import { OverviewComponent } from './overview/overview.component';
                 deps: [HttpClient]
             }
         }),
-        SharedModule,
-        DisplayModule.forRoot({
-            debounceWait: 100
-        })
+        SharedModule
     ],
     providers: [
         RouteResolver
