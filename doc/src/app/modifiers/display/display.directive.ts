@@ -19,7 +19,6 @@ export class DisplayDirective {
         private templateRef: TemplateRef<any>,
         private displayService: DisplayService
     ) {
-        console.log(this.displayService);
         this.resize = debounce(() => this.update(), this.displayService.options.debounceWait);
     }
 
