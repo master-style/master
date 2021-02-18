@@ -4,17 +4,18 @@
         "sourceMap": true,
         "declaration": true,
         "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
         "moduleResolution": "node",
         "esModuleInterop": true,
         "target": "es2015",
         "module": "es2020",
+        "skipLibCheck": true,
         "lib": [
             "es2018",
             "dom"
         ]
     },
     "include": [
-        "src/**/*index.ts",
-        "src/**/*.d.ts"
+        "src/**/*index.ts"
     ]
 }
