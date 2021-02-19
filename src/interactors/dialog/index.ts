@@ -234,7 +234,7 @@ export class DialogElement extends ModalElement {
 
 const DIALOG_ELEMENT = document.createElement('m-dialog');
 
-export function dialog(options) {
+export function dialog(options: any) {
     const eachDialog = (DIALOG_ELEMENT.cloneNode() as DialogElement);
     for (const eachPropKey in options) {
         const eachPropValue = options[eachPropKey];
