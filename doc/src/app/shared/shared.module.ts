@@ -6,6 +6,8 @@ import { PropComponent } from './prop/prop.component';
 import { HyperlinkComponent } from './hyperlink/hyperlink.component';
 import { ControlPropComponent } from './control-prop/control-prop.component';
 
+import { FormModule } from '@master/angular';
+
 @NgModule({
     declarations: [
         CodeDirective,
@@ -15,12 +17,14 @@ import { ControlPropComponent } from './control-prop/control-prop.component';
     ],
     imports: [
         CommonModule,
-        TranslateModule
+        TranslateModule,
+        FormModule
     ],
     exports: [
         CommonModule,
         CodeDirective,
         TranslateModule,
+        FormModule,
         PropComponent,
         HyperlinkComponent,
         ControlPropComponent

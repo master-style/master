@@ -71,6 +71,8 @@ import { EditorComponent } from './editor/editor.component';
 import { FormsModule } from '@angular/forms';
 import { OverviewComponent } from './overview/overview.component';
 
+import { DisplayModule } from '@master/angular';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -144,7 +146,8 @@ import { OverviewComponent } from './overview/overview.component';
                 deps: [HttpClient]
             }
         }),
-        SharedModule
+        SharedModule,
+        DisplayModule.forRoot()
     ],
     providers: [
         RouteResolver
