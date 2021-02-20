@@ -84,6 +84,7 @@ export class SelectElement extends ControlElement {
                                 click: (event) => {
                                     event.stopPropagation();
                                     eachOption.selected = false;
+                                    this.changeEmitter(this.value);
                                     this.popup.render();
                                 }
                             }
