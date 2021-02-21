@@ -112,6 +112,9 @@ export class ContentElement extends TargetElement {
     @Attr({ reflect: false })
     guideSize: number = 48;
 
+    @Attr({ reflect: false })
+    page = 0;
+
     @Attr({
         onUpdate(content) {
             (content.scrollX || content.scrollY) ? content.enable() : content.disable();
@@ -336,10 +339,11 @@ export class ContentElement extends TargetElement {
 
             if (
                 maxPosition === 0 ||
-                scrollPosition >= morePosition
-                && morePosition > this.#lastMorePosition
+                scrollPosition >= morePosition && morePosition > this.#lastMorePosition ||
+                scrollSize === rootSize
             ) {
                 this.#lastMorePosition = morePosition;
+                this.page++;
                 this.moreEmitter();
             }
 
