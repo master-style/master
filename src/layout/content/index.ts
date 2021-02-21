@@ -337,7 +337,7 @@ export class ContentElement extends TargetElement {
                 morePosition = this.#lastMorePosition + (maxPosition - this.#lastMorePosition) / 2;
             }
 
-            console.log(scrollSize, rootSize, this.page);
+            console.log(this.page, scrollSize, rootSize, this);
 
             if (
                 maxPosition === 0 ||
