@@ -194,7 +194,7 @@ export class ContentElement extends TargetElement {
         this.#resizeObserver = new ResizeObserver(() => {
             this.renderScroll();
         });
-        this.#resizeObserver.observe(this);
+        this.#resizeObserver.observe(this.root);
 
         $window.on('resize', debounce(() => {
             this.renderScroll();
