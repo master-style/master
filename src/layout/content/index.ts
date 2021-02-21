@@ -112,7 +112,7 @@ export class ContentElement extends TargetElement {
     @Attr({ reflect: false })
     guideSize: number = 48;
 
-    @Attr({ reflect: false })
+    @Attr({ reflect: false, render: false })
     page = 0;
 
     @Attr({
@@ -343,6 +343,7 @@ export class ContentElement extends TargetElement {
                 scrollSize === rootSize
             ) {
                 this.#lastMorePosition = morePosition;
+                console.log(scrollSize, rootSize, this.page);
                 this.page++;
                 this.moreEmitter();
             }
