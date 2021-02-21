@@ -119,11 +119,10 @@
 [part=root] {
     display: inherit;
     width: 100%;
-    height: 100%;
     align-items: inherit;
     justify-content: inherit;
     flex-direction: inherit;
-    max-height: inherit;
+    max-height: 100%;
     box-sizing: border-box;
     contain: style;
     margin: auto;
