@@ -374,6 +374,11 @@ export class ContentElement extends TargetElement {
         return render('X') || render('Y');
     }
 
+    reset() {
+        this.#lastMorePosition = 0;
+        this.page = 0;
+    }
+
     // stop current animation
     stop() {
         if (this.#animationFrame) {
