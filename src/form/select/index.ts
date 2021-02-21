@@ -218,6 +218,7 @@ export class SelectElement extends ControlElement {
                 if (this.disabled || this.popup) return;
                 this.popup = $('m-select-popup', {
                     multiple: this.multiple,
+                    placement: this.placement,
                     hidden: true,
                     'min-width': 'trigger'
                 });
@@ -250,6 +251,9 @@ export class SelectElement extends ControlElement {
 
     @Attr()
     placeholder: string;
+
+    @Attr()
+    placement = 'bottom-start';
 
     @Attr()
     label: string;
