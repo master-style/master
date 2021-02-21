@@ -343,7 +343,6 @@ export class ContentElement extends TargetElement {
                 scrollSize === rootSize
             ) {
                 this.#lastMorePosition = morePosition;
-                console.log(scrollSize, rootSize, this.page);
                 this.page++;
                 this.moreEmitter();
             }
@@ -377,6 +376,7 @@ export class ContentElement extends TargetElement {
     reset() {
         this.#lastMorePosition = 0;
         this.page = 0;
+        this.to({ y: 0 }, 0);
     }
 
     // stop current animation
