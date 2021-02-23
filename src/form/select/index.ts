@@ -46,8 +46,8 @@ export class SelectElement extends ControlElement {
             }, { passive: true })
         },
         'div', {
-            part: 'main',
-            $created: (element: HTMLDivElement) => this.main = element
+            part: 'master',
+            $created: (element: HTMLDivElement) => this.master = element
         }, [
             'div', {
                 part: 'body'
@@ -131,7 +131,7 @@ export class SelectElement extends ControlElement {
 
     uid: number;
 
-    main: HTMLDivElement;
+    master: HTMLDivElement;
     popup: SelectPopupElement;
     search: HTMLInputElement;
     searchInfo: HTMLElement;

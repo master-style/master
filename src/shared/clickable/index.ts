@@ -27,7 +27,7 @@ export class ClickableElement extends MasterElement {
                 return [
                     tag, {
                         class: 'touch',
-                        part: 'main',
+                        part: 'master',
                         disabled: this.disabled,
                         type: this.type
                     },
@@ -37,7 +37,7 @@ export class ClickableElement extends MasterElement {
                 return [
                     tag, {
                         class: 'touch',
-                        part: 'main',
+                        part: 'master',
                         href: this.href,
                         download: this.download,
                         rel: this.rel,
@@ -47,7 +47,7 @@ export class ClickableElement extends MasterElement {
                 ];
             default:
                 return [
-                    'div', { part: 'main' },
+                    'div', { part: 'master' },
                     this.slotTemplate || ['slot'], spinnerTemplate
                 ];
         }

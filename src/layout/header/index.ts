@@ -11,7 +11,7 @@ export class HeaderElement extends MasterElement {
     static css = css;
 
     template: Template = new Template(() => [
-        'div', { part: 'main' }, [
+        'div', { part: 'master' }, [
             'slot', { name: 'start' },
             'slot',
             'slot', { name: 'end' }

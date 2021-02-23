@@ -1,4 +1,4 @@
-[part=main] {
+[part=master] {
     position: relative;
     display: inherit;
     -webkit-appearance: none;
@@ -42,7 +42,7 @@
 }
 
 :host(.outlined) {
-    [part=main] {
+    [part=master] {
         border-width: var(--b-width, 1px);
     }
 }
@@ -76,8 +76,8 @@
     }
 }
 
-button[part=main],
-a[part=main] {
+button[part=master],
+a[part=master] {
     -webkit-appearance: none;
     -webkit-user-select: none;
     user-select: none;
@@ -87,7 +87,7 @@ a[part=main] {
 :host(.outlined) {
     --b-width: 1px;
 
-    [part=main] {
+    [part=master] {
         background-color: transparent;
     }
 }
@@ -98,7 +98,7 @@ a[part=main] {
 
 
 :host([part=foot]) {
-    [part=main] {
+    [part=master] {
         border: 0;
         box-shadow: none;
     }
@@ -109,7 +109,7 @@ a[part=main] {
     pointer-events: none !important;
     box-shadow: none !important;
 
-    [part=main] *:not([part=spinner]),
+    [part=master] *:not([part=spinner]),
     ::slotted(*) {
         visibility: hidden !important;
     }

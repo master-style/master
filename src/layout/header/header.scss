@@ -20,12 +20,12 @@ slot {
 }
 
 :host(.safe) {
-    [part=main] {
+    [part=master] {
         padding-top: unquote('env(safe-area-inset-top)');
     }
 }
 
-[part=main] {
+[part=master] {
     display: flex;
     justify-content: space-between;
     align-items: center;
