@@ -20,7 +20,7 @@
     border-radius: inherit;
 }
 
-:host(.fade) {
+:host([fade]) {
     will-change: opacity;
     transition: opacity .3s ease;
 }
