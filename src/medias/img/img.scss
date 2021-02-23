@@ -25,6 +25,10 @@
     transition: opacity .3s ease;
 }
 
+:host([fade]:not([complete])) {
+    opacity: 0;
+}
+
 :host([src=""]),
 :host([srcset=""]) {
     [part=master] {

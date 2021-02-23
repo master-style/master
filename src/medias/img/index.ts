@@ -39,8 +39,8 @@ export class ImgElement extends MasterElement {
 
     master: HTMLImageElement;
 
-    @Prop()
-    complete = false;
+    @Attr({ observe: false })
+    complete: boolean = false;
 
     @Attr({ render: false })
     fade: boolean;
