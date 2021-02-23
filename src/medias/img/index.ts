@@ -15,31 +15,50 @@ export class ImgElement extends MasterElement {
             srcset: this.srcset,
             width: this.width,
             height: this.height,
-            $created: (img: ImgElement) => {
+            alt: this.alt,
+            crossorigin: this.crossorigin,
+            decoding: this.decoding,
+            ismap: this.ismap,
+            loading: this.loading,
+            referrerpolicy: this.referrerpolicy,
+            sizes: this.sizes,
+            usemap: this.usemap,
+            $created: (img: HTMLImageElement) => {
+                this.master = img;
                 img.onload = () => {
                     this.complete = true;
                 };
             }
         },
         'm-skeleton', {
-            $if: !this.complete,
+            $if: !this.complete && (this.src || this.srcset),
             part: 'skeleton',
             class: 'animated'
         }
     ]);
 
+    master: HTMLImageElement;
+
     @Prop()
-    complete: boolean;
+    complete = false;
 
     @Attr({ render: false })
     fade: boolean;
 
     // native
 
-    @Attr()
+    @Attr({
+        onUpdate(this: ImgElement) {
+            this.complete = false;
+        }
+    })
     src: string;
 
-    @Attr()
+    @Attr({
+        onUpdate(this: ImgElement) {
+            this.complete = false;
+        }
+    })
     srcset: string;
 
     @Attr()
@@ -47,6 +66,30 @@ export class ImgElement extends MasterElement {
 
     @Attr()
     height: number;
+
+    @Attr()
+    alt: string;
+
+    @Attr()
+    crossorigin: string;
+
+    @Attr()
+    decoding: string;
+
+    @Attr()
+    ismap: boolean;
+
+    @Attr()
+    loading: string;
+
+    @Attr()
+    referrerpolicy: string;
+
+    @Attr()
+    sizes: string;
+
+    @Attr()
+    usemap: string;
 
     render() {
         this.template.render(this.shadowRoot);
