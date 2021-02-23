@@ -1,1 +1,5 @@
-<m-img src="https://photo.eyescream.com.tw/photo/photo/ow/11040643-A05-02.jpg" height="200"></m-img>
+<m-img [attr.src]="image.urls.regular"
+       width="200"
+       height="200"
+       fade
+       *ngFor="let image of data"></m-img>

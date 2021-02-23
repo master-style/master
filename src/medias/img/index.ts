@@ -1,4 +1,4 @@
-import { Attr, Element, MasterElement } from '@master/element';
+import { Attr, Element, MasterElement, Prop } from '@master/element';
 import { Template } from '@master/template';
 import css from './img.scss';
 
@@ -14,9 +14,27 @@ export class ImgElement extends MasterElement {
             src: this.src,
             srcset: this.srcset,
             width: this.width,
-            height: this.height
+            height: this.height,
+            $created: (img: ImgElement) => {
+                img.onload = () => {
+                    this.complete = true;
+                };
+            }
+        },
+        'm-skeleton', {
+            $if: !this.complete,
+            part: 'skeleton',
+            class: 'animated'
         }
     ]);
+
+    @Prop()
+    complete: boolean;
+
+    @Attr({ render: false })
+    fade: boolean;
+
+    // native
 
     @Attr()
     src: string;

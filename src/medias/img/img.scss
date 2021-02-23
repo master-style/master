@@ -1,11 +1,26 @@
 :host {
+    position: relative;
     display: inline-flex;
+    object-fit: cover;
 }
 
 [part=master] {
+    display: block;
     border-radius: inherit;
-    width: 100%;
-    height: 100%;
     object-fit: inherit;
     object-position: inherit;
+}
+
+[part=skeleton] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+}
+
+:host(.fade) {
+    will-change: opacity;
+    transition: opacity .3s ease;
 }
