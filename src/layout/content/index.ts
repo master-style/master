@@ -45,8 +45,8 @@ export class ContentElement extends TargetElement {
 
     template = new Template(() => [
         'slot', {
-            part: 'root',
-            $created: (element: MasterElement) => this.root = element
+            part: 'main',
+            $created: (element: MasterElement) => this.main = element
         },
         'slot', {
             name: 'part'
@@ -73,7 +73,7 @@ export class ContentElement extends TargetElement {
         ]
     ]);
 
-    root: MasterElement;
+    main: MasterElement;
     scrolling = false;
 
     maxX: number;
@@ -158,7 +158,7 @@ export class ContentElement extends TargetElement {
         if (this.#enabled) return;
         this.#enabled = true;
         this.scrolling = false;
-        this.root
+        this.main
             .on('scroll', (event: any) => {
                 if (!this.renderScroll()) return;
                 if (!this.scrolling) {
@@ -194,7 +194,7 @@ export class ContentElement extends TargetElement {
         this.#resizeObserver = new ResizeObserver(() => {
             this.renderScroll();
         });
-        this.#resizeObserver.observe(this.root);
+        this.#resizeObserver.observe(this.main);
 
         $window.on('resize', debounce(() => {
             this.renderScroll();
@@ -206,7 +206,7 @@ export class ContentElement extends TargetElement {
     disable() {
         if (!this.#enabled) return;
         this.#enabled = false;
-        this.root.off({ id: ['scroll'] });
+        this.main.off({ id: ['scroll'] });
         $window.off({ id: [this, NAME] });
         this.#resizeObserver.unobserve(this);
     }
@@ -228,7 +228,7 @@ export class ContentElement extends TargetElement {
                     if (this.center) {
                         const
                             elementSize = element[CLIENT_SIZE_KEY[dir]],
-                            offsetSize = this.root[OFFSET_SIZE_KEY[dir]],
+                            offsetSize = this.main[OFFSET_SIZE_KEY[dir]],
                             centerOffset = (offsetSize - elementSize) / 2;
                         if (to[dir] < centerOffset) {
                             to[dir] = 0;
@@ -251,7 +251,7 @@ export class ContentElement extends TargetElement {
                     } else if (to[dir] < 0) {
                         to[dir] = 0;
                     }
-                    const current = this[POSITION_KEY[dir]] = this.root[SCROLL_POSITION_KEY[dir]];
+                    const current = this[POSITION_KEY[dir]] = this.main[SCROLL_POSITION_KEY[dir]];
                     if (to[dir] === current) return to[dir] = null;
                 };
             if (this.scrollX) calc('X');
@@ -271,8 +271,8 @@ export class ContentElement extends TargetElement {
         }
 
         if (duration === 0) {
-            if (this.scrollX && isNum(to.X)) this.x = this.root.scrollLeft = to.X;
-            if (this.scrollY && isNum(to.Y)) this.y = this.root.scrollTop = to.Y;
+            if (this.scrollX && isNum(to.X)) this.x = this.main.scrollLeft = to.X;
+            if (this.scrollY && isNum(to.Y)) this.y = this.main.scrollTop = to.Y;
         } else {
             duration = duration || this.duration;
             this.scrolling = true;
@@ -284,15 +284,15 @@ export class ContentElement extends TargetElement {
                         return Math.round(b + c * t);
                     })(this.#time[dir], currentValue, toValue - currentValue, duration);
                 if (currentValue !== Math.round(toValue)) {
-                    this[POSITION_KEY[dir]] = this.root[SCROLL_POSITION_KEY[dir]] = newValue;
+                    this[POSITION_KEY[dir]] = this.main[SCROLL_POSITION_KEY[dir]] = newValue;
                     this.#animationFrame = requestAnimationFrame(() => scroll(dir, newValue, toValue));
                 } else {
                     this.scrolling = false;
                     if (complete) complete();
                 }
             };
-            if (this.scrollX && isNum(to.X)) scroll('X', this.x = this.root[SCROLL_POSITION_KEY.X], to.X);
-            if (this.scrollY && isNum(to.Y)) scroll('Y', this.y = this.root[SCROLL_POSITION_KEY.Y], to.Y);
+            if (this.scrollX && isNum(to.X)) scroll('X', this.x = this.main[SCROLL_POSITION_KEY.X], to.X);
+            if (this.scrollY && isNum(to.Y)) scroll('Y', this.y = this.main[SCROLL_POSITION_KEY.Y], to.Y);
         }
     }
 
@@ -303,11 +303,11 @@ export class ContentElement extends TargetElement {
             }
 
             const
-                scrollSize = this.#scrollSize[dir] = this.root[SCROLL_SIZE_KEY[dir]],
+                scrollSize = this.#scrollSize[dir] = this.main[SCROLL_SIZE_KEY[dir]],
                 size = this[CLIENT_SIZE_KEY[dir]],
                 // tslint:disable-next-line: radix
-                rootSize = this.root[CLIENT_SIZE_KEY[dir]],
-                scrollPosition = this[POSITION_KEY[dir]] = this.root[SCROLL_POSITION_KEY[dir]],
+                rootSize = this.main[CLIENT_SIZE_KEY[dir]],
+                scrollPosition = this[POSITION_KEY[dir]] = this.main[SCROLL_POSITION_KEY[dir]],
                 maxPosition = this['max' + dir] = scrollSize - rootSize < 0 ? 0 : (scrollSize - rootSize),
                 reach = scrollPosition <= 0 ? -1 : scrollPosition >= maxPosition ? 1 : 0;
 
@@ -323,7 +323,7 @@ export class ContentElement extends TargetElement {
                             `linear-gradient(to ${dir === 'X' ? 'right' : 'bottom'},rgba(0,0,0,0) 0px,rgba(0,0,0,1) ${startGuide}px,rgba(0,0,0,1) ${endGuide}px,rgba(0,0,0,0) ${size}px)` :
                             '';
                 // tslint:disable-next-line: deprecation
-                this.root.style.webkitMaskImage = this.root.style.maskImage = maskImage;
+                this.main.style.webkitMaskImage = this.main.style.maskImage = maskImage;
             }
 
             if (!this.scrollable) {

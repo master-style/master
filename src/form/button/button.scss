@@ -80,7 +80,7 @@
     --f-size: inherit;
     line-height: inherit;
 
-    [part=root] {
+    [part=main] {
         display: flex;
         padding: 0;
         min-width: unset;
@@ -90,7 +90,7 @@
     }
 }
 
-[part=root] {
+[part=main] {
     padding: var(--py) var(--px);
     min-width: var(--size);
     min-height: var(--size);

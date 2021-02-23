@@ -10,7 +10,7 @@ export class FooterElement extends MasterElement {
     static css = css;
 
     template: Template = new Template(() => [
-        'div', { part: 'root' }, [
+        'div', { part: 'main' }, [
             'slot', { name: 'start' },
             'slot',
             'slot', { name: 'end' }

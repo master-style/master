@@ -19,7 +19,7 @@ export class IconElement extends MasterElement {
     static css = css;
 
     template = new Template(() => [
-        'div', { part: 'root' }, [
+        'div', { part: 'main' }, [
             'svg', { viewBox: '0 0 24 24', $namespace: 'http://www.w3.org/2000/svg', $html: ICON[this.name] }
         ]
     ]);
