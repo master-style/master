@@ -41,7 +41,7 @@
 
 :host([scroll-y]),
 :host([scroll-x]) {
-    [part=root] {
+    [part=master] {
         will-change: scroll-position, -webkit-mask-image;
         -webkit-overflow-scrolling: touch;
         -ms-overflow-style: none;
@@ -54,7 +54,7 @@
 }
 
 :host([scroll-x]) {
-    [part=root] {
+    [part=master] {
         overflow-y: hidden;
         overflow-x: auto;
         overscroll-behavior-x: contain;
@@ -83,7 +83,7 @@
 
 :host([scroll-y]) {
 
-    [part=root] {
+    [part=master] {
         overflow-y: auto;
         overflow-x: hidden;
         overscroll-behavior-y: contain;
@@ -104,7 +104,7 @@
 }
 
 :host([scroll-x][scroll-y]) {
-    [part=root] {
+    [part=master] {
         overflow: auto;
         touch-action: manipulation;
     }
@@ -116,17 +116,15 @@
 }
 
 
-[part=root] {
+[part=master] {
     display: inherit;
     width: 100%;
-    height: 100%;
     align-items: inherit;
     justify-content: inherit;
     flex-direction: inherit;
-    max-height: inherit;
+    max-height: 100%;
     box-sizing: border-box;
     contain: style;
-    margin: auto;
     padding: var(--offset-top) var(--offset-right) var(--offset-bottom) var(--offset-left)
 }
 

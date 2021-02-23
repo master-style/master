@@ -19,7 +19,6 @@ export class SelectPopupElement extends PopupElement {
 
     _duration = 300;
     _triggerEvent = null;
-    _placement = 'bottom-start';
 
     items: ItemElement[] = [];
 

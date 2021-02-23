@@ -9,18 +9,19 @@ const NAME = 'skeleton';
 export class SkeletonElement extends MasterElement {
     static css = css;
 
-    template = new Template(() => {
-        this.css('width', this.width);
-        return [
-            'div', {
-                part: 'bg', $css: {
-                    height: this.height
-                }
+    template = new Template(() => [
+        'div', {
+            part: 'bg', $css: {
+                height: this.height
             }
-        ];
-    });
+        }
+    ]);
 
-    @Attr()
+    @Attr({
+        onUpdate(this: SkeletonElement, value: number) {
+            this.css('width', value);
+        }
+    })
     width: number;
 
     @Attr()

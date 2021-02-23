@@ -33,8 +33,8 @@ export class ModalElement extends TargetElement {
             $created: (element: MasterElement) => this.overlayElement = element
         },
         'div', {
-            part: 'root',
-            $created: (element: MasterElement) => this.root = element
+            part: 'master',
+            $created: (element: MasterElement) => this.master = element
         }, [
             ...this.contentTokens(),
             'm-button', {
@@ -59,7 +59,7 @@ export class ModalElement extends TargetElement {
         this.template.remove();
     }
 
-    root: any;
+    master: any;
     wrap: any;
     header: HeaderElement;
     // footer: FooterElement;
@@ -141,7 +141,7 @@ export class ModalElement extends TargetElement {
 
             const
                 triggerRect = this.trigger.getBoundingClientRect(),
-                rootRect = this.root.getBoundingClientRect();
+                rootRect = this.master.getBoundingClientRect();
             const scale = triggerRect.width / rootRect.width;
             console.log(rootRect);
             const x =
@@ -190,25 +190,25 @@ export class ModalElement extends TargetElement {
                         dir = 'X';
                         offset = '100%';
                         if (this.pushing)
-                            pushingOffset = -this.root.offsetWidth / 3;
+                            pushingOffset = -this.master.offsetWidth / 3;
                         break;
                     case 'left':
                         dir = 'X';
                         offset = '-100%';
                         if (this.pushing)
-                            pushingOffset = this.root.offsetWidth / 3;
+                            pushingOffset = this.master.offsetWidth / 3;
                         break;
                     case 'bottom':
                         dir = 'Y';
                         offset = '100%';
                         if (this.pushing)
-                            pushingOffset = -this.root.offsetHeight / 3;
+                            pushingOffset = -this.master.offsetHeight / 3;
                         break;
                     case 'top':
                         dir = 'Y';
                         offset = '-100%';
                         if (this.pushing)
-                            pushingOffset = this.root.offsetHeight / 3;
+                            pushingOffset = this.master.offsetHeight / 3;
                         break;
                 }
 
@@ -256,7 +256,7 @@ export class ModalElement extends TargetElement {
             );
         }
 
-        this.animation = this.root.animate(keyframes, options);
+        this.animation = this.master.animate(keyframes, options);
         this.animations.push(this.animation);
         return new Promise<void>((finish) => {
             this.animation.onfinish = () => {
@@ -266,9 +266,9 @@ export class ModalElement extends TargetElement {
                 }
                 if (content) {
                     if (hidden) {
-                        enableBodyScroll(content.root);
+                        enableBodyScroll(content.master);
                     } else {
-                        disableBodyScroll(content.root);
+                        disableBodyScroll(content.master);
                         content.enable();
                     }
                 }

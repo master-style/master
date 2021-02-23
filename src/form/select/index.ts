@@ -46,8 +46,8 @@ export class SelectElement extends ControlElement {
             }, { passive: true })
         },
         'div', {
-            part: 'root',
-            $created: (element: HTMLDivElement) => this.root = element
+            part: 'master',
+            $created: (element: HTMLDivElement) => this.master = element
         }, [
             'div', {
                 part: 'body'
@@ -84,6 +84,7 @@ export class SelectElement extends ControlElement {
                                 click: (event) => {
                                     event.stopPropagation();
                                     eachOption.selected = false;
+                                    this.changeEmitter(this.value);
                                     this.popup.render();
                                 }
                             }
@@ -130,7 +131,7 @@ export class SelectElement extends ControlElement {
 
     uid: number;
 
-    root: HTMLDivElement;
+    master: HTMLDivElement;
     popup: SelectPopupElement;
     search: HTMLInputElement;
     searchInfo: HTMLElement;
@@ -217,6 +218,7 @@ export class SelectElement extends ControlElement {
                 if (this.disabled || this.popup) return;
                 this.popup = $('m-select-popup', {
                     multiple: this.multiple,
+                    placement: this.placement,
                     hidden: true,
                     'min-width': 'trigger'
                 });
@@ -249,6 +251,9 @@ export class SelectElement extends ControlElement {
 
     @Attr()
     placeholder: string;
+
+    @Attr()
+    placement = 'bottom-start';
 
     @Attr()
     label: string;

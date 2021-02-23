@@ -57,8 +57,9 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { GridComponent } from './layout/grid/grid.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { OverlayComponent } from './layout/overlay/overlay.component';
+import { ImgComponent } from './medias/img/img.component';
 
-export const routes: Routes =  [
+export const routes: Routes = [
     { path: 'overview', data: { icon: 'grid' }, component: OverviewComponent, resolve: { route: RouteResolver } },
     // { path: 'animation', data: { icon: 'activity' }, component: AnimationComponent, resolve: { route: RouteResolver } },
     // { path: 'components' },
@@ -118,6 +119,11 @@ export const routes: Routes =  [
             { path: 'header', component: HeaderComponent, resolve: { route: RouteResolver } },
             { path: 'content', component: ContentComponent, resolve: { route: RouteResolver } },
             { path: 'footer', component: FooterComponent, resolve: { route: RouteResolver } },
+        ]
+    },
+    {
+        path: 'medias', data: { icon: 'image' }, resolve: { route: RouteResolver }, children: [
+            { path: 'img', component: ImgComponent, resolve: { route: RouteResolver } },
         ]
     },
     // { path: 'utilities' },
