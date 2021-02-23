@@ -72,6 +72,7 @@ import { FormsModule } from '@angular/forms';
 import { OverviewComponent } from './overview/overview.component';
 
 import { DisplayModule } from '@master/angular';
+import { ImgComponent } from './medias/img/img.component';
 
 @NgModule({
     declarations: [
@@ -133,6 +134,7 @@ import { DisplayModule } from '@master/angular';
         FooterComponent,
         EditorComponent,
         OverviewComponent,
+        ImgComponent,
     ],
     imports: [
         FormsModule,
