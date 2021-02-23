@@ -18,6 +18,30 @@
     box-sizing: border-box;
 }
 
+[part=master] {
+    display: inherit;
+    width: 100%;
+    align-items: inherit;
+    justify-content: inherit;
+    flex-direction: inherit;
+    max-height: 100%;
+    box-sizing: border-box;
+    contain: style;
+    padding: var(--offset-top) var(--offset-right) var(--offset-bottom) var(--offset-left)
+}
+
+[part=content] {
+    display: block;
+}
+
+:host(.full) {
+
+    [part=master],
+    [part=content] {
+        height: 100%;
+    }
+}
+
 :host([changing]) {
     overflow: hidden !important;
     contain: style;
@@ -113,19 +137,6 @@
 
 :host([overscroll]) {
     overscroll-behavior: auto auto;
-}
-
-
-[part=master] {
-    display: inherit;
-    width: 100%;
-    align-items: inherit;
-    justify-content: inherit;
-    flex-direction: inherit;
-    max-height: 100%;
-    box-sizing: border-box;
-    contain: style;
-    padding: var(--offset-top) var(--offset-right) var(--offset-bottom) var(--offset-left)
 }
 
 m-bar {

@@ -44,10 +44,15 @@ export class ContentElement extends TargetElement {
     #lastMorePosition: number = 0;
 
     template = new Template(() => [
-        'slot', {
+        'div', {
             part: 'master',
             $created: (element: MasterElement) => this.master = element
-        },
+        }, [
+            'slot', {
+                part: 'content',
+                $created: (element: HTMLSlotElement) => this.content = element
+            }
+        ],
         'slot', {
             name: 'part'
         },
@@ -74,6 +79,7 @@ export class ContentElement extends TargetElement {
     ]);
 
     master: MasterElement;
+    content: HTMLSlotElement;
     scrolling = false;
 
     maxX: number;
@@ -195,6 +201,7 @@ export class ContentElement extends TargetElement {
             this.renderScroll();
         });
         this.#resizeObserver.observe(this.master);
+        this.#resizeObserver.observe(this.content);
 
         $window.on('resize', debounce(() => {
             this.renderScroll();
@@ -208,7 +215,8 @@ export class ContentElement extends TargetElement {
         this.#enabled = false;
         this.master.off({ id: ['scroll'] });
         $window.off({ id: [this, NAME] });
-        this.#resizeObserver.unobserve(this);
+        this.#resizeObserver.unobserve(this.master);
+        this.#resizeObserver.unobserve(this.content);
     }
 
     get scrollable(): boolean {
