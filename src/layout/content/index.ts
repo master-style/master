@@ -324,11 +324,11 @@ export class ContentElement extends TargetElement {
                     guideSize = this.guideSize,
                     startGuide = (scrollPosition < guideSize) ? scrollPosition : guideSize,
                     endGuide = (scrollPosition > maxPosition - guideSize) ?
-                        (size + scrollPosition - maxPosition) :
-                        (size - guideSize),
+                        (rootSize + scrollPosition - maxPosition) :
+                        (rootSize - guideSize),
                     maskImage =
                         this.scrollable ?
-                            `linear-gradient(to ${dir === 'X' ? 'right' : 'bottom'},rgba(0,0,0,0) 0px,rgba(0,0,0,1) ${startGuide}px,rgba(0,0,0,1) ${endGuide}px,rgba(0,0,0,0) ${size}px)` :
+                            `linear-gradient(to ${dir === 'X' ? 'right' : 'bottom'},rgba(0,0,0,0) 0px,rgba(0,0,0,1) ${startGuide}px,rgba(0,0,0,1) ${endGuide}px,rgba(0,0,0,0) ${rootSize}px)` :
                             '';
                 // tslint:disable-next-line: deprecation
                 this.master.style.webkitMaskImage = this.master.style.maskImage = maskImage;
