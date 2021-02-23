@@ -19,11 +19,8 @@
 }
 
 [part=master] {
-    display: inherit;
+    display: block;
     width: 100%;
-    align-items: inherit;
-    justify-content: inherit;
-    flex-direction: inherit;
     max-height: 100%;
     box-sizing: border-box;
     contain: style;
