@@ -24,3 +24,10 @@
     will-change: opacity;
     transition: opacity .3s ease;
 }
+
+:host([src=""]),
+:host([srcset=""]) {
+    [part=master] {
+        visibility: hidden;
+    }
+}
