@@ -36,9 +36,8 @@
 // text line
 [class*="t-line\:"] {
     overflow: hidden;
-    display: -webkit-box;
     max-width: 100%;
-    word-wrap: normal;
+    white-space: nowrap;
     text-overflow: ellipsis;
     -ms-text-overflow: ellipsis;
     -webkit-box-orient: vertical;
