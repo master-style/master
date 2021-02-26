@@ -9,7 +9,7 @@
     position: relative;
     contain: style;
     width: 100%;
-    display: block;
+    display: flex;
     flex-direction: column;
     -webkit-user-drag: none;
     -webkit-touch-callout: none;
@@ -21,7 +21,7 @@
 [part=master] {
     display: block;
     width: 100%;
-    max-height: inherit;
+    max-height: 100%;
     box-sizing: border-box;
     contain: style;
     padding: var(--offset-top) var(--offset-right) var(--offset-bottom) var(--offset-left)
