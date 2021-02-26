@@ -4,12 +4,13 @@
 m-table {
     display: table;
     width: max-content;
+    min-width: 100%;
     border-collapse: separate;
     border-spacing: 0;
     border-radius: inherit;
-    table-layout: fixed;
 
-    .fit {
+    th.fit,
+    td.fit {
         width: .1%;
     }
 
@@ -42,7 +43,6 @@ m-table {
     }
 
     &.sm {
-
         td,
         th {
             padding: .6rem;
