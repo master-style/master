@@ -19,13 +19,6 @@ m-table {
         border-width: 2px !important;
     }
 
-    /* for IOS safari */
-    // @supports (-webkit-overflow-scrolling: touch) {
-    //     border: 1px solid var(--b-fadest);
-    //     mask-image: radial-gradient(circle, black, black);
-    //     -webkit-mask-image: -webkit-radial-gradient(circle, black, black);
-    // }
-
     th,
     td {
         line-height: 1.3;
