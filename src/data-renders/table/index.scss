@@ -2,10 +2,12 @@
 @import '../../mixins.scss';
 
 m-table {
-    contain: style;
-    border-radius: $xs;
-    display: block;
-    width: 100%;
+    display: table;
+    width: max-content;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: inherit;
+    table-layout: fixed;
 
     .fit {
         width: .1%;
@@ -14,16 +16,6 @@ m-table {
     thead th {
         vertical-align: middle;
         border-width: 2px !important;
-    }
-
-    table {
-        border-collapse: separate;
-        border-spacing: 0;
-        border-radius: inherit;
-        table-layout: fixed;
-        width: auto;
-        min-width: 100%; // min-width 會使內容均勻分佈，不可使用 width
-        color: inherit;
     }
 
     /* for IOS safari */
