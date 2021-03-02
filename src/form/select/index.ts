@@ -114,7 +114,7 @@ export class SelectElement extends ControlElement {
         ]
     ]);
 
-    @Event({ force: true })
+    @Event({ force: true, bubbles: true })
     addEmitter: EventEmitter;
 
     @Event({ force: true, bubbles: true })
