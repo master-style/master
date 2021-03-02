@@ -92,9 +92,6 @@ export class ContentElement extends TargetElement {
     moreEmitter: EventEmitter;
 
     @Event()
-    changeEmitter: EventEmitter;
-
-    @Event()
     scrollEmitter: EventEmitter;
 
     @Event()
@@ -189,13 +186,6 @@ export class ContentElement extends TargetElement {
                 id: [NAME],
                 passive: true
             })
-            .on('slotchange', (event) => {
-                this.renderScroll();
-                this.changeEmitter();
-            }, {
-                id: [NAME],
-                passive: true
-            });
 
         this.#resizeObserver = new ResizeObserver(() => {
             this.renderScroll();

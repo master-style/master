@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { $ } from '@master/dom';
 
 @Component({
-  selector: 'doc-select',
-  templateUrl: './select.component.html',
-  styleUrls: ['./select.component.scss']
+    selector: 'doc-select',
+    templateUrl: './select.component.html',
+    styleUrls: ['./select.component.scss']
 })
 export class SelectComponent implements OnInit {
 
-  constructor() { }
+    @ViewChild('form') formRef: ElementRef<any>;
 
-  ngOnInit(): void {
-  }
+    constructor() { }
+
+    ngOnInit(): void { }
+
+    ngAfterViewInit(): void {
+        $(this.formRef.nativeElement)
+            .on('change', 'm-select', (event) => {
+                console.log(event);
+            })
+    }
 
 }

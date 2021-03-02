@@ -117,7 +117,7 @@ export class SelectElement extends ControlElement {
     @Event({ force: true })
     addEmitter: EventEmitter;
 
-    @Event({ force: true })
+    @Event({ force: true, bubbles: true })
     changeEmitter: EventEmitter;
 
     @Attr({ key: 'tabindex' })
