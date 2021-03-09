@@ -55,9 +55,6 @@ export class ControlElement extends MasterElement {
     required: boolean;
 
     @Attr({ observe: false, render: false })
-    prompt: string;
-
-    @Attr({ observe: false, render: false })
     valid: boolean;
 
     @Attr({ observe: false, render: false })
@@ -71,6 +68,9 @@ export class ControlElement extends MasterElement {
 
     @Attr({ observe: false, render: false })
     touched: boolean = false;
+
+    @Attr({ observe: false, render: false })
+    prompt: string;
 
     validate() {
 
@@ -107,10 +107,12 @@ export class ControlElement extends MasterElement {
         this.valid = this.validity.valid;
         this.invalid = !this.validity.valid;
 
+        console.log(this.valid, prompt);
+
         if (prompt !== undefined) {
             this.prompt = prompt;
         } else {
-            this.toggleAttribute('prompt', false);
+            this.prompt = null;
         }
     }
 

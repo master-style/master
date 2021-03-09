@@ -59,16 +59,7 @@ export class DialogComponent implements OnInit {
                         placeholder: 'e.g username@domain.com',
                         label: 'username',
                         'when-type-mismatch': 'type error',
-                        required: true,
-                        $created: (input) => {
-                            input.on('input', (event) => {
-                                if (event.target.value === 'aoyue.design@gmail.com') {
-                                    input.error = 'error';
-                                } else {
-                                    input.error = '';
-                                }
-                            });
-                        }
+                        required: true
                     },
                     'm-input', {
                         class: 'outlined x:12',
@@ -76,7 +67,16 @@ export class DialogComponent implements OnInit {
                         type: 'password',
                         placeholder: 'password',
                         label: 'password',
-                        required: true
+                        required: true,
+                        $created: (input) => {
+                            input.on('input', (event) => {
+                                if (event.target.value === '123') {
+                                    input.error = 'error';
+                                } else {
+                                    input.error = '';
+                                }
+                            });
+                        }
                     },
                     'm-button', {
                         class: 'x:12',
