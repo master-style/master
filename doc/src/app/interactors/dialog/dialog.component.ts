@@ -58,8 +58,16 @@ export class DialogComponent implements OnInit {
                         type: 'email',
                         placeholder: 'e.g username@domain.com',
                         label: 'username',
-                        'when-custom-error': 'wrong email format',
-                        required: true
+                        required: true,
+                        // $created: (input) => {
+                        //     input.on('input', (event) => {
+                        //         if (event.target.value) {
+                        //             input.whenCustomError = 'error';
+                        //         } else {
+                        //             input.whenCustomError = '';
+                        //         }
+                        //     });
+                        // }
                     },
                     'm-input', {
                         class: 'outlined x:12',
