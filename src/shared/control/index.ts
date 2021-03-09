@@ -25,9 +25,6 @@ export class ControlElement extends MasterElement {
     whenBadInput: string;
 
     @Attr(WHEN_ATTR_OPTIONS)
-    whenCustomError: string;
-
-    @Attr(WHEN_ATTR_OPTIONS)
     whenPatternMismatch: string;
 
     @Attr(WHEN_ATTR_OPTIONS)
@@ -50,6 +47,9 @@ export class ControlElement extends MasterElement {
 
     @Attr(WHEN_ATTR_OPTIONS)
     whenValid: string;
+
+    @Attr(WHEN_ATTR_OPTIONS)
+    error: string;
 
     @Attr({ onRender: (control: ControlElement) => control.validate() })
     required: boolean;
@@ -82,7 +82,9 @@ export class ControlElement extends MasterElement {
 
         for (const key in this.validity) {
             const eachWhether = this.validity[key];
-            if (key === 'customError') break;
+            if (key === 'customError') {
+                continue;
+            }
             const eachPrompt = this['when' + capitalize(key)];
             if (eachPrompt !== undefined) {
                 if (eachWhether) {
@@ -94,10 +96,10 @@ export class ControlElement extends MasterElement {
             }
         }
 
-        const customError = this.whenCustomError;
+        const error = this.error;
 
-        if (customError && !prompt) {
-            this.body.setCustomValidity(prompt = customError);
+        if(error && !prompt) {
+            this.body.setCustomValidity(prompt = error);
         } else {
             this.body.setCustomValidity('');
         }
