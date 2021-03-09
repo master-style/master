@@ -78,14 +78,12 @@ export class ControlElement extends MasterElement {
             return;
         }
 
-        this.valid = this.validity.valid;
-        this.invalid = !this.validity.valid;
         let prompt;
 
         for (const key in this.validity) {
             const eachWhether = this.validity[key];
+            if (key === 'customError') break;
             const eachPrompt = this['when' + capitalize(key)];
-
             if (eachPrompt !== undefined) {
                 if (eachWhether) {
                     prompt = eachPrompt;
@@ -95,6 +93,17 @@ export class ControlElement extends MasterElement {
                 }
             }
         }
+
+        const customError = this.whenCustomError;
+
+        if (customError && !prompt) {
+            this.body.setCustomValidity(prompt = customError);
+        } else {
+            this.body.setCustomValidity('');
+        }
+
+        this.valid = this.validity.valid;
+        this.invalid = !this.validity.valid;
 
         if (prompt !== undefined) {
             this.prompt = prompt;

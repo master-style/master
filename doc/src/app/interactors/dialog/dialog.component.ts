@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { InputElement } from '../../../../../src';
 
-declare const MasterUI;
+import { dialog } from '../../../../../src/interactors/dialog';
 
 @Component({
     selector: 'doc-dialog',
@@ -21,7 +22,7 @@ export class DialogComponent implements OnInit {
             const obs = this.http
                 .get('https://api.unsplash.com/photos/random/?client_id=yY6EAfiInBb_-KFF8QG7C1jg6bMAxfdK6MkZwqHnkjk&count=10')
 
-            MasterUI.dialog({
+            dialog({
                 title: 'Login',
                 text: 'Welcome to the Master.',
                 // type: 'success',
@@ -57,7 +58,7 @@ export class DialogComponent implements OnInit {
                         type: 'email',
                         placeholder: 'e.g username@domain.com',
                         label: 'username',
-                        'prompt-invalid': 'wrong email format',
+                        'when-custom-error': 'wrong email format',
                         required: true
                     },
                     'm-input', {
@@ -65,7 +66,6 @@ export class DialogComponent implements OnInit {
                         name: 'password',
                         type: 'password',
                         placeholder: 'password',
-                        'prompt-invalid': '',
                         label: 'password',
                         required: true
                     },
