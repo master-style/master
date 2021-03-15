@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, Directive, Input } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -74,6 +74,7 @@ import { OverviewComponent } from './overview/overview.component';
 import { DisplayModule } from '@master/angular';
 import { ImgComponent } from './medias/img/img.component';
 
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -96,22 +97,22 @@ import { ImgComponent } from './medias/img/img.component';
         TabsComponent,
         InstallationComponent,
         DisplayComponent,
-        VisibilityComponent, 
-        ArticleComponent, 
-        AlignmentComponent, 
-        PositionComponent, 
+        VisibilityComponent,
+        ArticleComponent,
+        AlignmentComponent,
+        PositionComponent,
         WrapComponent,
-        AreaComponent, 
-        BackgroundComponent, 
-        BorderComponent, 
-        FontComponent, 
-        HoverComponent, 
-        MarginComponent, 
-        PaddingComponent, 
-        RadiusComponent, 
-        ScaleComponent, 
-        ShadowComponent, 
-        TextComponent, 
+        AreaComponent,
+        BackgroundComponent,
+        BorderComponent,
+        FontComponent,
+        HoverComponent,
+        MarginComponent,
+        PaddingComponent,
+        RadiusComponent,
+        ScaleComponent,
+        ShadowComponent,
+        TextComponent,
         ZIndexComponent,
         DialogComponent,
         RippleComponent,
@@ -134,7 +135,7 @@ import { ImgComponent } from './medias/img/img.component';
         FooterComponent,
         EditorComponent,
         OverviewComponent,
-        ImgComponent,
+        ImgComponent
     ],
     imports: [
         FormsModule,

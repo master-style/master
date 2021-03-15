@@ -1,17 +1,26 @@
 import { Element, MasterElement, Attr, Prop } from '@master/element';
-
+import './editor-block';
 import css from './editor.scss';
-import { Template } from '@master/template';
 
-const defaultParagraphSeparatorString = 'defaultParagraphSeparator'
-const formatBlock = 'formatBlock'
-const queryCommandState = command => document.queryCommandState(command)
-const queryCommandValue = command => document.queryCommandValue(command)
+import { Template } from '@master/template';
+import { extend } from '../utils/extend';
+import { EditorBlockElement } from './editor-block';
+
+const defaultParagraphSeparatorString = 'defaultParagraphSeparator';
+const formatBlock = 'formatBlock';
+const queryCommandState = command => document.queryCommandState(command);
+const queryCommandValue = command => document.queryCommandValue(command);
 
 export const exec = (command, value = null) => document.execCommand(command, false, value)
 
 const NAME = 'editor';
 
+export interface EditorBlock {
+    tag: string;
+    type: string;
+    value: any;
+    attr?: any;
+}
 
 @Element('m-' + NAME)
 export class EditorElement extends MasterElement {
@@ -38,7 +47,6 @@ export class EditorElement extends MasterElement {
                                 eachAction.result();
                                 this.focus();
                             }, { id: [NAME], passive: true });
-
                             if (eachAction.state) {
                                 const handler = () => element.toggleAttribute('active', eachAction.state());
                                 this.on('keyup mouseup', handler, { id: [NAME], passive: true });
@@ -66,12 +74,47 @@ export class EditorElement extends MasterElement {
         ]
     ]);
 
+    blockTemplate = new Template(() => {
+        return [].concat(...this.value?.map((eachBlock: EditorBlock) => {
+            const blockOption = this.blockOptions[eachBlock.type];
+            const options: any = {};
+            switch (eachBlock.type) {
+                default:
+                    options.contentEditable = blockOption.editable;
+                    options.placeholder = this.placeholder;
+                    options.$on = {
+                        input: (event) => {
+                            eachBlock.value = event.target.innerHTML;
+                        }
+                    }
+                    if (eachBlock.value) {
+                        options.$html = eachBlock.value;
+                    }
+            }
+            return [
+                'm-editor-block', {
+                    type: eachBlock.type,
+                    $created: (editorBlock: EditorBlockElement) => {
+                        editorBlock.value = eachBlock.value
+                    }
+                }, [
+                    blockOption.tag, options
+                ]
+            ]
+        }) || [])
+    });
+
     codeWrap: HTMLElement;
+
+    blocks: EditorBlockElement[] = [];
 
     @Attr()
     disabled: boolean;
 
-    actions = {
+    @Attr({ reflect: false })
+    placeholder: string = 'Type ...';
+
+    defaultActions = {
         bold: {
             icon: '<b>B</b>',
             title: 'Bold',
@@ -151,63 +194,65 @@ export class EditorElement extends MasterElement {
                 const url = window.prompt('Enter the image URL')
                 if (url) exec('insertImage', url)
             }
-        },
-        html: {
-            icon: '&lt;/&gt;',
-            title: 'Code',
-            result: () => {
-                if (this.view) {
-                    this.innerHTML = this.codeWrap.textContent;
-                    this.view = '';
-                } else {
-                    this.view = 'code';
-                }
-            }
         }
     };
 
-    render() {
-        this.template.render(this.shadowRoot);
+    defaultBlockOptions = {
+        paragraph: {
+            tag: 'p',
+            editable: true
+        }
     }
 
-    get value() {
-        return (this.view
-            ? this.codeWrap.textContent
-            : this.innerHTML).replace(/<? _[\S]*?="[\s\S]*?"/g, '');
-    };
+    @Prop({
+        parse(editor: EditorElement, value) {
+            return extend({}, editor.defaultActions, value);
+        }
+    })
+    actions = this.defaultActions;
+
+    @Prop({
+        parse(editor: EditorElement, value) {
+            return extend({}, editor.defaultBlockOptions, value);
+        }
+    })
+    blockOptions = this.defaultBlockOptions;
+
+    @Prop({
+        parse(editor: EditorElement, value) {
+            console.log(value);
+            return value;
+        }
+    })
+    value: any[];
 
     // styleWithCSS = false;
 
     onConnected() {
-
-        this.contentEditable = 'true';
-
-        if (!this.innerHTML) {
-            this.innerHTML = '<p><br></p>';
-        }
-
-        this.on('input', (event: any) => {
-            if (!this.view) {
-                const html = this.innerHTML;
-                if (!html) {
-                    this.innerHTML = '<p><br></p>';
+        const self = this;
+        this
+            .on('keydown', 'm-editor-block', function (event: any) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    const nextIndex = self.blocks.indexOf(this) + 1;
+                    self.value.splice(nextIndex, 0, {
+                        type: 'paragraph',
+                        value: '' // value 不給空會有問題，@master/template 那邊有問題
+                    });
+                    self.blockTemplate.render(self);
+                    (self.blocks[nextIndex].firstChild as any).focus();
                 }
-            }
-        }, { id: [NAME], passive: true });
-
-        this.on('keydown', (event: any) => {
-            if (event.key === 'Enter' && queryCommandValue(formatBlock) === 'blockquote') {
-                setTimeout(() => exec(formatBlock, 'div'), 0);
-            }
-        }, { id: [NAME], passive: true });
-
+            }, { id: [NAME] });
         // if (this.styleWithCSS) exec('styleWithCSS');
-
         exec(defaultParagraphSeparatorString, 'div');
     }
 
     onDisconnected() {
-
+        this.off({ id: [NAME] })
     }
 
+    render() {
+        this.template.render(this.shadowRoot);
+        this.blockTemplate.render(this);
+    }
 }

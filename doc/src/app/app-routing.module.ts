@@ -106,10 +106,10 @@ export const routes: Routes = [
             { path: 'input', component: InputComponent, resolve: { route: RouteResolver } },
             { path: 'textarea', component: TextareaComponent, resolve: { route: RouteResolver } },
             { path: 'check', component: CheckComponent, resolve: { route: RouteResolver } },
-            { path: 'editor', component: EditorComponent, resolve: { route: RouteResolver } },
-            { path: 'icon', data: { icon: 'image' }, component: IconComponent, resolve: { route: RouteResolver } },
         ]
     },
+    { path: 'editor', data: { icon: 'feather' }, component: EditorComponent, resolve: { route: RouteResolver } },
+    { path: 'icon', data: { icon: 'image' }, component: IconComponent, resolve: { route: RouteResolver } },
     {
         path: 'layout', data: { icon: 'grid' }, resolve: { route: RouteResolver }, children: [
             { path: 'app', component: AppComponent, resolve: { route: RouteResolver } },

@@ -1,0 +1,10 @@
+m-editor {
+    [contenteditable] {
+        outline: none;
+
+        &:empty[placeholder]:focus:before {
+            content: attr(placeholder);
+            color: var(--f-fadest);
+        }
+    }
+}
