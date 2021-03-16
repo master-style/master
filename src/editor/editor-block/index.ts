@@ -19,7 +19,8 @@ export class EditorBlockElement extends MasterElement {
         const options: any = {
             placeholder: this.placeholder,
             contentEditable: this.options.editable,
-            $html: this.value.data,
+            $html: this.data,
+            $created: (element) => this.editableElement = this.options.editable ? element : undefined
         };
         if (this.options.editable) {
             options.$on = {
@@ -34,16 +35,52 @@ export class EditorBlockElement extends MasterElement {
         ]
     });
 
-    @Prop({ render: false })
-    value: EditorBlockValue;
-
-    @Prop({ render: false })
-    options: EditorBlockOptions;
-
     @Prop()
     placeholder: string;
 
+    set data(data) {
+        this.value.data = data;
+        if (this.editableElement) {
+            this.editableElement.innerHTML = data;
+        }
+    }
+
+    get data() {
+        return this.value.data || '';
+    }
+
+    value: EditorBlockValue;
+    options: EditorBlockOptions;
     editor: EditorElement;
+    editableElement: HTMLElement;
+
+    focus() {
+        this.editableElement?.focus();
+    }
+
+    get caretPosition() {
+        this.editableElement.focus();
+        let selection = window.getSelection();
+        let range = selection.getRangeAt(0);
+        const childNodes = this.editableElement.childNodes;
+        const lastChildNodeIndex = childNodes.length - 1;
+        const lastChildNode = childNodes[lastChildNodeIndex];
+        range.selectNodeContents(lastChildNode);
+        return {
+            offset: range.endOffset,
+            index: lastChildNodeIndex
+        };
+    }
+
+    set caretPosition(caretPosition: { offset: number, index: number }) {
+        let selection = window.getSelection();
+        let range = document.createRange();
+        const lastChildNode = this.editableElement.childNodes[caretPosition.index];
+        range.setStart(lastChildNode, caretPosition.offset);
+        range.setEnd(lastChildNode, caretPosition.offset);
+        selection.removeAllRanges();
+        selection.addRange(range);
+    }
 
     onConnected() {
         this.editor = (this.parentElement as EditorElement);

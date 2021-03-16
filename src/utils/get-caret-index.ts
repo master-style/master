@@ -6,6 +6,7 @@ export function getCaretIndex<T extends Element>(element: T) {
         const preCaretRange = range.cloneRange();
         preCaretRange.selectNodeContents(element);
         preCaretRange.setEnd(range.endContainer, range.endOffset);
+        console.log(preCaretRange);
         position = preCaretRange.toString().length;
     }
     return position;

@@ -13,10 +13,16 @@ const formatBlock = 'formatBlock';
 const queryCommandState = command => document.queryCommandState(command);
 const queryCommandValue = command => document.queryCommandValue(command);
 
-export const exec = (command, value = null) => document.execCommand(command, false, value)
+export const exec = (command, value = null) => document.execCommand(command, false, value);
 
 const NAME = 'editor';
 const body = $(document.body);
+
+enum KeyCode {
+    ENTER = 13,
+    DELETE = 46,
+    BACKSPACE = 8
+}
 
 export interface EditorBlockValue {
     type: string;
@@ -227,26 +233,30 @@ export class EditorElement extends MasterElement {
                 const nextIndex = currentIndex + 1;
                 const prevIndex = currentIndex - 1;
                 const prevBlock = prevIndex !== -1 ? editor.blocks[prevIndex] : undefined;
-                switch (event.key) {
-                    case 'Enter':
+                const caretIndex = getCaretIndex(event.target);
+                switch (event.keyCode) {
+                    case KeyCode.ENTER:
                         event.preventDefault();
+                        console.log(caretIndex);
                         editor.value.splice(nextIndex, 0, {
                             type: 'paragraph'
                         });
                         editor.blockTemplate.render(editor);
                         const newBlock = editor.blocks[nextIndex];
-                        const newEditableElement = newBlock.querySelector('[contenteditable]') as HTMLElement;
-                        if (newEditableElement) {
-                            newEditableElement.innerHTML = '';
-                            newEditableElement.focus();
+                        if (newBlock.options.editable) {
+                            newBlock.data = '';
+                            newBlock.focus();
                         }
                         break;
-                    case 'Backspace':
-                        const caretIndex = getCaretIndex(event.target);
+                    case KeyCode.BACKSPACE:
                         if (caretIndex === 0) {
-                            if (prevBlock && block.value.data) {
-                                const prevBlockOption = editor.blockOptionsByType[prevBlock.value.type];
-
+                            event.preventDefault();
+                            if (prevBlock && prevBlock.options.editable) {
+                                const caretPosition = prevBlock.caretPosition;
+                                if (block.value.data) {
+                                    prevBlock.data = prevBlock.data + block.value.data;
+                                }
+                                prevBlock.caretPosition = caretPosition;
                             }
                             editor.removeBlocks([block]);
                         }
@@ -293,8 +303,8 @@ export class EditorElement extends MasterElement {
                 setTimeout(() => {
                     body
                         .on('keydown', (event: any) => {
-                            switch (event.key) {
-                                case 'Delete':
+                            switch (event.keyCode) {
+                                case KeyCode.DELETE:
                                     this.clearSelection(store);
                                     this.removeBlocks((store.selected as EditorBlockElement[]));
                                     break;
