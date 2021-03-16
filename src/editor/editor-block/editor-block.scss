@@ -1,3 +1,9 @@
 :host {
     display: block;
 }
+
+:host([selected]) {
+    background-color: var(--blue-fader);
+    transition: background-color .2s ease;
+    will-change: background-color;
+}

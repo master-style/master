@@ -21,14 +21,15 @@ export class EditorBlockElement extends MasterElement {
     @Attr()
     type: string;
 
+    editor: EditorElement;
+
     onConnected() {
-        const editor = (this.parentElement as EditorElement);
-        editor.blocks.push(this);
+        this.editor = (this.parentElement as EditorElement);
+        this.editor.blocks.push(this);
     }
 
     onDisconnected() {
-        const editor = (this.parentElement as EditorElement);
-        editor.blocks.splice(editor.blocks.indexOf(this), 1);
+        this.editor.blocks.splice(this.editor.blocks.indexOf(this), 1);
     }
 
     render() {

@@ -5,6 +5,8 @@ import css from './editor.scss';
 import { Template } from '@master/template';
 import { extend } from '../utils/extend';
 import { EditorBlockElement } from './editor-block';
+import SelectionArea from '@simonwep/selection-js';
+import { $ } from '@master/dom';
 
 const defaultParagraphSeparatorString = 'defaultParagraphSeparator';
 const formatBlock = 'formatBlock';
@@ -14,12 +16,11 @@ const queryCommandValue = command => document.queryCommandValue(command);
 export const exec = (command, value = null) => document.execCommand(command, false, value)
 
 const NAME = 'editor';
+const body = $(document.body);
 
-export interface EditorBlock {
-    tag: string;
+export interface EditorValue {
     type: string;
-    value: any;
-    attr?: any;
+    data?: any;
 }
 
 @Element('m-' + NAME)
@@ -75,25 +76,26 @@ export class EditorElement extends MasterElement {
     ]);
 
     blockTemplate = new Template(() => {
-        return [].concat(...this.value?.map((eachBlock: EditorBlock) => {
-            const blockOption = this.blockOptions[eachBlock.type];
+        return [].concat(...this.value?.map((editorValue: EditorValue) => {
+            const blockOption = this.blockOptions[editorValue.type];
             const options: any = {};
-            switch (eachBlock.type) {
+            switch (editorValue.type) {
                 default:
                     options.contentEditable = blockOption.editable;
                     options.placeholder = this.placeholder;
-                    options.$html = eachBlock.value;
+                    options.$html = editorValue.data;
                     options.$on = {
                         input: (event) => {
-                            eachBlock.value = event.target.innerHTML;
+                            editorValue.data = event.target.innerHTML;
+                            console.log(this.value);
                         }
                     }
             }
             return [
                 'm-editor-block', {
-                    type: eachBlock.type,
+                    type: editorValue.type,
                     $created: (editorBlock: EditorBlockElement) => {
-                        editorBlock.value = eachBlock.value
+                        editorBlock.value = editorValue
                     }
                 }, [
                     blockOption.tag, options
@@ -222,7 +224,9 @@ export class EditorElement extends MasterElement {
             return value;
         }
     })
-    value: any[];
+    value: EditorValue[];
+
+    selection: SelectionArea;
 
     // styleWithCSS = false;
 
@@ -230,12 +234,12 @@ export class EditorElement extends MasterElement {
         const self = this;
         this
             .on('keydown', 'm-editor-block', function (event: any) {
+                console.log('fuck');
                 if (event.key === 'Enter') {
                     event.preventDefault();
                     const nextIndex = self.blocks.indexOf(this) + 1;
                     self.value.splice(nextIndex, 0, {
-                        type: 'paragraph',
-                        value: ''
+                        type: 'paragraph'
                     });
                     self.blockTemplate.render(self);
                     const newBlock = self.blocks[nextIndex];
@@ -248,10 +252,85 @@ export class EditorElement extends MasterElement {
             }, { id: [NAME] });
         // if (this.styleWithCSS) exec('styleWithCSS');
         exec(defaultParagraphSeparatorString, 'div');
+
+        this.selection = new SelectionArea({
+            selectables: ['m-editor-block'],
+            singleTap: {
+                allow: false,
+                intersect: 'touch'
+            }
+        })
+            .on('beforestart', ({ event, store }) => {
+                console.log(event, store);
+                for (const block of this.blocks) {
+                    if (event.target === block || block.contains((event.target) as any)) {
+                        return false;
+                    }
+                }
+            })
+            .on('start', ({ store, event }) => {
+                // Remove class if the user isn't pressing the control key or ⌘ key
+                if (!event.ctrlKey && !event.metaKey) {
+                    this.clearSelection(store);
+                }
+            })
+            .on('move', ({ store: { changed: { added, removed } } }) => {
+                // Add a custom class to the elements that where selected.
+                for (const el of added) {
+                    el.toggleAttribute('selected', true);
+                }
+                // Remove the class from elements that where removed
+                // since the last selection
+                for (const el of removed) {
+                    el.removeAttribute('selected');
+                }
+            })
+            .on('stop', ({ store, event }) => {
+                this.selection.keepSelection();
+                setTimeout(() => {
+                    body
+                        .on('keydown', (event: any) => {
+                            switch (event.key) {
+                                case 'Delete':
+                                    this.clearSelection(store);
+                                    this.removeBlocks((store.selected as EditorBlockElement[]));
+                                    break;
+                            }
+                        }, {
+                            id: [this, NAME, 'selection'],
+                            passive: true
+                        })
+                        .on('click', () => {
+                            this.clearSelection(store);
+                            console.log('click');
+                        }, {
+                            id: [this, NAME, 'selection'],
+                            passive: true
+                        });
+                })
+            });
+    }
+
+    removeBlocks(blocks: EditorBlockElement[]) {
+        for (const block of blocks) {
+            console.log(this.value.indexOf(block.value));
+            this.value.splice(this.value.indexOf(block.value), 1);
+        }
+        console.log(this.value);
+        this.blockTemplate.render(this);
+    }
+
+    clearSelection(store) {
+        body.off({ id: [this, NAME, 'selection'] });
+        for (const el of store.stored) {
+            el.removeAttribute('selected');
+        }
+        this.selection.clearSelection();
     }
 
     onDisconnected() {
-        this.off({ id: [NAME] })
+        this.off({ id: [NAME] });
+        this.selection.destroy();
     }
 
     render() {
