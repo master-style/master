@@ -236,8 +236,7 @@ export class EditorElement extends MasterElement {
                     event.preventDefault();
                     const nextIndex = self.blocks.indexOf(this) + 1;
                     self.value.splice(nextIndex, 0, {
-                        type: 'paragraph',
-                        value: '' // value 不給空會有問題，@master/template 那邊有問題
+                        type: 'paragraph'
                     });
                     self.blockTemplate.render(self);
                     (self.blocks[nextIndex].firstChild as any).focus();
