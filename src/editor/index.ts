@@ -4,11 +4,11 @@ import css from './editor.scss';
 
 import { Template } from '@master/template';
 import { extend } from '../utils/extend';
+import { getCaretIndex } from '../utils/get-caret-index';
 import { EditorBlockElement } from './editor-block';
 import SelectionArea from '@simonwep/selection-js';
 import { $ } from '@master/dom';
 
-const defaultParagraphSeparatorString = 'defaultParagraphSeparator';
 const formatBlock = 'formatBlock';
 const queryCommandState = command => document.queryCommandState(command);
 const queryCommandValue = command => document.queryCommandValue(command);
@@ -18,10 +18,17 @@ export const exec = (command, value = null) => document.execCommand(command, fal
 const NAME = 'editor';
 const body = $(document.body);
 
-export interface EditorValue {
+export interface EditorBlockValue {
     type: string;
     data?: any;
 }
+
+export interface EditorBlockOptions {
+    tag: string;
+    editable: boolean;
+}
+
+export type EditorBlockOptionsByType = Record<string, EditorBlockOptions>;
 
 @Element('m-' + NAME)
 export class EditorElement extends MasterElement {
@@ -75,34 +82,15 @@ export class EditorElement extends MasterElement {
         ]
     ]);
 
-    blockTemplate = new Template(() => {
-        return [].concat(...this.value?.map((editorValue: EditorValue) => {
-            const blockOption = this.blockOptions[editorValue.type];
-            const options: any = {};
-            switch (editorValue.type) {
-                default:
-                    options.contentEditable = blockOption.editable;
-                    options.placeholder = this.placeholder;
-                    options.$html = editorValue.data;
-                    options.$on = {
-                        input: (event) => {
-                            editorValue.data = event.target.innerHTML;
-                            console.log(this.value);
-                        }
-                    }
+    blockTemplate = new Template(() => [].concat(...this.value?.map((blockValue: EditorBlockValue) => [
+        'm-editor-block', {
+            $created: (block: EditorBlockElement) => {
+                block.value = blockValue;
+                block.options = this.blockOptionsByType[blockValue.type];
+                block.placeholder = this.placeholder;
             }
-            return [
-                'm-editor-block', {
-                    type: editorValue.type,
-                    $created: (editorBlock: EditorBlockElement) => {
-                        editorBlock.value = editorValue
-                    }
-                }, [
-                    blockOption.tag, options
-                ]
-            ]
-        }) || [])
-    });
+        }
+    ]) || []));
 
     codeWrap: HTMLElement;
 
@@ -197,7 +185,7 @@ export class EditorElement extends MasterElement {
         }
     };
 
-    defaultBlockOptions = {
+    defaultBlockOptionsByType: EditorBlockOptionsByType = {
         paragraph: {
             tag: 'p',
             editable: true
@@ -213,10 +201,10 @@ export class EditorElement extends MasterElement {
 
     @Prop({
         parse(editor: EditorElement, value) {
-            return extend({}, editor.defaultBlockOptions, value);
+            return extend({}, editor.defaultBlockOptionsByType, value);
         }
     })
-    blockOptions = this.defaultBlockOptions;
+    blockOptionsByType = this.defaultBlockOptionsByType;
 
     @Prop({
         parse(editor: EditorElement, value) {
@@ -224,34 +212,49 @@ export class EditorElement extends MasterElement {
             return value;
         }
     })
-    value: EditorValue[];
+    value: EditorBlockValue[];
 
     selection: SelectionArea;
 
     // styleWithCSS = false;
 
     onConnected() {
-        const self = this;
+        const editor = this;
         this
             .on('keydown', 'm-editor-block', function (event: any) {
-                console.log('fuck');
-                if (event.key === 'Enter') {
-                    event.preventDefault();
-                    const nextIndex = self.blocks.indexOf(this) + 1;
-                    self.value.splice(nextIndex, 0, {
-                        type: 'paragraph'
-                    });
-                    self.blockTemplate.render(self);
-                    const newBlock = self.blocks[nextIndex];
-                    const newEditableElement = newBlock.querySelector('[contenteditable]') as HTMLElement;
-                    if (newEditableElement) {
-                        newEditableElement.innerHTML = '';
-                        newEditableElement.focus();
-                    }
+                const block: EditorBlockElement = this;
+                const currentIndex = editor.blocks.indexOf(block);
+                const nextIndex = currentIndex + 1;
+                const prevIndex = currentIndex - 1;
+                const prevBlock = prevIndex !== -1 ? editor.blocks[prevIndex] : undefined;
+                switch (event.key) {
+                    case 'Enter':
+                        event.preventDefault();
+                        editor.value.splice(nextIndex, 0, {
+                            type: 'paragraph'
+                        });
+                        editor.blockTemplate.render(editor);
+                        const newBlock = editor.blocks[nextIndex];
+                        const newEditableElement = newBlock.querySelector('[contenteditable]') as HTMLElement;
+                        if (newEditableElement) {
+                            newEditableElement.innerHTML = '';
+                            newEditableElement.focus();
+                        }
+                        break;
+                    case 'Backspace':
+                        const caretIndex = getCaretIndex(event.target);
+                        if (caretIndex === 0) {
+                            if (prevBlock && block.value.data) {
+                                const prevBlockOption = editor.blockOptionsByType[prevBlock.value.type];
+
+                            }
+                            editor.removeBlocks([block]);
+                        }
+                        break;
                 }
             }, { id: [NAME] });
+
         // if (this.styleWithCSS) exec('styleWithCSS');
-        exec(defaultParagraphSeparatorString, 'div');
 
         this.selection = new SelectionArea({
             selectables: ['m-editor-block'],
@@ -316,7 +319,6 @@ export class EditorElement extends MasterElement {
             console.log(this.value.indexOf(block.value));
             this.value.splice(this.value.indexOf(block.value), 1);
         }
-        console.log(this.value);
         this.blockTemplate.render(this);
     }
 
