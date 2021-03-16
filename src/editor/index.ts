@@ -82,13 +82,11 @@ export class EditorElement extends MasterElement {
                 default:
                     options.contentEditable = blockOption.editable;
                     options.placeholder = this.placeholder;
+                    options.$html = eachBlock.value;
                     options.$on = {
                         input: (event) => {
                             eachBlock.value = event.target.innerHTML;
                         }
-                    }
-                    if (eachBlock.value) {
-                        options.$html = eachBlock.value;
                     }
             }
             return [
@@ -236,10 +234,16 @@ export class EditorElement extends MasterElement {
                     event.preventDefault();
                     const nextIndex = self.blocks.indexOf(this) + 1;
                     self.value.splice(nextIndex, 0, {
-                        type: 'paragraph'
+                        type: 'paragraph',
+                        value: ''
                     });
                     self.blockTemplate.render(self);
-                    (self.blocks[nextIndex].firstChild as any).focus();
+                    const newBlock = self.blocks[nextIndex];
+                    const newEditableElement = newBlock.querySelector('[contenteditable]') as HTMLElement;
+                    if (newEditableElement) {
+                        newEditableElement.innerHTML = '';
+                        newEditableElement.focus();
+                    }
                 }
             }, { id: [NAME] });
         // if (this.styleWithCSS) exec('styleWithCSS');
