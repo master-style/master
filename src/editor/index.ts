@@ -256,7 +256,9 @@ export class EditorElement extends MasterElement {
                                 if (block.value.data) {
                                     prevBlock.data = prevBlock.data + block.value.data;
                                 }
-                                prevBlock.caretPosition = caretPosition;
+                                if (caretPosition) {
+                                    prevBlock.caretPosition = caretPosition;
+                                }
                             }
                             editor.removeBlocks([block]);
                         }

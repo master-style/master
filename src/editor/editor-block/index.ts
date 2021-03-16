@@ -65,11 +65,15 @@ export class EditorBlockElement extends MasterElement {
         const childNodes = this.editableElement.childNodes;
         const lastChildNodeIndex = childNodes.length - 1;
         const lastChildNode = childNodes[lastChildNodeIndex];
-        range.selectNodeContents(lastChildNode);
-        return {
-            offset: range.endOffset,
-            index: lastChildNodeIndex
-        };
+        if (lastChildNode) {
+            range.selectNodeContents(lastChildNode);
+            return {
+                offset: range.endOffset,
+                index: lastChildNodeIndex
+            };
+        } else {
+            return;
+        }
     }
 
     set caretPosition(caretPosition: { offset: number, index: number }) {
