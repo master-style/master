@@ -23,8 +23,6 @@ import debounce from '../../utils/debounce';
 const $body = $(document.body);
 const NAME = 'popup';
 
-export declare type PopupPlacement = Placement | 'cursor';
-
 @Element('m-' + NAME)
 export class PopupElement extends TargetElement {
     static css = css;
@@ -35,7 +33,6 @@ export class PopupElement extends TargetElement {
     _duration = 300;
 
     content: ContentElement;
-    trigger: HTMLElement;
     popper;
     #resizeObserver;
 
@@ -49,7 +46,10 @@ export class PopupElement extends TargetElement {
     boundaryPadding = 10;
 
     @Attr({ reflect: false })
-    placement: PopupPlacement = 'bottom';
+    placement: Placement = 'bottom';
+
+    @Attr({ reflect: false })
+    followCursor: boolean;
 
     @Attr({ reflect: false })
     closeOn = 'click:outside';
@@ -147,7 +147,9 @@ export class PopupElement extends TargetElement {
 
         if (!this.popper) {
             await new Promise((resolve) => {
-                const popperOptions = {
+                let distance = this.distance;
+                const getPopperOptions = () => ({
+                    placement: this.placement,
                     modifiers: [
                         // {
                         //     name: 'arrow',
@@ -158,7 +160,7 @@ export class PopupElement extends TargetElement {
                         {
                             name: 'offset',
                             options: {
-                                offset: [this.offset, this.distance],
+                                offset: [this.offset, distance],
                             },
                         },
                         {
@@ -175,18 +177,18 @@ export class PopupElement extends TargetElement {
                         }
                     ],
                     onFirstUpdate: resolve
-                };
-                if (this.placement === 'cursor') {
+                });
+                if (this.followCursor && this.currentEvent && this.currentEvent instanceof MouseEvent) {
                     const virtualElement = {
-                        getBoundingClientRect: generateGetBoundingClientRect(),
+                        getBoundingClientRect: generateGetBoundingClientRect(this.currentEvent.clientX, this.currentEvent.clientY),
                     };
+                    distance = 0;
                     this.popper = createPopper(virtualElement, this, {
-                        ...popperOptions
+                        ...getPopperOptions()
                     });
                 } else {
                     this.popper = createPopper(this.trigger, this, {
-                        ...popperOptions,
-                        placement: this.placement
+                        ...getPopperOptions()
                     });
                 }
             });

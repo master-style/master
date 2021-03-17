@@ -1,6 +1,6 @@
 import { MasterElement, Attr, Event, EventEmitter } from '@master/element';
 
-import { $ } from '@master/dom';
+import { $, ListenerOptions } from '@master/dom';
 
 const $body = $(document.body);
 
@@ -38,51 +38,67 @@ export class TargetElement extends MasterElement {
                 const toggleAttrKey = 'toggle-' + name;
                 const typeSets = value.split(',');
                 const handleTrigger = target['handleTrigger'];
-
-                // open
-                $body
-                    .on(typeSets.join(' '), '[' + toggleAttrKey + ']', function (event) {
-                        const trigger = this;
-                        if (this.disabled) {
+                const typeSet = new Set<string>(typeSets.join(' ').split(' '));
+                const handle = function (event: Event) {
+                    const trigger = this;
+                    if (this.disabled) {
+                        return;
+                    }
+                    const targetSelector = trigger.getAttribute(toggleAttrKey);
+                    if (!target.matches(targetSelector)) {
+                        return;
+                    }
+                    const eventType = event.type;
+                    let whether: boolean;
+                    if (typeSets.length > 1) {
+                        whether = target.hidden;
+                        if (
+                            whether && typeSets[0].split(' ').indexOf(eventType) === -1
+                            || !whether && typeSets[1].split(' ').indexOf(eventType) === -1
+                        ) {
                             return;
                         }
-                        const targetSelector = trigger.getAttribute(toggleAttrKey);
-                        if (!target.matches(targetSelector)) {
+                        if (handleTrigger && handleTrigger.call(target, event, whether) === false) {
                             return;
                         }
-                        const eventType = event.type;
-                        let whether: boolean;
-                        if (typeSets.length > 1) {
-                            whether = target.hidden;
-                            if (
-                                whether && typeSets[0].split(' ').indexOf(eventType) === -1
-                                || !whether && typeSets[1].split(' ').indexOf(eventType) === -1
-                            ) {
-                                return;
-                            }
-                            if (handleTrigger && handleTrigger.call(target, event, whether) === false) {
-                                return;
-                            }
+                    } else {
+                        if (
+                            'checked' in trigger
+                            && (eventType === 'input' || eventType === 'change')
+                        ) {
+                            whether = !!trigger.checked;
                         } else {
-                            if (
-                                'checked' in trigger
-                                && (eventType === 'input' || eventType === 'change')
-                            ) {
-                                whether = !!trigger.checked;
-                            } else {
-                                whether = target.hidden;
-                            }
+                            whether = target.hidden;
                         }
-                        if (whether && !target.animation) {
-                            target['trigger'] = trigger;
-                        }
-                        target.toggle(whether);
-                    }, { passive: true, id: [target, name] });
+                    }
+                    if (whether && !target.animation) {
+                        target.trigger = trigger;
+                    }
+                    target.currentEvent = event;
+                    target.toggle(whether);
+                };
+                for (const eachTypeSet of typeSet) {
+                    const options: ListenerOptions = { passive: true, id: [target, name] };
+                    if (eachTypeSet.includes('contextmenu')) {
+                        options.passive = false;
+                        $body
+                            .on(eachTypeSet, '[' + toggleAttrKey + ']', function (event) {
+                                event.preventDefault();
+                                handle.call(this, event);
+                            }, options);
+                    } else {
+                        $body
+                            .on(eachTypeSet, '[' + toggleAttrKey + ']', handle, options);
+                    }
+                }
+                // open
 
             }
         }
     })
     triggerEvent: string = 'click';
+
+    trigger: MasterElement;
 
     @Attr({ reflect: false, render: false })
     emit: boolean = false;
@@ -100,6 +116,8 @@ export class TargetElement extends MasterElement {
     closedEmitter: EventEmitter;
 
     changing: Promise<void>;
+
+    currentEvent: Event;
 
     protected animations: Animation[] = [];
     protected animation: Animation;
@@ -168,6 +186,7 @@ export class TargetElement extends MasterElement {
         }
         this.closeEmitter();
         await (this.changing = this.prepare());
+        this.currentEvent = null;
         this.closedEmitter();
         return true;
     }
