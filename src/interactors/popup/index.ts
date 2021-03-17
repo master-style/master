@@ -9,6 +9,7 @@ import css from './popup.scss';
 import { ContentElement } from '../../layout/content';
 import { $ } from '@master/dom';
 import { TargetElement } from '../../shared/target';
+import debounce from '../../utils/debounce';
 
 const $body = $(document.body);
 const NAME = 'popup';
@@ -183,10 +184,10 @@ export class PopupElement extends TargetElement {
             }
 
             if (!this.#resizeObserver) {
-                this.#resizeObserver = new ResizeObserver(() => {
+                this.#resizeObserver = new ResizeObserver(debounce(() => {
                     this.updateSize();
                     this.popper.forceUpdate();
-                });
+                }));
                 this.#resizeObserver.observe(this.content);
                 this.#resizeObserver.observe(this.trigger);
             }
