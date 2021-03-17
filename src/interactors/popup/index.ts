@@ -204,7 +204,7 @@ export class PopupElement extends TargetElement {
 
             if (this.closeOn && this.closeOn.indexOf('click:outside') !== -1) {
                 $body
-                    .on('click', this.determineClose, { passive: true });
+                    .on('mousedown click', this.determineClose, { passive: true });
             }
 
             if (!this.#resizeObserver) {
