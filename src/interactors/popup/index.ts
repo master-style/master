@@ -3,6 +3,15 @@ import { createPopper, Placement } from '@popperjs/core';
 import { isInteractOutside } from '../../utils/is-interact-outside';
 import { Template } from '@master/template';
 
+const generateGetBoundingClientRect = (x = 0, y = 0) => () => ({
+    width: 0,
+    height: 0,
+    top: y,
+    right: x,
+    bottom: y,
+    left: x,
+})
+
 declare const ResizeObserver: any;
 
 import css from './popup.scss';
@@ -14,6 +23,7 @@ import debounce from '../../utils/debounce';
 const $body = $(document.body);
 const NAME = 'popup';
 
+export declare type PopupPlacement = Placement | 'cursor';
 
 @Element('m-' + NAME)
 export class PopupElement extends TargetElement {
@@ -39,7 +49,7 @@ export class PopupElement extends TargetElement {
     boundaryPadding = 10;
 
     @Attr({ reflect: false })
-    placement: Placement = 'bottom';
+    placement: PopupPlacement = 'bottom';
 
     @Attr({ reflect: false })
     closeOn = 'click:outside';
@@ -137,8 +147,7 @@ export class PopupElement extends TargetElement {
 
         if (!this.popper) {
             await new Promise((resolve) => {
-                this.popper = createPopper(this.trigger, this, {
-                    placement: this.placement,
+                const popperOptions = {
                     modifiers: [
                         // {
                         //     name: 'arrow',
@@ -166,7 +175,20 @@ export class PopupElement extends TargetElement {
                         }
                     ],
                     onFirstUpdate: resolve
-                });
+                };
+                if (this.placement === 'cursor') {
+                    const virtualElement = {
+                        getBoundingClientRect: generateGetBoundingClientRect(),
+                    };
+                    this.popper = createPopper(virtualElement, this, {
+                        ...popperOptions
+                    });
+                } else {
+                    this.popper = createPopper(this.trigger, this, {
+                        ...popperOptions,
+                        placement: this.placement
+                    });
+                }
             });
         }
     }
