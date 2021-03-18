@@ -93,7 +93,20 @@ a[part=master] {
 }
 
 :host([active]) {
-    background-color: var(--bg-color-hover);
+    .touch {
+        background-color: var(--bg-color-hover);
+    }
+
+}
+
+:host(.outlined) {
+    .touch {
+        &:hover:not([disabled]) {
+            background-color: var(--bg-color-hover);
+            box-shadow: inset 0 0 0 1px var(--b-color-active);
+            border-color: var(--b-color-active);
+        }
+    }
 }
 
 :host([disabled]) {
