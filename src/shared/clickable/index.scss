@@ -92,6 +92,10 @@ a[part=master] {
     }
 }
 
+:host([active]) {
+    background-color: var(--bg-color-hover);
+}
+
 :host([disabled]) {
     pointer-events: none !important;
 }
