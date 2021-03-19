@@ -1,6 +1,7 @@
 import getDeepestNode from './get-deepest-node';
 import isLineBreakTag from './is-line-break-tag';
-import isEmptyNode from './is-empty-node';
+import isEmpty from './is-empty';
+import getHigherLevelSiblings from './get-higher-level-siblings';
 
 const selection = window.getSelection();
 
@@ -9,10 +10,10 @@ const selection = window.getSelection();
  *
  * @returns {boolean}
  */
-export function isCaretAtEnd(): boolean {
+export default function isCaretAtEnd(editableElement: HTMLElement): boolean {
     let focusNode = selection.focusNode;
 
-    const lastNode = getDeepestNode(this.Editor.BlockManager.currentBlock.currentInput, true);
+    const lastNode = getDeepestNode(editableElement, true);
 
     /** Case when selection have been cleared programmatically, for example after CBS */
     if (!selection.focusNode) {
@@ -47,15 +48,15 @@ export function isCaretAtEnd(): boolean {
      *     <p><b></b></p>   <-- first (and deepest) node is <b></b>
      * </div>
      */
-    if (isLineBreakTag(lastNode as HTMLElement) || isEmptyNode(lastNode)) {
-        const rightSiblings = this.getHigherLevelSiblings(focusNode as HTMLElement, 'right');
+    if (isLineBreakTag(lastNode as HTMLElement) || isEmpty(lastNode)) {
+        const rightSiblings = getHigherLevelSiblings(focusNode as HTMLElement, 'right');
         const nothingAtRight = rightSiblings.every((node, i) => {
             /**
              * If last right sibling is BR isEmpty returns false, but there actually nothing at right
              */
             const isLastBR = i === rightSiblings.length - 1 && isLineBreakTag(node as HTMLElement);
 
-            return isLastBR || (isEmptyNode(node) && !isLineBreakTag(node));
+            return isLastBR || (isEmpty(node) && !isLineBreakTag(node));
         });
 
         if (nothingAtRight && focusOffset === focusNode.textContent.length) {

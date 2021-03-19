@@ -1,6 +1,7 @@
 import getDeepestNode from './get-deepest-node';
 import isLineBreakTag from './is-line-break-tag';
-import isEmptyNode from './is-empty-node';
+import isEmpty from './is-empty';
+import getHigherLevelSiblings from './get-higher-level-siblings';
 
 const selection = window.getSelection();
 
@@ -9,8 +10,8 @@ const selection = window.getSelection();
  *
  * @returns {boolean}
  */
-export default function isCaretAtStart(): boolean {
-    const firstNode = getDeepestNode(this.Editor.BlockManager.currentBlock.currentInput);
+export default function isCaretAtStart(editableElement: HTMLElement): boolean {
+    const firstNode = getDeepestNode(editableElement);
     let focusNode = selection.focusNode;
 
     /** Case when selection have been cleared programmatically, for example after CBS */
@@ -59,8 +60,8 @@ export default function isCaretAtStart(): boolean {
      *     |adaddad         <-- focus node
      * </div>
      */
-    if (isLineBreakTag(firstNode as HTMLElement) || isEmptyNode(firstNode)) {
-        const leftSiblings = this.getHigherLevelSiblings(focusNode as HTMLElement, 'left');
+    if (isLineBreakTag(firstNode as HTMLElement) || isEmpty(firstNode)) {
+        const leftSiblings = getHigherLevelSiblings(focusNode as HTMLElement, 'left');
         const nothingAtLeft = leftSiblings.every((node) => {
             /**
              * Workaround case when block starts with several <br>'s (created by SHIFT+ENTER)
@@ -75,7 +76,7 @@ export default function isCaretAtStart(): boolean {
             const lineBreakInSafari = node.children.length === 1 && isLineBreakTag(node.children[0] as HTMLElement);
             const isLineBreak = regularLineBreak || lineBreakInSafari;
 
-            return isEmptyNode(node) && !isLineBreak;
+            return isEmpty(node) && !isLineBreak;
         });
 
         if (nothingAtLeft && focusOffset === firstLetterPosition) {

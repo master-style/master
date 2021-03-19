@@ -1,3 +1,6 @@
+import isNodeLeaf from './is-node-leaf';
+import isNodeEmpty from './is-node-empty';
+
 /**
  * breadth-first search (BFS)
  * {@link https://en.wikipedia.org/wiki/Breadth-first_search}
@@ -7,7 +10,7 @@
  * @param {Node} node - node to check
  * @returns {boolean}
  */
-export default function isEmptyNode(node: Node): boolean {
+export default function isEmpty(node: Node): boolean {
     /**
      * Normalize node to merge several text nodes to one to reduce tree walker iterations
      */
@@ -22,7 +25,7 @@ export default function isEmptyNode(node: Node): boolean {
             continue;
         }
 
-        if (this.isLeaf(node) && !this.isNodeEmpty(node)) {
+        if (isNodeLeaf(node) && !isNodeEmpty(node)) {
             return false;
         }
 

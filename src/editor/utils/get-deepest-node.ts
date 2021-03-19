@@ -40,7 +40,7 @@ export default function getDeepestNode(node: Node, atLast = false): Node {
             }
         }
 
-        return this.getDeepestNode(nodeChild, atLast);
+        return getDeepestNode(nodeChild, atLast);
     }
 
     return node;

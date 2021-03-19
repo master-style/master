@@ -2,6 +2,8 @@ import { Element, MasterElement, Attr, Prop } from '@master/element';
 import { Template } from '@master/template';
 import { EditorElement, EditorBlockValue, EditorBlockOptions } from '..';
 import { getCaretIndex } from '../utils/get-caret-index';
+import isCaretAtStart from '../utils/is-caret-at-start';
+import isCaretAtEnd from '../utils/is-caret-at-end';
 
 import css from './editor-block.scss';
 
@@ -97,6 +99,7 @@ export class EditorBlockElement extends MasterElement {
                 const prevIndex = currentIndex - 1;
                 const prevBlock = prevIndex !== -1 ? this.editor.blocks[prevIndex] : undefined;
                 const caretIndex = getCaretIndex(event.target);
+                console.log(isCaretAtStart(this.editableElement), isCaretAtEnd(this.editableElement))
                 // switch (event.key) {
                 //     case 'Backspace':
                 //         if (caretIndex === 0) {
