@@ -8,7 +8,6 @@ import isLineBreakTag from '../utils/is-line-break-tag';
 import isEmpty from '../utils/is-empty';
 import getHigherLevelSiblings from '../utils/get-higher-level-siblings';
 import getTextLengthFromNode from '../utils/get-text-length-from-node';
-import placeCaret from '../utils/place-caret';
 
 import css from './editor-block.scss';
 
@@ -20,7 +19,7 @@ export interface EditorCaretAnchor {
     offset: number;
 }
 
-export declare type EditorCaretPlacement = 'last' | 'end';
+export declare type EditorCaretPlacement = 'last' | 'start';
 
 @Element('m-' + NAME + '-block')
 export class EditorBlockElement extends MasterElement {
@@ -111,7 +110,7 @@ export class EditorBlockElement extends MasterElement {
                             if (prevBlock) {
                                 event.preventDefault();
                                 if (prevBlock.editable && this.data) {
-                                    prevBlock.placeCaret('end');
+                                    prevBlock.placeCaretAt('last');
                                     prevBlock.editableElement.append(...Array.from(this.editableElement.childNodes));
                                     prevBlock.data = prevBlock.editableElement.innerHTML;
                                 }
@@ -343,10 +342,14 @@ export class EditorBlockElement extends MasterElement {
      * @param {HTMLElement} element - target node.
      * @param {number} offset - offset
      */
-    placeCaret(placement: EditorCaretPlacement) {
+    placeCaretAt(placement: EditorCaretPlacement) {
         this.focus();
-        const anchor = this.getCaretAnchor(placement);
-        placeCaret(anchor.node, anchor.offset);
+        const { node, offset } = this.getCaretAnchor(placement);
+        const range = document.createRange();
+        range.setStart(node, offset);
+        range.setEnd(node, offset);
+        selection.removeAllRanges();
+        selection.addRange(range);
         this.editableElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
         return this;
     }
