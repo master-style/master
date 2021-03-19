@@ -1,13 +1,15 @@
 import { Element, MasterElement, Attr } from '@master/element';
 import { SelectElement } from '../select';
 
+import css from './option.scss';
+
 const NAME = 'option';
 
 @Element('m-' + NAME)
 export class OptionElement extends MasterElement {
 
-    static shadow = false;
-
+    static css = css;
+    
     updating: boolean;
 
     @Attr()

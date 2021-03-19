@@ -13,6 +13,7 @@
     --label-f-size: var(--select-label-f-size, var(--f-xxs));
     --label-f-color: var(--select-label-f-color, var(--f-theme-fader));
     cursor: pointer;
+    outline: none;
 }
 
 [part=master] {

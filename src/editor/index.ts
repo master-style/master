@@ -7,6 +7,7 @@ import { extend } from '../utils/extend';
 import { EditorBlockElement } from './editor-block';
 import SelectionArea from '@simonwep/selection-js';
 import { $ } from '@master/dom';
+import { SelectElement } from '../form';
 
 const formatBlock = 'formatBlock';
 const queryCommandState = command => document.queryCommandState(command);
@@ -24,6 +25,7 @@ export interface EditorBlockValue {
 
 export interface EditorBlockOptions {
     tag: string;
+    name: string;
     editable: boolean;
 }
 
@@ -39,6 +41,19 @@ export class EditorElement extends MasterElement {
 
     template = new Template(() => [
         'div', { part: 'toolbar' },
+        ['m-select', {
+            value: 'paragraph',
+            class: 'sm',
+            $created: (select: SelectElement) => this.typeSelect = select
+        },
+            () => Object.keys(this.blockOptionsByType)
+                .map((type: string) => [
+                    'm-option', {
+                        $text: this.blockOptionsByType[type].name,
+                        value: type
+                    }
+                ])
+        ],
         () => {
             let actionTokens = [];
             for (const actionKey in this.actions) {
@@ -91,6 +106,8 @@ export class EditorElement extends MasterElement {
         }
     ]) || []));
 
+    typeSelect: SelectElement;
+
     codeWrap: HTMLElement;
 
     blocks: EditorBlockElement[] = [];
@@ -125,26 +142,6 @@ export class EditorElement extends MasterElement {
             title: 'Strike-through',
             state: () => queryCommandState('strikeThrough'),
             result: () => exec('strikeThrough')
-        },
-        heading1: {
-            icon: '<b>H<sub>1</sub></b>',
-            title: 'Heading 1',
-            result: () => exec(formatBlock, '<h1>')
-        },
-        heading2: {
-            icon: '<b>H<sub>2</sub></b>',
-            title: 'Heading 2',
-            result: () => exec(formatBlock, '<h2>')
-        },
-        heading3: {
-            icon: '<b>H<sub>3</sub></b>',
-            title: 'Heading 3',
-            result: () => exec(formatBlock, '<h3>')
-        },
-        paragraph: {
-            icon: '&#182;',
-            title: 'Paragraph',
-            result: () => exec(formatBlock, '<p>')
         },
         quote: {
             icon: '&#8220; &#8221;',
@@ -187,6 +184,22 @@ export class EditorElement extends MasterElement {
     defaultBlockOptionsByType: EditorBlockOptionsByType = {
         paragraph: {
             tag: 'p',
+            name: 'Text',
+            editable: true
+        },
+        h1: {
+            tag: 'h1',
+            name: 'Heading 1',
+            editable: true
+        },
+        h2: {
+            tag: 'h2',
+            name: 'Heading 2',
+            editable: true
+        },
+        h3: {
+            tag: 'h3',
+            name: 'Heading 3',
             editable: true
         }
     }
@@ -217,6 +230,13 @@ export class EditorElement extends MasterElement {
     // styleWithCSS = false;
 
     onConnected() {
+
+        const editor = this;
+
+        this
+            .on('focusin', 'm-editor-block', function () {
+                editor.typeSelect.value = this.value.type;
+            }, { id: [NAME], passive: true })
 
         // if (this.styleWithCSS) exec('styleWithCSS');
 

@@ -1,7 +1,6 @@
 import { Element, MasterElement, Attr, Prop } from '@master/element';
 import { Template } from '@master/template';
 import { EditorElement, EditorBlockValue, EditorBlockOptions } from '..';
-import { getCaretIndex } from '../utils/get-caret-index';
 
 import getDeepestNode from '../utils/get-deepest-node';
 import isLineBreakTag from '../utils/is-line-break-tag';
@@ -106,10 +105,12 @@ export class EditorBlockElement extends MasterElement {
                             if (prevBlock) {
                                 // merge data into previous
                                 event.preventDefault();
-                                if (prevBlock.editable && this.value.data) {
+                                if (prevBlock.editable) {
                                     prevBlock.placeCaretAt('last');
-                                    prevBlock.editableElement.append(...Array.from(this.editableElement.childNodes));
-                                    prevBlock.updateData();
+                                    if (this.value.data) {
+                                        prevBlock.editableElement.append(...Array.from(this.editableElement.childNodes));
+                                        prevBlock.updateData();
+                                    }
                                 }
                                 this.editor.removeBlocks([this]);
                             }
@@ -118,8 +119,12 @@ export class EditorBlockElement extends MasterElement {
                 }
             }, { id: [NAME] })
             .on('input', (event: InputEvent) => {
-                console.log(event);
-                switch (event.inputType) {
+                let inputType = event.inputType;
+                // fix issue
+                if (inputType === 'insertText' && event.data === null) {
+                    inputType = 'insertParagraph';
+                }
+                switch (inputType) {
                     case 'insertParagraph':
                         const insertedDiv = this.getInsertDiv(selection.focusNode);
                         insertedDiv.remove();
