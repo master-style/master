@@ -97,20 +97,8 @@ export class EditorBlockElement extends MasterElement {
                 const prevIndex = currentIndex - 1;
                 const prevBlock = prevIndex !== -1 ? this.editor.blocks[prevIndex] : undefined;
                 const caretIndex = getCaretIndex(event.target);
-                // switch (event.keyCode) {
-                //     case KeyCode.ENTER:
-                //         event.preventDefault();
-                //         editor.value.splice(nextIndex, 0, {
-                //             type: 'paragraph'
-                //         });
-                //         editor.blockTemplate.render(editor);
-                //         const newBlock = editor.blocks[nextIndex];
-                //         if (newBlock.options.editable) {
-                //             newBlock.data = '';
-                //             newBlock.focus();
-                //         }
-                //         break;
-                //     case KeyCode.BACKSPACE:
+                // switch (event.key) {
+                //     case 'Backspace':
                 //         if (caretIndex === 0) {
                 //             event.preventDefault();
                 //             if (prevBlock && prevBlock.options.editable) {
@@ -128,6 +116,7 @@ export class EditorBlockElement extends MasterElement {
                 // }
             }, { id: [NAME] })
             .on('input', (event: InputEvent) => {
+                console.log(event);
                 switch (event.inputType) {
                     case 'insertParagraph':
                         const insertedDiv = this.getInsertDiv(selection.focusNode);

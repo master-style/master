@@ -17,23 +17,6 @@ export const exec = (command, value = null) => document.execCommand(command, fal
 const NAME = 'editor';
 const body = $(document.body);
 
-enum KeyCode {
-    BACKSPACE = 8,
-    TAB = 9,
-    ENTER = 13,
-    SHIFT = 16,
-    CTRL = 17,
-    ALT = 18,
-    ESC = 27,
-    SPACE = 32,
-    LEFT = 37,
-    UP = 38,
-    DOWN = 40,
-    RIGHT = 39,
-    DELETE = 46,
-    META = 91,
-}
-
 export interface EditorBlockValue {
     type: string;
     data?: any;
@@ -272,9 +255,9 @@ export class EditorElement extends MasterElement {
                 this.selection.keepSelection();
                 setTimeout(() => {
                     body
-                        .on('keydown', (event: any) => {
-                            switch (event.keyCode) {
-                                case KeyCode.DELETE:
+                        .on('keydown', (event: KeyboardEvent) => {
+                            switch (event.key) {
+                                case 'Delete':
                                     this.clearSelection(store);
                                     this.removeBlocks((store.selected as EditorBlockElement[]));
                                     break;
@@ -293,8 +276,12 @@ export class EditorElement extends MasterElement {
             });
     }
 
-    addBlock(value: EditorBlockValue, index: number) {
-        this.value.splice(index, 0, value);
+    addBlock(value: EditorBlockValue, index?: number) {
+        if (index) {
+            this.value.splice(index, 0, value);
+        } else {
+            this.value.push(value);
+        }
         this.renderBlocks();
         return this.blocks[index];
     }
