@@ -145,7 +145,7 @@ export class EditorBlockElement extends MasterElement {
         this.contentTemplate.render(this);
     }
 
-    getInsertDiv(node: Element | Node) {
+    private getInsertDiv(node: Element | Node) {
         const parentElement = node.parentElement;
         if (parentElement === this.editableElement) {
             return node
