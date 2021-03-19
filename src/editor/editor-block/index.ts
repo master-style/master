@@ -7,6 +7,7 @@ import getDeepestNode from '../utils/get-deepest-node';
 import isLineBreakTag from '../utils/is-line-break-tag';
 import isEmpty from '../utils/is-empty';
 import getHigherLevelSiblings from '../utils/get-higher-level-siblings';
+import getTextLengthFromNode from '../utils/get-text-length-from-node';
 
 import css from './editor-block.scss';
 
@@ -97,29 +98,22 @@ export class EditorBlockElement extends MasterElement {
         this.editor.blocks.push(this);
         this
             .on('keydown', (event: KeyboardEvent) => {
-                const currentIndex = this.editor.blocks.indexOf(this);
-                const nextIndex = currentIndex + 1;
-                const prevIndex = currentIndex - 1;
-                const prevBlock = prevIndex !== -1 ? this.editor.blocks[prevIndex] : undefined;
-                const caretIndex = getCaretIndex(event.target);
                 console.log(this.isCaretAtStart, this.isCaretAtEnd)
-                // switch (event.key) {
-                //     case 'Backspace':
-                //         if (caretIndex === 0) {
-                //             event.preventDefault();
-                //             if (prevBlock && prevBlock.options.editable) {
-                //                 const caretPosition = prevBlock.caretPosition;
-                //                 if (block.value.data) {
-                //                     prevBlock.data = prevBlock.data + block.value.data;
-                //                 }
-                //                 if (caretPosition) {
-                //                     prevBlock.caretPosition = caretPosition;
-                //                 }
-                //             }
-                //             editor.removeBlocks([block]);
-                //         }
-                //         break;
-                // }
+                switch (event.key) {
+                    case 'Backspace':
+                        if (this.isCaretAtStart) {
+                            const prevBlock = this.prevBlock;
+                            if (prevBlock) {
+                                event.preventDefault();
+                                if (prevBlock.editable && this.data) {
+                                    prevBlock.focus();
+                                    prevBlock.data = prevBlock.data + this.data;
+                                }
+                                this.editor.removeBlocks([this]);
+                            }
+                        }
+                        break;
+                }
             }, { id: [NAME] })
             .on('input', (event: InputEvent) => {
                 console.log(event);
@@ -127,6 +121,7 @@ export class EditorBlockElement extends MasterElement {
                     case 'insertParagraph':
                         const insertedDiv = this.getInsertDiv(selection.focusNode);
                         insertedDiv?.remove();
+                        this.data = this.editableElement.innerHTML;
                         const nextBlock = this.editor.addBlock({
                             type: this.value.type,
                             data: insertedDiv?.innerHTML
@@ -154,6 +149,22 @@ export class EditorBlockElement extends MasterElement {
         } else {
             return this.getInsertDiv(parentElement);
         }
+    }
+
+    get editable() {
+        return this.options.editable;
+    }
+
+    get prevBlock() {
+        return this.editor.blocks[this.index - 1]
+    }
+
+    get nextBlock() {
+        return this.editor.blocks[this.index + 1]
+    }
+
+    get type() {
+        return this.value.type;
     }
 
     get index() {
@@ -318,5 +329,33 @@ export class EditorBlockElement extends MasterElement {
          * "Hello |"  <--- selection.anchorOffset is 7, but rightTrimmedText is 6
          */
         return focusNode === lastNode && focusOffset >= rightTrimmedText.length;
+    }
+
+    /**
+     * Creates Document Range and sets caret to the element with offset
+     *
+     * @param {HTMLElement} element - target node.
+     * @param {number} offset - offset
+     */
+    public placeCaret(position: string): void {
+        let offset = 0;
+        const node = getDeepestNode(this.editableElement, position === 'end');
+
+        switch (position) {
+            case 'start':
+                offset = 0;
+                break;
+            case 'end':
+                offset = getTextLengthFromNode(node);
+                break;
+        }
+
+        const range = document.createRange();
+        const selection = window.getSelection();
+        range.setStart(this.editableElement, offset);
+        range.setEnd(this.editableElement, offset);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        this.editableElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 }
