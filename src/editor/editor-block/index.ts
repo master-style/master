@@ -32,7 +32,7 @@ export class EditorBlockElement extends MasterElement {
 
     contentTemplate = new Template(() => {
         const options: any = {
-            placeholder: this.placeholder,
+            'aria-placeholder': this.placeholder,
             contentEditable: this.options.editable,
             $html: this.value.data,
             $created: (element) => this.editableElement = this.options.editable ? element : undefined

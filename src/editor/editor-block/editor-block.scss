@@ -7,3 +7,14 @@
     transition: background-color .2s ease;
     will-change: background-color;
 }
+
+::slotted([contenteditable]) {
+    outline: none;
+}
+
+::slotted([contenteditable]:empty[aria-placeholder]:focus) {
+    &:before {
+        content: attr(aria-placeholder);
+        color: var(--f-fadest);
+    }
+}
