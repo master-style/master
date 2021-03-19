@@ -104,6 +104,7 @@ export class EditorBlockElement extends MasterElement {
                         if (this.isCaretAtStart) {
                             const prevBlock = this.prevBlock;
                             if (prevBlock) {
+                                // merge data into previous
                                 event.preventDefault();
                                 if (prevBlock.editable && this.value.data) {
                                     prevBlock.placeCaretAt('last');
@@ -121,11 +122,12 @@ export class EditorBlockElement extends MasterElement {
                 switch (event.inputType) {
                     case 'insertParagraph':
                         const insertedDiv = this.getInsertDiv(selection.focusNode);
-                        insertedDiv?.remove();
+                        insertedDiv.remove();
                         this.updateData();
+                        const data = insertedDiv.innerHTML;
                         const nextBlock = this.editor.addBlock({
                             type: this.value.type,
-                            data: insertedDiv?.innerHTML
+                            data: data === '<br>' ? '' : data
                         }, this.index + 1);
                         nextBlock.focus();
                         break;
