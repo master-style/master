@@ -1,10 +1,12 @@
 import { Element, MasterElement, Attr, Prop } from '@master/element';
 import { Template } from '@master/template';
 import { EditorElement, EditorBlockValue, EditorBlockOptions } from '..';
+import { getCaretIndex } from '../utils/get-caret-index';
 
 import css from './editor-block.scss';
 
 const NAME = 'editor';
+const selection = window.getSelection();
 
 @Element('m-' + NAME + '-block')
 export class EditorBlockElement extends MasterElement {
@@ -26,7 +28,6 @@ export class EditorBlockElement extends MasterElement {
             options.$on = {
                 input: (event) => {
                     this.value.data = event.target.innerHTML;
-                    console.log(this.value);
                 }
             }
         }
@@ -89,6 +90,57 @@ export class EditorBlockElement extends MasterElement {
     onConnected() {
         this.editor = (this.parentElement as EditorElement);
         this.editor.blocks.push(this);
+        this
+            .on('keydown', (event: KeyboardEvent) => {
+                const currentIndex = this.editor.blocks.indexOf(this);
+                const nextIndex = currentIndex + 1;
+                const prevIndex = currentIndex - 1;
+                const prevBlock = prevIndex !== -1 ? this.editor.blocks[prevIndex] : undefined;
+                const caretIndex = getCaretIndex(event.target);
+                // switch (event.keyCode) {
+                //     case KeyCode.ENTER:
+                //         event.preventDefault();
+                //         editor.value.splice(nextIndex, 0, {
+                //             type: 'paragraph'
+                //         });
+                //         editor.blockTemplate.render(editor);
+                //         const newBlock = editor.blocks[nextIndex];
+                //         if (newBlock.options.editable) {
+                //             newBlock.data = '';
+                //             newBlock.focus();
+                //         }
+                //         break;
+                //     case KeyCode.BACKSPACE:
+                //         if (caretIndex === 0) {
+                //             event.preventDefault();
+                //             if (prevBlock && prevBlock.options.editable) {
+                //                 const caretPosition = prevBlock.caretPosition;
+                //                 if (block.value.data) {
+                //                     prevBlock.data = prevBlock.data + block.value.data;
+                //                 }
+                //                 if (caretPosition) {
+                //                     prevBlock.caretPosition = caretPosition;
+                //                 }
+                //             }
+                //             editor.removeBlocks([block]);
+                //         }
+                //         break;
+                // }
+            }, { id: [NAME] })
+            .on('input', (event: InputEvent) => {
+                switch (event.inputType) {
+                    case 'insertParagraph':
+                        const insertedDiv = this.getInsertDiv(selection.focusNode);
+                        insertedDiv?.remove();
+                        const nextBlock = this.editor.addBlock({
+                            type: this.value.type,
+                            data: insertedDiv?.innerHTML
+                        }, this.index + 1);
+                        nextBlock.focus();
+                        break;
+                }
+
+            }, { id: [NAME], passive: true })
     }
 
     onDisconnected() {
@@ -98,5 +150,18 @@ export class EditorBlockElement extends MasterElement {
     render() {
         this.template.render(this.shadowRoot);
         this.contentTemplate.render(this);
+    }
+
+    getInsertDiv(node: Element | Node) {
+        const parentElement = node.parentElement;
+        if (parentElement === this.editableElement) {
+            return node
+        } else {
+            return this.getInsertDiv(parentElement);
+        }
+    }
+
+    get index() {
+        return this.editor.value.indexOf(this.value);
     }
 }

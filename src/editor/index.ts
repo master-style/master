@@ -4,7 +4,6 @@ import css from './editor.scss';
 
 import { Template } from '@master/template';
 import { extend } from '../utils/extend';
-import { getCaretIndex } from '../utils/get-caret-index';
 import { EditorBlockElement } from './editor-block';
 import SelectionArea from '@simonwep/selection-js';
 import { $ } from '@master/dom';
@@ -19,9 +18,20 @@ const NAME = 'editor';
 const body = $(document.body);
 
 enum KeyCode {
+    BACKSPACE = 8,
+    TAB = 9,
     ENTER = 13,
+    SHIFT = 16,
+    CTRL = 17,
+    ALT = 18,
+    ESC = 27,
+    SPACE = 32,
+    LEFT = 37,
+    UP = 38,
+    DOWN = 40,
+    RIGHT = 39,
     DELETE = 46,
-    BACKSPACE = 8
+    META = 91,
 }
 
 export interface EditorBlockValue {
@@ -214,7 +224,6 @@ export class EditorElement extends MasterElement {
 
     @Prop({
         parse(editor: EditorElement, value) {
-            console.log(value);
             return value;
         }
     })
@@ -225,46 +234,6 @@ export class EditorElement extends MasterElement {
     // styleWithCSS = false;
 
     onConnected() {
-        const editor = this;
-        this
-            .on('keydown', 'm-editor-block', function (event: any) {
-                const block: EditorBlockElement = this;
-                const currentIndex = editor.blocks.indexOf(block);
-                const nextIndex = currentIndex + 1;
-                const prevIndex = currentIndex - 1;
-                const prevBlock = prevIndex !== -1 ? editor.blocks[prevIndex] : undefined;
-                const caretIndex = getCaretIndex(event.target);
-                switch (event.keyCode) {
-                    case KeyCode.ENTER:
-                        event.preventDefault();
-                        console.log(caretIndex);
-                        editor.value.splice(nextIndex, 0, {
-                            type: 'paragraph'
-                        });
-                        editor.blockTemplate.render(editor);
-                        const newBlock = editor.blocks[nextIndex];
-                        if (newBlock.options.editable) {
-                            newBlock.data = '';
-                            newBlock.focus();
-                        }
-                        break;
-                    case KeyCode.BACKSPACE:
-                        if (caretIndex === 0) {
-                            event.preventDefault();
-                            if (prevBlock && prevBlock.options.editable) {
-                                const caretPosition = prevBlock.caretPosition;
-                                if (block.value.data) {
-                                    prevBlock.data = prevBlock.data + block.value.data;
-                                }
-                                if (caretPosition) {
-                                    prevBlock.caretPosition = caretPosition;
-                                }
-                            }
-                            editor.removeBlocks([block]);
-                        }
-                        break;
-                }
-            }, { id: [NAME] });
 
         // if (this.styleWithCSS) exec('styleWithCSS');
 
@@ -276,7 +245,6 @@ export class EditorElement extends MasterElement {
             }
         })
             .on('beforestart', ({ event, store }) => {
-                console.log(event, store);
                 for (const block of this.blocks) {
                     if (event.target === block || block.contains((event.target) as any)) {
                         return false;
@@ -317,7 +285,6 @@ export class EditorElement extends MasterElement {
                         })
                         .on('click', () => {
                             this.clearSelection(store);
-                            console.log('click');
                         }, {
                             id: [this, NAME, 'selection'],
                             passive: true
@@ -326,12 +293,17 @@ export class EditorElement extends MasterElement {
             });
     }
 
+    addBlock(value: EditorBlockValue, index: number) {
+        this.value.splice(index, 0, value);
+        this.renderBlocks();
+        return this.blocks[index];
+    }
+
     removeBlocks(blocks: EditorBlockElement[]) {
         for (const block of blocks) {
-            console.log(this.value.indexOf(block.value));
             this.value.splice(this.value.indexOf(block.value), 1);
         }
-        this.blockTemplate.render(this);
+        this.renderBlocks();
     }
 
     clearSelection(store) {
@@ -349,6 +321,10 @@ export class EditorElement extends MasterElement {
 
     render() {
         this.template.render(this.shadowRoot);
+        this.renderBlocks();
+    }
+
+    renderBlocks() {
         this.blockTemplate.render(this);
     }
 }

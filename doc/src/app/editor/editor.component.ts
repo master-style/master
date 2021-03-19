@@ -12,8 +12,4 @@ export class EditorComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  input(event) {
-      console.log(event)
-  }
-
 }
