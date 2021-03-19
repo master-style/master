@@ -34,7 +34,7 @@ export class EditorBlockElement extends MasterElement {
         const options: any = {
             placeholder: this.placeholder,
             contentEditable: this.options.editable,
-            $html: this.data,
+            $html: this.value.data,
             $created: (element) => this.editableElement = this.options.editable ? element : undefined
         };
         if (this.options.editable) {
@@ -52,12 +52,8 @@ export class EditorBlockElement extends MasterElement {
     @Prop()
     placeholder: string;
 
-    set data(data) {
-        this.value.data = data;
-    }
-
-    get data() {
-        return this.value.data || '';
+    updateData() {
+        this.value.data = this.editableElement?.innerHTML;
     }
 
     value: EditorBlockValue;
@@ -109,10 +105,10 @@ export class EditorBlockElement extends MasterElement {
                             const prevBlock = this.prevBlock;
                             if (prevBlock) {
                                 event.preventDefault();
-                                if (prevBlock.editable && this.data) {
+                                if (prevBlock.editable && this.value.data) {
                                     prevBlock.placeCaretAt('last');
                                     prevBlock.editableElement.append(...Array.from(this.editableElement.childNodes));
-                                    prevBlock.data = prevBlock.editableElement.innerHTML;
+                                    prevBlock.updateData();
                                 }
                                 this.editor.removeBlocks([this]);
                             }
@@ -126,7 +122,7 @@ export class EditorBlockElement extends MasterElement {
                     case 'insertParagraph':
                         const insertedDiv = this.getInsertDiv(selection.focusNode);
                         insertedDiv?.remove();
-                        this.data = this.editableElement.innerHTML;
+                        this.updateData();
                         const nextBlock = this.editor.addBlock({
                             type: this.value.type,
                             data: insertedDiv?.innerHTML
@@ -336,12 +332,6 @@ export class EditorBlockElement extends MasterElement {
         return focusNode === lastNode && focusOffset >= rightTrimmedText.length;
     }
 
-    /**
-     * Creates Document Range and sets caret to the element with offset
-     *
-     * @param {HTMLElement} element - target node.
-     * @param {number} offset - offset
-     */
     placeCaretAt(placement: EditorCaretPlacement) {
         this.focus();
         const { node, offset } = this.getCaretAnchor(placement);
