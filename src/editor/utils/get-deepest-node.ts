@@ -1,7 +1,7 @@
 import isSingleTag from './is-single-tag';
 import isLineBreakTag from './is-line-break-tag';
 
-export default function getDeepestNode(node: Node, atLast = false): Node {
+export default function getDeepestNode(node: Node, placement: 'first' | 'last'): Node {
     /**
      * Current function have two directions:
      *  - starts from first child and every time gets first or nextSibling in special cases
@@ -9,8 +9,8 @@ export default function getDeepestNode(node: Node, atLast = false): Node {
      *
      * @type {string}
      */
-    const child = atLast ? 'lastChild' : 'firstChild',
-        sibling = atLast ? 'previousSibling' : 'nextSibling';
+    const child = placement === 'last' ? 'lastChild' : 'firstChild',
+        sibling = placement === 'last' ? 'previousSibling' : 'nextSibling';
 
     if (node && node.nodeType === Node.ELEMENT_NODE && node[child]) {
         let nodeChild = node[child] as Node;
@@ -40,7 +40,7 @@ export default function getDeepestNode(node: Node, atLast = false): Node {
             }
         }
 
-        return getDeepestNode(nodeChild, atLast);
+        return getDeepestNode(nodeChild, placement);
     }
 
     return node;

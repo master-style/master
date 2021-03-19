@@ -8,11 +8,19 @@ import isLineBreakTag from '../utils/is-line-break-tag';
 import isEmpty from '../utils/is-empty';
 import getHigherLevelSiblings from '../utils/get-higher-level-siblings';
 import getTextLengthFromNode from '../utils/get-text-length-from-node';
+import placeCaret from '../utils/place-caret';
 
 import css from './editor-block.scss';
 
 const NAME = 'editor';
 const selection = window.getSelection();
+
+export interface EditorCaretAnchor {
+    node: Node;
+    offset: number;
+}
+
+export declare type EditorCaretPlacement = 'last' | 'end';
 
 @Element('m-' + NAME + '-block')
 export class EditorBlockElement extends MasterElement {
@@ -47,9 +55,6 @@ export class EditorBlockElement extends MasterElement {
 
     set data(data) {
         this.value.data = data;
-        if (this.editableElement) {
-            this.editableElement.innerHTML = data;
-        }
     }
 
     get data() {
@@ -106,8 +111,9 @@ export class EditorBlockElement extends MasterElement {
                             if (prevBlock) {
                                 event.preventDefault();
                                 if (prevBlock.editable && this.data) {
-                                    prevBlock.focus();
-                                    prevBlock.data = prevBlock.data + this.data;
+                                    prevBlock.placeCaret('end');
+                                    prevBlock.editableElement.append(...Array.from(this.editableElement.childNodes));
+                                    prevBlock.data = prevBlock.editableElement.innerHTML;
                                 }
                                 this.editor.removeBlocks([this]);
                             }
@@ -177,7 +183,7 @@ export class EditorBlockElement extends MasterElement {
      * @returns {boolean}
      */
     get isCaretAtStart(): boolean {
-        const firstNode = getDeepestNode(this.editableElement);
+        const firstNode = getDeepestNode(this.editableElement, 'first');
         let focusNode = selection.focusNode;
 
         /** Case when selection have been cleared programmatically, for example after CBS */
@@ -265,7 +271,7 @@ export class EditorBlockElement extends MasterElement {
     get isCaretAtEnd(): boolean {
         let focusNode = selection.focusNode;
 
-        const lastNode = getDeepestNode(this.editableElement, true);
+        const lastNode = getDeepestNode(this.editableElement, 'last');
 
         /** Case when selection have been cleared programmatically, for example after CBS */
         if (!selection.focusNode) {
@@ -337,25 +343,24 @@ export class EditorBlockElement extends MasterElement {
      * @param {HTMLElement} element - target node.
      * @param {number} offset - offset
      */
-    public placeCaret(position: string): void {
-        let offset = 0;
-        const node = getDeepestNode(this.editableElement, position === 'end');
-
-        switch (position) {
-            case 'start':
-                offset = 0;
-                break;
-            case 'end':
-                offset = getTextLengthFromNode(node);
-                break;
-        }
-
-        const range = document.createRange();
-        const selection = window.getSelection();
-        range.setStart(this.editableElement, offset);
-        range.setEnd(this.editableElement, offset);
-        selection.removeAllRanges();
-        selection.addRange(range);
+    placeCaret(placement: EditorCaretPlacement) {
+        this.focus();
+        const anchor = this.getCaretAnchor(placement);
+        placeCaret(anchor.node, anchor.offset);
         this.editableElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return this;
+    }
+
+    getCaretAnchor(placement: EditorCaretPlacement): EditorCaretAnchor {
+        let offset = 0;
+        let node: Node | Element = this.editableElement;
+        if (placement === 'last') {
+            node = getDeepestNode(this.editableElement, 'last');
+            offset = getTextLengthFromNode(node);
+        }
+        return {
+            node,
+            offset
+        }
     }
 }
