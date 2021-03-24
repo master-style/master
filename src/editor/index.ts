@@ -42,6 +42,7 @@ export class EditorElement extends MasterElement {
     template = new Template(() => [
         'div', { part: 'toolbar' },
         ['m-select', {
+            part: 'type',
             value: 'paragraph',
             class: 'sm',
             $created: (select: SelectElement) => this.typeSelect = select

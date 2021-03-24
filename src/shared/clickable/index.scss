@@ -92,11 +92,10 @@ a[part=master] {
     }
 }
 
-:host([active]) {
+:host(.bg\@active[active]) {
     .touch {
         background-color: var(--bg-color-hover);
     }
-
 }
 
 :host(.outlined) {

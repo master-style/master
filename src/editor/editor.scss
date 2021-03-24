@@ -22,6 +22,14 @@
     m-button[active] {
         --button-f-color: var(--f-blue);
     }
+
+    m-button {
+        border-radius: 0;
+    }
+}
+
+[part="type"] {
+    border-right: 1px solid var(--b-fadest);
 }
 
 [part="content"] {
@@ -31,10 +39,6 @@
 :host(.outlined) {
     border-radius: $xs;
     border: 1px solid var(--b-fader);
-
-    [part=toolbar] {
-        padding: $xs;
-    }
 
     [part=content] {
         padding: $md;
