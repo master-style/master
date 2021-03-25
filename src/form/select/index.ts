@@ -71,10 +71,15 @@ export class SelectElement extends ControlElement {
                 .map((eachOption: OptionElement) => [
                     'm-chip', {
                         $if: this.multiple,
-                        class: 'sm',
-                        // $html: eachOption.innerHTML
-                        //     .replace('slot', 'part')
-                    }, [
+                        class: 'sm'
+                    }, () =>
+                        Array.from(eachOption.childNodes)
+                            .filter(({ nodeType }) => nodeType === Node.ELEMENT_NODE || nodeType === Node.TEXT_NODE)
+                            .map((node: Text | Element) => node instanceof Text
+                                ? ['$text', { $text: node.textContent }]
+                                : [node.tagName, { $html: node.innerHTML, slot: false, part: node.slot }]
+                            )
+                    , [
                         'm-button', {
                             $if: !this.readOnly && !this.disabled,
                             part: 'close',
@@ -89,13 +94,7 @@ export class SelectElement extends ControlElement {
                         }, [
                             'm-icon', { name: 'cross' }
                         ]
-                    ],
-                    Array.from(eachOption.childNodes)
-                        .filter(({ nodeType }) => nodeType === Node.ELEMENT_NODE || nodeType === Node.TEXT_NODE)
-                        .map((node: Text | Element) => node instanceof Text
-                            ? ['$text', { $text: node.textContent }]
-                            : [node.tagName, { $html: node.innerHTML, slot: false }]
-                        )
+                    ]
                 ]),
             'fieldset', [
                 'legend', [
