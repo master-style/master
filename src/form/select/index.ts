@@ -49,9 +49,7 @@ export class SelectElement extends ControlElement {
             part: 'master',
             $created: (element: HTMLDivElement) => this.master = element
         }, [
-            'div', {
-                part: 'body'
-            }, [
+            'div', { part: 'body' }, [
                 'span', {
                     $if: this.multiple && this.searchable && !this.readOnly || !this.multiple,
                     part: 'search',
@@ -74,8 +72,8 @@ export class SelectElement extends ControlElement {
                     'm-chip', {
                         $if: this.multiple,
                         class: 'sm',
-                        $html: eachOption.innerHTML
-                            .replace('slot', 'part')
+                        // $html: eachOption.innerHTML
+                        //     .replace('slot', 'part')
                     }, [
                         'm-button', {
                             $if: !this.readOnly && !this.disabled,
@@ -91,7 +89,13 @@ export class SelectElement extends ControlElement {
                         }, [
                             'm-icon', { name: 'cross' }
                         ]
-                    ]
+                    ],
+                    Array.from(eachOption.childNodes)
+                        .filter(({ nodeType }) => nodeType === Node.ELEMENT_NODE || nodeType === Node.TEXT_NODE)
+                        .map((node: Text | Element) => node instanceof Text
+                            ? ['$text', { $text: node.textContent }]
+                            : [node.tagName, { $html: node.innerHTML, slot: false }]
+                        )
                 ]),
             'fieldset', [
                 'legend', [

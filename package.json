@@ -37,9 +37,9 @@
         "url": "https://github.com/master-style/ui.git"
     },
     "dependencies": {
-        "@master/dom": "~1.0.0",
-        "@master/element": "~1.0.0",
-        "@master/template": "~1.0.0",
+        "@master/dom": "^1.0.0",
+        "@master/element": "^1.0.0",
+        "@master/template": "^1.0.0",
         "@popperjs/core": "^2.5.4",
         "@simonwep/selection-js": "^2.0.2",
         "body-scroll-lock": "^3.1.5"
