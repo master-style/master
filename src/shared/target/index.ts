@@ -173,7 +173,7 @@ export class TargetElement extends MasterElement {
     }
 
     async open() {
-        if (!await this.openable()) {
+        if (!(await this.openable())) {
             return false;
         }
         this['_hidden'] = false;
@@ -199,7 +199,7 @@ export class TargetElement extends MasterElement {
     }
 
     async close() {
-        if (!await this.closeable()) {
+        if (!(await this.closeable())) {
             return false;
         }
         this['_hidden'] = true;
