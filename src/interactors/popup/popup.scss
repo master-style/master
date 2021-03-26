@@ -1,12 +1,14 @@
 @import '../../variables';
 
 :host {
+    --popup-offset-top: .375rem;
+    --popup-offset-bottom: .375rem;
     z-index: $z-top;
 }
 
 [part=content] {
-    --content-offset-top: .375rem;
-    --content-offset-bottom: .375rem;
+    --content-offset-top: var(--popup-offset-top);
+    --content-offset-bottom: var(--popup-offset-bottom);
     border-radius: $xs;
     background-color: rgba(var(--bg-object-rgb), .8);
     backdrop-filter: blur(35px);
