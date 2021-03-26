@@ -2,14 +2,16 @@
 @import '../../mixins';
 
 :host {
+    --size: var(--footer-size, 3rem);
+    --side-min-width: var(--footer-side-min-width, var(--size));
     width: 100%;
-    min-height: 3rem;
-    bottom: 0;
+    min-height: var(--size);
+    top: 0;
     text-align: center;
     text-align-last: center;
+    @include bgBlur(var(--bg-raise-rgb), .8);
     border-top-right-radius: 0;
     border-top-left-radius: 0;
-    @include bgBlur(var(--bg-raise-rgb), .8);
 }
 
 :host,
@@ -17,6 +19,10 @@ slot {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+slot {
+    flex: 1 1 auto;
 }
 
 :host(.safe) {
@@ -34,6 +40,11 @@ slot {
 
 slot[name=end],
 slot[name=start] {
-    min-width: 3rem;
+    min-width: var(--side-min-width);
+    flex: 0 0 auto;
 }
 
+::slotted(h2) {
+    font-size: var(--f-sm) !important;
+    margin: 0 !important;
+}
