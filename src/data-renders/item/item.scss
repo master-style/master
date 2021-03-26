@@ -2,7 +2,7 @@
 @import '../../shared/clickable';
 
 :host {
-    --bg-color: var(--item-bg-color);
+    --bg-color: var(--item-bg-color, transparent);
     --bg-color-hover: var(--item-bg-color-hover, var(--bg-object-hover));
     --b-color-active: var(--item-b-color-active);
     --bg-disabled: var(--item-bg-disabled);
@@ -21,6 +21,7 @@
 [part=master] {
     padding-left: var(--px);
     line-height: 1.3;
+    border: 0;
 }
 
 [part=body] {
