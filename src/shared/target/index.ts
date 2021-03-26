@@ -39,7 +39,7 @@ export class TargetElement extends MasterElement {
                 const typeSets = value.split(',');
                 const handleTrigger = target['handleTrigger'];
                 const typeSet = new Set<string>(typeSets.join(' ').split(' '));
-                const handle = function (event: Event) {
+                const handle =  function (event: Event) {
                     const trigger = this;
                     if (this.disabled) {
                         return;
@@ -172,7 +172,7 @@ export class TargetElement extends MasterElement {
         return true;
     }
 
-    async open() {
+    async open(): Promise<boolean> {
         if (!await this.openable()) {
             return false;
         }
@@ -198,7 +198,7 @@ export class TargetElement extends MasterElement {
         return true;
     }
 
-    async close() {
+    async close(): Promise<boolean> {
         if (!await this.closeable()) {
             return false;
         }
@@ -214,9 +214,9 @@ export class TargetElement extends MasterElement {
         return true;
     }
 
-    async toggle(whether?: boolean) {
+    async toggle(whether?: boolean): Promise<boolean> {
         whether = typeof whether === 'boolean' ? whether : this.hidden;
-        await (whether ? this.open() : this.close());
+        return await (whether ? this.open() : this.close());
     }
 
     onDisconnected() {

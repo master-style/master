@@ -15,9 +15,6 @@ const PX = 'px';
 export class ModalElement extends TargetElement {
     static css = css;
 
-    @Event()
-    closedByClickEmitter: EventEmitter;
-
     contentTokens: any = () => [
         'slot', {
             $created: (element: HTMLElement) => this.wrap = element
@@ -82,11 +79,7 @@ export class ModalElement extends TargetElement {
             }
             if (value) {
                 modal.closeElement
-                    .on('click', async () => {
-                        if (await modal.close()) {
-                            modal.closedByClickEmitter(modal.closeElement);
-                        }
-                    }, { passive: true, id: [NAME] });
+                    .on('click', async () => modal.close(), { passive: true, id: [NAME] });
             }
         }
     })
@@ -103,11 +96,7 @@ export class ModalElement extends TargetElement {
             }
             if (value === 'close') {
                 modal.overlayElement
-                    .on('click', async () => {
-                        if (await modal.close()) {
-                            modal.closedByClickEmitter(modal.overlayElement);
-                        }
-                    }, { passive: true, id: [NAME] });
+                    .on('click', () => modal.close(), { passive: true, id: [NAME] });
             }
         }
     })
