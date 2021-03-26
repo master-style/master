@@ -83,7 +83,7 @@ export class ModalElement extends TargetElement {
             if (value) {
                 modal.closeElement
                     .on('click', async () => {
-                        if (await modal.closeable) {
+                        if (await modal.closeable()) {
                             modal.close();
                             modal.closeByClickEmitter(modal.closeElement);
                         }
@@ -105,7 +105,7 @@ export class ModalElement extends TargetElement {
             if (value === 'close') {
                 modal.overlayElement
                     .on('click', async () => {
-                        if (await modal.closeable) {
+                        if (await modal.closeable()) {
                             modal.close();
                             modal.closeByClickEmitter(modal.overlayElement);
                         }
