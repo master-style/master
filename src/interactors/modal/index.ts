@@ -16,7 +16,7 @@ export class ModalElement extends TargetElement {
     static css = css;
 
     @Event()
-    closeOnClickEmitter: EventEmitter;
+    closeByClickEmitter: EventEmitter;
 
     contentTokens: any = () => [
         'slot', {
@@ -83,8 +83,9 @@ export class ModalElement extends TargetElement {
             if (value) {
                 modal.closeElement
                     .on('click', async () => {
-                        if (await modal.close() !== false) {
-                            modal.closeOnClickEmitter(modal.closeElement);
+                        if (await modal.closeable) {
+                            modal.close();
+                            modal.closeByClickEmitter(modal.closeElement);
                         }
                     }, { passive: true, id: [NAME] });
             }
@@ -104,8 +105,9 @@ export class ModalElement extends TargetElement {
             if (value === 'close') {
                 modal.overlayElement
                     .on('click', async () => {
-                        if (await modal.close()) {
-                            modal.closeOnClickEmitter(modal.overlayElement);
+                        if (await modal.closeable) {
+                            modal.close();
+                            modal.closeByClickEmitter(modal.overlayElement);
                         }
                     }, { passive: true, id: [NAME] });
             }

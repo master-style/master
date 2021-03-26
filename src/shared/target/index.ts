@@ -122,6 +122,9 @@ export class TargetElement extends MasterElement {
     protected animations: Animation[] = [];
     protected animation: Animation;
 
+    startClose: () => Promise<boolean>;
+    startOpen: () => Promise<boolean>;
+
     private async prepare() {
         if (this.triggerEvent) {
             const name = this.constructor['elementName'];
@@ -159,8 +162,18 @@ export class TargetElement extends MasterElement {
         }
     }
 
-    async open() {
+    async openable(): Promise<boolean> {
         if (!this.hidden) {
+            return false;
+        }
+        if (this.startOpen && !await this.startOpen()) {
+            return false;
+        }
+        return true;
+    }
+
+    async open() {
+        if (!this.openable) {
             return false;
         }
         this['_hidden'] = false;
@@ -175,8 +188,18 @@ export class TargetElement extends MasterElement {
         return true;
     }
 
-    async close() {
+    async closeable(): Promise<boolean> {
         if (this.hidden) {
+            return false;
+        }
+        if (this.startClose && !await this.startClose()) {
+            return false;
+        }
+        return true;
+    }
+
+    async close() {
+        if (!this.closeable) {
             return false;
         }
         this['_hidden'] = true;
