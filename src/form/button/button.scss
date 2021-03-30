@@ -81,6 +81,7 @@
 :host(.inline) {
     --f-size: inherit;
     line-height: inherit;
+    border-radius: 0;
 
     [part=master] {
         display: flex;
