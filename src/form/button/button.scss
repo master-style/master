@@ -8,6 +8,7 @@
     --size: var(--button-size, 3rem);
     --f-size: var(--button-f-size, #{var(--f-sm)});
     --f-color: var(--button-f-color, var(--f-theme));
+    --f-color-hover: var(--button-f-color-hover, var(--f-color));
     --b-width: var(--button-b-width, 0px);
     --b-color: var(--button-b-color, var(--b-fader));
     --b-color-active: var(--button-b-color-active, var(--b-fade));
