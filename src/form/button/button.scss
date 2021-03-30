@@ -78,14 +78,16 @@
     }
 }
 
-:host(.inline) {
-    --f-size: inherit;
+:host(.inline),
+:host([class^="inline-"]),
+:host([class*=" inline-"]) {
+    --f-size: var(--button-f-size, inherit);
+    --px: var(--button-px, 0px);
+    --py: var(--button-py, 0px);
     line-height: inherit;
-    border-radius: 0;
 
     [part=master] {
         display: flex;
-        padding: 0;
         min-width: unset;
         min-height: unset;
         height: auto;
