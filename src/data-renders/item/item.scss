@@ -40,15 +40,13 @@
     }
 }
 
-:host(.lined:not(:last-of-type)),
-:host(.lined:first-of-type) {
+:host(.lined:not(:last-of-type)) {
     [part=master] {
         border-bottom: 1px solid var(--b-fadest);
     }
 }
 
-:host(.indent-lined:not(:last-of-type)),
-:host(.indent-lined:first-of-type) {
+:host(.indent-lined:not(:last-of-type)) {
     [part=lower] {
         border-bottom: 1px solid var(--b-fadest);
     }
