@@ -47,15 +47,13 @@
 
 :host(.outlined),
 :host(.underlined) {
-    --b-color: var(--b-fader);
-    --b-color-active: var(--b-fade);
     backdrop-filter: none;
 }
 
 @media (any-hover: hover) {
     :host(:not([disabled]):not([read-only]):hover) {
         fieldset {
-            border-color: var(--b-color-active);
+            border-color: var(--b-color-active, var(--b-fade));
         }
     }
 }
@@ -70,18 +68,23 @@
     pointer-events: none;
 }
 
-:host(:active:not([read-only]):not([disabled])),
-:host(:focus-within:not([read-only]):not([disabled])),
-:host([focused]:not([read-only]):not([disabled])) {
+:host(.outlined:active:not([read-only]):not([disabled])),
+:host(.outlined:focus-within:not([read-only]):not([disabled])),
+:host(.outlined[focused]:not([read-only]):not([disabled])) {
 
     fieldset {
-        --b-width: 2px;
-        border-color: var(--b-color-active);
+        border-width: calc(var(--b-width, 1px) + 1px);
+        border-color: var(--b-color-active, var(--b-fade));
     }
+}
 
-    ::slotted([part=body]),
-    [part=body] {
-        color: var(--f-fade);
+:host(.underlined:active:not([read-only]):not([disabled])),
+:host(.underlined:focus-within:not([read-only]):not([disabled])),
+:host(.underlined[focused]:not([read-only]):not([disabled])) {
+
+    fieldset {
+        border-bottom-width: calc(var(--b-width, 1px) + 1px);
+        border-color: var(--b-color-active, var(--b-fade));
     }
 }
 
@@ -109,7 +112,7 @@
     border-radius: $xs;
 
     fieldset {
-        border-width: var(--b-width);
+        border-width: var(--b-width, 1px);
     }
 
     legend {
@@ -154,7 +157,7 @@
     --px: 0;
 
     fieldset {
-        border-bottom-width: var(--b-width);
+        border-bottom-width: var(--b-width, 1px);
     }
 
     ::slotted([part=head]),
@@ -197,12 +200,12 @@ fieldset {
     margin: 0;
     display: flex;
     color: var(--theme, var(--f-theme-fader));
-    border-color: var(--b-color);
-    border-width: 0;
-    border-style: solid;
     padding: 0 calc(var(--px) - .3125rem);
     border-radius: inherit;
     pointer-events: none;
+    border-color: var(--b-color, var(--b-fader));
+    border-width: var(--b-width, 0px);
+    border-style: var(--b-style, solid);
 }
 
 legend {

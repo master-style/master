@@ -18,7 +18,6 @@
     color: inherit;
     border-radius: inherit;
     padding: 0;
-    border: 0;
     width: 100%;
     height: 100%;
     outline: none;
@@ -29,7 +28,7 @@
     will-change: transform;
     background-color: var(--bg-color);
     backdrop-filter: blur(var(--blur));
-    border-color: var(--b-color);
+    border-color: var(--b-color, var(--b-fader));
     border-width: var(--b-width, 0);
     border-style: var(--b-style, solid);
 
@@ -45,9 +44,9 @@
 }
 
 :host(.outlined) {
-    border-width: var(--b-width);
 
     [part=master] {
+        border-width: var(--b-width, 1px);
         background-color: transparent;
     }
 }
@@ -70,7 +69,7 @@
         color: var(--f-color-hover);
     }
 
-    :host(.touch.outlined:hover:not([disabled])) {
+    :host(.touch:hover.outlined:not([disabled])) {
         --bg-color: var(--bg-color-hover);
         --b-color: var(--b-color-active);
         color: var(--f-color-hover);
@@ -87,11 +86,6 @@ a[part=master] {
     -webkit-user-select: none;
     user-select: none;
     cursor: pointer;
-}
-
-:host(.outlined) {
-    --b-width: 1px;
-    --bg-color: transparent;
 }
 
 :host(.bg\@active[active]) {

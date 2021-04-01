@@ -9,9 +9,9 @@
     --f-size: var(--button-f-size, #{var(--f-sm)});
     --f-color: var(--button-f-color, var(--f-theme));
     --f-color-hover: var(--button-f-color-hover, var(--f-color));
-    --b-width: var(--button-b-width, 0);
+    --b-width: var(--button-b-width);
     --b-style: var(--button-b-style);
-    --b-color: var(--button-b-color, var(--b-fader));
+    --b-color: var(--button-b-color);
     --b-color-active: var(--button-b-color-active, var(--b-fade));
     --bg-color: var(--button-bg-color, transparent);
     --bg-color-hover: var(--button-bg-color-hover, var(--theme-fade));
@@ -73,7 +73,6 @@
 }
 
 :host(.outlined) {
-    --bg-color-hover: var(--button-bg-color-hover, var(--bg-color));
 
     ::slotted([part=foot]) {
         color: var(--f-fader);

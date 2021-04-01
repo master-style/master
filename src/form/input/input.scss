@@ -4,7 +4,8 @@
 :host {
     --f-size: var(--input-f-size, var(--f-sm));
     --b-width: var(--input-b-width);
-    --b-color: var(--input-b-color, transparent);
+    --b-style: var(--input-b-style);
+    --b-color: var(--input-b-color);
     --py: var(--input-py, .90625rem);
     --px: var(--input-px, 1rem);
     --size: var(--input-size, 3rem);
