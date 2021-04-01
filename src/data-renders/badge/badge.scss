@@ -7,7 +7,7 @@
     --bg-color: var(--badge-bg-color);
     --b-color-active: var(--badge-b-color-active);
     --b-color: var(--badge-b-color);
-    --b-width: var(--badge-b-width);
+    --b-width: var(--badge-b-width, 0);
     --b-style: var(--badge-b-style);
     background-color: var(--bg-color);
     border: var(--b-color) var(--b-width, 0) var(--b-style);

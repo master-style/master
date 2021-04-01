@@ -10,7 +10,7 @@
     --bg-color-hover: var(--chip-bg-color-hover);
     --b-color-active: var(--chip-b-color-active);
     --b-color: var(--chip-b-color);
-    --b-width: var(--chip-b-width);
+    --b-width: var(--chip-b-width, 0);
     --b-style: var(--chip-b-style);
     --bg-disabled: var(--chip-bg-disabled);
     --radius: var(--chip-radius, #{$xs});
