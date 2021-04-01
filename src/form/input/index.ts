@@ -29,7 +29,6 @@ export class InputElement extends ControlElement {
             $created: (element: HTMLInputElement) => {
                 this.body = element;
                 this.validity = element.validity;
-                this.focus = element.focus;
             }
         }
     ]);
@@ -275,13 +274,17 @@ export class InputElement extends ControlElement {
             = this.multiple ? this.files.concat(files) : files;
     }
 
+    focus() {
+        this.body.focus();
+    }
+
     onConnected() {
         this.validate();
 
         this
             .on('click', (event: any) => {
                 if (event.target === this.body || this.keepValidity && this.readOnly) return;
-                this.body.focus();
+                this.focus();
             }, {
                 id: [NAME],
                 passive: true
