@@ -29,6 +29,7 @@ export class InputElement extends ControlElement {
             $created: (element: HTMLInputElement) => {
                 this.body = element;
                 this.validity = element.validity;
+                this.focus = element.focus;
             }
         }
     ]);
