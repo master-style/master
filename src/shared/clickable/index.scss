@@ -18,16 +18,16 @@
     color: inherit;
     border-radius: inherit;
     padding: 0;
-    border: var(--b-color) var(--b-width, 0) var(--b-style, solid);
+    border: 0;
     width: 100%;
     height: 100%;
     outline: none;
     overflow: hidden;
     background-origin: border-box;
-    background-color: var(--bg-color);
     box-sizing: border-box;
     transition: box-shadow ease-out .15s;
     will-change: transform;
+    background-color: var(--bg-color);
     backdrop-filter: blur(var(--blur));
 
     &[disabled] {
@@ -43,7 +43,10 @@
 
 :host(.outlined) {
     [part=master] {
-        border-width: var(--b-width, 1px);
+        border-color: var(--b-color);
+        border-width: var(--b-width, 0);
+        border-style: var(--b-style, solid);
+        background-color: transparent;
     }
 }
 
@@ -59,21 +62,19 @@
 }
 
 @media (any-hover: hover) {
-    .touch {
-        &:hover:not([disabled]) {
-            background-color: var(--bg-color-hover);
-            color: var(--f-color-hover);
-        }
+
+    :host(.touch:hover:not([disabled])) {
+        --bg-color: var(--bg-color-hover);
+        --f-color: var(--f-color-hover);
     }
 
-    :host(.outlined) {
-        .touch {
-            &:hover:not([disabled]) {
-                background-color: var(--bg-color-hover);
-                color: var(--f-color-hover);
-                box-shadow: inset 0 0 0 1px var(--b-color-active);
-                border-color: var(--b-color-active);
-            }
+    :host(.touch.outlined:hover:not([disabled])) {
+        --bg-color: var(--bg-color-hover);
+        --f-color: var(--f-color-hover);
+        --b-color: var(--b-color-active);
+
+        [part=master] {
+            box-shadow: inset 0 0 0 1px var(--b-color-active);
         }
     }
 }
@@ -88,26 +89,11 @@ a[part=master] {
 
 :host(.outlined) {
     --b-width: 1px;
-
-    [part=master] {
-        background-color: transparent;
-    }
+    --bg-color: transparent;
 }
 
 :host(.bg\@active[active]) {
-    .touch {
-        background-color: var(--bg-color-hover);
-    }
-}
-
-:host(.outlined) {
-    .touch {
-        &:hover:not([disabled]) {
-            background-color: var(--bg-color-hover);
-            box-shadow: inset 0 0 0 1px var(--b-color-active);
-            border-color: var(--b-color-active);
-        }
-    }
+    --bg-color: var(--bg-color-hover);
 }
 
 :host([disabled]) {

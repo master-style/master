@@ -24,9 +24,9 @@ export class ClickableElement extends MasterElement {
 
         switch (tag) {
             case 'button':
+                this.classList.add('touch');
                 return [
                     tag, {
-                        class: 'touch',
                         part: 'master',
                         disabled: this.disabled,
                         type: this.type
@@ -34,9 +34,9 @@ export class ClickableElement extends MasterElement {
                     this.slotTemplate || ['slot'], spinnerTemplate
                 ];
             case 'a':
+                this.classList.add('touch');
                 return [
                     tag, {
-                        class: 'touch',
                         part: 'master',
                         href: this.href,
                         download: this.download,
@@ -46,6 +46,7 @@ export class ClickableElement extends MasterElement {
                     this.slotTemplate || ['slot'], spinnerTemplate
                 ];
             default:
+                this.classList.remove('touch');
                 return [
                     'div', { part: 'master' },
                     this.slotTemplate || ['slot'], spinnerTemplate
