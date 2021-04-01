@@ -64,10 +64,10 @@ export class ControlElement extends MasterElement {
     invalid: boolean;
 
     @Attr({ observe: false, render: false })
-    dirty: boolean = false;
+    dirty: boolean;
 
     @Attr({ observe: false, render: false })
-    touched: boolean = false;
+    touched: boolean;
 
     @Attr({ observe: false, render: false })
     prompt: string;
@@ -78,7 +78,7 @@ export class ControlElement extends MasterElement {
             return;
         }
 
-        let prompt = null; // 為 null 時會移除 attribute
+        let prompt: string;
 
         for (const key in this.validity) {
             const eachWhether = this.validity[key];
@@ -106,6 +106,7 @@ export class ControlElement extends MasterElement {
 
         this.valid = this.validity.valid;
         this.invalid = !this.validity.valid;
+
         this.prompt = prompt;
     }
 
