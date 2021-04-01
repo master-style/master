@@ -4,7 +4,7 @@
 }
 
 :host(.blue.outlined) {
-    --f-theme: var(--f-blue);
+    --f-color: var(--f-blue);
     --bg-color-head: var(--blue-fader);
     --bg-color-hover: var(--blue-fader);
     --b-color: var(--blue);
@@ -15,7 +15,7 @@
     --bg-color-head: var(--blue-fade);
     --bg-color: var(--blue-fader);
     --bg-color-hover: var(--blue-fade);
-    --f-theme: var(--f-blue);
+    --f-color: var(--f-blue);
 }
 
 :host(.blue\+.outlined) {
@@ -31,7 +31,7 @@
 }
 
 :host(.green.outlined) {
-    --f-theme: var(--f-green);
+    --f-color: var(--f-green);
     --bg-color-head: var(--green-fader);
     --bg-color-hover: var(--green-fader);
     --b-color: var(--green);
@@ -42,7 +42,7 @@
     --bg-color-head: var(--green-fade);
     --bg-color: var(--green-fader);
     --bg-color-hover: var(--green-fade);
-    --f-theme: var(--f-green);
+    --f-color: var(--f-green);
 }
 
 :host(.green\+.outlined) {
@@ -58,7 +58,7 @@
 }
 
 :host(.red.outlined) {
-    --f-theme: var(--f-red);
+    --f-color: var(--f-red);
     --bg-color-head: var(--red-fader);
     --bg-color-hover: var(--red-fader);
     --b-color: var(--red);
@@ -69,7 +69,7 @@
     --bg-color-head: var(--red-fade);
     --bg-color: var(--red-fader);
     --bg-color-hover: var(--red-fade);
-    --f-theme: var(--f-red);
+    --f-color: var(--f-red);
 }
 
 :host(.red\+.outlined) {
@@ -86,7 +86,7 @@
 }
 
 :host(.purple.outlined) {
-    --f-theme: var(--f-purple);
+    --f-color: var(--f-purple);
     --bg-color-head: var(--purple-fader);
     --bg-color-hover: var(--purple-fader);
     --b-color: var(--purple);
@@ -97,7 +97,7 @@
     --bg-color-head: var(--purple-fade);
     --bg-color: var(--purple-fader);
     --bg-color-hover: var(--purple-fade);
-    --f-theme: var(--f-purple);
+    --f-color: var(--f-purple);
 }
 
 :host(.purple\+.outlined) {
@@ -113,7 +113,7 @@
 }
 
 :host(.yellow.outlined) {
-    --f-theme: var(--f-yellow);
+    --f-color: var(--f-yellow);
     --bg-color-head: var(--yellow-fader);
     --bg-color-hover: var(--yellow-fader);
     --b-color: var(--yellow);
@@ -124,7 +124,7 @@
     --bg-color-head: var(--yellow-fade);
     --bg-color: var(--yellow-fader);
     --bg-color-hover: var(--yellow-fade);
-    --f-theme: var(--f-yellow);
+    --f-color: var(--f-yellow);
 }
 
 :host(.yellow\+.outlined) {
@@ -179,7 +179,7 @@
 :host(.purple),
 :host(.yellow) {
     --bg-color-head: rgba(0, 0, 0, .1);
-    --f-theme: #fff;
+    --f-color: #fff;
 }
 
 :host([disabled]) {

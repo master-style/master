@@ -65,13 +65,13 @@
 
     :host(.touch:hover:not([disabled])) {
         --bg-color: var(--bg-color-hover);
-        --f-color: var(--f-color-hover);
+        color: var(--f-color-hover);
     }
 
     :host(.touch.outlined:hover:not([disabled])) {
         --bg-color: var(--bg-color-hover);
-        --f-color: var(--f-color-hover);
         --b-color: var(--b-color-active);
+        color: var(--f-color-hover);
 
         [part=master] {
             box-shadow: inset 0 0 0 1px var(--b-color-active);
