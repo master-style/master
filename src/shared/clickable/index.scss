@@ -29,6 +29,9 @@
     will-change: transform;
     background-color: var(--bg-color);
     backdrop-filter: blur(var(--blur));
+    border-color: var(--b-color);
+    border-width: var(--b-width, 0);
+    border-style: var(--b-style, solid);
 
     &[disabled] {
         // cursor: no-drop !important;
@@ -42,10 +45,9 @@
 }
 
 :host(.outlined) {
+    border-width: var(--b-width, 1px);
+
     [part=master] {
-        border-color: var(--b-color);
-        border-width: var(--b-width, 0);
-        border-style: var(--b-style, solid);
         background-color: transparent;
     }
 }
