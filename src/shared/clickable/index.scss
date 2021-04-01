@@ -45,7 +45,7 @@
 }
 
 :host(.outlined) {
-    border-width: var(--b-width, 1px);
+    border-width: var(--b-width);
 
     [part=master] {
         background-color: transparent;

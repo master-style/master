@@ -4,7 +4,7 @@
 
 :host {
     --f-size: var(--textarea-f-size, var(--f-sm));
-    --b-width: var(--textarea-b-width, 1px);
+    --b-width: var(--textarea-b-width);
     --b-color: var(--textarea-b-color, var(--b-fade));
     --py: var(--textarea-py, .90625rem);
     --px: var(--textarea-px, 1rem);
