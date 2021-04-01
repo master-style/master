@@ -9,10 +9,17 @@ const NAME = 'option';
 export class OptionElement extends MasterElement {
 
     static css = css;
-    
+
     updating: boolean;
 
-    @Attr()
+    @Attr({
+        onUpdate(option: OptionElement, selected) {
+            const select = (option.parentElement as SelectElement);
+            if (select.popup && !select.popup?.hidden) {
+                select.popup.render();
+            }
+        },
+    })
     disabled: boolean;
 
     @Attr({

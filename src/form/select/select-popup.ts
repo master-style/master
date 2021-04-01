@@ -65,6 +65,7 @@ export class SelectPopupElement extends PopupElement {
                     style: '--f-size: var(--f-sm); --py: 0.375rem;',
                     empty: eachOption.empty,
                     selected: eachOption.selected,
+                    disabled: eachOption.disabled,
                     $data: eachOption,
                     $html: eachOption.innerHTML,
                     $created: (item: ItemElement) => {
@@ -80,6 +81,7 @@ export class SelectPopupElement extends PopupElement {
                         class: 'sm',
                         style: 'margin-left: 1rem',
                         checked: eachOption.selected,
+                        disabled: eachOption.disabled,
                         $data: eachOption,
                         type: this.multiple ? 'checkbox' : 'radio',
                         $created: (check: CheckElement, node: TemplateNode) => {
