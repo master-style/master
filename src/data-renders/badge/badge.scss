@@ -6,9 +6,8 @@
     --f-size: var(--badge-f-size, var(--f-xxs));
     --bg-color: var(--badge-bg-color, var(--theme));
     --b-color: var(--badge-b-color);
-    --b-width: var(--badge-b-width, 0);
-    --b-style: var(--badge-b-style);
-    border: var(--b-color) var(--b-width, 0) var(--b-style);
+    --b-width: var(--badge-b-width, 1px);
+    --b-style: var(--badge-b-style, solid);
     color: var(--f-color);
     display: inline-flex;
     align-items: center;
@@ -40,6 +39,8 @@
 }
 
 :host(.outlined) {
-    --b-width: 1px;
+    border-width: var(--b-width);
+    border-color: var(--b-color);
+    border-style: var(--b-style);
     background-color: transparent;
 }
