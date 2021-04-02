@@ -14,7 +14,7 @@
     --b-color: var(--button-b-color, var(--b-fader));
     --b-color-active: var(--button-b-color-active, var(--b-fade));
     --bg-color: var(--button-bg-color, transparent);
-    --bg-color-hover: var(--button-bg-color-hover, var(--theme-fade));
+    --bg-color-hover: var(--button-bg-color-hover, var(--bg-object-hover));
     display: inline-flex;
     font-size: var(--f-size);
     color: var(--f-color);
