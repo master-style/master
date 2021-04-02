@@ -30,7 +30,7 @@
     border-width: 0;
     border-color: var(--b-color);
     border-style: var(--b-style);
-    background-color: var(--bg-color);
+    background-color: transparent;
 
     &[disabled] {
         // cursor: no-drop !important;
@@ -44,10 +44,14 @@
 }
 
 :host(.outlined) {
-
     [part=master] {
         border-width: var(--b-width, 1px);
-        background-color: transparent;
+    }
+}
+
+:host(.filled) {
+    [part=master] {
+        background-color: var(--bg-color);
     }
 }
 

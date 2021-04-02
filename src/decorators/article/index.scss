@@ -168,7 +168,7 @@ article {
         blockquote:not(:last-child),
         hr,
         p:not(:last-child) {
-            margin-bottom: 2rem;
+            margin-bottom: $sm;
         }
 
         h1 {
