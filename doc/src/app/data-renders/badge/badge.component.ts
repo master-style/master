@@ -9,7 +9,7 @@ export class BadgeComponent implements OnInit {
 
   constructor() { }
 
-  colors = ['blue', 'red', 'green', 'purple', 'yellow', 'theme'];
+  colors = ['blue', 'red', 'green', 'purple', 'yellow'];
   styles = ['', 'outlined'];
 
   ngOnInit(): void {

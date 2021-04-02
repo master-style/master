@@ -4,12 +4,10 @@
 :host {
     --f-color: var(--badge-f-color, var(--f-theme));
     --f-size: var(--badge-f-size, var(--f-xxs));
-    --bg-color: var(--badge-bg-color);
-    --b-color-active: var(--badge-b-color-active);
+    --bg-color: var(--badge-bg-color, var(--theme));
     --b-color: var(--badge-b-color);
     --b-width: var(--badge-b-width, 0);
     --b-style: var(--badge-b-style);
-    background-color: var(--bg-color);
     border: var(--b-color) var(--b-width, 0) var(--b-style);
     color: var(--f-color);
     display: inline-flex;
@@ -27,6 +25,7 @@
     white-space: nowrap;
     contain: style;
     flex: 0 0 auto;
+    background-color: var(--bg-color);
 }
 
 :host(.sm) {
