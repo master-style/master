@@ -24,7 +24,7 @@ export class FormComponent implements OnInit {
         this.timer = setInterval(() => {
             if (i > 5) return;
             i++;
-            this.options.unshift(new Date().getTime());
+            this.options.unshift(new Date());
         }, 1000);
 
         setTimeout(() => {

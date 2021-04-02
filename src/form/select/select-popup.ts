@@ -66,6 +66,7 @@ export class SelectPopupElement extends PopupElement {
                     empty: eachOption.empty,
                     selected: eachOption.selected,
                     disabled: eachOption.disabled,
+                    $id: eachOption.value,
                     $data: eachOption,
                     $html: eachOption.innerHTML,
                     $created: (item: ItemElement) => {
