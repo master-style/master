@@ -16,7 +16,7 @@
                 <th class="fit t:left">type</th>
                 <td>
                     <div class="y:xs">
-                        <m-chip class="x theme+ sm" *ngFor="let type of types">
+                        <m-chip class="x sm" *ngFor="let type of types">
                             <div part="head">
                                 <ion-icon *ngIf="type !== undefined" [attr.name]="getTypeIcon(type)"></ion-icon>
                                 <span *ngIf="type === undefined">'∅'</span>

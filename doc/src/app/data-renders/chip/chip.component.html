@@ -1,7 +1,7 @@
 <div class="demo">
     <div class="demo-body">
         <div class="y:sm c:center">
-            <m-chip class="x theme">
+            <m-chip class="x">
                 <div part="head">S</div>
                 Sally
             </m-chip>
@@ -13,7 +13,7 @@
                 <div part="head">♀️</div>
                 Joy
             </m-chip>
-            <m-chip class="x outlined theme rounded">
+            <m-chip class="x outlined rounded">
                 <img part="head" src="assets/images/avatar1.jpg">
                 Joy
                 <m-button part="close">
@@ -102,7 +102,7 @@
             <template [codeLang]="'html'" [codeDemo]=true>
                 <div class="y:sm">
                     <m-chip class="x {{ eachColor + eachDepth }} {{ eachStyle }}" *ngFor="let eachColor of colors"
-                        (click)="currentColor = eachColor">
+                            (click)="currentColor = eachColor">
                         <div part="head">
                             <ion-icon name="water"></ion-icon>
                         </div>
@@ -147,11 +147,11 @@
 </m-table>
 <template [codeLang]="'html'" [codeDemo]=true>
     <div class="y:sm c:bottom c:center">
-        <m-chip class="x sm theme outlined">
+        <m-chip class="x sm outlined">
             <div part="head">S</div>
             small
         </m-chip>
-        <m-chip class="x theme outlined">
+        <m-chip class="x outlined">
             default
         </m-chip>
     </div>
@@ -181,7 +181,7 @@
                 </td>
                 <td><b>側圓角</b></td>
                 <td class="t:right">
-                    <m-chip class="sm theme+" href="modifiers">
+                    <m-chip class="sm" href="modifiers">
                         {{ 'modifiers' | translate }}
                     </m-chip>
                 </td>
@@ -191,11 +191,11 @@
 </m-table>
 <template [codeLang]="'html'" [codeDemo]=true>
     <div class="y:sm c:bottom c:center">
-        <m-chip class="x theme outlined">
+        <m-chip class="x outlined">
             <div part="head">D</div>
             default
         </m-chip>
-        <m-chip class="x theme outlined rounded">
+        <m-chip class="x outlined rounded">
             <div part="head">R</div>
             rounded
         </m-chip>
