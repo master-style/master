@@ -7,6 +7,7 @@
     --b-width: var(--textarea-b-width);
     --b-style: var(--textarea-b-style);
     --b-color: var(--textarea-b-color);
+    --bg-color: var(--textarea-bg-color, transparent);
     --py: var(--textarea-py, .90625rem);
     --px: var(--textarea-px, 1rem);
     --size: var(--textarea-size, 3rem);

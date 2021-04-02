@@ -275,7 +275,7 @@ export class InputElement extends ControlElement {
     }
 
     focus() {
-        this.focus();
+        this.body.focus();
     }
 
     onConnected() {

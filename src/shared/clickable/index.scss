@@ -26,11 +26,11 @@
     box-sizing: border-box;
     transition: box-shadow ease-out .15s;
     will-change: transform;
-    background-color: var(--bg-color);
     backdrop-filter: blur(var(--blur));
-    border-color: var(--b-color, var(--b-fader));
-    border-width: var(--b-width, 0);
-    border-style: var(--b-style, solid);
+    border-width: 0;
+    border-color: var(--b-color);
+    border-style: var(--b-style);
+    background-color: var(--bg-color);
 
     &[disabled] {
         // cursor: no-drop !important;
