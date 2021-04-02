@@ -144,8 +144,8 @@
 }
 
 ::slotted(m-content) {
-    --offset-top: calc(var(--modal-offset-top, 0px) + env(safe-area-inset-top));
-    --offset-bottom: calc(var(--modal-offset-bottom, 0px) + env(safe-area-inset-bottom));
+    // --content-offset-top: calc(var(--offset-top, 0px) + env(safe-area-inset-top));
+    // --content-offset-bottom: calc(var(--offset-bottom, 0px) + env(safe-area-inset-bottom));
     height: 100%;
     min-height: 0;
     flex: 0 0 auto;
