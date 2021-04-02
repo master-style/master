@@ -36,6 +36,7 @@
         // cursor: no-drop !important;
         color: var(--f-fadest) !important;
         box-shadow: none !important;
+        background-color: transparent!important;
 
         ::slotted([part=foot]) {
             color: inherit;

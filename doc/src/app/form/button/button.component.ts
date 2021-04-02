@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ButtonComponent implements OnInit {
 
-    colors = ['blue', 'red', 'green', 'purple', 'yellow', 'theme'];
+    colors = ['blue', 'red', 'green', 'purple', 'yellow'];
     styles = ['filled', 'filled rounded', 'outlined', 'outlined rounded'];
 
     constructor() { }

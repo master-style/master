@@ -1,4 +1,4 @@
-:host(.blue) {
+:host(.blue.filled) {
     --bg-color: var(--blue);
 }
 
@@ -9,7 +9,7 @@
     --b-color-active: var(--blue);
 }
 
-:host(.blue\+) {
+:host(.blue\+.filled) {
     --bg-color-head: var(--blue-fade);
     --bg-color: var(--blue-fader);
     --bg-color-hover: var(--blue-fade);
@@ -19,9 +19,10 @@
 :host(.blue\+.outlined) {
     --bg-color-head: var(--blue-fader);
     --b-color: var(--b-fader);
+    --f-color: var(--f-blue);
 }
 
-:host(.green) {
+:host(.green.filled) {
     --bg-color: var(--green);
 }
 
@@ -32,7 +33,7 @@
     --b-color-active: var(--green);
 }
 
-:host(.green\+) {
+:host(.green\+.filled) {
     --bg-color-head: var(--green-fade);
     --bg-color: var(--green-fader);
     --bg-color-hover: var(--green-fade);
@@ -42,9 +43,10 @@
 :host(.green\+.outlined) {
     --bg-color-head: var(--green-fader);
     --b-color: var(--b-fader);
+    --f-color: var(--f-green);
 }
 
-:host(.red) {
+:host(.red.filled) {
     --bg-color: var(--red);
 }
 
@@ -54,7 +56,7 @@
     --b-color-active: var(--red);
 }
 
-:host(.red\+) {
+:host(.red\+.filled) {
     --bg-color-head: var(--red-fade);
     --bg-color: var(--red-fader);
     --bg-color-hover: var(--red-fade);
@@ -64,10 +66,11 @@
 :host(.red\+.outlined) {
     --bg-color-head: var(--red-fader);
     --b-color: var(--b-fader);
+    --f-color: var(--f-red);
 }
 
 
-:host(.purple) {
+:host(.purple.filled) {
     --bg-color: var(--purple);
 }
 
@@ -78,7 +81,7 @@
     --b-color-active: var(--purple);
 }
 
-:host(.purple\+) {
+:host(.purple\+.filled) {
     --bg-color-head: var(--purple-fade);
     --bg-color: var(--purple-fader);
     --bg-color-hover: var(--purple-fade);
@@ -88,9 +91,10 @@
 :host(.purple\+.outlined) {
     --bg-color-head: var(--purple-fader);
     --b-color: var(--b-fader);
+    --f-color: var(--f-purple);
 }
 
-:host(.yellow) {
+:host(.yellow.filled) {
     --bg-color: var(--yellow);
 }
 
@@ -101,7 +105,7 @@
     --b-color-active: var(--yellow);
 }
 
-:host(.yellow\+) {
+:host(.yellow\+.filled) {
     --bg-color-head: var(--yellow-fade);
     --bg-color: var(--yellow-fader);
     --bg-color-hover: var(--yellow-fade);
@@ -112,9 +116,10 @@
     --bg-color-head: var(--yellow-fader);
     --bg-color-hover: var(--yellow-fader);
     --b-color: var(--b-fader);
+    --f-color: var(--f-yellow);
 }
 
-:host(.object) {
+:host(.object.filled) {
     --bg-color: var(--bg-object);
     --bg-color-head: var(--theme-fade);
     --bg-color-hover: var(--theme-fade);
@@ -126,32 +131,7 @@
     --b-color-active: var(--b-fade);
 }
 
-:host(.theme) {
-    --bg-color: var(--theme);
-    --bg-color-head: var(--theme-fade);
-}
-
-:host(.theme.outlined) {
-    --b-color: var(--f-theme);
-    --b-color-active: var(--f-theme);
-}
-
-:host(.theme\+) {
-    --bg-color-head: var(--theme);
-    --bg-color: var(--theme-fade);
-}
-
-:host(.theme\+.outlined) {
-    --bg-color-head: var(--theme-fader);
-    --b-color: var(--b-fader);
-}
-
-:host(.brand),
-:host(.blue),
-:host(.red),
-:host(.green),
-:host(.purple),
-:host(.yellow) {
+:host(.filled) {
     --bg-color-head: rgba(0, 0, 0, .1);
     --f-color: #fff;
 }

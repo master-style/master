@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChipComponent implements OnInit {
 
-    colors = ['blue', 'red', 'green', 'purple', 'yellow', 'theme'];
-    styles = ['', 'rounded', 'outlined', 'outlined rounded'];
+    colors = ['blue', 'red', 'green', 'purple', 'yellow'];
+    styles = ['filled', 'filled rounded', 'outlined', 'outlined rounded'];
 
     constructor() { }
 
