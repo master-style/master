@@ -4,6 +4,7 @@
 :host {
     --bg-color: var(--item-bg-color, transparent);
     --bg-color-hover: var(--item-bg-color-hover, var(--bg-object-hover));
+    --bg-color-disabled: var(--item-bg-color-disabled, transparent);
     --b-color-active: var(--item-b-color-active);
     --bg-disabled: var(--item-bg-disabled);
     --f-size: var(--item-f-size, 1rem);
@@ -78,7 +79,7 @@
 }
 
 :host([disabled]) {
-    background-color: transparent !important;
+    background-color: var(--bg-color-disabled) !important;
 
     ::slotted(*) {
         color: var(--f-fadest) !important;

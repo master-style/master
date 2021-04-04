@@ -2,13 +2,13 @@
 @import '../../shared/clickable';
 
 :host {
-    --bg-color: var(--card-bg-color, var(--bg-object));
-    --bg-color-hover: var(--card-bg-color-hover, var(--bg-object-hover));
     --b-width: var(--card-b-width, 1px);
     --b-style: var(--card-b-style, solid);
     --b-color: var(--card-b-color, var(--b-fader));
     --b-color-active: var(--card-b-color-active, var(--b-fade));
-    --bg-disabled: var(--card-bg-disabled, var(--bg-color));
+    --bg-color: var(--card-bg-color, var(--bg-object));
+    --bg-color-hover: var(--card-bg-color-hover, var(--bg-object-hover));
+    --bg-color-disabled: var(--card-bg-color-disabled, var(--bg-color));
     --foot-px: var(--card-foot-px, 1rem);
     --foot-py: var(--card-foot-py, .8rem);
     display: flex;
@@ -25,6 +25,12 @@
         0 2.7px 4.4px rgba(0, 0, 0, 0.045),
         0 5.5px 9.1px rgba(0, 0, 0, 0.055),
         0 15px 25px rgba(0, 0, 0, 0.08);
+}
+
+:host(.raised[disabled]) {
+    [part=master] {
+        box-shadow: none !important;
+    }
 }
 
 :host([disabled]) {

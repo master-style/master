@@ -135,8 +135,3 @@
     --bg-color-head: rgba(0, 0, 0, .1);
     --f-color: #fff;
 }
-
-:host([disabled]) {
-    --bg-color: transparent;
-    --b-color: transparent;
-}

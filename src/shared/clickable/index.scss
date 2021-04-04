@@ -33,10 +33,9 @@
     background-color: transparent;
 
     &[disabled] {
+
         // cursor: no-drop !important;
         color: var(--f-fadest) !important;
-        box-shadow: none !important;
-        background-color: transparent!important;
 
         ::slotted([part=foot]) {
             color: inherit;
@@ -67,6 +66,12 @@
             pointer-events: none;
             contain: strict;
         }
+    }
+}
+
+:host(.filled[disabled]) {
+    [part=master] {
+        background-color: var(--bg-color-disabled) !important;
     }
 }
 
@@ -114,14 +119,15 @@ a[part=master] {
     cursor: pointer;
 }
 
-:host(.bg\@active[active]) {
-    --bg-color: var(--bg-color-hover);
+:host(.filled\@active[active]) {
+    [part=master] {
+        background-color: var(--bg-color-hover);
+    }
 }
 
 :host([disabled]) {
     pointer-events: none !important;
 }
-
 
 :host([part=foot]) {
     [part=master] {

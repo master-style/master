@@ -15,6 +15,7 @@
     --b-color-active: var(--button-b-color-active, var(--b-fade));
     --bg-color: var(--button-bg-color, transparent);
     --bg-color-hover: var(--button-bg-color-hover, var(--bg-object-hover));
+    --bg-color-disabled: var(--button-bg-color-disabled, transparent);
     display: inline-flex;
     font-size: var(--f-size);
     color: var(--f-color);
