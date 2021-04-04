@@ -78,6 +78,16 @@
     font-weight: 500;
 }
 
+@media (any-hover: hover) {
+
+    :host(.touch:hover:not([disabled])) {
+        [part=master] {
+            background-color: var(--bg-color-hover);
+        }
+    }
+
+}
+
 :host([disabled]) {
     background-color: var(--bg-color-disabled) !important;
 

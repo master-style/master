@@ -1,5 +1,6 @@
 @import '../../variables';
 @import '../../shared/clickable';
+@import '../../shared/clickable/style';
 
 :host {
     --b-width: var(--card-b-width, 1px);
