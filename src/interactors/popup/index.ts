@@ -118,14 +118,16 @@ export class PopupElement extends TargetElement {
         }
     }
 
-    updateSize() {
-        const refRect = this.trigger.getBoundingClientRect();
+    updateSize(
+        rect: DOMRect = this.trigger.getBoundingClientRect()
+    ) {
+        console.log(rect);
         const windowHeight = window.innerHeight;
-        const bottomDistance = windowHeight - (refRect.y + refRect.height);
-        const topDistance = refRect.y;
+        const bottomDistance = windowHeight - (rect.y + rect.height);
+        const topDistance = rect.y;
         this.css('maxHeight', (topDistance < bottomDistance ? bottomDistance : topDistance) - this.distance - 10);
         if (this.minWidth === 'trigger') {
-            this.css('minWidth', refRect.width);
+            this.css('minWidth', rect.width);
         }
     }
 
@@ -142,8 +144,6 @@ export class PopupElement extends TargetElement {
         };
 
         activate(this.trigger.parentNode as PopupElement);
-
-        this.updateSize();
 
         if (!this.popper) {
             await new Promise((resolve) => {
@@ -209,8 +209,14 @@ export class PopupElement extends TargetElement {
 
             if (!this.#resizeObserver) {
                 this.#resizeObserver = new ResizeObserver(debounce(() => {
-                    this.updateSize();
-                    this.popper.forceUpdate();
+                    const rect = this.trigger.getBoundingClientRect();
+                    // determine whether element is hidden
+                    if (!rect.x && !rect.y && !rect.width && !rect.height) {
+                        this.onClosed();
+                    } else if (this.popper) {
+                        this.updateSize(rect);
+                        this.popper.forceUpdate();
+                    }
                 }));
                 this.#resizeObserver.observe(this.content);
                 this.#resizeObserver.observe(this.trigger);
