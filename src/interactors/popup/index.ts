@@ -144,6 +144,7 @@ export class PopupElement extends TargetElement {
         };
 
         activate(this.trigger.parentNode as PopupElement);
+        this.updateSize();
 
         if (!this.popper) {
             await new Promise((resolve) => {
