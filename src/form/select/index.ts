@@ -53,7 +53,7 @@ export class SelectElement extends ControlElement {
                 'div', { part: 'output' }, [
                     'span', {
                         $if: this.multiple && this.searchable && !this.readOnly || !this.multiple,
-                        part: 'search',
+                        part: 'output-text',
                         contenteditable: !this.readOnly && this.searchable && !this.disabled,
                         spellcheck: 'false',
                         disabled: this.disabled,
