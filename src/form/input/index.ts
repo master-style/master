@@ -37,14 +37,21 @@ export class InputElement extends ControlElement {
         'slot',
         'div', {
             $if: this.type === 'file',
-            part: 'body',
-            placeholder: this.placeholder,
-            label: this.label?.length > this.placeholder?.length
-                ? this.label
-                : this.placeholder, // for default select width
+            part: 'body'
         }, [
-            'div', { part: 'output' },
-            () => this.files.map((eachFile: File) => {
+            'div', {
+                part: 'output'
+            }, [
+                // just for placeholder display
+                'div', {
+                    $if: this.placeholder && !this.value?.length,
+                    part: 'output-text',
+                    'aria-placeholder': this.placeholder
+                }, [
+                    'slot', { name: 'placeholder' }
+                ]
+            ],
+            () => this.value?.map((eachFile: File) => {
                 const ext = eachFile.name.split('.').pop();
                 const src = URL.createObjectURL(eachFile);
                 const type = eachFile.type.split('/')[0];
@@ -82,7 +89,7 @@ export class InputElement extends ControlElement {
                                 $on: {
                                     click: (event) => {
                                         event.stopPropagation();
-                                        this.value.splice(this.value.indexOf(eachFile), 1);
+                                        this.value = this.value.filter((file) => eachFile !== file);
                                         this.render();
                                     }
                                 }
@@ -128,8 +135,6 @@ export class InputElement extends ControlElement {
             ]
         ],
     ]);
-
-    files: File[] = [];
 
     @Attr({ observe: false })
     empty: boolean;
@@ -225,7 +230,7 @@ export class InputElement extends ControlElement {
         render: false,
         reflect: false
     })
-    value: any;
+    value: any | File[];
 
     @Attr()
     multiple: boolean;
@@ -260,13 +265,12 @@ export class InputElement extends ControlElement {
     private addFiles(fileList: FileList) {
         if (!fileList.length) return;
         const files = Array.from(fileList);
-        this.value
-            = this.files
-            = this.multiple ? this.files.concat(files) : files;
+        this.value = this.multiple
+            ? (this.value || []).concat(files)
+            : files;
     }
 
     focus() {
-        console.log('focus');
         this.assignee.focus();
     }
 

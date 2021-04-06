@@ -37,8 +37,10 @@
     white-space: nowrap;
     outline: none;
     -webkit-user-modify: read-write-plaintext-only;
+}
 
-    &[aria-placeholder]:empty:before {
+:host([empty]) {
+    [part=output-text][aria-placeholder]:before {
         content: attr(aria-placeholder);
         color: var(--f-fadest);
     }
