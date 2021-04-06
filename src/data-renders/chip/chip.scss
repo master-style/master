@@ -22,6 +22,7 @@
     display: inline-flex;
     border-radius: var(--radius);
     color: var(--f-color);
+    max-width: 100%;
 }
 
 [part=master] {

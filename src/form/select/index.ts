@@ -22,7 +22,7 @@ export class SelectElement extends ControlElement {
 
     controlTemplate = new Template(() => [
         'input', {
-            part: 'output',
+            hidden: true,
             $created: (element: HTMLInputElement) => {
                 this.body = element;
                 this.validity = element.validity;
@@ -50,55 +50,57 @@ export class SelectElement extends ControlElement {
             $created: (element: HTMLDivElement) => this.master = element
         }, [
             'div', { part: 'body' }, [
-                'input', {
-                    $if: this.multiple && this.searchable && !this.readOnly || !this.multiple,
-                    part: 'search',
-                    type: 'search',
-                    readonly: this.readOnly && !this.searchable && !this.disabled,
-                    spellcheck: 'false',
-                    disabled: this.disabled,
-                    placeholder: this.placeholder,
-                    value: this.keyword,
-                    $created: (element) => {
-                        this.search = element
-                            .on('input', () => {
-                                if (this.searchable)
-                                    this.popup.search(this.search.value);
-                            }, { passive: true, id: [NAME] });
-                    },
-                    $removed: () => this.search = null
-                }
-            ], () => this.selectedOptions
-                .map((eachOption: OptionElement) => [
-                    'm-chip', {
-                        $if: this.multiple,
-                        $id: eachOption.value,
-                        class: 'sm filled theme+'
-                    }, () =>
-                        Array.from(eachOption.childNodes)
-                            .filter(({ nodeType }) => nodeType === Node.ELEMENT_NODE || nodeType === Node.TEXT_NODE)
-                            .map((node: Text | Element) => node instanceof Text
-                                ? ['$text', { $text: node.textContent }]
-                                : [node.tagName, { $html: node.innerHTML, slot: false, part: node.slot }]
-                            )
-                    , [
-                        'm-button', {
-                            $if: !this.readOnly && !this.disabled,
-                            part: 'close',
-                            class: 'square',
-                            $on: {
-                                click: (event) => {
-                                    event.stopPropagation();
-                                    eachOption.selected = false;
-                                    this.changeEmitter(this.value);
-                                    this.popup.render();
+                'div', { part: 'output' }, [
+                    'span', {
+                        $if: this.multiple && this.searchable && !this.readOnly || !this.multiple,
+                        part: 'search',
+                        contenteditable: !this.readOnly && this.searchable && !this.disabled,
+                        spellcheck: 'false',
+                        disabled: this.disabled,
+                        'aria-placeholder': this.placeholder,
+                        $text: this.keyword,
+                        $created: (element) => {
+                            this.search = element
+                                .on('input', () => {
+                                    if (this.searchable)
+                                        this.popup.search(this.search.textContent);
+                                }, { passive: true, id: [NAME] });
+                        },
+                        $removed: () => this.search = null
+                    }
+                ],
+                () => this.selectedOptions
+                    .map((eachOption: OptionElement) => [
+                        'm-chip', {
+                            $if: this.multiple,
+                            $id: eachOption.value,
+                            class: 'sm filled theme+'
+                        }, () =>
+                            Array.from(eachOption.childNodes)
+                                .filter(({ nodeType }) => nodeType === Node.ELEMENT_NODE || nodeType === Node.TEXT_NODE)
+                                .map((node: Text | Element) => node instanceof Text
+                                    ? ['span', { $text: node.textContent, part: 'chip-text' }]
+                                    : [node.tagName, { $html: node.innerHTML, slot: false, part: node.slot }]
+                                )
+                        , [
+                            'm-button', {
+                                $if: !this.readOnly && !this.disabled,
+                                part: 'close',
+                                class: 'square',
+                                $on: {
+                                    click: (event) => {
+                                        event.stopPropagation();
+                                        eachOption.selected = false;
+                                        this.changeEmitter(this.value);
+                                        this.popup.render();
+                                    }
                                 }
-                            }
-                        }, [
-                            'm-icon', { name: 'cross' }
+                            }, [
+                                'm-icon', { name: 'cross' }
+                            ]
                         ]
-                    ]
-                ]),
+                    ]),
+            ],
             'fieldset', [
                 'legend', [
                     'span', { part: 'label', $text: this.label }
@@ -290,7 +292,7 @@ export class SelectElement extends ControlElement {
                         .join(' ')
                         .trim()
                     : '';
-            this.search.value = optionText || '';
+            this.search.textContent = optionText || '';
         }
     }
 

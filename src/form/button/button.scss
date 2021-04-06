@@ -133,9 +133,8 @@
 
 :host([part=close]) {
     --bg-color: var(--button-bg-color, transparent);
-    --bg-color-hover: var(--button-bg-color-hover, var(--f-fadest));
     --b-color-active: var(--button-b-color-active, transparent);
-    --f-color: var(--button-f-color, var(--theme-fade));
+    --f-color: var(--button-f-color, var(--f-fadest));
     --f-color-hover: var(--button-f-color-hover, var(--f-theme));
 
     ::slotted(m-icon) {
