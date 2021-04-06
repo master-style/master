@@ -14,7 +14,7 @@
     --label-px: var(--input-label-px, .25rem);
     --label-f-size: var(--input-label-f-size, var(--f-xxs));
     --label-f-color: var(--input-label-f-color, var(--f-theme-fader));
-    --image-size: var(--input-image-size, 10rem);
+    --preview-size: var(--input-image-size, 10rem);
     --output-item-margin: .25rem;
 }
 
@@ -46,8 +46,8 @@
     }
 
     ::slotted(img) {
-        width: var(--image-size);
-        height: var(--image-size);
+        width: var(--preview-size);
+        height: var(--preview-size);
         object-fit: cover;
     }
 }
@@ -63,20 +63,29 @@
     }
 }
 
-[part=image] {
-    width: var(--image-size);
-    height: var(--image-size);
+[part=preview] {
+    width: var(--preview-size);
+    height: var(--preview-size);
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--f-fade);
+    letter-spacing: 2px;
+    background-color: rgba(var(--bg-skeleton-rgb), 0.05);
     object-fit: cover;
-    background-color: rgba(var(--bg-skeleton-rgb), .05);
 }
 
-:host([interface=image]) {
+:host([interface=preview]) {
     [role=assignee] {
         &:before {
             display: flex;
             justify-content: center;
-            min-height: var(--image-size);
-            min-width: var(--image-size);
+            min-height: var(--preview-size);
+            min-width: var(--preview-size);
             align-items: center;
         }
     }
@@ -89,7 +98,7 @@
 
         m-chip {
             border-radius: 0;
-            width: var(--image-size);
+            width: var(--preview-size);
             margin: 0;
 
             m-button[part=close] {
@@ -97,10 +106,4 @@
             }
         }
     }
-}
-
-[part=filename] {
-    overflow: hidden;
-    flex: 1 1 auto;
-    text-overflow: ellipsis;
 }

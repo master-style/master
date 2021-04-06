@@ -47,25 +47,33 @@ export class InputElement extends ControlElement {
             () => this.files.map((eachFile: File) => {
                 const ext = eachFile.name.split('.').pop();
                 const src = URL.createObjectURL(eachFile);
-                console.log(eachFile);
+                const type = eachFile.type.split('/')[0];
                 return [
-                    'div', { part: 'output-item' }, [
+                    'div', {
+                        part: 'output-item',
+                        $id: eachFile
+                    }, [
                         'img', {
-                            $if: this.interface === 'image',
-                            part: 'image',
+                            $if: type === 'image',
+                            part: 'preview',
                             src,
                             $removed: () => URL.revokeObjectURL(src)
+                        },
+                        'div', {
+                            $if: type !== 'image',
+                            part: 'preview',
+                            $text: ext
                         },
                         'm-chip', {
                             class: 'sm filled theme+'
                         }, [
                             'span', {
-                                part: 'filename',
+                                part: 'output-item-name',
                                 $text: eachFile.name
                             },
                             'div', {
                                 part: 'foot',
-                                $text: (eachFile.size / 1024).toFixed(0) + 'KB'
+                                $text: (eachFile.size / 1024).toFixed(0) + ' KB'
                             },
                             'm-button', {
                                 $if: !this.readOnly && !this.disabled,
