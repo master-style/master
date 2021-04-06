@@ -20,7 +20,7 @@ export class SelectElement extends ControlElement {
 
     static css = css;
 
-    controlTemplate = new Template(() => [
+    lightTemplate = new Template(() => [
         'input', {
             hidden: true,
             $created: (element: HTMLInputElement) => {

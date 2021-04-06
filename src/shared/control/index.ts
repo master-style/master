@@ -111,7 +111,7 @@ export class ControlElement extends MasterElement {
     }
 
     render() {
-        (this as any).controlTemplate.render(this);
+        (this as any).lightTemplate.render(this);
         (this as any).template.render(this.shadowRoot);
     }
 }

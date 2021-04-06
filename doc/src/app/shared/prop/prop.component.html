@@ -1,60 +1,58 @@
-<m-table class="sm axis:x axis:y bb neat">
-    <table>
-        <thead>
-            <tr>
-                <td colspan="2">
-                    <h3 id="property-disabled" style="margin-bottom: 0">
-                        <code class="bg:transparent" style="font-size: inherit; padding: 0">.{{ name }}</code>
-                        <m-chip *ngIf="readonly" class="yellow+ sm a:middle" style="margin-left: .5rem">Read Only
-                        </m-chip>
-                    </h3>
-                </td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th class="fit t:left">type</th>
-                <td>
-                    <div class="y:xs">
-                        <m-chip class="x sm" *ngFor="let type of types">
-                            <div part="head">
-                                <ion-icon *ngIf="type !== undefined" [attr.name]="getTypeIcon(type)"></ion-icon>
-                                <span *ngIf="type === undefined">'∅'</span>
-                            </div>
-                            <code>{{ parsedStr(type) }}</code>
-                        </m-chip>
-                    </div>
-                </td>
-            </tr>
-            <tr *ngIf="default !== 'undefined'">
-                <th class="fit t:left t-wrap:no">default</th>
-                <td>
-                    <div class="y:xs">
-                        <m-chip class="x sm"
-                                [ngClass]="{'purple+': default === 'Auto', 'outlined blue+': default !== 'Auto'}">
-                            <div part="head" *ngIf="default !== 'Auto'">
-                                <ion-icon *ngIf="default !== undefined" [attr.name]="getTypeIcon(default)"></ion-icon>
-                                <span *ngIf="default === undefined">∅</span>
-                            </div>
-                            <code>{{ parsedStr(default) }}</code>
-                        </m-chip>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th class="fit t:left">attribute</th>
-                <td>
-                    <m-chip class="theme+ sm">
-                        <code>{{ attr || camelToKebabCase(name) }}</code>
+<m-table class="sm axis:x axis:y bb neat w:full">
+    <thead>
+        <tr>
+            <td colspan="2">
+                <h3 style="margin-bottom: 0">
+                    <code class="bg:transparent" style="font-size: inherit; padding: 0">.{{ name }}</code>
+                    <m-chip *ngIf="readonly" class="yellow+ sm a:middle" style="margin-left: .5rem">Read Only
                     </m-chip>
-                </td>
-            </tr>
-            <tr *ngIf="description">
-                <th class="fit t:left">description</th>
-                <td>
-                    <p class="remark f:xs" style="margin-bottom: 0" [innerHTML]="description"></p>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                </h3>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th class="fit t:left">type</th>
+            <td>
+                <div class="y:xs">
+                    <m-chip class="x sm" *ngFor="let type of types">
+                        <div part="head">
+                            <ion-icon *ngIf="type !== undefined" [attr.name]="getTypeIcon(type)"></ion-icon>
+                            <span *ngIf="type === undefined">'∅'</span>
+                        </div>
+                        <code>{{ parsedStr(type) }}</code>
+                    </m-chip>
+                </div>
+            </td>
+        </tr>
+        <tr *ngIf="default !== 'undefined'">
+            <th class="fit t:left t-wrap:no">default</th>
+            <td>
+                <div class="y:xs">
+                    <m-chip class="x sm"
+                            [ngClass]="{'purple+': default === 'Auto', 'outlined blue+': default !== 'Auto'}">
+                        <div part="head" *ngIf="default !== 'Auto'">
+                            <ion-icon *ngIf="default !== undefined" [attr.name]="getTypeIcon(default)"></ion-icon>
+                            <span *ngIf="default === undefined">∅</span>
+                        </div>
+                        <code>{{ parsedStr(default) }}</code>
+                    </m-chip>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th class="fit t:left">attribute</th>
+            <td>
+                <m-chip class="theme+ sm">
+                    <code>{{ attr || camelToKebabCase(name) }}</code>
+                </m-chip>
+            </td>
+        </tr>
+        <tr *ngIf="description">
+            <th class="fit t:left">description</th>
+            <td>
+                <p class="remark f:xs" style="margin-bottom: 0" [innerHTML]="description"></p>
+            </td>
+        </tr>
+    </tbody>
 </m-table>

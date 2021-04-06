@@ -15,7 +15,7 @@ export class CheckElement extends ControlElement {
 
     static css = css;
 
-    controlTemplate = new Template(() => [
+    lightTemplate = new Template(() => [
         'input', {
             part: 'body',
             type: this.type,

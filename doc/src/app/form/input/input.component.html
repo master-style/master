@@ -189,33 +189,6 @@
           [types]="['date', 'email', 'file', 'number', 'password', 'search', 'tel', 'text', 'time', 'url']"
           [description]="'The type of control to display. The default type is text.'" [default]="'text'">
 </doc-prop>
-<div class="demo">
-    <div class="demo-body">
-        <div class="y">
-            <div class="x:12">
-                <m-input type="file"
-                         class="outlined"
-                         placeholder="Drop files here or click to upload."
-                         multiple
-                         accept="image/*"
-                         label="file">
-                </m-input>
-            </div>
-            <div class="x:12">
-                <m-input type="file"
-                         class="outlined"
-                         placeholder="Upload image"
-                         interface="image"
-                         accept="image/*"
-                         label="file"
-                         #input
-                         (change)="upload($event, input)"
-                         required>
-                </m-input>
-            </div>
-        </div>
-    </div>
-</div>
 
 <doc-prop [name]="'inputmode'"
           [types]="['decimal', 'email', 'none', 'numeric', 'search', 'tel', 'text', 'url']"
@@ -272,3 +245,32 @@
 </doc-prop>
 
 <doc-control-prop></doc-control-prop>
+
+<h2 id="file-upload" class="t:capitalize">{{ 'file upload' | translate }}</h2>
+<div class="demo">
+    <div class="demo-body">
+        <div class="y">
+            <div class="x:12">
+                <m-input type="file"
+                         class="outlined"
+                         placeholder="Drop files here or click to upload."
+                         multiple
+                         accept="image/*"
+                         label="file">
+                </m-input>
+            </div>
+            <div class="x:12">
+                <m-input type="file"
+                         class="outlined"
+                         placeholder="Upload image"
+                         interface="image"
+                         accept="image/*"
+                         label="file"
+                         #input
+                         (change)="upload($event, input)"
+                         required>
+                </m-input>
+            </div>
+        </div>
+    </div>
+</div>

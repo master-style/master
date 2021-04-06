@@ -10,7 +10,7 @@ const NAME = 'textarea';
 export class TextareaElement extends ControlElement {
     static css = css;
 
-    controlTemplate = new Template(() => [
+    lightTemplate = new Template(() => [
         'textarea', {
             part: 'body',
             name: this.name,
