@@ -1,5 +1,6 @@
 @import '../shared/field';
 @import '../shared/prompt';
+@import '../shared/output';
 
 :host {
     --f-size: var(--input-f-size, var(--f-sm));

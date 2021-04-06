@@ -208,6 +208,8 @@ export class InputElement extends ControlElement {
         onUpdate(input: InputElement, value: any) {
             if (input.type === 'file') {
                 input.empty = !value?.length || !value;
+                // make file input can upload again
+                input.assignee.value = '';
                 input.render();
             } else {
                 input.empty = value === null || value === undefined || value === '';
