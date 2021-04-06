@@ -3,6 +3,8 @@ import css from './input.scss';
 import { Template } from '@master/template';
 import { ControlElement } from '../../shared/control';
 
+import { displaySizeByBytes } from '../../utils/display-size-by-bytes';
+
 const NAME = 'input';
 const changeEvent = new window.Event('change', { 'bubbles': true, 'cancelable': false });
 
@@ -81,7 +83,7 @@ export class InputElement extends ControlElement {
                             },
                             'div', {
                                 part: 'foot',
-                                $text: (eachFile.size / 1024).toFixed(0) + ' KB'
+                                $text: displaySizeByBytes((eachFile.size))
                             },
                             'm-button', {
                                 $if: !this.readOnly && !this.disabled,

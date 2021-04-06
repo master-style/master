@@ -52,14 +52,14 @@
     }
 }
 
-:host([dragging]) {
+:host([dragging]:not([disabled]):not([read-only])) {
     ::slotted([role=assignee]) {
         cursor: grab !important;
     }
 
     fieldset {
-        --b-width: 2px;
-        border-color: var(--b-color-active);
+        border-width: calc(var(--b-width, 1px) + 1px)!important;
+        border-color: var(--b-color-active, var(--b-fade))!important;
     }
 }
 
