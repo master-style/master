@@ -75,7 +75,7 @@ export class InputElement extends ControlElement {
                             $text: ext
                         },
                         'm-chip', {
-                            class: 'sm filled theme+'
+                            class: 'sm filled' + (this.unacceptableFiles.has(eachFile) ? ' red+' : ' theme+')
                         }, [
                             'span', {
                                 part: 'output-item-name',
@@ -83,7 +83,7 @@ export class InputElement extends ControlElement {
                             },
                             'div', {
                                 part: 'foot',
-                                $text: displaySizeByBytes((eachFile.size))
+                                $text: displaySizeByBytes(eachFile.size)
                             },
                             'm-button', {
                                 $if: !this.readOnly && !this.disabled,
@@ -159,6 +159,12 @@ export class InputElement extends ControlElement {
 
     @Attr()
     placeholder: string;
+
+    @Attr()
+    maxFileSize: number;
+
+    @Attr()
+    maxFileNumber: number;
 
     @Attr()
     label: string;
@@ -237,7 +243,7 @@ export class InputElement extends ControlElement {
                 input.empty = !value?.length || !value;
                 // make file input can upload again
                 input.assignee.value = '';
-                input.render();
+                input.vaildateFiles();
             } else {
                 input.empty = value === null || value === undefined || value === '';
                 input.assignee.value = value ?? null;
@@ -279,12 +285,62 @@ export class InputElement extends ControlElement {
     @Attr()
     clearable: boolean = false;
 
+    @Attr()
+    whenFileSizeExceeds: string = 'File size exceeds limit';
+
+    unacceptableFiles: Set<File> = new Set();
+
     private addFiles(files: FileList | File[]) {
         if (!files.length) return;
         files = Array.isArray(files) ? files : Array.from(files);
-        this.value = this.multiple
-            ? (this.value || []).concat(files)
-            : files;
+        if (this.multiple) {
+            const value = this.value || [];
+            if (this.maxFileNumber) {
+                this.value = value.concat(files.splice(0, this.maxFileNumber - value.length))
+            } else {
+                this.value = value.concat(files);
+            }
+        } else {
+            this.value = [files[0]];
+        }
+        this.vaildateFiles();
+        this.render();
+    }
+
+    vaildateFiles() {
+
+        if (!this.ready) {
+            return;
+        }
+
+        let prompt = null;
+
+        this.unacceptableFiles.clear();
+
+        // 檢查 "檔案個數", "單檔大小"
+        if (this.maxFileSize) {
+            for (const file of this.value) {
+                if (file.size > this.maxFileSize) {
+                    prompt = this.whenFileSizeExceeds;
+                    this.unacceptableFiles.add(file);
+                }
+            }
+        }
+
+        console.log(this.unacceptableFiles);
+
+        if (this.unacceptableFiles.size) {
+            this.assignee.setCustomValidity(prompt);
+        } else {
+            this.assignee.setCustomValidity('');
+        }
+
+        this.valid = this.validity.valid;
+        this.invalid = !this.validity.valid;
+
+        console
+
+        this.prompt = prompt;
     }
 
     focus() {
