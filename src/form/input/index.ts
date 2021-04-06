@@ -173,26 +173,36 @@ export class InputElement extends ControlElement {
                         input.assignee.click();
                     }, { id: [NAME] + '.file', passive: true })
                     // 拖拉檔案 accept 格式檢查待解決
-                    .on('dragenter', (event) => {
-                        event.preventDefault();
-                        event.stopPropagation();
-                        input.dragging = true;
-                    }, { id: [NAME] + '.file' })
                     .on('dragover', (event) => {
                         event.preventDefault();
                         event.stopPropagation();
                     }, { id: [NAME] + '.file' })
+                    .on('dragenter', (event) => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        console.log(event.type, event.target);
+                        input.dragging = true;
+                    }, { id: [NAME] + '.file' })
                     .on('dragleave dragend', (event) => {
                         event.preventDefault();
+                        event.stopPropagation();
+                        console.log(event.type, event.target);
                         input.dragging = false;
                     }, { id: [NAME] + '.file' })
                     .on('drop', (event: any) => {
                         input.dragging = false;
+                        console.log(event);
                         event.preventDefault();
+                        const files = Array.from(event.dataTransfer.files) as File[];
+                        let acceptedFiles: File[];
                         // 檢查拖進的檔案符合 accept 格式
-                        const MIMEtype = new RegExp(input.accept.replace('*', '.\*'));
-                        const acceptedFiles = (Array.from(event.dataTransfer.files) as File[])
-                            .filter((file: File) => MIMEtype.test(file.type));
+                        if (input.accept) {
+                            const MIMEtype = new RegExp(input.accept.replace('*', '.\*'));
+                            acceptedFiles = files
+                                .filter((file: File) => MIMEtype.test(file.type));
+                        } else {
+                            acceptedFiles = files;
+                        }
                         if (acceptedFiles.length) {
                             input.addFiles(acceptedFiles);
                             input.assignee.dispatchEvent(changeEvent);

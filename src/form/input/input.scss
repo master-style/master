@@ -107,3 +107,7 @@
         }
     }
 }
+
+slot[name=placeholder] {
+    pointer-events: none;
+}
