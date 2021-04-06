@@ -71,7 +71,8 @@ export class SelectElement extends ControlElement {
                 .map((eachOption: OptionElement) => [
                     'm-chip', {
                         $if: this.multiple,
-                        class: 'sm'
+                        $id: eachOption.value,
+                        class: 'sm filled theme+'
                     }, () =>
                         Array.from(eachOption.childNodes)
                             .filter(({ nodeType }) => nodeType === Node.ELEMENT_NODE || nodeType === Node.TEXT_NODE)
@@ -83,6 +84,7 @@ export class SelectElement extends ControlElement {
                         'm-button', {
                             $if: !this.readOnly && !this.disabled,
                             part: 'close',
+                            class: 'square',
                             $on: {
                                 click: (event) => {
                                     event.stopPropagation();

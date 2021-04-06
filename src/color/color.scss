@@ -128,13 +128,17 @@
     --bg-color: var(--bg-object);
     --bg-color-head: var(--theme-fade);
     --bg-color-hover: var(--theme-fade);
-    --f-color: #fff;
-    --blur: 35px;
+    --f-color: var(--f-theme);
 }
 
 :host(.object.outlined) {
     --b-color: var(--b-fader);
     --b-color-active: var(--b-fade);
+}
+
+:host(.theme.filled) {
+    --bg-color: var(--theme);
+    --bg-color-head: var(--theme-fade);
 }
 
 :host(.theme.outlined) {
@@ -146,10 +150,12 @@
 
 :host(.theme\+.filled) {
     --bg-color: var(--theme-fade);
+    --bg-color-head: var(--theme);
 }
 
 :host(.theme\+\+.filled) {
     --bg-color: var(--theme-fader);
+    --bg-color-head: var(--theme);
 }
 
 :host(.filled) {

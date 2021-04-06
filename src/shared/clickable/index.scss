@@ -26,7 +26,6 @@
     box-sizing: border-box;
     transition: box-shadow ease-out .15s;
     will-change: transform;
-    backdrop-filter: blur(var(--blur));
     border-width: 0;
     border-color: var(--b-color);
     border-style: var(--b-style);
