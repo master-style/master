@@ -12,7 +12,7 @@ export class TextareaElement extends ControlElement {
 
     lightTemplate = new Template(() => [
         'textarea', {
-            part: 'body',
+            role: 'assignee',
             name: this.name,
             placeholder: this.placeholder,
             disabled: this.disabled,

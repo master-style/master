@@ -17,7 +17,7 @@ export class CheckElement extends ControlElement {
 
     lightTemplate = new Template(() => [
         'input', {
-            part: 'body',
+            role: 'assignee',
             type: this.type,
             name: this.name,
             disabled: this.disabled,

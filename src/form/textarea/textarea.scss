@@ -17,7 +17,7 @@
     flex-direction: column;
 }
 
-::slotted([part=body]) {
+::slotted([role=assignee]) {
     overflow: visible;
     white-space: pre-wrap;
     min-height: var(--size);
@@ -30,7 +30,7 @@
 }
 
 :host(:not([disabled])) {
-    ::slotted([part=body]) {
+    ::slotted([role=assignee]) {
         -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 1) var(--py), rgba(0, 0, 0, 1) calc(100% - var(--py)), rgba(0, 0, 0, 0) 100%)
     }
 }

@@ -30,7 +30,7 @@
 }
 
 // check
-::slotted([part=body]) {
+::slotted([role=assignee]) {
     opacity: 0;
     position: absolute;
     top: 0;

@@ -95,7 +95,7 @@
 
     ::slotted([part=head]),
     ::slotted([part=foot]),
-    ::slotted([part=body]),
+    ::slotted([role=assignee]),
     [part=body] {
         opacity: 0;
         transition-delay: 0s;
@@ -167,7 +167,7 @@
 
     ::slotted([part=head]),
     ::slotted([part=foot]),
-    ::slotted([part=body]),
+    ::slotted([role=assignee]),
     [part=icon],
     [part=body] {
         padding-top: calc(var(--py) + .125rem);
@@ -232,7 +232,7 @@ legend {
 
 ::slotted([part=head]),
 ::slotted([part=foot]),
-::slotted([part=body]),
+::slotted([role=assignee]),
 [part=icon],
 [part=body] {
     box-sizing: border-box;
@@ -243,7 +243,7 @@ legend {
     min-height: var(--size);
 }
 
-::slotted([part=body]),
+::slotted([role=assignee]),
 [part=body] {
     z-index: $z-up;
     display: flex;
@@ -288,7 +288,7 @@ legend {
 :host([busy]) {
     pointer-events: none !important;
 
-    ::slotted([part=body]),
+    ::slotted([role=assignee]),
     [part=body] {
         visibility: hidden;
     }
