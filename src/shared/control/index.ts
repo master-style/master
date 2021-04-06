@@ -7,7 +7,7 @@ export class ControlElement extends MasterElement {
 
     validity: ValidityState;
 
-    body: any;
+    assignee;
 
     @Attr({ render: false })
     emit: boolean;
@@ -99,9 +99,9 @@ export class ControlElement extends MasterElement {
         const error = this.error;
 
         if (error && !prompt) {
-            this.body.setCustomValidity(prompt = error);
+            this.assignee.setCustomValidity(prompt = error);
         } else {
-            this.body.setCustomValidity('');
+            this.assignee.setCustomValidity('');
         }
 
         this.valid = this.validity.valid;

@@ -4,7 +4,6 @@ import { Template } from '@master/template';
 import { ControlElement } from '../../shared/control';
 
 const NAME = 'input';
-const changeEvent = new window.Event('change', { 'bubbles': true, 'cancelable': false });
 
 
 @Element('m-' + NAME)
@@ -14,7 +13,7 @@ export class InputElement extends ControlElement {
 
     lightTemplate = new Template(() => [
         'input', {
-            part: 'body',
+            role: 'assignee',
             tabindex: -1,
             type: this.type,
             name: this.name,
@@ -28,7 +27,7 @@ export class InputElement extends ControlElement {
             autocomplete: this.autocomplete,
             autofocus: this.autofocus,
             $created: (element: HTMLInputElement) => {
-                this.body = element;
+                this.assignee = element;
                 this.validity = element.validity;
             }
         }
@@ -159,8 +158,8 @@ export class InputElement extends ControlElement {
             if (value === 'file') {
                 input
                     .on('click', (event) => {
-                        input.body.focus();
-                        input.body.click();
+                        input.assignee.focus();
+                        input.assignee.click();
                     }, { id: [NAME] + '.file', passive: true })
                 // 拖拉檔案 accept 格式檢查待解決
                 // .on('dragenter', (event) => {
@@ -179,9 +178,9 @@ export class InputElement extends ControlElement {
                 // .on('drop', (event: any) => {
                 //     input.dragging = false;
                 //     event.preventDefault();
-                //     if (input.body.files.length) {
-                //         input.addFiles(input.body.files);
-                //         input.body.dispatchEvent(changeEvent);
+                //     if (input.assignee.files.length) {
+                //         input.addFiles(input.assignee.files);
+                //         input.assignee.dispatchEvent(changeEvent);
                 //     }
                 // }, { id: [NAME] + '.file' });
             }
@@ -212,7 +211,7 @@ export class InputElement extends ControlElement {
                 input.render();
             } else {
                 input.empty = value === null || value === undefined || value === '';
-                input.body.value = value ?? null;
+                input.assignee.value = value ?? null;
                 input.validate();
             }
         },
@@ -261,7 +260,7 @@ export class InputElement extends ControlElement {
 
     focus() {
         console.log('focus');
-        this.body.focus();
+        this.assignee.focus();
     }
 
     onConnected() {
@@ -269,14 +268,14 @@ export class InputElement extends ControlElement {
 
         this
             .on('click focusin', (event: any) => {
-                if (event.target === this.body || this.keepValidity && this.readOnly) return;
+                if (event.target === this.assignee || this.keepValidity && this.readOnly) return;
                 this.focus();
             }, { id: [NAME] });
 
-        this.body
+        this.assignee
             .on('input', (event: any) => {
                 if (this.type === 'file') {
-                    this.addFiles(this.body.files);
+                    this.addFiles(this.assignee.files);
                 } else {
                     this.value = event.target.value;
                 }

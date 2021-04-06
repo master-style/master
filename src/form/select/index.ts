@@ -24,7 +24,7 @@ export class SelectElement extends ControlElement {
         'input', {
             hidden: true,
             $created: (element: HTMLInputElement) => {
-                this.body = element;
+                this.assignee = element;
                 this.validity = element.validity;
             }
         }
@@ -318,7 +318,7 @@ export class SelectElement extends ControlElement {
                 if (equal) return;
             }
             select.empty = value === null || value === undefined || value === '' || isArray && !value.length;
-            select.body.value = value;
+            select.assignee.value = value;
             select.validate();
             select.selectOptionByValue(value);
         },

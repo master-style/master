@@ -23,7 +23,7 @@ export class CheckElement extends ControlElement {
             disabled: this.disabled,
             required: this.required,
             $created: (element: HTMLInputElement) => {
-                this.body = element;
+                this.assignee = element;
                 this.validity = element.validity;
             }
         }
@@ -41,7 +41,7 @@ export class CheckElement extends ControlElement {
         'slot'
     ]);
 
-    body: any;
+    assignee: any;
 
     @Attr({ observe: false, render: false })
     role: string;
@@ -91,7 +91,7 @@ export class CheckElement extends ControlElement {
     @Attr({
         onUpdate(check: CheckElement, value: any, oldValue: any) {
 
-            check.body.checked = value;
+            check.assignee.checked = value;
             check.toggleAttribute('aria-checked', !!value);
 
             if (check.type === 'radio' && check.name && value) {
@@ -113,7 +113,7 @@ export class CheckElement extends ControlElement {
         render: false,
         onUpdate(check: CheckElement, value: any, oldValue: any) {
             if (value === oldValue) return;
-            check.body.value = value ?? null;
+            check.assignee.value = value ?? null;
         }
     })
     value: any;
@@ -121,7 +121,7 @@ export class CheckElement extends ControlElement {
     onConnected() {
         this.validate();
 
-        this.body
+        this.assignee
             .on('input', (event: any) => {
                 this.checked = event.target.checked;
             }, { id: [NAME], passive: true });

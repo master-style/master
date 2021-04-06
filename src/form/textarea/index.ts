@@ -20,7 +20,7 @@ export class TextareaElement extends ControlElement {
             readonly: this.readOnly,
             rows: this.rows,
             $created: (element: HTMLInputElement) => {
-                this.body = element;
+                this.assignee = element;
                 this.validity = element.validity;
             }
         }
@@ -85,7 +85,7 @@ export class TextareaElement extends ControlElement {
         render: false,
         onUpdate(textarea: TextareaElement, value: any) {
             textarea.empty = value === null || value === undefined || value === '';
-            textarea.body.value = value ?? null;
+            textarea.assignee.value = value ?? null;
             textarea.validate();
         },
     })
@@ -105,14 +105,14 @@ export class TextareaElement extends ControlElement {
 
         this
             .on('click', (event: any) => {
-                if (event.target === this.body) return;
-                this.body.focus();
+                if (event.target === this.assignee) return;
+                this.assignee.focus();
             }, {
                 id: [NAME],
                 passive: true
             });
 
-        this.body.on('input', (event: any) => {
+        this.assignee.on('input', (event: any) => {
             this.value = event.target.value;
             if (!this.dirty) {
                 this.dirty = true;
