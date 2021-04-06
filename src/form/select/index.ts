@@ -50,19 +50,20 @@ export class SelectElement extends ControlElement {
             $created: (element: HTMLDivElement) => this.master = element
         }, [
             'div', { part: 'body' }, [
-                'span', {
+                'input', {
                     $if: this.multiple && this.searchable && !this.readOnly || !this.multiple,
                     part: 'search',
-                    contenteditable: !this.readOnly && this.searchable && !this.disabled,
+                    type: 'search',
+                    readonly: this.readOnly && !this.searchable && !this.disabled,
                     spellcheck: 'false',
                     disabled: this.disabled,
                     placeholder: this.placeholder,
-                    $text: this.keyword,
+                    value: this.keyword,
                     $created: (element) => {
                         this.search = element
                             .on('input', () => {
                                 if (this.searchable)
-                                    this.popup.search(this.search.textContent);
+                                    this.popup.search(this.search.value);
                             }, { passive: true, id: [NAME] });
                     },
                     $removed: () => this.search = null
@@ -289,7 +290,7 @@ export class SelectElement extends ControlElement {
                         .join(' ')
                         .trim()
                     : '';
-            this.search.textContent = optionText || '';
+            this.search.value = optionText || '';
         }
     }
 

@@ -156,7 +156,7 @@ export class SelectPopupElement extends PopupElement {
     onClose() {
         super.onClose();
         if (this.select.search) {
-            this.select.search.textContent = this.select.keyword = '';
+            this.select.search.value = this.select.keyword = '';
         }
         this.select.focused = false;
         this.select.output();

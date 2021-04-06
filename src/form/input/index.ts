@@ -58,7 +58,7 @@ export class InputElement extends ControlElement {
                         $removed: () => URL.revokeObjectURL(src)
                     },
                     'm-chip', {
-                        class: 'sm'
+                        class: 'sm filled theme+'
                     }, [
                         'div', {
                             part: 'head',
@@ -75,6 +75,7 @@ export class InputElement extends ControlElement {
                         'm-button', {
                             $if: !this.readOnly && !this.disabled,
                             part: 'close',
+                            class: 'square',
                             $on: {
                                 click: (event) => {
                                     event.stopPropagation();
