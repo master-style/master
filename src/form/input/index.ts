@@ -15,6 +15,7 @@ export class InputElement extends ControlElement {
     controlTemplate = new Template(() => [
         'input', {
             part: 'body',
+            tabindex: -1,
             type: this.type,
             name: this.name,
             placeholder: this.placeholder,
@@ -123,10 +124,6 @@ export class InputElement extends ControlElement {
         ],
     ]);
 
-    #files = [];
-
-    savedTabIndex: number;
-
     files: File[] = [];
 
     @Attr({ observe: false })
@@ -138,20 +135,7 @@ export class InputElement extends ControlElement {
     @Attr()
     keepValidity: boolean;
 
-    @Attr({
-        onUpdate(input: InputElement, value) {
-            const tabIndex = input.tabIndex;
-
-            if (value) {
-                input.savedTabIndex = tabIndex;
-                input.tabIndex = -1;
-            }
-            if (!value && input.savedTabIndex !== undefined) {
-                input.tabIndex = input.savedTabIndex;
-                input.savedTabIndex = undefined;
-            }
-        }
-    })
+    @Attr()
     readOnly: boolean;
 
     @Attr()
@@ -275,6 +259,7 @@ export class InputElement extends ControlElement {
     }
 
     focus() {
+        console.log('focus');
         this.body.focus();
     }
 
@@ -282,13 +267,10 @@ export class InputElement extends ControlElement {
         this.validate();
 
         this
-            .on('click', (event: any) => {
+            .on('click focusin', (event: any) => {
                 if (event.target === this.body || this.keepValidity && this.readOnly) return;
                 this.focus();
-            }, {
-                id: [NAME],
-                passive: true
-            });
+            }, { id: [NAME] });
 
         this.body
             .on('input', (event: any) => {

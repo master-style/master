@@ -10,7 +10,7 @@
     --b-width: var(--chip-b-width, 1px);
     --b-style: var(--chip-b-style, solid);
     --b-color: var(--chip-b-color, var(--b-fader));
-    --bg-color: var(--chip-bg-color, transparent);
+    --bg-color: var(--chip-bg-color, var(--theme));
     --bg-color-hover: var(--chip-bg-color-hover, var(--bg-object-hover));
     --bg-color-head: var(--chip-bg-color-head);
     --bg-color-disabled: var(--chip-bg-color-disabled, transparent);

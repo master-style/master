@@ -1,20 +1,22 @@
+[part=master] {
+    &:before {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--bg-color-hover);
+        opacity: 0;
+        pointer-events: none;
+        contain: strict;
+    }
+}
+
 :host(.filled) {
     [part=master] {
         background-color: var(--bg-color);
-
-        &:before {
-            content: '';
-            position: absolute;
-            z-index: -1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--bg-color-hover);
-            opacity: 0;
-            pointer-events: none;
-            contain: strict;
-        }
     }
 }
 
@@ -32,7 +34,7 @@
 
 @media (any-hover: hover) {
 
-    :host(.touch:hover:not([disabled]).filled) {
+    :host(.touch:hover:not([disabled]):not(.outlined)) {
         [part=master] {
             &:before {
                 opacity: 1;

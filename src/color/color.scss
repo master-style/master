@@ -1,5 +1,6 @@
 :host(.blue.filled) {
     --bg-color: var(--blue);
+    --f-color: #fff;
 }
 
 :host(.blue.outlined) {
@@ -24,6 +25,7 @@
 
 :host(.green.filled) {
     --bg-color: var(--green);
+    --f-color: #fff;
 }
 
 :host(.green.outlined) {
@@ -48,6 +50,7 @@
 
 :host(.red.filled) {
     --bg-color: var(--red);
+    --f-color: #fff;
 }
 
 :host(.red.outlined) {
@@ -72,6 +75,7 @@
 
 :host(.purple.filled) {
     --bg-color: var(--purple);
+    --f-color: #fff;
 }
 
 :host(.purple.outlined) {
@@ -96,6 +100,7 @@
 
 :host(.yellow.filled) {
     --bg-color: var(--yellow);
+    --f-color: #fff;
 }
 
 :host(.yellow.outlined) {
@@ -123,6 +128,7 @@
     --bg-color: var(--bg-object);
     --bg-color-head: var(--theme-fade);
     --bg-color-hover: var(--theme-fade);
+    --f-color: #fff;
     --blur: 35px;
 }
 
@@ -131,7 +137,21 @@
     --b-color-active: var(--b-fade);
 }
 
+:host(.theme.outlined) {
+    --f-color: var(--f-theme);
+    --bg-color-head: var(--theme-fader);
+    --b-color: var(--f-theme);
+    --b-color-active: var(--f-theme);
+}
+
+:host(.theme\+.filled) {
+    --bg-color: var(--theme-fade);
+}
+
+:host(.theme\+\+.filled) {
+    --bg-color: var(--theme-fader);
+}
+
 :host(.filled) {
     --bg-color-head: rgba(0, 0, 0, .1);
-    --f-color: #fff;
 }

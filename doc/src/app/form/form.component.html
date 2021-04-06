@@ -113,7 +113,7 @@
                 </m-check>
             </div>
             <div class="x" *ngFor="let sex of ['male', 'female']">
-                <m-check type="radio"
+                <m-check [type]="true ? 'radio' : 'checkbox'"
                          name="sex"
                          [value]="sex"
                          ngModel
