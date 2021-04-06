@@ -15,6 +15,7 @@
     --label-f-size: var(--input-label-f-size, var(--f-xxs));
     --label-f-color: var(--input-label-f-color, var(--f-theme-fader));
     --image-size: var(--input-image-size, 10rem);
+    --output-item-margin: .25rem;
 }
 
 :host(.outlined) {

@@ -45,9 +45,9 @@ export class InputElement extends ControlElement {
         }, [
             'div', { part: 'output' },
             () => this.files.map((eachFile: File) => {
-                const eachFileNameSplits = eachFile.name.split('.');
-                const ext = eachFileNameSplits.pop();
+                const ext = eachFile.name.split('.').pop();
                 const src = URL.createObjectURL(eachFile);
+                console.log(eachFile);
                 return [
                     'div', { part: 'output-item' }, [
                         'img', {
@@ -59,13 +59,9 @@ export class InputElement extends ControlElement {
                         'm-chip', {
                             class: 'sm filled theme+'
                         }, [
-                            'div', {
-                                part: 'head',
-                                $text: ext
-                            },
                             'span', {
                                 part: 'filename',
-                                $text: eachFileNameSplits.join()
+                                $text: eachFile.name
                             },
                             'div', {
                                 part: 'foot',

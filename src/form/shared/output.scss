@@ -1,3 +1,7 @@
+:host {
+    --output-item-margin: .125rem;
+}
+
 [part=output] {
     display: flex;
     max-width: 100%;
@@ -9,7 +13,7 @@
 
 [part=output-item] {
     flex: 0 0 auto;
-    margin: .125rem .125rem;
+    margin: var(--output-item-margin) var(--output-item-margin);
 }
 
 [part=output-item-name] {
@@ -43,14 +47,14 @@
 :host(.underlined) {
 
     [part=output] {
-        margin-left: -.125rem;
-        margin-right: -.125rem;
+        margin-left: calc(var(--output-item-margin) * -1);
+        margin-right: calc(var(--output-item-margin) * -1);
     }
 
     [part=output-text],
     [part=output-item] {
-        margin-right: .125rem;
-        margin-left: .125rem;
+        margin-right: var(--output-item-margin);
+        margin-left: var(--output-item-margin);
     }
 
     [part=output-item] {
