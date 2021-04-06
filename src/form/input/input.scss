@@ -80,21 +80,20 @@
         }
     }
 
-    [part=output] {
+    [part=output-item] {
         display: flex;
         flex-direction: column;
-        margin: .25rem;
         border-radius: 3px;
         overflow: hidden;
-    }
 
-    m-chip {
-        border-radius: 0;
-        width: var(--image-size);
-        margin: 0;
+        m-chip {
+            border-radius: 0;
+            width: var(--image-size);
+            margin: 0;
 
-        m-button[part=close] {
-            margin-left: auto;
+            m-button[part=close] {
+                margin-left: auto;
+            }
         }
     }
 }

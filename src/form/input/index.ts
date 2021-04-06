@@ -42,53 +42,54 @@ export class InputElement extends ControlElement {
             label: this.label?.length > this.placeholder?.length
                 ? this.label
                 : this.placeholder, // for default select width
-        }, () => this.files.map((eachFile: File) => {
-            const eachFileNameSplits = eachFile.name.split('.');
-            const ext = eachFileNameSplits.pop();
-            const src = URL.createObjectURL(eachFile);
-            return [
-                'div', {
-                    part: 'output'
-                }, [
-                    'img', {
-                        $if: this.interface === 'image',
-                        part: 'image',
-                        src,
-                        $removed: () => URL.revokeObjectURL(src)
-                    },
-                    'm-chip', {
-                        class: 'sm filled theme+'
-                    }, [
-                        'div', {
-                            part: 'head',
-                            $text: ext
+        }, [
+            'div', { part: 'output' },
+            () => this.files.map((eachFile: File) => {
+                const eachFileNameSplits = eachFile.name.split('.');
+                const ext = eachFileNameSplits.pop();
+                const src = URL.createObjectURL(eachFile);
+                return [
+                    'div', { part: 'output-item' }, [
+                        'img', {
+                            $if: this.interface === 'image',
+                            part: 'image',
+                            src,
+                            $removed: () => URL.revokeObjectURL(src)
                         },
-                        'span', {
-                            part: 'filename',
-                            $text: eachFileNameSplits.join()
-                        },
-                        'div', {
-                            part: 'foot',
-                            $text: (eachFile.size / 1024).toFixed(0) + 'KB'
-                        },
-                        'm-button', {
-                            $if: !this.readOnly && !this.disabled,
-                            part: 'close',
-                            class: 'square',
-                            $on: {
-                                click: (event) => {
-                                    event.stopPropagation();
-                                    this.value.splice(this.value.indexOf(eachFile), 1);
-                                    this.render();
-                                }
-                            }
+                        'm-chip', {
+                            class: 'sm filled theme+'
                         }, [
-                            'm-icon', { name: 'cross' }
+                            'div', {
+                                part: 'head',
+                                $text: ext
+                            },
+                            'span', {
+                                part: 'filename',
+                                $text: eachFileNameSplits.join()
+                            },
+                            'div', {
+                                part: 'foot',
+                                $text: (eachFile.size / 1024).toFixed(0) + 'KB'
+                            },
+                            'm-button', {
+                                $if: !this.readOnly && !this.disabled,
+                                part: 'close',
+                                class: 'square',
+                                $on: {
+                                    click: (event) => {
+                                        event.stopPropagation();
+                                        this.value.splice(this.value.indexOf(eachFile), 1);
+                                        this.render();
+                                    }
+                                }
+                            }, [
+                                'm-icon', { name: 'cross' }
+                            ]
                         ]
                     ]
-                ]
-            ];
-        })
+                ];
+            })
+        ],
         ,
         'fieldset', [
             'legend', [

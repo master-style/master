@@ -4,18 +4,23 @@
     flex-wrap: wrap;
     flex: 1 1 auto;
     width: auto;
-    margin: -.28125rem -.25rem;
+    margin: -.28125rem -.375rem;
+}
 
-    [part=chip-text] {
-        overflow: hidden;
-        /* flex: 0 0 auto; */
-        max-width: 100%;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        -ms-text-overflow: ellipsis;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 1;
-    }
+[part=output-item] {
+    flex: 0 0 auto;
+    margin: .125rem .125rem;
+}
+
+[part=output-item-name] {
+    overflow: hidden;
+    /* flex: 0 0 auto; */
+    max-width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
 }
 
 [part=output-text] {
@@ -24,7 +29,7 @@
     order: 1;
     flex: 1 1 auto;
     padding: 0;
-    margin: .28125rem .25rem;
+    margin: .28125rem .375rem;
     white-space: nowrap;
     outline: none;
     -webkit-user-modify: read-write-plaintext-only;
@@ -37,18 +42,20 @@
 
 :host(.underlined) {
 
-    [part=output],
-    [part=output-text] {
-        margin-left: 0;
-        margin-right: 0;
+    [part=output] {
+        margin-left: -.125rem;
+        margin-right: -.125rem;
     }
 
-    [part=output] {
-        m-chip {
-            &:last-of-type {
-                margin-right: .5rem;
-            }
+    [part=output-text],
+    [part=output-item] {
+        margin-right: .125rem;
+        margin-left: .125rem;
+    }
+
+    [part=output-item] {
+        &:last-of-type {
+            margin-right: .375rem;
         }
     }
-
 }

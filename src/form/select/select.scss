@@ -46,7 +46,7 @@
     min-width: 0;
 }
 
-[part=output] {
+[part=output-item-name] {
     padding-right: 0;
 
     &:empty[placeholder] {
@@ -66,15 +66,6 @@
 
 [part=foot] {
     margin-left: .375rem;
-}
-
-m-chip {
-    --chip-bg-color-head: var(--theme-fade);
-    --chip-bg-color: var(--theme-fader);
-    --chip-b-color: transparent;
-    --chip-radius: .25rem;
-    flex: 0 0 auto;
-    margin: .125rem .25rem .125rem 0;
 }
 
 m-button[part=close] {
@@ -105,7 +96,7 @@ m-icon[part=icon] {
 }
 
 :host(:not([multiple]):not([searchable])) {
-    [part=output-text] {
+    [part=output-item-name] {
         cursor: pointer;
     }
 }

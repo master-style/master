@@ -73,6 +73,7 @@ export class SelectElement extends ControlElement {
                 () => this.selectedOptions
                     .map((eachOption: OptionElement) => [
                         'm-chip', {
+                            part: 'output-item',
                             $if: this.multiple,
                             $id: eachOption.value,
                             class: 'sm filled theme+'
@@ -80,7 +81,7 @@ export class SelectElement extends ControlElement {
                             Array.from(eachOption.childNodes)
                                 .filter(({ nodeType }) => nodeType === Node.ELEMENT_NODE || nodeType === Node.TEXT_NODE)
                                 .map((node: Text | Element) => node instanceof Text
-                                    ? ['span', { $text: node.textContent, part: 'chip-text' }]
+                                    ? ['span', { $text: node.textContent, part: 'output-item-name' }]
                                     : [node.tagName, { $html: node.innerHTML, slot: false, part: node.slot }]
                                 )
                         , [
