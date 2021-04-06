@@ -101,10 +101,14 @@
             width: var(--preview-size);
             margin: 0;
 
-            m-button[part=close] {
-                margin-left: auto;
+            [part=foot] {
+                padding-right: 0;
             }
         }
+    }
+
+    [part=output-item-name] {
+        margin-right: auto;
     }
 }
 
