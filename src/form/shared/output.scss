@@ -39,13 +39,6 @@
     -webkit-user-modify: read-write-plaintext-only;
 }
 
-:host([empty]) {
-    [part=output-text][aria-placeholder]:before {
-        content: attr(aria-placeholder);
-        color: var(--f-fadest);
-    }
-}
-
 :host(.underlined) {
 
     [part=output] {
@@ -64,4 +57,9 @@
             margin-right: .375rem;
         }
     }
+}
+
+[aria-placeholder]:empty:before {
+    content: attr(aria-placeholder);
+    color: var(--f-fadest);
 }

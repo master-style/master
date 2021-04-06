@@ -252,13 +252,14 @@
         <div class="y">
             <div class="x:12">
                 <m-input type="file"
-                         class="outlined"
-                         placeholder="Drop files here or click to upload."
+                         class="outlined w:full"
                          multiple
                          interface="preview"
+                         accept="image/*"
                          label="file">
-                    <div slot="placeholder">
-                        哇系帥氣欸郎
+                    <div slot="placeholder" class="c:center c:middle c:row f:fade++ w:full py">
+                        <i class="i-upload-cloud f:xxl"></i>
+                        <div>Drop files here or click to upload</div>
                     </div>
                 </m-input>
             </div>

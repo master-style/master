@@ -4,7 +4,7 @@ import { Template } from '@master/template';
 import { ControlElement } from '../../shared/control';
 
 const NAME = 'input';
-
+const changeEvent = new window.Event('change', { 'bubbles': true, 'cancelable': false });
 
 @Element('m-' + NAME)
 export class InputElement extends ControlElement {
@@ -39,18 +39,19 @@ export class InputElement extends ControlElement {
             $if: this.type === 'file',
             part: 'body'
         }, [
+            // just for placeholder display
             'div', {
-                part: 'output'
-            }, [
-                // just for placeholder display
-                'div', {
-                    $if: this.placeholder && !this.value?.length,
-                    part: 'output-text',
-                    'aria-placeholder': this.placeholder
-                }, [
-                    'slot', { name: 'placeholder' }
-                ]
-            ],
+                $if: !this.value?.length,
+                'aria-placeholder': this.placeholder
+            },
+            'slot', {
+                name: 'placeholder',
+                $if: !this.value?.length
+            },
+            'div', {
+                part: 'output',
+                $if: this.value?.length
+            },
             () => this.value?.map((eachFile: File) => {
                 const ext = eachFile.name.split('.').pop();
                 const src = URL.createObjectURL(eachFile);
@@ -171,28 +172,32 @@ export class InputElement extends ControlElement {
                         input.assignee.focus();
                         input.assignee.click();
                     }, { id: [NAME] + '.file', passive: true })
-                // 拖拉檔案 accept 格式檢查待解決
-                // .on('dragenter', (event) => {
-                //     event.preventDefault();
-                //     event.stopPropagation();
-                //     input.dragging = true;
-                // }, { id: [NAME] + '.file' })
-                // .on('dragover', (event) => {
-                //     event.preventDefault();
-                //     event.stopPropagation();
-                // }, { id: [NAME] + '.file' })
-                // .on('dragleave dragend', (event) => {
-                //     event.preventDefault();
-                //     input.dragging = false;
-                // }, { id: [NAME] + '.file' })
-                // .on('drop', (event: any) => {
-                //     input.dragging = false;
-                //     event.preventDefault();
-                //     if (input.assignee.files.length) {
-                //         input.addFiles(input.assignee.files);
-                //         input.assignee.dispatchEvent(changeEvent);
-                //     }
-                // }, { id: [NAME] + '.file' });
+                    // 拖拉檔案 accept 格式檢查待解決
+                    .on('dragenter', (event) => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        input.dragging = true;
+                    }, { id: [NAME] + '.file' })
+                    .on('dragover', (event) => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }, { id: [NAME] + '.file' })
+                    .on('dragleave dragend', (event) => {
+                        event.preventDefault();
+                        input.dragging = false;
+                    }, { id: [NAME] + '.file' })
+                    .on('drop', (event: any) => {
+                        input.dragging = false;
+                        event.preventDefault();
+                        // 檢查拖進的檔案符合 accept 格式
+                        const MIMEtype = new RegExp(input.accept.replace('*', '.\*'));
+                        const acceptedFiles = (Array.from(event.dataTransfer.files) as File[])
+                            .filter((file: File) => MIMEtype.test(file.type));
+                        if (acceptedFiles.length) {
+                            input.addFiles(acceptedFiles);
+                            input.assignee.dispatchEvent(changeEvent);
+                        }
+                    }, { id: [NAME] + '.file' });
             }
             if (oldValue === 'file') {
                 input.off({ id: [NAME] + '.file' });
@@ -262,9 +267,9 @@ export class InputElement extends ControlElement {
     @Attr()
     clearable: boolean = false;
 
-    private addFiles(fileList: FileList) {
-        if (!fileList.length) return;
-        const files = Array.from(fileList);
+    private addFiles(files: FileList | File[]) {
+        if (!files.length) return;
+        files = Array.isArray(files) ? files : Array.from(files);
         this.value = this.multiple
             ? (this.value || []).concat(files)
             : files;
