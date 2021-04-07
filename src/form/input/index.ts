@@ -289,7 +289,7 @@ export class InputElement extends ControlElement {
     clearable: boolean = false;
 
     @Attr()
-    whenFileSizeExceeds: string = 'File size exceeds limit';
+    whenFileSizeExceeds: string;
 
     unacceptableFiles: Set<File> = new Set();
 
