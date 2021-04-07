@@ -201,6 +201,9 @@ export class InputElement extends ControlElement {
                         input.dragging = false;
                         console.log(event);
                         event.preventDefault();
+                        if (!input.touched) {
+                            input.touched = true;
+                        }
                         const files = Array.from(event.dataTransfer.files) as File[];
                         let acceptedFiles: File[];
                         // 檢查拖進的檔案符合 accept 格式
@@ -303,8 +306,10 @@ export class InputElement extends ControlElement {
         } else {
             this.value = [files[0]];
         }
+        if (!this.dirty) {
+            this.dirty = true;
+        }
         this.vaildateFiles();
-        this.render();
     }
 
     vaildateFiles() {
@@ -321,13 +326,11 @@ export class InputElement extends ControlElement {
         if (this.maxFileSize) {
             for (const file of this.value) {
                 if (file.size > this.maxFileSize) {
-                    prompt = this.whenFileSizeExceeds;
+                    prompt = this.whenFileSizeExceeds + ' ( ' + displaySizeByBytes(this.maxFileSize) + ' )';
                     this.unacceptableFiles.add(file);
                 }
             }
         }
-
-        console.log(this.unacceptableFiles);
 
         if (this.unacceptableFiles.size) {
             this.assignee.setCustomValidity(prompt);
@@ -338,9 +341,8 @@ export class InputElement extends ControlElement {
         this.valid = this.validity.valid;
         this.invalid = !this.validity.valid;
 
-        console
-
         this.prompt = prompt;
+        this.render();
     }
 
     focus() {
