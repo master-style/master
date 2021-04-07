@@ -23,7 +23,7 @@ export class SelectElement extends ControlElement {
     lightTemplate = new Template(() => [
         'input', {
             role: 'assignee',
-            hidden: true,
+            type: 'hidden',
             $created: (element: HTMLInputElement) => {
                 this.assignee = element;
                 this.validity = element.validity;
