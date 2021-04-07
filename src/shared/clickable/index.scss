@@ -21,11 +21,10 @@
     width: 100%;
     height: 100%;
     outline: none;
-    overflow: hidden;
     background-origin: border-box;
     box-sizing: border-box;
     transition: box-shadow ease-out .15s;
-    will-change: transform;
+    will-change: box-shadow;
     border-width: 0;
     border-color: var(--b-color);
     border-style: var(--b-style);

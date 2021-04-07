@@ -18,6 +18,10 @@
     border-radius: $xs;
 }
 
+[part=master] {
+    overflow: hidden;
+}
+
 :host(.raised) {
     border: 0;
     box-shadow:
