@@ -37,7 +37,6 @@ export class InputElement extends ControlElement {
         'slot',
         // for file
         'input', {
-            $if: this.type === 'file',
             role: 'file-input',
             tabindex: -1,
             type: this.type,
@@ -62,7 +61,6 @@ export class InputElement extends ControlElement {
             }
         },
         'div', {
-            $if: this.type === 'file',
             part: 'body'
         }, [
             // just for placeholder display
