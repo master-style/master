@@ -99,6 +99,7 @@ export class CheckElement extends ControlElement {
                     .forEach((eachCheck: CheckElement) => {
                         if (eachCheck !== check && eachCheck.type === 'radio') {
                             eachCheck.checked = false;
+                            eachCheck.validate();
                         }
                     });
             }

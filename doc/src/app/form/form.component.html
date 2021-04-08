@@ -113,10 +113,11 @@
                 </m-check>
             </div>
             <div class="x" *ngFor="let sex of ['male', 'female']">
-                <m-check [type]="true ? 'radio' : 'checkbox'"
+                <m-check type="radio"
                          name="sex"
                          [value]="sex"
                          ngModel
+                         when-value-missing="required"
                          required>
                     <label>{{ sex }}</label>
                 </m-check>

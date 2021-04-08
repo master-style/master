@@ -1,9 +1,7 @@
 @import '../../variables';
 
 :host([when-valid][valid][dirty]),
-:host([when-valid][valid][touched]),
-:host([when-valid][class*=-valid][class*=-dirty]),
-:host([when-valid][class*=-valid][class*=-touched]) {
+:host([when-valid][valid][touched]) {
     --prompt-bg-color: var(--green-fader);
     --prompt-f-color: var(--green);
     --label-f-color: var(--green);
@@ -17,9 +15,7 @@
 // }
 
 :host([prompt][invalid][dirty]),
-:host([prompt][invalid][touched]),
-:host([prompt][class*=-invalid][class*=-dirty]),
-:host([prompt][class*=-invalid][class*=-touched]) {
+:host([prompt][invalid][touched]) {
     --prompt-bg-color: var(--red-fader) !important;
     --prompt-f-color: var(--f-red) !important;
     --label-f-color: var(--f-red) !important;
@@ -27,9 +23,7 @@
 }
 
 :host([prompt]:not([prompt=""])[dirty]),
-:host([prompt]:not([prompt=""])[touched]),
-:host([prompt]:not([prompt=""])[class*=-dirty]),
-:host([prompt]:not([prompt=""])[class*=-touched]) {
+:host([prompt]:not([prompt=""])[touched]) {
     &:after {
         content: attr(prompt);
         position: absolute;
