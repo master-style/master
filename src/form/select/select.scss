@@ -100,3 +100,7 @@ m-icon[part=icon] {
         cursor: pointer;
     }
 }
+
+::slotted([role="assignee"]) {
+    display: none;
+}
