@@ -322,7 +322,8 @@ export class SelectElement extends ControlElement {
                 if (equal) return;
             }
             select.empty = value === null || value === undefined || value === '' || isArray && !value.length;
-            select.assignee.value = value;
+            // don't assign empty array that will be valid
+            select.assignee.value = select.empty ? null : value;
             select.validate();
             select.selectOptionByValue(value);
         },
