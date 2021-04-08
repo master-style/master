@@ -1,4 +1,4 @@
-import { Element, Attr } from '@master/element';
+import { Element, Attr, Event, EventEmitter } from '@master/element';
 import css from './input.scss';
 import { Template } from '@master/template';
 import { ControlElement } from '../../shared/control';
@@ -6,7 +6,6 @@ import { $ } from '@master/dom';
 import { displaySizeByBytes } from '../../utils/display-size-by-bytes';
 
 const NAME = 'input';
-const changeEvent = new window.Event('change', { 'bubbles': true, 'cancelable': false });
 
 @Element('m-' + NAME)
 export class InputElement extends ControlElement {
@@ -49,6 +48,7 @@ export class InputElement extends ControlElement {
             $created: (element: HTMLInputElement) => {
                 this.fileInput = $(element)
                     .on('change', (event: any) => {
+                        event.stopPropagation();
                         this.addFiles(this.fileInput.files);
                         // make file input can upload again
                         this.fileInput.value = '';
@@ -117,6 +117,7 @@ export class InputElement extends ControlElement {
                                     click: (event) => {
                                         event.stopPropagation();
                                         this.value = this.value.filter((file) => eachFile !== file);
+                                        this.changeEmitter();
                                         this.render();
                                     }
                                 }
@@ -240,7 +241,6 @@ export class InputElement extends ControlElement {
                         }
                         if (acceptedFiles.length) {
                             input.addFiles(acceptedFiles);
-                            input.assignee.dispatchEvent(changeEvent);
                         }
                     }, { id: [NAME] + '.file' });
             }
@@ -319,6 +319,9 @@ export class InputElement extends ControlElement {
     fileInput: HTMLInputElement;
     unacceptableFiles: Set<File> = new Set();
 
+    @Event({ force: true, bubbles: true })
+    changeEmitter: EventEmitter;
+
     private addFiles(files: FileList | File[]) {
         if (!files.length) return;
         files = Array.isArray(files) ? files : Array.from(files);
@@ -332,6 +335,7 @@ export class InputElement extends ControlElement {
         } else {
             this.value = [files[0]];
         }
+        this.changeEmitter();
         if (!this.dirty) {
             this.dirty = true;
         }

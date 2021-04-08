@@ -8,13 +8,14 @@ import { Component, OnInit } from '@angular/core';
 export class InputComponent implements OnInit {
 
     mail: string;
+    files;
 
     constructor() { }
 
     ngOnInit(): void { }
 
     upload(event, input) {
-        console.log('upload', event, input.files);
+        console.log('upload', event[0]?.name, input);
     }
 
 }

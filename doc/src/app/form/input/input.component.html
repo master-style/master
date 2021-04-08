@@ -259,6 +259,8 @@
                          max-file-size="1024000000"
                          when-value-missing="required"
                          required
+                         name="file"
+                         #file
                          label="file">
                     <div slot="placeholder" class="c:center c:middle c:row f:fade++ w:full py">
                         <i class="i-upload-cloud f:xxl"></i>
@@ -273,10 +275,12 @@
                          interface="preview"
                          accept="image/*"
                          label="file"
-                         #input
-                         (change)="upload($event, input)"
+                         #fileInput
+                         (ngModelChange)="upload($event, fileInput)"
+                         [(ngModel)]="files"
                          required>
                 </m-input>
+                {{ files | json }}
             </div>
         </div>
     </div>
