@@ -22,7 +22,6 @@ export class InputElement extends ControlElement {
             placeholder: this.placeholder,
             disabled: this.disabled,
             required: this.required,
-            multiple: this.multiple,
             readonly: this.readOnly && !this.keepValidity,
             pattern: this.pattern,
             autocomplete: this.autocomplete,
@@ -36,6 +35,32 @@ export class InputElement extends ControlElement {
 
     template = new Template(() => [
         'slot',
+        // for file
+        'input', {
+            $if: this.type === 'file',
+            role: 'file-input',
+            tabindex: -1,
+            type: this.type,
+            name: this.name,
+            disabled: this.disabled,
+            required: this.required,
+            multiple: this.multiple,
+            accept: this.accept,
+            $created: (element: HTMLInputElement) => {
+                this.fileInput = $(element)
+                    .on('input', (event: any) => {
+                        this.addFiles(this.fileInput.files);
+                        // make file input can upload again
+                        this.fileInput.value = '';
+                        if (!this.dirty) {
+                            this.dirty = true;
+                        }
+                    }, { id: [NAME], passive: true })
+                    .on('focusout', () => {
+                        this.touched = true;
+                    }, { id: [NAME], passive: true, once: true });
+            }
+        },
         'div', {
             $if: this.type === 'file',
             part: 'body'
@@ -135,31 +160,7 @@ export class InputElement extends ControlElement {
                     name: 'cross'
                 }
             ]
-        ],
-        // for file
-        'input', {
-            $if: this.type === 'file',
-            role: 'file-input',
-            tabindex: -1,
-            type: this.type,
-            name: this.name,
-            disabled: this.disabled,
-            required: this.required,
-            multiple: this.multiple,
-            accept: this.accept,
-            $created: (element: HTMLInputElement) => {
-                this.fileInput = $(element)
-                    .on('input', (event: any) => {
-                        this.addFiles(this.fileInput.files);
-                        if (!this.dirty) {
-                            this.dirty = true;
-                        }
-                    }, { id: [NAME], passive: true })
-                    .on('focusout', () => {
-                        this.touched = true;
-                    }, { id: [NAME], passive: true, once: true });
-            }
-        }
+        ]
     ]);
 
     @Attr({ observe: false })
@@ -267,9 +268,10 @@ export class InputElement extends ControlElement {
         onUpdate(input: InputElement, value: any) {
             if (input.type === 'file') {
                 input.empty = !value?.length || !value;
-                // make file input can upload again
-                input.assignee.value = '';
-                input.vaildateFiles();
+                input.assignee.value = input.empty ? null : value;
+                if (input.validateFiles()) {
+                    input.validate();
+                }
             } else {
                 input.empty = value === null || value === undefined || value === '';
                 input.assignee.value = value ?? null;
@@ -333,16 +335,16 @@ export class InputElement extends ControlElement {
         if (!this.dirty) {
             this.dirty = true;
         }
-        this.vaildateFiles();
+        this.validateFiles();
     }
 
-    vaildateFiles() {
+    validateFiles(): boolean {
 
         if (!this.ready) {
             return;
         }
 
-        let prompt = null;
+        let prompt: string;
 
         this.unacceptableFiles.clear();
 
@@ -350,7 +352,7 @@ export class InputElement extends ControlElement {
         if (this.maxFileSize) {
             for (const file of this.value) {
                 if (file.size > this.maxFileSize) {
-                    prompt = this.whenFileSizeExceeds + ' ( ' + displaySizeByBytes(this.maxFileSize) + ' )';
+                    prompt = (this.whenFileSizeExceeds || '') + ' ( ' + displaySizeByBytes(this.maxFileSize) + ' )';
                     this.unacceptableFiles.add(file);
                 }
             }
@@ -364,13 +366,18 @@ export class InputElement extends ControlElement {
 
         this.valid = this.validity.valid;
         this.invalid = !this.validity.valid;
-        console.log(prompt);
         this.prompt = prompt ? prompt : null;
         this.render();
+
+        return this.valid;
     }
 
     focus() {
-        this.assignee.focus();
+        if (this.type === 'file') {
+            this.fileInput.focus();
+        } else {
+            this.assignee.focus();
+        }
     }
 
     onConnected() {

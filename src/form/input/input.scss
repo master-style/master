@@ -35,9 +35,17 @@
 :host([type=file]) {
     cursor: copy;
 
+    [part=body] {
+        pointer-events: none;
+    }
+
+    [part=close] {
+        pointer-events: auto;
+    }
+
     [role=file-input] {
         position: absolute;
-        z-index: 2;
+        z-index: 1;
         opacity: 0;
         height: 100%;
         width: 100%;
