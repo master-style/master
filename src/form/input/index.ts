@@ -48,7 +48,7 @@ export class InputElement extends ControlElement {
             accept: this.accept,
             $created: (element: HTMLInputElement) => {
                 this.fileInput = $(element)
-                    .on('input', (event: any) => {
+                    .on('change', (event: any) => {
                         this.addFiles(this.fileInput.files);
                         // make file input can upload again
                         this.fileInput.value = '';
@@ -335,7 +335,6 @@ export class InputElement extends ControlElement {
         if (!this.dirty) {
             this.dirty = true;
         }
-        this.validateFiles();
     }
 
     validateFiles(): boolean {
@@ -364,9 +363,9 @@ export class InputElement extends ControlElement {
             this.assignee.setCustomValidity('');
         }
 
-        this.valid = this.validity.valid;
-        this.invalid = !this.validity.valid;
         this.prompt = prompt ? prompt : null;
+        this.valid = !prompt;
+        this.invalid = !!prompt;
         this.render();
 
         return this.valid;
