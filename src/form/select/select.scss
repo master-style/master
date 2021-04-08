@@ -69,7 +69,7 @@
 }
 
 m-button[part=close] {
-    --button-bg-color-hover: var(--bg-object-hover);
+    --button-bg-color-hover: var(--bg-overlay-hover);
     --button-bg-color: transparent;
     --button-f-color: var(--f-fader);
 

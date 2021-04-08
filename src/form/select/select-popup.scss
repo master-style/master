@@ -23,7 +23,7 @@
 
 ::slotted(m-item[selected]) {
     font-weight: 600;
-    background-color: var(--item-bg-color-hover, var(--bg-object-hover));
+    background-color: var(--item-bg-color-hover, var(--bg-overlay-hover));
 }
 
 ::slotted(m-item[empty]) {
