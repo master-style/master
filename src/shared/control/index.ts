@@ -107,7 +107,11 @@ export class ControlElement extends MasterElement {
         this.valid = this.validity.valid;
         this.invalid = !this.validity.valid;
 
-        this.prompt = prompt ? prompt : null;
+        if (prompt) {
+            this.prompt = prompt;
+        } else {
+            this.removeAttribute('prompt');
+        }
     }
 
     render() {

@@ -16,7 +16,6 @@ export class InputElement extends ControlElement {
     lightTemplate = new Template(() => [
         'input', {
             role: 'assignee',
-            tabindex: -1,
             type: this.type === 'file' ? false : this.type,
             name: this.name,
             placeholder: this.placeholder,
@@ -365,7 +364,11 @@ export class InputElement extends ControlElement {
             this.assignee.setCustomValidity('');
         }
 
-        this.prompt = prompt ? prompt : null;
+        if (prompt) {
+            this.prompt = prompt;
+        } else {
+            this.removeAttribute('prompt');
+        }
         this.valid = !prompt;
         this.invalid = !!prompt;
         this.render();
