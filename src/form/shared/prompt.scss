@@ -20,6 +20,7 @@
     --prompt-f-color: var(--f-red) !important;
     --label-f-color: var(--f-red) !important;
     --b-color: var(--red) !important;
+    --b-color-active: var(--red) !important;
 }
 
 :host([prompt]:not([prompt=""])[dirty]),
