@@ -26,6 +26,7 @@ export class SelectElement extends ControlElement {
             name: this.name,
             disabled: this.disabled,
             required: this.required,
+            hidden: true,
             $created: (element: HTMLInputElement) => {
                 this.assignee = element;
                 this.validity = element.validity;
@@ -323,7 +324,7 @@ export class SelectElement extends ControlElement {
             }
             select.empty = value === null || value === undefined || value === '' || isArray && !value.length;
             // don't assign empty array that will be valid
-            select.assignee.value = select.empty ? null : value;
+            select.assignee.value = select.empty ? '' : value;
             select.validate();
             select.selectOptionByValue(value);
         },

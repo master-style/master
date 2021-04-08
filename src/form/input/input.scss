@@ -35,14 +35,17 @@
 :host([type=file]) {
     cursor: copy;
 
-    ::slotted([role=assignee]) {
+    [role=file-input] {
         position: absolute;
-        pointer-events: none;
         z-index: 2;
         opacity: 0;
         height: 100%;
         width: 100%;
         cursor: copy !important;
+    }
+
+    ::slotted([role=assignee]) {
+        display: none;
     }
 
     ::slotted(img) {
@@ -58,8 +61,8 @@
     }
 
     fieldset {
-        border-width: calc(var(--b-width, 1px) + 1px)!important;
-        border-color: var(--b-color-active, var(--b-fade))!important;
+        border-width: calc(var(--b-width, 1px) + 1px) !important;
+        border-color: var(--b-color-active, var(--b-fade)) !important;
     }
 }
 

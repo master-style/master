@@ -2,7 +2,7 @@ import { Element, Attr } from '@master/element';
 import css from './input.scss';
 import { Template } from '@master/template';
 import { ControlElement } from '../../shared/control';
-
+import { $ } from '@master/dom';
 import { displaySizeByBytes } from '../../utils/display-size-by-bytes';
 
 const NAME = 'input';
@@ -17,13 +17,12 @@ export class InputElement extends ControlElement {
         'input', {
             role: 'assignee',
             tabindex: -1,
-            type: this.type,
+            type: this.type === 'file' ? false : this.type,
             name: this.name,
             placeholder: this.placeholder,
             disabled: this.disabled,
             required: this.required,
             multiple: this.multiple,
-            accept: this.accept,
             readonly: this.readOnly && !this.keepValidity,
             pattern: this.pattern,
             autocomplete: this.autocomplete,
@@ -137,6 +136,30 @@ export class InputElement extends ControlElement {
                 }
             ]
         ],
+        // for file
+        'input', {
+            $if: this.type === 'file',
+            role: 'file-input',
+            tabindex: -1,
+            type: this.type,
+            name: this.name,
+            disabled: this.disabled,
+            required: this.required,
+            multiple: this.multiple,
+            accept: this.accept,
+            $created: (element: HTMLInputElement) => {
+                this.fileInput = $(element)
+                    .on('input', (event: any) => {
+                        this.addFiles(this.fileInput.files);
+                        if (!this.dirty) {
+                            this.dirty = true;
+                        }
+                    }, { id: [NAME], passive: true })
+                    .on('focusout', () => {
+                        this.touched = true;
+                    }, { id: [NAME], passive: true, once: true });
+            }
+        }
     ]);
 
     @Attr({ observe: false })
@@ -291,6 +314,7 @@ export class InputElement extends ControlElement {
     @Attr()
     whenFileSizeExceeds: string;
 
+    fileInput: HTMLInputElement;
     unacceptableFiles: Set<File> = new Set();
 
     private addFiles(files: FileList | File[]) {
@@ -340,8 +364,8 @@ export class InputElement extends ControlElement {
 
         this.valid = this.validity.valid;
         this.invalid = !this.validity.valid;
-
-        this.prompt = prompt;
+        console.log(prompt);
+        this.prompt = prompt ? prompt : null;
         this.render();
     }
 
@@ -360,11 +384,7 @@ export class InputElement extends ControlElement {
 
         this.assignee
             .on('input', (event: any) => {
-                if (this.type === 'file') {
-                    this.addFiles(this.assignee.files);
-                } else {
-                    this.value = event.target.value;
-                }
+                this.value = event.target.value;
                 if (!this.dirty) {
                     this.dirty = true;
                 }
