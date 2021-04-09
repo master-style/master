@@ -17,7 +17,7 @@
     flex-direction: column;
     flex-wrap: nowrap;
     contain: style;
-    padding: var(--p) // &.long {
+    padding: var(--p); // &.long {
     //     padding-top: 0;
     //     padding-bottom: 0;
 
@@ -35,12 +35,12 @@
     // }
 }
 
-:host([placement=left]) {
+:host([placement='left']) {
     --p: 0px;
     --r: 0px;
     right: auto;
 
-    [part=master] {
+    [part='master'] {
         margin-left: 0;
         height: 100%;
         border-top-left-radius: 0;
@@ -48,23 +48,23 @@
     }
 }
 
-:host([placement=right]) {
+:host([placement='right']) {
     --p: 0px;
     --r: 0px;
     right: 0;
     left: auto;
 
-    [part=master] {
+    [part='master'] {
         margin-right: 0;
         height: 100%;
     }
 }
 
-:host([placement=top]) {
+:host([placement='top']) {
     --p: 0px;
     bottom: auto;
 
-    [part=master] {
+    [part='master'] {
         margin-top: 0;
         width: 100%;
         max-height: 100%;
@@ -73,12 +73,12 @@
     }
 }
 
-:host([placement=bottom]) {
+:host([placement='bottom']) {
     --p: 0px;
     top: auto;
     bottom: 0;
 
-    [part=master] {
+    [part='master'] {
         margin-bottom: 0;
         width: 100%;
         max-height: 100%;
@@ -88,7 +88,7 @@
 }
 
 :host([changing]) {
-    [part=master] {
+    [part='master'] {
         will-change: height, opacity;
     }
 
@@ -101,7 +101,7 @@
     width: 100% !important;
     max-width: 100% !important;
 
-    [part=master] {
+    [part='master'] {
         height: 100%;
     }
 }
@@ -112,7 +112,7 @@
     width: 100% !important;
     max-width: 100% !important;
 
-    [part=master] {
+    [part='master'] {
         height: 100%;
     }
 }
@@ -128,7 +128,7 @@
 //     @include bgBlur(var(--theme), 0);
 // }
 
-[part=master] {
+[part='master'] {
     max-width: var(--max-width);
     position: relative;
     contain: style;
@@ -165,14 +165,14 @@
 //     border-top-left-radius: 0;
 // }
 
-[part=close] {
+[part='close'] {
     --button-bg-color: transparent;
     --button-bg-color-hover: transparent;
     color: var(--f-fader);
     position: absolute;
     z-index: $z-overlay;
-    top: .5rem;
-    left: .5rem;
+    top: 0.5rem;
+    left: 0.5rem;
     border-radius: 50%;
     font-size: 1.25rem;
 
@@ -181,14 +181,14 @@
     }
 }
 
-:host([close-button="cross"]) {
-    [part=close] {
-        right: .5rem;
+:host([close-button='cross']) {
+    [part='close'] {
+        right: 0.5rem;
         left: auto;
     }
 }
 
-@include below(sm) {
+@media (max-width: var(--below-sm)) {
     :host {
         --p: #{$sm};
     }

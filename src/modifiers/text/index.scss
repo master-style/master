@@ -34,7 +34,7 @@
 }
 
 // text line
-[class*="t-line\:"] {
+[class*='t-line\:'] {
     overflow: hidden;
     max-width: 100%;
     white-space: nowrap;
@@ -125,7 +125,7 @@
     line-height: 1.15;
 }
 
-@include above(sm) {
+@media (min-width: var(--above-sm)) {
     .t\:left\@sm {
         text-align: left !important;
         text-align-last: left !important;
@@ -142,7 +142,7 @@
     }
 }
 
-@include above(md) {
+@media (min-width: var(--above-md)) {
     .t\:left\@md {
         text-align: left !important;
         text-align-last: left !important;
@@ -159,7 +159,7 @@
     }
 }
 
-@include above(lg) {
+@media (min-width: var(--above-lg)) {
     .t\:left\@lg {
         text-align: left !important;
         text-align-last: left !important;
@@ -176,7 +176,7 @@
     }
 }
 
-@include above(xl) {
+@media (min-width: var(--above-xl)) {
     .t\:left\@xl {
         text-align: left !important;
         text-align-last: left !important;

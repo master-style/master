@@ -46,50 +46,50 @@
 }
 
 // min
-@include above(sm) {
+@media(min-width: var(--above-sm)) {
     .hide\@sm {
         display: none !important;
-    }
+    }    
 }
 
-@include above(md) {
+@media(min-width: var(--above-md)) {
     .hide\@md {
         display: none !important;
     }
 }
 
-@include above(lg) {
+@media(min-width: var(--above-lg)) {
     .hide\@lg {
         display: none !important;
     }
 }
 
-@include above(xl) {
+@media(min-width: var(--above-xl)) {
     .hide\@xl {
         display: none !important;
     }
 }
 
 // max
-@include below(sm) {
+@media(max-width: var(--below-sm)) {
     .show\@sm {
         display: none !important;
     }
 }
 
-@include below(md) {
+@media(max-width: var(--below-md)) {
     .show\@md {
         display: none !important;
     }
 }
 
-@include below(lg) {
+@media(max-width: var(--below-lg)) {
     .show\@lg {
         display: none !important;
     }
 }
 
-@include below(xl) {
+@media(max-width: var(--below-xl)) {
     .show\@xl {
         display: none !important;
     }
