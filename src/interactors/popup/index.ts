@@ -208,7 +208,7 @@ export class PopupElement extends TargetElement {
                     .on('mousedown click', this.determineClose, { passive: true });
             }
 
-            if (!this.#resizeObserver) {
+            if (!this.#resizeObserver && !this.followCursor) {
                 this.#resizeObserver = new ResizeObserver(debounce(() => {
                     const rect = this.trigger.getBoundingClientRect();
                     // determine whether element is hidden
