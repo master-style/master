@@ -32,14 +32,14 @@ article {
         ol {
             padding-left: 2.2rem;
 
-            > li {
+            >li {
                 position: relative;
-                padding-bottom: 0.2rem;
+                padding-bottom: .2rem;
 
                 &:before {
                     position: absolute;
                     transform: translate(-100%, 0);
-                    margin-left: -0.8rem;
+                    margin-left: -.8rem;
                     color: var(--f-fade);
                 }
 
@@ -52,12 +52,13 @@ article {
 
             ol,
             ul {
-                padding-top: 0.2rem;
+                padding-top: .2rem;
                 margin: 0;
             }
         }
 
-        ul > li {
+
+        ul>li {
             &:before {
                 content: '⦁';
                 margin-top: 2px;
@@ -68,16 +69,16 @@ article {
             counter-reset: li;
         }
 
-        ol > li {
+        ol>li {
             &:before {
                 counter-increment: li;
-                content: counter(li) '.';
+                content: counter(li)'.';
             }
 
             ol {
-                > li {
+                >li {
                     &:before {
-                        content: counters(li, '.') '.';
+                        content: counters(li, '.')'.';
                     }
                 }
             }
@@ -87,7 +88,7 @@ article {
         del {
             position: relative;
             text-decoration: none;
-            background: rgba($red, 0.1);
+            background: rgba($red, .1);
             padding: 0 $xxs;
 
             &:after {
@@ -127,12 +128,12 @@ article {
             &:before {
                 position: absolute;
                 z-index: -1;
-                left: -0.5rem;
+                left: -.5rem;
                 top: -2.3rem;
                 font-weight: 500;
                 color: var(--f-fadest);
                 font-size: 5rem;
-                font-family: 'Gill Sans', sans-serif;
+                font-family: 'Gill Sans', sans-serif
             }
         }
 
@@ -224,7 +225,7 @@ article {
             margin-bottom: $sm;
         }
 
-        h1 + h2 {
+        h1+h2 {
             margin-top: $md;
         }
 
@@ -232,7 +233,7 @@ article {
             max-width: 100%;
         }
 
-        @media (max-width: var(--below-sm)) {
+        @include below(sm) {
             h1 {
                 font-size: var(--f-xl);
             }
@@ -299,4 +300,5 @@ article {
             }
         }
     }
+
 }

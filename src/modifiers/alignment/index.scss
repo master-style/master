@@ -43,7 +43,7 @@
     margin-right: 0 !important;
 }
 
-@media (min-width: var(--above-sm)) {
+@include above(sm) {
     .a\:left\@sm {
         float: left !important;
         margin-left: 0 !important;
@@ -64,7 +64,7 @@
     }
 }
 
-@media (min-width: var(--above-md)) {
+@include above(md) {
     .a\:left\@md {
         float: left !important;
         margin-left: 0 !important;
@@ -84,7 +84,7 @@
     }
 }
 
-@media (min-width: var(--above-lg)) {
+@include above(lg) {
     .a\:left\@lg {
         float: left !important;
         margin-left: 0 !important;
@@ -104,7 +104,7 @@
     }
 }
 
-@media (min-width: var(--above-xl)) {
+@include above(xl) {
     .a\:left\@xl {
         float: left !important;
         margin-left: 0 !important;
@@ -124,8 +124,8 @@
     }
 }
 
-[class^='c\:'],
-[class*=' c\:'] {
+[class^=c\:],
+[class*=" c\:"] {
     display: flex;
 }
 
@@ -203,7 +203,8 @@
     flex-wrap: nowrap !important;
 }
 
-@media (min-width: var(--above-sm)) {
+@include above(sm) {
+
     .c\:top\@sm:not(.c\:row),
     .c\:row.c\:left\@sm {
         align-items: flex-start !important;
@@ -263,7 +264,8 @@
     }
 }
 
-@media (min-width: var(--above-md)) {
+@include above(md) {
+
     .c\:top\@md:not(.c\: row),
     .c\:row.c\:left\@md {
         align-items: flex-start !important;
@@ -323,7 +325,8 @@
     }
 }
 
-@media (min-width: var(--above-lg)) {
+@include above(lg) {
+
     .c\:top\@lg:not(.c\: row),
     .c\:row.c\:left\@lg {
         align-items: flex-start !important;
@@ -383,7 +386,8 @@
     }
 }
 
-@media (min-width: var(--above-xl)) {
+@include above(xl) {
+
     .c\:top\@xl:not(.c\: row),
     .c\:row.c\:left\@xl {
         align-items: flex-start !important;

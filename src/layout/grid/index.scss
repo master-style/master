@@ -2,25 +2,26 @@
 @import '../../mixins.scss';
 
 .y,
-[class^='y\:'],
+[class^=y\:],
 [class*=' y\:'] {
     --gap: #{$md};
     display: flex; // 不可使用 inline-flex 會有空白問題
     flex-wrap: wrap;
-    margin: calc(var(--gap) * -0.5);
+    margin: calc(var(--gap) * -.5);
 
-    > .x,
-    > [class^='x\@'],
-    > [class*=' x\@'],
-    > [class^='x\:'],
-    > [class*=' x\:'] {
+    >.x,
+    >[class^=x\@],
+    >[class*=' x\@'],
+    >[class^=x\:],
+    >[class*=' x\:'] {
         margin: calc(var(--gap) / 2);
         flex-basis: calc(var(--x) - var(--gap));
     }
 
     &:not(.c\:row) {
-        > [class^='x\:'],
-        > [class*=' x\:'] {
+
+        >[class^=x\:],
+        >[class*=' x\:'] {
             max-width: calc(var(--x) - var(--gap));
         }
 
@@ -30,8 +31,9 @@
     }
 
     &.c\:row {
-        > [class^='x\:'],
-        > [class*=' x\:'] {
+
+        >[class^=x\:],
+        >[class*=' x\:'] {
             max-height: calc(var(--x) - var(--gap));
         }
 
@@ -39,18 +41,19 @@
             height: calc(100% + var(--gap));
         }
 
-        > .x,
-        > [class^='x\:'],
-        > [class*=' x\:'] {
+        >.x,
+        >[class^=x\:],
+        >[class*=' x\:'] {
             width: var(--x12);
             max-width: var(--x12);
         }
     }
+
 }
 
-[class^='x\@'],
+[class^=x\@],
 [class*=' x\@'],
-[class^='x\:'],
+[class^=x\:],
 [class*=' x\:'] {
     --x: var(--x12);
     flex-basis: var(--x);
@@ -260,58 +263,59 @@
 }
 
 .o\:1 {
-    order: 1;
+    order: 1
 }
 
 .o\:2 {
-    order: 2;
+    order: 2
 }
 
 .o\:3 {
-    order: 3;
+    order: 3
 }
 
 .o\:4 {
-    order: 4;
+    order: 4
 }
 
 .o\:5 {
-    order: 5;
+    order: 5
 }
 
 .o\:6 {
-    order: 6;
+    order: 6
 }
 
 .o\:7 {
-    order: 7;
+    order: 7
 }
 
 .o\:8 {
-    order: 8;
+    order: 8
 }
 
 .o\:9 {
-    order: 9;
+    order: 9
 }
 
 .o\:10 {
-    order: 10;
+    order: 10
 }
 
 .o\:11 {
-    order: 11;
+    order: 11
 }
 
 .o\:12 {
-    order: 12;
+    order: 12
 }
 
 .o\:last {
-    order: 13;
+    order: 13
 }
 
-@media (min-width: var(--above-sm)) {
+@include above(sm) {
+
     .x\:12\@sm {
         --x: var(--x12);
     }
@@ -519,59 +523,60 @@
     }
 
     .o\:1\@sm {
-        order: 1;
+        order: 1
     }
 
     .o\:2\@sm {
-        order: 2;
+        order: 2
     }
 
     .o\:3\@sm {
-        order: 3;
+        order: 3
     }
 
     .o\:4\@sm {
-        order: 4;
+        order: 4
     }
 
     .o\:5\@sm {
-        order: 5;
+        order: 5
     }
 
     .o\:6\@sm {
-        order: 6;
+        order: 6
     }
 
     .o\:7\@sm {
-        order: 7;
+        order: 7
     }
 
     .o\:8\@sm {
-        order: 8;
+        order: 8
     }
 
     .o\:9\@sm {
-        order: 9;
+        order: 9
     }
 
     .o\:10\@sm {
-        order: 10;
+        order: 10
     }
 
     .o\:11\@sm {
-        order: 11;
+        order: 11
     }
 
     .o\:12\@sm {
-        order: 12;
+        order: 12
     }
 
     .o\:last\@sm {
-        order: 13;
+        order: 13
     }
 }
 
-@media (min-width: var(--above-md)) {
+@include above(md) {
+
     .x\:12\@md {
         --x: var(--x12);
     }
@@ -779,59 +784,60 @@
     }
 
     .o\:1\@md {
-        order: 1;
+        order: 1
     }
 
     .o\:2\@md {
-        order: 2;
+        order: 2
     }
 
     .o\:3\@md {
-        order: 3;
+        order: 3
     }
 
     .o\:4\@md {
-        order: 4;
+        order: 4
     }
 
     .o\:5\@md {
-        order: 5;
+        order: 5
     }
 
     .o\:6\@md {
-        order: 6;
+        order: 6
     }
 
     .o\:7\@md {
-        order: 7;
+        order: 7
     }
 
     .o\:8\@md {
-        order: 8;
+        order: 8
     }
 
     .o\:9\@md {
-        order: 9;
+        order: 9
     }
 
     .o\:10\@md {
-        order: 10;
+        order: 10
     }
 
     .o\:11\@md {
-        order: 11;
+        order: 11
     }
 
     .o\:12\@md {
-        order: 12;
+        order: 12
     }
 
     .o\:last\@md {
-        order: 13;
+        order: 13
     }
 }
 
-@media (min-width: var(--above-lg)) {
+@include above(lg) {
+
     // [class^=x\:lg],
     // [class*=' x\:lg'] {
     //     flex: 0 0 auto!important;
@@ -1043,59 +1049,60 @@
     }
 
     .o\:1\@lg {
-        order: 1;
+        order: 1
     }
 
     .o\:2\@lg {
-        order: 2;
+        order: 2
     }
 
     .o\:3\@lg {
-        order: 3;
+        order: 3
     }
 
     .o\:4\@lg {
-        order: 4;
+        order: 4
     }
 
     .o\:5\@lg {
-        order: 5;
+        order: 5
     }
 
     .o\:6\@lg {
-        order: 6;
+        order: 6
     }
 
     .o\:7\@lg {
-        order: 7;
+        order: 7
     }
 
     .o\:8\@lg {
-        order: 8;
+        order: 8
     }
 
     .o\:9\@lg {
-        order: 9;
+        order: 9
     }
 
     .o\:10\@lg {
-        order: 10;
+        order: 10
     }
 
     .o\:11\@lg {
-        order: 11;
+        order: 11
     }
 
     .o\:12\@lg {
-        order: 12;
+        order: 12
     }
 
     .o\:last\@lg {
-        order: 13;
+        order: 13
     }
 }
 
-@media (min-width: var(--above-xl)) {
+@include above(xl) {
+
     .x\:12\@xl {
         flex: 0 0 var(--x12);
     }
@@ -1299,54 +1306,54 @@
     }
 
     .o\:1\@xl {
-        order: 1;
+        order: 1
     }
 
     .o\:2\@xl {
-        order: 2;
+        order: 2
     }
 
     .o\:3\@xl {
-        order: 3;
+        order: 3
     }
 
     .o\:4\@xl {
-        order: 4;
+        order: 4
     }
 
     .o\:5\@xl {
-        order: 5;
+        order: 5
     }
 
     .o\:6\@xl {
-        order: 6;
+        order: 6
     }
 
     .o\:7\@xl {
-        order: 7;
+        order: 7
     }
 
     .o\:8\@xl {
-        order: 8;
+        order: 8
     }
 
     .o\:9\@xl {
-        order: 9;
+        order: 9
     }
 
     .o\:10\@xl {
-        order: 10;
+        order: 10
     }
 
     .o\:11\@xl {
-        order: 11;
+        order: 11
     }
 
     .o\:12\@xl {
-        order: 12;
+        order: 12
     }
 
     .o\:last\@xl {
-        order: 13;
+        order: 13
     }
 }
