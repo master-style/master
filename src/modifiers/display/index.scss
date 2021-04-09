@@ -46,50 +46,50 @@
 }
 
 // min
-@media(min-width: var(--above-sm)) {
+@include above(sm) {
     .hide\@sm {
         display: none !important;
-    }    
+    }
 }
 
-@media(min-width: var(--above-md)) {
+@include above(md) {
     .hide\@md {
         display: none !important;
     }
 }
 
-@media(min-width: var(--above-lg)) {
+@include above(lg) {
     .hide\@lg {
         display: none !important;
     }
 }
 
-@media(min-width: var(--above-xl)) {
+@include above(xl) {
     .hide\@xl {
         display: none !important;
     }
 }
 
 // max
-@media(max-width: var(--below-sm)) {
+@include below(sm) {
     .show\@sm {
         display: none !important;
     }
 }
 
-@media(max-width: var(--below-md)) {
+@include below(md) {
     .show\@md {
         display: none !important;
     }
 }
 
-@media(max-width: var(--below-lg)) {
+@include below(lg) {
     .show\@lg {
         display: none !important;
     }
 }
 
-@media(max-width: var(--below-xl)) {
+@include below(xl) {
     .show\@xl {
         display: none !important;
     }
