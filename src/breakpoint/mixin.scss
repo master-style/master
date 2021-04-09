@@ -1,0 +1,22 @@
+@import '../variables.scss';
+
+@function breakpoint-min($names, $breakpoints: $breakpoints) {
+    $min: map-get($breakpoints, $names);
+    @return if($min !=0, $min, null);
+}
+
+@function breakpoint-suffix($names, $breakpoints: $grid-breakpoints) {
+    @return if(breakpoint-min($names, $breakpoints) ==null, '', '\\@#{$names}');
+}
+
+@mixin above($names, $breakpoints: $breakpoints) {
+    $min: breakpoint-min($names, $breakpoints);
+
+    @if $min {
+        @media (min-width: $min) {
+            @content;
+        }
+    } @else {
+        @content;
+    }
+}
