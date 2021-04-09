@@ -10,7 +10,7 @@
 }
 
 .sticky {
-    @include sticky( !important);
+    @include sticky(!important);
     top: 0;
 }
 
@@ -107,13 +107,13 @@
     align-items: center;
 }
 
-@include above(sm) {
+@media (min-width: var(--above-sm)) {
     .rel\@sm {
         position: relative !important;
     }
 
     .sticky\@sm {
-        @include sticky( !important);
+        @include sticky(!important);
         top: 0;
     }
 
@@ -160,13 +160,13 @@
     }
 }
 
-@include above(md) {
+@media (min-width: var(--above-md)) {
     .rel\@md {
         position: relative !important;
     }
 
     .sticky\@md {
-        @include sticky( !important);
+        @include sticky(!important);
         top: 0;
     }
 
@@ -213,13 +213,13 @@
     }
 }
 
-@include above(lg) {
+@media (min-width: var(--above-lg)) {
     .rel\@lg {
         position: relative !important;
     }
 
     .sticky\@lg {
-        @include sticky( !important);
+        @include sticky(!important);
         top: 0;
     }
 
@@ -266,13 +266,13 @@
     }
 }
 
-@include above(xl) {
+@media (min-width: var(--above-xl)) {
     .rel\@xl {
         position: relative !important;
     }
 
     .sticky\@xl {
-        @include sticky( !important);
+        @include sticky(!important);
         top: 0;
     }
 
