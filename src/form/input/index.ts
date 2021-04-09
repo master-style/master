@@ -13,6 +13,31 @@ export class InputElement extends ControlElement {
 
     static css = css;
 
+    private static parseValue(input: InputElement, value) {
+        if (input.type === 'number') {
+            if (value === '') {
+                value = null;
+            } else {
+                value = isNaN(+value) ? 0 : +value;
+            }
+        }
+        return value;
+    }
+
+    private static updateValue(input: InputElement, value, preventAssign) {
+        if (input.type === 'file') {
+            input.empty = !value?.length || !value;
+            input.assignee.value = input.empty ? null : value;
+            if (input.validateFiles()) {
+                input.validate();
+            }
+        } else {
+            input.empty = value === null || value === undefined || value === '';
+            input.assignee.value = value ?? null;
+            input.validate();
+        }
+    }
+
     lightTemplate = new Template(() => [
         'input', {
             role: 'assignee',
@@ -251,38 +276,6 @@ export class InputElement extends ControlElement {
     })
     type: string;
 
-    @Attr({ render: false })
-    expanded: boolean;
-
-    @Attr({
-        parse(input: InputElement, value: any) {
-            if (input.type === 'number') {
-                if (value === '') {
-                    value = null;
-                } else {
-                    value = isNaN(+value) ? 0 : +value;
-                }
-            }
-            return value;
-        },
-        onUpdate(input: InputElement, value: any) {
-            if (input.type === 'file') {
-                input.empty = !value?.length || !value;
-                input.assignee.value = input.empty ? null : value;
-                if (input.validateFiles()) {
-                    input.validate();
-                }
-            } else {
-                input.empty = value === null || value === undefined || value === '';
-                input.assignee.value = value ?? null;
-                input.validate();
-            }
-        },
-        render: false,
-        reflect: false
-    })
-    value: any | File[];
-
     @Attr()
     multiple: boolean;
 
@@ -315,6 +308,17 @@ export class InputElement extends ControlElement {
 
     @Attr()
     whenFileSizeExceeds: string;
+
+    @Attr({ render: false })
+    expanded: boolean;
+
+    @Attr({
+        parse: InputElement.parseValue,
+        onUpdate: InputElement.updateValue,
+        render: false,
+        reflect: false
+    })
+    value: any | File[];
 
     fileInput: HTMLInputElement;
     unacceptableFiles: Set<File> = new Set();
@@ -394,10 +398,12 @@ export class InputElement extends ControlElement {
             }, { id: [NAME] });
 
         this.assignee
-            .on('input', (event: any) => {
-                this.value = event.target.value;
-                if (!this.dirty) {
-                    this.dirty = true;
+            .on('input', (event: InputEvent) => {
+                if (event.inputType !== 'insertCompositionText') {
+                    this.value = (event.target as InputElement).value;
+                    if (!this.dirty) {
+                        this.dirty = true;
+                    }
                 }
             }, { id: [NAME], passive: true })
             .on('focusout', () => {
