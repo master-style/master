@@ -1,10 +1,11 @@
 [class*="\@hover"] {
     transform: translateZ(0);
     transition-delay: 50ms; // improve interactions performance and experience
-    transition-duration: 0.5s;
+    transition-duration: 0.3s;
     transition-timing-function: ease;
     transition-property: none;
 }
+
 
 .\@hover {
     &:hover {
