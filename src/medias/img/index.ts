@@ -112,14 +112,16 @@ export class ImgElement extends MasterElement {
 
     @Attr({
         onUpdate(img: ImgElement, token) {
-            const splits = token.split('x');
-            const w = splits[0];
-            const h = splits[1];
-            if (w && h) {
-                img.style.setProperty('--ratio', 1 / w * h * 100 + '%')
-            } else {
-                img.style.removeProperty('--ratio');
+            if (token) {
+                const splits = token.split('x');
+                const w = splits[0];
+                const h = splits[1];
+                if (w && h) {
+                    img.style.setProperty('--ratio', 1 / w * h * 100 + '%');
+                    return;
+                }
             }
+            img.style.removeProperty('--ratio');
         }
     })
     ratio: string;
