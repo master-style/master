@@ -10,6 +10,7 @@ export class ImgElement extends MasterElement {
 
     template = new Template(() => [
         'img', {
+            role: 'img',
             part: 'master',
             src: this.src,
             srcset: this.srcset,
@@ -61,10 +62,28 @@ export class ImgElement extends MasterElement {
     })
     srcset: string;
 
-    @Attr()
+    @Attr({
+        onUpdate(img: ImgElement, value) {
+            const isNaN = Number.isNaN(+value);
+            if (value === undefined || value === null) {
+                img.style.removeProperty('width');
+            } else {
+                img.style.setProperty('width', isNaN ? value : value + 'px');
+            }
+        }
+    })
     width: number;
 
-    @Attr()
+    @Attr({
+        onUpdate(img: ImgElement, value) {
+            const isNaN = Number.isNaN(+value);
+            if (value === undefined || value === null) {
+                img.style.removeProperty('height');
+            } else {
+                img.style.setProperty('height', isNaN ? value : value + 'px');
+            }
+        }
+    })
     height: number;
 
     @Attr()
@@ -90,6 +109,20 @@ export class ImgElement extends MasterElement {
 
     @Attr()
     usemap: string;
+
+    @Attr({
+        onUpdate(img: ImgElement, token) {
+            const splits = token.split('x');
+            const w = splits[0];
+            const h = splits[1];
+            if (w && h) {
+                img.style.setProperty('--ratio', 1 / w * h * 100 + '%')
+            } else {
+                img.style.removeProperty('--ratio');
+            }
+        }
+    })
+    ratio: string;
 
     render() {
         this.template.render(this.shadowRoot);

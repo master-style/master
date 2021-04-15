@@ -20,6 +20,24 @@
     border-radius: inherit;
 }
 
+:host([style*=--ratio]) {
+
+    [part=master] {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+
+    &:after {
+        contain: strict;
+        content: '';
+        display: inline-block;
+        vertical-align: middle;
+        padding-bottom: var(--ratio);
+    }
+}
+
+
 :host([fade]) {
     will-change: opacity;
     transition: opacity .3s ease;
