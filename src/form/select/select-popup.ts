@@ -39,7 +39,6 @@ export class SelectPopupElement extends PopupElement {
             type: 'button',
             style: '--f-size: var(--f-sm); --py: 0.375rem;',
             $if: this.#keyword && !this.#matchKeyword && this.select.addable,
-            $text: this.#keyword,
             $on: {
                 click: () => {
                     this.select.addEmitter({
@@ -52,7 +51,8 @@ export class SelectPopupElement extends PopupElement {
                 style: 'color: var(--f-fade)',
                 name: 'add',
                 slot: 'head'
-            }
+            },
+            '$text', { $text: this.#keyword }
         ]
     ];
 
@@ -133,6 +133,7 @@ export class SelectPopupElement extends PopupElement {
                 if (text === keyword) {
                     this.#matchKeyword = true;
                 }
+                console.log(this.#keyword && !this.#matchKeyword && this.select.addable);
                 eachItem
                     .toggleAttribute('found', found);
             });
