@@ -4,7 +4,7 @@ import { Template } from '@master/template';
 import { ControlElement } from '../../shared/control';
 import { $ } from '@master/dom';
 import { displaySizeByBytes } from '../../utils/display-size-by-bytes';
-const changeEvent = new window.Event('change', { 'bubbles': true, 'cancelable': false });
+const changeEvent = new window.Event('change', { bubbles: true, cancelable: false });
 
 const NAME = 'input';
 

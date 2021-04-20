@@ -5,6 +5,8 @@ import { Template } from '@master/template';
 
 type elementToken = string | { [key: string]: any };
 
+const submitEvent = new window.Event('submit', { bubbles: true, cancelable: false });
+
 export class ClickableElement extends MasterElement {
 
     slotTemplate: (elementToken | (() => elementToken[]))[];
@@ -58,9 +60,12 @@ export class ClickableElement extends MasterElement {
         onUpdate(clickable: ClickableElement, value: string, oldValue: string) {
             if (value === 'submit') {
                 clickable.on('click', (event) => {
-                    const form = clickable.closest('form');
+                    const form: HTMLFormElement = clickable.closest('form');
                     let valid = true;
                     let firstInvalidControl;
+                    if (!form) {
+                        return;
+                    }
                     form.querySelectorAll('m-input,m-textarea,m-select,m-check')
                         .forEach((eachControl: ControlElement) => {
                             eachControl.dirty = true;
@@ -71,20 +76,12 @@ export class ClickableElement extends MasterElement {
                                 valid = false;
                             }
                         });
-
                     if (firstInvalidControl) {
                         firstInvalidControl
                             .scrollIntoView({ behavior: 'smooth', block: 'center' });
                     }
-
-                    if (form) {
-                        if (!valid) return;
-                        if (form.requestSubmit) {
-                            form.requestSubmit();
-                        } else {
-                            form.submit();
-                        }
-                    }
+                    if (!valid) return;
+                    form.dispatchEvent(submitEvent);
                 }, { id: [clickable], passive: true });
             } else if (
                 value !== 'submit'

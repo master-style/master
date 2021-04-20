@@ -1,6 +1,22 @@
 <h2 id="prompt">{{ 'prompt' | translate }}</h2>
+
+<div class="demo mb:no">
+    <form class="demo-body" (submit)="submit($event)" onsubmit="return false">
+        <div class="y">
+            <div class="x:4@sm">
+                <m-input class="outlined"
+                         name="key"
+                         required
+                         when-value-missing="required">
+                </m-input>
+            </div>
+        </div>
+        <m-button type="submit">submit</m-button>
+    </form>
+</div>
+
 <div class="y:xs" style="margin-top: .25rem">
-    <m-chip class="x sm" *ngFor="let eachApply of ['input','textarea','select','check']">
+    <m-chip class="x sm filled object" *ngFor="let eachApply of ['input','textarea','select','check']">
         <i class="i-box" part="head"></i>
         <code>{{ eachApply }}</code>
     </m-chip>
