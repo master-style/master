@@ -9,6 +9,8 @@
     border-radius: inherit;
     object-fit: inherit;
     object-position: inherit;
+    height: 100%;
+    width: 100%;
 }
 
 [part=skeleton] {
@@ -24,8 +26,6 @@
 
     [part=master] {
         position: absolute;
-        height: 100%;
-        width: 100%;
     }
 
     &:after {

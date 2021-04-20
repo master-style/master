@@ -14,8 +14,6 @@ export class ImgElement extends MasterElement {
             part: 'master',
             src: this.src,
             srcset: this.srcset,
-            width: this.width,
-            height: this.height,
             alt: this.alt,
             crossorigin: this.crossorigin,
             decoding: this.decoding,
@@ -70,9 +68,10 @@ export class ImgElement extends MasterElement {
             } else {
                 img.style.setProperty('width', isNaN ? value : value + 'px');
             }
-        }
+        },
+        render: false
     })
-    width: number;
+    width: string;
 
     @Attr({
         onUpdate(img: ImgElement, value) {
@@ -82,9 +81,10 @@ export class ImgElement extends MasterElement {
             } else {
                 img.style.setProperty('height', isNaN ? value : value + 'px');
             }
-        }
+        },
+        render: false
     })
-    height: number;
+    height: string;
 
     @Attr()
     alt: string;
