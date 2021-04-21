@@ -141,6 +141,7 @@
     border-radius: var(--r);
     overflow: hidden;
     background-color: var(--bg-body);
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
 }
 
 ::slotted(m-content) {
