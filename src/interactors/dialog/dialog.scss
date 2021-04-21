@@ -2,6 +2,7 @@
 
 :host {
     --max-width: var(--wrap-xxs);
+    z-index: 1070;
 }
 
 slot[name=icon]::slotted(*),
