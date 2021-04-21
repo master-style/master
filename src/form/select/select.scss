@@ -4,6 +4,7 @@
 
 
 :host {
+    --f-color: var(--select-f-color, var(--f-theme));
     --f-size: var(--select-f-size, var(--f-sm));
     --b-width: var(--select-b-width, 1px);
     --b-style: var(--select-b-style, solid);

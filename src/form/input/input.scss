@@ -3,6 +3,7 @@
 @import '../shared/output';
 
 :host {
+    --f-color: var(--input-f-color, var(--f-theme));
     --f-size: var(--input-f-size, var(--f-sm));
     --b-width: var(--input-b-width, 1px);
     --b-style: var(--input-b-style, solid);

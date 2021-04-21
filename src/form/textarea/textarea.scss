@@ -3,6 +3,7 @@
 
 
 :host {
+    --f-color: var(--textarea-f-color, var(--f-theme));
     --f-size: var(--textarea-f-size, var(--f-sm));
     --b-width: var(--textarea-b-width, 1px);
     --b-style: var(--textarea-b-style, solid);

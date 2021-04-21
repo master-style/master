@@ -10,14 +10,12 @@
    */
 
 :host {
-    --f-size: var(--input-f-size, var(--f-sm));
-    --f-color: var(--input-f-color, var(--f-theme));
+    font-size: var(--f-size);
+    color: var(--f-color);
     position: relative;
     display: inline-flex;
     align-items: flex-start;
-    font-size: var(--f-size);
     line-height: 1.2;
-    color: var(--f-theme);
     border-radius: $xs;
     max-width: 100%;
     -webkit-user-drag: none;
@@ -57,7 +55,27 @@
 }
 
 ::slotted([role=assignee]) {
-    color: var(--f-color);
+    cursor: text;
+    color: inherit;
+    border: 0;
+    font-weight: inherit;
+    -webkit-appearance: none;
+    white-space: nowrap;
+    font-family: inherit;
+    font-size: inherit;
+    text-align: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    -webkit-text-fill-color: unset; // fix safari opacity problem
+    user-select: text;
+    -webkit-user-select: text;
+    outline: none;
+    background-color: transparent;
+    -webkit-user-drag: none;
+    touch-action: manipulation;
+    -webkit-touch-action: manipulation;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 @media (any-hover: hover) {
