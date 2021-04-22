@@ -14,8 +14,8 @@
     --b-style: var(--button-b-style, solid);
     --b-color: var(--button-b-color, var(--b-fader));
     --b-color-active: var(--button-b-color-active, var(--b-fade));
-    --bg-color: var(--button-bg-color, var(--theme));
-    --bg-color-hover: var(--button-bg-color-hover, var(--theme-fade));
+    --bg-color: var(--button-bg-color, transparent);
+    --bg-color-hover: var(--button-bg-color-hover, var(--bg-overlay));
     --bg-color-disabled: var(--button-bg-color-disabled, transparent);
     display: inline-flex;
     font-size: var(--f-size);

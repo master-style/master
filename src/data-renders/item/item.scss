@@ -3,7 +3,7 @@
 
 :host {
     --bg-color: var(--item-bg-color, transparent);
-    --bg-color-hover: var(--item-bg-color-hover, var(--bg-overlay-hover));
+    --bg-color-hover: var(--item-bg-color-hover, var(--bg-overlay));
     --bg-color-disabled: var(--item-bg-color-disabled, transparent);
     --b-color-active: var(--item-b-color-active);
     --bg-disabled: var(--item-bg-disabled);

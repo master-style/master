@@ -20,7 +20,7 @@
 
     :host(.touch:hover:not([disabled]):not(.filled):not(.outlined)) {
         [part=master] {
-            background-color: var(--bg-overlay-hover);
+            background-color: var(--bg-overlay);
         }
     }
 

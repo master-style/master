@@ -141,6 +141,11 @@
     --b-color-active: var(--b-fade);
 }
 
+:host(.theme.filled) {
+    --bg-color: var(--theme);
+    --bg-color-hover: var(--theme-fade);
+}
+
 :host(.theme.outlined) {
     --f-color: var(--f-theme);
     --bg-color-head: var(--theme-fader);
