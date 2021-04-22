@@ -57,53 +57,61 @@ export class PopupElement extends TargetElement {
     @Attr({ reflect: false })
     minWidth: string;
 
+    @Attr()
+    withOverlay: boolean;
+
     activeChildPopups = new Set;
+
+    master;
 
     // arrow: SVGElement;
 
     contentTokens: any = () => [];
 
     template = new Template(() => [
-        'm-content', {
-            'scroll-y': true,
-            guide: true,
-            part: 'content',
-            $created: (element: ContentElement) => this.content = element
+        'm-overlay', {
+            $if: this.withOverlay,
+            part: 'overlay'
+        },
+        'div', {
+            part: 'master',
+            $created: (element: HTMLDivElement) => this.master = $(element)
         }, [
-            'slot', {
-                $created: (element) => element.on('slotchange', (event) => {
-                    const onSlotChange = this['onSlotChange'];
-                    if (onSlotChange) {
-                        onSlotChange.call(this, event);
-                    }
-                })
-            },
-            ...this.contentTokens(),
-            // 'div', {
-            //     slot: 'part',
-            //     part: 'arrow',
-            //     $created: (element: SVGAElement) => this.arrow = element
-            // }, [
-            //     'svg', {
-            //         part: 'arrow-icon',
-            //         height: 10,
-            //         viewBox: '0 0 64 20',
-            //         $namespace: 'http://www.w3.org/2000/svg',
-            //         $html: '<g transform="matrix(1.04009,0,0,1.45139,-1.26297,-65.9145)"><path d="M1.214,59.185C1.214,59.185 12.868,59.992 21.5,51.55C29.887,43.347 33.898,43.308 42.5,51.55C51.352,60.031 62.747,59.185 62.747,59.185L1.214,59.185Z"></path></g>'
-            //     }
-            // ]
+            'm-content', {
+                'scroll-y': true,
+                guide: true,
+                part: 'content',
+                $created: (element: ContentElement) => this.content = element
+            }, [
+                'slot', {
+                    $created: (element) => element.on('slotchange', (event) => {
+                        const onSlotChange = this['onSlotChange'];
+                        if (onSlotChange) {
+                            onSlotChange.call(this, event);
+                        }
+                    })
+                },
+                ...this.contentTokens(),
+                // 'div', {
+                //     slot: 'part',
+                //     part: 'arrow',
+                //     $created: (element: SVGAElement) => this.arrow = element
+                // }, [
+                //     'svg', {
+                //         part: 'arrow-icon',
+                //         height: 10,
+                //         viewBox: '0 0 64 20',
+                //         $namespace: 'http://www.w3.org/2000/svg',
+                //         $html: '<g transform="matrix(1.04009,0,0,1.45139,-1.26297,-65.9145)"><path d="M1.214,59.185C1.214,59.185 12.868,59.992 21.5,51.55C29.887,43.347 33.898,43.308 42.5,51.55C51.352,60.031 62.747,59.185 62.747,59.185L1.214,59.185Z"></path></g>'
+                //     }
+                // ]
+            ]
         ]
     ]);
 
-    protected handleTrigger(event, whether) {
-        if (!whether) {
-            if (
-                !isInteractOutside(this.trigger, event) ||
-                !isInteractOutside(this.content, event, this.distance)
-            ) {
-                return false;
-            }
-        }
+    protected triggerBefore(event) {
+        return !(!isInteractOutside(this.trigger, event)
+            || !isInteractOutside(this.content, event, this.distance))
     }
 
     private determineClose = (event: any) => {
@@ -125,9 +133,9 @@ export class PopupElement extends TargetElement {
         const windowHeight = window.innerHeight;
         const bottomDistance = windowHeight - (rect.y + rect.height);
         const topDistance = rect.y;
-        this.css('maxHeight', (topDistance < bottomDistance ? bottomDistance : topDistance) - this.distance - 10);
+        this.master.css('maxHeight', (topDistance < bottomDistance ? bottomDistance : topDistance) - this.distance - 10);
         if (this.minWidth === 'trigger') {
-            this.css('minWidth', rect.width);
+            this.master.css('minWidth', rect.width);
         }
     }
 
@@ -184,11 +192,11 @@ export class PopupElement extends TargetElement {
                         getBoundingClientRect: generateGetBoundingClientRect(this.currentEvent.clientX, this.currentEvent.clientY),
                     };
                     distance = 0;
-                    this.popper = createPopper(virtualElement, this, {
+                    this.popper = createPopper(virtualElement, this.master, {
                         ...getPopperOptions()
                     });
                 } else {
-                    this.popper = createPopper(this.trigger, this, {
+                    this.popper = createPopper(this.trigger, this.master, {
                         ...getPopperOptions()
                     });
                 }

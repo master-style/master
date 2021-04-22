@@ -1,40 +1,53 @@
 @import '../../variables';
 
 :host {
-    --popup-offset-top: .375rem;
-    --popup-offset-bottom: .375rem;
+    --overlay-bg-color: var(--popup-overlay-bg-color, transparent);
+    --content-offset-top: var(--popup-content-offset-top, .375rem);
+    --content-offset-bottom: var(--popup-content-offset-bottom, .375rem);
+    --bg-color: var(--popup-bg-color, rgba(var(--bg-object-rgb), .8));
+    --box-shadow: var(--popup-box-shadow,
+            0 0.5px 0.8px rgba(0, 0, 0, 0.017),
+            0 1.3px 1.9px rgba(0, 0, 0, 0.024),
+            0 2.4px 3.6px rgba(0, 0, 0, 0.03),
+            0 4.2px 6.5px rgba(0, 0, 0, 0.036),
+            0 7.9px 12.1px rgba(0, 0, 0, 0.043),
+            0 19px 29px rgba(0, 0, 0, 0.06),
+            0 -4.2px 6.5px rgba(0, 0, 0, 0.036));
+    display: contents;
+}
+
+[part=overlay] {
+    --bg-color: var(--overlay-bg-color);
+    position: fixed;
+    z-index: $z-top;
+}
+
+[part=master] {
     z-index: $z-top;
 }
 
 [part=content] {
-    --content-offset-top: var(--popup-offset-top);
-    --content-offset-bottom: var(--popup-offset-bottom);
-    border-radius: $xs;
-    background-color: rgba(var(--bg-object-rgb), .8);
-    backdrop-filter: blur(35px);
-    -webkit-backdrop-filter: blur(35px);
+    --offset-top: var(--content-offset-top);
+    --offset-bottom: var(--content-offset-bottom);
 
     // fix safari ui
-    &:after {
+    &:before {
         position: absolute;
         top: 0;
         left: 0;
         pointer-events: none;
         box-sizing: border-box;
         content: '';
+        contain: strict;
         border: 1px solid var(--b-fadest);
-
+        box-shadow: var(--box-shadow);
         display: block;
         width: 100%;
         height: 100%;
-        border-radius: inherit;
-        box-shadow: 0 0.5px 0.8px rgba(0, 0, 0, 0.017),
-            0 1.3px 1.9px rgba(0, 0, 0, 0.024),
-            0 2.4px 3.6px rgba(0, 0, 0, 0.03),
-            0 4.2px 6.5px rgba(0, 0, 0, 0.036),
-            0 7.9px 12.1px rgba(0, 0, 0, 0.043),
-            0 19px 29px rgba(0, 0, 0, 0.06),
-            0 -4.2px 6.5px rgba(0, 0, 0, 0.036);
+        border-radius: $xs;
+        background-color: var(--bg-color);
+        backdrop-filter: blur(35px);
+        -webkit-backdrop-filter: blur(35px);
     }
 }
 

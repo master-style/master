@@ -37,9 +37,9 @@ export class TargetElement extends MasterElement {
             if (value) {
                 const toggleAttrKey = 'toggle-' + name;
                 const typeSets = value.split(',');
-                const handleTrigger = target['handleTrigger'];
+                const triggerBefore = target['triggerBefore'];
                 const typeSet = new Set<string>(typeSets.join(' ').split(' '));
-                const handle =  function (event: Event) {
+                const handle = function (event: Event) {
                     const trigger = this;
                     if (this.disabled) {
                         return;
@@ -58,7 +58,7 @@ export class TargetElement extends MasterElement {
                         ) {
                             return;
                         }
-                        if (handleTrigger && handleTrigger.call(target, event, whether) === false) {
+                        if (!whether && triggerBefore && !triggerBefore.call(target, event)) {
                             return;
                         }
                     } else {

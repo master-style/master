@@ -1,4 +1,4 @@
-import { Element, MasterElement, Attr, attrEnabled, Event, EventEmitter } from '@master/element';
+import { Element, MasterElement, Attr, attrEnabled } from '@master/element';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { ContentElement } from '../../layout/content';
 import { HeaderElement } from '../../layout/header';
@@ -88,6 +88,7 @@ export class ModalElement extends TargetElement {
     @Attr({ reflect: false })
     hideTrigger: boolean;
 
+    // 'static', 'close', 'none'
     @Attr({
         reflect: false,
         onUpdate(modal: ModalElement, value: string, oldValue: string) {
