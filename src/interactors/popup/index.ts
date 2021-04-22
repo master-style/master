@@ -120,7 +120,6 @@ export class PopupElement extends TargetElement {
         if (this.animation || this.activeChildPopups.size) {
             return;
         }
-        console.log('幹');
         if (
             this.withOverlay ? true : isInteractOutside(this.trigger, event)
                 && isInteractOutside(this.content, event, this.distance)
