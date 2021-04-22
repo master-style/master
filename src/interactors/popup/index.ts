@@ -21,6 +21,7 @@ import { TargetElement } from '../../shared/target';
 import debounce from '../../utils/debounce';
 
 const $body = $(document.body);
+const $html = $(document.documentElement);
 const NAME = 'popup';
 const lockedPopup = new Set();
 
@@ -224,11 +225,11 @@ export class PopupElement extends TargetElement {
         if (this.popper) {
             if (this.closeOn) {
                 if (this.closeOn.indexOf('move:outside') !== -1) {
-                    $body
+                    $html
                         .on('mousemove', this.whetherToClose, { passive: true });
                 }
                 if (this.closeOn.indexOf('click:outside') !== -1) {
-                    $body
+                    $html
                         .on('click', this.whetherToClose, { passive: true });
                 }
             }
@@ -286,7 +287,7 @@ export class PopupElement extends TargetElement {
     onClosed() {
         if (this.popper) {
             this.popper = this.popper.destroy();
-            $($body).off(this.whetherToClose);
+            $($html).off(this.whetherToClose);
         }
     }
 

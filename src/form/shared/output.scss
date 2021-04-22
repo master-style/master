@@ -35,8 +35,6 @@
     padding: 0;
     margin: .28125rem .375rem;
     white-space: nowrap;
-    outline: none;
-    -webkit-user-modify: read-write-plaintext-only;
 }
 
 :host(.underlined) {
@@ -57,6 +55,13 @@
             margin-right: .375rem;
         }
     }
+}
+
+[contenteditable] {
+    outline: none;
+    -webkit-user-modify: read-write-plaintext-only;
+    user-select: text;
+    cursor: text;
 }
 
 [aria-placeholder]:empty:before {
