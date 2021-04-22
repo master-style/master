@@ -110,17 +110,20 @@ export class PopupElement extends TargetElement {
     ]);
 
     protected triggerBefore(event) {
-        return !(!isInteractOutside(this.trigger, event)
-            || !isInteractOutside(this.content, event, this.distance))
+        return !(
+            !isInteractOutside(this.trigger, event) ||
+            !isInteractOutside(this.content, event, this.distance)
+        )
     }
 
-    private determineClose = (event: any) => {
+    private whetherToClose = (event: any) => {
         if (this.animation || this.activeChildPopups.size) {
             return;
         }
+        console.log('幹');
         if (
-            isInteractOutside(this.trigger, event) &&
-            isInteractOutside(this.content, event, this.distance)
+            this.withOverlay ? true : isInteractOutside(this.trigger, event)
+                && isInteractOutside(this.content, event, this.distance)
         ) {
             this.close();
         }
@@ -208,12 +211,12 @@ export class PopupElement extends TargetElement {
         if (this.popper) {
             if (this.closeOn && this.closeOn.indexOf('mouseout') !== -1) {
                 $body
-                    .on('mousemove', this.determineClose, { passive: true });
+                    .on('mousemove', this.whetherToClose, { passive: true });
             }
 
             if (this.closeOn && this.closeOn.indexOf('click:outside') !== -1) {
                 $body
-                    .on('mousedown click', this.determineClose, { passive: true });
+                    .on('click', this.whetherToClose, { passive: true });
             }
 
             if (!this.#resizeObserver && !this.followCursor) {
@@ -257,7 +260,7 @@ export class PopupElement extends TargetElement {
     onClosed() {
         if (this.popper) {
             this.popper = this.popper.destroy();
-            $($body).off(this.determineClose);
+            $($body).off(this.whetherToClose);
         }
     }
 
