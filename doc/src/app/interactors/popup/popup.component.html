@@ -5,11 +5,9 @@
 </m-button>
 
 <m-popup id="popup"
-         trigger-event="click contextmenu,click"
-         follow-cursor
+         trigger-event="mouseover,click mouseout"
          placement="bottom-start"
-         close-on="click:outside"
-         with-overlay
+         close-on="click:outside move:outside"
          hidden>
     <m-item class="sm indent-lined">
         <img slot="head" src="assets/images/ios-icons/airplane.svg">

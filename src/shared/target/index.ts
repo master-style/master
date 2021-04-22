@@ -37,8 +37,9 @@ export class TargetElement extends MasterElement {
             if (value) {
                 const toggleAttrKey = 'toggle-' + name;
                 const typeSets = value.split(',');
+                const openingTypes = typeSets[0]?.trim()?.split(' ');
+                const closingTypes = typeSets[1]?.trim()?.split(' ');
                 const triggerBefore = target['triggerBefore'];
-                const typeSet = new Set<string>(typeSets.join(' ').split(' '));
                 const handle = function (event: Event) {
                     const trigger = this;
                     if (this.disabled) {
@@ -50,21 +51,22 @@ export class TargetElement extends MasterElement {
                     }
                     const eventType = event.type;
                     let whether: boolean;
-                    if (typeSets.length > 1) {
+                    if (typeSets.length) {
                         whether = target.hidden;
+                        console.log(event.type);
                         if (
-                            whether && typeSets[0].split(' ').indexOf(eventType) === -1
-                            || !whether && typeSets[1].split(' ').indexOf(eventType) === -1
+                            whether && openingTypes.indexOf(eventType) === -1 ||
+                            !whether && closingTypes.indexOf(eventType) === -1
                         ) {
                             return;
                         }
-                        if (!whether && triggerBefore && !triggerBefore.call(target, event)) {
+                        if (!(triggerBefore && triggerBefore.call(target, event, trigger, whether))) {
                             return;
                         }
                     } else {
                         if (
-                            'checked' in trigger
-                            && (eventType === 'input' || eventType === 'change')
+                            'checked' in trigger &&
+                            (eventType === 'input' || eventType === 'change')
                         ) {
                             whether = !!trigger.checked;
                         } else {
@@ -77,8 +79,12 @@ export class TargetElement extends MasterElement {
                     target.currentEvent = event;
                     target.toggle(whether);
                 };
+                const typeSet = new Set<string>(typeSets.join(' ').split(' '));
                 for (const eachTypeSet of typeSet) {
-                    const options: ListenerOptions = { passive: true, id: [target, name] };
+                    const options: ListenerOptions = {
+                        passive: true,
+                        id: [target, name]
+                    };
                     if (eachTypeSet.includes('contextmenu')) {
                         options.passive = false;
                         $body

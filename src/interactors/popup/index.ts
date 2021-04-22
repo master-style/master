@@ -109,11 +109,14 @@ export class PopupElement extends TargetElement {
         ]
     ]);
 
-    protected triggerBefore(event) {
-        return !(
-            !isInteractOutside(this.trigger, event) ||
-            !isInteractOutside(this.content, event, this.distance)
-        )
+    protected triggerBefore(event, trigger, whether) {
+        if (!whether && event.type === 'mouseout') {
+            return !(
+                !isInteractOutside(trigger, event) ||
+                !isInteractOutside(this.master, event, this.distance)
+            )
+        }
+        return true;
     }
 
     private whetherToClose = (event: any) => {
@@ -121,8 +124,8 @@ export class PopupElement extends TargetElement {
             return;
         }
         if (
-            this.withOverlay ? true : isInteractOutside(this.trigger, event)
-                && isInteractOutside(this.content, event, this.distance)
+            isInteractOutside(this.trigger, event)
+            // && isInteractOutside(this.master, event, this.distance)
         ) {
             this.close();
         }
@@ -131,7 +134,6 @@ export class PopupElement extends TargetElement {
     updateSize(
         rect: DOMRect = this.trigger.getBoundingClientRect()
     ) {
-        console.log(rect);
         const windowHeight = window.innerHeight;
         const bottomDistance = windowHeight - (rect.y + rect.height);
         const topDistance = rect.y;
@@ -208,14 +210,15 @@ export class PopupElement extends TargetElement {
 
     onOpened() {
         if (this.popper) {
-            if (this.closeOn && this.closeOn.indexOf('mouseout') !== -1) {
-                $body
-                    .on('mousemove', this.whetherToClose, { passive: true });
-            }
-
-            if (this.closeOn && this.closeOn.indexOf('click:outside') !== -1) {
-                $body
-                    .on('click', this.whetherToClose, { passive: true });
+            if (this.closeOn) {
+                if (this.closeOn.indexOf('move:outside') !== -1) {
+                    $body
+                        .on('mousemove', this.whetherToClose, { passive: true });
+                }
+                if (this.closeOn.indexOf('click:outside') !== -1) {
+                    $body
+                        .on('click', this.whetherToClose, { passive: true });
+                }
             }
 
             if (!this.#resizeObserver && !this.followCursor) {
