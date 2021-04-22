@@ -53,14 +53,14 @@ export class TargetElement extends MasterElement {
                     let whether: boolean;
                     if (typeSets.length) {
                         whether = target.hidden;
-                        console.log(event.type);
+                        console.log('幹');
                         if (
                             whether && openingTypes.indexOf(eventType) === -1 ||
                             !whether && closingTypes.indexOf(eventType) === -1
                         ) {
                             return;
                         }
-                        if (!(triggerBefore && triggerBefore.call(target, event, trigger, whether))) {
+                        if (triggerBefore && !triggerBefore.call(target, event, trigger, whether)) {
                             return;
                         }
                     } else {

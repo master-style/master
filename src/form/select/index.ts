@@ -233,6 +233,7 @@ export class SelectElement extends ControlElement {
                     multiple: this.multiple,
                     placement: this.placement,
                     hidden: true,
+                    'will-lock': true,
                     'min-width': 'trigger'
                 });
                 this.popup.select = this;

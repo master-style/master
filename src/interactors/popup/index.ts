@@ -22,6 +22,7 @@ import debounce from '../../utils/debounce';
 
 const $body = $(document.body);
 const NAME = 'popup';
+const lockedPopup = new Set();
 
 @Element('m-' + NAME)
 export class PopupElement extends TargetElement {
@@ -59,6 +60,9 @@ export class PopupElement extends TargetElement {
 
     @Attr()
     withOverlay: boolean;
+
+    @Attr()
+    willLock: boolean;
 
     activeChildPopups = new Set;
 
@@ -125,7 +129,7 @@ export class PopupElement extends TargetElement {
         }
         if (
             isInteractOutside(this.trigger, event)
-            // && isInteractOutside(this.master, event, this.distance)
+            && isInteractOutside(this.master, event, this.distance)
         ) {
             this.close();
         }
@@ -157,6 +161,14 @@ export class PopupElement extends TargetElement {
 
         activate(this.trigger.parentNode as PopupElement);
         this.updateSize();
+
+        if (this.willLock) {
+            if (!lockedPopup.size) {
+                document.body.classList.add('locked-by-popup');
+            }
+            lockedPopup.add(this);
+            this.trigger?.classList.add('unlocked-by-popup');
+        }
 
         if (!this.popper) {
             await new Promise((resolve) => {
@@ -251,6 +263,18 @@ export class PopupElement extends TargetElement {
         };
 
         deactivate(this.trigger.parentNode as PopupElement);
+
+        // resolve [willLock] changed during opening
+        if (lockedPopup.size) {
+            lockedPopup.delete(this);
+        }
+
+        if (this.willLock) {
+            if (!lockedPopup.size) {
+                document.body.classList.remove('locked-by-popup');
+            }
+            this.trigger?.classList.remove('unlocked-by-popup');
+        }
 
         if (this.#resizeObserver) {
             this.#resizeObserver.unobserve(this.content);

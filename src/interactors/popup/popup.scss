@@ -1,7 +1,7 @@
 @import '../../variables';
 
 :host {
-    --overlay-bg-color: var(--popup-overlay-bg-color, transparent);
+    --overlay-bg-color: var(--popup-overlay-bg-color, rgba(0, 0, 0, .3));
     --content-offset-top: var(--popup-content-offset-top, .375rem);
     --content-offset-bottom: var(--popup-content-offset-bottom, .375rem);
     --bg-color: var(--popup-bg-color, rgba(var(--bg-object-rgb), .8));
@@ -14,6 +14,10 @@
             0 19px 29px rgba(0, 0, 0, 0.06),
             0 -4.2px 6.5px rgba(0, 0, 0, 0.036));
     display: contents;
+}
+
+:host([will-lock]) {
+    pointer-events: auto !important;
 }
 
 [part=overlay] {

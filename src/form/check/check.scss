@@ -50,7 +50,6 @@
 }
 
 :host([type=radio][checked]) {
-    pointer-events: none;
 
     [part=check] {
         background-color: transparent;
