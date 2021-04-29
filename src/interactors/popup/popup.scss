@@ -35,6 +35,8 @@
 [part=content] {
     --offset-top: var(--content-offset-top);
     --offset-bottom: var(--content-offset-bottom);
+    backdrop-filter: blur(35px);
+    -webkit-backdrop-filter: blur(35px);
 
     // fix safari ui
     &:before {
@@ -52,8 +54,6 @@
         height: 100%;
         border-radius: $xs;
         background-color: var(--bg-color);
-        backdrop-filter: blur(35px);
-        -webkit-backdrop-filter: blur(35px);
     }
 }
 
