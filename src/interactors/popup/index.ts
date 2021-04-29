@@ -56,9 +56,6 @@ export class PopupElement extends TargetElement {
     @Attr({ reflect: false })
     closeOn = 'click:outside';
 
-    @Attr({ reflect: false })
-    minWidth: string;
-
     @Attr()
     withOverlay: boolean;
 
@@ -143,9 +140,7 @@ export class PopupElement extends TargetElement {
         const bottomDistance = windowHeight - (rect.y + rect.height);
         const topDistance = rect.y;
         this.master.css('maxHeight', (topDistance < bottomDistance ? bottomDistance : topDistance) - this.distance - 10);
-        if (this.minWidth === 'trigger') {
-            this.master.css('minWidth', rect.width);
-        }
+        this.style.setProperty('--trigger-width', rect.width + 'px');
     }
 
     async onOpen() {
