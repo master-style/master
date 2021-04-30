@@ -5,6 +5,7 @@
     --content-offset-top: var(--popup-content-offset-top, .375rem);
     --content-offset-bottom: var(--popup-content-offset-bottom, .375rem);
     --min-width: var(--popup-min-width, var(--trigger-size));
+    --max-width: var(--popup-max-width, none);
     --bg-color: var(--popup-bg-color, rgba(var(--bg-object-rgb), .8));
     --box-shadow: var(--popup-box-shadow,
             0 0.5px 0.8px rgba(0, 0, 0, 0.017),
@@ -30,6 +31,7 @@
 [part=master] {
     z-index: $z-top;
     min-width: var(--min-width);
+    max-width: var(--max-width);
 }
 
 [part=content] {
