@@ -24,7 +24,8 @@
     border-radius: inherit;
 }
 
-:host([style*=--ratio]) {
+:host([ratio]) {
+    width: 100%;
 
     [part=master] {
         position: absolute;
