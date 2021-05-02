@@ -1,7 +1,8 @@
 @import '../../variables';
 
 :host {
-    contain: style paint;
+    position: relative;
+    contain: style;
     display: inline-flex;
     border-radius: $xxs;
     height: 100%;

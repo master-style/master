@@ -108,3 +108,5 @@ export class AppComponent implements OnInit {
     }
 
 }
+
+document.addEventListener("touchstart", function() {},false);

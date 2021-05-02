@@ -62,11 +62,9 @@
 }
 
 @media (any-hover: hover) {
-
     :host(.touch:hover:not([disabled])) {
         color: var(--f-color-hover);
     }
-
 }
 
 :host(.filled\@active[active]) {
