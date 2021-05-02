@@ -6,7 +6,7 @@
     --side-min-width: var(--footer-side-min-width, var(--size));
     width: 100%;
     min-height: var(--size);
-    top: 0;
+    bottom: 0;
     text-align: center;
     text-align-last: center;
     @include bgBlur(var(--bg-raise-rgb), .8);
