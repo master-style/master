@@ -24,13 +24,11 @@
     bottom: 0;
     margin: auto;
     border-radius: inherit;
-    height: 100%;
     width: 100%;
     background-color: rgba(var(--bg-skeleton-rgb), .05);
 }
 
 :host(.animated) {
-    position: relative;
 
     [part=bg] {
         background-color: transparent;
