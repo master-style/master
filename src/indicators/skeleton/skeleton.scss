@@ -5,7 +5,6 @@
     contain: style;
     display: inline-flex;
     border-radius: $xxs;
-    height: 100%;
     width: 100%;
     pointer-events: none;
     user-select: none;
@@ -24,6 +23,7 @@
     bottom: 0;
     margin: auto;
     border-radius: inherit;
+    height: 100%;
     width: 100%;
     background-color: rgba(var(--bg-skeleton-rgb), .05);
 }
