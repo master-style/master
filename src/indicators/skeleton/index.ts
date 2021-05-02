@@ -18,14 +18,30 @@ export class SkeletonElement extends MasterElement {
     ]);
 
     @Attr({
-        onUpdate(this: SkeletonElement, value: number) {
-            this.css('width', value);
-        }
+        onUpdate(img: SkeletonElement, value) {
+            const isNaN = Number.isNaN(+value);
+            if (value === undefined || value === null) {
+                img.style.removeProperty('width');
+            } else {
+                img.style.setProperty('width', isNaN ? value : value + 'px');
+            }
+        },
+        render: false
     })
-    width: number;
+    width: string;
 
-    @Attr()
-    height: number;
+    @Attr({
+        onUpdate(img: SkeletonElement, value) {
+            const isNaN = Number.isNaN(+value);
+            if (value === undefined || value === null) {
+                img.style.removeProperty('height');
+            } else {
+                img.style.setProperty('height', isNaN ? value : value + 'px');
+            }
+        },
+        render: false
+    })
+    height: string;
 
     render() {
         this.template.render(this.shadowRoot);
