@@ -1,4 +1,6 @@
 version: 2
+orbs:
+  discord: teka23/discord@0.0.1
 
 jobs:
   pack & release:
