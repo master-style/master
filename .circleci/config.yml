@@ -1,11 +1,11 @@
-version: 2
-orbs:
-  discord: teka23/discord@0.0.1
+version: 2.1
+# orbs:
+#   discord: teka23/discord@0.0.1
 
 jobs:
   pack & release:
     docker:
-      - image: 'circleci/node:latest'
+      - image: 'circleci/node:12'
     steps:
       - checkout
       - run:
@@ -17,9 +17,9 @@ jobs:
       - run:
           name: semantic release
           command: npm run semantic-release || true
-      - discord/status:
-          success_message: ""
-          webhook: "https://discord.com/api/webhooks/837290183144767499/_HprDZweWYyWctm9uF04WZEpOWszc4X8Qxz0Wbn2q6YPLVI8Mf_cyR2exp7nlmw3tnpo"
+      # - discord/status:
+      #     success_message: ""
+      #     webhook: "https://discord.com/api/webhooks/837290183144767499/_HprDZweWYyWctm9uF04WZEpOWszc4X8Qxz0Wbn2q6YPLVI8Mf_cyR2exp7nlmw3tnpo"
   # deploy-document:
   #   docker:
   #     - image: 'circleci/node:12.16'
