@@ -12,7 +12,7 @@
     --b-color: var(--chip-b-color, var(--b-fader));
     --bg-color: var(--chip-bg-color, transparent);
     --bg-color-hover: var(--chip-bg-color-hover, var(--bg-overlay));
-    --bg-color-head: var(--chip-bg-color-head);
+    --bg-color-head: var(--chip-bg-color-head, transparent);
     --bg-color-disabled: var(--chip-bg-color-disabled, transparent);
     --radius: var(--chip-radius, #{$xs});
     --size: var(--chip-size, 2rem);
@@ -92,11 +92,6 @@ slot {
     justify-content: center;
     contain: layout style;
 
-    /* for IOS safari */
-    @supports (-webkit-overflow-scrolling: touch) {
-        mask-image: radial-gradient(circle, black, black);
-        -webkit-mask-image: -webkit-radial-gradient(circle, black, black);
-    }
 }
 
 ::slotted([part=head]),
