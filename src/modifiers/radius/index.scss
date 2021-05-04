@@ -12,6 +12,12 @@
 
 .rounded {
     border-radius: 10000000000000000000rem !important;
+
+    /* for IOS safari */
+    @supports (-webkit-overflow-scrolling: touch) {
+        mask-image: radial-gradient(circle, black, black);
+        -webkit-mask-image: -webkit-radial-gradient(circle, black, black);
+    }
 }
 
 .round {

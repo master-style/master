@@ -52,6 +52,12 @@ slot {
 :host(.rounded) {
     border-radius: inherit;
 
+    /* for IOS safari */
+    @supports (-webkit-overflow-scrolling: touch) {
+        mask-image: radial-gradient(circle, black, black);
+        -webkit-mask-image: -webkit-radial-gradient(circle, black, black);
+    }
+
     ::slotted([part=head]),
     ::slotted([part=foot]),
     ::slotted([part=close]) {
