@@ -83,7 +83,8 @@ module.exports = env => {
         output: {
             path: path.resolve('./dist'),
             clean: true,
-            libraryTarget: 'umd'
+            libraryTarget: 'umd',
+            globalObject: 'this'
         },
         plugins: [
             new Webpack.ProgressPlugin(),
