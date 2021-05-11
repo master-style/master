@@ -1,4 +1,4 @@
-import { Element, Attr, Prop } from '@master/element';
+import { Element, Attr, Prop, attrEnabled, MasterElement } from '@master/element';
 import { ModalElement } from '../modal';
 import css from './dialog.scss';
 import { Template } from '@master/template';
@@ -28,70 +28,73 @@ export class DialogElement extends ModalElement {
             slot: 'icon',
             $html: this.icon ? (this.iconOnBusy || this.icon) : this.icon
         },
-        'article', {
-            $if: this.body,
-            slot: 'body',
-            class: 'prose',
-            $html: this.body ? (this.bodyOnBusy || this.body) : this.body
-        },
         'div', {
             $if: this.controls.length,
-            slot: 'controls',
             class: 'y',
-        }, this.controls,
-        'div', {
-            part: 'foot'
-        }, [
-            'm-button', this.cancelButton,
-            'm-button', this.rejectButton,
-            'm-button', this.acceptButton
-        ]
+        }, this.controls
     ]);
 
-    contentTokens = () => [
-        'm-icon', {
-            class: 'animated',
-            $if: this.type,
-            part: 'icon',
-            name: TYPE_ICON[this.type]
-        },
-        'slot', {
-            $if: this.icon,
-            name: 'icon'
-        },
-        'h2', {
-            $if: this.title,
-            part: 'title',
-            $text: this.busy ? (this.titleOnBusy || this.title) : this.title
-        },
-        'p', {
-            $if: this.text,
-            part: 'text',
-            $text: this.busy ? (this.textOnBusy || this.text) : this.text
-        },
-        'slot', {
-            name: 'body',
-            $if: this.body,
-            $text: this.busy ? (this.bodyOnBusy || this.body) : this.body
+    template = new Template(() => [
+        'm-overlay', {
+            part: 'overlay',
+            $if: attrEnabled(this.overlay),
+            $created: (element: MasterElement) => this.overlayElement = element
         },
         'form', {
-            part: 'form',
-            $created: (element) => this.form = element
-                .on('submit', (event) => {
-                    console.log(event);
-                    event.preventDefault();
-                })
+            part: 'master',
+            $created: (element) => this.master = element
+                .on('submit', (event) => event.preventDefault())
         }, [
-            'slot', {
-                name: 'controls'
-            }
-        ],
-    ]
+            'div', {
+                part: 'body'
+            }, [
+                'm-icon', {
+                    class: 'animated',
+                    $if: this.type,
+                    part: 'icon',
+                    name: TYPE_ICON[this.type]
+                },
+                'slot', {
+                    $if: this.icon,
+                    name: 'icon'
+                },
+                'h2', {
+                    $if: this.title,
+                    part: 'title',
+                    $text: this.busy ? (this.titleOnBusy || this.title) : this.title
+                },
+                'p', {
+                    $if: this.text,
+                    part: 'text',
+                    $text: this.busy ? (this.textOnBusy || this.text) : this.text
+                },
+                'slot', {
+                    $created: (element: HTMLElement) => this.wrap = element
+                }
+            ],
+            'div', {
+                part: 'foot'
+            }, [
+                'm-button', this.cancelButton,
+                'm-button', this.rejectButton,
+                'm-button', this.acceptButton
+            ],
+            'm-button', {
+                part: 'close',
+                class: 'round xs',
+                $if: this.closeButton,
+                $created: (element: MasterElement) => this.closeElement = element,
+            }, [
+                'm-icon', { name: this.closeButton, direction: 'left' }
+            ]
+        ]
+    ]);
 
     _hidden: boolean = true;
     _duration: number = 300;
     _placement: string = 'center';
-    form: HTMLFormElement;
+
+    master: HTMLFormElement;
 
     onAccept: () => Promise<boolean> | boolean;
     onReject: () => Promise<boolean> | boolean;
@@ -150,12 +153,6 @@ export class DialogElement extends ModalElement {
     };
 
     @Prop()
-    body: string;
-
-    @Prop()
-    bodyOnBusy: string;
-
-    @Prop()
     type: string;
 
     @Prop()
@@ -176,7 +173,7 @@ export class DialogElement extends ModalElement {
         const value = {};
         let valid = true;
         Array.from(
-            this.form
+            this.master
                 .querySelectorAll('m-input,m-select,m-textarea,m-check')
 
         )

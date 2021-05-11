@@ -15,12 +15,6 @@ const PX = 'px';
 export class ModalElement extends TargetElement {
     static css = css;
 
-    contentTokens: any = () => [
-        'slot', {
-            $created: (element: HTMLElement) => this.wrap = element
-        }
-    ]
-
     template = new Template(() => [
         'm-overlay', {
             part: 'overlay',
@@ -31,7 +25,9 @@ export class ModalElement extends TargetElement {
             part: 'master',
             $created: (element: MasterElement) => this.master = element
         }, [
-            ...this.contentTokens(),
+            'slot', {
+                $created: (element: HTMLElement) => this.wrap = element
+            },
             'm-button', {
                 part: 'close',
                 class: 'round xs',

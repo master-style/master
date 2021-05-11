@@ -7,7 +7,7 @@
 
 slot[name=icon]::slotted(*),
 [part=icon] {
-    margin: 2.875rem auto 0 auto;
+    margin: 0 auto;
     font-size: 4rem;
     border-radius: 50%;
 }
@@ -26,27 +26,18 @@ slot[name=icon]::slotted(*),
 [part=title] {
     text-align: center;
     font-weight: 500;
-    margin: 2.5rem 2rem;
+    margin-top: 1rem;
     font-size: 1.875rem;
-
-    ~[part=text],
-    ~slot[name=body]::slotted([slot=body]) {
-        margin-top: -1.5rem !important;
-        padding-top: 0 !important;
-    }
-
-    +[part=form] {
-        margin-top: -2.5rem;
-    }
 }
 
-[part=form] {
+[part=body] {
+    display: block;
     padding: 2rem;
 }
 
 [part=text] {
     text-align: center;
-    margin: 2rem;
+    margin-top: 1rem;
     color: var(--f-theme-fader);
     font-size: var(--f-sm);
     line-height: 1.5;
@@ -55,10 +46,6 @@ slot[name=icon]::slotted(*),
 [part=icon]+[part=title],
 slot[name=icon]+[part=title] {
     margin-top: 1.5rem;
-}
-
-slot[name=body]::slotted([slot=body]) {
-    padding: 2rem !important;
 }
 
 [part=foot] {
