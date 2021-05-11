@@ -33,7 +33,19 @@ export class DialogElement extends ModalElement {
             slot: 'body',
             class: 'prose',
             $html: this.body ? (this.bodyOnBusy || this.body) : this.body
-        }
+        },
+        'div', {
+            $if: this.controls.length,
+            slot: 'controls',
+            class: 'y',
+        }, this.controls,
+        'div', {
+            part: 'foot'
+        }, [
+            'm-button', this.cancelButton,
+            'm-button', this.rejectButton,
+            'm-button', this.acceptButton
+        ]
     ]);
 
     contentTokens = () => [
@@ -70,18 +82,9 @@ export class DialogElement extends ModalElement {
                     event.preventDefault();
                 })
         }, [
-            'div', {
-                $if: this.controls.length,
-                part: 'controls',
-                class: 'y',
-            }, this.controls,
-            'div', {
-                part: 'foot'
-            }, [
-                'm-button', this.cancelButton,
-                'm-button', this.rejectButton,
-                'm-button', this.acceptButton
-            ]
+            'slot', {
+                name: 'controls'
+            }
         ],
     ]
 

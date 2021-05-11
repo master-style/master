@@ -40,25 +40,8 @@ slot[name=icon]::slotted(*),
     }
 }
 
-[part=form]:not(:first-of-type) {
-    margin-top: -2rem;
-}
-
-[part=controls] {
-    display: flex;
-    flex-direction: column;
+[part=form] {
     padding: 2rem;
-    margin: -.5rem;
-}
-
-[part=controls] {
-
-    m-input,
-    m-button,
-    m-textarea,
-    m-select {
-        margin: .5rem;
-    }
 }
 
 [part=text] {
