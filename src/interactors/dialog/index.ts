@@ -167,24 +167,18 @@ export class DialogElement extends ModalElement {
 
     lastAction: string;
 
-    private get data() {
+    private get value() {
         const value = {};
-        let valid = true;
         Array.from(
             this.master
                 .querySelectorAll('m-input,m-select,m-textarea,m-check')
-
         )
             .map((eachControl: any) => {
                 if (eachControl.name) {
                     value[eachControl.name] = eachControl.value;
-                    valid = valid && eachControl.valid;
                 }
             });
-        return {
-            value,
-            valid
-        };
+        return value;
     }
 
     private async handleAction(action: string) {
@@ -192,7 +186,7 @@ export class DialogElement extends ModalElement {
         this.lastAction = action;
         const onAction = this['on' + action.charAt(0).toUpperCase() + action.slice(1)];
         if (onAction) {
-            const result = onAction(this.data, this);
+            const result = onAction(this.value, this);
             if (result instanceof Promise) {
                 const actionButton = this[action + 'Button'];
                 this.busy = actionButton.busy = true;
