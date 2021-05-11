@@ -28,7 +28,7 @@ export class DialogComponent implements OnInit {
                 // type: 'success',
                 async onAccept(data) {
                     console.log(data);
-                    if (data.valid) {
+                    if (true) {
                         await obs.toPromise();
                     } else {
                         return false;
@@ -85,7 +85,7 @@ export class DialogComponent implements OnInit {
                         placeHolder: 'XXXXXX',
                         required: true,
                     },
-                    'm-select',{
+                    'm-select', {
                         class: 'outlined x:12',
                         name: 'code',
                         placeholder: '輸入手機區碼',

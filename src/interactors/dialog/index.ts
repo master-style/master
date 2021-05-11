@@ -30,7 +30,7 @@ export class DialogElement extends ModalElement {
             $html: this.icon ? (this.iconOnBusy || this.icon) : this.icon
         },
         'form', {
-            $created: (element: MasterElement) => this.closeElement = element,
+            $created: (form: HTMLFormElement) => this.form = form,
         }, [
             'div', {
                 $if: this.controls.length,
@@ -170,7 +170,7 @@ export class DialogElement extends ModalElement {
     private get value() {
         const value = {};
         Array.from(
-            this.master
+            this.form
                 .querySelectorAll('m-input,m-select,m-textarea,m-check')
         )
             .map((eachControl: any) => {
