@@ -1,0 +1,15 @@
+slot {
+    display: flex;
+    flex-wrap: nowrap;
+    margin: var(--p) calc(var(--p) * -1) calc(var(--p) * -1) calc(var(--p) * -1);
+}
+
+::slotted(m-button) {
+    flex: 1 1 0;
+    border-radius: 0;
+    border-top: 1px solid var(--b-fadest);
+
+    &:not(:first-child) {
+        border-left: 1px solid var(--b-fadest);
+    }
+}

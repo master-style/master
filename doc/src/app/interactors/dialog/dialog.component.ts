@@ -78,6 +78,13 @@ export class DialogComponent implements OnInit {
                             });
                         }
                     },
+                    'm-input', {
+                        class: 'outlined x:9',
+                        name: 'verification-code',
+                        type: 'text',
+                        placeHolder: 'XXXXXX',
+                        required: true,
+                    },
                     'm-select',{
                         class: 'outlined x:12',
                         name: 'code',
@@ -91,11 +98,11 @@ export class DialogComponent implements OnInit {
                         }
                     ],
                     'm-button', {
-                        class: 'x:12',
+                        class: 'x:12 filled',
                         $text: 'facebook',
                         $css: {
-                            '--button-bg-color': '#4267B2',
-                            '--button-f-color': '#fff'
+                            '--bg-color': '#4267B2',
+                            '--f-color': '#fff'
                         }
                     }, [
                         'ion-icon', {
@@ -105,11 +112,11 @@ export class DialogComponent implements OnInit {
                         }
                     ],
                     'm-button', {
-                        class: 'x:12',
+                        class: 'x:12 filled',
                         $text: 'google',
                         $css: {
-                            '--button-bg-color': '#DB4437',
-                            '--button-f-color': '#fff'
+                            '--bg-color': '#DB4437',
+                            '--f-color': '#fff'
                         }
                     }, [
                         'ion-icon', {

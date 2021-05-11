@@ -1,5 +1,6 @@
 import { Element, Attr, Prop, attrEnabled, MasterElement } from '@master/element';
 import { ModalElement } from '../modal';
+import './dialog-foot';
 import css from './dialog.scss';
 import { Template } from '@master/template';
 
@@ -28,10 +29,19 @@ export class DialogElement extends ModalElement {
             slot: 'icon',
             $html: this.icon ? (this.iconOnBusy || this.icon) : this.icon
         },
-        'div', {
-            $if: this.controls.length,
-            class: 'y',
-        }, this.controls
+        'form', {
+            $created: (element: MasterElement) => this.closeElement = element,
+        }, [
+            'div', {
+                $if: this.controls.length,
+                class: 'y',
+            }, this.controls,
+            'm-dialog-foot', [
+                'm-button', this.cancelButton,
+                'm-button', this.rejectButton,
+                'm-button', this.acceptButton
+            ],
+        ]
     ]);
 
     template = new Template(() => [
@@ -40,45 +50,35 @@ export class DialogElement extends ModalElement {
             $if: attrEnabled(this.overlay),
             $created: (element: MasterElement) => this.overlayElement = element
         },
-        'form', {
+        'div', {
             part: 'master',
             $created: (element) => this.master = element
-                .on('submit', (event) => event.preventDefault())
+                .on('submit', (event) => {
+                    event.preventDefault();
+                    this.accept();
+                })
         }, [
-            'div', {
-                part: 'body'
-            }, [
-                'm-icon', {
-                    class: 'animated',
-                    $if: this.type,
-                    part: 'icon',
-                    name: TYPE_ICON[this.type]
-                },
-                'slot', {
-                    $if: this.icon,
-                    name: 'icon'
-                },
-                'h2', {
-                    $if: this.title,
-                    part: 'title',
-                    $text: this.busy ? (this.titleOnBusy || this.title) : this.title
-                },
-                'p', {
-                    $if: this.text,
-                    part: 'text',
-                    $text: this.busy ? (this.textOnBusy || this.text) : this.text
-                },
-                'slot', {
-                    $created: (element: HTMLElement) => this.wrap = element
-                }
-            ],
-            'div', {
-                part: 'foot'
-            }, [
-                'm-button', this.cancelButton,
-                'm-button', this.rejectButton,
-                'm-button', this.acceptButton
-            ],
+            'm-icon', {
+                class: 'animated',
+                $if: this.type,
+                part: 'icon',
+                name: TYPE_ICON[this.type]
+            },
+            'slot', {
+                $if: this.icon,
+                name: 'icon'
+            },
+            'h2', {
+                $if: this.title,
+                part: 'title',
+                $text: this.busy ? (this.titleOnBusy || this.title) : this.title
+            },
+            'p', {
+                $if: this.text,
+                part: 'text',
+                $text: this.busy ? (this.textOnBusy || this.text) : this.text
+            },
+            'slot',
             'm-button', {
                 part: 'close',
                 class: 'round xs',
@@ -94,7 +94,7 @@ export class DialogElement extends ModalElement {
     _duration: number = 300;
     _placement: string = 'center';
 
-    master: HTMLFormElement;
+    form: HTMLFormElement;
 
     onAccept: () => Promise<boolean> | boolean;
     onReject: () => Promise<boolean> | boolean;
@@ -122,9 +122,7 @@ export class DialogElement extends ModalElement {
     acceptButton = {
         $if: true,
         $text: 'ok',
-        $on: {
-            click: () => this.accept()
-        },
+        type: 'submit',
         busy: false,
         disabled: false
     };
@@ -147,7 +145,7 @@ export class DialogElement extends ModalElement {
         $on: {
             click: () => this.cancel()
         },
-        style: '--button-f-color: var(--f-fade)',
+        style: '--f-color: var(--f-fader)',
         busy: false,
         disabled: false
     };

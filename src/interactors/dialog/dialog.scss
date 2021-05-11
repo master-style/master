@@ -2,6 +2,7 @@
 
 :host {
     --max-width: var(--wrap-xxs);
+    --p: var(--dialog-p, 2rem);
     z-index: 1070;
 }
 
@@ -30,9 +31,10 @@ slot[name=icon]::slotted(*),
     font-size: 1.875rem;
 }
 
-[part=body] {
+[part=master] {
+    padding: var(--p);
+    box-sizing: border-box;
     display: block;
-    padding: 2rem;
 }
 
 [part=text] {
@@ -46,22 +48,4 @@ slot[name=icon]::slotted(*),
 [part=icon]+[part=title],
 slot[name=icon]+[part=title] {
     margin-top: 1.5rem;
-}
-
-[part=foot] {
-    display: flex;
-
-    m-button {
-        flex: 1 1 0;
-        border-radius: 0;
-        border-top: 1px solid var(--b-fadest);
-
-        &:not(:first-child) {
-            border-left: 1px solid var(--b-fadest);
-        }
-    }
-}
-
-[part=cancel] {
-    --button-f-color: var(--f-fader);
 }
