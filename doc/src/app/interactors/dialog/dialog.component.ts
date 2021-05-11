@@ -78,6 +78,18 @@ export class DialogComponent implements OnInit {
                             });
                         }
                     },
+                    'm-select',{
+                        class: 'outlined x:12',
+                        name: 'code',
+                        placeholder: '輸入手機區碼',
+                        label: 'code',
+                        required: true
+                    }, [
+                        'm-option', {
+                            $text: 123,
+                            value: 123
+                        }
+                    ],
                     'm-button', {
                         class: 'x:12',
                         $text: 'facebook',

@@ -8,6 +8,10 @@
     }
 }
 
+[part=master] {
+    z-index: 9999;
+}
+
 [part=search-info] {
     font-size: var(--f-xxs);
     padding: .5rem 1.25rem;
