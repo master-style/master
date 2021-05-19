@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { InputElement } from '../../../../../src';
 
 import { dialog } from '../../../../../src/interactors/dialog';
 

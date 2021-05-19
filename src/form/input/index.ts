@@ -5,6 +5,7 @@ import { ControlElement } from '../../shared/control';
 import { $ } from '@master/dom';
 import { displaySizeByBytes } from '../../utils/display-size-by-bytes';
 const changeEvent = new window.Event('change', { bubbles: true, cancelable: false });
+const inputEvent = new window.Event('input', { bubbles: true, cancelable: false });
 
 const NAME = 'input';
 
@@ -24,16 +25,21 @@ export class InputElement extends ControlElement {
         return value;
     }
 
-    private static updateValue(input: InputElement, value, preventAssign) {
+    private static updateValue(input: InputElement, value, preventAssign?: boolean) {
         if (input.type === 'file') {
             input.empty = !value?.length || !value;
-            input.assignee.value = input.empty ? null : value;
+            if (preventAssign) {
+                input.assignee.value = input.empty ? null : value;
+            }
             if (input.validateFiles()) {
                 input.validate();
             }
         } else {
             input.empty = value === null || value === undefined || value === '';
-            input.assignee.value = value ?? null;
+            // fix: composition text issue
+            if (preventAssign) {
+                input.assignee.value = value ?? null;
+            }
             input.validate();
         }
     }
@@ -399,20 +405,20 @@ export class InputElement extends ControlElement {
 
         this.assignee
             .on('input', (event: InputEvent) => {
-                if (event.inputType !== 'insertCompositionText') {
-                    this.value = (event.target as InputElement).value;
-                    if (!this.dirty) {
-                        this.dirty = true;
-                    }
+                InputElement.updateValue(this, (event.target as InputElement).value, true);
+                if (!this.dirty) {
+                    this.dirty = true;
                 }
+                console.log(this.assignee.value);
             }, { id: [NAME], passive: true })
             .on('focusout', () => {
                 this.touched = true;
-            }, { id: [NAME], passive: true, once: true });
+            }, { id: [NAME], passive: true });
     }
 
     onDisconnected() {
         this.off({ id: [NAME] });
+        this.assignee.off({ id: [NAME] })
     }
 
 }
