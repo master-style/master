@@ -28,7 +28,7 @@ export class InputElement extends ControlElement {
     private static updateValue(input: InputElement, value, preventAssign?: boolean) {
         if (input.type === 'file') {
             input.empty = !value?.length || !value;
-            if (preventAssign) {
+            if (!preventAssign) {
                 input.assignee.value = input.empty ? null : value;
             }
             if (input.validateFiles()) {
@@ -37,7 +37,7 @@ export class InputElement extends ControlElement {
         } else {
             input.empty = value === null || value === undefined || value === '';
             // fix: composition text issue
-            if (preventAssign) {
+            if (!preventAssign) {
                 input.assignee.value = value ?? null;
             }
             input.validate();
@@ -405,11 +405,12 @@ export class InputElement extends ControlElement {
 
         this.assignee
             .on('input', (event: InputEvent) => {
-                InputElement.updateValue(this, (event.target as InputElement).value, true);
+                // fix: don't set this.value to fix composition text issue
+                const value = this['_value'] = InputElement.parseValue(this, (event.target as HTMLInputElement).value);
+                InputElement.updateValue(this, value, true);
                 if (!this.dirty) {
                     this.dirty = true;
                 }
-                console.log(this.assignee.value);
             }, { id: [NAME], passive: true })
             .on('focusout', () => {
                 this.touched = true;
