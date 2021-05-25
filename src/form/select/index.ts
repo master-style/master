@@ -185,13 +185,14 @@ export class SelectElement extends ControlElement {
         this.options.forEach((eachOption) => {
             if (this.multiple) {
                 if (!Array.isArray(value)) return;
-                // value = [x,x];
                 if (
                     this.binding
                         ? value.find((eachEntity) => eachEntity[this.binding] === eachOption.value[this.binding])
                         : value.indexOf(eachOption.value) !== -1
                 ) {
                     eachOption.selected = true;
+                } else {
+                    eachOption.selected = false;
                 }
             } else {
                 // value = x
@@ -312,10 +313,11 @@ export class SelectElement extends ControlElement {
                     const each = value[i];
                     const eachOld = oldValue[i];
                     if (
-                        each !== eachOld ||
+                        each !== eachOld || (
                             select.binding
-                            ? each[select.binding] !== eachOld[select.binding]
-                            : each !== eachOld
+                                ? each[select.binding] !== eachOld[select.binding]
+                                : each !== eachOld
+                        )
                     ) {
                         equal = false;
                         break;

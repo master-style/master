@@ -12,7 +12,13 @@ export class SelectComponent implements OnInit {
 
     constructor() { }
 
-    ngOnInit(): void { }
+    cities = ['taipei']
+
+    ngOnInit(): void {
+        setTimeout(()=> {
+            this.cities = ['hualien']
+        }, 1000);
+    }
 
     ngAfterViewInit(): void {
         $(this.formRef.nativeElement)
