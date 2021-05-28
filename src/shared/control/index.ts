@@ -110,7 +110,7 @@ export class ControlElement extends MasterElement {
         if (prompt) {
             this.prompt = prompt;
         } else {
-            this.removeAttribute('prompt');
+            this.prompt = null;
         }
     }
 

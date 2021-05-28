@@ -133,7 +133,6 @@ export class SelectPopupElement extends PopupElement {
                 if (text === keyword) {
                     this.#matchKeyword = true;
                 }
-                console.log(this.#keyword && !this.#matchKeyword && this.select.addable);
                 eachItem
                     .toggleAttribute('found', found);
             });
