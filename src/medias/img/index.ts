@@ -29,7 +29,6 @@ export class ImgElement extends MasterElement {
                 };
             }
         },
-        'slot',
         'm-skeleton', {
             $if: !this.complete && (this.src || this.srcset),
             part: 'skeleton',
