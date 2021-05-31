@@ -41,7 +41,6 @@
         "@master/element": "^1.0.0",
         "@master/template": "^1.0.0",
         "@popperjs/core": "^2.5.4",
-        "@shoplay/enums": "^6.0.1",
         "@simonwep/selection-js": "^2.0.2",
         "body-scroll-lock": "^3.1.5"
     },
