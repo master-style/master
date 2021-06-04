@@ -24,11 +24,12 @@
     max-height: 100%;
     box-sizing: border-box;
     contain: style;
-    padding: var(--offset-top) var(--offset-right) var(--offset-bottom) var(--offset-left)
 }
 
 [part=content] {
     display: block;
+    width: fit-content;
+    padding: var(--offset-top) var(--offset-right) var(--offset-bottom) var(--offset-left);
 }
 
 :host(.full) {
