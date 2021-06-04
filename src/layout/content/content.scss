@@ -28,6 +28,7 @@
 
 [part=content] {
     display: block;
+    flex: 1 1 auto;
     padding: var(--offset-top) var(--offset-right) var(--offset-bottom) var(--offset-left);
 }
 
