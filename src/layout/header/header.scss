@@ -15,13 +15,15 @@
 }
 
 :host,
-slot {
+[part=body],
+slot[name=start],
+slot[name=end] {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-slot {
+[part=body] {
     flex: 1 1 auto;
     min-width: 0;
 }

@@ -14,7 +14,7 @@ export class HeaderElement extends MasterElement {
         'slot', { name: 'above' },
         'div', { part: 'master' }, [
             'slot', { name: 'start' },
-            'slot',
+            'slot', { part: 'body' },
             'slot', { name: 'end' },
         ],
         'slot', { name: 'below' },

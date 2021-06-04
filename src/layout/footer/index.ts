@@ -12,7 +12,7 @@ export class FooterElement extends MasterElement {
     template: Template = new Template(() => [
         'div', { part: 'master' }, [
             'slot', { name: 'start' },
-            'slot',
+            'slot', { part: 'body' },
             'slot', { name: 'end' }
         ]
     ]);
