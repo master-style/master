@@ -19,7 +19,7 @@
 }
 
 [part=master] {
-    display: block;
+    display: flex; // use flex to fix content padding issue
     width: 100%;
     max-height: 100%;
     box-sizing: border-box;
@@ -28,7 +28,6 @@
 
 [part=content] {
     display: block;
-    width: fit-content;
     padding: var(--offset-top) var(--offset-right) var(--offset-bottom) var(--offset-left);
 }
 
