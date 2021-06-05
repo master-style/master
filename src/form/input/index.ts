@@ -25,7 +25,7 @@ export class InputElement extends ControlElement {
         return value;
     }
 
-    private static updateValue(input: InputElement, value, preventAssign?: boolean) {
+    private static updateValue(input: InputElement, value: any, oldValue: any, preventAssign?: boolean) {
         if (input.type === 'file') {
             input.empty = !value?.length || !value;
             if (!preventAssign) {
@@ -407,7 +407,7 @@ export class InputElement extends ControlElement {
             .on('input', (event: InputEvent) => {
                 // fix: don't set this.value to fix composition text issue
                 const value = this['_value'] = InputElement.parseValue(this, (event.target as HTMLInputElement).value);
-                InputElement.updateValue(this, value, true);
+                InputElement.updateValue(this, value, this.value, true);
                 if (!this.dirty) {
                     this.dirty = true;
                 }
