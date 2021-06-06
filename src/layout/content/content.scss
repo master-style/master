@@ -29,6 +29,7 @@
 [part=content] {
     display: block;
     height: fit-content;
+    min-width: 0;
     flex: 1 1 auto;
     padding: var(--offset-top) var(--offset-right) var(--offset-bottom) var(--offset-left);
 }
