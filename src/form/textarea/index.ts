@@ -88,10 +88,10 @@ export class TextareaElement extends ControlElement {
     })
     value: any;
 
-    @Attr({ onUpdate: (control: ControlElement) => control.validate() })
+    @Attr({ onRender: (textarea: TextareaElement) => textarea.validate() })
     maxLength: number;
 
-    @Attr({ onUpdate: (control: ControlElement) => control.validate() })
+    @Attr({ onRender: (textarea: TextareaElement) => textarea.validate() })
     minLength: number;
 
     @Attr()

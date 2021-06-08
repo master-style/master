@@ -210,7 +210,7 @@ export class InputElement extends ControlElement {
     @Attr()
     interface: string;
 
-    @Attr({ onUpdate: (control: ControlElement) => control.validate() })
+    @Attr({ onRender: (input: InputElement) => input.validate() })
     accept: string;
 
     @Attr()
@@ -282,31 +282,31 @@ export class InputElement extends ControlElement {
     })
     type: string;
 
-    @Attr({ onUpdate: (control: ControlElement) => control.validate() })
+    @Attr({ onRender: (input: InputElement) => input.validate() })
     multiple: boolean;
 
     @Attr()
     autocomplete: string;
 
-    @Attr({ onUpdate: (control: ControlElement) => control.validate() })
+    @Attr({ onRender: (input: InputElement) => input.validate() })
     max: number;
 
-    @Attr({ onUpdate: (control: ControlElement) => control.validate() })
+    @Attr({ onRender: (input: InputElement) => input.validate() })
     min: number;
 
-    @Attr({ onUpdate: (control: ControlElement) => control.validate() })
+    @Attr({ onRender: (input: InputElement) => input.validate() })
     maxLength: number;
 
-    @Attr({ onUpdate: (control: ControlElement) => control.validate() })
+    @Attr({ onRender: (input: InputElement) => input.validate() })
     minLength: number;
 
-    @Attr({ onUpdate: (control: ControlElement) => control.validate() })
+    @Attr({ onRender: (input: InputElement) => input.validate() })
     pattern: string;
 
     @Attr()
     size: number;
 
-    @Attr({ onUpdate: (control: ControlElement) => control.validate() })
+    @Attr({ onRender: (input: InputElement) => input.validate() })
     step: number;
 
     @Attr()
