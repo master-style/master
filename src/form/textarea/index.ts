@@ -74,9 +74,6 @@ export class TextareaElement extends ControlElement {
     @Attr()
     label: string;
 
-    @Attr()
-    type: string;
-
     @Attr({ render: false })
     expanded: boolean;
 
@@ -91,10 +88,10 @@ export class TextareaElement extends ControlElement {
     })
     value: any;
 
-    @Attr()
+    @Attr({ onUpdate: (control: ControlElement) => control.validate() })
     maxLength: number;
 
-    @Attr()
+    @Attr({ onUpdate: (control: ControlElement) => control.validate() })
     minLength: number;
 
     @Attr()

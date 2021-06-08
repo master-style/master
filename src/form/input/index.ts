@@ -210,7 +210,7 @@ export class InputElement extends ControlElement {
     @Attr()
     interface: string;
 
-    @Attr()
+    @Attr({ onUpdate: (control: ControlElement) => control.validate() })
     accept: string;
 
     @Attr()
@@ -282,31 +282,31 @@ export class InputElement extends ControlElement {
     })
     type: string;
 
-    @Attr()
+    @Attr({ onUpdate: (control: ControlElement) => control.validate() })
     multiple: boolean;
 
     @Attr()
     autocomplete: string;
 
-    @Attr()
+    @Attr({ onUpdate: (control: ControlElement) => control.validate() })
     max: number;
 
-    @Attr()
+    @Attr({ onUpdate: (control: ControlElement) => control.validate() })
     min: number;
 
-    @Attr()
+    @Attr({ onUpdate: (control: ControlElement) => control.validate() })
     maxLength: number;
 
-    @Attr()
+    @Attr({ onUpdate: (control: ControlElement) => control.validate() })
     minLength: number;
 
-    @Attr()
+    @Attr({ onUpdate: (control: ControlElement) => control.validate() })
     pattern: string;
 
     @Attr()
     size: number;
 
-    @Attr()
+    @Attr({ onUpdate: (control: ControlElement) => control.validate() })
     step: number;
 
     @Attr()

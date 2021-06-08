@@ -10,6 +10,14 @@
                          when-value-missing="required">
                 </m-input>
             </div>
+            <div class="x:4@sm">
+                <m-input class="outlined"
+                         label="pattern"
+                         pattern="(?=.[a-z])(?=.[A-Z])(?=.\d)[A-Za-z\d@$!%?&.]{8,32}"
+                         when-pattern-mismatch="格式不符"
+                         required>
+                </m-input>
+            </div>
         </div>
         <m-button type="submit">submit</m-button>
     </form>
