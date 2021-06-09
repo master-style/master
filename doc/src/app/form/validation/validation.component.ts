@@ -9,6 +9,8 @@ export class ValidationComponent implements OnInit {
 
     constructor() { }
 
+    passwordPattern = '(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d@$!%*?&.]{8,32}';
+
     ngOnInit(): void {
     }
 

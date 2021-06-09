@@ -122,7 +122,7 @@ export class PopupElement extends TargetElement {
     }
 
     private whetherToClose = (event: any) => {
-        if (this.animation || this.activeChildPopups.size) {
+        if (this.animations.length || this.activeChildPopups.size) {
             return;
         }
         if (
@@ -331,10 +331,10 @@ export class PopupElement extends TargetElement {
             keyframes.reverse();
         }
 
-        this.animation = this.content.animate(keyframes, options);
-        this.animations.push(this.animation);
+        const animation = this.content.animate(keyframes, options);
+        this.animations.push(animation);
         return new Promise((finish) => {
-            this.animation.onfinish = finish;
+            animation.onfinish = finish;
         });
     }
 

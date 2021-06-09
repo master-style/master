@@ -240,10 +240,10 @@ export class ModalElement extends TargetElement {
             );
         }
 
-        this.animation = this.master.animate(keyframes, options);
-        this.animations.push(this.animation);
+        const animation = this.master.animate(keyframes, options);
+        this.animations.push(animation);
         return new Promise<void>((finish) => {
-            this.animation.onfinish = () => {
+            animation.onfinish = () => {
                 const hidden = this.hidden;
                 if (hidden && this.trigger && this.hideTrigger) {
                     this.trigger.toggleClass('invisible', false);

@@ -72,8 +72,11 @@ export class TargetElement extends MasterElement {
                             whether = target.hidden;
                         }
                     }
-                    if (whether && !target.animation) {
+                    if (whether && !target.animations.length) {
                         target.trigger = trigger;
+                    }
+                    for (const animation of target.animations) {
+                        animation.cancel();
                     }
                     target.currentEvent = event;
                     target.toggle(whether);
@@ -125,7 +128,6 @@ export class TargetElement extends MasterElement {
     currentEvent: Event;
 
     protected animations: Animation[] = [];
-    protected animation: Animation;
 
     startClose: () => Promise<boolean>;
     startOpen: () => Promise<boolean>;
@@ -145,7 +147,7 @@ export class TargetElement extends MasterElement {
                     }
                 });
         }
-        if (this.animation) {
+        if (this.animations.length) {
             for (const eachAnimation of this.animations) {
                 eachAnimation.reverse();
             }
@@ -160,7 +162,6 @@ export class TargetElement extends MasterElement {
                 this.toggleAttribute('hidden', true);
             }
             this.toggleAttribute('changing', false);
-            this.animation = null;
             this.animations = [];
             const completed = hidden ? this['onClosed'] : this['onOpened'];
             if (completed) completed.call(this);

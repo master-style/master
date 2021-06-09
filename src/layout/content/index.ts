@@ -420,10 +420,10 @@ export class ContentElement extends TargetElement {
             keyframes.push(startKeyframe, endKeyframe);
         }
 
-        this.animation = this.animate(keyframes, options);
-        this.animations.push(this.animation);
+        const animation = this.animate(keyframes, options);
+        this.animations.push(animation);
         return new Promise((finish) => {
-            this.animation.onfinish = finish;
+            animation.onfinish = finish;
         });
     }
 
