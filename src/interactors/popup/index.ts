@@ -111,25 +111,40 @@ export class PopupElement extends TargetElement {
         ]
     ]);
 
-    protected triggerBefore(event, trigger, whether) {
-        if (!whether && event.type === 'mouseout') {
+    protected triggerBefore({ event, trigger, oldTrigger, hidden }) {
+
+        if (trigger !== oldTrigger) {
+            if (this.popper) {
+                this.popper.state.elements.reference = trigger;
+                this.popper.forceUpdate();
+            }
+        }
+
+        if (!hidden && event.type === 'mouseout') {
             return !(
                 !isInteractOutside(trigger, event) ||
                 !isInteractOutside(this.master, event, this.distance)
             )
         }
+
         return true;
     }
 
     private whetherToClose = (event: any) => {
-        if (this.animations.length || this.activeChildPopups.size) {
+        if (this.activeChildPopups.size) {
             return;
         }
-        if (
-            isInteractOutside(this.trigger, event)
-            && isInteractOutside(this.master, event, this.distance)
-        ) {
+
+        const isInteractTriggerOutside = isInteractOutside(this.trigger, event);
+        const isInteractTargetOutside = isInteractOutside(this.master, event, this.distance);
+
+        if (isInteractTriggerOutside && isInteractTargetOutside) {
             this.close();
+        }
+
+        if (!isInteractTriggerOutside || !isInteractTargetOutside) {
+            console.log('open');
+            this.open();
         }
     }
 
@@ -144,6 +159,7 @@ export class PopupElement extends TargetElement {
     }
 
     async onOpen() {
+
         const activate = (parent: PopupElement) => {
             if (!parent) {
                 return;
@@ -214,21 +230,24 @@ export class PopupElement extends TargetElement {
                 }
             });
         }
+
+        $html.off(this.whetherToClose);
+        
+        if (this.closeOn) {
+            if (this.closeOn.indexOf('move:outside') !== -1) {
+                $html
+                    .on('mousemove', this.whetherToClose, { passive: true });
+            }
+            if (this.closeOn.indexOf('click:outside') !== -1) {
+                $html
+                    .on('click', this.whetherToClose, { passive: true });
+            }
+        }
+
     }
 
     onOpened() {
         if (this.popper) {
-            if (this.closeOn) {
-                if (this.closeOn.indexOf('move:outside') !== -1) {
-                    $html
-                        .on('mousemove', this.whetherToClose, { passive: true });
-                }
-                if (this.closeOn.indexOf('click:outside') !== -1) {
-                    $html
-                        .on('click', this.whetherToClose, { passive: true });
-                }
-            }
-
             if (!this.#resizeObserver && !this.followCursor) {
                 this.#resizeObserver = new ResizeObserver(debounce(() => {
                     const rect = this.trigger.getBoundingClientRect();
@@ -282,11 +301,11 @@ export class PopupElement extends TargetElement {
     onClosed() {
         if (this.popper) {
             this.popper = this.popper.destroy();
-            $($html).off(this.whetherToClose);
         }
+        $html.off(this.whetherToClose);
     }
 
-    protected toggling(
+    protected async toggling(
         options: KeyframeEffectOptions
     ) {
         let keyframes: any;
@@ -331,11 +350,14 @@ export class PopupElement extends TargetElement {
             keyframes.reverse();
         }
 
-        const animation = this.content.animate(keyframes, options);
-        this.animations.push(animation);
-        return new Promise((finish) => {
-            animation.onfinish = finish;
-        });
+        this.animations.push(this.content.animate(keyframes, options));
+
+        return Promise.all(
+            this.animations.map((animation) => new Promise((finish) => {
+                animation.onfinish = finish
+            }))
+        )
+
     }
 
     render() {

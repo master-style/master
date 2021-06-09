@@ -18,7 +18,7 @@ export class TargetElement extends MasterElement {
     hidden: boolean = false;
 
     @Attr({ reflect: false })
-    duration = 500;
+    duration: number = 500;
 
     @Attr({ reflect: false })
     fade: boolean;
@@ -50,36 +50,28 @@ export class TargetElement extends MasterElement {
                         return;
                     }
                     const eventType = event.type;
-                    let whether: boolean;
-                    if (typeSets.length) {
-                        whether = target.hidden;
-                        if (
-                            whether && openingTypes.indexOf(eventType) === -1 ||
-                            !whether && closingTypes?.indexOf(eventType) === -1
-                        ) {
-                            return;
-                        }
-                        if (triggerBefore && !triggerBefore.call(target, event, trigger, whether)) {
-                            return;
-                        }
-                    } else {
-                        if (
-                            'checked' in trigger &&
-                            (eventType === 'input' || eventType === 'change')
-                        ) {
-                            whether = !!trigger.checked;
-                        } else {
-                            whether = target.hidden;
+                    let hidden: boolean = target.hidden;
+                    const oldTrigger = target.trigger;
+                    target.trigger = trigger;
+
+                    if (
+                        triggerBefore && !triggerBefore.call(target, { event, trigger, oldTrigger, hidden }) ||
+                        hidden && openingTypes.indexOf(eventType) === -1 ||
+                        !hidden && closingTypes?.indexOf(eventType) === -1
+                    ) {
+                        return;
+                    } else if (
+                        'checked' in trigger &&
+                        (eventType === 'input' || eventType === 'change')
+                    ) {
+                        hidden = !!trigger.checked;
+                        if (hidden) {
+                            target.trigger = trigger;
                         }
                     }
-                    if (whether && !target.animations.length) {
-                        target.trigger = trigger;
-                    }
-                    for (const animation of target.animations) {
-                        animation.cancel();
-                    }
+
                     target.currentEvent = event;
-                    target.toggle(whether);
+                    target.toggle(hidden);
                 };
                 const typeSet = new Set<string>(typeSets.join(' ').split(' '));
                 for (const eachTypeSet of typeSet) {
@@ -148,10 +140,12 @@ export class TargetElement extends MasterElement {
                 });
         }
         if (this.animations.length) {
-            for (const eachAnimation of this.animations) {
-                eachAnimation.reverse();
+            console.log('-- 反轉', this.hidden ? 'CLOSE' : 'OPEN');
+            for (const animation of this.animations) {
+                animation.reverse();
             }
         } else if (this.duration) {
+            console.log('-- 切換', this.hidden ? 'CLOSE' : 'OPEN');
             this.toggleAttribute('changing', true);
             await this['toggling']({
                 easing: this.easing,
@@ -163,6 +157,7 @@ export class TargetElement extends MasterElement {
             }
             this.toggleAttribute('changing', false);
             this.animations = [];
+            console.log('-- 動畫完成');
             const completed = hidden ? this['onClosed'] : this['onOpened'];
             if (completed) completed.call(this);
         }
