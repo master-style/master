@@ -229,18 +229,18 @@ export class PopupElement extends TargetElement {
                     });
                 }
             });
-        }
 
-        $html.off(this.whetherToClose);
-        
-        if (this.closeOn) {
-            if (this.closeOn.indexOf('move:outside') !== -1) {
-                $html
-                    .on('mousemove', this.whetherToClose, { passive: true });
-            }
-            if (this.closeOn.indexOf('click:outside') !== -1) {
-                $html
-                    .on('click', this.whetherToClose, { passive: true });
+            $html.off(this.whetherToClose);
+
+            if (this.closeOn) {
+                if (this.closeOn.indexOf('move:outside') !== -1) {
+                    $html
+                        .on('mousemove', this.whetherToClose, { passive: true });
+                }
+                if (this.closeOn.indexOf('click:outside') !== -1) {
+                    $html
+                        .on('click', this.whetherToClose, { passive: true });
+                }
             }
         }
 
