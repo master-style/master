@@ -80,7 +80,6 @@ export class TargetElement extends MasterElement {
                                 target.trigger = trigger;
                             }
                         }
-                        console.log('trigger');
                         target.currentEvent = event;
                         target.toggle(hidden);
                     } else {
@@ -129,7 +128,7 @@ export class TargetElement extends MasterElement {
     @Event()
     closedEmitter: EventEmitter;
 
-    changing: Promise<any>;
+    changing: Promise<void>;
     currentEvent: Event;
     protected animations: Animation[] = [];
     closingDelay;
@@ -159,23 +158,23 @@ export class TargetElement extends MasterElement {
                 animation.reverse();
             }
         } else if (this.duration) {
-            console.log('-- 切換', this.hidden ? 'CLOSE' : 'OPEN');
+            console.log('-- 動畫', this.hidden ? 'CLOSE' : 'OPEN');
             this.toggleAttribute('changing', true);
             await this['toggling']({
                 easing: this.easing,
                 duration: this.duration
             });
             const hidden = this.hidden;
+            this.toggleAttribute('changing', false);
+            this.changing = null;
+            this.animations = [];
             if (hidden) {
                 this.toggleAttribute('hidden', true);
+                this['onClosed']?.call(this);
+            } else {
+                this['onOpened']?.call(this);
             }
-            this.toggleAttribute('changing', false);
-            this.animations = [];
-            this.openingDelay = clearInterval(this.openingDelay);
-            this.closingDelay = clearInterval(this.closingDelay);
             console.log('-- 動畫完成');
-            const completed = hidden ? this['onClosed'] : this['onOpened'];
-            if (completed) completed.call(this);
         }
     }
 
@@ -202,10 +201,11 @@ export class TargetElement extends MasterElement {
         if (this.delay) {
             if (this.openingDelay) {
                 return;
-            } else {
+            } else if (!this.changing) {
                 await new Promise<void>((resolve) => {
                     this.openingDelay = setTimeout(() => {
                         resolve();
+                        this.openingDelay = null;
                     }, this.delay);
                 })
             }
@@ -245,10 +245,11 @@ export class TargetElement extends MasterElement {
         if (this.delay) {
             if (this.closingDelay) {
                 return;
-            } else {
+            } else if (!this.changing) {
                 await new Promise<void>((resolve) => {
                     this.closingDelay = setTimeout(() => {
                         resolve();
+                        this.closingDelay = null;
                     }, this.delay);
                 })
             }

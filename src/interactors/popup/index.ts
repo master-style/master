@@ -116,7 +116,7 @@ export class PopupElement extends TargetElement {
         if (trigger !== oldTrigger) {
             if (this.popper) {
                 this.popper.state.elements.reference = trigger;
-                this.popper.forceUpdate();
+                this.popper.update();
             }
         }
 
