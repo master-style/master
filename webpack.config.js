@@ -28,6 +28,9 @@ module.exports = env => {
             extensions: ['.js', '.ts'],
             modules: [path.resolve('./src'), path.resolve('./node_modules')]
         },
+        optimization: {
+            minimize: true
+        },
         module: {
             rules: [
                 {

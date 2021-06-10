@@ -121,10 +121,7 @@ export class PopupElement extends TargetElement {
         }
 
         if (!hidden && event.type === 'mouseout') {
-            const isInteractTriggerOutside = event.target !== this.trigger && !this.trigger.contains(event.target);
-            const isInteractTargetOutside = isInteractOutside(this.master, event, this.distance);
-            return (!isInteractTriggerOutside ||
-                !isInteractTargetOutside);
+            return !isInteractOutside(this.master, event, this.distance);
         }
     }
 
@@ -297,14 +294,18 @@ export class PopupElement extends TargetElement {
             this.#resizeObserver.unobserve(this.trigger);
             this.#resizeObserver = null;
         }
-
-        $html.off(this.whetherToClose);
     }
 
     onClosed() {
         if (this.popper) {
             this.popper = this.popper.destroy();
         }
+
+        /**
+         * whetherToClose
+         * * 於 changing 及 hidden 為 false 時都必須偵測 
+         */
+        $html.off(this.whetherToClose);
     }
 
     protected async toggling(
