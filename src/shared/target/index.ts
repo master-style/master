@@ -21,6 +21,9 @@ export class TargetElement extends MasterElement {
     duration: number = 500;
 
     @Attr({ reflect: false })
+    delay: number;
+
+    @Attr({ reflect: false })
     fade: boolean;
 
     @Attr({ reflect: false })
@@ -37,41 +40,50 @@ export class TargetElement extends MasterElement {
             if (value) {
                 const toggleAttrKey = 'toggle-' + name;
                 const typeSets = value.split(',');
-                const openingTypes = typeSets[0]?.trim()?.split(' ');
-                const closingTypes = typeSets[1]?.trim()?.split(' ');
-                const triggerBefore = target['triggerBefore'];
+                const typesOnOpen = typeSets[0]?.trim()?.split(' ');
+                const typesOnClose = typeSets[1]?.trim()?.split(' ');
+                const preventTrigger = target['preventTrigger'];
                 const handle = function (event: Event) {
                     const trigger = this;
                     if (this.disabled) {
                         return;
+
                     }
                     const targetSelector = trigger.getAttribute(toggleAttrKey);
+
                     if (!target.matches(targetSelector)) {
                         return;
                     }
+
                     const eventType = event.type;
                     let hidden: boolean = target.hidden;
                     const oldTrigger = target.trigger;
-                    target.trigger = trigger;
 
-                    if (
-                        triggerBefore && !triggerBefore.call(target, { event, trigger, oldTrigger, hidden }) ||
-                        hidden && openingTypes.indexOf(eventType) === -1 ||
-                        !hidden && closingTypes?.indexOf(eventType) === -1
-                    ) {
+                    if (preventTrigger?.call(target, { event, trigger, oldTrigger, hidden })) {
                         return;
-                    } else if (
-                        'checked' in trigger &&
-                        (eventType === 'input' || eventType === 'change')
-                    ) {
-                        hidden = !!trigger.checked;
-                        if (hidden) {
-                            target.trigger = trigger;
-                        }
                     }
 
-                    target.currentEvent = event;
-                    target.toggle(hidden);
+                    if (
+                        /** 執行開啟：是否吻合執行開啟的條件與事件 */
+                        hidden && typesOnOpen.indexOf(eventType) !== -1 ||
+                        /** 執行關閉：是否吻合執行關閉的條件與事件 */
+                        !hidden && typesOnClose?.indexOf(eventType) !== -1
+                    ) {
+                        if (
+                            'checked' in trigger &&
+                            (eventType === 'input' || eventType === 'change')
+                        ) {
+                            hidden = !!trigger.checked;
+                            if (hidden) {
+                                target.trigger = trigger;
+                            }
+                        }
+                        target.trigger = trigger;
+                        target.currentEvent = event;
+                        target.toggle(hidden);
+                    } else {
+                        return;
+                    }
                 };
                 const typeSet = new Set<string>(typeSets.join(' ').split(' '));
                 for (const eachTypeSet of typeSet) {
@@ -115,11 +127,10 @@ export class TargetElement extends MasterElement {
     @Event()
     closedEmitter: EventEmitter;
 
-    changing: Promise<void>;
-
+    changing: Promise<any>;
     currentEvent: Event;
-
     protected animations: Animation[] = [];
+    changingDelay;
 
     startClose: () => Promise<boolean>;
     startOpen: () => Promise<boolean>;
@@ -157,17 +168,38 @@ export class TargetElement extends MasterElement {
             }
             this.toggleAttribute('changing', false);
             this.animations = [];
+            this.delayingHidden = null;
             console.log('-- 動畫完成');
             const completed = hidden ? this['onClosed'] : this['onOpened'];
             if (completed) completed.call(this);
         }
     }
 
-    async openable(): Promise<boolean> {
-        if (!this.hidden) {
-            return false;
+    delayingHidden: boolean;
+
+    private delayChanging(hidden: boolean) {
+        if (this.changingDelay) {
+            this.changingDelay = clearInterval(this.changingDelay);
         }
-        if (this.startOpen && !await this.startOpen()) {
+        if (this.delay) {
+            this.delayingHidden = hidden;
+            return new Promise<void>((resolve) => {
+                this.changingDelay = setTimeout(() => {
+                    this.delayingHidden = null;
+                    resolve();
+                }, this.delay);
+            })
+        } else {
+            this.delayingHidden = null;
+        }
+    }
+
+    async openable(): Promise<boolean> {
+        if (
+            !this.hidden ||
+            this.delayingHidden === false ||
+            this.startOpen && !await this.startOpen()
+        ) {
             return false;
         }
         return true;
@@ -177,6 +209,11 @@ export class TargetElement extends MasterElement {
         if (!await this.openable()) {
             return false;
         }
+
+        if (this.delayChanging) {
+            await this.delayChanging(false);
+        }
+
         this['_hidden'] = false;
         this.toggleAttribute('hidden', false);
         const onOpen = this['onOpen'];
@@ -190,10 +227,11 @@ export class TargetElement extends MasterElement {
     }
 
     async closeable(): Promise<boolean> {
-        if (this.hidden) {
-            return false;
-        }
-        if (this.startClose && !await this.startClose()) {
+        if (
+            this.hidden ||
+            this.delayingHidden === true ||
+            this.startClose && !await this.startClose()
+        ) {
             return false;
         }
         return true;
@@ -203,6 +241,11 @@ export class TargetElement extends MasterElement {
         if (!await this.closeable()) {
             return false;
         }
+
+        if (this.delayChanging) {
+            await this.delayChanging(true);
+        }
+
         this['_hidden'] = true;
         const onClose = this['onClose'];
         if (onClose) {
@@ -215,9 +258,9 @@ export class TargetElement extends MasterElement {
         return true;
     }
 
-    async toggle(whether?: boolean): Promise<boolean> {
-        whether = typeof whether === 'boolean' ? whether : this.hidden;
-        return await (whether ? this.open() : this.close());
+    async toggle(hidden?: boolean): Promise<boolean> {
+        hidden = typeof hidden === 'boolean' ? hidden : this.hidden;
+        return await (hidden ? this.open() : this.close());
     }
 
     onDisconnected() {

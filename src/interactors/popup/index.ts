@@ -111,7 +111,7 @@ export class PopupElement extends TargetElement {
         ]
     ]);
 
-    protected triggerBefore({ event, trigger, oldTrigger, hidden }) {
+    protected preventTrigger({ event, trigger, oldTrigger, hidden }) {
 
         if (trigger !== oldTrigger) {
             if (this.popper) {
@@ -121,13 +121,9 @@ export class PopupElement extends TargetElement {
         }
 
         if (!hidden && event.type === 'mouseout') {
-            return !(
-                !isInteractOutside(trigger, event) ||
-                !isInteractOutside(this.master, event, this.distance)
-            )
+            return !isInteractOutside(trigger, event) ||
+                !isInteractOutside(this.master, event, this.distance);
         }
-
-        return true;
     }
 
     private whetherToClose = (event: any) => {
