@@ -135,15 +135,15 @@ export class PopupElement extends TargetElement {
             return;
         }
 
-        const isInteractTriggerOutside = isInteractOutside(this.trigger, event);
+        /**
+         * 不可使用 isInteractOutside 來偵測 trigger 互動範圍，會有偵測誤差的問題存在，暫時無解
+         */
+        const isInteractTriggerOutside = event.target !== this.trigger && !this.trigger.contains(event.target);
         const isInteractTargetOutside = isInteractOutside(this.master, event, this.distance);
 
         if (isInteractTriggerOutside && isInteractTargetOutside) {
             this.close();
-        }
-
-        if (!isInteractTriggerOutside || !isInteractTargetOutside) {
-            console.log('open');
+        } else if (!isInteractTriggerOutside || !isInteractTargetOutside) {
             this.open();
         }
     }
@@ -296,13 +296,14 @@ export class PopupElement extends TargetElement {
             this.#resizeObserver.unobserve(this.trigger);
             this.#resizeObserver = null;
         }
+
+        $html.off(this.whetherToClose);
     }
 
     onClosed() {
         if (this.popper) {
             this.popper = this.popper.destroy();
         }
-        $html.off(this.whetherToClose);
     }
 
     protected async toggling(
