@@ -121,8 +121,10 @@ export class PopupElement extends TargetElement {
         }
 
         if (!hidden && event.type === 'mouseout') {
-            return !isInteractOutside(trigger, event) ||
-                !isInteractOutside(this.master, event, this.distance);
+            const isInteractTriggerOutside = event.target !== this.trigger && !this.trigger.contains(event.target);
+            const isInteractTargetOutside = isInteractOutside(this.master, event, this.distance);
+            return (!isInteractTriggerOutside ||
+                !isInteractTargetOutside);
         }
     }
 
@@ -139,8 +141,10 @@ export class PopupElement extends TargetElement {
 
         if (isInteractTriggerOutside && isInteractTargetOutside) {
             this.close();
-        } else if (!isInteractTriggerOutside || !isInteractTargetOutside) {
-            this.open();
+        } else if (
+            this.closingDelay && (!isInteractTriggerOutside || !isInteractTargetOutside)
+        ) {
+            this.closingDelay = clearInterval(this.closingDelay);
         }
     }
 
@@ -262,6 +266,7 @@ export class PopupElement extends TargetElement {
     }
 
     onClose() {
+
         const deactivate = (parent: PopupElement) => {
             if (!parent) {
                 return;

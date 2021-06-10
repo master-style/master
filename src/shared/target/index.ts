@@ -63,6 +63,8 @@ export class TargetElement extends MasterElement {
                         return;
                     }
 
+                    target.trigger = trigger;
+
                     if (
                         /** 執行開啟：是否吻合執行開啟的條件與事件 */
                         hidden && typesOnOpen.indexOf(eventType) !== -1 ||
@@ -78,7 +80,7 @@ export class TargetElement extends MasterElement {
                                 target.trigger = trigger;
                             }
                         }
-                        target.trigger = trigger;
+                        console.log('trigger');
                         target.currentEvent = event;
                         target.toggle(hidden);
                     } else {
@@ -130,7 +132,8 @@ export class TargetElement extends MasterElement {
     changing: Promise<any>;
     currentEvent: Event;
     protected animations: Animation[] = [];
-    changingDelay;
+    closingDelay;
+    openingDelay;
 
     startClose: () => Promise<boolean>;
     startOpen: () => Promise<boolean>;
@@ -168,36 +171,17 @@ export class TargetElement extends MasterElement {
             }
             this.toggleAttribute('changing', false);
             this.animations = [];
-            this.delayingHidden = null;
+            this.openingDelay = clearInterval(this.openingDelay);
+            this.closingDelay = clearInterval(this.closingDelay);
             console.log('-- 動畫完成');
             const completed = hidden ? this['onClosed'] : this['onOpened'];
             if (completed) completed.call(this);
         }
     }
 
-    delayingHidden: boolean;
-
-    private delayChanging(hidden: boolean) {
-        if (this.changingDelay) {
-            this.changingDelay = clearInterval(this.changingDelay);
-        }
-        if (this.delay) {
-            this.delayingHidden = hidden;
-            return new Promise<void>((resolve) => {
-                this.changingDelay = setTimeout(() => {
-                    this.delayingHidden = null;
-                    resolve();
-                }, this.delay);
-            })
-        } else {
-            this.delayingHidden = null;
-        }
-    }
-
     async openable(): Promise<boolean> {
         if (
             !this.hidden ||
-            this.delayingHidden === false ||
             this.startOpen && !await this.startOpen()
         ) {
             return false;
@@ -206,12 +190,25 @@ export class TargetElement extends MasterElement {
     }
 
     async open(): Promise<boolean> {
+
         if (!await this.openable()) {
             return false;
         }
 
-        if (this.delayChanging) {
-            await this.delayChanging(false);
+        if (this.closingDelay) {
+            this.closingDelay = clearInterval(this.closingDelay);
+        }
+
+        if (this.delay) {
+            if (this.openingDelay) {
+                return;
+            } else {
+                await new Promise<void>((resolve) => {
+                    this.openingDelay = setTimeout(() => {
+                        resolve();
+                    }, this.delay);
+                })
+            }
         }
 
         this['_hidden'] = false;
@@ -229,7 +226,6 @@ export class TargetElement extends MasterElement {
     async closeable(): Promise<boolean> {
         if (
             this.hidden ||
-            this.delayingHidden === true ||
             this.startClose && !await this.startClose()
         ) {
             return false;
@@ -242,8 +238,20 @@ export class TargetElement extends MasterElement {
             return false;
         }
 
-        if (this.delayChanging) {
-            await this.delayChanging(true);
+        if (this.openingDelay) {
+            this.openingDelay = clearInterval(this.openingDelay);
+        }
+
+        if (this.delay) {
+            if (this.closingDelay) {
+                return;
+            } else {
+                await new Promise<void>((resolve) => {
+                    this.closingDelay = setTimeout(() => {
+                        resolve();
+                    }, this.delay);
+                })
+            }
         }
 
         this['_hidden'] = true;
