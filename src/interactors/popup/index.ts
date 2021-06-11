@@ -208,12 +208,6 @@ export class PopupElement extends TargetElement {
                             options: {
                                 padding: this.boundaryPadding,
                             }
-                        },
-                        {
-                            name: 'computeStyles',
-                            options: {
-                                adaptive: false
-                            }
                         }
                     ],
                     onFirstUpdate: resolve
