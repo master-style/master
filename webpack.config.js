@@ -4,6 +4,7 @@ const Webpack = require('webpack');
 const glob = require('globby');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const TerserPlugin = require("terser-webpack-plugin");
 const package = require('./package.json');
 
 module.exports = env => {
@@ -29,7 +30,17 @@ module.exports = env => {
             modules: [path.resolve('./src'), path.resolve('./node_modules')]
         },
         optimization: {
-            minimize: true
+            minimize: true,
+            minimizer: [
+                new TerserPlugin({
+                    terserOptions: {
+                        format: {
+                            comments: false,
+                        },
+                    },
+                    extractComments: false,
+                }),
+            ],
         },
         module: {
             rules: [

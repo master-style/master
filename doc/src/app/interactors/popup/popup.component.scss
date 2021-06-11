@@ -1,0 +1,4 @@
+m-popup[animatable]::part(master) {
+    transition-property: transform, width;
+    transition-duration: .3s;
+}

@@ -208,6 +208,12 @@ export class PopupElement extends TargetElement {
                             options: {
                                 padding: this.boundaryPadding,
                             }
+                        },
+                        {
+                            name: 'computeStyles',
+                            options: {
+                                adaptive: false
+                            }
                         }
                     ],
                     onFirstUpdate: resolve
@@ -244,6 +250,7 @@ export class PopupElement extends TargetElement {
     }
 
     onOpened() {
+
         if (this.popper) {
             if (!this.#resizeObserver && !this.followCursor) {
                 this.#resizeObserver = new ResizeObserver(debounce(() => {
@@ -300,6 +307,8 @@ export class PopupElement extends TargetElement {
         if (this.popper) {
             this.popper = this.popper.destroy();
         }
+
+        this.master.css('maxHeight', '');
 
         /**
          * whetherToClose
