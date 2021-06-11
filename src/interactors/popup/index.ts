@@ -39,13 +39,13 @@ export class PopupElement extends TargetElement {
     #resizeObserver;
 
     @Attr({ reflect: false })
-    offset = 0;
+    offset: number = 0;
 
     @Attr({ reflect: false })
-    distance = 8;
+    distance: number = 8;
 
     @Attr({ reflect: false })
-    boundaryPadding = 10;
+    boundaryPadding: number = 10;
 
     @Attr({ reflect: false })
     placement: Placement = 'bottom';
