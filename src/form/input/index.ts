@@ -54,6 +54,12 @@ export class InputElement extends ControlElement {
             required: this.required,
             readonly: this.readOnly && !this.keepValidity,
             pattern: this.pattern,
+            max: this.max,
+            min: this.min,
+            maxlength: this.maxlength,
+            minlength: this.minlength,
+            size: this.size,
+            step: this.step,
             autocomplete: this.autocomplete,
             autofocus: this.autofocus,
             $created: (element: HTMLInputElement) => {
@@ -295,10 +301,10 @@ export class InputElement extends ControlElement {
     min: number;
 
     @Attr({ onRender: (input: InputElement) => input.validate() })
-    maxLength: number;
+    maxlength: number;
 
     @Attr({ onRender: (input: InputElement) => input.validate() })
-    minLength: number;
+    minlength: number;
 
     @Attr({ onRender: (input: InputElement) => input.validate() })
     pattern: string;

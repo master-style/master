@@ -18,6 +18,8 @@ export class TextareaElement extends ControlElement {
             disabled: this.disabled,
             required: this.required,
             readonly: this.readOnly,
+            maxlength: this.maxlength,
+            minlength: this.minlength,
             rows: this.rows,
             $created: (element: HTMLInputElement) => {
                 this.assignee = element;
@@ -89,10 +91,10 @@ export class TextareaElement extends ControlElement {
     value: any;
 
     @Attr({ onRender: (textarea: TextareaElement) => textarea.validate() })
-    maxLength: number;
+    maxlength: number;
 
     @Attr({ onRender: (textarea: TextareaElement) => textarea.validate() })
-    minLength: number;
+    minlength: number;
 
     @Attr()
     rows: number = 1;
