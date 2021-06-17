@@ -26,7 +26,7 @@ module.exports = env => {
         externals: Object.keys(package.dependencies),
         mode: 'production',
         resolve: {
-            extensions: ['.js', '.ts'],
+            extensions: ['.js', '.ts', '.mjs'],
             modules: [path.resolve('./src'), path.resolve('./node_modules')]
         },
         optimization: {
