@@ -90,7 +90,12 @@ export class SelectPopupElement extends PopupElement {
                                 .on('change', () => {
                                     if (this.multiple) {
                                         node.$data.selected = check.checked;
-                                        if (this.select.outputText) this.select.outputText.focus();
+                                        if (this.select.outputText) {
+                                            this.select.outputText.focus();
+                                            if (this.#keyword) {
+                                                this.search('');
+                                            }
+                                        }
                                         this.render();
                                     } else {
                                         node.$data.selected = check.checked;
