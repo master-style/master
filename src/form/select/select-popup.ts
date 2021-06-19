@@ -90,7 +90,7 @@ export class SelectPopupElement extends PopupElement {
                                 .on('change', () => {
                                     if (this.multiple) {
                                         node.$data.selected = check.checked;
-                                        if (this.select.search) this.select.search.focus();
+                                        if (this.select.outputText) this.select.outputText.focus();
                                         this.render();
                                     } else {
                                         node.$data.selected = check.checked;
@@ -137,6 +137,9 @@ export class SelectPopupElement extends PopupElement {
                     .toggleAttribute('found', found);
             });
         }
+        if (this.select.outputText) {
+            this.select.outputText.textContent = keyword;
+        }
         this.render();
     }
 
@@ -147,16 +150,16 @@ export class SelectPopupElement extends PopupElement {
     async onOpen() {
         super.onOpen();
         this.content.renderScroll();
-        if (this.select.search) {
-            // this.select.search.readOnly = false;
-            this.select.search.focus();
+        if (this.select.outputText) {
+            // this.select.outputText.readOnly = false;
+            this.select.outputText.focus();
         }
     }
 
     onClose() {
         super.onClose();
-        if (this.select.search) {
-            this.select.search.textContent = this.select.keyword = '';
+        if (this.select.outputText) {
+            this.select.outputText.textContent = '';
         }
         this.select.focused = false;
         this.select.output();
@@ -164,8 +167,8 @@ export class SelectPopupElement extends PopupElement {
 
     onClosed() {
         super.onClosed();
-        // if (this.select.search) {
-        //     this.select.search.readOnly = true;
+        // if (this.select.outputText) {
+        //     this.select.outputText.readOnly = true;
         // }
         this.#foundCount = 0;
         this.#keyword = '';

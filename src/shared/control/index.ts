@@ -104,8 +104,6 @@ export class ControlElement extends MasterElement {
             this.assignee.setCustomValidity('');
         }
 
-        console.log(this.validity);
-
         this.valid = this.validity.valid;
         this.invalid = !this.validity.valid;
 

@@ -62,15 +62,14 @@ export class SelectElement extends ControlElement {
                         spellcheck: 'false',
                         disabled: this.disabled,
                         'aria-placeholder': this.placeholder,
-                        $text: this.keyword,
                         $created: (element) => {
-                            this.search = element
+                            this.outputText = element
                                 .on('input', () => {
                                     if (this.searchable)
-                                        this.popup.search(this.search.textContent);
+                                        this.popup.search(this.outputText.textContent);
                                 }, { passive: true, id: [NAME] });
                         },
-                        $removed: () => this.search = null
+                        $removed: () => this.outputText = null
                     }
                 ],
                 () => this.selectedOptions
@@ -146,7 +145,7 @@ export class SelectElement extends ControlElement {
 
     master: HTMLDivElement;
     popup: SelectPopupElement;
-    search: HTMLInputElement;
+    outputText: HTMLInputElement;
     searchInfo: HTMLElement;
     updating: boolean;
 
@@ -166,8 +165,6 @@ export class SelectElement extends ControlElement {
             }
         }
     });
-
-    keyword: string;
 
     options: Set<OptionElement> = new Set();
 
@@ -299,7 +296,7 @@ export class SelectElement extends ControlElement {
                         .join(' ')
                         .trim()
                     : '';
-            this.search.textContent = optionText || '';
+            this.outputText.textContent = optionText || '';
         }
     }
 
