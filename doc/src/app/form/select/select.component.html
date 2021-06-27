@@ -29,7 +29,7 @@
         <m-option *ngFor="let city of ['taichung', 'kaosiung', 'taipei', 'hualien']"
                   [value]="city">
             <span slot="head">🍉</span>
-            {{city}}
+            <span [ngStyle]="{'color': 'var(--f-fade)'}">{{city}}</span>
         </m-option>
     </m-select>
 </form>
