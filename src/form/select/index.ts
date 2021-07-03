@@ -96,7 +96,7 @@ export class SelectElement extends ControlElement {
                                         event.stopPropagation();
                                         eachOption.selected = false;
                                         this.changeEmitter(this.value);
-                                        this.popup.render();
+                                        this.popup?.render();
                                     }
                                 }
                             }, [
@@ -225,7 +225,7 @@ export class SelectElement extends ControlElement {
         if (this.readOnly || this.disabled) {
             this.off({ passive: true, id: [NAME] });
         } else {
-            this.on('click focusin', () => {
+            this.on('click', () => {
                 if (this.disabled || this.popup) return;
                 this.popup = $('m-select-popup', {
                     multiple: this.multiple,
