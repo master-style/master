@@ -21,6 +21,9 @@ export class TargetElement extends MasterElement {
     duration: number = 500;
 
     @Attr({ reflect: false })
+    durationOnClose: number;
+
+    @Attr({ reflect: false })
     delay: number;
 
     @Attr({ reflect: false })
@@ -153,16 +156,16 @@ export class TargetElement extends MasterElement {
                 });
         }
         if (this.animations.length) {
-            console.log('-- 反轉', this.hidden ? 'CLOSE' : 'OPEN');
+            // console.log('-- 反轉', this.hidden ? 'CLOSE' : 'OPEN');
             for (const animation of this.animations) {
                 animation.reverse();
             }
         } else if (this.duration) {
-            console.log('-- 動畫', this.hidden ? 'CLOSE' : 'OPEN');
+            // console.log('-- 動畫', this.hidden ? 'CLOSE' : 'OPEN');
             this.toggleAttribute('changing', true);
             await this['toggling']({
                 easing: this.easing,
-                duration: this.duration
+                duration: this.hidden && this.durationOnClose || this.duration
             });
             const hidden = this.hidden;
             this.toggleAttribute('changing', false);
