@@ -186,3 +186,17 @@
         opacity: .5;
     }
 }
+
+@media (any-hover: hover) {
+    :host(:hover:not([disabled])) {
+        [part=check] {
+            border-color: var(--b-fade);
+        }
+    }
+
+    :host(:hover:not([disabled]):not([checked])) {
+        [part=switch] {
+            background-color: var(--b-fade);
+        }
+    }
+}
