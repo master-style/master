@@ -41,7 +41,7 @@
 }
 
 
-:host([fade]) {
+:host([fade][complete]) {
     will-change: opacity;
     transition: opacity .3s ease;
 }

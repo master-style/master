@@ -47,15 +47,19 @@ export class ImgElement extends MasterElement {
     // native
 
     @Attr({
-        onUpdate(this: ImgElement) {
-            this.complete = false;
+        onUpdate(img: ImgElement, value, oldValue) {
+            if (oldValue) {
+                img.complete = false;
+            }
         }
     })
     src: string;
 
     @Attr({
-        onUpdate(this: ImgElement) {
-            this.complete = false;
+        onUpdate(img: ImgElement, value, oldValue) {
+            if (oldValue) {
+                img.complete = false;
+            }
         }
     })
     srcset: string;
