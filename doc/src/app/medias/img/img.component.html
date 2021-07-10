@@ -1,9 +1,9 @@
 <m-button (click)="images.reverse()">reverse</m-button>
 
-<div>
+<div class="y:no">
     <m-img [srcset]="image"
            [loading]="'lazy'"
-           width="33.33%"
+           class="x:6"
            ratio="16x9"
            *ngFor="let image of images"
            #img

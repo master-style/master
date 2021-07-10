@@ -47,6 +47,12 @@
     min-width: 0;
 }
 
+:host(.outlined) {
+    [part=body] {
+        padding-right: 0;
+    }
+}
+
 [part=output-item-name] {
     padding-right: 0;
 
