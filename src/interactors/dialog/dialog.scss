@@ -10,6 +10,8 @@ slot[name=icon]::slotted(*),
 [part=icon] {
     margin: 0 auto;
     font-size: 4rem;
+    width: fit-content;
+    display: block;
     border-radius: 50%;
 }
 
