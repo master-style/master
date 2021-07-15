@@ -19,7 +19,7 @@
     >[class^=x\:]:not(.x\:fill),
     >[class*=' x\:'] {
         margin: calc(var(--gap) / 2);
-        flex: 1 1 calc(var(--x) - var(--gap));
+        flex: 0 0 calc(var(--x) - var(--gap));
     }
 
     &:not(.c\:row) {
