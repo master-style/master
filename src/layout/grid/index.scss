@@ -9,13 +9,14 @@
     flex-wrap: wrap;
     margin: calc(var(--gap) * -.5);
 
-    >.x {
+    >.x,
+    >.x\:fill {
         margin: calc(var(--gap) / 2);
     }
 
     >[class^=x\@],
     >[class*=' x\@'],
-    >[class^=x\:],
+    >[class^=x\:]:not(.x\:fill),
     >[class*=' x\:'] {
         margin: calc(var(--gap) / 2);
         flex: 1 1 calc(var(--x) - var(--gap));
