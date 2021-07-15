@@ -9,13 +9,16 @@
     flex-wrap: wrap;
     margin: calc(var(--gap) * -.5);
 
-    >.x,
+    >.x {
+        margin: calc(var(--gap) / 2);
+    }
+
     >[class^=x\@],
     >[class*=' x\@'],
     >[class^=x\:],
     >[class*=' x\:'] {
         margin: calc(var(--gap) / 2);
-        flex: 0 0 calc(var(--x) - var(--gap));
+        flex: 1 1 calc(var(--x) - var(--gap));
     }
 
     &:not(.c\:row) {
@@ -108,15 +111,15 @@
 }
 
 .x\:0 {
-    flex: 0 0 0 !important;
+    flex: 0 0 0;
 }
 
 .x\:fill {
-    flex: 1 1 auto !important;
+    flex: 1 1 auto;
 }
 
 .x {
-    flex: 0 0 auto !important;
+    flex: 0 0 auto;
 }
 
 .grow {
