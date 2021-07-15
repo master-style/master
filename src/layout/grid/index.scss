@@ -15,7 +15,7 @@
     >[class^=x\:],
     >[class*=' x\:'] {
         margin: calc(var(--gap) / 2);
-        flex-basis: calc(var(--x) - var(--gap));
+        flex: 0 0 calc(var(--x) - var(--gap));
     }
 
     &:not(.c\:row) {
