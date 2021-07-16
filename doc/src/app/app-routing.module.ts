@@ -50,7 +50,6 @@ import { SelectComponent } from './form/select/select.component';
 import { InputComponent } from './form/input/input.component';
 import { CheckComponent } from './form/check/check.component';
 import { ButtonComponent } from './form/button/button.component';
-import { EditorComponent } from './editor/editor.component';
 import { OverviewComponent } from './overview/overview.component';
 import { AppComponent } from './layout/app/app.component';
 import { FooterComponent } from './layout/footer/footer.component';
@@ -108,7 +107,6 @@ export const routes: Routes = [
             { path: 'check', component: CheckComponent, resolve: { route: RouteResolver } },
         ]
     },
-    { path: 'editor', data: { icon: 'feather' }, component: EditorComponent, resolve: { route: RouteResolver } },
     { path: 'icon', data: { icon: 'image' }, component: IconComponent, resolve: { route: RouteResolver } },
     {
         path: 'layout', data: { icon: 'grid' }, resolve: { route: RouteResolver }, children: [

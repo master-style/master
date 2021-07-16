@@ -66,7 +66,6 @@ import { CheckComponent } from './form/check/check.component';
 import { ValidationComponent } from './form/validation/validation.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
-import { EditorComponent } from './editor/editor.component';
 
 import { FormsModule } from '@angular/forms';
 import { OverviewComponent } from './overview/overview.component';
@@ -133,7 +132,6 @@ import { ImgComponent } from './medias/img/img.component';
         ValidationComponent,
         HeaderComponent,
         FooterComponent,
-        EditorComponent,
         OverviewComponent,
         ImgComponent
     ],
