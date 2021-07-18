@@ -16,7 +16,9 @@
     >[class^=x\:],
     >[class*=' x\:'] {
         margin: calc(var(--gap) / 2);
-        flex: var(--grow, 0) var(--shrink, 0) calc(var(--x) - var(--gap));
+        flex-grow: var(--grow, 0);
+        flex-shrink: var(--shrink, 0);
+        flex-basis: calc(var(--x) - var(--gap));
     }
 
     &:not(.c\:row) {
