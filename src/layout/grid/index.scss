@@ -103,19 +103,19 @@
 .x\:0 {
     --x: 0;
     --grow: 0;
-    --shirnk: 0;
+    --shrink: 0;
 }
 
 .x\:fill {
     --x: auto;
     --grow: 1;
-    --shirnk: 1;
+    --shrink: 1;
 }
 
 .x {
     --x: auto;
     --grow: 0;
-    --shirnk: 0;
+    --shrink: 0;
 }
 
 .grow {
@@ -370,21 +370,21 @@
     .x\:0\@sm {
         --x: 0;
         --grow: 0;
-        --shirnk: 0;
+        --shrink: 0;
     }
 
     .x\:fill\@sm {
         width: auto;
         --x: auto;
         --grow: 1;
-        --shirnk: 1;
+        --shrink: 1;
     }
 
     .x\@sm {
         width: auto;
         --x: auto;
         --grow: 0;
-        --shirnk: 0;
+        --shrink: 0;
     }
 
     .grow\@sm {
@@ -637,21 +637,21 @@
     .x\:0\@md {
         --x: 0;
         --grow: 0;
-        --shirnk: 0;
+        --shrink: 0;
     }
 
     .x\:fill\@md {
         width: auto;
         --x: auto;
         --grow: 1;
-        --shirnk: 1;
+        --shrink: 1;
     }
 
     .x\@md {
         width: auto;
         --x: auto;
         --grow: 0;
-        --shirnk: 0;
+        --shrink: 0;
     }
 
     .grow\@md {
@@ -908,21 +908,21 @@
     .x\:0\@lg {
         --x: 0;
         --grow: 0;
-        --shirnk: 0;
+        --shrink: 0;
     }
 
     .x\:fill\@lg {
         width: auto;
         --x: auto;
         --grow: 1;
-        --shirnk: 1;
+        --shrink: 1;
     }
 
     .x\@lg {
         width: auto;
         --x: auto;
         --grow: 0;
-        --shirnk: 0;
+        --shrink: 0;
     }
 
     .grow\@lg {
@@ -1175,21 +1175,21 @@
     .x\:0\@xl {
         --x: 0;
         --grow: 0;
-        --shirnk: 0;
+        --shrink: 0;
     }
 
     .x\:fill\@xl {
         width: auto;
         --x: auto;
         --grow: 1;
-        --shirnk: 1;
+        --shrink: 1;
     }
 
     .x\@xl {
         width: auto;
         --x: auto;
         --grow: 0;
-        --shirnk: 0;
+        --shrink: 0;
     }
 
     .grow\@xl {
