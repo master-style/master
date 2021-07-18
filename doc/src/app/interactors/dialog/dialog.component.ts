@@ -127,10 +127,10 @@ export class DialogComponent implements OnInit {
                 ]
             });
 
-            dialog({
-                title: 'success',
-                type: 'success',
-            });
+            // dialog({
+            //     title: 'success',
+            //     type: 'success',
+            // });
 
         }, 300);
     }

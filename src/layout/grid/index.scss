@@ -5,21 +5,18 @@
 [class^=y\:],
 [class*=' y\:'] {
     --gap: #{$md};
+    --x: 100%;
     display: flex; // 不可使用 inline-flex 會有空白問題
     flex-wrap: wrap;
     margin: calc(var(--gap) * -.5);
 
     >.x,
-    >.x\:fill {
-        margin: calc(var(--gap) / 2);
-    }
-
     >[class^=x\@],
     >[class*=' x\@'],
-    >[class^=x\:]:not(.x\:fill),
+    >[class^=x\:],
     >[class*=' x\:'] {
         margin: calc(var(--gap) / 2);
-        flex: 0 0 calc(var(--x) - var(--gap));
+        flex: var(--grow, 0) var(--shrink, 0) calc(var(--x) - var(--gap));
     }
 
     &:not(.c\:row) {
@@ -53,14 +50,6 @@
         }
     }
 
-}
-
-[class^=x\@],
-[class*=' x\@'],
-[class^=x\:],
-[class*=' x\:'] {
-    --x: var(--x12);
-    flex-basis: var(--x);
 }
 
 .x\:11 {
@@ -112,15 +101,21 @@
 }
 
 .x\:0 {
-    flex: 0 0 0;
+    --x: 0;
+    --grow: 0;
+    --shirnk: 0;
 }
 
 .x\:fill {
-    flex: 1 1 auto;
+    --x: auto;
+    --grow: 1;
+    --shirnk: 1;
 }
 
 .x {
-    flex: 0 0 auto;
+    --x: auto;
+    --grow: 0;
+    --shirnk: 0;
 }
 
 .grow {
@@ -373,17 +368,23 @@
     }
 
     .x\:0\@sm {
-        flex: 0 0 0 !important;
+        --x: 0;
+        --grow: 0;
+        --shirnk: 0;
     }
 
     .x\:fill\@sm {
         width: auto;
-        flex: 1 1 auto !important;
+        --x: auto;
+        --grow: 1;
+        --shirnk: 1;
     }
 
     .x\@sm {
         width: auto;
-        flex: 0 0 auto !important;
+        --x: auto;
+        --grow: 0;
+        --shirnk: 0;
     }
 
     .grow\@sm {
@@ -406,7 +407,7 @@
         --gap: #{$lg};
     }
 
-    .gap\@sm {
+    .y\:md\@sm {
         --gap: #{$md};
     }
 
@@ -634,17 +635,23 @@
     }
 
     .x\:0\@md {
-        flex: 0 0 0 !important;
+        --x: 0;
+        --grow: 0;
+        --shirnk: 0;
     }
 
     .x\:fill\@md {
         width: auto;
-        flex: 1 1 auto !important;
+        --x: auto;
+        --grow: 1;
+        --shirnk: 1;
     }
 
     .x\@md {
         width: auto;
-        flex: 0 0 auto !important;
+        --x: auto;
+        --grow: 0;
+        --shirnk: 0;
     }
 
     .grow\@md {
@@ -667,7 +674,7 @@
         --gap: #{$lg};
     }
 
-    .gap\@md {
+    .y\:md\@md {
         --gap: #{$md};
     }
 
@@ -899,17 +906,23 @@
     }
 
     .x\:0\@lg {
-        flex: 0 0 0 !important;
+        --x: 0;
+        --grow: 0;
+        --shirnk: 0;
     }
 
     .x\:fill\@lg {
         width: auto;
-        flex: 1 1 auto !important;
+        --x: auto;
+        --grow: 1;
+        --shirnk: 1;
     }
 
     .x\@lg {
         width: auto;
-        flex: 0 0 auto !important;
+        --x: auto;
+        --grow: 0;
+        --shirnk: 0;
     }
 
     .grow\@lg {
@@ -932,7 +945,7 @@
         --gap: #{$lg};
     }
 
-    .gap\@lg {
+    .y\:md\@lg {
         --gap: #{$md};
     }
 
@@ -1160,17 +1173,23 @@
     }
 
     .x\:0\@xl {
-        flex: 0 0 0 !important;
+        --x: 0;
+        --grow: 0;
+        --shirnk: 0;
     }
 
     .x\:fill\@xl {
         width: auto;
-        flex: 1 1 auto !important;
+        --x: auto;
+        --grow: 1;
+        --shirnk: 1;
     }
 
     .x\@xl {
         width: auto;
-        flex: 0 0 auto !important;
+        --x: auto;
+        --grow: 0;
+        --shirnk: 0;
     }
 
     .grow\@xl {
@@ -1193,7 +1212,7 @@
         --gap: #{$lg};
     }
 
-    .gap\@xl {
+    .y\:md\@xl {
         --gap: #{$md};
     }
 
